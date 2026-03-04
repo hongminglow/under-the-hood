@@ -35,7 +35,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   return (
     <aside
       className={cn(
-        "flex flex-col h-full bg-card/60 backdrop-blur-3xl border-r border-border/40 shrink-0 text-muted-foreground select-none transition-all duration-500 relative z-40 shadow-2xl",
+        "flex flex-col h-full bg-card/30 backdrop-blur-2xl border-r border-border/20 shrink-0 text-muted-foreground select-none transition-all duration-500 relative z-40 shadow-2xl",
         isCollapsed ? "w-20" : "w-72",
       )}
     >

@@ -56,7 +56,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
 
   return (
     <div
-      className="fixed inset-0 z-100 flex items-start justify-center pt-[15vh] bg-background/80 backdrop-blur-xl animate-in fade-in duration-300"
+      className="fixed inset-0 z-100 flex items-start justify-center pt-[15vh] bg-background/40 backdrop-blur-xl animate-in fade-in duration-300"
       onClick={onClose}
     >
       <div
