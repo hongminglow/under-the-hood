@@ -13,7 +13,6 @@ interface GlobalSearchProps {
 
 export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<Topic[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -37,22 +36,9 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    if (!isOpen) {
-      setQuery("");
-      setResults([]);
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (query.trim() === "") {
-      setResults([]);
-    } else {
-      const searchResults = fuse
-        .search(query)
-        .map((result) => result.item as Topic);
-      setResults(searchResults);
-    }
+  const results = useMemo(() => {
+    if (query.trim() === "") return [];
+    return fuse.search(query).map((result) => result.item as Topic);
   }, [query, fuse]);
 
   const handleSelect = (topicId: string, sectionId: string) => {
@@ -70,7 +56,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh] bg-background/80 backdrop-blur-xl animate-in fade-in duration-300"
+      className="fixed inset-0 z-100 flex items-start justify-center pt-[15vh] bg-background/80 backdrop-blur-xl animate-in fade-in duration-300"
       onClick={onClose}
     >
       <div
@@ -161,7 +147,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
               </div>
               <div className="space-y-1">
                 <p className="text-xl font-bold tracking-tight">
-                  Enterprise Search
+                  Global Search
                 </p>
                 <p className="text-sm max-w-xs mx-auto">
                   Access the entire knowledge base with high-precision fuzzy

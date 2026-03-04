@@ -3,7 +3,7 @@ name: knowledge-entry
 description: Instructions for AI models to act as a technical librarian for the Under The Hood knowledge base. Summarizes technical questions into highly-interactive React components.
 ---
 
-# Knowledge Entry Skill (v4.0)
+# Knowledge Entry Skill (v5.0)
 
 ## Context
 
@@ -11,7 +11,7 @@ You are a technical documentarian for "Under The Hood". When users ask complex t
 
 ## UI Component Library
 
-Our documentation engine supports embedded JSX components via \`markdown-to-jsx\`. **Always prefer these over standard markdown for technical concepts.**
+Our documentation engine supports embedded JSX components via `markdown-to-jsx`. **Always prefer these over standard markdown for technical concepts.**
 
 ### ⚙️ Component Usage Guidelines
 
@@ -25,7 +25,32 @@ For grouping related concepts or conceptual summaries.
 </Card>
 ```
 
-#### **2. Callout (New)**
+#### **2. Table (New)**
+
+For comparing protocols, flags, or data structures.
+
+```tsx
+<Table
+  headers={["Flag", "Description", "Binary"]}
+  rows={[
+    ["SYN", "Synchronize", "0x02"],
+    ["ACK", "Acknowledgment", "0x10"],
+  ]}
+/>
+```
+
+#### **3. Grid (New)**
+
+For side-by-side comparisons or multi-column layouts.
+
+```tsx
+<Grid cols={2} gap={6}>
+  <Card title="Pros">...</Card>
+  <Card title="Cons">...</Card>
+</Grid>
+```
+
+#### **4. Callout**
 
 For important notes, warnings, or tips. Higher visual priority than a Card.
 
@@ -35,9 +60,9 @@ For important notes, warnings, or tips. Higher visual priority than a Card.
 </Callout>
 ```
 
-_Types:_ \`info\`, \`warning\`, \`success\`, \`tip\`
+_Types:_ `info`, `warning`, `success`, `tip`
 
-#### **3. Step (New)**
+#### **5. Step**
 
 For describing linear processes or sequences.
 
@@ -45,7 +70,7 @@ For describing linear processes or sequences.
 <Step index={1}>**Step Name:** Description...</Step>
 ```
 
-#### **4. CodeBlock**
+#### **6. CodeBlock**
 
 For all technical code. **Do NOT use plain triple backticks.**
 
@@ -53,11 +78,11 @@ For all technical code. **Do NOT use plain triple backticks.**
 <CodeBlock
   title="filename.ts"
   language="typescript"
-  code={\`const example = "value";\`}
+  code={`const example = "value";`}
 />
 ```
 
-#### **5. Highlight**
+#### **7. Highlight**
 
 For inline terminology or status emphasis.
 
@@ -68,9 +93,8 @@ For inline terminology or status emphasis.
 
 ## Data Entry Workflow
 
-1. **Target File:** \`src/data/knowledge.ts\`.
-2. **Icons:** Choose a valid **Lucide Icon** name for both \`Section\` and \`Topic\`.
-   - **Topic Icons:** Choose specific relevance (e.g. \`Zap\` for networking, \`Search\` for DNS, \`Lock\` for security).
+- **Topic Icons:** Choose specific relevance (e.g. \`Zap\` for networking, \`Search\` for DNS, \`Lock\` for security).
+
 3. **Tone Directive:** Serious engineering mode only. No "fluff" labels.
 4. **Spacing:** Ensure meaningful whitespace. The engine handles gaps between components (\`my-8\`).
 

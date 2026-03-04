@@ -53,6 +53,16 @@ Modern network stacks perform this synchronization in the kernel before your app
 Operating systems shift ISNs over time using cryptographic salts to protect against sequence prediction (TCP injection) attacks.
 </Callout>
 
+<Table
+  headers={["Flag", "Full Name", "Description"]}
+  rows={[
+    ["SYN", "Synchronize", "Initiates connection & synchronizes sequence numbers."],
+    ["ACK", "Acknowledgment", "Confirms receipt of a packet and sequence number."],
+    ["FIN", "Finish", "Request to gracefully terminate the connection."],
+    ["RST", "Reset", "Aborts the connection due to errors or port unavailability."]
+  ]}
+/>
+
 <CodeBlock
   title="Packet Flag Inspection (tcpdump)"
   language="bash"

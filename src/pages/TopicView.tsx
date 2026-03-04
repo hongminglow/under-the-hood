@@ -9,6 +9,7 @@ import {
   Callout,
   Step,
 } from "../components/ui/DocComponents";
+import * as LucideIcons from "lucide-react"; // Added LucideIcons import
 
 export function TopicView() {
   const { topicId } = useParams();
@@ -17,6 +18,14 @@ export function TopicView() {
 
   const topic = getTopicById(topicId);
   const section = getSectionByTopicId(topicId);
+
+  // Helper for dynamic icon rendering
+  const getIcon = (name: string, size = 18) => {
+    const Icon =
+      (LucideIcons[name as keyof typeof LucideIcons] as React.ElementType) ||
+      LucideIcons.FileText;
+    return <Icon size={size} />;
+  };
 
   if (!topic) {
     return (
@@ -56,11 +65,16 @@ export function TopicView() {
 
       {/* Primary Hero Section - SMALLER FONT & TIGHTER GAP */}
       <header className="mb-12 animate-in slide-in-from-bottom-6 fade-in-0 duration-1000 fill-mode-both">
-        <h1 className="text-5xl md:text-6xl font-black tracking-[-0.04em] mb-6 bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/40 leading-[1.1]">
+        <div className="flex items-center gap-3 text-primary mb-6 font-mono text-[10px] uppercase font-black tracking-widest">
+          {getIcon(topic.icon, 14)}
+          <span>Verified Segment</span>
+        </div>
+
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter mb-4 bg-clip-text text-transparent bg-linear-to-br from-foreground to-foreground/40 leading-none">
           {topic.title}
         </h1>
 
-        <p className="text-xl md:text-2xl text-muted-foreground/70 leading-relaxed max-w-4xl font-bold tracking-tight border-l-4 border-primary/10 pl-8">
+        <p className="text-lg md:text-xl text-muted-foreground/60 leading-relaxed max-w-3xl font-bold tracking-tight border-l-2 border-primary/20 pl-6">
           {topic.description}
         </p>
 
@@ -79,8 +93,8 @@ export function TopicView() {
       </header>
 
       {/* Content Rendering (with JSX Support) */}
-      <article className="prose prose-invert prose-emerald mt-16 max-w-none border-t border-border/10 pt-16 animate-in fade-in-0 duration-1000 delay-300 fill-mode-both">
-        <div className="leading-[1.9] text-foreground/80 font-semibold text-lg antialiased space-y-8">
+      <article className="prose prose-invert prose-emerald mt-12 max-w-none border-t border-border/10 pt-12 animate-in fade-in-0 duration-1000 delay-300 fill-mode-both">
+        <div className="leading-[1.9] text-foreground/80 font-semibold text-lg antialiased space-y-16">
           <Markdown
             options={{
               overrides: {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import * as LucideIcons from "lucide-react";
-import { ChevronDown, ChevronRight, Terminal, ChevronLeft } from "lucide-react";
+import { ChevronDown, ChevronRight, ChevronLeft } from "lucide-react";
 import { knowledgeBase } from "../../data/knowledge";
 import { cn } from "../../utils/utils";
 
@@ -26,7 +26,9 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   };
 
   const getIcon = (name: string, size = 18) => {
-    const Icon = (LucideIcons as any)[name] || LucideIcons.FileText;
+    const Icon =
+      (LucideIcons[name as keyof typeof LucideIcons] as React.ElementType) ||
+      LucideIcons.FileText;
     return <Icon size={size} />;
   };
 
@@ -56,8 +58,8 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           isCollapsed ? "justify-center px-0" : "px-6 gap-3",
         )}
       >
-        <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 shadow-[0_0_25px_rgba(16,185,129,0.1)] transition-all hover:border-primary/40">
-          <Terminal className="text-primary w-5 h-5 shadow-[0_0_10px_rgba(16,185,129,0.4)]" />
+        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 shadow-[0_0_25px_rgba(16,185,129,0.1)] transition-all hover:border-primary/40">
+          <img src="/logo.svg" className="text-primary w-5 h-5" />
         </div>
         {!isCollapsed && (
           <span className="text-xl tracking-tight font-black bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/40 whitespace-nowrap">
@@ -70,101 +72,113 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       <div
         className={cn(
           "flex-1 overflow-y-auto pt-8 pb-12 flex flex-col custom-scrollbar",
-          isCollapsed ? "items-center px-0 gap-8" : "px-4 gap-2",
+          isCollapsed ? "items-center px-0 gap-4" : "px-4 gap-2",
         )}
       >
-        {knowledgeBase.map((section) => {
-          const isOpen = openSections[section.id];
-          const hasActiveDescendant = section.topics.some((t) =>
-            location.pathname.includes(t.id),
-          );
-
-          if (isCollapsed) {
-            return (
-              <div key={section.id} className="relative group/mini mb-2">
-                <button
-                  onClick={(e) => toggleSection(section.id, e)}
-                  className={cn(
-                    "p-3 rounded-2xl transition-all border border-transparent cursor-pointer hover:bg-primary/10 hover:border-primary/30",
-                    hasActiveDescendant
-                      ? "text-primary bg-primary/5 border-primary/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]"
-                      : "text-muted-foreground/40",
-                  )}
-                >
-                  {getIcon(section.icon, 24)}
-                </button>
-                <div className="absolute left-full ml-4 px-3 py-1.5 bg-card border border-border shadow-2xl rounded-lg text-[10px] font-black uppercase tracking-widest text-primary opacity-0 pointer-events-none group-hover/mini:opacity-100 transition-all scale-95 group-hover/mini:scale-100 whitespace-nowrap z-50 ring-1 ring-primary/20">
-                  {section.title}
-                </div>
-              </div>
-            );
-          }
-
-          return (
-            <div key={section.id} className="mb-4">
-              <button
-                onClick={(e) => toggleSection(section.id, e)}
-                className={cn(
-                  "w-full flex items-center justify-between px-3 py-2 text-[10px] font-black uppercase tracking-[0.25em] transition-all group rounded-xl cursor-pointer hover:bg-secondary/20",
-                  hasActiveDescendant
-                    ? "text-primary"
-                    : "text-muted-foreground/40 hover:text-foreground",
-                )}
+        {isCollapsed
+          ? // COLLAPSED MODE: Show all topic icons directly for one-click access
+            knowledgeBase.map((section) => (
+              <div
+                key={section.id}
+                className="flex flex-col gap-4 items-center w-full"
               >
-                {section.title}
-                {isOpen ? (
-                  <ChevronDown
-                    size={14}
-                    className="opacity-40 group-hover:opacity-100"
-                  />
-                ) : (
-                  <ChevronRight
-                    size={14}
-                    className="opacity-40 group-hover:opacity-100"
-                  />
-                )}
-              </button>
-
-              {isOpen && (
-                <div className="flex flex-col gap-1 mt-2 ml-1 pl-4 border-l border-border/10">
-                  {section.topics.map((topic) => (
+                {section.topics.map((topic) => (
+                  <div key={topic.id} className="relative group/mini">
                     <NavLink
-                      key={topic.id}
                       to={`/${section.id}/${topic.id}`}
                       className={({ isActive }) =>
                         cn(
-                          "relative group flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] transition-all duration-300 cursor-pointer font-bold",
+                          "p-3 rounded-2xl transition-all border border-transparent cursor-pointer flex items-center justify-center",
                           isActive
-                            ? "bg-primary/10 text-primary border border-primary/20"
-                            : "text-muted-foreground/50 hover:bg-secondary/40 hover:text-foreground",
+                            ? "text-primary bg-primary/10 border-primary/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+                            : "text-muted-foreground/40 hover:bg-primary/10 hover:border-primary/30 hover:text-primary",
                         )
                       }
                     >
-                      {({ isActive }) => (
-                        <>
-                          <div
-                            className={cn(
-                              "transition-all transform",
-                              isActive
-                                ? "text-primary scale-110"
-                                : "text-muted-foreground/40 group-hover:text-primary/60",
-                            )}
-                          >
-                            {getIcon(topic.icon, 16)}
-                          </div>
-                          <span className="truncate">{topic.title}</span>
-                          {isActive && (
-                            <span className="absolute -left-[18px] top-1/2 -translate-y-1/2 w-[3px] h-1/2 bg-primary rounded-full shadow-[0_0_15px_rgba(16,185,129,0.8)]" />
-                          )}
-                        </>
-                      )}
+                      {getIcon(topic.icon, 22)}
                     </NavLink>
-                  ))}
+                    {/* Floating Tooltip */}
+                    <div className="absolute left-full ml-4 px-3 py-1.5 bg-card border border-border shadow-2xl rounded-lg text-[10px] font-black uppercase tracking-widest text-primary opacity-0 pointer-events-none group-hover/mini:opacity-100 transition-all scale-95 group-hover/mini:scale-100 whitespace-nowrap z-50 ring-1 ring-primary/20">
+                      {topic.title}
+                    </div>
+                  </div>
+                ))}
+                {/* Optional: Small divider between sections even in collapsed mode */}
+                <div className="w-8 h-px bg-border/20 last:hidden my-2" />
+              </div>
+            ))
+          : // EXPANDED MODE: Show sections with collapsible accordion
+            knowledgeBase.map((section) => {
+              const isOpen = openSections[section.id];
+              const hasActiveDescendant = section.topics.some((t) =>
+                location.pathname.includes(t.id),
+              );
+
+              return (
+                <div key={section.id} className="mb-4">
+                  <button
+                    onClick={(e) => toggleSection(section.id, e)}
+                    className={cn(
+                      "w-full flex items-center justify-between px-3 py-2 text-[10px] font-black uppercase tracking-[0.25em] transition-all group rounded-xl cursor-pointer hover:bg-secondary/20",
+                      hasActiveDescendant
+                        ? "text-primary"
+                        : "text-muted-foreground/40 hover:text-foreground",
+                    )}
+                  >
+                    {section.title}
+                    {isOpen ? (
+                      <ChevronDown
+                        size={14}
+                        className="opacity-40 group-hover:opacity-100"
+                      />
+                    ) : (
+                      <ChevronRight
+                        size={14}
+                        className="opacity-40 group-hover:opacity-100"
+                      />
+                    )}
+                  </button>
+
+                  {isOpen && (
+                    <div className="flex flex-col gap-1 mt-2 ml-1 pl-4 border-l border-border/10">
+                      {section.topics.map((topic) => (
+                        <NavLink
+                          key={topic.id}
+                          to={`/${section.id}/${topic.id}`}
+                          className={({ isActive }) =>
+                            cn(
+                              "relative group flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] transition-all duration-300 cursor-pointer font-bold",
+                              isActive
+                                ? "bg-primary/10 text-primary border border-primary/20"
+                                : "text-muted-foreground/50 hover:bg-secondary/40 hover:text-foreground",
+                            )
+                          }
+                        >
+                          {({ isActive }) => (
+                            <>
+                              <div
+                                className={cn(
+                                  "transition-all transform",
+                                  isActive
+                                    ? "text-primary scale-110"
+                                    : "text-muted-foreground/40 group-hover:text-primary/60",
+                                )}
+                              >
+                                {getIcon(topic.icon, 16)}
+                              </div>
+                              <span className="truncate">{topic.title}</span>
+                              {isActive && (
+                                <span className="absolute -left-[18px] top-1/2 -translate-y-1/2 w-[3px] h-1/2 bg-primary rounded-full shadow-[0_0_15px_rgba(16,185,129,0.8)]" />
+                              )}
+                            </>
+                          )}
+                        </NavLink>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          );
-        })}
+              );
+            })}
       </div>
 
       {!isCollapsed && (
