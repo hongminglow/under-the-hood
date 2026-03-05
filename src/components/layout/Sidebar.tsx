@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import * as LucideIcons from "lucide-react";
-import { ChevronDown, ChevronRight, ChevronLeft } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  ChevronLeft,
+  ChevronUp,
+} from "lucide-react";
 import { knowledgeBase, getAllTopics } from "@/data/knowledge";
 import { cn } from "@/utils/utils";
 
@@ -132,12 +137,12 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                   >
                     {section.title}
                     {isOpen ? (
-                      <ChevronDown
+                      <ChevronUp
                         size={14}
                         className="opacity-40 group-hover:opacity-100"
                       />
                     ) : (
-                      <ChevronRight
+                      <ChevronDown
                         size={14}
                         className="opacity-40 group-hover:opacity-100"
                       />
