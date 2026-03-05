@@ -86,7 +86,7 @@ export function TopicView() {
       </header>
 
       {/* Content Rendering (with JSX Support) */}
-      <article className="prose prose-invert prose-emerald mt-12 max-w-none border-t border-border/10 pt-12 animate-in fade-in-0 duration-1000 delay-300 fill-mode-both">
+      <article className="prose prose-invert prose-emerald max-w-none border-t border-border/10 animate-in fade-in-0 duration-1000 delay-300 fill-mode-both">
         <div className="leading-[1.9] text-foreground/80 font-semibold text-lg antialiased space-y-4">
           {topic.content.map((block, index) => (
             <React.Fragment key={index}>{block}</React.Fragment>

@@ -7,6 +7,9 @@ import { webRequestLifecycleTopic } from "@/data/topics/web-request-lifecycle";
 import { renderingPipelineTopic } from "@/data/topics/rendering-pipeline";
 import { corsTopic } from "@/data/topics/cors";
 import { rustSystemsTopic } from "@/data/topics/rust-systems";
+import { sqlVsNosqlTopic } from "@/data/topics/sql-vs-nosql";
+import { oauthOidcTopic } from "@/data/topics/oauth2-oidc";
+import { dockerContainersTopic } from "@/data/topics/docker-containers";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -31,15 +34,21 @@ export const knowledgeBase: Section[] = [
   },
   {
     id: "security",
-    title: "Security",
+    title: "Security & Auth",
     icon: "ShieldAlert",
-    topics: [corsTopic],
+    topics: [corsTopic, oauthOidcTopic],
   },
   {
     id: "architecture",
     title: "Software Architecture",
     icon: "Cpu",
-    topics: [rustSystemsTopic],
+    topics: [rustSystemsTopic, dockerContainersTopic],
+  },
+  {
+    id: "databases",
+    title: "Databases & Storage",
+    icon: "Database",
+    topics: [sqlVsNosqlTopic],
   },
 ];
 
