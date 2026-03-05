@@ -68,7 +68,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
         </div>
         {!isCollapsed && (
           <div className="flex flex-col justify-center">
-            <span className="text-xl leading-none tracking-tight font-black bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/40 whitespace-nowrap">
+            <span className="text-xl leading-none tracking-tight font-black bg-clip-text text-transparent bg-linear-to-br from-foreground to-foreground/40 whitespace-nowrap">
               Under The Hood
             </span>
             <span className="text-[9px] mt-1 uppercase font-black tracking-widest text-primary/80 bg-primary/10 w-fit px-2 py-0.5 rounded-full border border-primary/20">
@@ -96,7 +96,6 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                   <div key={topic.id} className="relative group/mini">
                     <NavLink
                       to={`/${section.id}/${topic.id}`}
-                      title={topic.title}
                       className={({ isActive }) =>
                         cn(
                           "p-3 rounded-2xl transition-all border border-transparent cursor-pointer flex items-center justify-center",
@@ -108,8 +107,8 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                     >
                       {getIcon(topic.icon, 22)}
                     </NavLink>
-                    {/* Tooltip visible only if container allows it - but title is safer */}
-                    <div className="absolute left-full ml-4 px-3 py-1.5 bg-card border border-border shadow-2xl rounded-lg text-[10px] font-black uppercase tracking-widest text-primary opacity-0 pointer-events-none group-hover/mini:opacity-100 transition-all scale-95 group-hover/mini:scale-100 whitespace-nowrap z-50 ring-1 ring-primary/20">
+                    {/* Collapsed Mode Premium Tooltip */}
+                    <div className="absolute left-full ml-4 px-3 py-2 bg-card/95 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-primary opacity-0 pointer-events-none group-hover/mini:opacity-100 transition-all -translate-x-2 group-hover/mini:translate-x-0 whitespace-nowrap z-50 ring-1 ring-primary/20">
                       {topic.title}
                     </div>
                   </div>
@@ -157,7 +156,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                           to={`/${section.id}/${topic.id}`}
                           className={({ isActive }) =>
                             cn(
-                              "relative group flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] transition-all duration-300 cursor-pointer font-bold",
+                              "relative group/item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] transition-all duration-300 cursor-pointer font-bold",
                               isActive
                                 ? "bg-primary/10 text-primary border border-primary/20"
                                 : "text-muted-foreground/50 hover:bg-secondary/40 hover:text-foreground",
@@ -168,10 +167,10 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                             <>
                               <div
                                 className={cn(
-                                  "transition-all transform",
+                                  "transition-all transform shrink-0",
                                   isActive
                                     ? "text-primary scale-110"
-                                    : "text-muted-foreground/40 group-hover:text-primary/60",
+                                    : "text-muted-foreground/40 group-hover/item:text-primary/60",
                                 )}
                               >
                                 {getIcon(topic.icon, 16)}
@@ -180,6 +179,10 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                               {isActive && (
                                 <span className="absolute -left-[18px] top-1/2 -translate-y-1/2 w-[3px] h-1/2 bg-primary rounded-full shadow-[0_0_15px_rgba(16,185,129,0.8)]" />
                               )}
+                              {/* Expanded Mode Premium Tooltip (Bottom Floating) */}
+                              <div className="absolute top-1/2 -translate-y-1/2 left-full ml-2 px-3 py-2 bg-card/95 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-primary opacity-0 pointer-events-none group-hover/item:opacity-100 transition-all -translate-x-2 group-hover/item:translate-x-0 whitespace-nowrap z-50 ring-1 ring-primary/20">
+                                {topic.title}
+                              </div>
                             </>
                           )}
                         </NavLink>
@@ -200,7 +203,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       >
         {isCollapsed ? (
           <div className="relative group/engine flex justify-center">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 flex items-center justify-center backdrop-blur-md transition-all hover:bg-primary/10 hover:border-primary/40 cursor-help shadow-[0_0_20px_rgba(16,185,129,0.05)] group-hover/engine:scale-110">
+            <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-primary/10 to-transparent border border-primary/20 flex items-center justify-center backdrop-blur-md transition-all hover:bg-primary/10 hover:border-primary/40 cursor-help shadow-[0_0_20px_rgba(16,185,129,0.05)] group-hover/engine:scale-110">
               <LucideIcons.Cpu
                 size={18}
                 className="text-primary/70 group-hover/engine:text-primary transition-colors"
@@ -215,7 +218,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
             </div>
           </div>
         ) : (
-          <div className="flex items-center gap-4 bg-gradient-to-br from-primary/10 to-primary/[0.02] py-1.5 pl-4 rounded-[2rem] border border-primary/10 backdrop-blur-sm hover:bg-primary/[0.08] hover:border-primary/30 transition-all group/status cursor-pointer">
+          <div className="flex items-center gap-4 bg-linear-to-br from-primary/10 to-primary/[0.02] py-1.5 pl-4 rounded-[2rem] border border-primary/10 backdrop-blur-sm hover:bg-primary/[0.08] hover:border-primary/30 transition-all group/status cursor-pointer">
             <div className="w-11 h-11 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 group-hover/status:scale-105 transition-all shadow-inner">
               <LucideIcons.Cpu
                 size={20}
