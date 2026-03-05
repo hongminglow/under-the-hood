@@ -40,6 +40,16 @@ import { cspTopic } from "@/data/topics/content-security-policy";
 import { iacTopic } from "@/data/topics/iac-terraform-ansible";
 import { oopVsFpTopic } from "@/data/topics/oop-vs-fp";
 import { databaseIndexingTopic } from "@/data/topics/database-indexing";
+import { browserStorageTopic } from "@/data/topics/browser-storage";
+import { viteVsWebpackTopic } from "@/data/topics/vite-vs-webpack";
+import { webRtcTopic } from "@/data/topics/webrtc";
+import { webVitalsTopic } from "@/data/topics/web-vitals";
+import { grpcVsRestTopic } from "@/data/topics/grpc-vs-rest";
+import { acidPropertiesTopic } from "@/data/topics/acid-properties";
+import { distributedTransactionsTopic } from "@/data/topics/distributed-transactions";
+import { redisTopic } from "@/data/topics/redis-in-memory";
+import { passkeysTopic } from "@/data/topics/passkeys-webauthn";
+import { consistentHashingTopic } from "@/data/topics/consistent-hashing";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -59,6 +69,8 @@ export const knowledgeBase: Section[] = [
       loadBalancingTopic,
       httpEvolutionTopic,
       webhooksTopic,
+      webRtcTopic,
+      grpcVsRestTopic,
     ],
   },
   {
@@ -78,6 +90,7 @@ export const knowledgeBase: Section[] = [
       webSecurityTopic,
       apiRateLimitingTopic,
       cspTopic,
+      passkeysTopic,
     ],
   },
   {
@@ -93,19 +106,34 @@ export const knowledgeBase: Section[] = [
       messageQueuesTopic,
       cachingStrategiesTopic,
       serverlessTopic,
+      distributedTransactionsTopic,
+      consistentHashingTopic,
     ],
   },
   {
     id: "databases",
     title: "Databases & Storage",
     icon: "Database",
-    topics: [sqlVsNosqlTopic, capTheoremTopic, databaseIndexingTopic],
+    topics: [
+      sqlVsNosqlTopic,
+      capTheoremTopic,
+      databaseIndexingTopic,
+      acidPropertiesTopic,
+      redisTopic,
+    ],
   },
   {
     id: "frontend",
     title: "Frontend & UI",
     icon: "LayoutTemplate",
-    topics: [frontendFrameworksTopic, ssrVsCsrTopic, webAssemblyTopic],
+    topics: [
+      frontendFrameworksTopic,
+      ssrVsCsrTopic,
+      webAssemblyTopic,
+      browserStorageTopic,
+      viteVsWebpackTopic,
+      webVitalsTopic,
+    ],
   },
   {
     id: "programming",
