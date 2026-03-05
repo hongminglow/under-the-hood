@@ -19,7 +19,29 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     networking: true, // Default open for better UI
   });
+  const [hoveredTopic, setHoveredTopic] = useState<{
+    title: string;
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+  } | null>(null);
   const location = useLocation();
+
+  const handleMouseEnter = (e: React.MouseEvent, title: string) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setHoveredTopic({
+      title,
+      top: rect.top,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredTopic(null);
+  };
 
   const toggleSection = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -39,8 +61,9 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
 
   return (
     <aside
+      onMouseLeave={handleMouseLeave}
       className={cn(
-        "flex flex-col h-full bg-card/30 backdrop-blur-xl border-r border-border/20 shrink-0 text-muted-foreground select-none transition-all duration-500 relative z-90 shadow-2xl",
+        "flex flex-col h-full bg-card/30 backdrop-blur-xl border-r border-border/20 shrink-0 text-muted-foreground select-none transition-all duration-500 relative z-100 shadow-2xl",
         isCollapsed ? "w-20" : "w-72",
       )}
     >
@@ -48,7 +71,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       <button
         onClick={onToggle}
         className={cn(
-          "absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-xl shadow-primary/30 cursor-pointer z-50 transition-all border border-primary-400 hover:scale-110 active:scale-95",
+          "absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-xl shadow-primary/30 cursor-pointer z-200 transition-all border border-primary-400 hover:scale-110 active:scale-95",
           isCollapsed ? "opacity-100" : "opacity-100",
         )}
         aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
@@ -94,12 +117,10 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                 className="flex flex-col gap-4 items-center w-full"
               >
                 {section.topics.map((topic) => (
-                  <div
-                    key={topic.id}
-                    className="relative group/mini hover:z-100"
-                  >
+                  <div key={topic.id} className="relative group/mini">
                     <NavLink
                       to={`/${section.id}/${topic.id}`}
+                      onMouseEnter={(e) => handleMouseEnter(e, topic.title)}
                       className={({ isActive }) =>
                         cn(
                           "p-3 rounded-2xl transition-all border border-transparent cursor-pointer flex items-center justify-center",
@@ -111,10 +132,6 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                     >
                       {getIcon(topic.icon, 22)}
                     </NavLink>
-                    {/* Collapsed Mode Premium Tooltip */}
-                    <div className="absolute top-1/2 -translate-y-1/2 left-full ml-4 px-3 py-2 bg-card/95 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-primary opacity-0 pointer-events-none group-hover/mini:opacity-100 transition-all -translate-x-2 whitespace-nowrap z-1000 ring-1 ring-primary/20">
-                      {topic.title}
-                    </div>
                   </div>
                 ))}
                 <div className="w-8 h-px bg-border/20 last:hidden my-2" />
@@ -158,6 +175,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                         <NavLink
                           key={topic.id}
                           to={`/${section.id}/${topic.id}`}
+                          onMouseEnter={(e) => handleMouseEnter(e, topic.title)}
                           className={({ isActive }) =>
                             cn(
                               "relative group/item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] transition-all duration-300 cursor-pointer font-bold",
@@ -183,10 +201,6 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                               {isActive && (
                                 <span className="absolute -left-[18px] top-1/2 -translate-y-1/2 w-[3px] h-1/2 bg-primary rounded-full shadow-[0_0_15px_rgba(16,185,129,0.8)]" />
                               )}
-                              {/* Expanded Mode Premium Tooltip (Bottom Floating) */}
-                              <div className="absolute top-1/2 -translate-y-1/2 left-full ml-2 px-3 py-2 bg-card/95 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-primary opacity-0 pointer-events-none group-hover/item:opacity-100 transition-all -translate-x-2 whitespace-nowrap z-1000 ring-1 ring-primary/20">
-                                {topic.title}
-                              </div>
                             </>
                           )}
                         </NavLink>
@@ -246,6 +260,22 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           </div>
         )}
       </div>
+
+      {/* FIXED PORTAL-STYLE TOOLTIP (Bypasses parent clipping) */}
+      {hoveredTopic && (
+        <div
+          className="fixed pointer-events-none z-2000 animate-in fade-in zoom-in-95 duration-200"
+          style={{
+            top: hoveredTopic.top + hoveredTopic.height / 2,
+            left: hoveredTopic.left + hoveredTopic.width / 2,
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <div className="px-4 py-2.5 bg-card/95 backdrop-blur-2xl border border-primary/30 shadow-[0_0_30px_rgba(16,185,129,0.2)] rounded-2xl text-[11px] font-black uppercase tracking-widest text-primary ring-2 ring-primary/5 whitespace-nowrap">
+            {hoveredTopic.title}
+          </div>
+        </div>
+      )}
     </aside>
   );
 }
