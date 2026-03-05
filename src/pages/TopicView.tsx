@@ -33,11 +33,11 @@ export function TopicView() {
   return (
     <div className="max-w-5xl mx-auto pb-12 selection:bg-primary/30">
       {/* Cohesive Breadcrumbs */}
-      <nav className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/40 mb-12 animate-in slide-in-from-left-4 duration-700">
-        <span className="hover:text-primary transition-colors cursor-pointer">
+      <nav className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-primary mb-12 animate-in slide-in-from-left-4 duration-700">
+        <span className="hover:text-primary-400 transition-colors cursor-pointer text-primary/80 tracking-widest">
           {section?.title || "System"}
         </span>
-        <ChevronRight size={12} className="opacity-30" />
+        <ChevronRight size={12} className="opacity-50" />
         <span className="text-primary/80 font-black tracking-widest">
           {topic.title}
         </span>
