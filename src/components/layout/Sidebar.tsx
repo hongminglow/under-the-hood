@@ -29,14 +29,25 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   const location = useLocation();
 
   const handleMouseEnter = (e: React.MouseEvent, title: string) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setHoveredTopic({
-      title,
-      top: rect.top,
-      left: rect.left,
-      width: rect.width,
-      height: rect.height,
-    });
+    const el = e.currentTarget as HTMLElement;
+    const textSpan = el.querySelector(".truncate") as HTMLElement;
+
+    // Condition 1: If collapsed, we ALWAYS show tooltip (icons only)
+    // Condition 2: If expanded, only show if text is truncated
+    const isTruncated = textSpan
+      ? textSpan.scrollWidth > textSpan.clientWidth
+      : false;
+
+    if (isCollapsed || isTruncated) {
+      const rect = el.getBoundingClientRect();
+      setHoveredTopic({
+        title,
+        top: rect.top,
+        left: rect.left,
+        width: rect.width,
+        height: rect.height,
+      });
+    }
   };
 
   const handleMouseLeave = () => {
@@ -71,12 +82,17 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       <button
         onClick={onToggle}
         className={cn(
-          "absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-xl shadow-primary/30 cursor-pointer z-200 transition-all border border-primary-400 hover:scale-110 active:scale-95",
+          "absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.4)] cursor-pointer z-200 transition-all border border-primary-400 hover:scale-110 active:scale-95 group/toggle",
           isCollapsed ? "opacity-100" : "opacity-100",
         )}
         aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
       >
-        {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+        <div className="absolute inset-0 rounded-xl bg-white/20 opacity-0 group-hover/toggle:opacity-100 transition-opacity" />
+        {isCollapsed ? (
+          <ChevronRight size={18} strokeWidth={3} />
+        ) : (
+          <ChevronLeft size={18} strokeWidth={3} />
+        )}
       </button>
 
       {/* Header */}
@@ -104,7 +120,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       {/* Navigation Space */}
       <div
         className={cn(
-          "flex-1 overflow-y-auto pb-12 flex flex-col custom-scrollbar overflow-x-visible pt-8",
+          "flex-1 overflow-y-auto flex flex-col custom-scrollbar overflow-x-visible py-3",
           isCollapsed ? "items-center px-0 gap-4" : "px-4 gap-2",
         )}
         style={{ scrollbarGutter: "stable" }}
@@ -121,6 +137,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                     <NavLink
                       to={`/${section.id}/${topic.id}`}
                       onMouseEnter={(e) => handleMouseEnter(e, topic.title)}
+                      onMouseLeave={handleMouseLeave}
                       className={({ isActive }) =>
                         cn(
                           "p-3 rounded-2xl transition-all border border-transparent cursor-pointer flex items-center justify-center",
@@ -149,22 +166,22 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                   <button
                     onClick={(e) => toggleSection(section.id, e)}
                     className={cn(
-                      "w-full flex items-center justify-between px-3 py-2 text-[10px] font-black uppercase tracking-[0.25em] transition-all group rounded-xl cursor-pointer hover:bg-secondary/20",
+                      "w-full flex items-center justify-between px-3 py-2 text-[10px] font-black uppercase tracking-[0.25em] transition-all group rounded-xl cursor-pointer hover:bg-primary/5",
                       hasActiveDescendant
-                        ? "text-primary"
-                        : "text-muted-foreground/40 hover:text-foreground",
+                        ? "text-primary drop-shadow-[0_0_8px_rgba(16,185,129,0.3)]"
+                        : "text-muted-foreground/70 hover:text-primary",
                     )}
                   >
                     {section.title}
                     {isOpen ? (
                       <ChevronUp
                         size={14}
-                        className="opacity-40 group-hover:opacity-100"
+                        className="opacity-80 group-hover:opacity-100 text-primary/60 group-hover:text-primary"
                       />
                     ) : (
                       <ChevronDown
                         size={14}
-                        className="opacity-40 group-hover:opacity-100"
+                        className="opacity-80 group-hover:opacity-100 text-primary/60 group-hover:text-primary"
                       />
                     )}
                   </button>
@@ -176,12 +193,13 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                           key={topic.id}
                           to={`/${section.id}/${topic.id}`}
                           onMouseEnter={(e) => handleMouseEnter(e, topic.title)}
+                          onMouseLeave={handleMouseLeave}
                           className={({ isActive }) =>
                             cn(
                               "relative group/item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] transition-all duration-300 cursor-pointer font-bold",
                               isActive
-                                ? "bg-primary/10 text-primary border border-primary/20"
-                                : "text-muted-foreground/50 hover:bg-secondary/40 hover:text-foreground",
+                                ? "bg-primary/15 text-primary border border-primary/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+                                : "text-muted-foreground/70 hover:bg-primary/5 hover:text-primary-400",
                             )
                           }
                         >
@@ -264,14 +282,22 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       {/* FIXED PORTAL-STYLE TOOLTIP (Bypasses parent clipping) */}
       {hoveredTopic && (
         <div
-          className="fixed pointer-events-none z-2000 animate-in fade-in zoom-in-95 duration-200"
-          style={{
-            top: hoveredTopic.top + hoveredTopic.height / 2,
-            left: hoveredTopic.left + hoveredTopic.width / 2,
-            transform: "translate(-50%, -50%)",
-          }}
+          className="fixed pointer-events-none z-2000 animate-in fade-in slide-in-from-left-2 duration-200"
+          style={
+            isCollapsed
+              ? {
+                  top: hoveredTopic.top + hoveredTopic.height / 2,
+                  left: hoveredTopic.left + hoveredTopic.width + 12,
+                  transform: "translateY(-50%)",
+                }
+              : {
+                  top: hoveredTopic.top + hoveredTopic.height / 2,
+                  left: hoveredTopic.left + hoveredTopic.width / 2,
+                  transform: "translate(-50%, -50%)",
+                }
+          }
         >
-          <div className="px-4 py-2.5 bg-card/95 backdrop-blur-2xl border border-primary/30 shadow-[0_0_30px_rgba(16,185,129,0.2)] rounded-2xl text-[11px] font-black uppercase tracking-widest text-primary ring-2 ring-primary/5 whitespace-nowrap">
+          <div className="px-4 py-2 bg-card/95 backdrop-blur-2xl border border-primary/30 shadow-[0_0_30px_rgba(16,185,129,0.2)] rounded-2xl text-[9px] font-black uppercase tracking-widest text-primary ring-2 ring-primary/5 whitespace-nowrap">
             {hoveredTopic.title}
           </div>
         </div>
