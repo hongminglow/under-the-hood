@@ -1,8 +1,7 @@
 import { useParams, Navigate } from "react-router";
 import React from "react";
 import { getTopicById, getSectionByTopicId } from "@/data/knowledge";
-import { ChevronRight, FileText, Globe } from "lucide-react";
-import * as LucideIcons from "lucide-react";
+import { ChevronRight, FileText } from "lucide-react";
 
 export function TopicView() {
   const { topicId } = useParams();
@@ -11,14 +10,6 @@ export function TopicView() {
 
   const topic = getTopicById(topicId);
   const section = getSectionByTopicId(topicId);
-
-  // Helper for dynamic icon rendering
-  const getIcon = (name: string, size = 18) => {
-    const Icon =
-      (LucideIcons[name as keyof typeof LucideIcons] as React.ElementType) ||
-      LucideIcons.FileText;
-    return <Icon size={size} />;
-  };
 
   if (!topic) {
     return (
@@ -41,28 +32,19 @@ export function TopicView() {
 
   return (
     <div className="max-w-5xl mx-auto pb-12 selection:bg-primary/30">
-      {/* Dynamic Breadcrumbs */}
-      <nav className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.25em] text-muted-foreground/40 mb-16 animate-in slide-in-from-left-4 duration-700">
-        <div className="px-3 py-1.5 rounded-xl bg-primary/5 border border-primary/20 text-primary transition-all cursor-pointer flex items-center gap-2 group hover:border-primary/50">
-          <Globe
-            size={12}
-            className="group-hover:scale-110 transition-transform"
-          />
-          <span>{section?.title || "System"}</span>
-        </div>
-        <ChevronRight size={14} className="opacity-20" />
-        <span className="text-foreground/80 px-3 py-1.5 border border-border/40 rounded-xl bg-secondary/10 shadow-xl">
+      {/* Cohesive Breadcrumbs */}
+      <nav className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/40 mb-12 animate-in slide-in-from-left-4 duration-700">
+        <span className="hover:text-primary transition-colors cursor-pointer">
+          {section?.title || "System"}
+        </span>
+        <ChevronRight size={12} className="opacity-30" />
+        <span className="text-primary/80 font-black tracking-widest">
           {topic.title}
         </span>
       </nav>
 
-      {/* Primary Hero Section - SMALLER FONT & TIGHTER GAP */}
+      {/* Primary Hero Section */}
       <header className="mb-12 animate-in slide-in-from-bottom-6 fade-in-0 duration-1000 fill-mode-both">
-        <div className="flex items-center gap-3 text-primary mb-6 font-mono text-[10px] uppercase font-black tracking-widest">
-          {getIcon(topic.icon, 14)}
-          <span>Verified Segment</span>
-        </div>
-
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter mb-4 bg-clip-text text-transparent bg-linear-to-br from-foreground to-foreground/40 leading-normal">
           {topic.title}
         </h1>
