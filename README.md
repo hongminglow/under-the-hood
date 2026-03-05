@@ -1,6 +1,6 @@
 # Under The Hood Knowledge Base
 
-An enterprise-ready, scalable application designed to serve as a decentralized repository for storing summarized answers from AI models across various topics (networking, browsers, architecture, algorithms, and more). Built with React 19, Tailwind v4, and React Router v7.
+An enterprise-ready, scalable knowledge-sharing platform covering every aspect of networking, programming, and software engineering. We summarize incredibly popular and highly-debated topics into robust, deeply-researched, bite-sized articles. Built with React 19, Tailwind v4, and React Router v7.
 
 ## Key Features
 
@@ -9,6 +9,23 @@ An enterprise-ready, scalable application designed to serve as a decentralized r
 - **1-to-1 Route Mapping:** Every topic gets its own route (`/networking/tcp-ip`).
 - **Scroll Restoration:** Maintains your scroll position as you jump across deep technical articles.
 - **Global Markdown Search:** Use `Ctrl + K` to trigger a modal overlay for fuzzy-searching across entire sections and tags.
+
+---
+
+## Current Progress & Covered Topics
+
+Welcome to a premier knowledge-sharing platform covering every aspect of networking, devops, and common programming concepts! Below is our continually expanding roadmap of thoroughly researched paradigms:
+
+| Category                  | Topics Covered                                                         | Focus Areas                                                                                 |
+| :------------------------ | :--------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
+| **Networking**            | TCP/IP, DNS, NAT, Web Requests, TCP vs UDP, WebSockets, Load Balancing | Core OSI layers, raw transport, multiplexing, stateful tunneling, high-availability setups. |
+| **Browser Engine**        | Critical Rendering Path                                                | DOM/CSSOM construction, layout, and painting bottlenecks.                                   |
+| **Security & Auth**       | CORS Policy, OAuth 2.0 & OIDC, JWT vs Session Auth                     | Pre-flight handshakes, stateless vs stateful validation, digital credential delegation.     |
+| **Software Architecture** | Rust, Docker & Containers, GraphQL vs REST, Microservices              | Zero-cost abstractions, OS-level virtualization, client-centric APIs, scaling strategies.   |
+| **Databases & Storage**   | SQL vs NoSQL Paradigms                                                 | ACID vs BASE guarantees, relational consistency, document/graph tradeoffs.                  |
+| **Frontend & UI**         | React vs Vue vs Angular                                                | Virtual DOM vs Signals, rendering strategies, state synchronization.                        |
+| **Core Programming**      | JS Event Loop, V8 Garbage Collector                                    | Single-threaded concurrency, Macrotask/Microtask queues, memory generation limits.          |
+| **DevOps & Tooling**      | CI/CD Pipelines                                                        | Automated testing, artifact generation, zero-downtime rollouts.                             |
 
 ---
 

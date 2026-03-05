@@ -10,6 +10,16 @@ import { rustSystemsTopic } from "@/data/topics/rust-systems";
 import { sqlVsNosqlTopic } from "@/data/topics/sql-vs-nosql";
 import { oauthOidcTopic } from "@/data/topics/oauth2-oidc";
 import { dockerContainersTopic } from "@/data/topics/docker-containers";
+import { tcpVsUdpTopic } from "@/data/topics/tcp-vs-udp";
+import { frontendFrameworksTopic } from "@/data/topics/frontend-frameworks";
+import { graphqlVsRestTopic } from "@/data/topics/graphql-vs-rest";
+import { microservicesTopic } from "@/data/topics/microservices";
+import { ciCdTopic } from "@/data/topics/ci-cd";
+import { eventLoopTopic } from "@/data/topics/js-event-loop";
+import { websocketsTopic } from "@/data/topics/websockets";
+import { jwtVsSessionTopic } from "@/data/topics/jwt-vs-session";
+import { loadBalancingTopic } from "@/data/topics/load-balancing";
+import { garbageCollectionTopic } from "@/data/topics/garbage-collection";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -24,6 +34,9 @@ export const knowledgeBase: Section[] = [
       dnsTopic,
       natAddressingTopic,
       webRequestLifecycleTopic,
+      tcpVsUdpTopic,
+      websocketsTopic,
+      loadBalancingTopic,
     ],
   },
   {
@@ -36,19 +49,42 @@ export const knowledgeBase: Section[] = [
     id: "security",
     title: "Security & Auth",
     icon: "ShieldAlert",
-    topics: [corsTopic, oauthOidcTopic],
+    topics: [corsTopic, oauthOidcTopic, jwtVsSessionTopic],
   },
   {
     id: "architecture",
     title: "Software Architecture",
     icon: "Cpu",
-    topics: [rustSystemsTopic, dockerContainersTopic],
+    topics: [
+      rustSystemsTopic,
+      dockerContainersTopic,
+      graphqlVsRestTopic,
+      microservicesTopic,
+    ],
   },
   {
     id: "databases",
     title: "Databases & Storage",
     icon: "Database",
     topics: [sqlVsNosqlTopic],
+  },
+  {
+    id: "frontend",
+    title: "Frontend & UI",
+    icon: "LayoutTemplate",
+    topics: [frontendFrameworksTopic],
+  },
+  {
+    id: "programming",
+    title: "Core Programming",
+    icon: "Code2",
+    topics: [eventLoopTopic, garbageCollectionTopic],
+  },
+  {
+    id: "devops",
+    title: "DevOps & Tooling",
+    icon: "GitMerge",
+    topics: [ciCdTopic],
   },
 ];
 
