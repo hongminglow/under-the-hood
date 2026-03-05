@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import * as LucideIcons from "lucide-react";
 import { ChevronDown, ChevronRight, ChevronLeft } from "lucide-react";
-import { knowledgeBase } from "@/data/knowledge";
+import { knowledgeBase, getAllTopics } from "@/data/knowledge";
 import { cn } from "@/utils/utils";
 
 interface SidebarProps {
@@ -62,9 +62,14 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           <img src="/logo.svg" className="text-primary w-5 h-5" />
         </div>
         {!isCollapsed && (
-          <span className="text-xl tracking-tight font-black bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/40 whitespace-nowrap">
-            Under The Hood
-          </span>
+          <div className="flex flex-col justify-center">
+            <span className="text-xl leading-none tracking-tight font-black bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/40 whitespace-nowrap">
+              Under The Hood
+            </span>
+            <span className="text-[9px] mt-1 uppercase font-black tracking-widest text-primary/80 bg-primary/10 w-fit px-2 py-0.5 rounded-full border border-primary/20">
+              {getAllTopics().length} Topics Covered
+            </span>
+          </div>
         )}
       </div>
 
