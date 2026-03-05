@@ -30,6 +30,16 @@ import { typescriptTypeTopic } from "@/data/topics/typescript-types";
 import { messageQueuesTopic } from "@/data/topics/message-queues";
 import { concurrencyParallelismTopic } from "@/data/topics/concurrency-parallelism";
 import { apiRateLimitingTopic } from "@/data/topics/api-rate-limiting";
+import { capTheoremTopic } from "@/data/topics/cap-theorem";
+import { webhooksTopic } from "@/data/topics/webhooks-vs-polling";
+import { stackVsHeapTopic } from "@/data/topics/stack-vs-heap";
+import { kubernetesTopic } from "@/data/topics/kubernetes-architecture";
+import { webAssemblyTopic } from "@/data/topics/webassembly";
+import { serverlessTopic } from "@/data/topics/serverless-computing";
+import { cspTopic } from "@/data/topics/content-security-policy";
+import { iacTopic } from "@/data/topics/iac-terraform-ansible";
+import { oopVsFpTopic } from "@/data/topics/oop-vs-fp";
+import { databaseIndexingTopic } from "@/data/topics/database-indexing";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -48,6 +58,7 @@ export const knowledgeBase: Section[] = [
       websocketsTopic,
       loadBalancingTopic,
       httpEvolutionTopic,
+      webhooksTopic,
     ],
   },
   {
@@ -66,6 +77,7 @@ export const knowledgeBase: Section[] = [
       jwtVsSessionTopic,
       webSecurityTopic,
       apiRateLimitingTopic,
+      cspTopic,
     ],
   },
   {
@@ -80,19 +92,20 @@ export const knowledgeBase: Section[] = [
       designPatternsTopic,
       messageQueuesTopic,
       cachingStrategiesTopic,
+      serverlessTopic,
     ],
   },
   {
     id: "databases",
     title: "Databases & Storage",
     icon: "Database",
-    topics: [sqlVsNosqlTopic],
+    topics: [sqlVsNosqlTopic, capTheoremTopic, databaseIndexingTopic],
   },
   {
     id: "frontend",
     title: "Frontend & UI",
     icon: "LayoutTemplate",
-    topics: [frontendFrameworksTopic, ssrVsCsrTopic],
+    topics: [frontendFrameworksTopic, ssrVsCsrTopic, webAssemblyTopic],
   },
   {
     id: "programming",
@@ -103,13 +116,15 @@ export const knowledgeBase: Section[] = [
       garbageCollectionTopic,
       typescriptTypeTopic,
       concurrencyParallelismTopic,
+      stackVsHeapTopic,
+      oopVsFpTopic,
     ],
   },
   {
     id: "devops",
     title: "DevOps & Tooling",
     icon: "GitMerge",
-    topics: [ciCdTopic, gitInternalsTopic],
+    topics: [ciCdTopic, gitInternalsTopic, kubernetesTopic, iacTopic],
   },
 ];
 
