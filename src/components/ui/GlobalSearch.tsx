@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import Fuse from "fuse.js";
 import { Search, Command, BookOpen, Hash, ArrowUpRight } from "lucide-react";
-import { getAllTopics, knowledgeBase } from "../../data/knowledge";
-import type { Topic } from "../../data/knowledge";
+import { getAllTopics, knowledgeBase } from "@/data/knowledge";
+import type { Topic } from "@/data/knowledge";
 import { useNavigate } from "react-router";
-import { cn } from "../../utils/utils";
+import { cn } from "@/utils/utils";
 
 interface GlobalSearchProps {
   isOpen: boolean;

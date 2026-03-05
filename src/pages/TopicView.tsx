@@ -1,6 +1,6 @@
 import { useParams, Navigate } from "react-router";
 import React from "react";
-import { getTopicById, getSectionByTopicId } from "../data/knowledge";
+import { getTopicById, getSectionByTopicId } from "@/data/knowledge";
 import { ChevronRight, FileText, Globe } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 

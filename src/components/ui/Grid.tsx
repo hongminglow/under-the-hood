@@ -5,10 +5,12 @@ export function Grid({
   children,
   cols = 2,
   gap = 6,
+  className,
 }: {
   children: React.ReactNode;
   cols?: number;
   gap?: number;
+  className?: string;
 }) {
   const gridCols =
     {
@@ -19,7 +21,7 @@ export function Grid({
     }[cols] || "grid-cols-2";
 
   return (
-    <div className={cn("grid gap-6 mb-8", gridCols, `gap-${gap}`)}>
+    <div className={cn("grid gap-6 mb-8", gridCols, `gap-${gap}`, className)}>
       {children}
     </div>
   );

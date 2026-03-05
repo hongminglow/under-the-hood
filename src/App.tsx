@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router";
-import { AppLayout } from "./components/layout/AppLayout";
-import { TopicView } from "./pages/TopicView";
+import { AppLayout } from "@/components/layout/AppLayout";
+import { TopicView } from "@/pages/TopicView";
 
 const router = createBrowserRouter([
   {
