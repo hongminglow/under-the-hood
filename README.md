@@ -14,7 +14,7 @@ An enterprise-ready, scalable knowledge-sharing platform covering every aspect o
 
 ## Current Progress & Covered Topics
 
-Welcome to a premier knowledge-sharing platform covering every aspect of networking, devops, and common programming concepts! Below is our continually expanding roadmap of **40 thoroughly researched paradigms**:
+Welcome to a premier knowledge-sharing platform covering every aspect of networking, devops, and common programming concepts! Below is our continually expanding roadmap of **50+ thoroughly researched paradigms**:
 
 | Category                  | Topics Covered                                                                                                                       | Focus Areas                                                                                         |
 | :------------------------ | :----------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------- |
