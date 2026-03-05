@@ -40,7 +40,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   return (
     <aside
       className={cn(
-        "flex flex-col h-full bg-card/30 backdrop-blur-2xl border-r border-border/20 shrink-0 text-muted-foreground select-none transition-all duration-500 relative z-40 shadow-2xl",
+        "flex flex-col h-full bg-card/30 backdrop-blur-xl border-r border-border/20 shrink-0 text-muted-foreground select-none transition-all duration-500 relative z-90 shadow-2xl",
         isCollapsed ? "w-20" : "w-72",
       )}
     >
@@ -81,9 +81,10 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       {/* Navigation Space */}
       <div
         className={cn(
-          "flex-1 overflow-y-auto overflow-x-hidden pt-8 pb-12 flex flex-col custom-scrollbar",
+          "flex-1 overflow-y-auto pb-12 flex flex-col custom-scrollbar overflow-x-visible pt-8",
           isCollapsed ? "items-center px-0 gap-4" : "px-4 gap-2",
         )}
+        style={{ scrollbarGutter: "stable" }}
       >
         {isCollapsed
           ? // COLLAPSED MODE: Show all topic icons directly for one-click access
@@ -93,7 +94,10 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                 className="flex flex-col gap-4 items-center w-full"
               >
                 {section.topics.map((topic) => (
-                  <div key={topic.id} className="relative group/mini">
+                  <div
+                    key={topic.id}
+                    className="relative group/mini hover:z-100"
+                  >
                     <NavLink
                       to={`/${section.id}/${topic.id}`}
                       className={({ isActive }) =>
@@ -108,7 +112,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                       {getIcon(topic.icon, 22)}
                     </NavLink>
                     {/* Collapsed Mode Premium Tooltip */}
-                    <div className="absolute left-full ml-4 px-3 py-2 bg-card/95 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-primary opacity-0 pointer-events-none group-hover/mini:opacity-100 transition-all -translate-x-2 group-hover/mini:translate-x-0 whitespace-nowrap z-50 ring-1 ring-primary/20">
+                    <div className="absolute top-1/2 -translate-y-1/2 left-full ml-4 px-3 py-2 bg-card/95 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-primary opacity-0 pointer-events-none group-hover/mini:opacity-100 transition-all -translate-x-2 whitespace-nowrap z-1000 ring-1 ring-primary/20">
                       {topic.title}
                     </div>
                   </div>
@@ -180,7 +184,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                                 <span className="absolute -left-[18px] top-1/2 -translate-y-1/2 w-[3px] h-1/2 bg-primary rounded-full shadow-[0_0_15px_rgba(16,185,129,0.8)]" />
                               )}
                               {/* Expanded Mode Premium Tooltip (Bottom Floating) */}
-                              <div className="absolute top-1/2 -translate-y-1/2 left-full ml-2 px-3 py-2 bg-card/95 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-primary opacity-0 pointer-events-none group-hover/item:opacity-100 transition-all -translate-x-2 group-hover/item:translate-x-0 whitespace-nowrap z-50 ring-1 ring-primary/20">
+                              <div className="absolute top-1/2 -translate-y-1/2 left-full ml-2 px-3 py-2 bg-card/95 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-primary opacity-0 pointer-events-none group-hover/item:opacity-100 transition-all -translate-x-2 whitespace-nowrap z-1000 ring-1 ring-primary/20">
                                 {topic.title}
                               </div>
                             </>
