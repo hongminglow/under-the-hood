@@ -16,16 +16,16 @@ An enterprise-ready, scalable knowledge-sharing platform covering every aspect o
 
 Welcome to a premier knowledge-sharing platform covering every aspect of networking, devops, and common programming concepts! Below is our continually expanding roadmap of thoroughly researched paradigms:
 
-| Category                  | Topics Covered                                                         | Focus Areas                                                                                 |
-| :------------------------ | :--------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
-| **Networking**            | TCP/IP, DNS, NAT, Web Requests, TCP vs UDP, WebSockets, Load Balancing | Core OSI layers, raw transport, multiplexing, stateful tunneling, high-availability setups. |
-| **Browser Engine**        | Critical Rendering Path                                                | DOM/CSSOM construction, layout, and painting bottlenecks.                                   |
-| **Security & Auth**       | CORS Policy, OAuth 2.0 & OIDC, JWT vs Session Auth                     | Pre-flight handshakes, stateless vs stateful validation, digital credential delegation.     |
-| **Software Architecture** | Rust, Docker & Containers, GraphQL vs REST, Microservices              | Zero-cost abstractions, OS-level virtualization, client-centric APIs, scaling strategies.   |
-| **Databases & Storage**   | SQL vs NoSQL Paradigms                                                 | ACID vs BASE guarantees, relational consistency, document/graph tradeoffs.                  |
-| **Frontend & UI**         | React vs Vue vs Angular                                                | Virtual DOM vs Signals, rendering strategies, state synchronization.                        |
-| **Core Programming**      | JS Event Loop, V8 Garbage Collector                                    | Single-threaded concurrency, Macrotask/Microtask queues, memory generation limits.          |
-| **DevOps & Tooling**      | CI/CD Pipelines                                                        | Automated testing, artifact generation, zero-downtime rollouts.                             |
+| Category                  | Topics Covered                                                                                                                                      | Focus Areas                                                                                         |
+| :------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------- |
+| **Networking**            | TCP/IP, DNS, NAT, Web Requests, TCP vs UDP, WebSockets, Load Balancing, HTTP/1.1 vs HTTP/2 vs HTTP/3                                                | OSI layers, transport protocols, multiplexing, QUIC, stateful tunneling, high-availability routing. |
+| **Browser Engine**        | Critical Rendering Path                                                                                                                             | DOM/CSSOM construction, layout reflows, painting bottlenecks.                                       |
+| **Security & Auth**       | CORS Policy, OAuth 2.0 & OIDC, JWT vs Session Auth, Web Security (XSS/CSRF/SQLi), API Rate Limiting                                                 | Pre-flight handshakes, token validation, OWASP Top 10, throttling algorithms.                       |
+| **Software Architecture** | Rust Systems, Docker & Containers, GraphQL vs REST, Microservices vs Monolith, Design Patterns, Message Queues (Kafka/RabbitMQ), Caching Strategies | Namespaces/cgroups, API paradigms, event-driven CQRS, GoF patterns, cache invalidation.             |
+| **Databases & Storage**   | SQL vs NoSQL Paradigms                                                                                                                              | ACID vs BASE guarantees, document/graph/column-family stores.                                       |
+| **Frontend & UI**         | React vs Vue vs Angular, SSR vs CSR vs SSG vs ISR                                                                                                   | Virtual DOM vs Signals, rendering strategies, hydration, meta-frameworks.                           |
+| **Core Programming**      | JS Event Loop, V8 Garbage Collection, TypeScript Type System, Concurrency vs Parallelism                                                            | Microtask/Macrotask queues, generational GC, structural typing, threads vs async.                   |
+| **DevOps & Tooling**      | CI/CD Pipelines, Git Internals                                                                                                                      | Automated deployments, zero-downtime rollouts, content-addressable object stores.                   |
 
 ---
 

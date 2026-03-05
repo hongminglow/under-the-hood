@@ -20,6 +20,16 @@ import { websocketsTopic } from "@/data/topics/websockets";
 import { jwtVsSessionTopic } from "@/data/topics/jwt-vs-session";
 import { loadBalancingTopic } from "@/data/topics/load-balancing";
 import { garbageCollectionTopic } from "@/data/topics/garbage-collection";
+import { httpEvolutionTopic } from "@/data/topics/http-evolution";
+import { cachingStrategiesTopic } from "@/data/topics/caching-strategies";
+import { webSecurityTopic } from "@/data/topics/web-security";
+import { ssrVsCsrTopic } from "@/data/topics/ssr-vs-csr";
+import { designPatternsTopic } from "@/data/topics/design-patterns";
+import { gitInternalsTopic } from "@/data/topics/git-internals";
+import { typescriptTypeTopic } from "@/data/topics/typescript-types";
+import { messageQueuesTopic } from "@/data/topics/message-queues";
+import { concurrencyParallelismTopic } from "@/data/topics/concurrency-parallelism";
+import { apiRateLimitingTopic } from "@/data/topics/api-rate-limiting";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -37,6 +47,7 @@ export const knowledgeBase: Section[] = [
       tcpVsUdpTopic,
       websocketsTopic,
       loadBalancingTopic,
+      httpEvolutionTopic,
     ],
   },
   {
@@ -49,7 +60,13 @@ export const knowledgeBase: Section[] = [
     id: "security",
     title: "Security & Auth",
     icon: "ShieldAlert",
-    topics: [corsTopic, oauthOidcTopic, jwtVsSessionTopic],
+    topics: [
+      corsTopic,
+      oauthOidcTopic,
+      jwtVsSessionTopic,
+      webSecurityTopic,
+      apiRateLimitingTopic,
+    ],
   },
   {
     id: "architecture",
@@ -60,6 +77,9 @@ export const knowledgeBase: Section[] = [
       dockerContainersTopic,
       graphqlVsRestTopic,
       microservicesTopic,
+      designPatternsTopic,
+      messageQueuesTopic,
+      cachingStrategiesTopic,
     ],
   },
   {
@@ -72,19 +92,24 @@ export const knowledgeBase: Section[] = [
     id: "frontend",
     title: "Frontend & UI",
     icon: "LayoutTemplate",
-    topics: [frontendFrameworksTopic],
+    topics: [frontendFrameworksTopic, ssrVsCsrTopic],
   },
   {
     id: "programming",
     title: "Core Programming",
     icon: "Code2",
-    topics: [eventLoopTopic, garbageCollectionTopic],
+    topics: [
+      eventLoopTopic,
+      garbageCollectionTopic,
+      typescriptTypeTopic,
+      concurrencyParallelismTopic,
+    ],
   },
   {
     id: "devops",
     title: "DevOps & Tooling",
     icon: "GitMerge",
-    topics: [ciCdTopic],
+    topics: [ciCdTopic, gitInternalsTopic],
   },
 ];
 
