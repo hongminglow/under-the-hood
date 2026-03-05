@@ -82,7 +82,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       <button
         onClick={onToggle}
         className={cn(
-          "absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.4)] cursor-pointer z-200 transition-all border border-primary-400 hover:scale-110 active:scale-95 group/toggle",
+          "absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.4)] cursor-pointer z-200 transition-all border border-primary-400 hover:scale-110 active:scale-95 group/toggle",
           isCollapsed ? "opacity-100" : "opacity-100",
         )}
         aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
