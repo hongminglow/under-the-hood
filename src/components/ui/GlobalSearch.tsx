@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import Fuse from "fuse.js";
 import { Search, Command, BookOpen, Hash, ArrowUpRight } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 import { getAllTopics, knowledgeBase } from "@/data/knowledge";
 import type { Topic } from "@/data/knowledge";
 import { useNavigate } from "react-router";
@@ -52,6 +53,13 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
     );
   };
 
+  const getIcon = (name: string, size = 16) => {
+    const Icon =
+      (LucideIcons[name as keyof typeof LucideIcons] as React.ElementType) ||
+      BookOpen;
+    return <Icon size={size} />;
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -88,7 +96,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
               </p>
             </div>
           ) : (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5">
               {results.map((topic, i) => {
                 const secId = getSectionForTopic(topic.id);
                 return (
@@ -96,45 +104,46 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                     key={topic.id}
                     onClick={() => handleSelect(topic.id, secId)}
                     className={cn(
-                      "w-full text-left flex items-start flex-col gap-1 p-4 rounded-2xl transition-all border border-transparent cursor-pointer hover:bg-primary/10 hover:border-primary/20 group relative overflow-hidden",
+                      "w-full text-left flex items-center gap-4 py-2.5 px-3 rounded-xl transition-all border border-transparent cursor-pointer hover:bg-primary/10 hover:border-primary/20 group relative overflow-hidden",
                       i === 0 && query !== ""
                         ? "bg-primary/5 border-primary/10 ring-1 ring-primary/5 shadow-inner"
                         : "hover:bg-secondary/40",
                     )}
                   >
-                    <div className="flex items-center justify-between w-full">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-secondary/60 flex items-center justify-center text-muted-foreground group-hover:text-primary transition-colors">
-                          <BookOpen size={16} />
-                        </div>
-                        <span className="font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                          {topic.title}
-                        </span>
-                      </div>
-                      <ArrowUpRight
-                        size={18}
-                        className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
-                      />
+                    <div className="w-9 h-9 shrink-0 rounded-lg bg-secondary/60 flex items-center justify-center text-muted-foreground group-hover:text-primary group-hover:bg-primary/10 transition-colors shadow-sm">
+                      {getIcon(topic.icon, 16)}
                     </div>
 
-                    {topic.description && (
-                      <p className="text-sm text-muted-foreground/80 pl-11 line-clamp-1 group-hover:text-muted-foreground transition-colors">
-                        {topic.description}
-                      </p>
-                    )}
-
-                    {topic.tags && topic.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-2 pl-11 mt-2">
-                        {topic.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[10px] font-extrabold uppercase tracking-widest bg-emerald-500/10 text-emerald-400/90 px-2 py-0.5 rounded-lg border border-emerald-500/10"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                    <div className="flex-1 flex flex-col min-w-0">
+                      <div className="flex items-center justify-between w-full">
+                        <span className="font-bold text-[15px] leading-tight text-foreground group-hover:text-primary transition-colors truncate">
+                          {topic.title}
+                        </span>
+                        <ArrowUpRight
+                          size={16}
+                          className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-2"
+                        />
                       </div>
-                    )}
+
+                      {topic.description && (
+                        <p className="text-[13px] text-muted-foreground/80 line-clamp-1 group-hover:text-muted-foreground transition-colors mt-0.5">
+                          {topic.description}
+                        </p>
+                      )}
+
+                      {topic.tags && topic.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 mt-1.5">
+                          {topic.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-[9px] font-extrabold uppercase tracking-widest bg-emerald-500/10 text-emerald-400/90 px-1.5 py-0.5 rounded-md border border-emerald-500/10"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </button>
                 );
               })}

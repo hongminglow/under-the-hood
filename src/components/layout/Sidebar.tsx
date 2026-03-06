@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router";
 import * as LucideIcons from "lucide-react";
 import {
@@ -27,6 +27,39 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
     height: number;
   } | null>(null);
   const location = useLocation();
+
+  // Automatically expand the section that contains the active route and scroll to it
+  useEffect(() => {
+    // Wait a brief moment to avoid synchronous setState cascading renders,
+    // and to let the accordion open in DOM before scrolling.
+    const scrollTimer = setTimeout(() => {
+      const activeSection = knowledgeBase.find((section) =>
+        section.topics.some((t) => location.pathname.includes(t.id)),
+      );
+
+      if (activeSection) {
+        setOpenSections((prev) => {
+          if (!prev[activeSection.id]) {
+            return { ...prev, [activeSection.id]: true };
+          }
+          return prev;
+        });
+      }
+
+      // Small nested timeout allows DOM to update after state is set, so scroll target exists.
+      setTimeout(() => {
+        const scrollContainer = document.getElementById(
+          "sidebar-scroll-container",
+        );
+        const activeLink = scrollContainer?.querySelector(".active-topic");
+        if (activeLink && scrollContainer) {
+          activeLink.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }, 150);
+    }, 50);
+
+    return () => clearTimeout(scrollTimer);
+  }, [location.pathname]);
 
   const handleMouseEnter = (e: React.MouseEvent, title: string) => {
     const el = e.currentTarget as HTMLElement;
@@ -118,6 +151,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       </div>
 
       <div
+        id="sidebar-scroll-container"
         className={cn(
           "flex-1 overflow-y-auto flex flex-col custom-scrollbar overflow-x-visible py-3",
           isCollapsed ? "items-center px-0 gap-4" : "px-4 gap-0",
@@ -197,7 +231,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                             cn(
                               "relative group/item flex items-center gap-3 px-3 py-3 rounded-xl text-[13px] transition-all duration-300 cursor-pointer font-bold my-px",
                               isActive
-                                ? "bg-primary/15 text-primary border border-primary/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+                                ? "active-topic bg-primary/15 text-primary border border-primary/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
                                 : "text-muted-foreground/70 hover:bg-primary/5 hover:text-primary-400 border border-transparent",
                             )
                           }
