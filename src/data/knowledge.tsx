@@ -51,6 +51,30 @@ import { redisTopic } from "@/data/topics/redis-in-memory";
 import { passkeysTopic } from "@/data/topics/passkeys-webauthn";
 import { consistentHashingTopic } from "@/data/topics/consistent-hashing";
 
+// ── New Topics (Batch 2) ──────────────────────────────────────────────
+import { databaseShardingTopic } from "@/data/topics/database-sharding";
+import { databaseReplicationTopic } from "@/data/topics/database-replication";
+import { monorepoVsPolyrepoTopic } from "@/data/topics/monorepo-vs-polyrepo";
+import { restApiDesignTopic } from "@/data/topics/rest-api-design";
+import { circuitBreakerTopic } from "@/data/topics/circuit-breaker-pattern";
+import { eventDrivenArchitectureTopic } from "@/data/topics/event-driven-architecture";
+import { zeroTrustTopic } from "@/data/topics/zero-trust-architecture";
+import { closuresLexicalScopeTopic } from "@/data/topics/closures-lexical-scope";
+import { promisesVsObservablesTopic } from "@/data/topics/promises-vs-observables";
+import { bigOComplexityTopic } from "@/data/topics/big-o-complexity";
+import { hashTablesTopic } from "@/data/topics/hash-tables-internals";
+import { proxyVsReverseProxyTopic } from "@/data/topics/proxy-vs-reverse-proxy";
+import { cdnTopic } from "@/data/topics/cdn-under-the-hood";
+import { reactFiberTopic } from "@/data/topics/react-fiber-reconciliation";
+import { virtualDomVsSignalsTopic } from "@/data/topics/virtual-dom-vs-signals";
+import { idempotencyTopic } from "@/data/topics/api-idempotency";
+import { processVsThreadTopic } from "@/data/topics/process-vs-thread-vs-coroutine";
+import { monolithVsMicroservicesTopic } from "@/data/topics/monolith-vs-microservices";
+import { oauthFlowsTopic } from "@/data/topics/oauth2-flows-deep-dive";
+import { dnsOverHttpsTopic } from "@/data/topics/dns-security-doh-dot";
+import { solidPrinciplesTopic } from "@/data/topics/solid-principles";
+import { observabilityTopic } from "@/data/topics/observability-monitoring";
+
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
 
@@ -71,6 +95,8 @@ export const knowledgeBase: Section[] = [
       webhooksTopic,
       webRtcTopic,
       grpcVsRestTopic,
+      proxyVsReverseProxyTopic,
+      cdnTopic,
     ],
   },
   {
@@ -91,6 +117,9 @@ export const knowledgeBase: Section[] = [
       apiRateLimitingTopic,
       cspTopic,
       passkeysTopic,
+      zeroTrustTopic,
+      oauthFlowsTopic,
+      dnsOverHttpsTopic,
     ],
   },
   {
@@ -108,6 +137,12 @@ export const knowledgeBase: Section[] = [
       serverlessTopic,
       distributedTransactionsTopic,
       consistentHashingTopic,
+      restApiDesignTopic,
+      circuitBreakerTopic,
+      eventDrivenArchitectureTopic,
+      idempotencyTopic,
+      monolithVsMicroservicesTopic,
+      solidPrinciplesTopic,
     ],
   },
   {
@@ -120,6 +155,8 @@ export const knowledgeBase: Section[] = [
       databaseIndexingTopic,
       acidPropertiesTopic,
       redisTopic,
+      databaseShardingTopic,
+      databaseReplicationTopic,
     ],
   },
   {
@@ -133,6 +170,8 @@ export const knowledgeBase: Section[] = [
       browserStorageTopic,
       viteVsWebpackTopic,
       webVitalsTopic,
+      reactFiberTopic,
+      virtualDomVsSignalsTopic,
     ],
   },
   {
@@ -146,13 +185,25 @@ export const knowledgeBase: Section[] = [
       concurrencyParallelismTopic,
       stackVsHeapTopic,
       oopVsFpTopic,
+      closuresLexicalScopeTopic,
+      promisesVsObservablesTopic,
+      bigOComplexityTopic,
+      hashTablesTopic,
+      processVsThreadTopic,
     ],
   },
   {
     id: "devops",
     title: "DevOps & Tooling",
     icon: "GitMerge",
-    topics: [ciCdTopic, gitInternalsTopic, kubernetesTopic, iacTopic],
+    topics: [
+      ciCdTopic,
+      gitInternalsTopic,
+      kubernetesTopic,
+      iacTopic,
+      monorepoVsPolyrepoTopic,
+      observabilityTopic,
+    ],
   },
 ];
 
