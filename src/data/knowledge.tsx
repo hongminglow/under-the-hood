@@ -51,7 +51,7 @@ import { redisTopic } from "@/data/topics/redis-in-memory";
 import { passkeysTopic } from "@/data/topics/passkeys-webauthn";
 import { consistentHashingTopic } from "@/data/topics/consistent-hashing";
 
-// ── New Topics (Batch 2) ──────────────────────────────────────────────
+// ── Batch 2 ───────────────────────────────────────────────────────────
 import { databaseShardingTopic } from "@/data/topics/database-sharding";
 import { databaseReplicationTopic } from "@/data/topics/database-replication";
 import { monorepoVsPolyrepoTopic } from "@/data/topics/monorepo-vs-polyrepo";
@@ -75,6 +75,27 @@ import { dnsOverHttpsTopic } from "@/data/topics/dns-security-doh-dot";
 import { solidPrinciplesTopic } from "@/data/topics/solid-principles";
 import { observabilityTopic } from "@/data/topics/observability-monitoring";
 
+// ── Batch 3 (Fullstack & System Design) ──────────────────────────────
+import { apiGatewayTopic } from "@/data/topics/api-gateway-pattern";
+import { connectionPoolingTopic } from "@/data/topics/connection-pooling";
+import { sqlQueryOptimizationTopic } from "@/data/topics/sql-query-optimization";
+import { nPlusOneTopic } from "@/data/topics/n-plus-one-problem";
+import { httpsTlsTopic } from "@/data/topics/https-tls-handshake";
+import { stateManagementTopic } from "@/data/topics/state-management";
+import { cssBoxModelTopic } from "@/data/topics/css-box-model";
+import { serviceWorkersTopic } from "@/data/topics/service-workers-pwa";
+import { prototypalInheritanceTopic } from "@/data/topics/prototypal-inheritance";
+import { dependencyInjectionTopic } from "@/data/topics/dependency-injection";
+import { twelveFacorAppTopic } from "@/data/topics/twelve-factor-app";
+import { testingPyramidTopic } from "@/data/topics/testing-pyramid";
+import { encodingEncryptionHashingTopic } from "@/data/topics/encoding-encryption-hashing";
+import { webAccessibilityTopic } from "@/data/topics/web-accessibility";
+import { errorHandlingTopic } from "@/data/topics/error-handling-patterns";
+import { paginationStrategiesTopic } from "@/data/topics/pagination-strategies";
+import { envConfigTopic } from "@/data/topics/env-config-secrets";
+import { databaseMigrationsTopic } from "@/data/topics/database-migrations";
+import { recursionCallStackTopic } from "@/data/topics/recursion-call-stack";
+
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
 
@@ -97,6 +118,7 @@ export const knowledgeBase: Section[] = [
       grpcVsRestTopic,
       proxyVsReverseProxyTopic,
       cdnTopic,
+      httpsTlsTopic,
     ],
   },
   {
@@ -120,6 +142,7 @@ export const knowledgeBase: Section[] = [
       zeroTrustTopic,
       oauthFlowsTopic,
       dnsOverHttpsTopic,
+      encodingEncryptionHashingTopic,
     ],
   },
   {
@@ -143,6 +166,9 @@ export const knowledgeBase: Section[] = [
       idempotencyTopic,
       monolithVsMicroservicesTopic,
       solidPrinciplesTopic,
+      apiGatewayTopic,
+      dependencyInjectionTopic,
+      paginationStrategiesTopic,
     ],
   },
   {
@@ -157,6 +183,10 @@ export const knowledgeBase: Section[] = [
       redisTopic,
       databaseShardingTopic,
       databaseReplicationTopic,
+      connectionPoolingTopic,
+      sqlQueryOptimizationTopic,
+      nPlusOneTopic,
+      databaseMigrationsTopic,
     ],
   },
   {
@@ -172,6 +202,10 @@ export const knowledgeBase: Section[] = [
       webVitalsTopic,
       reactFiberTopic,
       virtualDomVsSignalsTopic,
+      stateManagementTopic,
+      cssBoxModelTopic,
+      serviceWorkersTopic,
+      webAccessibilityTopic,
     ],
   },
   {
@@ -190,6 +224,9 @@ export const knowledgeBase: Section[] = [
       bigOComplexityTopic,
       hashTablesTopic,
       processVsThreadTopic,
+      prototypalInheritanceTopic,
+      errorHandlingTopic,
+      recursionCallStackTopic,
     ],
   },
   {
@@ -203,6 +240,9 @@ export const knowledgeBase: Section[] = [
       iacTopic,
       monorepoVsPolyrepoTopic,
       observabilityTopic,
+      twelveFacorAppTopic,
+      testingPyramidTopic,
+      envConfigTopic,
     ],
   },
 ];
