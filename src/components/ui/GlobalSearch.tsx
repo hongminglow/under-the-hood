@@ -17,6 +17,9 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const resultsContainerRef = useRef<HTMLDivElement>(null);
+
   const allTopics = getAllTopics();
   const fuse = useMemo(
     () =>
@@ -31,6 +34,8 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
   useEffect(() => {
     if (isOpen) {
       const timer = setTimeout(() => {
+        setQuery("");
+        setSelectedIndex(0);
         inputRef.current?.focus();
       }, 0);
       return () => clearTimeout(timer);
@@ -41,6 +46,45 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
     if (query.trim() === "") return [];
     return fuse.search(query).map((result) => result.item as Topic);
   }, [query, fuse]);
+
+  // Auto-scroll selected item into view in the results container
+  useEffect(() => {
+    if (resultsContainerRef.current) {
+      const selectedEl = resultsContainerRef.current.children[
+        selectedIndex
+      ] as HTMLElement;
+      if (selectedEl) {
+        selectedEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+  }, [selectedIndex]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") {
+      onClose();
+      return;
+    }
+
+    if (results.length === 0) return;
+
+    // Arrow keys or mapping Ctrl+S / Ctrl+W to Down/Up mapping
+    if (e.key === "ArrowDown" || (e.ctrlKey && e.key.toLowerCase() === "s")) {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev < results.length - 1 ? prev + 1 : prev));
+    } else if (
+      e.key === "ArrowUp" ||
+      (e.ctrlKey && e.key.toLowerCase() === "w")
+    ) {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev));
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      const topic = results[selectedIndex];
+      if (topic) {
+        handleSelect(topic.id, getSectionForTopic(topic.id));
+      }
+    }
+  };
 
   const handleSelect = (topicId: string, sectionId: string) => {
     navigate(`/${sectionId}/${topicId}`);
@@ -79,7 +123,11 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
             className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground/60 text-xl font-medium"
             placeholder="What knowledge are you looking for?"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setSelectedIndex(0);
+            }}
+            onKeyDown={handleKeyDown}
           />
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-background/60 text-xs text-muted-foreground font-bold border border-border/80 shadow-sm">
             <span>ESC</span>
@@ -96,16 +144,18 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
               </p>
             </div>
           ) : (
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5" ref={resultsContainerRef}>
               {results.map((topic, i) => {
                 const secId = getSectionForTopic(topic.id);
+                const isSelected = i === selectedIndex;
                 return (
                   <button
                     key={topic.id}
                     onClick={() => handleSelect(topic.id, secId)}
+                    onMouseEnter={() => setSelectedIndex(i)}
                     className={cn(
                       "w-full text-left flex items-center gap-4 py-2.5 px-3 rounded-xl transition-all border border-transparent cursor-pointer hover:bg-primary/10 hover:border-primary/20 group relative overflow-hidden",
-                      i === 0 && query !== ""
+                      isSelected
                         ? "bg-primary/5 border-primary/10 ring-1 ring-primary/5 shadow-inner"
                         : "hover:bg-secondary/40",
                     )}

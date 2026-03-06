@@ -28,6 +28,23 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   } | null>(null);
   const location = useLocation();
 
+  // Gentle reset when the user collapses the sidebar:
+  // We close all accordion sections except the currently active one to avoid huge vertical lists upon reopening.
+  useEffect(() => {
+    if (isCollapsed) {
+      const resetTimer = setTimeout(() => {
+        setOpenSections(() => {
+          const activeSection = knowledgeBase.find((section) =>
+            section.topics.some((t) => location.pathname.includes(t.id)),
+          );
+          if (activeSection) return { [activeSection.id]: true };
+          return {};
+        });
+      }, 0);
+      return () => clearTimeout(resetTimer);
+    }
+  }, [isCollapsed, location.pathname]);
+
   // Automatically expand the section that contains the active route and scroll to it
   useEffect(() => {
     // Wait a brief moment to avoid synchronous setState cascading renders,
@@ -59,7 +76,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
     }, 50);
 
     return () => clearTimeout(scrollTimer);
-  }, [location.pathname]);
+  }, [location.pathname, isCollapsed]);
 
   const handleMouseEnter = (e: React.MouseEvent, title: string) => {
     const el = e.currentTarget as HTMLElement;
@@ -175,7 +192,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                         cn(
                           "p-3 rounded-2xl transition-all border border-transparent cursor-pointer flex items-center justify-center",
                           isActive
-                            ? "text-primary bg-primary/10 border-primary/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+                            ? "active-topic text-primary bg-primary/10 border-primary/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]"
                             : "text-muted-foreground/40 hover:bg-primary/10 hover:border-primary/30 hover:text-primary",
                         )
                       }
