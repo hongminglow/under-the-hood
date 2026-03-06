@@ -117,11 +117,10 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
         )}
       </div>
 
-      {/* Navigation Space */}
       <div
         className={cn(
           "flex-1 overflow-y-auto flex flex-col custom-scrollbar overflow-x-visible py-3",
-          isCollapsed ? "items-center px-0 gap-4" : "px-4 gap-2",
+          isCollapsed ? "items-center px-0 gap-4" : "px-4 gap-0",
         )}
         style={{ scrollbarGutter: "stable" }}
       >
@@ -162,11 +161,11 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
               );
 
               return (
-                <div key={section.id} className="mb-4">
+                <div key={section.id} className="mb-0">
                   <button
                     onClick={(e) => toggleSection(section.id, e)}
                     className={cn(
-                      "w-full flex items-center justify-between px-3 py-2 text-[10px] font-black uppercase tracking-[0.25em] transition-all group rounded-xl cursor-pointer hover:bg-primary/5",
+                      "w-full flex items-center justify-between px-3 py-3 text-[10px] font-black uppercase tracking-[0.25em] transition-all group rounded-xl cursor-pointer hover:bg-primary/5",
                       hasActiveDescendant
                         ? "text-primary drop-shadow-[0_0_8px_rgba(16,185,129,0.3)]"
                         : "text-muted-foreground/70 hover:text-primary",
@@ -187,7 +186,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                   </button>
 
                   {isOpen && (
-                    <div className="flex flex-col gap-1 mt-2 ml-1 pl-4 border-l border-border/10">
+                    <div className="flex flex-col mt-1 ml-1 pl-4 border-l border-border/10">
                       {section.topics.map((topic) => (
                         <NavLink
                           key={topic.id}
@@ -196,10 +195,10 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                           onMouseLeave={handleMouseLeave}
                           className={({ isActive }) =>
                             cn(
-                              "relative group/item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] transition-all duration-300 cursor-pointer font-bold",
+                              "relative group/item flex items-center gap-3 px-3 py-3 rounded-xl text-[13px] transition-all duration-300 cursor-pointer font-bold my-px",
                               isActive
                                 ? "bg-primary/15 text-primary border border-primary/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
-                                : "text-muted-foreground/70 hover:bg-primary/5 hover:text-primary-400",
+                                : "text-muted-foreground/70 hover:bg-primary/5 hover:text-primary-400 border border-transparent",
                             )
                           }
                         >

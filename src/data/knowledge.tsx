@@ -96,6 +96,19 @@ import { envConfigTopic } from "@/data/topics/env-config-secrets";
 import { databaseMigrationsTopic } from "@/data/topics/database-migrations";
 import { recursionCallStackTopic } from "@/data/topics/recursion-call-stack";
 
+// ── Batch 4 (AI & Frontend) ─────────────────────────────────────────
+import { llmHowItWorksTopic } from "@/data/topics/how-llms-work";
+import { ragTopic } from "@/data/topics/rag-retrieval-augmented";
+import { aiAgentsTopic } from "@/data/topics/ai-agents-tool-use";
+import { promptEngineeringTopic } from "@/data/topics/prompt-engineering";
+import { vectorDatabasesTopic } from "@/data/topics/vector-databases-embeddings";
+import { reactServerComponentsTopic } from "@/data/topics/react-server-components";
+import { microFrontendsTopic } from "@/data/topics/micro-frontends";
+import { debounceThrottleTopic } from "@/data/topics/debounce-vs-throttle";
+import { webComponentsTopic } from "@/data/topics/web-components-shadow-dom";
+import { sseVsWebSocketTopic } from "@/data/topics/sse-vs-websocket";
+import { cssInJsVsUtilityTopic } from "@/data/topics/css-in-js-vs-utility";
+
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
 
@@ -119,6 +132,7 @@ export const knowledgeBase: Section[] = [
       proxyVsReverseProxyTopic,
       cdnTopic,
       httpsTlsTopic,
+      sseVsWebSocketTopic,
     ],
   },
   {
@@ -206,6 +220,11 @@ export const knowledgeBase: Section[] = [
       cssBoxModelTopic,
       serviceWorkersTopic,
       webAccessibilityTopic,
+      reactServerComponentsTopic,
+      microFrontendsTopic,
+      debounceThrottleTopic,
+      webComponentsTopic,
+      cssInJsVsUtilityTopic,
     ],
   },
   {
@@ -243,6 +262,18 @@ export const knowledgeBase: Section[] = [
       twelveFacorAppTopic,
       testingPyramidTopic,
       envConfigTopic,
+    ],
+  },
+  {
+    id: "ai",
+    title: "AI & Machine Learning",
+    icon: "Brain",
+    topics: [
+      llmHowItWorksTopic,
+      ragTopic,
+      aiAgentsTopic,
+      promptEngineeringTopic,
+      vectorDatabasesTopic,
     ],
   },
 ];
