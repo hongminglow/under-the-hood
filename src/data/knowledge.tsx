@@ -108,6 +108,7 @@ import { debounceThrottleTopic } from "@/data/topics/debounce-vs-throttle";
 import { webComponentsTopic } from "@/data/topics/web-components-shadow-dom";
 import { sseVsWebSocketTopic } from "@/data/topics/sse-vs-websocket";
 import { cssInJsVsUtilityTopic } from "@/data/topics/css-in-js-vs-utility";
+import { tauriUnderTheHoodTopic } from "@/data/topics/tauri-under-the-hood";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -183,6 +184,7 @@ export const knowledgeBase: Section[] = [
       apiGatewayTopic,
       dependencyInjectionTopic,
       paginationStrategiesTopic,
+      tauriUnderTheHoodTopic,
     ],
   },
   {
