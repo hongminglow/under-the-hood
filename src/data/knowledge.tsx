@@ -12,6 +12,7 @@ import { oauthOidcTopic } from "@/data/topics/oauth2-oidc";
 import { dockerContainersTopic } from "@/data/topics/docker-containers";
 import { tcpVsUdpTopic } from "@/data/topics/tcp-vs-udp";
 import { frontendFrameworksTopic } from "@/data/topics/frontend-frameworks";
+import { frameworksVsVanillaJsTopic } from "@/data/topics/frameworks-vs-vanilla-js";
 import { graphqlVsRestTopic } from "@/data/topics/graphql-vs-rest";
 import { microservicesTopic } from "@/data/topics/microservices";
 import { ciCdTopic } from "@/data/topics/ci-cd";
@@ -211,6 +212,7 @@ export const knowledgeBase: Section[] = [
     icon: "LayoutTemplate",
     topics: [
       frontendFrameworksTopic,
+      frameworksVsVanillaJsTopic,
       ssrVsCsrTopic,
       webAssemblyTopic,
       browserStorageTopic,
@@ -297,3 +299,4 @@ export function getSectionByTopicId(topicId: string): Section | undefined {
     section.topics.some((t) => t.id === topicId),
   );
 }
+
