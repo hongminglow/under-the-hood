@@ -12,6 +12,7 @@ import { oauthOidcTopic } from "@/data/topics/oauth2-oidc";
 import { dockerContainersTopic } from "@/data/topics/docker-containers";
 import { tcpVsUdpTopic } from "@/data/topics/tcp-vs-udp";
 import { frontendFrameworksTopic } from "@/data/topics/frontend-frameworks";
+import { frameworksVsVanillaJsTopic } from "@/data/topics/frameworks-vs-vanilla-js";
 import { graphqlVsRestTopic } from "@/data/topics/graphql-vs-rest";
 import { microservicesTopic } from "@/data/topics/microservices";
 import { ciCdTopic } from "@/data/topics/ci-cd";
@@ -40,7 +41,6 @@ import { cspTopic } from "@/data/topics/content-security-policy";
 import { iacTopic } from "@/data/topics/iac-terraform-ansible";
 import { oopVsFpTopic } from "@/data/topics/oop-vs-fp";
 import { databaseIndexingTopic } from "@/data/topics/database-indexing";
-import { bTreeVsBPlusTreeTopic } from "@/data/topics/b-tree-vs-b-plus-tree";
 import { browserStorageTopic } from "@/data/topics/browser-storage";
 import { viteVsWebpackTopic } from "@/data/topics/vite-vs-webpack";
 import { webRtcTopic } from "@/data/topics/webrtc";
@@ -196,7 +196,6 @@ export const knowledgeBase: Section[] = [
       sqlVsNosqlTopic,
       capTheoremTopic,
       databaseIndexingTopic,
-      bTreeVsBPlusTreeTopic,
       acidPropertiesTopic,
       redisTopic,
       databaseShardingTopic,
@@ -213,6 +212,7 @@ export const knowledgeBase: Section[] = [
     icon: "LayoutTemplate",
     topics: [
       frontendFrameworksTopic,
+      frameworksVsVanillaJsTopic,
       ssrVsCsrTopic,
       webAssemblyTopic,
       browserStorageTopic,
