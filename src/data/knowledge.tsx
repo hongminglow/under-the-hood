@@ -71,6 +71,7 @@ import { virtualDomVsSignalsTopic } from "@/data/topics/virtual-dom-vs-signals";
 import { idempotencyTopic } from "@/data/topics/api-idempotency";
 import { processVsThreadTopic } from "@/data/topics/process-vs-thread-vs-coroutine";
 import { monolithVsMicroservicesTopic } from "@/data/topics/monolith-vs-microservices";
+import { monolithVsMonorepoVsMicrofrontendsTopic } from "@/data/topics/monolith-vs-monorepo-vs-microfrontends";
 import { oauthFlowsTopic } from "@/data/topics/oauth2-flows-deep-dive";
 import { dnsOverHttpsTopic } from "@/data/topics/dns-security-doh-dot";
 import { solidPrinciplesTopic } from "@/data/topics/solid-principles";
@@ -182,6 +183,7 @@ export const knowledgeBase: Section[] = [
       eventDrivenArchitectureTopic,
       idempotencyTopic,
       monolithVsMicroservicesTopic,
+      monolithVsMonorepoVsMicrofrontendsTopic,
       solidPrinciplesTopic,
       apiGatewayTopic,
       dependencyInjectionTopic,
