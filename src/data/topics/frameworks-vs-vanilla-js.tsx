@@ -11,7 +11,7 @@ export const frameworksVsVanillaJsTopic: Topic = {
   id: "frameworks-vs-vanilla-js",
   title: "React/Vue vs Vanilla JS Performance",
   description:
-    "When frameworks are faster, when they\'re slower, and what you pay (bytes, CPU, memory) for a better developer experience.",
+    "When frameworks are faster, when they're slower, and what you pay (bytes, CPU, memory) for a better developer experience.",
   tags: ["frontend", "javascript", "performance", "react", "vue", "dom"],
   icon: "Gauge",
   content: [
@@ -220,4 +220,3 @@ const count = ref(0);
     </Callout>,
   ],
 };
-

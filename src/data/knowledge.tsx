@@ -106,6 +106,7 @@ import { vectorDatabasesTopic } from "@/data/topics/vector-databases-embeddings"
 import { reactServerComponentsTopic } from "@/data/topics/react-server-components";
 import { microFrontendsTopic } from "@/data/topics/micro-frontends";
 import { debounceThrottleTopic } from "@/data/topics/debounce-vs-throttle";
+import { setIntervalVsRequestAnimationFrameTopic } from "@/data/topics/setinterval-vs-requestanimationframe";
 import { webComponentsTopic } from "@/data/topics/web-components-shadow-dom";
 import { sseVsWebSocketTopic } from "@/data/topics/sse-vs-websocket";
 import { cssInJsVsUtilityTopic } from "@/data/topics/css-in-js-vs-utility";
@@ -227,6 +228,7 @@ export const knowledgeBase: Section[] = [
       reactServerComponentsTopic,
       microFrontendsTopic,
       debounceThrottleTopic,
+      setIntervalVsRequestAnimationFrameTopic,
       webComponentsTopic,
       cssInJsVsUtilityTopic,
     ],
