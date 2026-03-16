@@ -90,6 +90,7 @@ import { dependencyInjectionTopic } from "@/data/topics/dependency-injection";
 import { twelveFacorAppTopic } from "@/data/topics/twelve-factor-app";
 import { testingPyramidTopic } from "@/data/topics/testing-pyramid";
 import { encodingEncryptionHashingTopic } from "@/data/topics/encoding-encryption-hashing";
+import { backendEncryptionMethodsTopic } from "@/data/topics/backend-encryption-comparison";
 import { webAccessibilityTopic } from "@/data/topics/web-accessibility";
 import { errorHandlingTopic } from "@/data/topics/error-handling-patterns";
 import { paginationStrategiesTopic } from "@/data/topics/pagination-strategies";
@@ -159,6 +160,7 @@ export const knowledgeBase: Section[] = [
       oauthFlowsTopic,
       dnsOverHttpsTopic,
       encodingEncryptionHashingTopic,
+      backendEncryptionMethodsTopic,
     ],
   },
   {
