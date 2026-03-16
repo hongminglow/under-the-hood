@@ -71,6 +71,7 @@ import { virtualDomVsSignalsTopic } from "@/data/topics/virtual-dom-vs-signals";
 import { idempotencyTopic } from "@/data/topics/api-idempotency";
 import { processVsThreadTopic } from "@/data/topics/process-vs-thread-vs-coroutine";
 import { monolithVsMicroservicesTopic } from "@/data/topics/monolith-vs-microservices";
+import { monolithVsMonorepoVsMicrofrontendsTopic } from "@/data/topics/monolith-vs-monorepo-vs-microfrontends";
 import { oauthFlowsTopic } from "@/data/topics/oauth2-flows-deep-dive";
 import { dnsOverHttpsTopic } from "@/data/topics/dns-security-doh-dot";
 import { solidPrinciplesTopic } from "@/data/topics/solid-principles";
@@ -107,6 +108,7 @@ import { vectorDatabasesTopic } from "@/data/topics/vector-databases-embeddings"
 import { reactServerComponentsTopic } from "@/data/topics/react-server-components";
 import { microFrontendsTopic } from "@/data/topics/micro-frontends";
 import { debounceThrottleTopic } from "@/data/topics/debounce-vs-throttle";
+import { setIntervalVsRequestAnimationFrameTopic } from "@/data/topics/setinterval-vs-requestanimationframe";
 import { webComponentsTopic } from "@/data/topics/web-components-shadow-dom";
 import { sseVsWebSocketTopic } from "@/data/topics/sse-vs-websocket";
 import { cssInJsVsUtilityTopic } from "@/data/topics/css-in-js-vs-utility";
@@ -183,6 +185,7 @@ export const knowledgeBase: Section[] = [
       eventDrivenArchitectureTopic,
       idempotencyTopic,
       monolithVsMicroservicesTopic,
+      monolithVsMonorepoVsMicrofrontendsTopic,
       solidPrinciplesTopic,
       apiGatewayTopic,
       dependencyInjectionTopic,
@@ -229,6 +232,7 @@ export const knowledgeBase: Section[] = [
       reactServerComponentsTopic,
       microFrontendsTopic,
       debounceThrottleTopic,
+      setIntervalVsRequestAnimationFrameTopic,
       webComponentsTopic,
       cssInJsVsUtilityTopic,
     ],
