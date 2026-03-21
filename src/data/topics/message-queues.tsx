@@ -1,77 +1,40 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
-import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 
 export const messageQueuesTopic: Topic = {
   id: "message-queues",
-  title: "Message Queues & Event-Driven",
+  title: "Message Queues (Kafka & RabbitMQ)",
   description:
-    "Decoupling services via asynchronous communication: Kafka, RabbitMQ, and the event-driven paradigm.",
-  tags: ["architecture", "dist-systems", "kafka"],
-  icon: "MailPlus",
+    "How to handle chaotic Black Friday traffic spikes by decoupling instant APIs from massive background processing.",
+  tags: ["backend", "system-design", "async"],
+  icon: "ListOrdered",
   content: [
     <p key="1">
-      In a tightly-coupled system, Service A calls Service B synchronously and
-      waits. If B is slow or down, A fails too. <strong>Message Queues</strong>{" "}
-      decouple producers from consumers by introducing an intermediary buffer
-      where messages persist until processed.
+      If an e-commerce user hits "Buy", your API needs to charge their card, update inventory, email them a receipt, and notify shipping. If your API does all 4 of these synchronously, the user is staring at a freezing loading spinner for 12 seconds.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      Queuing vs Streaming
-    </h4>,
-    <Grid key="3" cols={2} gap={6} className="mb-8">
-      <Card title="Traditional Queue (RabbitMQ)">
-        <ul className="text-sm space-y-2 list-disc pl-4 mt-2">
-          <li>
-            <strong>Push-based:</strong> The broker actively pushes messages to
-            consumers.
-          </li>
-          <li>
-            Messages are <strong>deleted</strong> after acknowledgment.
-          </li>
-          <li>
-            Great for task distribution (e.g., send emails, process payments).
-          </li>
-          <li>Supports complex routing (topic, fanout, headers).</li>
-        </ul>
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      Asynchronous Decoupling
+    </h3>,
+    <p key="3" className="mb-4">
+      Instead, your API instantly charges their card, drops a tiny JSON message into a <strong>Message Queue</strong> reading <code>{"{\"type\": \"OrderPlaced\", \"id\": 55}"}</code>, and immediately returns <code>200 Success</code> to the user in 100 milliseconds.
+    </p>,
+    <Grid key="4" cols={2} gap={6} className="my-8">
+      <Card title="The Producer (Your API)" description="Fast and Forgetful">
+        <p className="text-sm text-muted-foreground">
+          It blindly drops messages onto the conveyor belt and walks away. It never cares who processes the email or how long it takes.
+        </p>
       </Card>
-      <Card title="Event Log (Apache Kafka)">
-        <ul className="text-sm space-y-2 list-disc pl-4 mt-2">
-          <li>
-            <strong>Pull-based:</strong> Consumers poll the broker and track
-            their own offset.
-          </li>
-          <li>
-            Messages are <strong>retained</strong> (often for days/weeks).
-            Multiple consumers can replay the stream.
-          </li>
-          <li>
-            Great for event sourcing, analytics pipelines, and real-time
-            streaming.
-          </li>
-          <li>Partitioned logs enable massive parallelism.</li>
-        </ul>
+      <Card title="The Workers (Consumers)" description="Slow and Steady">
+        <p className="text-sm text-muted-foreground">
+          Five separate background servers blindly pull tasks off the conveyor belt to send emails. If Black Friday happens and 10,000 orders drop on the belt, the API never crashes. The Workers just peacefully spend the next hour chewing through the backlog line.
+        </p>
       </Card>
     </Grid>,
-    <Table
-      key="4"
-      headers={["Feature", "RabbitMQ", "Apache Kafka"]}
-      rows={[
-        ["Delivery Model", "Push to consumers", "Pull by consumers"],
-        ["Message Retention", "Deleted after ACK", "Retained by TTL/size"],
-        ["Throughput", "Thousands/sec per queue", "Millions/sec per partition"],
-        ["Use Case", "Task queues, RPC", "Event streaming, CQRS, analytics"],
-        ["Ordering", "Per-queue FIFO", "Per-partition ordering guaranteed"],
-      ]}
-    />,
-    <Callout key="5" type="tip" title="The CQRS + Event Sourcing Pattern">
-      Instead of storing the <em>current state</em> of an entity (a bank account
-      balance of $500), you store every <em>event</em> that led to it (Deposited
-      $1000, Withdrew $300, Withdrew $200). Kafka's immutable log is the perfect
-      backbone for this, enabling full audit trails, time-travel debugging, and
-      rebuilding state from scratch.
+    <Callout key="5" type="tip" title="RabbitMQ vs Kafka">
+      <strong>RabbitMQ</strong> is a traditional active queue: Once the Email server reads the message, it is permanently deleted from the queue immediately. <br/><br/>
+      <strong>Apache Kafka</strong> is a brutal immutable log: Messages are <em>never</em> deleted. Hundreds of different microservices can replay the entire history of every order ever placed from the very beginning of time.
     </Callout>,
   ],
 };

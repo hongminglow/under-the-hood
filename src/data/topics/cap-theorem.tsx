@@ -1,82 +1,49 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
+import { Callout } from "@/components/ui/Callout";
 
 export const capTheoremTopic: Topic = {
   id: "cap-theorem",
   title: "CAP Theorem",
   description:
-    "The fundamental theoretical limit of distributed data stores: you can only pick two of three guarantees.",
-  tags: ["databases", "architecture", "dist-systems"],
-  icon: "DatabaseZapped",
+    "The immutable law of physics proving it's mathematically impossible to build a perfectly flawless distributed database.",
+  tags: ["database", "system-design", "architecture"],
+  icon: "Triangle",
   content: [
     <p key="1">
-      Proposed by Eric Brewer in 2000, the CAP theorem states that any
-      distributed data store can only provide two of the following three
-      guarantees simultaneously. When a network partition happens, a system must
-      choose between Consistency and Availability.
+      When you have exactly one PostgreSQL server, everything is perfect. If the server dies, nobody can read anything. But if you have 3 servers clustered globally to prevent downtime, a massive nightmare begins: **What if the transatlantic fiber-optic cable snaps, completely isolating the US server from the Europe server?**
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      The Three Pillars
-    </h4>,
-    <Grid key="3" cols={3} gap={6} className="mb-8">
-      <Card title="Consistency (C)">
-        <p className="text-sm">
-          Every read receives the most recent write or an error. All nodes see
-          the exact same data at the exact same time.
-        </p>
-      </Card>
-      <Card title="Availability (A)">
-        <p className="text-sm">
-          Every request receives a non-error response, without the guarantee
-          that it contains the most recent write.
-        </p>
-      </Card>
-      <Card title="Partition Tolerance (P)">
-        <p className="text-sm">
-          The system continues to operate despite an arbitrary number of
-          messages being dropped (or delayed) by the network between nodes.
-        </p>
-      </Card>
-    </Grid>,
-    <p key="4" className="mb-4">
-      Because network partitions (P) are unavoidable in the real world (cables
-      get cut, routers crash, switches fail), distributed systems <em>must</em>{" "}
-      support Partition Tolerance. Thus, the real choice is between{" "}
-      <strong>CP</strong> and <strong>AP</strong>.
-    </p>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Mathematical Triangle
+    </h3>,
     <Table
-      key="5"
-      headers={["System Type", "Choice", "Examples", "Use Case"]}
+      key="3"
+      headers={["Letter", "Concept", "The Developer Reality"]}
       rows={[
         [
-          "CP (Consistent & Partition Tolerant)",
-          "Rejects requests if it cannot guarantee up-to-date data.",
-          "MongoDB, HBase, Redis, Etcd",
-          "Financial transactions, billing platforms.",
+          "C",
+          "Consistency",
+          "Every single read from ANY server in the world strictly returns the most recent, mathematically perfect write. Zero stale data."
         ],
         [
-          "AP (Available & Partition Tolerant)",
-          "Returns the local data it has, even if it might be stale.",
-          "Cassandra, CouchDB, DynamoDB",
-          "Social media feeds, messaging, analytics.",
+          "A",
+          "Availability",
+          "Every single request (read/write) MUST receive an un-crashed, perfectly functioning response, no matter how many servers are currently physically dead."
         ],
         [
-          "CA (Consistent & Available)",
-          "Cannot handle network partitions. (Only exists in single-node systems).",
-          "Traditional Single-node PostgreSQL / MySQL",
-          "Legacy monolithic data stores.",
-        ],
+          "P",
+          "Partition Tolerance",
+          "The system organically continues to operate perfectly even if the physical network wires absolutely snap and servers cannot talk to each other."
+        ]
       ]}
     />,
-    <Callout key="6" type="warning" title="PACELC Theorem Extension">
-      The CAP theorem technically only applies <em>during a network outage</em>.
-      The PACELC theorem expands on it: <strong>If Partition (P)</strong>, trade
-      off <strong>Availability (A)</strong> or <strong>Consistency (C)</strong>.{" "}
-      <strong>Else (E)</strong> (when running normally), trade off{" "}
-      <strong>Latency (L)</strong> or <strong>Consistency (C)</strong>.
+    <p key="4" className="my-4">
+      Because networks physically break randomly on planet Earth, <strong>Partition Tolerance is 100% mandatory (P).</strong> This forces every Software Architect sitting in a room to make a violently rigid permanent decision regarding their database: <strong>Do I choose Consistency (CP) or Availability (AP)?</strong>
+    </p>,
+    <Callout key="5" type="warning" title="CP (MongoDB / Redis) vs AP (Cassandra)">
+      If a European bank suffers a wire snap to the US, the European server realizes the data isn't perfectly syncing. It explicitly chooses <strong>Consistency (CP)</strong>: it physically turns itself completely off and screams an error. "I refuse to be Available, because I might hand you scientifically wrong bank balances!" 
+      <br/><br/>
+      If Instagram suffers a wire snap to the US, the European server explicitly chooses <strong>Availability (AP)</strong>. It stays perfectly alive, happily accepting thousands of European photo 'Likes', mathematically knowing the US server is wildly out of sync. It chooses speed over perfection.
     </Callout>,
   ],
 };

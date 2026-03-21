@@ -1,116 +1,61 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Callout } from "@/components/ui/Callout";
 
-export const webComponentsTopic: Topic = {
+export const webComponentsShadowDomTopic: Topic = {
   id: "web-components-shadow-dom",
   title: "Web Components & Shadow DOM",
   description:
-    "The browser-native component standard: Custom Elements, Shadow DOM, and HTML Templates — no framework required.",
-  tags: ["frontend", "web-standards", "components", "html"],
-  icon: "Component",
+    "How to physically isolate a custom <code><my-button></code> so global CSS rules mathematically cannot destroy its padding.",
+  tags: ["frontend", "architecture", "html"],
+  icon: "Box",
   content: [
     <p key="1">
-      <strong>Web Components</strong> are a set of browser-native APIs that let
-      you create <strong>reusable, encapsulated custom HTML elements</strong> —
-      like <code>&lt;my-button&gt;</code> — that work in any framework (React,
-      Vue, Angular) or with no framework at all. They're built on three
-      specifications.
+      Web Components are a suite of browser-native APIs that allow you to create reusable custom elements with their own encapsulated logic and styling. They are <strong>Framework-Agnostic</strong>—a component built today will work in any future framework (or none at all).
     </p>,
-    <Grid key="2" cols={3} gap={6} className="my-8">
-      <Card title="Custom Elements">
-        <p className="text-sm">
-          Define your own HTML tags with custom behavior. Extend{" "}
-          <code>HTMLElement</code> and register with{" "}
-          <code>customElements.define()</code>. Lifecycle callbacks:{" "}
-          <code>connectedCallback</code>, <code>disconnectedCallback</code>,{" "}
-          <code>attributeChangedCallback</code>.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Three Pillars
+    </h3>,
+    <Table
+      key="3"
+      headers={["Tech", "Mechanism", "Why it Matters"]}
+      rows={[
+        ["Custom Elements", "Register a new tag (e.g., <code>&lt;user-card&gt;</code>) via <code>customElements.define()</code>.", "Allows you to extend the browser's vocabulary with your own UI primitives."],
+        ["Shadow DOM", "Creates a 'Shadow Root' that is isolated from the main document.", "Guarantees <strong>CSS Scoping</strong>. Your component's styles cannot leak out, and global styles cannot leak in."],
+        ["HTML Templates", "Uses <code>&lt;template&gt;</code> and <code>&lt;slot&gt;</code> tags.", "Efficiently clones DOM structures without executing scripts until the component is instantiated."]
+      ]}
+    />,
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      Lifecycle Callbacks: The 'Under the Hood' Hooks
+    </h3>,
+    <Grid key="5" cols={2} gap={6} className="my-8">
+      <Card title="connectedCallback">
+        <p className="text-sm text-muted-foreground mb-2">
+          Invoked when the element is first <strong>appended</strong> to the DOM.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          This is where you perform data fetching, setup event listeners, and render the initial Shadow DOM tree.
         </p>
       </Card>
-      <Card title="Shadow DOM">
-        <p className="text-sm">
-          Creates an <strong>encapsulated DOM tree</strong> invisible to the
-          parent page. CSS inside Shadow DOM doesn't leak out; CSS outside
-          doesn't leak in. True style isolation without CSS modules, BEM, or
-          Tailwind prefixes.
+      <Card title="attributeChangedCallback">
+        <p className="text-sm text-muted-foreground mb-2">
+          Invoked when an <strong>observed attribute</strong> is updated.
         </p>
-      </Card>
-      <Card title="HTML Templates">
-        <p className="text-sm">
-          <code>&lt;template&gt;</code> and <code>&lt;slot&gt;</code> elements
-          define inert HTML that's cloned on demand. Slots let consumers inject
-          content:{" "}
-          <code>
-            &lt;my-card&gt;&lt;span
-            slot="title"&gt;Hi&lt;/span&gt;&lt;/my-card&gt;
-          </code>
-          .
+        <p className="text-xs italic text-muted-foreground">
+          The native version of <code>componentDidUpdate</code>. It allows you to synchronize the component's internal state with its HTML attributes.
         </p>
       </Card>
     </Grid>,
-    <CodeBlock
-      key="3"
-      language="javascript"
-      title="Building a Web Component"
-      code={`class MyCounter extends HTMLElement {
-  constructor() {
-    super();
-    this.count = 0;
-    this.attachShadow({ mode: "open" }); // Encapsulated DOM
-    this.shadowRoot.innerHTML = \`
-      <style>
-        button { padding: 8px 16px; font-size: 16px; }
-        span { margin: 0 12px; font-weight: bold; }
-      </style>
-      <button id="dec">−</button>
-      <span id="count">0</span>
-      <button id="inc">+</button>
-    \`;
-  }
-
-  connectedCallback() { // Called when element is added to DOM
-    this.shadowRoot.getElementById("inc")
-      .addEventListener("click", () => this.update(+1));
-    this.shadowRoot.getElementById("dec")
-      .addEventListener("click", () => this.update(-1));
-  }
-
-  update(delta) {
-    this.count += delta;
-    this.shadowRoot.getElementById("count").textContent = this.count;
-  }
-}
-
-customElements.define("my-counter", MyCounter);
-// Usage: <my-counter></my-counter>`}
-    />,
-    <Table
-      key="4"
-      headers={["Framework", "Web Component Support"]}
-      rows={[
-        ["Vanilla JS", "Native — no library needed"],
-        [
-          "Lit (Google)",
-          "Lightweight WC library — reactive properties, decorators",
-        ],
-        [
-          "Stencil (Ionic)",
-          "Compiler that outputs WC from TSX — lazy loading built-in",
-        ],
-        ["React", "Partial — needs workarounds for events and properties"],
-        ["Vue", "Excellent — can compile Vue SFCs as Web Components"],
-        ["Angular", "Excellent — Angular Elements exports components as WC"],
-      ]}
-    />,
-    <Callout key="5" type="info" title="When to Use Web Components">
-      <strong>Design systems</strong> shared across React, Vue, and Angular
-      teams. <strong>Micro-frontends</strong> that need framework-agnostic
-      widgets. <strong>CMS embeds</strong> that must work on any website. For
-      single-framework apps, framework-native components are usually simpler and
-      more ergonomic.
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      Declarative Shadow DOM (DSD)
+    </h3>,
+    <p key="7" className="mb-4 text-sm text-muted-foreground">
+      Historically, Shadow DOM required JavaScript to initialize. <strong>Declarative Shadow DOM</strong> allows you to define the shadow root directly in HTML: <code>&lt;template shadowrootmode="open"&gt;</code>. This enables <strong>Server-Side Rendering (SSR)</strong> for Web Components, preventing the "Flash of Unstyled Content" (FOUC).
+    </p>,
+    <Callout key="8" type="info" title="Theming with CSS Variables">
+      Since the Shadow DOM blocks global CSS, how do you theme a component? You use <strong>CSS Custom Properties (Variables)</strong>. Variables pass through the shadow boundary, allowing you to define <code>--primary-color: blue;</code> on the <code>&lt;body&gt;</code> and have it be inherited by all inner components.
     </Callout>,
   ],
 };

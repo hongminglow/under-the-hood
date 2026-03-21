@@ -1,105 +1,39 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
+import { Callout } from "@/components/ui/Callout";
 
 export const stackVsHeapTopic: Topic = {
   id: "stack-vs-heap",
-  title: "Memory: Stack vs Heap",
+  title: "Stack vs Heap",
   description:
-    "The two fundamental regions of RAM used by programs, mapping directly to speed, size, and lifecycle tradeoffs.",
-  tags: ["cs-fundamentals", "memory", "c++", "rust"],
-  icon: "Layers",
+    "How primitive numbers and massive complex arrays literally physically exist inside isolated silicon RAM hardware blocks.",
+  tags: ["core", "architecture", "backend"],
+  icon: "Database",
   content: [
     <p key="1">
-      When an application executes, the operating system allocates memory. Data
-      must be stored in RAM to be accessed by the CPU. Almost all programming
-      languages divide this memory into two distinct regions: the{" "}
-      <strong>Stack</strong> and the <strong>Heap</strong>.
+      When you blindly type <code>const age = 30</code> versus <code>{"const user = { age: 30 }"}</code>, the CPU handles the physics entirely differently. One goes into ultra-fast strict physical temporary memory array blocks. The other dives completely randomly into a massive endless unstructured garbage dump.
     </p>,
-    <Grid key="2" cols={2} gap={6} className="my-8">
-      <Card title="The Stack">
-        <ul className="text-sm space-y-2 list-disc pl-4 mt-2">
-          <li>
-            <strong>Structure:</strong> A strict LIFO (Last-In, First-Out) data
-            structure.
-          </li>
-          <li>
-            <strong>What goes here:</strong> Local variables (ints, floats,
-            booleans, pointers) and function call frames.
-          </li>
-          <li>
-            <strong>Size requirement:</strong> All data stored on the stack must
-            have a known, fixed size at compile time.
-          </li>
-          <li>
-            <strong>Speed:</strong> Blazing fast. Allocation is just moving a
-            single CPU pointer.
-          </li>
-          <li>
-            <strong>Lifecycle:</strong> Memory is automatically reclaimed the
-            moment the function returns.
-          </li>
-        </ul>
-      </Card>
-      <Card title="The Heap">
-        <ul className="text-sm space-y-2 list-disc pl-4 mt-2">
-          <li>
-            <strong>Structure:</strong> A disorganized, massive pool of free
-            memory governed by the OS.
-          </li>
-          <li>
-            <strong>What goes here:</strong> Dynamically sized data (arrays,
-            strings, large objects, closures).
-          </li>
-          <li>
-            <strong>Size requirement:</strong> Size can change dynamically at
-            runtime.
-          </li>
-          <li>
-            <strong>Speed:</strong> Slower. Must ask the OS to find a contiguous
-            block of free memory.
-          </li>
-          <li>
-            <strong>Lifecycle:</strong> Must be managed. Requires manual
-            `free()` (C/C++) or a Garbage Collector (JS/Java).
-          </li>
-        </ul>
-      </Card>
-    </Grid>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Two RAM Sectors
+    </h3>,
     <Table
       key="3"
-      headers={["Property", "Stack", "Heap"]}
+      headers={["Concept", "Memory Trait", "What Lives Here"]}
       rows={[
         [
-          "Allocation Strategy",
-          "Automatic (handled by compiler)",
-          "Manual or Garbage Collected",
-        ],
-        ["Performance", "Near-instantaneous", "Slower (OS syscall overhead)"],
-        [
-          "Size Limit",
-          "Small (often ~8MB total per thread)",
-          "Massive (limited only by physical RAM/swap)",
+          "The Stack",
+          "Tiny, linear, predictable, incredibly fast L1/L2 Cache CPU storage blocks.",
+          "Primitive values (booleans, strings, numbers). And function frames. When a function finishes running, this block instantly deletes itself safely."
         ],
         [
-          "Fragmentation",
-          "Impossible (strict LIFO)",
-          "Common (leads to holes in memory)",
-        ],
-        [
-          "Data Access",
-          "Thread-local (private)",
-          "Can be shared across multiple threads",
-        ],
+          "The Heap",
+          "Enormous, unstructured, random-access slow RAM pool.",
+          "Complex objects, massive arrays, closures. Because sizes fluctuate endlessly, the Stack simply holds a tiny physical pointer strictly linking to a specific address residing over in the messy Heap."
+        ]
       ]}
     />,
-    <Callout key="4" type="info" title="How Pointers Bridge The Gap">
-      In most languages, if you create a large object on the Heap, the actual
-      gigabytes of data reside in the Heap, but a small fixed-size{" "}
-      <em>pointer</em> (an integer storing the memory address, usually 8 bytes
-      on 64-bit systems) is stored on the Stack to keep track of it.
+    <Callout key="4" type="danger" title="The Stack Overflow">
+      If you write a recursive function that blindly calls itself eternally without a proper exit condition, it repeatedly fills up the entirely rigid physical Stack with completely endless new function execution frames. The CPU mathematically throws a "Maximum Call Stack Exceeded" fatal exception and permanently kills your physical backend server instance instantly.
     </Callout>,
   ],
 };

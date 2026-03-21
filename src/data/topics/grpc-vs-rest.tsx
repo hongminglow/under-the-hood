@@ -1,82 +1,66 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 
 export const grpcVsRestTopic: Topic = {
   id: "grpc-vs-rest",
   title: "gRPC vs REST",
   description:
-    "The transition from JSON text over HTTP/1.1 to hyper-efficient Protobuf binaries over HTTP/2 multiplexed streams.",
-  tags: ["networking", "api", "architecture", "microservices"],
-  icon: "WifiHigh",
+    "Why massive microservice architectures abandon standard JSON REST APIs for lightning-fast binary protocols.",
+  tags: ["backend", "api-design", "microservices"],
+  icon: "Binary",
   content: [
     <p key="1">
-      When two microservices need to talk to each other, using standard REST
-      APIs transmitting thick JSON payloads over HTTP/1.1 is incredibly slow.
-      Google invented <strong>gRPC (gRPC Remote Procedure Calls)</strong> as a
-      brutally fast communication protocol specifically for internal
-      microservice ecosystems.
+      Choosing between REST and gRPC is a trade-off between <strong>Accessibility</strong> and <strong>Performance</strong>. While REST is the universal language of the web, gRPC is the high-performance engine for internal microservices.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      JSON Text vs Protocol Buffers
-    </h4>,
-    <Grid key="3" cols={2} gap={6} className="mb-4">
-      <Card title="REST (JSON)">
-        <p className="text-sm">
-          JSON is human-readable, huge in byte size, and requires heavy CPU
-          cycles to parse string characters at runtime into actual objects.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Protocol Battle
+    </h3>,
+    <Table
+      key="3"
+      headers={["Feature", "REST (Representational State Transfer)", "gRPC (Google Remote Procedure Call)"]}
+      rows={[
+        ["Payload", "<strong>JSON</strong> (Text-based, Heavy).", "<strong>Protobuf</strong> (Binary, Lightweight)."],
+        ["Transport", "HTTP/1.1 or HTTP/2.", "Strictly <strong>HTTP/2</strong>."],
+        ["Contract", "Optional (Swagger/OpenAPI).", "Strictly Required (<code>.proto</code> files)."],
+        ["Performance", "Slower (Text parsing overhead).", "Blazing fast (Minimal serialization)."],
+        ["Streaming", "Client-to-Server (Request/Response).", "Bidirectional, Server-side, Client-side."]
+      ]}
+    />,
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      Under the Hood: Protocol Buffers (Protobuf)
+    </h3>,
+    <p key="5" className="mb-4 text-sm text-muted-foreground">
+      JSON is <strong>Self-Describing</strong>; it sends both the key and value (e.g., <code>"userId": 123</code>). gRPC uses Protobuf, which strips away the keys and sends raw binary bytes based on a shared schema.
+    </p>,
+    <Grid key="6" cols={2} gap={6} className="my-8">
+      <Card title="Code Generation">
+        <p className="text-sm text-muted-foreground mb-2">
+          gRPC generates the <strong>Client & Server Stubs</strong>.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          You write a <code>service.proto</code> file. gRPC automatically compiles it into TypeScript, Go, or Python. You call <code>client.getUser()</code> as if it were a local function.
         </p>
       </Card>
-      <Card title="gRPC (Protobuf)">
-        <p className="text-sm">
-          Uses Protocol Buffers. Data is serialized into dense, unreadable
-          binary bytes. It executes 5x to 10x faster and results in vastly
-          smaller network payloads.
+      <Card title="Streaming Capabilities">
+        <p className="text-sm text-muted-foreground mb-2">
+          Harnessing the power of HTTP/2.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          Supports <strong>Bidirectional Streaming</strong>: The server can push data elements one-by-one as they are processed, rather than waiting for a giant batch to finish.
         </p>
       </Card>
     </Grid>,
-    <p key="4" className="mb-4">
-      Unlike REST, where you describe endpoints using somewhat arbitrary OpenAPI
-      specs, gRPC strictly requires a <strong>`.proto` contract file</strong>.
-      Both the client and backend automatically generate highly-typed stub
-      classes directly from this file in any language.
+    <h3 key="7" className="text-xl font-bold mt-8 mb-4">
+      Why not for the Browser? (gRPC-Web)
+    </h3>,
+    <p key="8" className="mb-4">
+      Native gRPC requires access to low-level <strong>HTTP/2 Frames</strong>, which browsers (Chrome/Safari) do not expose to JavaScript. To use gRPC in a React app, you must use <strong>gRPC-Web</strong>, which requires a proxy (Envoy) to translate browser-friendly HTTP requests into native gRPC.
     </p>,
-    <CodeBlock
-      key="5"
-      language="protobuf"
-      title="user_service.proto"
-      code={`syntax = "proto3";
-
-service UserService {
-  rpc GetUser (UserRequest) returns (UserResponse);
-}
-
-message UserRequest {
-  int32 id = 1;
-}
-
-message UserResponse {
-  string first_name = 1;
-  string last_name = 2;
-}`}
-    />,
-    <h4 key="6" className="text-xl font-bold mt-8 mb-4">
-      HTTP/2 By Default
-    </h4>,
-    <p key="7" className="mb-4">
-      gRPC mandate the use of HTTP/2. This natively allows gRPC to take
-      advantage of <strong>Multiplexing</strong> and{" "}
-      <strong>Bi-Directional Streaming</strong>. A single TCP connection can
-      stream thousands of concurrent calls, or have data pouring continually
-      from Client to Server and Server to Client simultaneously.
-    </p>,
-    <Callout key="8" type="warning" title="gRPC in the Browser?">
-      Browsers do not have low-level access to raw HTTP/2 frames, so standard
-      gRPC from a browser tab to a server is impossible. You usually use
-      REST/GraphQL between the browser and a Gateway, and then the Gateway uses
-      gRPC to talk to the wildly scaled backend microservices.
+    <Callout key="9" type="info" title="Internal vs. External">
+      Rule of thumb: Use <strong>REST</strong> for your public-facing API that third-party developers use. Use <strong>gRPC</strong> for your internal microservices (e.g., Auth service talking to Order service) to minimize latency and CPU usage.
     </Callout>,
   ],
 };

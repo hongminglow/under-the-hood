@@ -2,7 +2,6 @@ import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Table } from "@/components/ui/Table";
 
 export const envConfigTopic: Topic = {
@@ -14,90 +13,52 @@ export const envConfigTopic: Topic = {
   icon: "Settings",
   content: [
     <p key="1">
-      <strong>Hardcoding secrets in source code</strong> is the #1 security
-      mistake developers make. API keys, database URLs, and encryption secrets
-      must live in <strong>environment variables</strong> — never in Git. The
-      same binary should run in dev, staging, and production with only env vars
-      changing.
+      Configuration management is the process of decoupling your application logic from its environment. The <strong>Twelve-Factor App</strong> methodology dictates that 100% of configuration should be stored in <strong>Environment Variables</strong>.
     </p>,
-    <Table
-      key="2"
-      headers={["Method", "Security", "Best For", "Risk"]}
-      rows={[
-        [
-          ".env files",
-          "Low — plaintext on disk",
-          "Local development",
-          "Accidentally committed to Git",
-        ],
-        [
-          "CI/CD Variables",
-          "Medium — encrypted at rest",
-          "Build-time injection",
-          "Visible in build logs if echoed",
-        ],
-        [
-          "Cloud Secrets Manager",
-          "High — encrypted, audited, rotated",
-          "Production",
-          "Vendor lock-in, latency",
-        ],
-        [
-          "Vault (HashiCorp)",
-          "Highest — dynamic secrets, TTL",
-          "Enterprise",
-          "Operational complexity",
-        ],
-      ]}
-    />,
-    <CodeBlock
-      key="3"
-      language="typescript"
-      title="Environment Config in Node.js"
-      code={`// .env (NEVER commit this file — add to .gitignore)
-DATABASE_URL=postgresql://user:pass@localhost:5432/mydb
-JWT_SECRET=super-secret-key-here
-REDIS_URL=redis://localhost:6379
-
-// app.ts — validate env vars at startup, fail fast
-import { z } from 'zod';
-
-const envSchema = z.object({
-  DATABASE_URL: z.string().url(),
-  JWT_SECRET: z.string().min(32),
-  REDIS_URL: z.string().url(),
-  NODE_ENV: z.enum(['development', 'production', 'test']),
-});
-
-// Throws immediately if any env var is missing or invalid
-export const env = envSchema.parse(process.env);`}
-    />,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Secret Lifecycle: Build-time vs. Runtime
+    </h3>,
+    <p key="3" className="mb-4">
+      Mixing these up is a common source of production bugs.
+    </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
-      <Card title="The .env.example Pattern">
-        <p className="text-sm">
-          Commit a <code>.env.example</code> with all required variable names
-          (no values) to Git. Developers copy it to <code>.env</code> and fill
-          in their local values. Documents which variables are needed without
-          leaking secrets.
+      <Card title="Build-time Variables">
+        <p className="text-sm text-muted-foreground mb-2">
+          Injected during <code>docker build</code> or <code>npm run build</code>.
         </p>
+        <p className="text-xs italic text-red-500 font-bold underline">Warning: Hardcoded in the final JS bundle / Image layer.</p>
       </Card>
-      <Card title="Secrets Rotation">
-        <p className="text-sm">
-          API keys and passwords should be <strong>rotated regularly</strong>.
-          Cloud secrets managers (AWS Secrets Manager, GCP Secret Manager)
-          support <strong>automatic rotation</strong> — the secret changes
-          periodically without any code changes.
+      <Card title="Runtime Variables">
+        <p className="text-sm text-muted-foreground mb-2">
+          Injected when the container starts (<code>process.env</code>). 
         </p>
+        <p className="text-xs italic text-green-500 font-bold underline">Success: Secure and hot-swappable without rebuilding.</p>
       </Card>
     </Grid>,
-    <Callout key="5" type="warning" title="The Git History Trap">
-      If you accidentally commit a secret,{" "}
-      <strong>removing it from the latest commit isn't enough</strong> — it's
-      still in Git history. You must{" "}
-      <strong>rotate the secret immediately</strong> (generate a new one), then
-      either use <code>git filter-branch</code> or BFG Repo Cleaner to purge
-      history. GitHub automatically scans for leaked secrets via{" "}
-      <strong>Secret Scanning</strong>.
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      Industrial Secret Management (Vault)
+    </h3>,
+    <p key="6" className="mb-4">
+      In high-security environments, secrets aren't even passed as env vars. You use a <strong>Secret Injection Sidecar</strong> (like HashiCorp Vault Agent).
+    </p>,
+    <Table
+      key="7"
+      headers={["Method", "Technical Implementation", "Security Level"]}
+      rows={[
+        [".env (Local)", "Plaintext files in <code>.gitignore</code>.", "Low (Human error risk)"],
+        ["Cloud Manager", "AWS Secrets Manager / GCP Secret Manager.", "High (Encryption at rest)"],
+        ["Dynamic Secrets", "Vault generates a <strong>temporary</strong> DB credential for one hour.", "Highest (Zero permanent secrets)"]
+      ]}
+    />,
+    <h3 key="8" className="text-xl font-bold mt-8 mb-4">
+      Preventing Leaks Before They Happen
+    </h3>,
+    <ul className="list-disc pl-5 mb-8 text-sm space-y-2">
+      <li><strong>Git Hooks (Husky):</strong> Run <code>gitleaks</code> or <code>trufflehog</code> in a <code>pre-commit</code> hook to scan for API keys before the push.</li>
+      <li><strong>GitHub Secret Scanning:</strong> Automatically revokes tokens from known providers (AWS/Stripe) if they are pushed to a public repo.</li>
+    </ul>,
+    <Callout key="9" type="danger" title="The Git History Trap">
+      Deleting a secret from a file and committing isn't enough. The secret remains in the <strong>Git History</strong> (the <code>.git</code> folder). You must <strong>immediately rotate</strong> (deactivate) the secret and use tools like <code>BFG Repo-Cleaner</code> to purge the history.
     </Callout>,
   ],
 };

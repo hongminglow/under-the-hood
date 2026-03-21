@@ -3,112 +3,109 @@ import { Card } from "@/components/ui/Card";
 import { Highlight } from "@/components/ui/Highlight";
 import { Callout } from "@/components/ui/Callout";
 import { Step } from "@/components/ui/Step";
-import { Table } from "@/components/ui/Table";
 import { Grid } from "@/components/ui/Grid";
+import { CodeBlock } from "@/components/ui/CodeBlock";
 
 export const dockerContainersTopic: Topic = {
   id: "docker-containers",
-  title: "Docker & Container Architecture",
+  title: "Docker & Containers",
   description:
-    "Deconstructing process-level virtualization: how Linux Kernel features are orchestrated to create isolated, reproducible runtime environments.",
-  tags: ["devops", "containers", "linux", "architecture"],
+    "A high-level explanation of what Docker is in the programming world, how it solves the 'it works on my machine' problem, and its role in modern CI/CD.",
+  tags: ["devops", "containers", "ci-cd", "backend"],
   icon: "Box",
   content: [
     <p key="1">
-      The "Works on my machine!" problem plagued software engineering for
-      decades. Developers would build logic on a Mac, test on CentOS, and deploy
-      on Ubuntu—inevitably failing due to mismatched system dependencies.{" "}
-      <strong>Docker</strong> popularized OS-level virtualization to solve this
-      by packaging code, runtimes, and system tools into an immutable, portable
-      artifact called an Image.
+      For years, developers faced the infamous{" "}
+      <strong>"It works on my machine!"</strong> problem. You write code on your
+      Windows laptop, it works perfectly, but when you send it to the Linux
+      production server, it crashes because of wrong Node.js versions, missing
+      packages, or different OS configurations.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      Containers vs. Virtual Machines (VMs)
+    <p key="2" className="mt-4">
+      <strong>Docker</strong> was created to solve this. Instead of just sending
+      your code, you send your code <em>along with</em> the exact environment it
+      needs to run. Docker packages your app and all its dependencies into a
+      standardized puzzle piece called a{" "}
+      <Highlight variant="primary">Container</Highlight>.
+    </p>,
+    <h4 key="3" className="text-xl font-bold mt-8 mb-4">
+      How Docker Helps Developers
     </h4>,
-    <p key="3">
-      Historically, scaling applications meant running Virtual Machines (VMs).
-      VMs are hardware-level virtualizations. A hypervisor (like VMware or
-      VirtualBox) reserves physical RAM/CPU to run an entire, heavy Guest
-      Operating System from scratch.
-    </p>,
     <Grid key="4" cols={2} gap={6} className="my-6">
-      <Card title="Virtual Machines" description="Hardware Virtualization">
-        <ul className="list-disc pl-5 space-y-2 mt-2">
-          <li>Runs a full Guest Kernel on top of the Host Kernel.</li>
-          <li>Weighs Gigabytes, takes minutes to boot.</li>
-          <li>Strict hardware boundary ensures heavy isolation.</li>
-        </ul>
+      <Card title="Absolute Consistency" description="No More Surprises">
+        <p className="text-sm mt-2 text-muted-foreground">
+          Since the container includes the code, the runtime (like Node or Python),
+          and the operating system details, it behaves exactly the same on your
+          laptop, on your co-worker's MacBook, and on the AWS production cloud.
+        </p>
       </Card>
-      <Card title="Containers" description="OS-Level Virtualization">
-        <ul className="list-disc pl-5 space-y-2 mt-2">
-          <li>
-            Shares the underlying Host OS Kernel natively; no hypervisor needed.
-          </li>
-          <li>Weighs Megabytes, boots in milliseconds.</li>
-          <li>
-            Isolated via <Highlight variant="primary">Namespaces</Highlight>.
-          </li>
-        </ul>
+      <Card title="Speed & Efficiency" description="Lighter than VMs">
+        <p className="text-sm mt-2 text-muted-foreground">
+          Unlike traditional Virtual Machines (VMs) that boot up entirely new
+          heavy operating systems, containers share the host's OS. They are tiny,
+          fast, and start in milliseconds.
+        </p>
       </Card>
     </Grid>,
     <h4 key="5" className="text-xl font-bold mt-8 mb-4">
-      The Magic Behind the Box: Linux Primitives
+      Key Concepts: Image vs. Container
     </h4>,
-    <p key="6">
-      "Container" isn't actually a technical Linux Kernel term; it's a
-      conceptual wrapper around three highly advanced core Linux isolation
-      features working in tandem.
+    <Card key="6" title="The Blueprint vs. The House">
+      <ul className="list-disc pl-5 space-y-2 mt-2">
+        <li>
+          <strong>Docker Image:</strong> The static blueprint. It's an immutable file
+          that contains your source code, libraries, dependencies, and tools.
+        </li>
+        <li>
+          <strong>Docker Container:</strong> The running instance of that Image.
+          You can run many identical containers from a single Image.
+        </li>
+      </ul>
+    </Card>,
+    <h4 key="7" className="text-xl font-bold mt-8 mb-4">
+      The Docker CI/CD Workflow
+    </h4>,
+    <p key="8" className="mb-6">
+      Docker is the backbone of modern Continuous Integration and Continuous
+      Deployment (CI/CD). Here is how a typical pipeline looks when you push
+      code to GitHub:
     </p>,
-    <Step key="7" index={1}>
-      <strong>Namespaces (Isolation):</strong> Limits what a process can{" "}
-      <em>see</em>. Docker creates unique Mount, PID (Process ID), Network, and
-      User namespaces. To the containerized app, it appears it is the only
-      process running on the machine, with its own dedicated network interface
-      and root filesystem.
+    <Step key="9" index={1}>
+      <strong>Build:</strong> The CI server (like GitHub Actions) reads your{" "}
+      <Highlight variant="primary">Dockerfile</Highlight>—a simple instruction
+      file—and builds a fresh Docker Image containing your updated code.
     </Step>,
-    <Step key="8" index={2}>
-      <strong>Cgroups (Resource Quotas):</strong> "Control Groups" limit what a
-      process can <em>use</em>. This prevents a rogue memory-leaking container
-      from consuming all the host's RAM. It tightly throttles CPU cycles and
-      Memory availability.
+    <Step key="10" index={2}>
+      <strong>Ship (Push):</strong> The CI server uploads this newly built
+      Image to a central storage area called a Registry (like Docker Hub or AWS
+      Elastic Container Registry).
     </Step>,
-    <Step key="9" index={3}>
-      <strong>UnionFS (Layered Filesystems):</strong> A filesystem service that
-      allows files and directories of separate file systems (branches) to be
-      transparently overlaid. If an image is 1GB, and you run 10 containers from
-      it, they don't consume 10GB. They all read from the same base image layer
-      and only allocate storage for thin, temporary "Copy-on-Write" differential
-      layers.
+    <Step key="11" index={3}>
+      <strong>Run (Deploy):</strong> Your production servers download the newest
+      Image from the Registry, stop the old containers, and spin up new
+      containers exactly recreating your fresh application environment.
     </Step>,
-    <h4 key="10" className="text-xl font-bold mt-8 mb-4">
-      The Orchestration Evolutionary Step
-    </h4>,
-    <Table
-      key="11"
-      headers={["Layer", "Technology", "Responsibility"]}
-      rows={[
-        [
-          "The Standard",
-          "OCI Images (Docker)",
-          "Defines exactly how an application is packaged step-by-step.",
-        ],
-        [
-          "The Engine",
-          "Containerd / runc",
-          "The daemon responsible for downloading images and executing namespaced processes.",
-        ],
-        [
-          "The Orchestrator",
-          "Kubernetes",
-          "The distributed cluster manager. It observes thousands of containers, rerouting traffic, handling crash restarts, and auto-scaling based on CPU loads.",
-        ],
-      ]}
-    />,
-    <Callout key="12" type="tip" title="Why Microservices?">
-      Containerization was the physical catalyst for the microservices boom.
-      Because containers cost almost zero overhead to run, architects could
-      freely split massive monolithic codebases into dozen of independently
-      deployable APIs without worrying about server provisioning limits.
+    <Callout key="12" type="tip" title="Example: The Dockerfile">
+      A simple instruction set mapping out your environment.
     </Callout>,
+    <CodeBlock
+      key="13"
+      title="Dockerfile"
+      language="dockerfile"
+      code={`
+# 1. Start from an existing Node.js blueprint
+FROM node:20-alpine
+
+# 2. Copy your local code into the image
+COPY . /app
+WORKDIR /app
+
+# 3. Install dependencies
+RUN npm install
+
+# 4. Tell the container what command to run
+CMD ["npm", "start"]
+      `}
+    />,
   ],
 };

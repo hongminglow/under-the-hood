@@ -105,3 +105,34 @@ For inline terminology or status emphasis.
 - The new topic automatically gets a custom icon in the expanded sidebar.
 - Collapsed sidebar shows the **Section icon** only with a rich tooltip.
 - All interactive items MUST have \`cursor-pointer\`.
+
+---
+
+## 🚨 Common Technical Pitfalls & Reminders
+
+To ensure the application remains stable and build-ready, always follow these rules:
+
+### 1. JSX Syntax Integrity
+- **Unclosed Tags**: Browsers and the build engine will crash if tags are not explicitly closed. 
+  - *Bad*: `<h3>Title,` or `<style>content`.
+  - *Good*: `<h3>Title</h3>` or `<style>{\`content\`}</style>`.
+- **String Escaping**: Use backticks for complex code strings within `CodeBlock` to avoid breaking JSX parsing.
+
+### 2. Import Hygiene
+- **Missing Imports**: When you add a new UI component (e.g., `<Table />`), you **MUST** add it to the file's imports:
+  ```tsx
+  import { Table } from "@/components/ui/Table";
+  ```
+- **Unused Imports**: When refactoring a file to remove old components (like `<Step />`), always delete the unused import to keep the bundle clean and avoid linting errors.
+
+### 3. Component Hierarchy & Choice
+- **Prefer Tables**: For protocol comparisons, bit flags, or feature lists, **always** use `<Table />` instead of a linear list of `<Step />`.
+- **Grid vs. Cards**: Use `<Grid cols={2} gap={6}>` for lateral comparisons (Pros/Cons, Before/After).
+
+### 4. Build Configuration (TSConfig)
+- **Standard Options Only**: Do not add non-standard or experimental TypeScript options (like `erasableSyntaxOnly`) that may not be supported by the current environment. 
+- **Incremental Builds**: If `tsBuildInfoFile` is specified, ensure `incremental: true` is also present to avoid configuration errors.
+
+### 5. React Keys
+- Every top-level element in a topic's `content` array **must** have a unique `key` prop (e.g., `<p key="1">`, `<Table key="2" ... />`).
+

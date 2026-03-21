@@ -1,9 +1,7 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Table } from "@/components/ui/Table";
+import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Callout } from "@/components/ui/Callout";
 
 export const recursionCallStackTopic: Topic = {
   id: "recursion-call-stack",
@@ -14,79 +12,55 @@ export const recursionCallStackTopic: Topic = {
   icon: "Repeat1",
   content: [
     <p key="1">
-      Every time a function calls itself, the JavaScript engine pushes a new{" "}
-      <strong>stack frame</strong> onto the call stack: local variables, return
-      address, and arguments. With deep recursion (10,000+ calls), the stack
-      overflows — the infamous <strong>Maximum call stack size exceeded</strong>{" "}
-      error.
+      Recursion is a programming technique where a function calls itself to solve a smaller instance of the same problem. While elegant, it is physically limited by the <strong>Call Stack</strong>—a fixed-size memory region that stores the execution state of active functions.
     </p>,
-    <CodeBlock
-      key="2"
-      language="typescript"
-      title="Recursion vs Iteration"
-      code={`// Recursive factorial: elegant but 10,000! overflows the stack
-function factorial(n: number): number {
-  if (n <= 1) return 1;           // Base case
-  return n * factorial(n - 1);    // Recursive case
-}
-// factorial(5) → 5 * factorial(4) → 5 * 4 * factorial(3) → ...
-// Each call adds a stack frame. factorial(100000) → 💥 Stack Overflow
-
-// Iterative factorial: ugly but safe for any input
-function factorialIterative(n: number): number {
-  let result = 1;
-  for (let i = 2; i <= n; i++) result *= i;
-  return result;                  // Single stack frame, no overflow
-}`}
-    />,
-    <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="When to Use Recursion">
-        <p className="text-sm">
-          <strong>Tree traversal</strong> (DOM, file system, JSON),{" "}
-          <strong>divide-and-conquer</strong> (merge sort, quick sort),{" "}
-          <strong>backtracking</strong> (maze solving, N-Queens), and{" "}
-          <strong>graph algorithms</strong> (DFS). If the problem has a{" "}
-          <em>recursive structure</em>, recursion is natural.
-        </p>
-      </Card>
-      <Card title="When to Avoid Recursion">
-        <p className="text-sm">
-          <strong>Linear iterations</strong> (use a loop), deep recursion that
-          might exceed stack limit, and performance-critical paths. JavaScript
-          has a ~10,000 frame stack limit. Use{" "}
-          <strong>iterative + explicit stack</strong> for deep recursion.
-        </p>
-      </Card>
-    </Grid>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      Anatomy of a Stack Frame
+    </h3>,
+    <p key="3" className="mb-4">
+      Every recursive call pushes a new <strong>Stack Frame</strong> (~48-128 bytes) onto the stack. If you exceed the engine's limit (usually ~10,000 frames in V8), you get a <strong>Stack Overflow</strong>.
+    </p>,
     <Table
       key="4"
-      headers={["Concept", "Description"]}
+      headers={["Component", "Technical Purpose"]}
       rows={[
-        [
-          "Base Case",
-          "The condition that stops recursion. Without it → infinite loop → stack overflow.",
-        ],
-        [
-          "Recursive Case",
-          "The function calling itself with a smaller/simpler input.",
-        ],
-        [
-          "Tail Recursion",
-          "Last operation is the recursive call (no pending work). Can be optimized to a loop.",
-        ],
-        [
-          "Memoization",
-          "Cache results of expensive recursive calls. Turns O(2ⁿ) Fibonacci into O(n).",
-        ],
+        ["Return Address", "The memory location to jump back to after the function finishes."],
+        ["Arguments", "The values passed into the current recursive call (e.g., <code>n-1</code>)."],
+        ["Local Variables", "Variables declared inside the function scope."],
+        ["Instruction Pointer", "Tracks exactly which line of code is currently executing."]
       ]}
     />,
-    <Callout key="5" type="info" title="Tail-Call Optimization (TCO)">
-      If the recursive call is the <strong>last thing</strong> the function does
-      (tail position), the engine can reuse the current stack frame instead of
-      creating a new one. This means infinite recursion depth with zero extra
-      memory. <strong>Safari supports TCO</strong>, but V8 (Chrome/Node) does{" "}
-      <strong>NOT</strong>. In practice, convert tail-recursive functions to
-      iterative for cross-engine safety.
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      Optimization: Memoization
+    </h3>,
+    <CodeBlock
+      key="6"
+      language="typescript"
+      title="Fibonacci: O(2ⁿ) vs O(n)"
+      code={`// ❌ Naive: Recalculates the same values millions of times
+function fib(n) {
+  if (n <= 1) return n;
+  return fib(n-1) + fib(n-2);
+}
+
+// ✅ Memoized: Stores results in a cache (Map)
+const memo = new Map();
+function fibMemo(n) {
+  if (memo.has(n)) return memo.get(n);
+  if (n <= 1) return n;
+  const res = fibMemo(n-1) + fibMemo(n-2);
+  memo.set(n, res);
+  return res;
+}`}
+    />,
+    <h3 key="7" className="text-xl font-bold mt-8 mb-4">
+      The 'Trampoline' Pattern
+    </h3>,
+    <p key="8" className="mb-4">
+      Since V8 (Node/Chrome) doesn't support <strong>Tail Call Optimization (TCO)</strong>, you can use a <strong>Trampoline</strong>. Instead of calling itself, the function returns <em>another function</em>. A loop then calls these functions until a value is returned.
+    </p>,
+    <Callout key="9" type="tip" title="When to use Recursion?">
+      Recursion is the natural choice for <strong>Recursive Data Structures</strong> like the <strong>DOM Tree</strong> or <strong>JSON</strong> objects. If you find yourself writing a <code>while</code> loop with a manual <code>stack.push()</code>, you are essentially re-implementing recursion manually to avoid the stack limit.
     </Callout>,
   ],
 };

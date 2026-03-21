@@ -1,85 +1,61 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 
-export const nPlusOneTopic: Topic = {
+export const nPlusOneProblemTopic: Topic = {
   id: "n-plus-one-problem",
   title: "The N+1 Query Problem",
   description:
-    "The ORM trap that turns 1 query into 101 queries — the single most common performance bug in fullstack applications.",
-  tags: ["databases", "orm", "performance", "fullstack"],
-  icon: "AlertTriangle",
+    "The legendary silent ORM assassin that generates 500 database requests mathematically entirely behind your back.",
+  tags: ["database", "backend", "performance"],
+  icon: "Bug",
   content: [
     <p key="1">
-      You fetch 100 blog posts (1 query). Then for each post, you fetch its
-      author (100 queries). Total: <strong>101 queries</strong> instead of 2.
-      This is the <strong>N+1 problem</strong> — the single most common
-      performance bug in applications using ORMs like Prisma, Sequelize, Django
-      ORM, or ActiveRecord.
+      The <strong>N+1 Problem</strong> is the most common cause of database performance degradation in modern ORM-based applications. It happens when you fetch a list of items (1 query) and then fetch a related item for each row individually (N queries).
     </p>,
-    <CodeBlock
-      key="2"
-      language="typescript"
-      title="❌ The N+1 Problem (Prisma Example)"
-      code={`// 1 query: SELECT * FROM posts LIMIT 100
-const posts = await prisma.post.findMany({ take: 100 });
-
-// 100 queries: SELECT * FROM users WHERE id = ? (once per post)
-for (const post of posts) {
-  const author = await prisma.user.findUnique({
-    where: { id: post.authorId }
-  });
-  console.log(post.title, author.name);
-}
-// Total: 101 database round-trips! 🔥`}
-    />,
-    <h4 key="3" className="text-xl font-bold mt-8 mb-4">
-      The Solutions
-    </h4>,
-    <Grid key="4" cols={2} gap={6} className="mb-8">
-      <Card title="1. Eager Loading (include/join)">
-        <CodeBlock
-          language="typescript"
-          title="✅ Prisma Eager Load"
-          code={`// 2 queries total (posts + authors in batch)
-const posts = await prisma.post.findMany({
-  take: 100,
-  include: { author: true }
-});
-// Prisma resolves this with a JOIN or
-// a second batch query internally.`}
-        />
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Anatomy of the Failure
+    </h3>,
+    <Grid key="3" cols={2} gap={6} className="my-8">
+      <Card title="The Naive Code">
+        <p className="text-sm font-mono text-muted-foreground/80 border-l border-border pl-3 mt-2 whitespace-pre-wrap">
+{"// Query 1\nconst users = await db.user.findMany();\n\n// N Queries (Loop)\nusers.map(u => u.getOrders());"}
+        </p>
       </Card>
-      <Card title="2. DataLoader (Batching)">
-        <CodeBlock
-          language="typescript"
-          title="✅ GraphQL DataLoader"
-          code={`// Collects all author IDs from the batch,
-// then fires ONE query:
-// SELECT * FROM users WHERE id IN (1,2,3...)
-const loader = new DataLoader(async (ids) => {
-  const users = await db.users.findMany({
-    where: { id: { in: ids } }
-  });
-  return ids.map(id => users.find(u => u.id === id));
-});`}
-        />
+      <Card title="The Network Cost">
+        <p className="text-sm text-muted-foreground">
+          Even if each query takes 1ms, doing 100 queries means 100ms of <strong>Network Round-Trip Time (RTT)</strong>. Your app spends more time waiting for the wire than the database spends searching.
+        </p>
       </Card>
     </Grid>,
-    <Callout key="5" type="warning" title="ORMs Hide the Problem">
-      The N+1 problem is <strong>invisible in code</strong> — your loops look
-      clean and readable. You only discover it in production when response times
-      spike. Enable <strong>query logging</strong> in your ORM (Prisma:{" "}
-      <code>log: ['query']</code>, Django: <code>DEBUG=True</code>) during
-      development to spot N+1 patterns before they reach production.
-    </Callout>,
-    <Callout key="6" type="tip" title="The Interview Answer">
-      "N+1 occurs when an ORM lazily loads associations inside a loop. Fix it
-      with <strong>eager loading</strong> (JOINs/includes),{" "}
-      <strong>DataLoader batching</strong> (GraphQL), or{" "}
-      <strong>subqueries</strong>. Always enable query logging in dev."
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      Three Levels of Defense
+    </h3>,
+    <Table
+      key="5"
+      headers={["Technique", "How it Works", "Best For"]}
+      rows={[
+        [
+          "Eager Loading (JOIN)",
+          "The ORM generates a single <code>LEFT JOIN</code> query.",
+          "Simple 1-to-many relationships in REST APIs."
+        ],
+        [
+          "Batch Loading (IN)",
+          "Collects all IDs and sends <code>WHERE id IN (...)</code>.",
+          "Large datasets where a JOIN would create massive duplication."
+        ],
+        [
+          "Dataloader (GraphQL)",
+          "Uses a <strong>memoized cache</strong> to prevent redundant fetches in a single request.",
+          "Highly nested GraphQL trees where the same user is fetched multiple times."
+        ]
+      ]}
+    />,
+    <Callout key="6" type="tip" title="Always check your SQL logs!">
+      Most modern ORMs allow you to log raw SQL to the console. If you see a "wall of text" of nearly identical queries scrolling past your screen, you have an N+1 bug.
     </Callout>,
   ],
 };

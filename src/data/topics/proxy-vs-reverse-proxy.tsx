@@ -8,85 +8,60 @@ export const proxyVsReverseProxyTopic: Topic = {
   id: "proxy-vs-reverse-proxy",
   title: "Proxy vs Reverse Proxy",
   description:
-    "The commonly confused interview topic: forward proxies protect clients, reverse proxies protect servers. Know the difference.",
-  tags: ["networking", "system-design", "nginx", "interview"],
+    "A practical look behind the scenes at how traffic is routed and protected in modern applications.",
+  tags: ["networking", "system-design", "nginx", "infrastructure"],
   icon: "ArrowLeftRight",
   content: [
     <p key="1">
-      Both "proxy" and "reverse proxy" sit{" "}
-      <strong>between clients and servers</strong>, but they face in{" "}
-      <strong>opposite directions</strong>. Interviewers constantly test whether
-      candidates understand which side each proxy protects and why they exist.
+      At its simplest, a <strong>Proxy</strong> is a "Middleman." It intercepts a request from a sender and forwards it to a receiver. However, the <em>direction</em> of this middleman determines whether it's protecting a user's privacy or a server's stability.
     </p>,
-    <Grid key="2" cols={2} gap={6} className="my-8">
-      <Card title="Forward Proxy (Client-Side)">
-        <p className="text-sm">
-          Sits in front of <strong>clients</strong>. The client sends requests
-          to the proxy, which forwards them to the internet. The server{" "}
-          <strong>never sees</strong> the real client IP.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      Forward vs. Reverse: The Directional Divide
+    </h3>,
+    <Table
+      key="3"
+      headers={["Feature", "Forward Proxy (Client Side)", "Reverse Proxy (Server Side)"]}
+      rows={[
+        ["Who it Protects", "The <strong>Client</strong> (Browser/User).", "The <strong>Server</strong> (API/Database)."],
+        ["Visibility", "Internet thinks the Proxy is the User.", "User thinks the Proxy is the Application."],
+        ["Main Use Case", "Anonymity, Content Filtering, Caching.", "Load Balancing, Security, SSL Termination."],
+        ["Location", "Inside the User's network (e.g., VPN).", "Directly in front of the Application servers."],
+        ["Example", "Corporate Firewalls, Squid, NordVPN.", "Nginx, HAProxy, AWS ALB, Cloudflare."]
+      ]}
+    />,
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      The Power of the Reverse Proxy
+    </h3>,
+    <Grid key="5" cols={2} gap={6} className="my-8">
+      <Card title="SSL Termination">
+        <p className="text-sm text-muted-foreground mb-2">
+          Decrypting HTTPS is <strong>computationally expensive</strong>.
         </p>
-        <p className="text-sm mt-2">
-          <strong>Use cases:</strong> Corporate content filtering, bypassing
-          geo-restrictions, anonymity (Tor), caching for client networks.
+        <p className="text-xs italic text-muted-foreground">
+          The Reverse Proxy (Nginx) handles the heavy math. It sends plain HTTP to your internal microservices, saving significant CPU cycles on your app servers.
         </p>
       </Card>
-      <Card title="Reverse Proxy (Server-Side)">
-        <p className="text-sm">
-          Sits in front of <strong>servers</strong>. The client thinks it's
-          talking to the real server, but the reverse proxy intercepts the
-          request and routes it. The client <strong>never sees</strong> the real
-          server IPs.
+      <Card title="Header Manipulation">
+        <p className="text-sm text-muted-foreground mb-2">
+          Passing the "Original" User IP.
         </p>
-        <p className="text-sm mt-2">
-          <strong>Use cases:</strong> Load balancing, SSL termination, caching,
-          DDoS protection, API gateway.
+        <p className="text-xs italic text-muted-foreground">
+          Because the backend only sees the Proxy's IP, the proxy injects an <code>X-Forwarded-For</code> header so your app knows exactly who the real user is.
         </p>
       </Card>
     </Grid>,
-    <Table
-      key="3"
-      headers={["Aspect", "Forward Proxy", "Reverse Proxy"]}
-      rows={[
-        [
-          "Deployed by",
-          "Client / organization",
-          "Server / infrastructure team",
-        ],
-        ["Protects", "Client identity", "Server identity & infrastructure"],
-        [
-          "Client aware?",
-          "Yes — client configured to use it",
-          "No — client doesn't know it exists",
-        ],
-        [
-          "Server aware?",
-          "No — server sees proxy IP",
-          "Yes — server sits behind it",
-        ],
-        [
-          "SSL",
-          "Can decrypt client traffic (MITM)",
-          "Terminates SSL for backend servers",
-        ],
-        [
-          "Examples",
-          "Squid, corporate firewalls, VPNs",
-          "Nginx, HAProxy, Cloudflare, AWS ALB",
-        ],
-      ]}
-    />,
-    <Callout key="4" type="info" title="Nginx: The Swiss Army Knife">
-      <strong>Nginx</strong> is the world's most popular reverse proxy. It
-      handles SSL termination (offloading HTTPS decryption), load balances
-      across backend servers, caches static assets, and compresses responses —
-      all before the request even reaches your application server. Nearly every
-      production deployment uses one.
-    </Callout>,
-    <Callout key="5" type="warning" title="Interview Tip">
-      When an interviewer says "proxy" without qualification, they almost always
-      mean <strong>reverse proxy</strong>. But always clarify: "Are we talking
-      about a forward proxy or a reverse proxy?" — this instantly signals you
-      understand the distinction.
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      Layer 4 vs. Layer 7 Proxying
+    </h3>,
+    <p key="7" className="mb-4">
+      Modern proxies like <strong>Nginx</strong> or <strong>Envoy</strong> can operate at two different levels of the OSI stack:
+    </p>,
+    <ul key="8" className="list-disc pl-5 text-sm text-muted-foreground space-y-2">
+      <li><strong>L4 Proxy (Transport):</strong> Routes traffic based on IP and Port (TCP/UDP). It's blindingly fast because it doesn't look at the HTTP content.</li>
+      <li><strong>L7 Proxy (Application):</strong> Decrypts the request to read URLs (<code>/api/v1</code>), headers (<code>User-Agent</code>), and cookies. It allows for "Smart" routing, like sending mobile users to a different set of servers.</li>
+    </ul>,
+    <Callout key="9" type="warning" title="The Single Point of Failure">
+      A Reverse Proxy is the <strong>Gatekeeper</strong>. If your Nginx instance crashes, your entire backend is unreachable—even if your 100 NodeJS servers are perfectly healthy. High-availability setups use <strong>Keepalived</strong> or <strong>Floating IPs</strong> to ensure the proxy itself never goes down.
     </Callout>,
   ],
 };

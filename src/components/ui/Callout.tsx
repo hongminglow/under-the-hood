@@ -8,7 +8,7 @@ export function Callout({
   title,
 }: {
   children: React.ReactNode;
-  type?: "info" | "warning" | "success" | "tip";
+  type?: "info" | "warning" | "success" | "tip" | "danger";
   title?: string;
 }) {
   const styles = {
@@ -39,6 +39,13 @@ export function Callout({
       bg: "bg-primary/5",
       border: "border-primary/20",
       label: "Tip",
+    },
+    danger: {
+      icon: AlertTriangle,
+      color: "text-red-500",
+      bg: "bg-red-500/5",
+      border: "border-red-500/20",
+      label: "Danger",
     },
   };
 

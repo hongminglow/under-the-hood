@@ -8,7 +8,7 @@ import { renderingPipelineTopic } from "@/data/topics/rendering-pipeline";
 import { corsTopic } from "@/data/topics/cors";
 import { rustSystemsTopic } from "@/data/topics/rust-systems";
 import { sqlVsNosqlTopic } from "@/data/topics/sql-vs-nosql";
-import { oauthOidcTopic } from "@/data/topics/oauth2-oidc";
+import { oauth2OidcTopic } from "@/data/topics/oauth2-oidc";
 import { dockerContainersTopic } from "@/data/topics/docker-containers";
 import { tcpVsUdpTopic } from "@/data/topics/tcp-vs-udp";
 import { frontendFrameworksTopic } from "@/data/topics/frontend-frameworks";
@@ -16,7 +16,7 @@ import { frameworksVsVanillaJsTopic } from "@/data/topics/frameworks-vs-vanilla-
 import { graphqlVsRestTopic } from "@/data/topics/graphql-vs-rest";
 import { microservicesTopic } from "@/data/topics/microservices";
 import { ciCdTopic } from "@/data/topics/ci-cd";
-import { eventLoopTopic } from "@/data/topics/js-event-loop";
+import { jsEventLoopTopic } from "@/data/topics/js-event-loop";
 import { websocketsTopic } from "@/data/topics/websockets";
 import { jwtVsSessionTopic } from "@/data/topics/jwt-vs-session";
 import { loadBalancingTopic } from "@/data/topics/load-balancing";
@@ -27,15 +27,15 @@ import { webSecurityTopic } from "@/data/topics/web-security";
 import { ssrVsCsrTopic } from "@/data/topics/ssr-vs-csr";
 import { designPatternsTopic } from "@/data/topics/design-patterns";
 import { gitInternalsTopic } from "@/data/topics/git-internals";
-import { typescriptTypeTopic } from "@/data/topics/typescript-types";
+import { typescriptTypesTopic } from "@/data/topics/typescript-types";
 import { messageQueuesTopic } from "@/data/topics/message-queues";
 import { concurrencyParallelismTopic } from "@/data/topics/concurrency-parallelism";
 import { apiRateLimitingTopic } from "@/data/topics/api-rate-limiting";
 import { capTheoremTopic } from "@/data/topics/cap-theorem";
-import { webhooksTopic } from "@/data/topics/webhooks-vs-polling";
+import { webhooksVsPollingTopic } from "@/data/topics/webhooks-vs-polling";
 import { stackVsHeapTopic } from "@/data/topics/stack-vs-heap";
 import { kubernetesTopic } from "@/data/topics/kubernetes-architecture";
-import { webAssemblyTopic } from "@/data/topics/webassembly";
+import { webassemblyTopic } from "@/data/topics/webassembly";
 import { serverlessTopic } from "@/data/topics/serverless-computing";
 import { cspTopic } from "@/data/topics/content-security-policy";
 import { iacTopic } from "@/data/topics/iac-terraform-ansible";
@@ -48,8 +48,8 @@ import { webVitalsTopic } from "@/data/topics/web-vitals";
 import { grpcVsRestTopic } from "@/data/topics/grpc-vs-rest";
 import { acidPropertiesTopic } from "@/data/topics/acid-properties";
 import { distributedTransactionsTopic } from "@/data/topics/distributed-transactions";
-import { redisTopic } from "@/data/topics/redis-in-memory";
-import { passkeysTopic } from "@/data/topics/passkeys-webauthn";
+import { redisInMemoryTopic } from "@/data/topics/redis-in-memory";
+import { passkeysWebauthnTopic } from "@/data/topics/passkeys-webauthn";
 import { consistentHashingTopic } from "@/data/topics/consistent-hashing";
 
 // ── Batch 2 ───────────────────────────────────────────────────────────
@@ -65,8 +65,8 @@ import { promisesVsObservablesTopic } from "@/data/topics/promises-vs-observable
 import { bigOComplexityTopic } from "@/data/topics/big-o-complexity";
 import { hashTablesTopic } from "@/data/topics/hash-tables-internals";
 import { proxyVsReverseProxyTopic } from "@/data/topics/proxy-vs-reverse-proxy";
-import { cdnTopic } from "@/data/topics/cdn-under-the-hood";
-import { reactFiberTopic } from "@/data/topics/react-fiber-reconciliation";
+import { cdnUnderTheHoodTopic } from "@/data/topics/cdn-under-the-hood";
+import { reactFiberReconciliationTopic } from "@/data/topics/react-fiber-reconciliation";
 import { virtualDomVsSignalsTopic } from "@/data/topics/virtual-dom-vs-signals";
 import { idempotencyTopic } from "@/data/topics/api-idempotency";
 import { processVsThreadTopic } from "@/data/topics/process-vs-thread-vs-coroutine";
@@ -78,14 +78,14 @@ import { solidPrinciplesTopic } from "@/data/topics/solid-principles";
 import { observabilityTopic } from "@/data/topics/observability-monitoring";
 
 // ── Batch 3 (Fullstack & System Design) ──────────────────────────────
-import { apiGatewayTopic } from "@/data/topics/api-gateway-pattern";
+import { apiGatewayPatternTopic } from "@/data/topics/api-gateway-pattern";
 import { connectionPoolingTopic } from "@/data/topics/connection-pooling";
 import { sqlQueryOptimizationTopic } from "@/data/topics/sql-query-optimization";
-import { nPlusOneTopic } from "@/data/topics/n-plus-one-problem";
-import { httpsTlsTopic } from "@/data/topics/https-tls-handshake";
+import { nPlusOneProblemTopic } from "@/data/topics/n-plus-one-problem";
+import { httpsTlsHandshakeTopic } from "@/data/topics/https-tls-handshake";
 import { stateManagementTopic } from "@/data/topics/state-management";
 import { cssBoxModelTopic } from "@/data/topics/css-box-model";
-import { serviceWorkersTopic } from "@/data/topics/service-workers-pwa";
+import { serviceWorkersPwaTopic } from "@/data/topics/service-workers-pwa";
 import { prototypalInheritanceTopic } from "@/data/topics/prototypal-inheritance";
 import { dependencyInjectionTopic } from "@/data/topics/dependency-injection";
 import { twelveFacorAppTopic } from "@/data/topics/twelve-factor-app";
@@ -100,19 +100,21 @@ import { databaseMigrationsTopic } from "@/data/topics/database-migrations";
 import { recursionCallStackTopic } from "@/data/topics/recursion-call-stack";
 
 // ── Batch 4 (AI & Frontend) ─────────────────────────────────────────
-import { llmHowItWorksTopic } from "@/data/topics/how-llms-work";
-import { ragTopic } from "@/data/topics/rag-retrieval-augmented";
-import { aiAgentsTopic } from "@/data/topics/ai-agents-tool-use";
+import { howLlmsWorkTopic } from "@/data/topics/how-llms-work";
+import { ragRetrievalAugmentedTopic } from "@/data/topics/rag-retrieval-augmented";
+import { aiAgentsToolUseTopic } from "@/data/topics/ai-agents-tool-use";
 import { promptEngineeringTopic } from "@/data/topics/prompt-engineering";
-import { vectorDatabasesTopic } from "@/data/topics/vector-databases-embeddings";
+import { vectorDatabasesEmbeddingsTopic } from "@/data/topics/vector-databases-embeddings";
 import { reactServerComponentsTopic } from "@/data/topics/react-server-components";
 import { microFrontendsTopic } from "@/data/topics/micro-frontends";
-import { debounceThrottleTopic } from "@/data/topics/debounce-vs-throttle";
-import { setIntervalVsRequestAnimationFrameTopic } from "@/data/topics/setinterval-vs-requestanimationframe";
-import { webComponentsTopic } from "@/data/topics/web-components-shadow-dom";
-import { sseVsWebSocketTopic } from "@/data/topics/sse-vs-websocket";
+import { debounceVsThrottleTopic } from "@/data/topics/debounce-vs-throttle";
+import { setintervalVsRequestanimationframeTopic } from "@/data/topics/setinterval-vs-requestanimationframe";
+import { webComponentsShadowDomTopic } from "@/data/topics/web-components-shadow-dom";
+import { sseVsWebsocketTopic } from "@/data/topics/sse-vs-websocket";
 import { cssInJsVsUtilityTopic } from "@/data/topics/css-in-js-vs-utility";
 import { tauriUnderTheHoodTopic } from "@/data/topics/tauri-under-the-hood";
+import { sagaPatternTopic } from "@/data/topics/saga-pattern";
+import { bTreeVsBPlusTreeTopic } from "@/data/topics/b-tree-vs-b-plus-tree";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -131,13 +133,13 @@ export const knowledgeBase: Section[] = [
       websocketsTopic,
       loadBalancingTopic,
       httpEvolutionTopic,
-      webhooksTopic,
+      webhooksVsPollingTopic,
       webRtcTopic,
       grpcVsRestTopic,
       proxyVsReverseProxyTopic,
-      cdnTopic,
-      httpsTlsTopic,
-      sseVsWebSocketTopic,
+      cdnUnderTheHoodTopic,
+      httpsTlsHandshakeTopic,
+      sseVsWebsocketTopic,
     ],
   },
   {
@@ -152,12 +154,12 @@ export const knowledgeBase: Section[] = [
     icon: "ShieldAlert",
     topics: [
       corsTopic,
-      oauthOidcTopic,
+      oauth2OidcTopic,
       jwtVsSessionTopic,
       webSecurityTopic,
       apiRateLimitingTopic,
       cspTopic,
-      passkeysTopic,
+      passkeysWebauthnTopic,
       zeroTrustTopic,
       oauthFlowsTopic,
       dnsOverHttpsTopic,
@@ -178,6 +180,7 @@ export const knowledgeBase: Section[] = [
       messageQueuesTopic,
       cachingStrategiesTopic,
       serverlessTopic,
+      sagaPatternTopic,
       distributedTransactionsTopic,
       consistentHashingTopic,
       restApiDesignTopic,
@@ -187,7 +190,7 @@ export const knowledgeBase: Section[] = [
       monolithVsMicroservicesTopic,
       monolithVsMonorepoVsMicrofrontendsTopic,
       solidPrinciplesTopic,
-      apiGatewayTopic,
+      apiGatewayPatternTopic,
       dependencyInjectionTopic,
       paginationStrategiesTopic,
       tauriUnderTheHoodTopic,
@@ -201,13 +204,14 @@ export const knowledgeBase: Section[] = [
       sqlVsNosqlTopic,
       capTheoremTopic,
       databaseIndexingTopic,
+      bTreeVsBPlusTreeTopic,
       acidPropertiesTopic,
-      redisTopic,
+      redisInMemoryTopic,
       databaseShardingTopic,
       databaseReplicationTopic,
       connectionPoolingTopic,
       sqlQueryOptimizationTopic,
-      nPlusOneTopic,
+      nPlusOneProblemTopic,
       databaseMigrationsTopic,
     ],
   },
@@ -219,21 +223,21 @@ export const knowledgeBase: Section[] = [
       frontendFrameworksTopic,
       frameworksVsVanillaJsTopic,
       ssrVsCsrTopic,
-      webAssemblyTopic,
+      webassemblyTopic,
       browserStorageTopic,
       viteVsWebpackTopic,
       webVitalsTopic,
-      reactFiberTopic,
+      reactFiberReconciliationTopic,
       virtualDomVsSignalsTopic,
       stateManagementTopic,
       cssBoxModelTopic,
-      serviceWorkersTopic,
+      serviceWorkersPwaTopic,
       webAccessibilityTopic,
       reactServerComponentsTopic,
       microFrontendsTopic,
-      debounceThrottleTopic,
-      setIntervalVsRequestAnimationFrameTopic,
-      webComponentsTopic,
+      debounceVsThrottleTopic,
+      setintervalVsRequestanimationframeTopic,
+      webComponentsShadowDomTopic,
       cssInJsVsUtilityTopic,
     ],
   },
@@ -242,9 +246,9 @@ export const knowledgeBase: Section[] = [
     title: "Core Programming",
     icon: "Code2",
     topics: [
-      eventLoopTopic,
+      jsEventLoopTopic,
       garbageCollectionTopic,
-      typescriptTypeTopic,
+      typescriptTypesTopic,
       concurrencyParallelismTopic,
       stackVsHeapTopic,
       oopVsFpTopic,
@@ -279,11 +283,11 @@ export const knowledgeBase: Section[] = [
     title: "AI & Machine Learning",
     icon: "Brain",
     topics: [
-      llmHowItWorksTopic,
-      ragTopic,
-      aiAgentsTopic,
+      howLlmsWorkTopic,
+      ragRetrievalAugmentedTopic,
+      aiAgentsToolUseTopic,
       promptEngineeringTopic,
-      vectorDatabasesTopic,
+      vectorDatabasesEmbeddingsTopic,
     ],
   },
 ];

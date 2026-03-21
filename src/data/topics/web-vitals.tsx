@@ -1,83 +1,44 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 
 export const webVitalsTopic: Topic = {
-  id: "core-web-vitals",
+  id: "web-vitals",
   title: "Core Web Vitals",
   description:
-    "Google's definitive performance metrics that dictate whether your website feels fast or ranks highly on search.",
-  tags: ["frontend", "performance", "browser"],
-  icon: "TrendingUp",
+    "Google's mathematical algorithm for permanently deleting your entire business from search results if your website is physically slow.",
+  tags: ["frontend", "performance", "seo"],
+  icon: "Zap",
   content: [
     <p key="1">
-      Historically, developers measured performance by asking "When does the
-      `window.onload` event fire?" But users don't care when background scripts
-      finish loading; they care about when the site is visible, interactable,
-      and stable. Google introduced <strong>Core Web Vitals</strong> to
-      objectively measure the actual human experience of rendering.
+      You built an incredibly complex React dashboard. It looks beautiful on your Macbook Pro. However, when users with budget Android phones on 3G connections attempt to load it, they abandon the screen after 6 seconds. Google punishes poor UX and enforces SEO ranking heavily based on three strict technical measurements.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      The Big Three
-    </h4>,
-    <Grid key="3" cols={3} gap={6} className="mb-8">
-      <Card title="Largest Contentful Paint (LCP)">
-        <p className="text-sm font-semibold mb-2">Goal: &lt; 2.5 seconds</p>
-        <p className="text-sm text-emerald-300">
-          Measures <em>Loading Performance</em>. It marks the exact millisecond
-          when the single largest image or text block in the viewport finishes
-          rendering on screen.
-        </p>
-      </Card>
-      <Card title="Interaction to Next Paint (INP)">
-        <p className="text-sm font-semibold mb-2">
-          Goal: &lt; 200 milliseconds
-        </p>
-        <p className="text-sm text-emerald-300">
-          Measures <em>Responsiveness</em>. If a user clicks an accordion menu,
-          how long does the browser delay before actually drawing the visual
-          change? Usually ruined by heavy JS blocking the main thread.
-        </p>
-      </Card>
-      <Card title="Cumulative Layout Shift (CLS)">
-        <p className="text-sm font-semibold mb-2">Goal: &lt; 0.1 score</p>
-        <p className="text-sm text-emerald-300">
-          Measures <em>Visual Stability</em>. Quantifies how much the UI jumps
-          around as it loads. If reading text gets pushed down suddenly because
-          an ad loaded above it, that's a CLS failure.
-        </p>
-      </Card>
-    </Grid>,
-    <h4 key="4" className="text-xl font-bold mt-8 mb-4">
-      Fixing the Bottlenecks
-    </h4>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Big Three Measurements
+    </h3>,
     <Table
-      key="5"
-      headers={["Metric", "Common Offender", "Primary Fix"]}
+      key="3"
+      headers={["Metric", "What it Measures", "The Developer Fix"]}
       rows={[
         [
           "LCP",
-          "Massive unoptimized Hero Image.",
-          "Use WebP/AVIF format. Preload the image immediately in the <head>.",
+          "Largest Contentful Paint. Measures when the absolute largest image or text block physically renders on screen. Must be under 2.5 seconds.",
+          "Lazy load images below the fold. Compress hero images to WebP. Avoid client-side rendering for critical content."
         ],
         [
           "INP",
-          "React rendering a huge list blocking the thread.",
-          "Code-split JS chunks, use requestIdleCallback, debounce inputs.",
+          "Interaction to Next Paint. When a user taps a button, how many milliseconds until the UI physically reacts? Must be under 200ms.",
+          "Stop writing massive heavy synchronous Javascript tasks that block the Event Loop. Use Web Workers or break up logic."
         ],
         [
           "CLS",
-          "Images without explicit width/height attributes.",
-          "Always reserve physical space for images (aspect-ratio CSS) before they load over the network.",
-        ],
+          "Cumulative Layout Shift. How much the website physically jerks around randomly while loading, causing mis-clicks. Must be near zero.",
+          "Never load an image without explicit strict height and width CSS constraints. The browser must reserve the space."
+        ]
       ]}
     />,
-    <Callout key="6" type="info" title="Why These Matter">
-      Google's web crawler actively profiles millions of websites globally on
-      these exact metrics. Failing Core Web Vitals heavily penalizes your
-      PageRank and SEO visibility.
+    <Callout key="4" type="danger" title="The React useEffect Trap">
+      React developers often suffer terrible LCP scores because they render a blank div, wait for a `useEffect` HTTP request to finish, and then finally render the giant Hero image. The browser must wait entirely for the Javascript cascade. SSR or SSG frameworks natively solve this logic.
     </Callout>,
   ],
 };

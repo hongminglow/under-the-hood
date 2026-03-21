@@ -1,81 +1,52 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 
 export const acidPropertiesTopic: Topic = {
   id: "acid-properties",
-  title: "ACID Database Properties",
+  title: "A.C.I.D Properties of SQL",
   description:
-    "The 4 fundamental iron-clad guarantees that protect a relational database from corrupting your money.",
-  tags: ["databases", "sql", "architecture"],
-  icon: "Key",
+    "The 4 fundamental guarantees a Relational Database enforces to stop you from accidentally giving a user infinite money.",
+  tags: ["database", "architecture", "sql"],
+  icon: "ShieldAlert",
   content: [
     <p key="1">
-      When you transfer $100 from your account to a friend's account, it
-      involves two separate database operations:{" "}
-      <code>UPDATE account SET balance = balance - 100 WHERE me</code> and{" "}
-      <code>UPDATE account SET balance = balance + 100 WHERE friend</code>. If
-      the database server crashes exactly in the middle of these two queries,
-      $100 vanishes into thin air.
+      If a user initiates a $50 bank transfer, the database mathematically performs two commands: `UPDATE user1 = user1 - 50` and `UPDATE user2 = user2 + 50`. What happens if the physical power cable to the server sparks and violently trips immediately after line 1? User 1 lost $50 permanently, and User 2 never received it. The money evaporated. 
     </p>,
-    <p key="2" className="mt-4 mb-8">
-      Relational Databases (like PostgreSQL / MySQL) wrap these queries inside a{" "}
-      <strong>Transaction</strong>. A transaction must strictly adhere to all
-      four ACID properties to guarantee absolute data integrity.
+    <p key="2" className="mt-4">
+      <strong>ACID</strong> is a set of iron-clad guarantees implemented directly into the deepest core of PostgreSQL and MySQL to prevent these architectural nightmares.
     </p>,
-    <h4 key="3" className="text-xl font-bold mt-8 mb-4">
-      The ACID Guarantees
-    </h4>,
-    <Grid key="4" cols={2} gap={6} className="mb-8">
-      <Card title="Atomicity (All or Nothing)">
-        <p className="text-sm">
-          A transaction represents a single indivisible unit of work. If 99
-          queries succeed but the 100th fails, the database automatically{" "}
-          <strong>ROLLBACKS</strong> all 99 operations as if nothing ever
-          happened.
-        </p>
-      </Card>
-      <Card title="Consistency">
-        <p className="text-sm">
-          Data must always conform to all defined rules, constraints (like NOT
-          NULL), and triggers before and after the transaction. A transaction
-          can never leave the DB in an illegal state.
-        </p>
-      </Card>
-      <Card title="Isolation">
-        <p className="text-sm">
-          A transaction must execute sequentially, completely unaware of other
-          transactions running at the exact same millisecond. Prevents scenarios
-          like "Dirty Reads" or "Phantom Reads" using row locks.
-        </p>
-      </Card>
-      <Card title="Durability">
-        <p className="text-sm">
-          The moment a transaction commits, the data is permanently written to
-          persistent non-volatile storage (disk logging). Even if a power outage
-          happens 1 nanosecond later, the data is safe.
-        </p>
-      </Card>
-    </Grid>,
-    <CodeBlock
-      key="5"
-      language="sql"
-      title="The Atomicity Guarantee"
-      code={`BEGIN TRANSACTION;
-
-  UPDATE checking SET balance = balance - 100 WHERE id = 1;
-  UPDATE savings SET balance = balance + 100 WHERE id = 1;
-
-COMMIT; -- Either both succeed simultaneously, or both fail.`}
+    <h3 key="3" className="text-xl font-bold mt-8 mb-4">
+      The ACID Matrix
+    </h3>,
+    <Table
+      key="4"
+      headers={["Letter", "Property", "The Developer Translation"]}
+      rows={[
+        [
+          "A",
+          "Atomicity",
+          "To fix the bank transfer power issue, you wrap both SQL lines in a `BEGIN;` and `COMMIT;`. It magically morphs the 2 queries into exactly 1 atomic bomb. Either all 2 lines successfully write cleanly, or 0 lines write."
+        ],
+        [
+          "C",
+          "Consistency",
+          "The database physically reads your strict constraints (`CHECK amount > 0`) before permitting the transaction. If the transaction scientifically breaks your rules, the database violently rolls the entire action back."
+        ],
+        [
+          "I",
+          "Isolation",
+          "If 10,000 thousands users violently attempt to buy the absolute last pair of limited Nike shoes physically at the exact same millisecond, the database invisibly isolates the requests and sequentially enforces a queue so exact money-checks don't organically bleed."
+        ],
+        [
+          "D",
+          "Durability",
+          "Once the SQL database sends the \"COMMIT SUCCESS\", it mathematically guarantees the data is physically burned onto the SSD hard drive. Even if you rip the power plug out 1 nanosecond later, the data survives."
+        ]
+      ]}
     />,
-    <Callout key="6" type="info" title="Why did NoSQL drop ACID?">
-      Enforcing strict ACID properties (specifically Isolation using locks) is
-      extremely hard to scale horizontally across multiple servers. Early NoSQL
-      databases (like Cassandra) happily sacrificed ACID for BASE (Basically
-      Available, Soft state, Eventual consistency) to achieve massive
-      scalability.
+    <Callout key="5" type="warning" title="NoSQL Abandons ACID (Historically)">
+      To achieve massive horizontal cloud scale in the 2010s, databases like Cassandra and early MongoDB historically abandoned the 'I' (Isolation) or 'C' (Consistency) to run blazing fast. This is exactly why 99% of global massive banking and fintech institutions strictly use rigid SQL Postgres arrays for their core ledgers, avoiding NoSQL for financial transactions entirely.
     </Callout>,
   ],
 };

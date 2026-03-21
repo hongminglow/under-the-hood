@@ -1,70 +1,74 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { Step } from "@/components/ui/Step";
 
 export const webRtcTopic: Topic = {
   id: "webrtc-p2p",
   title: "WebRTC & Peer-to-Peer",
   description:
-    "How browsers stream high-definition video and audio directly to each other without a central server.",
-  tags: ["networking", "browser", "streaming"],
+    "How to establish a high-bandwidth, sub-second latency video stream by cutting out the middleman server.",
+  tags: ["networking", "webrtc", "video", "browser"],
   icon: "Video",
   content: [
     <p key="1">
-      If a user on a laptop wants to video call a friend via a web browser,
-      routing heavy 4K video feeds through a central company server is
-      impossibly expensive and creates massive latency.{" "}
-      <strong>WebRTC (Web Real-Time Communication)</strong> was created to allow
-      two browsers to directly stream bytes entirely Peer-to-Peer (P2P).
+      WebRTC (Web Real-Time Communication) is the technology behind modern video conferencing (Zoom, Discord). It allows browsers to exchange <strong>Audio, Video, and Arbitrary Data</strong> directly between peers (Browser-to-Browser) with sub-second latency, bypassing the need for a central media server.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      The Initial Handshake (Signaling)
-    </h4>,
-    <p key="3" className="mb-4">
-      Browsers don't inherently know each other's IP addresses. You still need a
-      traditional server temporarily just to introduce them. This is called
-      <strong>Signaling</strong> (often done using WebSockets).
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Three Pillars: Signaling, Connecting, and Securing
+    </h3>,
+    <p key="3" className="mb-4 text-sm text-muted-foreground">
+      Establishing a P2P connection is a multi-stage dance because browsers don't know each other's IP addresses and are usually trapped behind strict NAT firewalls.
     </p>,
-    <Step key="4" index={1}>
-      Alice creates an "Offer" containing her video codecs and network data.
-    </Step>,
-    <Step key="5" index={2}>
-      Alice sends this Offer to a generic WebSocket Server, which forwards it to
-      Bob.
-    </Step>,
-    <Step key="6" index={3}>
-      Bob receives it, creates an "Answer", and sends it back to Alice.
-    </Step>,
-    <p key="7" className="mt-4 mb-8">
-      They now know each other's parameters, but there's a massive problem:
-      routers and firewalls.
-    </p>,
-    <h4 key="8" className="text-xl font-bold mt-8 mb-4">
-      Busting through NAT
-    </h4>,
-    <Grid key="9" cols={2} gap={6} className="mb-8">
-      <Card title="STUN Servers">
-        Most devices don't have public IP addresses (Network Address
-        Translation). They sit behind home routers. A STUN server is a public,
-        ultra-lightweight server that simply answers the question, "What is my
-        public IP and port?" Alice pings the STUN server to find out what she
-        looks like to the internet.
+    <Table
+      key="4"
+      headers={["Phase", "Protocol/Tool", "What It Does"]}
+      rows={[
+        ["1. Signaling", "HTTP/WebSocket + <strong>SDP</strong>", "The Peers exchange 'Offer' and 'Answer' (media capabilities/codecs)."],
+        ["2. Discovery", "<strong>STUN</strong>", "Peers discover their Public IP and Port. They generate <strong>ICE Candidates</strong>."],
+        ["3. Connecting", "<strong>ICE</strong>", "The browsers try every possible network path (Local IP, STUN, TURN) to connect."],
+        ["4. Securing", "<strong>DTLS / SRTP</strong>", "Every millisecond of video is encrypted using a unique session key."]
+      ]}
+    />,
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      Bypassing the Firewall: STUN vs. TURN
+    </h3>,
+    <Grid key="6" cols={2} gap={6} className="my-8">
+      <Card title="STUN (Session Traversal Utilities for NAT)">
+        <p className="text-sm text-muted-foreground mb-2">
+          A "Mirror" server. You ask it: "What's my Public IP?"
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          Free, very fast, and handles ~80% of consumer internet connections. It allows <strong>Hole Punching</strong> through common NAT routers.
+        </p>
       </Card>
-      <Card title="TURN Servers">
-        If massive corporate firewalls completely block direct P2P connections,
-        WebRTC falls back to a TURN server. This server relays the{" "}
-        <em>actual</em>
-        video data bytes. It acts as an expensive middleman when direct P2P
-        fails.
+      <Card title="TURN (Traversal Using Relays around NAT)">
+        <p className="text-sm text-muted-foreground mb-2">
+          The "Relay" fallback. If STUN fails, traffic is routed <strong>Through</strong> this server.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          Expensive (bandwidth costs). Used for strict corporate firewalls (Symmetric NAT) that block direct UDP traffic.
+        </p>
       </Card>
     </Grid>,
-    <Callout key="10" type="warning" title="UDP Transport">
-      WebRTC exclusively uses <strong>UDP</strong> underneath (not TCP) because
-      missing a single video frame is perfectly acceptable, but pausing a live
-      video call to re-transmit a dropped packet (TCP's behavior) would cause
-      horrendous stuttering.
+    <h3 key="7" className="text-xl font-bold mt-8 mb-4">
+      Scaling Video: P2P vs. Mesh vs. SFU
+    </h3>,
+    <p key="8" className="mb-4">
+      In a group call, <strong>Mesh (Pure P2P)</strong> kills your CPU because you must upload a stream to <em>every</em> participant. Enterprise apps use an <strong>SFU (Selective Forwarding Unit)</strong> architecture.
+    </p>,
+    <Table
+      key="9"
+      headers={["Architecture", "How it Works", "Trade-off"]}
+      rows={[
+        ["Mesh (Pure P2P)", "User A sends to B, C, and D directly.", "Melts CPU/Bandwidth for >3 users."],
+        ["SFU (Selective Forwarding)", "User A sends 1 stream to Server. Server clones it to B, C, D.", "Best balance. Used by Discord/Zoom."],
+        ["MCU (Multipoint Control)", "Server decodes all videos, makes a 'grid', and sends 1 video.", "Very expensive server CPU. Fixed layout."]
+      ]}
+    />,
+    <Callout key="10" type="info" title="The RTCDataChannel">
+      WebRTC isn't just for video! The <strong>RTCDataChannel</strong> uses <strong>SCTP</strong> over UDP. It provides the reliability of TCP with the speed of UDP. This is used for peer-to-peer file sharing (BitTorrent in the browser) and ultra-low latency multiplayer gaming.
     </Callout>,
   ],
 };

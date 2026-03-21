@@ -1,108 +1,61 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
-import { Step } from "@/components/ui/Step";
 import { Table } from "@/components/ui/Table";
+import { Grid } from "@/components/ui/Grid";
+import { Card } from "@/components/ui/Card";
+import { Callout } from "@/components/ui/Callout";
 
-export const llmHowItWorksTopic: Topic = {
+export const howLlmsWorkTopic: Topic = {
   id: "how-llms-work",
   title: "How LLMs Work",
   description:
-    "Transformers, attention, tokenization, and the math behind ChatGPT — how a neural network generates human-like text.",
-  tags: ["ai", "llm", "transformers", "deep-learning"],
-  icon: "Brain",
+    "How billions of mathematical weights predict the absolute most likely next word in a sentence, and why they hallucinate.",
+  tags: ["ai", "architecture"],
+  icon: "BrainCircuit",
   content: [
     <p key="1">
-      Large Language Models (LLMs) like GPT-4, Claude, and Llama are built on
-      the <strong>Transformer architecture</strong> (2017, "Attention Is All You
-      Need"). At their core, they do one thing:{" "}
-      <strong>predict the next token</strong> given all previous tokens. They
-      don't "understand" — they compute statistical patterns across trillions of
-      tokens of training data.
+      At its core, a Large Language Model (LLM) is a statistical engine designed to predict the <strong>most probable next token</strong>. Unlike traditional software, its behavior is determined by billions of adjustable weights (Parameters) rather than explicit conditional logic.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      The Pipeline
-    </h4>,
-    <Step key="3" index={1}>
-      <strong>Tokenization:</strong> Input text is split into{" "}
-      <strong>tokens</strong> (subwords). "unhappiness" → ["un", "happiness"].
-      GPT-4 uses ~100K token vocabulary. Each token gets an integer ID.
-    </Step>,
-    <Step key="4" index={2}>
-      <strong>Embedding:</strong> Each token ID maps to a high-dimensional
-      vector (e.g., 4096 dimensions). This vector captures semantic meaning —
-      "king" and "queen" are nearby in embedding space.
-    </Step>,
-    <Step key="5" index={3}>
-      <strong>Self-Attention:</strong> Each token "attends" to every other token
-      in the sequence via <strong>Query, Key, Value matrices</strong>. This lets
-      "it" in "The cat sat because it was tired" attend to "cat".
-    </Step>,
-    <Step key="6" index={4}>
-      <strong>Feed-Forward + Layers:</strong> After attention, each token passes
-      through a neural network. This repeats across{" "}
-      <strong>96+ transformer layers</strong> (GPT-4). Each layer refines the
-      representation.
-    </Step>,
-    <Step key="7" index={5}>
-      <strong>Prediction:</strong> The final layer outputs a probability
-      distribution over the vocabulary. Token with highest probability (or
-      sampled via temperature) becomes the next word.{" "}
-      <strong>Repeat autoregressively.</strong>
-    </Step>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Training Lifecycle: Pre-training to RLHF
+    </h3>,
+    <p key="3" className="mb-4">
+      Models go through a multi-stage process to become useful assistants.
+    </p>,
     <Table
-      key="8"
-      headers={["Concept", "What It Does"]}
+      key="4"
+      headers={["Stage", "Technical Action", "Objective"]}
       rows={[
-        [
-          "Self-Attention",
-          "Lets each token look at all other tokens to understand context",
-        ],
-        [
-          "Multi-Head Attention",
-          "Runs attention multiple times in parallel — each head learns different patterns",
-        ],
-        [
-          "Positional Encoding",
-          "Tells the model the ORDER of tokens (Transformers have no inherent sequence)",
-        ],
-        [
-          "Temperature",
-          "Controls randomness: 0 = deterministic, 1 = creative, 2 = chaos",
-        ],
-        [
-          "Context Window",
-          "Maximum tokens the model can see at once (GPT-4: 128K, Claude: 200K)",
-        ],
+        ["1. Pre-training", "Self-supervised learning on 10T+ tokens of raw internet text (Unstructured).", "Acquire broad world knowledge and grammar."],
+        ["2. SFT", "Supervised Fine-Tuning on high-quality (Input: Question, Output: Answer) pairs.", "Learn the format of 'Assistant Behavior'."],
+        ["3. RLHF", "Reinforcement Learning from Human Feedback. Humans rank model outputs by helpfulness/safety.", "Align the model with human values and reduce toxicity."]
       ]}
     />,
-    <Grid key="9" cols={2} gap={6} className="my-8">
-      <Card title="Pre-Training vs Fine-Tuning">
-        <p className="text-sm">
-          <strong>Pre-training:</strong> Learn language from the entire internet
-          (trillions of tokens, $100M+ compute). <strong>Fine-tuning:</strong>{" "}
-          Specialize on specific tasks (instruction following, code, medical).
-          RLHF (Reinforcement Learning from Human Feedback) aligns the model
-          with human preferences.
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      The Secret to Speed: KV Caching
+    </h3>,
+    <p key="6" className="mb-4">
+      Because LLMs are <strong>Autoregressive</strong> (output depends on all previous tokens), naive inference is O(N²). To fix this, engines use <strong>KV Caching</strong>: they store the 'Key' and 'Value' vectors of previous tokens in GPU memory so they don't have to be recomputed for every new word.
+    </p>,
+    <Grid key="7" cols={2} gap={6} className="my-8">
+      <Card title="Context Window (RAM)">
+        <p className="text-sm text-muted-foreground mb-2">
+          The context window is physically limited by <strong>GPU VRAM</strong>.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          Increasing the window linearly increases the KV Cache size. A 128k context window requires ~10GB of VRAM just to 'remember' the conversation history.
         </p>
       </Card>
-      <Card title="Inference Cost">
-        <p className="text-sm">
-          Each token generated requires a <strong>forward pass</strong> through
-          all 96+ layers. Longer context = more KV-cache memory. This is why API
-          pricing is <strong>per-token</strong> and why long prompts are
-          expensive. Techniques like KV-cache, speculative decoding, and
-          quantization reduce cost.
+      <Card title="In-Context Learning">
+        <p className="text-sm text-muted-foreground mb-2">
+          The model doesn't 'learn' while you chat.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          It uses <strong>Self-Attention</strong> to relate new tokens to the patterns found in your prompt. This allows it to follow instructions (few-shot) without weight updates.
         </p>
       </Card>
     </Grid>,
-    <Callout key="10" type="info" title="LLMs Don't 'Think'">
-      LLMs are <strong>next-token prediction machines</strong>. They don't have
-      memory between conversations, don't have beliefs, and can confidently
-      generate plausible-sounding but factually wrong text (
-      <strong>hallucinations</strong>). Understanding this limitation is
-      critical for building reliable AI applications.
+    <Callout key="8" type="info" title="Hallucinations">
+      Hallucinations occur because there is no 'Fact Checking' layer. If the statistically most likely word to follow "The capital of France is..." is "Mars" (due to bad training data or context skew), the model will output "Mars" with 100% confidence. RAG (Retrieval-Augmented Generation) is the standard industrial fix for this.
     </Callout>,
   ],
 };

@@ -1,129 +1,70 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
+import { Card } from "@/components/ui/Card";
 import { Table } from "@/components/ui/Table";
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Callout } from "@/components/ui/Callout";
 
-export const sseVsWebSocketTopic: Topic = {
-  id: "sse-vs-websocket-vs-polling",
+export const sseVsWebsocketTopic: Topic = {
+  id: "sse-vs-websocket",
   title: "SSE vs WebSocket vs Long Polling",
   description:
-    "Three approaches to real-time web communication: when to use each, their trade-offs, and why ChatGPT chose Server-Sent Events.",
-  tags: ["networking", "realtime", "frontend", "interview"],
-  icon: "Radio",
+    "Understanding the tradeoffs between the three dominant realtime streaming patterns.",
+  tags: ["backend", "real-time", "architecture"],
+  icon: "SignalHigh",
   content: [
     <p key="1">
-      HTTP was designed for <strong>request → response</strong>. But modern apps
-      need real-time updates: chat messages, stock prices, AI streaming
-      responses. There are three main approaches, and choosing wrong leads to
-      either over-engineering or poor user experience.
+      Modern real-time web applications require a persistent connection between the client and the server. Choosing the right protocol—<strong>SSE</strong>, <strong>WebSockets</strong>, or <strong>Long Polling</strong>—is a balance of <strong>Directionality</strong>, <strong>Overhead</strong>, and <strong>Scaling Ease</strong>.
     </p>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Real-Time Spectrum
+    </h3>,
     <Table
-      key="2"
-      headers={[
-        "Feature",
-        "Long Polling",
-        "Server-Sent Events (SSE)",
-        "WebSocket",
-      ]}
+      key="3"
+      headers={["Feature", "Long Polling", "SSE (Server-Sent Events)", "WebSockets"]}
       rows={[
-        [
-          "Direction",
-          "Server → Client (simulated)",
-          "Server → Client only",
-          "Bidirectional",
-        ],
-        [
-          "Protocol",
-          "HTTP (repeated requests)",
-          "HTTP/2 with text/event-stream",
-          "ws:// (upgraded from HTTP)",
-        ],
-        [
-          "Connection",
-          "New request after each response",
-          "Persistent, auto-reconnect",
-          "Persistent, full-duplex",
-        ],
-        [
-          "Browser Support",
-          "Universal",
-          "All modern browsers",
-          "All modern browsers",
-        ],
-        [
-          "Complexity",
-          "Simplest to implement",
-          "Simple, built-in EventSource API",
-          "Most complex (state management)",
-        ],
-        [
-          "Best For",
-          "Low-frequency updates, compatibility",
-          "Notifications, feeds, AI streaming",
-          "Chat, gaming, collaborative editing",
-        ],
+        ["Direction", "Unidirectional (Client Pull).", "<strong>Unidirectional</strong> (Server Push).", "<strong>Bidirectional</strong> (Full Duplex)."],
+        ["Protocol", "HTTP/1.1 or HTTP/2.", "Strictly <strong>HTTP/2</strong> recommended.", "TCP Upgrade (<code>ws://</code>)."],
+        ["Overhead", "High (Headers sent every time).", "Low (Single HTTP connection).", "Lowest (Binary framing)."],
+        ["Reconnection", "Handled by the client loop.", "<strong>Automatic</strong> by the browser.", "Must be handled manually in code."],
+        ["Data Type", "JSON / Text.", "Text-only (UTF-8).", "Binary or Text."]
       ]}
     />,
-    <Grid key="3" cols={3} gap={6} className="my-8">
-      <Card title="Long Polling">
-        <p className="text-sm">
-          Client sends a request. Server <strong>holds it open</strong> until
-          data is available, then responds. Client immediately sends another
-          request. Simple but creates many connections and can't handle
-          high-frequency updates.
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      Deep Dive: SSE (The Managed Push)
+    </h3>,
+    <p key="5" className="mb-4 text-sm text-muted-foreground">
+      SSE (Server-Sent Events) is a standard HTML5 API (<code>EventSource</code>). It's essentially <strong>one long-lived HTTP request</strong> that never closes. The server sends <code>Content-Type: text/event-stream</code> and keeps the connection open to pump data.
+    </p>,
+    <Grid key="6" cols={2} gap={6} className="my-8">
+      <Card title="The HTTP/2 Advantage">
+        <p className="text-sm text-muted-foreground mb-2">
+          Bypassing the "6-Connection Limit."
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          Under HTTP/1.1, browsers limited persistent connections. With <strong>HTTP/2 Multiplexing</strong>, you can open 100+ SSE streams over a <strong>single TCP pipe</strong>, making it incredibly lightweight for dashboards.
         </p>
       </Card>
-      <Card title="SSE (Server-Sent Events)">
-        <p className="text-sm">
-          Server pushes events over a <strong>single HTTP connection</strong>.
-          Built-in <code>EventSource</code> API handles reconnection
-          automatically. Perfect for <strong>one-way streaming</strong> — this
-          is how ChatGPT streams responses.
+      <Card title="Automatic Reconnect">
+        <p className="text-sm text-muted-foreground mb-2">
+          Resilience out of the box.
         </p>
-      </Card>
-      <Card title="WebSocket">
-        <p className="text-sm">
-          Full <strong>bidirectional</strong> communication over a single TCP
-          connection. Both client and server can send messages anytime. Required
-          for interactive apps (multiplayer games, collaborative editing) but
-          adds complexity.
+        <p className="text-xs italic text-muted-foreground">
+          If the network drops, the browser automatically retries the SSE connection. It even sends a <code>Last-Event-ID</code> header so the server can "replay" the missed messages.
         </p>
       </Card>
     </Grid>,
-    <CodeBlock
-      key="4"
-      language="typescript"
-      title="SSE: How ChatGPT Streams Responses"
-      code={`// Server (Express)
-app.get("/api/chat", (req, res) => {
-  res.setHeader("Content-Type", "text/event-stream");
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("Connection", "keep-alive");
-
-  // Stream tokens one by one
-  for await (const token of llm.stream(prompt)) {
-    res.write(\`data: \${JSON.stringify({ token })}\\n\\n\`);
-  }
-  res.write("data: [DONE]\\n\\n");
-  res.end();
-});
-
-// Client (Browser)
-const source = new EventSource("/api/chat");
-source.onmessage = (event) => {
-  if (event.data === "[DONE]") return source.close();
-  const { token } = JSON.parse(event.data);
-  output.textContent += token;  // Append each token
-};`}
-    />,
-    <Callout key="5" type="tip" title="Decision Guide">
-      <strong>Need one-way server pushes?</strong> → SSE (simplest,
-      auto-reconnect). <strong>Need bidirectional?</strong> → WebSocket.{" "}
-      <strong>Need max compatibility?</strong> → Long Polling.{" "}
-      <strong>Streaming AI responses?</strong> → SSE (it's literally what
-      OpenAI, Anthropic, and Google use for their chat APIs).
+    <h3 key="7" className="text-xl font-bold mt-8 mb-4">
+      The "Full Duplex" Power: WebSockets
+    </h3>,
+    <p key="8" className="mb-4">
+      WebSockets strictly start as an <strong>HTTP GET</strong> with an <code>Upgrade: websocket</code> header. If the server says "101 Switching Protocols," the connection <strong>stops being HTTP</strong> and becomes a raw TCP socket.
+    </p>,
+    <ul key="9" className="list-disc pl-5 text-sm text-muted-foreground space-y-2">
+      <li><strong>Use Case:</strong> Multi-player gaming, collaborative whiteboards (Figma), and high-frequency trading where the client also needs to "push" data constantly.</li>
+      <li><strong>Scaling Headache:</strong> Because WebSockets are <strong>Stateful</strong>, a Load Balancer must use "Sticky Sessions" so a client stays on the same server, or you must use a <strong>Pub/Sub (Redis)</strong> backplane to sync messages across 100 server instances.</li>
+    </ul>,
+    <Callout key="10" type="tip" title="When to use SSE?">
+      If your app is mostly <strong>Read-Only</strong> (like a stock price tracker, social media feed, or ChatGPT-style text streaming), <strong>SSE is almost always a better choice</strong> than WebSockets. It's easier to scale, works over standard HTTP, and has better firewall compatibility.
     </Callout>,
   ],
 };

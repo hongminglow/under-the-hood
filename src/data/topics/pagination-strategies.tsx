@@ -1,100 +1,59 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Callout } from "@/components/ui/Callout";
 
 export const paginationStrategiesTopic: Topic = {
   id: "pagination-strategies",
   title: "Pagination Strategies",
   description:
-    "Offset vs Cursor vs Keyset — why your pagination approach can make or break API performance at scale.",
-  tags: ["api", "databases", "performance", "system-design"],
-  icon: "ListOrdered",
+    "Why using standard 'Offset / Limit' to build your API destroys your database when users click 'Page 10,000'.",
+  tags: ["backend", "database", "api-design"],
+  icon: "BookOpen",
   content: [
     <p key="1">
-      When an API returns 10 million records, you can't send them all at once.{" "}
-      <strong>Pagination</strong> splits results into pages — but <em>how</em>{" "}
-      you paginate has massive performance implications at scale.
+      Pagination is more than just dividing a list into pages. It is a critical database performance decision. Choosing the wrong strategy (Offset vs. Keyset) can lead to <strong>Full Table Scans</strong> and 0% database availability as your data grows.
     </p>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      Offset vs. Keyset (Cursor) Pagination
+    </h3>,
     <Table
-      key="2"
-      headers={[
-        "Strategy",
-        "Mechanism",
-        "Performance at Page 10,000",
-        "Consistency",
-      ]}
+      key="3"
+      headers={["Feature", "Offset Pagination", "Keyset (Cursor) Pagination"]}
       rows={[
-        [
-          "Offset",
-          "OFFSET 100000 LIMIT 25",
-          "Terrible — DB scans 100,000 rows to skip them",
-          "Inconsistent (new inserts shift pages)",
-        ],
-        [
-          "Cursor (ID-based)",
-          "WHERE id > last_seen_id LIMIT 25",
-          "Constant O(1) — index seek",
-          "Consistent (stable references)",
-        ],
-        [
-          "Keyset (Compound)",
-          "WHERE (date, id) > (last_date, last_id)",
-          "Constant — index seek",
-          "Consistent + supports sorting",
-        ],
-        [
-          "Page Token",
-          "Opaque encrypted cursor",
-          "Depends on implementation",
-          "Server-controlled, versioned",
-        ],
+        ["Performance", "Slower as you go deeper (O(N) scan).", "Constant speed (O(log N) index jump)."],
+        ["Stability", "Inconsistent. Rows shift if data is added.", "Stable. Results are anchored to a 'Key'."],
+        ["Navigation", "Supports 'Jump to Page 50'.", "Supports only 'Next' and 'Previous'."],
+        ["Best For", "Small datasets with static UI.", "Infinite Scroll (Social Feeds, Activity Logs)."]
       ]}
     />,
-    <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="Offset Pagination (Simple)">
-        <CodeBlock
-          language="sql"
-          title="The Problem"
-          code={`-- Page 1: fast
-SELECT * FROM posts ORDER BY id LIMIT 25 OFFSET 0;
-
--- Page 4000: SLOW (DB must scan 100,000 rows to skip)
-SELECT * FROM posts ORDER BY id LIMIT 25 OFFSET 100000;
--- PostgreSQL literally reads and discards 100K rows!`}
-        />
+    <Grid key="2" cols={2} gap={6} className="my-8">
+      <Card title="The OFFSET Trap">
+        <p className="text-sm text-muted-foreground mb-2">
+          <code>SELECT * FROM logs LIMIT 20 OFFSET 100000;</code>
+        </p>
+        <p className="text-xs text-muted-foreground italic">
+          The database must <strong>load and discard</strong> the first 100,000 rows just to show you row 100,001. This consumes massive I/O and RAM.
+        </p>
       </Card>
-      <Card title="Cursor Pagination (Scalable)">
-        <CodeBlock
-          language="sql"
-          title="The Solution"
-          code={`-- Page 1
-SELECT * FROM posts ORDER BY id LIMIT 25;
--- last_id = 25
-
--- Any page: instant (index seek, no scanning)
-SELECT * FROM posts
-WHERE id > 25   -- cursor from previous page
-ORDER BY id LIMIT 25;`}
-        />
+      <Card title="The Keyset Advantage">
+        <p className="text-sm text-muted-foreground mb-2">
+          <code>SELECT * FROM logs WHERE id &lt; 9821 LIMIT 20;</code>
+        </p>
+        <p className="text-xs text-muted-foreground italic">
+          The database uses the B-Tree index to <strong>jump directly</strong> to the specified record. Page 1,000,000 is as fast as Page 1.
+        </p>
       </Card>
     </Grid>,
-    <Callout key="4" type="tip" title="Which to Use?">
-      <strong>Small datasets (&lt;10K rows):</strong> Offset is fine — simple
-      and supports "jump to page 50."
-      <strong> Large datasets:</strong> Always use cursor/keyset — constant
-      performance regardless of page depth.
-      <strong> Public APIs:</strong> Use opaque page tokens (encrypted cursors)
-      to hide implementation and prevent abuse.
-    </Callout>,
-    <Callout key="5" type="warning" title="The Ghost Row Problem">
-      With offset pagination, if a new row is inserted while a user is paging,
-      every subsequent page <strong>shifts by one</strong> — the user either
-      misses a row or sees a duplicate. Cursor pagination eliminates this
-      entirely because the cursor is an{" "}
-      <strong>absolute reference point</strong>.
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      The Hidden Performance Killer: 'Total Count'
+    </h3>,
+    <p key="6" className="mb-4">
+      In most UI designs, we show "Page 1 of 48,291." To do this, the backend must run <code>SELECT count(*)</code>. In PostgreSQL/MySQL, this is a <strong>Full Table Scan</strong>.
+    </p>,
+    <Callout key="7" type="tip" title="Scaling Total Counts">
+      On massive tables (billions of rows), never run a real count. Use <strong>Table Statistics</strong> (approximate count) from the database metadata, or implement a "Show More" button that doesn't reveal the total page count.
     </Callout>,
   ],
 };

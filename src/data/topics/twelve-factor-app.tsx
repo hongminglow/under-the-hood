@@ -1,6 +1,7 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 
 export const twelveFacorAppTopic: Topic = {
@@ -12,103 +13,40 @@ export const twelveFacorAppTopic: Topic = {
   icon: "ListChecks",
   content: [
     <p key="1">
-      Written by the founders of Heroku in 2011, the{" "}
-      <strong>Twelve-Factor App</strong> methodology defines 12 principles for
-      building <strong>scalable, portable, cloud-native</strong> applications.
-      Every modern deployment practice (Docker, Kubernetes, serverless) is
-      fundamentally shaped by these factors.
+      The <strong>Twelve-Factor App</strong> methodology is a set of best practices for building <strong>Software-as-a-Service (SaaS)</strong> applications. Created by the engineers at Heroku, these principles ensure that apps are scalable, portable across cloud providers, and easy to automate with CI/CD.
     </p>,
-    <Grid key="2" cols={2} gap={6} className="my-8">
-      <Card title="I. Codebase">
-        <p className="text-sm">
-          One codebase tracked in Git, many deploys (staging, production). Never
-          multiple apps sharing one repo with different deploy paths.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Core Tenets of Scalability
+    </h3>,
+    <Grid key="3" cols={2} gap={6} className="my-8">
+      <Card title="III. Config (Environment Vars)">
+        <p className="text-sm text-muted-foreground mb-2">
+          Store configuration in <strong>Environment Variables</strong>, not code. The same build artifact should run in Dev, Staging, and Prod without recompilation.
         </p>
       </Card>
-      <Card title="II. Dependencies">
-        <p className="text-sm">
-          Explicitly declare <strong>all</strong> dependencies via{" "}
-          <code>package.json</code>, <code>requirements.txt</code>, etc. Never
-          assume system-level packages exist.
-        </p>
-      </Card>
-      <Card title="III. Config">
-        <p className="text-sm">
-          Store config (DB URLs, API keys) in{" "}
-          <strong>environment variables</strong> — never in code. Same binary
-          runs in dev, staging, and production with different env vars.
-        </p>
-      </Card>
-      <Card title="IV. Backing Services">
-        <p className="text-sm">
-          Treat databases, caches, and queues as{" "}
-          <strong>attached resources</strong> accessible via URL. Swap a local
-          PostgreSQL for Amazon RDS by changing a config var.
-        </p>
-      </Card>
-      <Card title="V. Build, Release, Run">
-        <p className="text-sm">
-          Strictly separate: <strong>Build</strong> (compile + bundle),{" "}
-          <strong>Release</strong> (build + config = immutable artifact),{" "}
-          <strong>Run</strong> (execute the release). Every release gets a
-          unique version ID.
-        </p>
-      </Card>
-      <Card title="VI. Processes">
-        <p className="text-sm">
-          The app runs as <strong>stateless processes</strong>. Any persistent
-          data lives in backing services (DB, S3), never in process memory or
-          local filesystem.
-        </p>
-      </Card>
-      <Card title="VII. Port Binding">
-        <p className="text-sm">
-          The app is <strong>self-contained</strong> and exports HTTP by binding
-          to a port. No external web server (Apache) required. Express, NestJS,
-          and Flask all do this natively.
-        </p>
-      </Card>
-      <Card title="VIII. Concurrency">
-        <p className="text-sm">
-          Scale out via <strong>multiple processes</strong>, not bigger
-          machines. Run 10 instances of your API behind a load balancer instead
-          of one massive server.
-        </p>
-      </Card>
-      <Card title="IX. Disposability">
-        <p className="text-sm">
-          Processes should start <strong>fast</strong> and shut down{" "}
-          <strong>gracefully</strong>. Handle SIGTERM, finish in-flight
-          requests, then exit. Enables rapid deploys and autoscaling.
-        </p>
-      </Card>
-      <Card title="X. Dev/Prod Parity">
-        <p className="text-sm">
-          Keep dev, staging, and production as{" "}
-          <strong>similar as possible</strong>. Use the same database engine,
-          same OS, same runtime. Docker containers solve this perfectly.
-        </p>
-      </Card>
-      <Card title="XI. Logs">
-        <p className="text-sm">
-          Treat logs as <strong>event streams</strong> written to stdout. Never
-          manage log files — let the platform (Docker, K8s) collect and route
-          them to ELK, Datadog, or CloudWatch.
-        </p>
-      </Card>
-      <Card title="XII. Admin Processes">
-        <p className="text-sm">
-          Run one-off tasks (migrations, data fixes) as{" "}
-          <strong>isolated processes</strong> using the same codebase and
-          config. Ship them alongside the app, not as separate scripts.
+      <Card title="VI. Processes (Statelessness)">
+        <p className="text-sm text-muted-foreground mb-2">
+          <strong>The Most Critical Factor:</strong> Processes must be stateless. Any data that needs to persist must be stored in a <strong>Backing Service</strong> (DB, Redis, S3).
         </p>
       </Card>
     </Grid>,
-    <Callout key="3" type="info" title="Why It Still Matters in 2025">
-      Docker, Kubernetes, and serverless platforms{" "}
-      <strong>enforce 12-Factor by design</strong>. If your app violates these
-      principles (e.g., storing state in process memory, hardcoding config), it
-      will fail in containerized environments.
+    <Table
+      key="4"
+      headers={["Factor", "Brief Description", "Technical Benefit"]}
+      rows={[
+        ["I. Codebase", "One repo, many deploys.", "Prevents 'diverged code' bugs across environments."],
+        ["II. Dependencies", "Explicitly declare (npm/pip).", "Isolation; no 'works on my machine' errors."],
+        ["V. Build, Release, Run", "Strict isolation of stages.", "Enables rollbacks to known-good releases."],
+        ["VIII. Concurrency", "Scale out via process model.", "Horizontal scaling (adding more nodes) is trivial."],
+        ["IX. Disposability", "Fast startup & graceful shutdown.", "Enables Blue/Green deploys and Autoscaling."],
+        ["XI. Logs", "Treat logs as event streams.", "Centralized logging without managing .log files."]
+      ]}
+    />,
+    <Callout key="5" type="tip" title="The Statelessness Rule">
+      If your process stores a user's session in memory (e.g., a local variable), that user will be logged out if a Load Balancer directs them to a different server. By using <strong>Stateless Processes</strong>, you can kill and restart servers at will without affecting the user experience.
     </Callout>,
+    <p key="6" className="mt-8 text-muted-foreground italic">
+      Modern platforms like <strong>Kubernetes</strong> and <strong>Docker</strong> are essentially engines built to enforce the 12-Factor methodology at the infrastructure level.
+    </p>,
   ],
 };

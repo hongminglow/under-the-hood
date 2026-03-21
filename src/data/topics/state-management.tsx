@@ -2,109 +2,51 @@ import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
-import { Table } from "@/components/ui/Table";
 
 export const stateManagementTopic: Topic = {
-  id: "state-management-patterns",
-  title: "State Management Patterns",
+  id: "state-management",
+  title: "State Management",
   description:
-    "Redux vs Context vs Zustand vs Signals — the endless frontend debate about where state should live and how it should flow.",
-  tags: ["frontend", "react", "state", "debate"],
-  icon: "SlidersHorizontal",
+    "Why you should absolutely stop drilling twenty props through ten useless middle-man React components.",
+  tags: ["frontend", "architecture", "react"],
+  icon: "Database",
   content: [
     <p key="1">
-      Every frontend app needs to answer:{" "}
-      <strong>where does shared state live?</strong> Component state (
-      <code>useState</code>) works for local UI. But when 5 components need the
-      same data, prop drilling becomes a nightmare. The solution space has
-      exploded — and the debate over which approach is "best" never ends.
+      State management is the <strong>Synchronization of Truth</strong> across a UI. In React, state is local by default, but complex apps require <strong>Global Shared State</strong> to prevent the "Prop Drilling" nightmare.
     </p>,
-    <Table
-      key="2"
-      headers={[
-        "Library",
-        "Pattern",
-        "Bundle Size",
-        "Learning Curve",
-        "Best For",
-      ]}
-      rows={[
-        [
-          "useState/useReducer",
-          "Local component state",
-          "0kb (built-in)",
-          "Low",
-          "Simple component logic",
-        ],
-        [
-          "React Context",
-          "Provider/Consumer tree",
-          "0kb (built-in)",
-          "Low",
-          "Theming, auth, infrequent updates",
-        ],
-        [
-          "Redux Toolkit",
-          "Single store, actions, reducers",
-          "~11kb",
-          "Medium",
-          "Large apps, time-travel debugging",
-        ],
-        [
-          "Zustand",
-          "Hook-based store, no Provider",
-          "~1kb",
-          "Very Low",
-          "Medium apps, simplicity-first",
-        ],
-        [
-          "Jotai",
-          "Atomic (bottom-up)",
-          "~2kb",
-          "Low",
-          "Fine-grained reactivity, derived state",
-        ],
-        [
-          "TanStack Query",
-          "Server-state cache",
-          "~12kb",
-          "Medium",
-          "API data fetching, caching, sync",
-        ],
-        [
-          "Signals (Preact/Angular)",
-          "Reactive primitives",
-          "~1kb",
-          "Low",
-          "Fine-grained DOM updates",
-        ],
-      ]}
-    />,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Context vs. External Store Debate
+    </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="Client State vs Server State">
-        <p className="text-sm">
-          <strong>Client state</strong>: UI toggles, form inputs, modals.
-          Managed by useState/Zustand/Redux. <strong>Server state</strong>: API
-          data, cached responses. Managed by TanStack Query/SWR. Mixing them is
-          the #1 architecture mistake in React apps.
+      <Card title="React Context (Built-in)">
+        <p className="text-sm text-muted-foreground mb-2">
+          <strong>How it works:</strong> Injects data into the React Tree via a Provider.
         </p>
+        <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
+          <li><strong>Cons:</strong> Updating a single value re-renders <em>all</em> consumers.</li>
+          <li><strong>Cons:</strong> No built-in selector logic.</li>
+          <li><strong>Best For:</strong> Static data like Themes or User Auth.</li>
+        </ul>
       </Card>
-      <Card title="The Context Performance Trap">
-        <p className="text-sm">
-          React Context re-renders <strong>every consumer</strong> when the
-          provider value changes — even if only one property changed. For
-          frequently updating state (mouse position, timers), Context causes
-          massive re-renders. Use libraries with{" "}
-          <strong>selector-based subscriptions</strong> instead.
+      <Card title="External Stores (Zustand/Redux)">
+        <p className="text-sm text-muted-foreground mb-2">
+          <strong>How it works:</strong> An immutable object lives <em>outside</em> React.
         </p>
+        <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
+          <li><strong>Pros:</strong> Atomic updates via "Selectors".</li>
+          <li><strong>Pros:</strong> Middleware support (logging, persistence).</li>
+          <li><strong>Best For:</strong> High-frequency state like Carts or Forms.</li>
+        </ul>
       </Card>
     </Grid>,
-    <Callout key="4" type="tip" title="The Senior Answer">
-      "Use <strong>useState</strong> for component state.{" "}
-      <strong>TanStack Query</strong> for server state. If you still need shared
-      client state, use <strong>Zustand</strong> for its simplicity. Only reach
-      for Redux if you need middleware, time-travel debugging, or your team
-      already knows it." This is the pragmatic 2025 answer.
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      The Technical "Why": Fine-Grained Reactivity
+    </h3>,
+    <p key="5">
+      Modern libraries like <strong>Zustand</strong> use a <code>subscribeWithSelector</code> pattern. Instead of React watching the whole object, the library only triggers a re-render if the specific <em>property</em> you selected (e.g., <code>state.cartCount</code>) has changed by reference. This massive optimization prevents "Zombie Renders" in large dashboard UIs.
+    </p>,
+    <Callout key="6" type="tip" title="Server State vs. Client State">
+      Don't store API data in Redux! Use <strong>React Query (TanStack)</strong>. It handles caching, revalidation, and loading states automatically, leaving your global state manager to handle only "Unsaved" local UI transitions.
     </Callout>,
   ],
 };

@@ -1,91 +1,59 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 
 export const reactServerComponentsTopic: Topic = {
   id: "react-server-components",
   title: "React Server Components",
   description:
-    "React's paradigm shift: components that run on the server, send zero JavaScript to the browser, and fetch data without useEffect.",
-  tags: ["react", "frontend", "nextjs", "architecture"],
-  icon: "Server",
+    "Why rendering UI logic strictly on the physical backend node server solves massive Javascript execution issues.",
+  tags: ["frontend", "architecture", "react"],
+  icon: "Cpu",
   content: [
     <p key="1">
-      React Server Components (RSC) split your component tree into two worlds:{" "}
-      <strong>Server Components</strong> (default in Next.js App Router) run
-      only on the server — they can directly query databases, access the
-      filesystem, and use secrets. <strong>Client Components</strong> (
-      <code>"use client"</code>) run in the browser and handle interactivity.
+      React Server Components (RSC) represent a paradigm shift in web architecture. Unlike traditional SSR, which is a "one-off" HTML generation, RSC is a <strong>Continuous Serialization Stream</strong> that allows the server and client to share a single component tree.
     </p>,
-    <Grid key="2" cols={2} gap={6} className="my-8">
-      <Card title="Server Components (Default)">
-        <CodeBlock
-          language="tsx"
-          title="app/page.tsx"
-          code={`// No "use client" → Server Component
-// Can directly access DB, no API route needed!
-import { db } from "@/lib/db";
-
-export default async function UsersPage() {
-  const users = await db.user.findMany();
-  // 👆 Runs on server. Zero JS sent to browser.
-
-  return (
-    <ul>
-      {users.map(u => <li key={u.id}>{u.name}</li>)}
-    </ul>
-  );
-}`}
-        />
-      </Card>
-      <Card title="Client Components">
-        <CodeBlock
-          language="tsx"
-          title="components/Counter.tsx"
-          code={`"use client"; // ← Opt-in to client-side
-
-import { useState } from "react";
-
-export function Counter() {
-  // useState, onClick, etc. ONLY work
-  // in Client Components
-  const [count, setCount] = useState(0);
-  return (
-    <button onClick={() => setCount(c => c+1)}>
-      Count: {count}
-    </button>
-  );
-}`}
-        />
-      </Card>
-    </Grid>,
-    <Grid key="3" cols={2} gap={6} className="mb-8">
-      <Card title="✅ Benefits">
-        <p className="text-sm">
-          <strong>Zero JavaScript</strong> for data-heavy pages. Direct database
-          access without API routes. Secrets stay on the server. Automatic
-          code-splitting. <strong>Streaming</strong> with Suspense — show
-          content as it loads, don't block on one slow query.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      SSR vs. RSC: The Technical Breakdown
+    </h3>,
+    <Table
+      key="3"
+      headers={["Feature", "SSR (Server Side Rendering)", "RSC (Server Components)"]}
+      rows={[
+        ["Payload", "Sends <strong>HTML</strong> for the initial page load.", "Sends <strong>RSC Stream (Flight)</strong> for dynamic UI updates."],
+        ["State", "Loses all client state on navigation (full page).", "Preserves client state (inputs, scroll) during updates."],
+        ["Bundle Size", "Frontend JS includes all component code.", "Component code stays on the server (0kb JS sent)."],
+        ["Interactivity", "Requires <strong>Hydration</strong> to become interactive.", "Non-interactive; only Client Components hydrate."]
+      ]}
+    />,
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      The Inner Workings: Flight Format
+    </h3>,
+    <p key="5" className="mb-4">
+      When you navigate in an RSC app, the server doesn't send HTML. It sends a specialized <strong>Flight Stream</strong> (JSON-like text).
+    </p>,
+    <Grid key="6" cols={2} gap={6} className="my-8">
+      <Card title="Async Components">
+        <p className="text-sm text-muted-foreground mb-2">
+          Server Components can be <code>async</code>.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          You can <code>await db.query()</code> directly inside the component body. No <code>useEffect</code> or <code>fetch()</code> waterfalls are needed.
         </p>
       </Card>
-      <Card title="⚠️ Limitations">
-        <p className="text-sm">
-          <strong>No hooks</strong> (useState, useEffect) in Server Components.
-          No browser APIs (window, document). Can't pass{" "}
-          <strong>functions as props</strong> to Client Components (functions
-          aren't serializable). Mental model shift is steep for existing React
-          developers.
+      <Card title="Server Actions">
+        <p className="text-sm text-muted-foreground mb-2">
+          The built-in RPC (Remote Procedure Call) layer.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          Functions marked with <code>'use server'</code> can be called directly from client buttons. React handles the POST request and state synchronization automatically.
         </p>
       </Card>
     </Grid>,
-    <Callout key="4" type="tip" title="The Composition Pattern">
-      Server Components can <strong>import</strong> Client Components, but not
-      vice versa. The pattern: Server Component fetches data and{" "}
-      <strong>passes it as props</strong> to a Client Component that handles
-      interactivity. Think of Server Components as the "data layer" and Client
-      Components as the "interaction layer".
+    <Callout key="7" type="warning" title="The Serialization Boundary">
+      When passing data from a Server Component to a Client Component, the data <strong>must be serializable</strong>. You cannot pass functions or Class instances because they cannot be represented in the Flight Stream.
     </Callout>,
   ],
 };

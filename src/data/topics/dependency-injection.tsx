@@ -1,96 +1,63 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 
 export const dependencyInjectionTopic: Topic = {
   id: "dependency-injection",
-  title: "Dependency Injection & IoC",
+  title: "Dependency Injection (IoC)",
   description:
-    "The design principle that makes code testable and flexible by inverting who creates dependencies — powering NestJS, Spring, and Angular.",
-  tags: ["architecture", "design-patterns", "testing", "backend"],
+    "Why hardcoding 'new Database()' inside your classes makes them completely impossible to unit test.",
+  tags: ["architecture", "programming", "testing"],
   icon: "Syringe",
   content: [
     <p key="1">
-      In tightly coupled code, a class{" "}
-      <strong>creates its own dependencies</strong>:{" "}
-      <code>this.db = new PostgresDB()</code>. You can't test it without a real
-      database. You can't swap to MongoDB.
-      <strong> Dependency Injection</strong> (DI) flips this: dependencies are{" "}
-      <strong>provided from the outside</strong>.
+      <strong>Dependency Injection (DI)</strong> is a design pattern that implements <strong>Inversion of Control (IoC)</strong>. Instead of a class creating its own dependencies, they are "injected" from the outside.
     </p>,
-    <CodeBlock
-      key="2"
-      language="typescript"
-      title="DI in Practice"
-      code={`// ❌ Tight Coupling — UserService creates its own dependency
-class UserService {
-  private db = new PostgresDB();  // Hardcoded. Untestable.
-  async getUser(id: string) {
-    return this.db.query('SELECT * FROM users WHERE id = $1', [id]);
-  }
-}
-
-// ✅ Dependency Injection — dependency provided externally
-class UserService {
-  constructor(private db: Database) {}  // Injected via constructor
-  async getUser(id: string) {
-    return this.db.query('SELECT * FROM users WHERE id = $1', [id]);
-  }
-}
-
-// Production: new UserService(new PostgresDB())
-// Testing:    new UserService(new MockDB())
-// Migration:  new UserService(new MongoDB())`}
-    />,
-    <Grid key="3" cols={3} gap={6} className="my-8">
-      <Card title="Constructor Injection">
-        <p className="text-sm">
-          Dependencies passed via <strong>constructor parameters</strong>. Most
-          common, most explicit. Used by NestJS, Angular, Spring Boot.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The "Hollywood Principle"
+    </h3>,
+    <p key="3" className="mb-4">
+      <em>"Don't call us, we'll call you."</em> In a DI architecture, your low-level components (Database, Logger) don't decide when they are used. A high-level <strong>IoC Container</strong> (like NestJS or Awilix) manages their lifecycle and wiring.
+    </p>,
+    <Grid key="4" cols={2} gap={6} className="my-8">
+      <Card title="Tight Coupling (Fragile)">
+        <p className="text-sm text-muted-foreground mb-4">
+          A class uses <code>new Database()</code>. If you change the database name or credentials, you must search and replace every file in your app.
         </p>
+        <p className="text-sm text-red-500 font-bold">Un-testable without a real DB.</p>
       </Card>
-      <Card title="Property Injection">
-        <p className="text-sm">
-          Dependencies set via <strong>decorators or setters</strong> after
-          construction. Less explicit but useful for optional dependencies.
-          Common in Angular (<code>@Inject()</code>).
+      <Card title="Loose Coupling (Flexible)">
+        <p className="text-sm text-muted-foreground mb-4">
+          A class accepts <code>IDatabase</code>. It doesn't care if it's Postgres, MongoDB, or a Mock.
         </p>
-      </Card>
-      <Card title="IoC Container">
-        <p className="text-sm">
-          A central registry that <strong>automatically resolves</strong> and
-          injects dependencies. You register interfaces and implementations; the
-          container wires everything. NestJS, Spring, and Angular all have
-          built-in IoC containers.
-        </p>
+        <p className="text-sm text-green-500 font-bold">Swap implementations in 1 line of config.</p>
       </Card>
     </Grid>,
-    <CodeBlock
-      key="4"
-      language="typescript"
-      title="NestJS IoC Container"
-      code={`// NestJS resolves dependencies automatically via decorators
-@Injectable()
-class UserService {
-  constructor(
-    private readonly db: DatabaseService,      // Auto-injected
-    private readonly cache: CacheService,      // Auto-injected
-    private readonly logger: LoggerService,     // Auto-injected
-  ) {}
-}
-
-@Module({
-  providers: [UserService, DatabaseService, CacheService, LoggerService],
-})
-class AppModule {}`}
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      The Benefits of DI
+    </h3>,
+    <Table
+      key="6"
+      headers={["Benefit", "Technical Explanation"]}
+      rows={[
+        [
+          "Testability",
+          "Pass a <strong>Mock Object</strong> into the constructor to simulate failures without using a network."
+        ],
+        [
+          "Single Responsibility",
+          "Classes focus on <strong>using</strong> tools, not <strong>configuring</strong> or creating them."
+        ],
+        [
+          "Code Reuse",
+          "The same <code>AuthService</code> can be injected into a Web Server, a CLI tool, or a Lambda function."
+        ]
+      ]}
     />,
-    <Callout key="5" type="tip" title="DI Enables Testing">
-      The #1 practical benefit: <strong>mocking dependencies in tests</strong>.
-      Without DI, testing a service that calls a database, cache, and email
-      provider requires all three to be running. With DI, inject mocks and test
-      pure business logic in milliseconds.
+    <Callout key="7" type="info" title="What is an IoC Container?">
+      In large apps, manually doing <code>new A(new B(new C()))</code> is exhausting. An <strong>IoC Container</strong> scans your code, finds all the "demands" in constructors, and automatically instantiates and injects everything in the correct order.
     </Callout>,
   ],
 };

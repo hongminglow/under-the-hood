@@ -1,92 +1,44 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 
-export const typescriptTypeTopic: Topic = {
-  id: "typescript-type-system",
-  title: "TypeScript Type System Deep Dive",
+export const typescriptTypesTopic: Topic = {
+  id: "typescript-types",
+  title: "TypeScript Type System",
   description:
-    "Exploring structural typing, generics, mapped types, and conditional types that make TypeScript the industry standard.",
-  tags: ["typescript", "language-design", "types"],
-  icon: "FileType",
+    "Why Microsoft invented an incredibly strict structural type checker that completely vanishes before hitting the browser.",
+  tags: ["core", "javascript", "architecture"],
+  icon: "FileCode",
   content: [
     <p key="1">
-      TypeScript doesn't use <em>nominal</em> typing (Java/C# style where class
-      names must match). It uses <strong>Structural Typing</strong>: if an
-      object has the required shape, it's compatible — regardless of its
-      declared name. This is called "duck typing" at the type level.
+      Native Vanilla Javascript allows you to pass a `string` into physical functions expecting an exact `number`. It causes catastrophic crashes directly in production servers. TypeScript mathematically solves this purely by wrapping JS in an absurdly strict enterprise-grade compile-time inference engine.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      Advanced Type Utilities
-    </h4>,
-    <Grid key="3" cols={2} gap={6} className="mb-8">
-      <Card title="Generics">
-        <p className="text-sm mb-2">
-          Parameterize types to create reusable, type-safe abstractions.
-        </p>
-        <CodeBlock
-          language="typescript"
-          code={`function first<T>(arr: T[]): T | undefined {
-  return arr[0];
-}
-// first([1,2,3]) → type is number
-// first(["a","b"]) → type is string`}
-        />
-      </Card>
-      <Card title="Conditional Types">
-        <p className="text-sm mb-2">
-          Types that resolve based on a condition, like a ternary for types.
-        </p>
-        <CodeBlock
-          language="typescript"
-          code={`type IsString<T> = T extends string
-  ? "yes"
-  : "no";
-
-type A = IsString<"hello">; // "yes"
-type B = IsString<42>;      // "no"`}
-        />
-      </Card>
-      <Card title="Mapped Types">
-        <p className="text-sm mb-2">
-          Transform every property of a type systematically.
-        </p>
-        <CodeBlock
-          language="typescript"
-          code={`type Readonly<T> = {
-  readonly [K in keyof T]: T[K];
-};
-
-type Optional<T> = {
-  [K in keyof T]?: T[K];
-};`}
-        />
-      </Card>
-      <Card title="Template Literal Types">
-        <p className="text-sm mb-2">
-          String manipulation at the type level — incredibly powerful for API
-          safety.
-        </p>
-        <CodeBlock
-          language="typescript"
-          code={`type EventName<T extends string> =
-  \`on\${Capitalize<T>}\`;
-
-type E = EventName<"click">;
-// type E = "onClick"`}
-        />
-      </Card>
-    </Grid>,
-    <Callout
-      key="4"
-      type="info"
-      title="TypeScript's Type System is Turing Complete"
-    >
-      You can write a fully functioning calculator, a JSON parser, or even a
-      regex engine purely within TypeScript's type system. This power comes from
-      recursive conditional types and template literal types working together.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Structural Paradigm
+    </h3>,
+    <Table
+      key="3"
+      headers={["Concept", "The Traditional Rule", "The Typescript Way"]}
+      rows={[
+        [
+          "Structural Typing",
+          "If completely different classes `Bird` and `Plane` both have a `.fly()` function, Java throws a fatal type error expecting exactly `Plane`.",
+          "TypeScript mathematically only cares about the physical shape. If it quacks like a duck, it is absolutely perfectly identical structurally. No class extensions strictly necessary."
+        ],
+        [
+          "Type Erasure",
+          "C# explicitly compiles all your strict interfaces down into massive native executable runtime object DLL checks.",
+          "TypeScript completely surgically deletes all types during build time. The final compiled file is pure dynamically untyped raw Vanilla JS. Types exist cleanly entirely as a sophisticated developer linter."
+        ],
+        [
+          "Union Narrowing",
+          "Functions completely break apart checking `if (x instanceof User)` logic heavily everywhere.",
+          "TypeScript intrinsically narrows branches. If variable is `string | number`, writing an `if (typeof x === 'string')` branch inherently forces the variable physically into a pure native string down safely."
+        ]
+      ]}
+    />,
+    <Callout key="4" type="danger" title="The 'any' Keyword Pandemic">
+      Writing `const data: any = JSON.parse(res)` entirely disables the compiler. You forcefully command Typescript to ignore the object entirely, explicitly inviting runtime production crashes natively back into your architecture. Never bypass the engine blindly; use `unknown` and mathematically validate the physical shape directly before parsing.
     </Callout>,
   ],
 };

@@ -1,69 +1,49 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { Grid } from "@/components/ui/Grid";
 
-export const eventLoopTopic: Topic = {
+export const jsEventLoopTopic: Topic = {
   id: "js-event-loop",
-  title: "JavaScript Event Loop",
+  title: "JS Event Loop",
   description:
-    "How a single-threaded language handles massive concurrency using the Call Stack, Web APIs, and Task Queues.",
-  tags: ["javascript", "concurrency", "engine"],
-  icon: "RotateCcw",
+    "How Javascript physically manages to handle 10,000 concurrent network requests using only a single-threaded processor core.",
+  tags: ["core", "javascript", "backend"],
+  icon: "Cpu",
   content: [
     <p key="1">
-      JavaScript is single-threaded. It has exactly one Call Stack and executes
-      one instruction at a time. So how can a Node.js server handle 10,000
-      concurrent network requests without freezing? The answer is asynchronous
-      concurrency managed by the <strong>Event Loop</strong>.
+      Javascript mathematically executes strictly on one single thread. If it pauses to wait 500ms for a database SQL query to finish, the entire application drops dead for half a second. A global `while(true)` loop locks the entire architecture. Node runs thousands of massive enterprise apps successfully because of one secret weapon: The Event Loop.
     </p>,
-    <Grid key="2" cols={2} gap={6} className="my-8">
-      <Card title="The Call Stack">
-        The V8 engine's execution context. Functions are pushed on top and
-        popped off when they return. If a function takes 5 seconds to compute,
-        it "blocks the main thread."
-      </Card>
-      <Card title="Web / Node APIs">
-        C++ background threads provided by the browser (or Node's libuv). This
-        is where <code>setTimeout</code>, <code>fetch</code>, and database I/O
-        actually happen concurrently.
-      </Card>
-      <Card title="Microtask Queue">
-        The VIP line. Promises (<code>.then()</code>, <code>await</code>) and{" "}
-        <code>queueMicrotask</code> queue their callbacks here. High priority.
-      </Card>
-      <Card title="Macrotask Queue">
-        The regular line. <code>setTimeout</code>, <code>setInterval</code>, and
-        DOM events queue their callbacks here.
-      </Card>
-    </Grid>,
-    <h4 key="3" className="text-xl font-bold mb-4">
-      The Loop Algorithm
-    </h4>,
-    <ol
-      key="4"
-      className="list-decimal pl-6 space-y-2 mb-8 text-muted-foreground/90 font-medium"
-    >
-      <li>
-        Execute the synchronous code currently on the Call Stack until it is
-        empty.
-      </li>
-      <li>
-        If the Call Stack is empty, process <strong>ALL</strong> tasks in the{" "}
-        <strong>Microtask Queue</strong> until it is entirely empty.
-      </li>
-      <li>(Browser only) Render any UI updates to the screen.</li>
-      <li>
-        If the Call Stack remains empty, take exactly <strong>ONE</strong> task
-        from the <strong>Macrotask Queue</strong> and push it onto the Call
-        Stack.
-      </li>
-      <li>Repeat infinitely.</li>
-    </ol>,
-    <Callout key="5" type="warning" title="Event Loop Starvation">
-      If a Microtask recursively queues another Microtask (e.g., an infinite
-      Promise loop), the engine will never proceed to rendering the DOM or
-      executing Macrotasks. The browser tab will freeze!
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Asynchronous Dance
+    </h3>,
+    <Table
+      key="3"
+      headers={["Component", "Its Job", "The Metaphor"]}
+      rows={[
+        [
+          "The Call Stack",
+          "Executes Javascript functions line by line. It must ideally be completely empty at all times.",
+          "The Chef. He can only chop one tomato at a time. Never ask him to wait for water to boil."
+        ],
+        [
+          "Web APIs / C++ Libuv",
+          "The secret background workers. They handle the hard API fetching, file reading, and timers offline.",
+          "The Sous-Chefs. The Chef delegates boiling the water to them, and immediately goes back to chopping."
+        ],
+        [
+          "The Task Queue",
+          "When the Sous-Chef finishes boiling water, they drop a callback message into this queue.",
+          "The ticket window holding finished meal orders waiting to be served."
+        ],
+        [
+          "The Event Loop",
+          "An infinite C++ scanner. If the Call Stack is totally empty, it grabs the oldest message from the Task Queue and hands it to the Call Stack.",
+          "The constantly spinning conveyor belt seamlessly feeding new tasks to the Chef."
+        ]
+      ]}
+    />,
+    <Callout key="4" type="danger" title="The Golden Rule">
+      Never Block The Main Thread. If you run a massive mathematically intense <code>{"for(let i = 0; i < 1 billion; i++)"}</code> loop calculating prime numbers, the Call Stack sits occupied. The Event Loop physically cannot push finished network responses up to the Chef. The server times out and crashes. Always offload heavy CPU math to Worker Threads.
     </Callout>,
   ],
 };

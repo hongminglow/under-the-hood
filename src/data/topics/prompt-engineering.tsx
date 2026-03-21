@@ -2,7 +2,6 @@ import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Table } from "@/components/ui/Table";
 
 export const promptEngineeringTopic: Topic = {
@@ -14,104 +13,56 @@ export const promptEngineeringTopic: Topic = {
   icon: "MessageSquareCode",
   content: [
     <p key="1">
-      The same LLM can give wildly different outputs depending on{" "}
-      <strong>how you ask</strong>. Prompt engineering is the practice of
-      structuring inputs to reliably extract high-quality, accurate, and
-      format-compliant outputs from language models.
+      Modern prompting is shifting from "vague prose" to <strong>Programmatic Engineering</strong>. It is the process of manipulating the model's internal <strong>Self-Attention</strong> and <strong>KV Cache</strong> to produce deterministic, high-quality, and structured results.
+    </p>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      From Prose to DSPy (Programmatic)
+    </h3>,
+    <p key="3" className="mb-4">
+      The future of prompting isn't hand-writing text. It's <strong>Optimization</strong>.
     </p>,
     <Table
-      key="2"
-      headers={["Pattern", "Technique", "When to Use"]}
+      key="4"
+      headers={["Technique", "Physical Action", "The 'Why'"]}
       rows={[
-        [
-          "Zero-Shot",
-          "Ask directly, no examples",
-          "Simple tasks the model already knows well",
-        ],
-        [
-          "Few-Shot",
-          "Provide 2-5 examples in the prompt",
-          "Classification, formatting, style matching",
-        ],
-        [
-          "Chain-of-Thought (CoT)",
-          '"Think step by step"',
-          "Math, logic, multi-step reasoning",
-        ],
-        [
-          "System Prompt",
-          "Set role, constraints, output format",
-          "Every production application",
-        ],
-        [
-          "Self-Consistency",
-          "Generate multiple answers, pick majority",
-          "Reducing hallucinations on hard questions",
-        ],
-        [
-          "ReAct",
-          "Reason + Act in alternating steps",
-          "Agent workflows with tool use",
-        ],
+        ["Chain-of-Thought", "Forces the model to 'write its scratchpad' before the final answer.", "Prevents the model from 'blurt-guessing' the first token."],
+        ["Self-Consistency", "Generate 5 variations of an answer; select the one with the most 'Votes'.", "Eliminates random statistical outliers in reasoning."],
+        ["DSPy (Framework)", "Define a <strong>Signature</strong> (Input/Output). The framework 'Compiles' the best prompt.", "Removes the need for 'Manual Tweaking' of words."]
       ]}
     />,
-    <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="Few-Shot Prompting">
-        <CodeBlock
-          language="text"
-          title="Classification Example"
-          code={`Classify the sentiment:
-
-"Love this product!" → Positive
-"Worst purchase ever" → Negative
-"It's okay I guess" → Neutral
-
-"The battery life is incredible!" → `}
-        />
-      </Card>
-      <Card title="Chain-of-Thought">
-        <CodeBlock
-          language="text"
-          title="Reasoning Example"
-          code={`Q: If a store has 3 apples and
-gets 2 shipments of 5 apples each,
-how many apples total?
-
-A: Let me think step by step:
-- Start with 3 apples
-- 2 shipments × 5 apples = 10
-- Total: 3 + 10 = 13 apples`}
-        />
-      </Card>
-    </Grid>,
-    <Grid key="4" cols={2} gap={6} className="mb-8">
-      <Card title="Structured Output">
-        <p className="text-sm">
-          Force JSON output: "Respond ONLY with valid JSON matching this schema:
-          ..." or use OpenAI's{" "}
-          <code>
-            response_format: {"{"} type: "json_object" {"}"}
-          </code>
-          . For complex schemas, use <strong>Zod + structured outputs</strong>{" "}
-          to validate at the API level.
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      The Precision Layer: Sampling Parameters
+    </h3>,
+    <Grid key="6" cols={2} gap={6} className="my-8">
+      <Card title="Temperature (0 to 1)">
+        <p className="text-sm text-muted-foreground mb-2">
+          Controls the <strong>Softmax</strong> randomness.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          T=0 is 'Greedy' (always picks the #1 most likely word). T=0.8 is 'Creative' (picks from a wider distribution).
         </p>
       </Card>
-      <Card title="System Prompt Best Practices">
-        <p className="text-sm">
-          <strong>1.</strong> Define the role ("You are a senior code
-          reviewer"). <strong>2.</strong> Set constraints ("Never reveal
-          internal data"). <strong>3.</strong> Specify output format ("Respond
-          in markdown with code blocks"). <strong>4.</strong> Handle edge cases
-          ("If unsure, say 'I don't know'").
+      <Card title="Top-P (Nucleus Sampling)">
+        <p className="text-sm text-muted-foreground mb-2">
+          Limits the vocabulary based on <strong>Probability Mass</strong>.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          Top-P=0.9 means the model only considers the smallest set of words whose collective probability is 90%.
         </p>
       </Card>
     </Grid>,
-    <Callout key="5" type="tip" title="The Meta-Prompt Trick">
-      When a prompt isn't working, ask the LLM to{" "}
-      <strong>improve the prompt itself</strong>: "You are a prompt engineering
-      expert. Rewrite this prompt to be clearer and produce more accurate
-      results: [your prompt]". LLMs are surprisingly good at optimizing their
-      own instructions.
+    <h3 key="7" className="text-xl font-bold mt-8 mb-4">
+      Treating Prompts as Code: LMEval
+    </h3>,
+    <p key="8" className="mb-4">
+      In production, you never "just ship" a prompt. You must <strong>Benchmarking</strong> it against a dataset.
+    </p>,
+    <ul className="list-disc pl-5 mb-8 text-sm space-y-2">
+      <li><strong>Golden Dataset:</strong> A collection of "Perfect" (Input/Output) pairs to test new prompt versions.</li>
+      <li><strong>Assertion Testing:</strong> Using <code>Zod</code> or <code>Instructor</code> to guarantee that the prompt output matches a strict JSON schema.</li>
+    </ul>,
+    <Callout key="9" type="tip" title="Context Management">
+      As you add more <strong>Few-Shot Examples</strong>, the <strong>Prompt Latency</strong> increases. Each token in the prompt must be cross-referenced with every other token. For production speed, use only the <strong>3 most relevant</strong> examples found via RAG.
     </Callout>,
   ],
 };

@@ -1,66 +1,39 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
+import { Card } from "@/components/ui/Card";
 import { Callout } from "@/components/ui/Callout";
-import { Table } from "@/components/ui/Table";
 
 export const monolithVsMicroservicesTopic: Topic = {
   id: "monolith-vs-microservices",
-  title: "Monolith vs Microservices: The Debate",
+  title: "Monolith vs Microservices",
   description:
-    "The eternal architecture war: Amazon proves microservices scale, but Prime Video migrated back to a monolith. Who's right?",
-  tags: ["architecture", "debate", "system-design", "interview"],
-  icon: "Blocks",
+    "The eternal architectural debate: Keep everything in one big box, or chop it into 50 tiny ones?",
+  tags: ["architecture", "backend", "scale"],
+  icon: "Maximize",
   content: [
     <p key="1">
-      In 2023, <strong>Amazon Prime Video</strong> reduced costs by{" "}
-      <strong>90%</strong> migrating a microservices architecture <em>back</em>{" "}
-      to a monolith. The truth? <strong>Both are valid</strong> — the decision
-      depends on team size, domain complexity, and deployment needs.
+      Every single billion-dollar startup begins its life as a <strong>Majestic Monolith</strong>. The API, the database access, the HTML rendering, and the cron jobs are all glued together inside one gigantic NodeJS or Ruby on Rails codebase. Everything functions incredibly fast, and developers can visually trace any bug instantly across the whole codebase in VS Code.
     </p>,
-    <Table
-      key="2"
-      headers={["Dimension", "Monolith", "Microservices"]}
-      rows={[
-        ["Deployment", "Single atomic deploy", "Independent per-service"],
-        [
-          "Data Consistency",
-          "ACID transactions",
-          "Eventual consistency (Saga)",
-        ],
-        ["Debugging", "Single stack trace", "Distributed tracing required"],
-        ["Latency", "In-process calls (~ns)", "Network calls (~ms)"],
-        [
-          "Team Scaling",
-          "Hard beyond ~15 devs",
-          "Teams own services independently",
-        ],
-        ["Operational Cost", "One pipeline", "N pipelines, K8s, service mesh"],
-        ["Failure Blast Radius", "Entire app down", "Single service isolated"],
-      ]}
-    />,
-    <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="The Modular Monolith: Third Way">
-        <p className="text-sm">
-          Structure code into <strong>well-defined modules</strong> with strict
-          boundaries — but deploy as one unit. Shopify runs this at massive
-          scale. Extract modules to services only when needed.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      When The Monolith Fails
+    </h3>,
+    <p key="3" className="mb-4">
+      If a Monolith is so fast and elegant, why does the tech industry violently transition into complex Microservices?
+    </p>,
+    <Grid key="4" cols={2} gap={6} className="my-8">
+      <Card title="The 'Blast Radius'" description="One bug kills everything">
+        <p className="text-sm text-muted-foreground">
+          In a Monolith, if Junior Dev #4 accidentally writes a `while(true)` loop inside a totally obscure API endpoint for generating PDF receipts, the CPU spikes to 100%. The entire server violently crashes. Suddenly, nobody in the world can even log in! 
         </p>
       </Card>
-      <Card title="The Senior Interview Answer">
-        <p className="text-sm">
-          "Start monolith, extract microservices when you hit a specific scaling
-          wall." Never advocate microservices without a{" "}
-          <strong>concrete business requirement</strong> justifying the
-          distributed overhead.
+      <Card title="The Code Conflict" description="Developer Overlap">
+        <p className="text-sm text-muted-foreground">
+          When you have 300 developers pushing code to exactly one GitHub repository 50 times a day, the CI tests start taking 3 hours to compile. A tiny font change on the Homepage gets stuck waiting for the heavy Database Migration tests to clear.
         </p>
       </Card>
     </Grid>,
-    <Callout key="4" type="warning" title="Conway's Law">
-      Your system architecture will mirror your organization's communication
-      structure. A 5-person team using microservices creates unnecessary
-      overhead. A 500-person org using a monolith creates deployment
-      bottlenecks. <strong>Match architecture to team structure.</strong>
+    <Callout key="5" type="warning" title="The Netflix Delusion">
+      Junior developers often watch a Netflix conference talk and immediately try to build their brand new to-do list MVP using 8 Kubernetes microservices. Netflix has 10,000 engineers. Microservices introduce agonizing distributed networking bugs, extreme debugging complexity, and intense data synchronization issues. Build a Monolith until it physically breaks!
     </Callout>,
   ],
 };

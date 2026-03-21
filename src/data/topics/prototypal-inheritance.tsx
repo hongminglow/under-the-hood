@@ -13,16 +13,30 @@ export const prototypalInheritanceTopic: Topic = {
   icon: "GitBranch",
   content: [
     <p key="1">
-      Unlike Java or C++ where objects are instances of <em>classes</em>,
-      JavaScript objects inherit directly from <strong>other objects</strong>{" "}
-      via the <strong>prototype chain</strong>. When you access a property on an
-      object, JavaScript looks at the object first, then walks up the prototype
-      chain until it finds the property or reaches <code>null</code>.
+      Prototypal Inheritance is JavaScript's implementation of <strong>Object Delegation</strong>. Unlike Classical inheritance (Java/C++), where classes are blueprints, JS objects are linked directly to other objects in a recursive hierarchy known as the <strong>Prototype Chain</strong>.
     </p>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      Prototype vs. __proto__
+    </h3>,
+    <p key="3" className="mb-4">
+      The most common confusion is between <code>prototype</code> and <code>__proto__</code>.
+    </p>,
+    <Grid key="4" cols={2} gap={6} className="my-8">
+      <Card title="prototype">
+        <p className="text-sm text-muted-foreground mb-2">
+          <strong>The Blueprint:</strong> Only exists on functions. It's the object that will become the <code>__proto__</code> of any instance created with <code>new</code>.
+        </p>
+      </Card>
+      <Card title="__proto__">
+        <p className="text-sm text-muted-foreground mb-2">
+          <strong>The Link:</strong> Exists on every object. It points to the object's parent in the chain. Modern JS recommends using <code>Object.getPrototypeOf()</code> instead.
+        </p>
+      </Card>
+    </Grid>,
     <CodeBlock
-      key="2"
+      key="5"
       language="javascript"
-      title="The Prototype Chain"
+      title="The Delegation Chain"
       code={`const animal = {
   speak() { return \`\${this.name} makes a sound\`; }
 };
@@ -31,59 +45,20 @@ const dog = Object.create(animal); // dog.__proto__ === animal
 dog.name = "Rex";
 dog.bark = function() { return "Woof!"; };
 
-dog.bark();  // → "Woof!"        (found on dog itself)
-dog.speak(); // → "Rex makes a sound" (found on animal via __proto__)
-dog.toString(); // found on Object.prototype (top of chain)
-
-// Chain: dog → animal → Object.prototype → null`}
+dog.bark();  // → "Woof!" (found on dog)
+dog.speak(); // → "Rex makes a sound" (found on animal via __proto__)`}
     />,
-    <h4 key="3" className="text-xl font-bold mt-8 mb-4">
-      Classes Are Syntactic Sugar
-    </h4>,
-    <Grid key="4" cols={2} gap={6} className="mb-8">
-      <Card title="ES6 class (Sugar)">
-        <CodeBlock
-          language="javascript"
-          title="What You Write"
-          code={`class Dog extends Animal {
-  constructor(name) {
-    super(name);
-  }
-  bark() { return "Woof!"; }
-}`}
-        />
-      </Card>
-      <Card title="What JS Actually Does">
-        <CodeBlock
-          language="javascript"
-          title="Under the Hood"
-          code={`function Dog(name) {
-  Animal.call(this, name);
-}
-Dog.prototype = Object.create(
-  Animal.prototype
-);
-Dog.prototype.bark = function() {
-  return "Woof!";
-};`}
-        />
-      </Card>
-    </Grid>,
-    <Callout key="5" type="info" title="The Interview Distinction">
-      <strong>Classical inheritance</strong> (Java): objects are instances of
-      classes; classes extend other classes.{" "}
-      <strong>Prototypal inheritance</strong> (JS): objects delegate to other
-      objects via <code>[[Prototype]]</code> links. ES6 <code>class</code>{" "}
-      syntax looks classical but{" "}
-      <strong>it's still prototypes underneath</strong>. This distinction is
-      tested in every senior JS interview.
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      Zero-Prototype Objects
+    </h3>,
+    <p key="7" className="mb-4">
+      Sometimes you want a "Pure" object with absolutely no built-in methods (like <code>toString</code> or <code>hasOwnProperty</code>). You can create one with <code>Object.create(null)</code>.
+    </p>,
+    <Callout key="8" type="tip" title="Why use Object.create(null)?">
+      It's great for <strong>Hash Maps</strong> and performance-critical dictionaries. Because there's no prototype chain, the JS engine doesn't have to check for inherited properties, preventing accidental bugs with keys like "toString".
     </Callout>,
-    <Callout key="6" type="warning" title="Performance Pitfall">
-      Adding methods directly to instances (<code>this.bark = function...</code>
-      ) creates a <strong>new function per instance</strong>. Adding them to the
-      prototype (<code>Dog.prototype.bark</code>) shares{" "}
-      <strong>one function across all instances</strong>. With 10,000 instances,
-      that's 10,000 vs 1 function in memory.
+    <Callout key="9" type="warning" title="Classes Are Syntactic Sugar">
+      ES6 <code>class</code> syntax is just a wrapper for prototypes. If you run <code>typeof MyClass</code>, it returns <code>"function"</code>. Under the hood, it's still manipulating <code>MyClass.prototype</code>.
     </Callout>,
   ],
 };

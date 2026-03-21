@@ -1,74 +1,42 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
-import { Step } from "@/components/ui/Step";
 import { Callout } from "@/components/ui/Callout";
 
 export const viteVsWebpackTopic: Topic = {
   id: "vite-vs-webpack",
   title: "Vite vs Webpack",
   description:
-    "How native ES Modules (ESM) and esbuild utterly destroyed the slow, monolithic Javascript bundler era.",
-  tags: ["frontend", "tooling", "devops", "javascript"],
+    "Why your React server used to take 45 seconds to start, and why Vite starts in 100 milliseconds.",
+  tags: ["frontend", "performance", "architecture"],
   icon: "Zap",
   content: [
     <p key="1">
-      For years, <strong>Webpack</strong> was the undisputed king of frontend
-      tooling. But as JavaScript apps grew massive, Webpack's development server
-      started taking 30+ seconds to spin up, and 5 seconds to reflect a simple
-      CSS change. <strong>Vite</strong> changed the fundamental paradigm of how
-      code is served during development.
+      For years, developers accepted that saving a file in React meant waiting 15 seconds for the browser to refresh. Webpack was the enterprise standard, but it slowly strangled productivity. Then Vite arrived and mathematically changed the entire paradigm of local development.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      The Webpack Architecture (Bundle First)
-    </h4>,
-    <p key="3" className="mb-4">
-      Before Webpack can serve your application locally, it crawls your{" "}
-      <em>entire</em>
-      source code, resolves every single `import`, and bundles thousands of
-      files into a few massive JavaScript files. If your app has 2,000 modules,
-      you wait for all 2,000 to be bundled before you can see the home page.
-    </p>,
-    <h4 key="4" className="text-xl font-bold mt-8 mb-4">
-      The Vite Architecture (Native ESM)
-    </h4>,
-    <p key="5" className="mb-4">
-      Vite relies on the fact that modern browsers natively understand ES
-      Modules (<code>&lt;script type="module"&gt;</code>). It divides your app
-      into two categories:
-    </p>,
-    <Grid key="6" cols={2} gap={6} className="mb-8">
-      <Card title="Dependencies (Node_Modules)">
-        Vite aggressively pre-bundles massive dependencies (like React or
-        Lodash) using <strong>esbuild</strong> — a bundler written in Go that is
-        10-100x faster than JavaScript-based bundlers. It does this once and
-        caches it.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Paradigm Shift
+    </h3>,
+    <Grid key="3" cols={2} gap={6} className="my-8">
+      <Card title="Webpack (The Monolithic Builder)">
+        <p className="text-sm text-muted-foreground mb-2">
+          When you run <code>npm start</code>, Webpack must physically crawl every single Javascript file, every CSS file, and every image in your entire 10,000-file project. 
+        </p>
+        <p className="text-sm text-muted-foreground">
+          It then mashes them all together into massive bundle files before it can even turn the local server on. This is why enormous legacy projects can take minutes to boot.
+        </p>
       </Card>
-      <Card title="Source Code">
-        Vite does <strong>not</strong> bundle your source code. When the browser
-        requests the `Home.tsx` file, Vite transforms only that file (stripping
-        TS and JSX) and sends it. It exclusively loads the exact files requested
-        by the current URL.
+      <Card title="Vite (The Native ES Module Server)">
+        <p className="text-sm text-muted-foreground mb-2">
+          Vite skips bundling entirely during development. It leverages modern browser support for <code>import x from './y'</code> directly in the HTML.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          When you load a page, the browser asks Vite for only the exact files needed for the current screen. Vite instantly serves those untouched, raw Javascript files. The server boots in 100ms because it isn't doing any bundling math.
+        </p>
       </Card>
     </Grid>,
-    <h4 key="7" className="text-xl font-bold mt-8 mb-4">
-      Hot Module Replacement (HMR)
-    </h4>,
-    <Step key="8" index={1}>
-      <strong>Webpack:</strong> Rebuilds the bundle. The larger the app, the
-      slower the HMR update.
-    </Step>,
-    <Step key="9" index={2}>
-      <strong>Vite:</strong> Directly invalidates a single module's cache.
-      Regardless of whether your app has 10 components or 10,000, Vite HMR
-      updates the screen in milliseconds.
-    </Step>,
-    <Callout key="10" type="info" title="Production Builds">
-      Keep in mind that Vite still completely bundles your app for{" "}
-      <em>Production</em>
-      (currently using Rollup). Shipping a thousand unbundled Native ESM files
-      over the network to a real user would cause hundreds of slow HTTP
-      round-trips.
+    <Callout key="4" type="tip" title="Production Builds">
+      Vite still bundles your code for Production! It uses Rollup under the hood to ensure everything is minified and compressed. The magic of Vite is exclusively heavily focused on making the local Developer Experience lightning fast.
     </Callout>,
   ],
 };

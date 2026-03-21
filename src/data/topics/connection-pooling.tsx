@@ -1,100 +1,66 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Table } from "@/components/ui/Table";
+import { Callout } from "@/components/ui/Callout";
 
 export const connectionPoolingTopic: Topic = {
   id: "connection-pooling",
-  title: "Database Connection Pooling",
+  title: "Connection Pooling (PgBouncer)",
   description:
-    "Why opening a new database connection per request kills your server — and how connection pools solve it with pre-warmed sockets.",
-  tags: ["databases", "performance", "backend", "node"],
-  icon: "Plug",
+    "How to organically stop 10,000 aggressive API requests from violently shattering your database's strict TCP limits.",
+  tags: ["database", "backend", "performance"],
+  icon: "Cable",
   content: [
     <p key="1">
-      Opening a database connection involves a <strong>TCP handshake</strong>,
-      <strong> TLS negotiation</strong>, and{" "}
-      <strong>authentication exchange</strong> — costing{" "}
-      <strong>20–100ms</strong> each time. Under 100 requests/second, that's 100
-      new connections competing for database resources. PostgreSQL's default
-      limit is <strong>100 connections</strong>. You're dead.
+      Connection Pooling is a <strong>Resource Management Strategy</strong> designed to solve a fundamental architectural bottleneck: PostgreSQL's <strong>Process-per-Connection</strong> model.
     </p>,
-    <p key="2" className="mt-4 mb-8">
-      A <strong>Connection Pool</strong> opens N connections at startup and{" "}
-      <strong>reuses them</strong>. When your code needs a connection, the pool
-      lends one out. When done, the connection returns to the pool — never
-      closed, never reopened.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Overhead of a New Connection
+    </h3>,
+    <p key="3" className="mb-4">
+      Every time a client connects to Postgres, the database must <code>fork()</code> a brand new OS process. This consumes ~10MB of RAM immediately and requires a heavy TLS 1.3 handshake. Doing this 1,000 times per second will melt your CPU.
     </p>,
-    <CodeBlock
-      key="3"
-      language="typescript"
-      title="Node.js Pool vs No Pool"
-      code={`// ❌ Without pool: new connection per query (~50ms overhead each)
-import { Client } from 'pg';
-async function getUser(id: string) {
-  const client = new Client();    // TCP + TLS + Auth = 50ms
-  await client.connect();
-  const result = await client.query('SELECT * FROM users WHERE id = $1', [id]);
-  await client.end();             // Connection destroyed
-  return result.rows[0];
-}
-
-// ✅ With pool: reuse pre-warmed connections (~0ms overhead)
-import { Pool } from 'pg';
-const pool = new Pool({ max: 20 }); // 20 connections, pre-warmed
-async function getUser(id: string) {
-  const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
-  return result.rows[0];           // Connection auto-returned to pool
-}`}
-    />,
-    <Table
-      key="4"
-      headers={["Setting", "Too Low", "Too High"]}
-      rows={[
-        [
-          "Pool Size",
-          "Requests queue up waiting for a connection",
-          "Database overwhelmed, context switching overhead",
-        ],
-        [
-          "Idle Timeout",
-          "Connections die too fast, re-opened constantly",
-          "Stale connections consume DB resources",
-        ],
-        [
-          "Connection Lifetime",
-          "Frequent reconnects, instability",
-          "Connections never refresh, memory leaks accumulate",
-        ],
-      ]}
-    />,
-    <Grid key="5" cols={2} gap={6} className="my-8">
-      <Card title="Serverless Connection Problem">
-        <p className="text-sm">
-          Each Lambda/Cloud Function cold-start opens a{" "}
-          <strong>new connection</strong>. 1000 concurrent Lambdas = 1000
-          connections. Solutions: <strong>RDS Proxy</strong> (AWS),{" "}
-          <strong>PgBouncer</strong>, or <strong>Prisma Accelerate</strong> —
-          external poolers between serverless functions and the database.
+    <Grid key="4" cols={2} gap={6} className="my-8">
+      <Card title="Without Pooling">
+        <p className="text-sm text-muted-foreground mb-2">
+          Your app opens and closes a TCP socket for every single <code>SELECT</code>.
         </p>
+        <p className="text-sm text-red-500 font-bold">Latency: High (+50ms per query)</p>
       </Card>
-      <Card title="Pool Size Formula">
-        <p className="text-sm">
-          PostgreSQL recommends:{" "}
-          <code>pool_size = (core_count * 2) + effective_spindle_count</code>.
-          For a 4-core SSD server: <strong>~10 connections</strong>.
-          Counter-intuitive — more connections means more lock contention and
-          context switching.
+      <Card title="With PgBouncer">
+        <p className="text-sm text-muted-foreground mb-2">
+          A tiny C daemon maintains a "warm" pool of connections. Your app talks to PgBouncer instantly.
         </p>
+        <p className="text-sm text-green-500 font-bold">Latency: Ultra-Low (&lt;1ms per query)</p>
       </Card>
     </Grid>,
-    <Callout key="6" type="warning" title="The Connection Leak Bug">
-      If your code acquires a connection but <strong>never releases it</strong>{" "}
-      (e.g., an error thrown before <code>client.release()</code>), the pool
-      drains to zero and all subsequent requests hang forever. Always use{" "}
-      <code>try/finally</code> or the pool's auto-release query method.
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      Pooling Modes (PgBouncer)
+    </h3>,
+    <Table
+      key="6"
+      headers={["Mode", "How it Works", "Trade-off"]}
+      rows={[
+        [
+          "Session Mode",
+          "The connection is locked to 1 client until they disconnect.",
+          "Safest, but inefficient for high-concurrency apps."
+        ],
+        [
+          "Transaction Mode",
+          "The connection is returned to the pool as soon as a <code>COMMIT</code> is sent.",
+          "Highest throughput. Does not support <code>SET</code> or <code>LISTEN/NOTIFY</code>."
+        ],
+        [
+          "Statement Mode",
+          "The connection is returned after every single query.",
+          "Extreme scaling, but breaks multi-query transactions entirely."
+        ]
+      ]}
+    />,
+    <Callout key="7" type="warning" title="The Serverless Challenge">
+      In <strong>AWS Lambda</strong> or <strong>Vercel</strong>, functions are ephemeral. If 1,000 Lambdas fire at once, they can't "share" a pool in-memory. You <strong>MUST</strong> use an external proxy like <strong>Supabase Connection Pooler</strong> or <strong>AWS RDS Proxy</strong> to act as a global traffic controller.
     </Callout>,
   ],
 };

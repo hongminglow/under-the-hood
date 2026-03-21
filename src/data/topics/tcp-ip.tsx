@@ -1,85 +1,65 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
-import { CodeBlock } from "@/components/ui/CodeBlock";
-import { Highlight } from "@/components/ui/Highlight";
-import { Callout } from "@/components/ui/Callout";
-import { Step } from "@/components/ui/Step";
+import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
+import { Callout } from "@/components/ui/Callout";
 
 export const tcpIpTopic: Topic = {
   id: "tcp-ip",
   title: "TCP 3-Way Handshake",
   description:
-    "The core synchronization mechanism for establishing full-duplex transmission control.",
-  tags: ["tcp", "protocols", "low-level"],
+    "Why starting a database connection or API request takes time before data even starts moving.",
+  tags: ["networking", "tcp", "latency", "backend"],
   icon: "Zap",
   content: [
     <p key="1">
-      The <strong>TCP three-way handshake</strong> is the fundamental process
-      for setting up a connection. It's essentially a protocol for synchronizing
-      sequence numbers and ensuring reliability before data flows.
+      TCP (Transmission Control Protocol) is the <strong>Reliability Layer</strong> of the internet. It ensures that every byte of your API data arrives in order, without corruption, even if the underlying physical network is unreliable.
     </p>,
-    <Card
-      key="2"
-      title="Handshake Mechanism"
-      description="SYN -> SYN-ACK -> ACK"
-    >
-      This 3-step sequence prevents stale connection attempts from confusing the
-      server and allows both sides to agree on their{" "}
-      <strong>Initial Sequence Numbers (ISN)</strong>.
-    </Card>,
-    <h4 key="3" className="text-xl font-bold mt-8 mb-4">
-      Implementation Steps
-    </h4>,
-    <p key="4">
-      Modern network stacks perform this synchronization in the kernel before
-      your application ever sees the connection.
-    </p>,
-    <Step key="5" index={1}>
-      <strong>Client -&gt; Server (SYN):</strong> The client picks a random ISN
-      and sends a packet with the SYN flag set.
-    </Step>,
-    <Step key="6" index={2}>
-      <strong>Server -&gt; Client (SYN-ACK):</strong> The server increments the
-      client's ISN, chooses its own ISN, and sends back a packet with both SYN
-      and ACK flags.
-    </Step>,
-    <Step key="7" index={3}>
-      <strong>Client -&gt; Server (ACK):</strong> The client increments the
-      server's ISN and sends a final ACK. The socket state now transitions to{" "}
-      <Highlight variant="primary">ESTABLISHED</Highlight>.
-    </Step>,
-    <Callout key="8" type="tip" title="Sequence Entropy">
-      Operating systems shift ISNs over time using cryptographic salts to
-      protect against sequence prediction (TCP injection) attacks.
-    </Callout>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Protocol Hierarchy: OSI Context
+    </h3>,
     <Table
-      key="9"
-      headers={["Flag", "Full Name", "Description"]}
+      key="3"
+      headers={["Layer", "Name", "Role in Your App"]}
       rows={[
-        [
-          "SYN",
-          "Synchronize",
-          "Initiates connection & synchronizes sequence numbers.",
-        ],
-        [
-          "ACK",
-          "Acknowledgment",
-          "Confirms receipt of a packet and sequence number.",
-        ],
-        ["FIN", "Finish", "Request to gracefully terminate the connection."],
-        [
-          "RST",
-          "Reset",
-          "Aborts the connection due to errors or port unavailability.",
-        ],
+        ["Layer 7", "Application", "HTTP/REST, GraphQL, gRPC (The JSON)."],
+        ["Layer 4", "Transport", "<strong>TCP</strong> (Ordering, Retries, Flow Control)."],
+        ["Layer 3", "Network", "IP (Routing packets across routers)."],
+        ["Layer 2", "Data Link", "Ethernet/Wi-Fi (Physical bit transfer)."]
       ]}
     />,
-    <CodeBlock
-      key="10"
-      title="Packet Flag Inspection (tcpdump)"
-      language="bash"
-      code={`# SYN\nIP 192.168.1.10.1234 > 192.168.1.20.80: Flags [S], seq 1234567\n# SYN-ACK\nIP 192.168.1.20.80 > 192.168.1.10.1234: Flags [S.], seq 9876543, ack 1234568\n# ACK\nIP 192.168.1.10.1234 > 192.168.1.20.80: Flags [.], ack 9876544`}
-    />,
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      The 3-Way Handshake (Latency Cost)
+    </h3>,
+    <p key="5" className="mb-4 text-sm text-muted-foreground">
+      Every TCP connection starts with a "Hello" phase. This explains why first-time DB connections feel slow.
+    </p>,
+    <Grid key="6" cols={3} gap={4} className="my-8">
+      <Card title="1. SYN">
+        <p className="text-xs">Client → Server</p>
+        <p className="text-xs italic mt-2">"Is anyone there? Let's sync sequence numbers."</p>
+      </Card>
+      <Card title="2. SYN-ACK">
+        <p className="text-xs">Server → Client</p>
+        <p className="text-xs italic mt-2">"I hear you. Synchronizing back. Acknowledged!"</p>
+      </Card>
+      <Card title="3. ACK">
+        <p className="text-xs">Client → Server</p>
+        <p className="text-xs italic mt-2">"Copy that. I'm connected. Sending data now!"</p>
+      </Card>
+    </Grid>,
+    <h3 key="7" className="text-xl font-bold mt-8 mb-4">
+      Under the Hood: Flow & Congestion Control
+    </h3>,
+    <p key="8" className="mb-4">
+      TCP isn't just about sending data; it's about <strong>protecting the network</strong>.
+    </p>,
+    <ul key="9" className="list-disc pl-5 text-sm text-muted-foreground space-y-2">
+      <li><strong>Sliding Window (Flow Control):</strong> The receiver tells the sender exactly how much data it can buffer. If the client is slow, the server physically slows down its transmission.</li>
+      <li><strong>Slow Start (Congestion Control):</strong> TCP starts by sending a tiny bit of data, then doubles the speed every successful trip. It "probes" the network until a packet is dropped, then immediately cuts its speed in half.</li>
+    </ul>,
+    <Callout key="10" type="warning" title="Head-of-Line (HoL) Blocking">
+      In TCP, if Packet #2 is lost, Packets #3, #4, and #5 must wait in the buffer even if they arrive perfectly. This is "HoL Blocking." Modern <strong>HTTP/3 (QUIC/UDP)</strong> solves this by allowing streams to be independent, so one lost packet doesn't stall the entire connection.
+    </Callout>,
   ],
 };

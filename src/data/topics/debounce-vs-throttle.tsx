@@ -1,93 +1,61 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 
-export const debounceThrottleTopic: Topic = {
+export const debounceVsThrottleTopic: Topic = {
   id: "debounce-vs-throttle",
   title: "Debounce vs Throttle",
   description:
-    "The two most asked frontend performance interview questions: controlling how often expensive functions fire in response to rapid events.",
-  tags: ["javascript", "performance", "interview", "frontend"],
-  icon: "Timer",
+    "How to logically stop an impatient user from firing 50 identical heavy API requests globally by spamming their mouse cursor.",
+  tags: ["frontend", "javascript", "performance"],
+  icon: "Clock",
   content: [
     <p key="1">
-      When a user types in a search box, the <code>input</code> event fires on{" "}
-      <strong>every single keystroke</strong>. Sending an API call per keystroke
-      is wasteful. <strong>Debounce</strong> and <strong>Throttle</strong> are
-      two strategies to control how often a function executes — but they work
-      very differently.
+      Debouncing and Throttling are <strong>Rate-Limiting</strong> strategies used to prevent the main thread from being flooded by high-frequency events (scroll, resize, mousemove).
     </p>,
-    <Grid key="2" cols={2} gap={6} className="my-8">
-      <Card title="Debounce: Wait Until Calm">
-        <p className="text-sm mb-4">
-          <strong>Delays execution</strong> until the user{" "}
-          <strong>stops firing events</strong> for N milliseconds. If a new
-          event fires before the delay, the timer resets.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Logic Gates
+    </h3>,
+    <Table
+      key="3"
+      headers={["Strategy", "Mental Model", "Best For..."]}
+      rows={[
+        ["Debounce", "The <strong>Quiet Period</strong>. Executes <em>after</em> the user stops performing the action for X ms.", "Search inputs, Window resizing, Auto-save."],
+        ["Throttle", "The <strong>Paced Execution</strong>. Executes at most once every X ms, regardless of how many events fire.", "Infinite scroll, Scroll-based animations, Game loops."],
+        ["rAF", "The <strong>Browser Sync</strong>. Throttles execution to the browser's refresh rate (usually 60fps).", "Direct DOM manipulations, Canvas drawing."]
+      ]}
+    />,
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      Leading vs. Trailing Edge
+    </h3>,
+    <Grid key="5" cols={2} gap={6} className="my-8">
+      <Card title="Leading (Immediate)">
+        <p className="text-sm text-muted-foreground mb-2">
+          Executes the function <strong>immediately</strong> on the first click, then ignores all subsequent clicks for the duration.
         </p>
-        <CodeBlock
-          language="typescript"
-          title="Debounce Implementation"
-          code={`function debounce<T extends (...args: any[]) => void>(
-  fn: T,
-  delay: number
-): T {
-  let timer: ReturnType<typeof setTimeout>;
-  return ((...args: any[]) => {
-    clearTimeout(timer);  // Reset timer
-    timer = setTimeout(() => fn(...args), delay);
-  }) as T;
-}
-
-// Only fires 300ms AFTER user stops typing
-const search = debounce((query: string) => {
-  fetch(\`/api/search?q=\${query}\`);
-}, 300);
-
-input.addEventListener("input", (e) => {
-  search(e.target.value);
-});`}
-        />
+        <p className="text-xs italic text-muted-foreground">
+          Perfect for "Submit" buttons to prevent double-charging a credit card.
+        </p>
       </Card>
-      <Card title="Throttle: Max Frequency">
-        <p className="text-sm mb-4">
-          <strong>Limits execution</strong> to at most{" "}
-          <strong>once every N milliseconds</strong>. Events during the cooldown
-          are ignored, but the function fires at a steady rate.
+      <Card title="Trailing (Delayed)">
+        <p className="text-sm text-muted-foreground mb-2">
+          Waits for the events to stop, then executes the function <strong>once</strong> at the very end.
         </p>
-        <CodeBlock
-          language="typescript"
-          title="Throttle Implementation"
-          code={`function throttle<T extends (...args: any[]) => void>(
-  fn: T,
-  limit: number
-): T {
-  let inThrottle = false;
-  return ((...args: any[]) => {
-    if (!inThrottle) {
-      fn(...args);
-      inThrottle = true;
-      setTimeout(() => { inThrottle = false }, limit);
-    }
-  }) as T;
-}
-
-// Fires at most once per 100ms during scroll
-const onScroll = throttle(() => {
-  console.log(window.scrollY);
-}, 100);
-
-window.addEventListener("scroll", onScroll);`}
-        />
+        <p className="text-xs italic text-muted-foreground">
+          Standard for Search bars to ensure you only fetch once the user is done typing.
+        </p>
       </Card>
     </Grid>,
-    <Callout key="3" type="tip" title="When to Use Which?">
-      <strong>Debounce</strong> → search inputs, form validation, auto-save,
-      window resize calculations. You want the <strong>final value</strong>{" "}
-      after the user stops. <strong>Throttle</strong> → scroll handlers, mouse
-      move tracking, real-time game inputs. You want{" "}
-      <strong>regular updates during continuous action</strong>.
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      The React 'Closure' Trap
+    </h3>,
+    <p key="7" className="mb-4">
+      If you create a debounced function inside a React component without <code>useMemo</code>, a <strong>new closure</strong> is created on every render. This wipes the internal <code>timerID</code>, causing the debounce to fail.
+    </p>,
+    <Callout key="8" type="warning" title="Memory Leaks">
+      Always <strong>Cancel</strong> your timers on unmount. If a user types into a search bar and then immediately navigates away, the <code>setTimeout</code> may still fire, trying to update the state of a component that no longer exists (causing a memory leak or crash).
     </Callout>,
   ],
 };

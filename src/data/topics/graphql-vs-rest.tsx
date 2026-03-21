@@ -1,81 +1,53 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Table } from "@/components/ui/Table";
+import { Callout } from "@/components/ui/Callout";
 
 export const graphqlVsRestTopic: Topic = {
   id: "graphql-vs-rest",
   title: "GraphQL vs REST",
   description:
-    "Evolving API design from strict resource-based endpoints to flexible, consumer-driven queries.",
-  tags: ["api", "architecture", "graphql", "rest"],
-  icon: "Network",
+    "Why front-end engineers fell in love with a single endpoint, and backend engineers secretly hated it.",
+  tags: ["api-design", "architecture", "frontend"],
+  icon: "Database",
   content: [
     <p key="1">
-      APIs (Application Programming Interfaces) are how decoupled systems
-      communicate. For over a decade, <strong>REST</strong> (Representational
-      State Transfer) was the absolute standard. But modern data-intensive apps
-      birthed a new paradigm: <strong>GraphQL</strong>.
+      REST defines a strict, multi-endpoint architecture (`GET /users/5`, `GET /posts/12`). If a React developer building a complex dashboard needs the user's name AND their last 5 posts AND the comments, they suddenly have to make 7 separate slow API calls.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      REST: Resource-Centric
-    </h4>,
-    <p key="3">
-      In REST, everything revolves around resources identified by URLs. A single
-      conceptual entity (like a User) might require multiple HTTP requests to
-      fetch all its related data (Overfetching/Underfetching).
-    </p>,
-    <Grid key="4" cols={2} gap={4} className="mb-8 mt-4">
-      <CodeBlock
-        language="http"
-        code={`GET /users/123\n=> { id: 123, name: "Alice", email: "..." }`}
-      />
-      <CodeBlock
-        language="http"
-        code={`GET /users/123/posts\n=> [{ id: 1, title: "Hello World" }]`}
-      />
-    </Grid>,
-    <h4 key="5" className="text-xl font-bold mb-4">
-      GraphQL: Client-Centric
-    </h4>,
-    <p key="6">
-      Invented by Facebook to solve the mobile network crunch, GraphQL exposes a{" "}
-      <em>single endpoint</em> (`/graphql`). The client dictates exactly the
-      shape and size of the data it wants in a single request.
-    </p>,
-    <div key="7" className="mt-4">
-      <CodeBlock
-        language="graphql"
-        code={`query {
-  user(id: "123") {
-    name
-    posts {
-      title
-    }
-  }
-}`}
-      />
-    </div>,
-    <Grid key="8" cols={2} gap={6} className="mt-8">
-      <Card title="When to use REST">
-        <ul className="space-y-2 list-disc pl-4 mt-2 text-sm">
-          <li>Standardized architecture with HTTP-native caching.</li>
-          <li>File uploads and binary data are easier to handle.</li>
-          <li>Strict separation between microservices.</li>
-        </ul>
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Over-Fetching vs Under-Fetching War
+    </h3>,
+    <Table
+      key="3"
+      headers={["Problem", "REST Reality", "The GraphQL Fix"]}
+      rows={[
+        [
+          "Under-fetching",
+          "`GET /users` only returns IDs. The frontend must then fire 10 more loops to `GET /users/:id` to get names. (The N+1 Problem).",
+          "GraphQL asks for deeply nested data in exactly one single POST request to `/graphql`. Zero sequential waterfalls."
+        ],
+        [
+          "Over-fetching",
+          "`GET /movie/12` returns 900 fields of data, even though the mobile app only wanted the 'title'. Massive bandwidth waste.",
+          "The frontend explicitly dictates exactly which 2 fields it wants. The backend strictly trims the fat before sending."
+        ]
+      ]}
+    />,
+    <Grid key="4" cols={2} gap={6} className="my-8">
+      <Card title="The Frontend Utopia">
+        <p className="text-sm text-muted-foreground">
+          Frontend engineers dictate the entire data shape using declarative queries. They no longer have to beg backend teams to "please build a custom endpoint for my specific mobile screen."
+        </p>
       </Card>
-      <Card title="When to use GraphQL">
-        <ul className="space-y-2 list-disc pl-4 mt-2 text-sm">
-          <li>
-            Rapid frontend iteration (frontend devs don't need backend changes
-            for new data structures).
-          </li>
-          <li>
-            Aggregating data from multiple microservices into a unified graph.
-          </li>
-          <li>Heavily nested, interconnected data graphs.</li>
-        </ul>
+      <Card title="The Backend Nightmare">
+        <p className="text-sm text-muted-foreground">
+          Caching completely dies. REST caches perfectly on standard CDNs because `GET /users/5` is an immutable URL string. GraphQL sends everything wildly as unique POST bodies, destroying edge caches and forcing backend devs to build insanely complex 'DataLoader' systems to prevent their SQL database from catching fire.
+        </p>
       </Card>
     </Grid>,
+    <Callout key="5" type="tip" title="BFF Pattern (Backend for Frontend)">
+      Modern companies often stick to pure REST/gRPC for their core microservices, but build a tiny GraphQL translation layer purely to serve their React apps securely.
+    </Callout>,
   ],
 };

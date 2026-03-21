@@ -1,4 +1,6 @@
 import type { Topic } from "@/data/types";
+import { Card } from "@/components/ui/Card";
+import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 
@@ -6,64 +8,60 @@ export const websocketsTopic: Topic = {
   id: "websockets",
   title: "WebSockets & Real-Time",
   description:
-    "Moving beyond stateless HTTP request/response to persistent, bi-directional event streams.",
-  tags: ["networking", "realtime", "protocols"],
+    "How to keep a permanent, bi-directional pipe open between the browser and the server for instant communication.",
+  tags: ["networking", "real-time", "websockets", "backend"],
   icon: "Radio",
   content: [
     <p key="1">
-      Traditional HTTP is strictly unidirectional and stateless: the client
-      makes a request, the server responds, and the connection is closed. It is
-      incapable of letting the server push updates instantly to the client. This
-      birthed workarounds and eventually <strong>WebSockets</strong>.
+      WebSockets provide a <strong>Full-Duplex</strong>, persistent communication channel over a single TCP connection. Unlike HTTP's request-response model, WebSockets allow the server to push data to the client at any time, making it the industry standard for chat, live trading, and collaborative editing.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      Evolution of Real-Time Data
-    </h4>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Handshake: Upgrading HTTP
+    </h3>,
+    <p key="3" className="mb-4 text-sm text-muted-foreground">
+      Every WebSocket starts as a standard HTTP/1.1 request with specific headers that tell the server: "I'd like to change the rules of this connection."
+    </p>,
     <Table
-      key="3"
-      headers={["Technique", "Mechanism", "Downside"]}
+      key="4"
+      headers={["Header", "Value", "Purpose"]}
       rows={[
-        [
-          "Short Polling",
-          "setInterval HTTP requests every 5 seconds.",
-          "Massive overhead. Most responses are 'no new data', wasting resources.",
-        ],
-        [
-          "Long Polling",
-          "Server holds the HTTP connection open until data is ready, then closes it.",
-          "Complex to manage timeouts and scale connections.",
-        ],
-        [
-          "Server-Sent Events",
-          "A unidirectional persistent HTTP connection (Server -> Client only).",
-          "Client cannot easily push data back using the same stream.",
-        ],
-        [
-          "WebSockets (WS)",
-          "A persistent 1-to-1 duplex TCP connection.",
-          "Stateful; tricky to load balance across thousands of servers.",
-        ],
+        ["Connection", "Upgrade", "Tells the server to switch protocols."],
+        ["Upgrade", "websocket", "Specifies the target protocol."],
+        ["Sec-WebSocket-Key", "Base64 Nonce", "Prevents caching proxies from misinterpreting the request."],
+        ["101 Switching Protocols", "Response Code", "Server agrees to the upgrade. The TCP pipe is now a WebSocket."]
       ]}
     />,
-    <h4 key="4" className="text-xl font-bold mt-8 mb-4">
-      The WebSocket Protocol (RFC 6455)
-    </h4>,
-    <p key="5">
-      WebSockets aren't purely HTTP, but they gracefully downgrade. A WS
-      connection actually starts as a standard HTTP GET request with an{" "}
-      <code>Upgrade: websocket</code> header. If the server agrees, it responds
-      with a <code>101 Switching Protocols</code> status. From that moment on,
-      the HTTP protocol is abandoned, and a raw, bi-directional TCP tunnel is
-      left open for real-time framing.
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      Under the Hood: Data Framing
+    </h3>,
+    <p key="6" className="mb-4">
+      Once upgraded, data is sent in <strong>Frames</strong> rather than HTTP packets. A frame includes:
     </p>,
-    <div key="6" className="my-8">
-      <Callout type="tip" title="Are WebSockets Always The Best Choice?">
-        No! WebSockets are stateful, meaning maintaining millions of idle
-        concurrent connections requires significant RAM and sticky-session load
-        balancing layers. If you are building a Stock Ticker (Server updating
-        Clients), <strong>Server-Sent Events</strong> over HTTP/2 multiplexing
-        is often vastly superior and easier to scale.
-      </Callout>
-    </div>,
+    <ul key="7" className="list-disc pl-5 text-sm text-muted-foreground space-y-2">
+      <li><strong>FIN bit:</strong> Indicates if this is the final fragment of a message.</li>
+      <li><strong>Opcode:</strong> Defines the data type (Text, Binary, Close, Ping, Pong).</li>
+      <li><strong>Masking Key:</strong> All data from client to server <em>must</em> be XOR-masked to prevent "Cache Poisoning" in intermediate proxies.</li>
+    </ul>,
+    <Grid key="8" cols={2} gap={6} className="my-8">
+      <Card title="Heartbeats: Ping & Pong">
+        <p className="text-sm text-muted-foreground mb-2">
+          TCP connections can "silently" die if no data moves.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          WebSockets use <strong>Ping</strong> frames from the server and <strong>Pong</strong> replies from the client to ensure the "pipe" is still physically open. If a Pong is missed, the server closes the socket to save RAM.
+        </p>
+      </Card>
+      <Card title="Scaling: The Redis Factor">
+        <p className="text-sm text-muted-foreground mb-2">
+          WebSocket servers are <strong>Stateful</strong>.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          If User A is on Server 1 and User B is on Server 2, they can't chat! Solution: Use <strong>Redis Pub/Sub</strong> as a backbone. Server 1 publishes the message to Redis; all other servers listen and push it to their locally connected users.
+        </p>
+      </Card>
+    </Grid>,
+    <Callout key="9" type="danger" title="The 'Load Balancer' Trap">
+      Standard Load Balancers (L4) close connections frequently. For WebSockets, you must enable <strong>Sticky Sessions</strong> (Session Affinity) or use an L7 Proxy (Nginx/Envoy) that explicitly supports the <code>Upgrade</code> header.
+    </Callout>,
   ],
 };

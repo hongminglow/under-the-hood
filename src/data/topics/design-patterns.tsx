@@ -1,106 +1,49 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 
 export const designPatternsTopic: Topic = {
   id: "design-patterns",
-  title: "Essential Design Patterns",
+  title: "Design Patterns (GoF)",
   description:
-    "Time-tested, reusable solutions to recurring software design problems, from Singleton to Observer.",
-  tags: ["architecture", "oop", "patterns"],
-  icon: "Puzzle",
+    "The legendary blueprints of object-oriented programming that stop developers from reinventing the wheel.",
+  tags: ["architecture", "programming", "oop"],
+  icon: "Component",
   content: [
     <p key="1">
-      Design patterns are not copy-paste code snippets. They are{" "}
-      <strong>vocabulary</strong> for communicating proven architectural
-      solutions between engineers. The original 23 patterns were cataloged by
-      the "Gang of Four" (GoF) in 1994 and remain foundational today.
+      In 1994, four authors (The Gang of Four) wrote a book identifying 23 repeated architectural problems across all software engineering, and assigned strict vocabulary names to their proven solutions. 
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      Creational Patterns
-    </h4>,
-    <Grid key="3" cols={2} gap={6} className="mb-8">
-      <Card title="Singleton">
-        <p className="text-sm mb-2">
-          Guarantees only <strong>one instance</strong> of a class exists
-          globally (e.g., a database connection pool or a logger).
-        </p>
-        <CodeBlock
-          language="typescript"
-          code={`class DB {
-  private static instance: DB;
-  private constructor() {}
-  static getInstance() {
-    if (!DB.instance) DB.instance = new DB();
-    return DB.instance;
-  }
-}`}
-        />
-      </Card>
-      <Card title="Factory">
-        <p className="text-sm mb-2">
-          Delegates object creation to a factory function/class, decoupling the
-          caller from knowing the concrete class.
-        </p>
-        <CodeBlock
-          language="typescript"
-          code={`function createPayment(type: string) {
-  if (type === "stripe") return new StripePayment();
-  if (type === "paypal") return new PayPalPayment();
-  throw new Error("Unknown type");
-}`}
-        />
-      </Card>
-    </Grid>,
-    <h4 key="4" className="text-xl font-bold mt-8 mb-4">
-      Behavioral Patterns
-    </h4>,
-    <Grid key="5" cols={2} gap={6} className="mb-8">
-      <Card title="Observer (Pub/Sub)">
-        <p className="text-sm mb-2">
-          Objects <strong>subscribe</strong> to events and get notified when the
-          state changes. This is the backbone of reactive frameworks (React
-          state, Vue refs, RxJS).
-        </p>
-        <CodeBlock
-          language="typescript"
-          code={`const listeners = new Set<Function>();
-function subscribe(fn: Function) {
-  listeners.add(fn);
-}
-function notify(data: any) {
-  listeners.forEach(fn => fn(data));
-}`}
-        />
-      </Card>
-      <Card title="Strategy">
-        <p className="text-sm mb-2">
-          Defines a family of interchangeable algorithms and lets the client
-          select one at runtime (e.g., different sorting or compression
-          strategies).
-        </p>
-        <CodeBlock
-          language="typescript"
-          code={`interface Compressor {
-  compress(data: Buffer): Buffer;
-}
-class GzipCompressor implements Compressor { ... }
-class BrotliCompressor implements Compressor { ... }
-
-function upload(data: Buffer, c: Compressor) {
-  return send(c.compress(data));
-}`}
-        />
-      </Card>
-    </Grid>,
-    <Callout key="6" type="info" title="Modern Relevance">
-      You already use patterns daily without realizing it. React Hooks are a
-      form of the <strong>Observer</strong> pattern. Express middleware is{" "}
-      <strong>Chain of Responsibility</strong>. Redux reducers are{" "}
-      <strong>Command</strong> pattern. Understanding the names helps you
-      communicate architecture decisions clearly.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Core Vocabulary
+    </h3>,
+    <Table
+      key="3"
+      headers={["Pattern Name", "The Problem it Solves", "Real World Developer Example"]}
+      rows={[
+        [
+          "Singleton",
+          "You accidentally initialized 5 different database handlers burning up 5 TCP port connections.",
+          "It forces a class to only ever create exactly ONE instance of itself globally. (Used heavily for DB connections and Node Loggers)."
+        ],
+        [
+          "Factory",
+          "You have massive `if/else` statements manually building complex `Car` classes with 20 properties.",
+          "You create a `VehicleFactory` class. You simply ask it for 'Truck', and it hides all the ugly initialization logic behind the scenes."
+        ],
+        [
+          "Observer",
+          "Your UI screen needs to update instantly when a deeply nested background data download finishes.",
+          "The classic Publisher/Subscriber (PubSub) model. The UI 'Subscribes' to the data class. React's `useEffect` or RxJS are pure Observer patterns."
+        ],
+        [
+          "Strategy",
+          "Your shopping cart has a massive 500-line switch statement calculating tax for every country in the world.",
+          "You split it out. The Cart class accepts a completely interchangeable 'TaxStrategy' function passed in cleanly as an argument."
+        ]
+      ]}
+    />,
+    <Callout key="4" type="info" title="The Anti-Pattern Trap">
+      Junior developers read about Design Patterns and immediately try to violently force all 23 into a tiny To-Do List app. This is over-engineering. Use standard logic first, and only reach for a strict GoF Pattern when you physically feel the pain of a massive architectural knot.
     </Callout>,
   ],
 };

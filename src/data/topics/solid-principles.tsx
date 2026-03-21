@@ -1,94 +1,54 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 
 export const solidPrinciplesTopic: Topic = {
   id: "solid-principles",
-  title: "SOLID Principles",
+  title: "S.O.L.I.D Principles",
   description:
-    "The 5 foundational OOP design principles that every interviewer expects you to know — and apply correctly in code reviews.",
-  tags: ["oop", "design-patterns", "interview", "clean-code"],
-  icon: "BookOpen",
+    "The legendary 5 rules of Object-Oriented design that stop you from writing 'Spaghetti Code'.",
+  tags: ["architecture", "programming", "oop"],
+  icon: "Layers",
   content: [
     <p key="1">
-      <strong>SOLID</strong> is an acronym for 5 design principles introduced by
-      Robert C. Martin (Uncle Bob) that make software{" "}
-      <strong>maintainable, extensible, and testable</strong>. They're asked in
-      virtually every mid-to-senior engineering interview.
+      Coined by "Uncle Bob" Martin in 2000, SOLID is a checklist for writing code that is aggressively easy to maintain, scale, and test without breaking existing functionality.
     </p>,
-    <Grid key="2" cols={1} gap={6} className="my-8">
-      <Card title="S — Single Responsibility Principle">
-        <p className="text-sm">
-          A class should have <strong>only one reason to change</strong>. If
-          your <code>UserService</code> handles authentication, email sending,
-          AND database queries, it has three reasons to change. Split it into{" "}
-          <code>AuthService</code>, <code>EmailService</code>, and{" "}
-          <code>UserRepository</code>.
-        </p>
-      </Card>
-      <Card title="O — Open/Closed Principle">
-        <p className="text-sm">
-          Software entities should be{" "}
-          <strong>open for extension but closed for modification</strong>. Add
-          new behavior through interfaces and inheritance — not by editing
-          existing code. A payment system should accept new payment methods via
-          a <code>PaymentProcessor</code> interface, not <code>if/else</code>{" "}
-          chains.
-        </p>
-      </Card>
-      <Card title="L — Liskov Substitution Principle">
-        <p className="text-sm">
-          Subtypes must be <strong>substitutable</strong> for their base types
-          without altering correctness. If <code>Square extends Rectangle</code>{" "}
-          but setting width breaks height, it violates LSP. The classic
-          interview trap.
-        </p>
-      </Card>
-      <Card title="I — Interface Segregation Principle">
-        <p className="text-sm">
-          No client should be forced to implement interfaces it doesn't use. A{" "}
-          <code>Worker</code> interface with <code>work()</code> and{" "}
-          <code>eat()</code> forces robots to implement <code>eat()</code>.
-          Split into <code>Workable</code> and <code>Eatable</code>.
-        </p>
-      </Card>
-      <Card title="D — Dependency Inversion Principle">
-        <p className="text-sm">
-          High-level modules should not depend on low-level modules. Both should
-          depend on <strong>abstractions</strong>. Your{" "}
-          <code>OrderService</code> should depend on a <code>Database</code>{" "}
-          interface, not directly on <code>PostgresClient</code>. This enables
-          swapping implementations.
-        </p>
-      </Card>
-    </Grid>,
-    <CodeBlock
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The 5 Commandments
+    </h3>,
+    <Table
       key="3"
-      language="typescript"
-      title="Dependency Inversion in Practice"
-      code={`// ❌ Tight coupling — OrderService depends on concrete PostgresDB
-class OrderService {
-  private db = new PostgresDB(); // Hard dependency
-}
-
-// ✅ Dependency Inversion — depend on abstraction
-interface Database {
-  save(data: unknown): Promise<void>;
-}
-
-class OrderService {
-  constructor(private db: Database) {} // Injected abstraction
-}
-
-// Now you can swap PostgresDB, MongoDB, or a MockDB for testing`}
+      headers={["Letter", "Principle", "Developer Translation"]}
+      rows={[
+        [
+          "S",
+          "Single Responsibility",
+          "Your `Billing` class should charge credit cards. It should absolutely NEVER also be connecting to AWS to send receipt emails. Split it out!"
+        ],
+        [
+          "O",
+          "Open/Closed",
+          "You should be able to add a new 'PayPal' feature without physically modifying the existing 'Stripe' code. (Open for extension, Closed for modification)."
+        ],
+        [
+          "L",
+          "Liskov Substitution",
+          "If you have an array of `Birds`, and you call `.fly()` on all of them, the app shouldn't crash because one of them is a `Penguin`. Sub-classes must behave predictably!"
+        ],
+        [
+          "I",
+          "Interface Segregation",
+          "Don't build a massive `IUser` interface forcing every class to implement `updateProfile` and `banUser`. An admin class should use an `IAdmin` interface, and a guest should use an `IGuest` interface."
+        ],
+        [
+          "D",
+          "Dependency Inversion",
+          "High-level business logic should never directly import low-level SQL database drivers. Both should strictly rely on an abstract `DatabaseInterface` so you can effortlessly swap MySQL for MongoDB later."
+        ]
+      ]}
     />,
-    <Callout key="4" type="tip" title="SOLID in Practice">
-      Don't over-engineer. Applying SOLID to a 100-line script creates
-      unnecessary abstraction. Apply it when code is{" "}
-      <strong>likely to change or grow</strong>. The principles are{" "}
-      <em>guidelines</em>, not laws — pragmatism beats dogma.
+    <Callout key="4" type="info" title="Do not over-engineer!">
+      Applying all 5 SOLID principles strictly to a 100-line startup MVP is a massive mistake that results in 40 useless files. Apply them reactively only when updating a specific file physically starts to hurt.
     </Callout>,
   ],
 };

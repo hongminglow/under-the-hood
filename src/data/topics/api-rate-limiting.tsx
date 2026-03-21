@@ -1,67 +1,63 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
-import { Step } from "@/components/ui/Step";
+import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 
 export const apiRateLimitingTopic: Topic = {
   id: "api-rate-limiting",
-  title: "API Rate Limiting & Throttling",
+  title: "API Rate Limiting",
   description:
-    "Protecting backend services from abuse by intelligently restricting request volume per consumer.",
-  tags: ["api", "security", "scaling"],
-  icon: "Gauge",
+    "How to defend your backend servers from scrapers, angry users, and accidental infinite loops.",
+  tags: ["backend", "system-design", "security"],
+  icon: "DatabaseZapper",
   content: [
     <p key="1">
-      Without rate limiting, a single malicious actor (or a buggy client loop)
-      can overwhelm your servers with millions of requests, causing a
-      Denial-of-Service (DoS). Rate limiting enforces fair usage by capping the
-      number of requests a client can make within a time window.
+      If you open a completely public API endpoint, you are one bad `while(true)` loop away from a client sending 50,000 requests per second to your database and costing you $5,000 in AWS bills. Rate limiting is the absolute mandatory defense system. It forcefully blocks requests by returning <strong>HTTP Status Code 429 (Too Many Requests)</strong>.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      Common Algorithms
-    </h4>,
-    <Step key="3" index={1}>
-      <strong>Fixed Window Counter:</strong> Count requests in fixed time
-      windows (e.g., 100 requests per minute). Simple to implement but
-      susceptible to burst at window boundaries — a client can send 100 requests
-      at 11:59:59 and 100 more at 12:00:00.
-    </Step>,
-    <Step key="4" index={2}>
-      <strong>Sliding Window Log:</strong> Tracks the timestamp of every
-      request. On each new request, count how many fall within the sliding
-      window. Precise but memory-intensive.
-    </Step>,
-    <Step key="5" index={3}>
-      <strong>Token Bucket:</strong> A bucket holds up to N tokens. Each request
-      consumes one token. Tokens are refilled at a steady rate. Allows small
-      bursts while enforcing an average rate. This is the most popular algorithm
-      (used by AWS, Stripe, GitHub).
-    </Step>,
-    <Step key="6" index={4}>
-      <strong>Leaky Bucket:</strong> Requests enter a FIFO queue drained at a
-      constant rate. If the queue overflows, new requests are rejected. Shapes
-      traffic into a perfectly smooth output stream.
-    </Step>,
-    <h4 key="7" className="text-xl font-bold mt-8 mb-4">
-      HTTP Response Headers
-    </h4>,
-    <Grid key="8" cols={3} gap={4} className="mb-8">
-      <Card title="X-RateLimit-Limit">
-        Total allowed requests in the current window.
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      Core Algorithms Defined in Memcached/Redis
+    </h3>,
+    <Table
+      key="3"
+      headers={["Algorithm", "How It Blocks Traffic", "Developer Reality"]}
+      rows={[
+        [
+          "Token Bucket",
+          "You have a literal bucket of 10 virtual tokens. Every API call costs 1 token. After 10 calls, you hit 429. The bucket magically refills at a constant trickle of 1 token per second.",
+          "The industry standard. Handles heavy sudden bursts beautifully while maintaining an easy-to-understand average pace. (Stripe uses this)."
+        ],
+        [
+          "Leaky Bucket",
+          "Requests enter a bucket with a hole in the bottom. No matter how fast they aggressively pour in, the hole only leaks them into your API server at exactly 1 per minute.",
+          "Brilliant for aggressively smoothing out traffic spikes to literally guarantee your slow Node server never receives more than 1 per minute."
+        ],
+        [
+          "Fixed Window",
+          "Strictly sets a cap for a literal time window. E.g., Max 100 API pulls from 3:00 PM to 4:00 PM.",
+          "Terrible flaw: If a hacker sends 100 requests at 3:59 PM and 100 requests at 4:01 PM, they achieved 200 requests within two minutes seamlessly bypassing the 'per hour' intent."
+        ],
+      ]}
+    />,
+    <Grid key="4" cols={2} gap={6} className="my-8">
+      <Card title="Architectural Placement">
+        <p className="text-sm text-muted-foreground">
+          Never write an API Rate Limiter locally in Node.js memory! If you have 5 load-balanced servers, a hacker will just hit all 5 servers independently. Rate limits must be stored rapidly into a centralized lightning-fast cache like <strong>Redis</strong> or pushed up entirely into an API Gateway like AWS API Gateway, keeping the malicious traffic extremely far away from your precious codebase.
+        </p>
       </Card>
-      <Card title="X-RateLimit-Remaining">
-        How many requests the client can still make.
-      </Card>
-      <Card title="Retry-After">
-        Seconds until the rate limit resets (sent with a 429 status code).
+      <Card title="The Client Headers">
+        <p className="text-sm text-muted-foreground">
+          Good APIs strictly tell the frontend exactly how many tokens they have left so they do not blindly guess.
+        </p>
+        <ul className="text-xs mt-2 border-l border-border pl-3 text-muted-foreground/80 font-mono space-y-1">
+          <li>X-RateLimit-Limit: 100</li>
+          <li>X-RateLimit-Remaining: 32</li>
+          <li>X-RateLimit-Reset: 1726058400</li>
+        </ul>
       </Card>
     </Grid>,
-    <Callout key="9" type="warning" title="Distributed Rate Limiting">
-      If you have 10 API servers behind a load balancer, each server's local
-      counter only sees 1/10th of the traffic. You need a centralized store
-      (Redis with INCR + EXPIRE) to maintain a global, atomic request count
-      across all instances.
+    <Callout key="5" type="warning" title="Limiting IP vs User IDs">
+      Rate limiting by IP Address is a bad crutch. A single IP address might represent an entire university campus of 10,000 legitimate students sharing the same NAT IP router! Always strongly verify an authenticated `User-ID` from a JWT to accurately rate limit individuals.
     </Callout>,
   ],
 };

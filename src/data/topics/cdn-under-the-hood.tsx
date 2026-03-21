@@ -1,80 +1,70 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
-import { Step } from "@/components/ui/Step";
 import { Table } from "@/components/ui/Table";
+import { Callout } from "@/components/ui/Callout";
 
-export const cdnTopic: Topic = {
+export const cdnUnderTheHoodTopic: Topic = {
   id: "cdn-under-the-hood",
   title: "CDN Under the Hood",
   description:
-    "How Content Delivery Networks serve your assets from servers just 20ms away — and why every system design answer should mention one.",
-  tags: ["networking", "performance", "system-design", "caching"],
-  icon: "Globe2",
+    "How deploying a globally distributed caching network drastically slashes website loading times.",
+  tags: ["networking", "performance", "caching"],
+  icon: "Globe",
   content: [
     <p key="1">
-      Without a CDN, if your server is in Virginia and a user is in Singapore,
-      every single image, CSS file, and JavaScript bundle travels{" "}
-      <strong>16,000 km round-trip</strong> — adding{" "}
-      <strong>200–400ms of latency</strong> per asset. A CDN caches your content
-      on <strong>hundreds of edge servers worldwide</strong>, so that same
-      Singapore user gets assets from a server <strong>just 20ms away</strong>.
+      A <strong>Content Delivery Network (CDN)</strong> is a globally distributed network of "Edge" servers that store copies of your website's content. By placing data physically closer to the user, CDNs bypass the speed-of-light limitations of long-distance undersea cables.
     </p>,
-    <h4 key="2" className="text-xl font-bold mt-8 mb-4">
-      How a CDN Request Works
-    </h4>,
-    <Step key="3" index={1}>
-      <strong>DNS Resolution:</strong> User requests{" "}
-      <code>static.yourapp.com</code>. DNS resolves to the{" "}
-      <strong>nearest CDN edge server</strong> (via Anycast or geo-DNS).
-    </Step>,
-    <Step key="4" index={2}>
-      <strong>Cache Hit:</strong> If the edge server has a cached copy, it
-      returns it <strong>immediately</strong>. Response time: 5–20ms.
-    </Step>,
-    <Step key="5" index={3}>
-      <strong>Cache Miss:</strong> If not cached, the edge server fetches from
-      the <strong>origin server</strong>, caches the response, then serves the
-      user. Subsequent requests to that edge are served from cache.
-    </Step>,
+    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      How a CDN Routes Traffic: Anycast DNS
+    </h3>,
+    <p key="3" className="mb-4 text-sm text-muted-foreground">
+      When you type <code>netflix.com</code>, you aren't hitting one IP. CDNs use <strong>Anycast DNS</strong>, where multiple servers around the world share the <em>same</em> IP address. BGP routing automatically sends your request to the topologically closest server.
+    </p>,
+    <Table
+      key="4"
+      headers={["Process", "What Happens", "Result"]}
+      rows={[
+        ["1. Origin Fetch", "CDN asks your main server (Origin) for the file.", "The 'First' request is slow (Cache Miss)."],
+        ["2. Edge Caching", "CDN saves the file to its local SDD in the city.", "Subsequent requests are instant (Cache Hit)."],
+        ["3. Shielding", "CDN serves traffic instead of your server.", "Your backend CPU usage drops by 90%."],
+        ["4. Purging", "You tell the CDN to delete its old copy.", "The CDN fetches the new version on the next request."]
+      ]}
+    />,
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      Cache Control: The Browser-to-CDN Contract
+    </h3>,
     <Grid key="6" cols={2} gap={6} className="my-8">
-      <Card title="Push CDN">
-        <p className="text-sm">
-          You <strong>upload content</strong> to the CDN proactively (during
-          deploy). The CDN stores it permanently. Best for static assets that
-          rarely change (logos, fonts, compiled JS bundles).
+      <Card title="s-maxage vs. max-age">
+        <p className="text-sm text-muted-foreground mb-2">
+          Fine-tuning how long content lives.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          <code>max-age</code> tells the <strong>browser</strong> to cache it. <code>s-maxage</code> tells the <strong>CDN</strong> to cache it. This allows you to cache an image on the CDN for a year, but only in the browser for an hour.
         </p>
       </Card>
-      <Card title="Pull CDN">
-        <p className="text-sm">
-          The CDN <strong>fetches on first request</strong> and caches it. Best
-          for dynamic or frequently updated content. Users experience a
-          cold-start penalty on the first request only.
+      <Card title="Stale-While-Revalidate">
+        <p className="text-sm text-muted-foreground mb-2">
+          Zero-latency updates.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          The CDN serves the old (stale) version immediately while silently fetching the new version from your origin in the background. The user never waits for a loading spinner.
         </p>
       </Card>
     </Grid>,
-    <Table
-      key="7"
-      headers={["Feature", "Without CDN", "With CDN"]}
-      rows={[
-        ["Latency (Singapore→Virginia)", "200-400ms", "5-20ms"],
-        ["Origin Server Load", "Handles every request", "Only cache misses"],
-        ["DDoS Protection", "Vulnerable", "CDN absorbs attack traffic"],
-        ["SSL Handshake", "Full round-trip to origin", "Terminates at edge"],
-        ["Global Availability", "Single region", "200+ edge locations"],
-      ]}
-    />,
-    <Callout key="8" type="tip" title="Cache Invalidation: The Hard Problem">
-      <em>
-        "There are only two hard things in computer science: cache invalidation
-        and naming things."
-      </em>{" "}
-      CDNs use <strong>TTL (Time To Live)</strong> headers to auto-expire cache,
-      or <strong>cache busting</strong> (appending content hashes to filenames
-      like <code>app.3f2a1b.js</code>). Purge APIs allow manual cache
-      invalidation. In system design interviews, always discuss your CDN
-      invalidation strategy.
+    <h3 key="7" className="text-xl font-bold mt-8 mb-4">
+      Beyond Caching: Edge Computing
+    </h3>,
+    <p key="8" className="mb-4">
+      Modern CDNs (Cloudflare, Vercel) aren't just for images. They support <strong>Edge Functions</strong> (Wasm/JavaScript). You can run logic like:
+    </p>,
+    <ul key="9" className="list-disc pl-5 text-sm text-muted-foreground space-y-2">
+      <li><strong>A/B Testing:</strong> Randomly serve different HTML files to users based on an Edge cookie.</li>
+      <li><strong>Authentication:</strong> Verify a JWT token before the request even reaches your database.</li>
+      <li><strong>Image Optimization:</strong> Resize and convert a JPEG to WebP on-the-fly at the Edge.</li>
+    </ul>,
+    <Callout key="10" type="tip" title="The 'Cache Busting' Pattern">
+      Purging a CDN can take 30 seconds to several minutes globally. For instant updates, always use <strong>Content-Hashed Filenames</strong> (e.g., <code>main.abc123.js</code>). Since the filename is unique, the CDN treats it as new content and fetches it immediately.
     </Callout>,
   ],
 };

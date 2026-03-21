@@ -1,109 +1,64 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Grid } from "@/components/ui/Grid";
+import { Card } from "@/components/ui/Card";
+import { Callout } from "@/components/ui/Callout";
 
 export const encodingEncryptionHashingTopic: Topic = {
   id: "encoding-encryption-hashing",
   title: "Encoding vs Encryption vs Hashing",
   description:
-    "Three fundamentally different operations that everyone confuses: one transforms format, one protects secrets, one creates fingerprints.",
-  tags: ["security", "interview", "fundamentals", "backend"],
+    "The three fundamental algorithms of computer science that junior developers constantly mix up.",
+  tags: ["security", "computer-science", "backend"],
   icon: "Binary",
   content: [
     <p key="1">
-      "Is Base64 encryption?" <strong>No.</strong> "Can I decrypt a hash back to
-      the password?" <strong>No.</strong> These are the most common
-      misconceptions in security interviews. The three operations serve{" "}
-      <strong>completely different purposes</strong>.
+      Confusion between <strong>Encoding</strong>, <strong>Encryption</strong>, and <strong>Hashing</strong> is a common source of security vulnerabilities. Each serves a distinct purpose in the data lifecycle, from transport to storage.
     </p>,
-    <Table
-      key="2"
-      headers={["Property", "Encoding", "Encryption", "Hashing"]}
-      rows={[
-        [
-          "Purpose",
-          "Format transformation",
-          "Confidentiality",
-          "Integrity / fingerprinting",
-        ],
-        [
-          "Reversible?",
-          "Yes (anyone can decode)",
-          "Yes (with the correct key)",
-          "No (one-way function)",
-        ],
-        ["Key Required?", "No key", "Encryption key required", "No key"],
-        [
-          "Security?",
-          "None — NOT for secrets",
-          "Strong — protects data",
-          "Strong — verifies integrity",
-        ],
-        [
-          "Output Size",
-          "Variable (often larger)",
-          "Similar to input",
-          "Fixed size (always)",
-        ],
-        [
-          "Examples",
-          "Base64, URL encoding, UTF-8",
-          "AES-256, RSA, ChaCha20",
-          "SHA-256, bcrypt, argon2",
-        ],
-      ]}
-    />,
-    <Grid key="3" cols={3} gap={6} className="my-8">
+    <Grid key="2" cols={3} gap={4} className="my-8">
       <Card title="Encoding">
-        <p className="text-sm">
-          Transforms data into a different <strong>format</strong>, NOT for
-          security. Base64 encodes binary to ASCII for safe transport.{" "}
-          <strong>Anyone can decode it</strong> — it's just a format. Never
-          store passwords as Base64.
-        </p>
+        <p className="text-xs text-muted-foreground">Purpose: <strong>Format Conversion</strong></p>
+        <p className="text-xs mt-2 italic">Example: Base64, URL Encoding</p>
       </Card>
       <Card title="Encryption">
-        <p className="text-sm">
-          Transforms data so <strong>only someone with the key</strong> can read
-          it. <strong>Symmetric</strong>: same key encrypts and decrypts (AES).{" "}
-          <strong>Asymmetric</strong>: public key encrypts, private key decrypts
-          (RSA). Used for HTTPS, at-rest encryption.
-        </p>
+        <p className="text-xs text-muted-foreground">Purpose: <strong>Confidentiality</strong></p>
+        <p className="text-xs mt-2 italic">Example: AES, RSA</p>
       </Card>
       <Card title="Hashing">
-        <p className="text-sm">
-          Produces a <strong>fixed-size fingerprint</strong>. Same input always
-          produces same output. <strong>Cannot be reversed</strong>. Used for
-          password storage, data integrity checks, digital signatures.
-        </p>
+        <p className="text-xs text-muted-foreground">Purpose: <strong>Integrity/Fingerprinting</strong></p>
+        <p className="text-xs mt-2 italic">Example: SHA-256, Argon2</p>
       </Card>
     </Grid>,
-    <CodeBlock
+    <h3 key="3" className="text-xl font-bold mt-8 mb-4">
+      Encryption: Symmetric vs. Asymmetric
+    </h3>,
+    <Table
       key="4"
-      language="typescript"
-      title="Password Storage Done Right"
-      code={`// ❌ NEVER: Plain text, Base64, MD5, SHA-256 (too fast, rainbow tables)
-db.save({ password: "mypassword" });           // Plain text 🔥
-db.save({ password: btoa("mypassword") });     // Base64 — NOT encryption!
-db.save({ password: sha256("mypassword") });   // Fast hash — crackable
-
-// ✅ CORRECT: bcrypt/argon2 (slow by design, with salt)
-import bcrypt from 'bcrypt';
-const hash = await bcrypt.hash("mypassword", 12); // 12 salt rounds
-db.save({ password: hash });
-// "$2b$12$LJ3m4ys..." — salted, slow to brute-force
-
-// Verification (no decryption needed — compare hashes)
-const valid = await bcrypt.compare("mypassword", hash); // → true`}
+      headers={["Type", "Mechanism", "Best For"]}
+      rows={[
+        [
+          "Symmetric",
+          "One single password (key) used for both locking and unlocking.",
+          "High-speed data at rest (Full disk encryption, AES-256)."
+        ],
+        [
+          "Asymmetric",
+          "A <strong>Public Key</strong> to lock, and a <strong>Private Key</strong> to unlock.",
+          "Secure key exchange (TLS/SSL) and Digital Signatures."
+        ]
+      ]}
     />,
-    <Callout key="5" type="warning" title="SHA-256 Is NOT for Passwords">
-      SHA-256 computes <strong>billions of hashes per second</strong> on a GPU.
-      An attacker can brute-force an 8-character password in hours.{" "}
-      <strong>bcrypt</strong> and <strong>argon2</strong> are intentionally slow
-      (~100ms per hash), making brute-force attacks computationally infeasible.
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      The Golden Rule of Passwords: Resetting & Salting
+    </h3>,
+    <p key="6" className="mb-4">
+      You must <strong>never</strong> encrypt passwords; you must <strong>hash</strong> them. Specifically, you must use <strong>Salting</strong>—adding a random string to the password before hashing it.
+    </p>,
+    <Callout key="7" type="danger" title="Why Salting Matters">
+      Without a salt, two users with the same password (e.g., "P@ssword123") will have the same hash in the database. A hacker with a <strong>Rainbow Table</strong> (a pre-computed list of billions of hashes) can instantly crack everyone's password. A unique salt ensures that even identical passwords produce unique, un-crackable hashes.
     </Callout>,
+    <p key="8" className="mt-6 text-sm text-muted-foreground">
+      <strong>Encoding is NOT security.</strong> Encoding a string to Base64 is like putting a letter in a clear plastic envelope—everyone can see it, it just keeps it dry.
+    </p>,
   ],
 };
