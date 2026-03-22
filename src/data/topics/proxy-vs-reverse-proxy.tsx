@@ -29,6 +29,11 @@ export const proxyVsReverseProxyTopic: Topic = {
         ["Example", "Corporate Firewalls, Squid, NordVPN.", "Nginx, HAProxy, AWS ALB, Cloudflare."]
       ]}
     />,
+    <Callout key="CORS" type="info" title="Pro Tip: Bypassing CORS with Proxying">
+      Ever hit a <strong>CORS error</strong> while fetching an API from the browser? This is because browsers block cross-origin requests for security.
+      <br /><br />
+      Developers often use a <strong>Proxy Server</strong> (like a small NodeJS server or a dev-server proxy) to "hide" the browser. The browser sends the request to the proxy (same-origin), and the proxy fetches from the target API (server-to-server). Since CORS is a <strong>browser security feature</strong>, the proxy-to-server request is never blocked!
+    </Callout>,
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">
       The Power of the Reverse Proxy
     </h3>,

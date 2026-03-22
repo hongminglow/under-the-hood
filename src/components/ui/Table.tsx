@@ -19,7 +19,11 @@ export function Table({
                 key={i}
                 className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-primary/70"
               >
-                {h}
+                {typeof h === "string" ? (
+                  <span dangerouslySetInnerHTML={{ __html: h }} />
+                ) : (
+                  h
+                )}
               </th>
             ))}
           </tr>
@@ -43,7 +47,11 @@ export function Table({
                       isHighlighted ? "text-primary italic font-bold" : "text-foreground/70"
                     }`}
                   >
-                    {cell}
+                    {typeof cell === "string" ? (
+                      <span dangerouslySetInnerHTML={{ __html: cell }} />
+                    ) : (
+                      cell
+                    )}
                   </td>
                 ))}
               </tr>
