@@ -66,6 +66,14 @@ export const dnsTopic: Topic = {
         </p>
       </Card>
     </Grid>,
+    <Callout key="DNS-Opt" type="info" title="Optimization: dns-prefetch & preconnect">
+      DNS lookups can take **20-120ms** depending on network conditions. This is why you'll often see <code>&lt;link rel="dns-prefetch" href="https://fonts.googleapis.com"&gt;</code> in your <code>index.html</code>.
+      <br /><br />
+      - <strong>dns-prefetch:</strong> Resolves the DNS for <code>fonts.googleapis.com</code> in the background before the browser even needs the font.
+      - <strong>preconnect:</strong> Goes a step further by performing the DNS lookup, TCP handshake, AND TLS negotiation (HTTPS) ahead of time.
+      <br /><br />
+      Google Fonts uses these to ensure that by the time your CSS discovers a font-family, the server connection is already "warm" and ready to stream data, skipping the "DNS Lookup" stall.
+    </Callout>,
     <h3 key="6" className="text-xl font-bold mt-8 mb-4">
       DNSSEC: Preventing 'Cache Poisoning'
     </h3>,
