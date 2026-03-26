@@ -35,6 +35,7 @@ import { capTheoremTopic } from "@/data/topics/cap-theorem";
 import { webhooksVsPollingTopic } from "@/data/topics/webhooks-vs-polling";
 import { stackVsHeapTopic } from "@/data/topics/stack-vs-heap";
 import { kubernetesTopic } from "@/data/topics/kubernetes-architecture";
+import { dockerComposeVsKubernetesVsEksTopic } from "@/data/topics/docker-compose-vs-kubernetes-vs-eks";
 import { webassemblyTopic } from "@/data/topics/webassembly";
 import { serverlessTopic } from "@/data/topics/serverless-computing";
 import { cspTopic } from "@/data/topics/content-security-policy";
@@ -270,6 +271,7 @@ export const knowledgeBase: Section[] = [
       ciCdTopic,
       gitInternalsTopic,
       kubernetesTopic,
+      dockerComposeVsKubernetesVsEksTopic,
       iacTopic,
       monorepoVsPolyrepoTopic,
       observabilityTopic,
