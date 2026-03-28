@@ -113,6 +113,7 @@ import { setintervalVsRequestanimationframeTopic } from "@/data/topics/setinterv
 import { webComponentsShadowDomTopic } from "@/data/topics/web-components-shadow-dom";
 import { sseVsWebsocketTopic } from "@/data/topics/sse-vs-websocket";
 import { cssInJsVsUtilityTopic } from "@/data/topics/css-in-js-vs-utility";
+import { htmlVsHtmxTopic } from "@/data/topics/html-vs-htmx";
 import { tauriUnderTheHoodTopic } from "@/data/topics/tauri-under-the-hood";
 import { sagaPatternTopic } from "@/data/topics/saga-pattern";
 import { bTreeVsBPlusTreeTopic } from "@/data/topics/b-tree-vs-b-plus-tree";
@@ -238,6 +239,7 @@ export const knowledgeBase: Section[] = [
       microFrontendsTopic,
       debounceVsThrottleTopic,
       setintervalVsRequestanimationframeTopic,
+      htmlVsHtmxTopic,
       webComponentsShadowDomTopic,
       cssInJsVsUtilityTopic,
     ],
