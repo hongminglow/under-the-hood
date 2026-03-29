@@ -98,6 +98,7 @@ import { errorHandlingTopic } from "@/data/topics/error-handling-patterns";
 import { paginationStrategiesTopic } from "@/data/topics/pagination-strategies";
 import { envConfigTopic } from "@/data/topics/env-config-secrets";
 import { databaseMigrationsTopic } from "@/data/topics/database-migrations";
+import { databaseLockingMvccTopic } from "@/data/topics/database-locking-mvcc";
 import { recursionCallStackTopic } from "@/data/topics/recursion-call-stack";
 
 // ── Batch 4 (AI & Frontend) ─────────────────────────────────────────
@@ -214,6 +215,7 @@ export const knowledgeBase: Section[] = [
       connectionPoolingTopic,
       sqlQueryOptimizationTopic,
       nPlusOneProblemTopic,
+      databaseLockingMvccTopic,
       databaseMigrationsTopic,
     ],
   },
