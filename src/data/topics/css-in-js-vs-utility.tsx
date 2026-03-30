@@ -6,54 +6,78 @@ import { Callout } from "@/components/ui/Callout";
 
 export const cssInJsVsUtilityTopic: Topic = {
   id: "css-in-js-vs-utility",
-  title: "CSS-in-JS vs Utility CSS",
+  title: "Modern CSS Architectures",
   description:
-    "Why the React ecosystem abandoned runtime Styled Components for zero-cost build-time Tailwind generation.",
-  tags: ["frontend", "architecture", "css"],
+    "A deep dive into the evolution of styling: SCSS, Inline Styles, CSS-in-JS, and Utility CSS (Tailwind).",
+  tags: ["frontend", "architecture", "css", "tailwind", "scss"],
   icon: "Paintbrush",
   content: [
     <p key="1">
-      The "CSS Wars" are a battle over <strong>Execution Time</strong>. The choice between utility-first (Tailwind) and runtime-injection (Styled Components) determines whether your styles are generated on the developer's laptop or the user's phone.
+      The "CSS Wars" have raged for over a decade. Frontend developers constantly debate the best way to write, scope, and scale styles. The choice of CSS architecture drastically impacts your application's execution time, bundle size, and developer experience.
     </p>,
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
-      The Performance Divide
+      The Four Pillars of Styling
     </h3>,
-    <Table
-      key="3"
-      headers={["Feature", "Runtime CSS-in-JS (Emotion/Styled)", "Utility-First (Tailwind/UnoCSS)"]}
-      rows={[
-        ["Generation", "In the browser during component render.", "At <strong>Build-time</strong> via static analysis."],
-        ["Payload", "Javascript bundle contains style logic.", "Static <code>.css</code> file (highly cacheable)."],
-        ["RSC Support", "<strong>Fail</strong> (cannot inject tags on server).", "<strong>Pass</strong> (standard CSS works perfectly)."],
-        ["Specificity", "Generated unique class names.", "Flattened <strong>Atomic CSS</strong> classes."]
-      ]}
-    />,
-    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
-      The Engine: Atomic CSS
-    </h3>,
-    <p key="5" className="mb-4">
-      Tailwind's secret is <strong>Atomic CSS</strong>. Instead of writing a <code>.button</code> class with 10 properties, it generates 10 single-purpose classes (<code>p-4</code>, <code>bg-blue</code>, etc.). This means your CSS bundle size doesn't grow linearly with your app; it hits a "plateau" once most common utilities are used.
-    </p>,
-    <Grid key="6" cols={2} gap={6} className="my-8">
-      <Card title="Runtime Style Injection">
+    <Grid key="3" cols={2} gap={6} className="my-8">
+      <Card title="1. SCSS / SASS (The Preprocessors)">
         <p className="text-sm text-muted-foreground mb-2">
-          Styled Components use a <strong>StyleSheet Manager</strong>.
+          Adding superpowers to traditional CSS.
         </p>
         <p className="text-xs italic text-muted-foreground">
-          Every time a prop changes (e.g., <code>color={"{props.color}"}</code>), the library must re-hash the style and inject a new <code>&lt;style&gt;</code> tag, triggering a browser <strong>Recalculate Style</strong> event.
+          <strong>Sass</strong> started as an indentation-based syntax, while <strong>SCSS</strong> (Sassy CSS) is an extension of standard CSS using brackets. They allow variables, nesting, and mixins. Great for traditional websites, but global name-spacing often leads to "append-only stylesheets" where nobody deletes old code for fear of breaking things.
         </p>
       </Card>
-      <Card title="Static Extraction (Zero-Runtime)">
+      <Card title="2. Inline Styles">
         <p className="text-sm text-muted-foreground mb-2">
-          Libraries like <strong>Vanilla Extract</strong> or <strong>Panda CSS</strong>.
+          <code>style={"{{ color: 'red' }}"}</code> injected directly into HTML.
         </p>
         <p className="text-xs italic text-muted-foreground">
-          They offer the "Object-style" DX of CSS-in-JS but use a compiler to "Extract" them into standard CSS files during build. Best of both worlds.
+          Highly dynamic but lacks fundamental CSS features like media queries, keyframe animations, and pseudo-classes (e.g., <code>:hover</code>). It is impossible to cache inline styles effectively, making it poor for large-scale web architectures.
+        </p>
+      </Card>
+      <Card title="3. CSS-in-JS (Styled Components, Emotion)">
+        <p className="text-sm text-muted-foreground mb-2">
+          Generating styles at runtime via Javascript.
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          Loved for perfectly scoping styles to components and easily accepting React props for dynamic styling. However, compiling CSS in the browser adds <strong>Runtime Overhead</strong> and completely breaks inside modern Server-Side Rendering patterns like React Server Components (RSC).
+        </p>
+      </Card>
+      <Card title="4. Utility-First (Tailwind CSS)">
+        <p className="text-sm text-muted-foreground mb-2">
+          Predefined atomic classes (<code>p-4</code>, <code>bg-blue-500</code>).
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          Currently the industry favorite. It shifts styling from runtime to <strong>Build-time</strong> via static analysis. It eliminates naming fatigue, prevents CSS bloat (the bundle stops growing once common utilities are used), and is highly cacheable. The tradeoff? "Ugly" HTML files filled with massive class strings.
         </p>
       </Card>
     </Grid>,
-    <Callout key="7" type="warning" title="Specificity Issues">
-      Utility CSS relies on the order of classes in the generated <code>.css</code> file, not the order in your <code>className</code> string. This is why <strong>Tailwind Merge</strong> is essential for component libraries to ensure that child overrides actually "win" the specificity battle.
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      Head-to-Head Comparison
+    </h3>,
+    <Table
+      key="5"
+      headers={["Architecture", "Performance", "RSC Compatibility", "Scalability (Large Teams)"]}
+      rows={[
+        ["SCSS / CSS Modules", "Fast (Static File)", "Yes (Extracted to .css)", "Medium (Naming conflicts usually avoided with Modules)"],
+        ["Inline Styles", "Slow (DOM Bloat)", "Yes", "Poor (No responsive design natively)"],
+        ["CSS-in-JS (Runtime)", "Slowest (JS execution)", "No (Needs context/DOM)", "High (Perfect component isolation)"],
+        ["Utility CSS (Tailwind)", "Fastest (Atomic extraction)", "Yes (Zero runtime args)", "Highest (No context-switching, consistent design tokens)"]
+      ]}
+    />,
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      When To Use Which?
+    </h3>,
+    <p key="7" className="mb-4">
+      The consensus among modern developers heavily leans towards <strong>Utility-first (Tailwind CSS)</strong> paired with component libraries like Shadcn/ui or Headless UI. Here are some general recommendations:
+    </p>,
+    <ul key="8" className="list-disc pl-5 text-sm text-muted-foreground space-y-2 mb-8">
+      <li><strong>Choose Tailwind CSS</strong> if you are building a modern React/Next.js application, want excellent performance, and want to avoid writing custom CSS classes entirely.</li>
+      <li><strong>Choose SCSS / CSS Modules</strong> if you are migrating a legacy codebase, building an embeddable widget, or if your team strongly prefers separation of concerns (HTML vs CSS).</li>
+      <li><strong>Choose Zero-Runtime CSS-in-JS (Vanilla Extract / Panda CSS)</strong> if you love the developer experience of Styled Components but need the performance and Server Component compatibility of static CSS.</li>
+    </ul>,
+    <Callout key="9" type="warning" title="The Tailwind Specificity Trap">
+      Utility CSS relies on the order of classes in the generated <code>.css</code> file, not the order in your <code>className</code> string. Overriding a <code>p-4</code> with a <code>p-8</code> conditionally requires utility mergers like <strong>tailwind-merge</strong> to ensure the new class mathematically wins the specificity battle.
     </Callout>,
   ],
 };
