@@ -118,6 +118,7 @@ import { htmlVsHtmxTopic } from "@/data/topics/html-vs-htmx";
 import { tauriUnderTheHoodTopic } from "@/data/topics/tauri-under-the-hood";
 import { sagaPatternTopic } from "@/data/topics/saga-pattern";
 import { bTreeVsBPlusTreeTopic } from "@/data/topics/b-tree-vs-b-plus-tree";
+import { deploymentStrategiesTopic } from "@/data/topics/deployment-strategies";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -282,6 +283,7 @@ export const knowledgeBase: Section[] = [
       twelveFacorAppTopic,
       testingPyramidTopic,
       envConfigTopic,
+      deploymentStrategiesTopic,
     ],
   },
   {
