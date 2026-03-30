@@ -12,7 +12,7 @@ export const webassemblyTopic: Topic = {
   icon: "Cpu",
   content: [
     <p key="1">
-      For 25 years, Javascript was the only biological programming language allowed to execute natively inside a Web Browser. If you tried to build Adobe Photoshop or an intense 3D Video Game purely in Javascript, it would fundamentally crash the tab trying to mathematically calculate millions of pixels.
+      For 25 years, Javascript was the only programming language allowed to execute natively inside a Web Browser. If you tried to build Adobe Photoshop or a 3D Video Game purely in Javascript, it would crash the tab due to the heavy calculation of millions of pixels.
     </p>,
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
       The Wasm Revolution
@@ -23,20 +23,20 @@ export const webassemblyTopic: Topic = {
           You literally write standard C++ or Rust code: <code>fn calculate_physics()</code>. 
         </p>
         <p className="text-sm text-muted-foreground">
-          Instead of compiling it to an `.exe` file for Windows, you strictly compile it into a highly compressed, magical `.wasm` binary file format.
+          Instead of compiling it to an `.exe` file for Windows, you compile it into a highly compressed `.wasm` binary file format.
         </p>
       </Card>
       <Card title="The Native Speed">
         <p className="text-sm text-muted-foreground mb-2">
-          Browsers have a secure underlying magical Virtual Machine completely specifically designed strictly to read `.wasm` binaries. 
+          Browsers have a secure underlying Virtual Machine specifically designed to read `.wasm` binaries. 
         </p>
         <p className="text-sm text-muted-foreground">
-          Because the Wasm file is already mathematically parsed and physically optimized bytes, the browser skips reading expensive code and executes it natively at near-native physical CPU speeds seamlessly.
+          Because the Wasm file consists of parsed and optimized bytes, the browser skips reading expensive code and executes it natively at near-native CPU speeds.
         </p>
       </Card>
     </Grid>,
     <Callout key="4" type="warning" title="Not A Javascript Killer">
-      WebAssembly does natively precisely organically <strong>NOT</strong> logically replace Javascript securely. Wasm logically natively magically cannot directly access the `<div id="box"></div>` DOM. If your Wasm code mathematically precisely calculates the physical gravity of a 3D cube, it strictly natively MUST organically pass the exact coordinates back clearly directly logically successfully fully magically seamlessly purely logically dynamically magically properly nicely practically natively to Javascript so React can securely optimally natively draw identically optimally identically optimally functionally it.
+      WebAssembly does <strong>NOT</strong> replace Javascript. Wasm cannot directly access the `<div id="box"></div>` DOM. If your Wasm code calculates the physical gravity of a 3D cube, it MUST pass the exact coordinates back to Javascript so React can draw it.
     </Callout>,
   ],
 };
