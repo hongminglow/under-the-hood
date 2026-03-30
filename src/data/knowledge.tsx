@@ -119,6 +119,7 @@ import { tauriUnderTheHoodTopic } from "@/data/topics/tauri-under-the-hood";
 import { sagaPatternTopic } from "@/data/topics/saga-pattern";
 import { bTreeVsBPlusTreeTopic } from "@/data/topics/b-tree-vs-b-plus-tree";
 import { deploymentStrategiesTopic } from "@/data/topics/deployment-strategies";
+import { softwareTestingStrategiesTopic } from "@/data/topics/software-testing-strategies";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -284,6 +285,7 @@ export const knowledgeBase: Section[] = [
       testingPyramidTopic,
       envConfigTopic,
       deploymentStrategiesTopic,
+      softwareTestingStrategiesTopic,
     ],
   },
   {
