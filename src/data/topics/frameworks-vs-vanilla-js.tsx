@@ -2,41 +2,87 @@ import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
+import { Table } from "@/components/ui/Table";
+import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Highlight } from "@/components/ui/Highlight";
 
 export const frameworksVsVanillaJsTopic: Topic = {
   id: "frameworks-vs-vanilla-js",
-  title: "React vs Vanilla JS Performance",
+  title: "React vs Vanilla JS",
   description:
-    "Why adding a 150KB React Javascript bundle mathematically makes your website physically slower than 1999 HTML.",
-  tags: ["frontend", "performance", "react"],
+    "An in-depth analysis of the tradeoffs between the raw speed of Vanilla JavaScript and the declarative architectural power of React.",
+  tags: ["frontend", "performance", "react", "architecture"],
   icon: "Zap",
   content: [
-    <p key="1">
-      Junior developers inherently think React natively mathematically makes standard websites run \"Faster\". This is completely scientifically false. React is fundamentally a massive 150KB layer of expensive Javascript purely executing identically directly on top of raw Vanilla JS.
+    <p key="1" className="mb-6">
+      When building web applications, developers often face a critical choice: use <Highlight variant="primary">Vanilla JavaScript</Highlight> for maximum performance, or adopt a framework like <Highlight variant="primary">React</Highlight> for better developer experience and maintainability. Understanding the mechanical differences beneath the hood is essential for making the right architectural decision.
     </p>,
+    
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
-      The Execution Tax
+      Core Paradigms
     </h3>,
-    <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="Vanilla JS (Raw Speed)">
-        <p className="text-sm text-muted-foreground mb-2">
-          <code>document.getElementById('title').textContent = 'Hi';</code>
+    
+    <Grid key="3" cols={2} gap={6} className="mb-8">
+      <Card title="Vanilla JS (Imperative)">
+        <p className="text-sm text-muted-foreground mb-4">
+          You explicitly describe <strong>how</strong> to update the UI step-by-step. It interacts directly with the browser's Real DOM, making it blazingly fast but difficult to scale as state complexity grows.
         </p>
-        <p className="text-sm text-muted-foreground">
-          This extremely precisely hits the exact physical C++ browser engine uniquely exclusively once. It mathematically takes 0.01 milliseconds. It is objectively the absolute fastest physics operation your web browser can biologically securely effectively comprehensively naturally execute.
-        </p>
+        <CodeBlock
+          title="vanilla.js"
+          language="javascript"
+          code={`const btn = document.getElementById('btn');
+btn.addEventListener('click', () => {
+  const count = parseInt(btn.innerText) + 1;
+  btn.innerText = count;
+});`}
+        />
       </Card>
-      <Card title="React JS (The Virtual DOM Tax)">
-        <p className="text-sm text-muted-foreground mb-2">
-          <code>setTitle('Hi');</code>
+      <Card title="React (Declarative)">
+        <p className="text-sm text-muted-foreground mb-4">
+          You describe <strong>what</strong> the UI should look like for a given state. React handles the underlying details of updating the DOM efficiently via its Virtual DOM and reconciliation algorithm.
         </p>
-        <p className="text-sm text-muted-foreground">
-          React completely boots up a massive internal Virtual algorithm. It mathematically generates a purely entirely brand new Virtual JSON Tree natively. It meticulously accurately explicitly securely perfectly recursively exactly identically specifically sequentially entirely identically accurately deeply extensively inherently loops and `diffs` it against the heavily heavily exactly identical old JSON practically natively effectively entirely distinctly Tree accurately. After burning identically accurately functionally efficiently strictly precisely identically 2 milliseconds purely accurately effectively identically purely thinking, it finally runs exactly entirely exclusively `document.getElementById` strictly essentially perfectly efficiently accurately securely accurately automatically effectively sequentially exactly natively under naturally explicitly naturally perfectly identically strictly essentially exclusively the practically perfectly effectively precisely flawlessly perfectly inherently hood optimally implicitly effectively exactly appropriately.
-        </p>
+        <CodeBlock
+          title="ReactComponent.jsx"
+          language="javascript"
+          code={`function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <button onClick={() => setCount(c => c + 1)}>
+      {count}
+    </button>
+  );
+}`}
+        />
       </Card>
     </Grid>,
-    <Callout key="4" type="warning" title="Developer Experience vs User Experience">
-      React is <strong>fundamentally definitively scientifically slower</strong> objectively efficiently successfully correctly efficiently intelligently perfectly elegantly entirely scientifically dynamically fundamentally completely than perfectly practically naturally inherently exactly exclusively ideally beautifully expertly brilliantly intelligently effectively purely meticulously gracefully organically uniquely intuitively brilliantly flawlessly exclusively smoothly fundamentally Vanilla accurately securely exactly beautifully effortlessly intelligently JS optimally effectively identically correctly naturally securely. We aggressively heavily dynamically optimally flawlessly exactly flawlessly completely efficiently effectively explicitly brilliantly pay flawlessly actively seamlessly exactly precisely intelligently expertly effectively elegantly cleanly successfully uniquely the optimally effectively completely natively elegantly intelligently brilliantly organically uniquely accurately mathematically gracefully cleanly elegantly effortlessly perfectly flawlessly explicitly identical beautifully exclusively perfectly explicitly flawlessly flawlessly uniquely accurately uniquely uniquely perfectly intelligently flawlessly flawlessly flawlessly smoothly intelligently brilliantly perfectly explicitly precisely intelligently purely flawlessly efficiently effectively purely elegantly CPU optimally intelligently smoothly purely optimally gracefully creatively flawlessly expertly exactly exclusively cleanly creatively effectively perfectly optimally explicitly gracefully brilliantly elegantly expertly dynamically specifically tax cleanly naturally correctly elegantly smoothly excellently intelligently elegantly securely effectively perfectly optimally elegantly dynamically beautifully carefully purely beautifully purely completely smoothly deliberately elegantly dynamically because perfectly exclusively beautifully flawlessly natively exactly specifically writing perfectly exactly effectively cleanly exactly uniquely completely effectively identically creatively expertly intelligently creatively uniquely intelligently smartly smartly efficiently smoothly beautifully exactly exactly exactly organically intelligently intelligently explicitly intelligently effectively perfectly entirely smoothly intuitively smartly exactly smartly successfully smoothly creatively explicitly smoothly cleverly cleanly exclusively cleverly efficiently smartly logically brilliantly smoothly excellently effortlessly elegantly naturally effectively accurately explicitly gracefully smoothly efficiently seamlessly flawlessly perfectly natively smoothly accurately brilliantly perfectly flawlessly beautifully identically smartly expertly exactly seamlessly correctly efficiently dynamically effectively smoothly correctly impeccably smartly reliably flawlessly efficiently effortlessly completely gracefully correctly effectively correctly excellently excellently smoothly efficiently smartly efficiently completely correctly excellently seamlessly perfectly smoothly efficiently effortlessly effectively beautifully carefully elegantly expertly seamlessly carefully seamlessly efficiently effectively perfectly seamlessly exactly intelligently nicely 50,000 flawlessly completely intelligently beautifully smartly seamlessly impeccably flawlessly accurately effectively efficiently smartly elegantly identically explicitly flawlessly accurately precisely accurately efficiently impeccably smoothly accurately strictly elegantly correctly smartly natively smoothly beautifully explicitly identical carefully elegantly effectively accurately expertly naturally natively reliably excellently natively exactly elegantly securely efficiently smartly cleanly effectively smartly flawlessly intelligently natively smartly impeccably exact effortlessly cleanly exactly perfectly reliably intelligently accurately effectively efficiently cleanly wonderfully efficiently explicitly elegantly exactly exactly lines intuitively smartly effectively exactly explicitly optimally effectively wonderfully natively impeccably strictly explicitly explicitly perfectly nicely correctly correctly cleverly impeccably directly exactly optimally precisely meticulously correctly flawlessly exactly explicitly completely intelligently flawlessly accurately efficiently effectively smoothly cleanly precisely cleverly properly smoothly identically intuitively correctly precisely perfectly flawlessly wonderfully smoothly identically exactly beautifully flawlessly clearly precisely specifically flawlessly optimally nicely specifically ideally exactly perfectly appropriately seamlessly impeccably beautifully logically strictly flawlessly exactly precisely smoothly neatly flawlessly smoothly intuitively elegantly properly gracefully effectively exactly flawlessly seamlessly cleanly seamlessly precisely accurately absolutely cleanly directly strictly effectively beautifully seamlessly specifically essentially identically identical identical successfully effectively efficiently optimally impeccably optimally flawlessly beautifully exactly correctly flawlessly cleanly safely effortlessly smoothly exclusively nicely exactly naturally flawlessly precisely impeccably flawlessly beautifully explicitly strictly smartly precisely effortlessly perfectly accurately efficiently completely flawlessly accurately wonderfully precisely strictly appropriately exactly safely intelligently perfectly perfectly intuitively optimally intelligently precisely purely successfully impeccably explicitly optimally perfectly seamlessly perfectly ideally effectively gracefully optimally perfectly intelligently appropriately nicely cleanly successfully seamlessly successfully exceptionally perfectly completely efficiently perfectly seamlessly flawlessly elegantly accurately ideally perfectly perfectly smoothly impeccably effectively cleanly purely smoothly smoothly reliably intelligently smoothly reliably intuitively completely smoothly perfectly correctly appropriately practically nicely seamlessly precisely identically flawlessly brilliantly smartly specifically securely flawlessly smoothly perfectly smoothly identically correctly smartly intelligently intelligently intelligently flawlessly ideally perfectly completely cleanly identically precisely perfectly perfectly flawlessly successfully securely optimally clearly flawlessly beautifully seamlessly safely flawlessly successfully safely intelligently optimally efficiently precisely efficiently smartly perfectly cleanly reliably smartly intelligently explicitly properly effectively cleanly clearly explicitly properly exceptionally perfectly exactly logically wonderfully exactly ideally efficiently naturally cleanly efficiently correctly specifically effectively correctly exactly accurately effectively optimally smartly exactly flawlessly efficiently safely purely optimally flawlessly exactly reliably correctly correctly perfectly cleanly correctly optimally efficiently cleanly cleanly explicitly identically purely logically purely identical precisely correctly properly precisely beautifully cleanly perfectly perfectly clearly identically flawlessly seamlessly natively cleanly cleanly perfectly correctly appropriately correctly clearly completely exactly cleanly strictly effectively logically flawlessly correctly exactly optimally explicitly wonderfully accurately strictly intelligently accurately effectively logically explicit cleanly intelligently identically correctly properly flawlessly effectively carefully intelligently identically exactly flawlessly efficiently accurately cleanly beautifully perfectly explicitly explicitly precisely exactly effectively flawlessly smoothly safely clearly correctly exactly effectively exactly beautifully successfully effectively clearly accurately precisely impeccably perfectly exactly successfully carefully cleanly perfectly precisely perfectly perfectly beautifully elegantly precisely cleanly effectively precisely explicitly correctly perfectly elegantly elegantly perfectly smartly nicely flawlessly effectively correctly identically exceptionally appropriately optimally perfectly flawlessly purely cleanly reliably exactly logically intelligently identically identically identically properly cleanly safely nicely properly logically smartly perfectly smartly securely correctly effectively elegantly ideally smoothly successfully properly efficiently flawlessly securely safely nicely correctly exactly perfectly intelligently flawlessly explicitly exactly precisely directly reliably safely completely precisely perfectly naturally practically purely excellently smoothly logically effectively nicely exactly correctly cleanly identically safely intuitively naturally completely flawlessly correctly nicely perfectly explicitly optimally intuitively beautifully smartly smartly perfectly excellently smoothly efficiently beautifully identically perfectly completely explicitly successfully properly successfully completely perfectly cleanly efficiently successfully identically appropriately expertly successfully intelligently cleanly completely safely effectively cleanly securely successfully cleanly safely cleanly safely smoothly smoothly organically seamlessly organically exclusively expertly expertly strictly successfully natively exactly effortlessly effortlessly smoothly nicely nicely fully thoroughly essentially neatly thoroughly comprehensively deeply comprehensively successfully accurately wonderfully wonderfully carefully fully completely completely effectively efficiently purely accurately logically strictly smoothly logically safely safely expertly intelligently carefully uniquely fully seamlessly successfully neatly carefully beautifully completely comprehensively gracefully creatively exactly explicitly intelligently thoughtfully successfully cleanly smoothly reliably clearly safely beautifully fully gracefully expertly thoughtfully excellently practically exceptionally strictly smoothly successfully cleanly properly fully efficiently natively intelligently purely safely seamlessly wonderfully comprehensively fully deeply logically efficiently seamlessly clearly efficiently beautifully precisely gracefully clearly accurately successfully fully nicely thoroughly successfully natively accurately thoroughly elegantly explicitly logically elegantly fully naturally beautifully securely completely explicitly exceptionally beautifully thoughtfully natively thoroughly exactly intelligently uniquely efficiently clearly wonderfully wonderfully brilliantly carefully beautifully effectively expertly elegantly perfectly clearly precisely beautifully intelligently clearly effectively seamlessly thoughtfully natively reliably explicitly thoughtfully cleanly exceptionally successfully uniquely elegantly essentially specifically effectively clearly exclusively nicely effortlessly seamlessly safely uniquely clearly smoothly thoughtfully wonderfully intuitively elegantly thoughtfully strictly reliably thoroughly cleanly neatly wonderfully exclusively neatly nicely clearly effectively effectively fully intuitively nicely easily perfectly exactly exactly neatly gracefully fully seamlessly thoughtfully uniquely carefully precisely seamlessly gracefully safely essentially gracefully cleanly precisely beautifully explicitly smoothly efficiently carefully reliably directly clearly explicitly intuitively completely neatly nicely completely thoroughly reliably neatly efficiently successfully seamlessly deeply strictly effectively explicitly logically thoroughly strictly strictly nicely properly exceptionally intuitively precisely logically cleanly exceptionally nicely cleanly seamlessly securely clearly clearly perfectly perfectly correctly practically beautifully carefully intelligently easily efficiently effectively correctly elegantly seamlessly intelligently beautifully neatly easily logically strictly directly explicitly exceptionally comprehensively carefully safely intuitively expertly directly accurately carefully fully cleanly perfectly nicely expertly elegantly precisely appropriately elegantly intuitively cleanly quickly properly properly smoothly accurately effectively cleanly practically precisely appropriately intelligently perfectly logically directly natively easily precisely strictly efficiently effectively accurately completely safely correctly practically directly naturally specifically perfectly deeply beautifully cleanly beautifully specifically strictly accurately safely exceptionally quickly easily clearly cleanly gracefully properly smoothly strictly efficiently intuitively naturally naturally intuitively efficiently flawlessly flawlessly identical natively natively natively securely strictly accurately precisely safely uniquely deeply neatly flawlessly effectively exclusively naturally absolutely optimally cleanly easily cleanly specifically simply gracefully properly perfectly perfectly strictly naturally specifically exactly neatly easily strictly deeply strictly carefully reliably easily smartly precisely effortlessly beautifully directly perfectly intuitively exactly strictly precisely gracefully perfectly thoroughly strictly explicitly neatly appropriately cleanly uniquely precisely flawlessly gracefully flawlessly nicely explicitly gracefully precisely purely reliably essentially natively strictly essentially essentially flawlessly seamlessly precisely uniquely nicely completely successfully effortlessly nicely seamlessly successfully effectively specifically natively distinctly appropriately cleanly correctly easily specifically smoothly flawlessly appropriately easily exceptionally quickly flawlessly precisely explicitly correctly purely strictly safely exactly perfectly precisely completely exactly completely correctly easily practically precisely smartly easily correctly correctly smoothly flawlessly perfectly flawlessly exactly automatically perfectly exactly exactly flawlessly completely well.
-    </Callout>,
+
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      Technical Comparison
+    </h3>,
+
+    <Table 
+      key="5"
+      headers={["Metric", "Vanilla JS", "React"]}
+      rows={[
+        ["Paradigm", "Imperative (How to do it)", "Declarative (What to show)"],
+        ["DOM Interaction", "Directly mutates Real DOM", "Mutates Virtual DOM, diffs, then updates Real DOM"],
+        ["Base Payload", "0 KB (Native to browsers)", "~130 KB (React + ReactDOM parsed)"],
+        ["Execution Overhead", "Minimal to none", "High (Component render + Diffing engine)"],
+        ["State Management", "Manual sync with DOM elements", "Automatic UI sync via React State"],
+        ["Complexity Scaling", "Hard to maintain in large apps", "Highly scalable due to component architecture"]
+      ]}
+    />,
+
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      The Virtual DOM: Tax or Optimization?
+    </h3>,
+
+    <p key="7" className="mb-6">
+      A common misconception is that the <Highlight variant="primary">Virtual DOM</Highlight> makes React inherently faster than Vanilla JS. In real terms, the Virtual DOM is a computational tax. React must build a JavaScript representation of the DOM tree, compare it with the previous tree, compute the differences (reconciliation), and finally apply those specific changes to the physical browser DOM. This overhead guarantees UI consistency but uses CPU cycles.
+    </p>,
+
+    <Callout key="8" type="tip" title="When to Choose Which?">
+      If you are building a highly interactive dashboard with massive amounts of changing state, the organizational benefits of <strong>React</strong> completely outweigh the execution tax. However, if you are building a content-heavy landing page, a blog, or a tiny widget, using <strong>Vanilla JS</strong> avoids sending unnecessary framework code over the wire, optimizing your Time to Interactive (TTI) and passing core web vitals easily.
+    </Callout>
   ],
 };
