@@ -91,6 +91,19 @@ For inline terminology or status emphasis.
 <Highlight variant="warning">DEPRECATED</Highlight>;
 ```
 
+#### **8. Flow (New)**
+
+For visualizing sequential architectural logic, pipelines, or step-by-step processes (e.g. Call Stack -> Task Queue -> Event Loop). This renders a visually connected sequence with arrows.
+
+```tsx
+<Flow 
+  steps={[
+    { title: "1. Step One", description: "Initial phase." },
+    { title: "2. Step Two", description: "Final phase." }
+  ]}
+/>
+```
+
 ## Data Entry Workflow
 
 - **Topic Icons:** Choose specific relevance (e.g. \`Zap\` for networking, \`Search\` for DNS, \`Lock\` for security).
@@ -129,6 +142,7 @@ To ensure the application remains stable and build-ready, always follow these ru
 ### 3. Component Hierarchy & Choice
 - **Prefer Tables**: For protocol comparisons, bit flags, or feature lists, **always** use `<Table />` instead of a linear list of `<Step />`.
 - **Grid vs. Cards**: Use `<Grid cols={2} gap={6}>` for lateral comparisons (Pros/Cons, Before/After).
+- **Flow sequences**: Always use `<Flow>` for visualizing the lifecycle of requests or connected architectural pipelines instead of bullet points.
 
 ### 4. Build Configuration (TSConfig)
 - **Standard Options Only**: Do not add non-standard or experimental TypeScript options (like `erasableSyntaxOnly`) that may not be supported by the current environment. 
