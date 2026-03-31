@@ -1,44 +1,117 @@
 import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { Grid } from "@/components/ui/Grid";
+import { Card } from "@/components/ui/Card";
+import { Highlight } from "@/components/ui/Highlight";
+import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Flow } from "@/components/ui/Flow";
 
 export const typescriptTypesTopic: Topic = {
   id: "typescript-types",
-  title: "TypeScript Type System",
+  title: "TypeScript vs JavaScript",
   description:
-    "Why Microsoft invented an incredibly strict structural type checker that completely vanishes before hitting the browser.",
-  tags: ["core", "javascript", "architecture"],
+    "Why an extremely strict compiler became the undeniable enterprise standard for development, and why it completely vanishes before hitting the browser.",
+  tags: ["core", "javascript", "typescript", "architecture"],
   icon: "FileCode",
   content: [
-    <p key="1">
-      Native Vanilla Javascript allows you to pass a `string` into physical functions expecting an exact `number`. It causes catastrophic crashes directly in production servers. TypeScript mathematically solves this purely by wrapping JS in an absurdly strict enterprise-grade compile-time inference engine.
+    <p key="1" className="mb-6">
+      If you write <Highlight variant="primary">Vanilla JavaScript</Highlight>, you inherently trust that the variables you pass around are structurally correct. A simple typo or passing a string into a function expecting a number will successfully execute, only to cause a catastrophic crash days later in production. <Highlight variant="primary">TypeScript</Highlight> solves this by wrapping JS in an enterprise-grade static type-checker, mathematically proving your application logic works before the code is ever deployed.
     </p>,
+
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
-      The Structural Paradigm
+      Static vs Dynamic Typing
     </h3>,
+    
     <Table
       key="3"
-      headers={["Concept", "The Traditional Rule", "The Typescript Way"]}
+      headers={["Concept", "JavaScript (Dynamic)", "TypeScript (Static)"]}
       rows={[
-        [
-          "Structural Typing",
-          "If completely different classes `Bird` and `Plane` both have a `.fly()` function, Java throws a fatal type error expecting exactly `Plane`.",
-          "TypeScript mathematically only cares about the physical shape. If it quacks like a duck, it is absolutely perfectly identical structurally. No class extensions strictly necessary."
-        ],
-        [
-          "Type Erasure",
-          "C# explicitly compiles all your strict interfaces down into massive native executable runtime object DLL checks.",
-          "TypeScript completely surgically deletes all types during build time. The final compiled file is pure dynamically untyped raw Vanilla JS. Types exist cleanly entirely as a sophisticated developer linter."
-        ],
-        [
-          "Union Narrowing",
-          "Functions completely break apart checking `if (x instanceof User)` logic heavily everywhere.",
-          "TypeScript intrinsically narrows branches. If variable is `string | number`, writing an `if (typeof x === 'string')` branch inherently forces the variable physically into a pure native string down safely."
-        ]
+        ["Type Discovery", "Interpreter blindly guesses types at the exact moment the code executes.", "Types are structurally enforced in real-time while you write code in the IDE."],
+        ["Error Catching", "Fails in Production (users see the 500 error or broken UI).", "Fails in Development (compiler physically refuses to build the app)."],
+        ["Code Refactoring", "Extremely dangerous. Changing an API response breaks 50 unknown files.", "Extremely safe. The compiler highlights every exact file you broke."],
+        ["Auto-completion", "Basic IDE guessing based on previous usage context.", "Flawless, 100% accurate object property autocompletion."]
       ]}
     />,
-    <Callout key="4" type="danger" title="The 'any' Keyword Pandemic">
-      Writing `const data: any = JSON.parse(res)` entirely disables the compiler. You forcefully command Typescript to ignore the object entirely, explicitly inviting runtime production crashes natively back into your architecture. Never bypass the engine blindly; use `unknown` and mathematically validate the physical shape directly before parsing.
+
+    <h3 key="4" className="text-xl font-bold mt-12 mb-4">
+      The "Type Erasure" Build Flow
+    </h3>,
+
+    <p key="4a" className="mb-6">
+      <strong>The Problem:</strong> Browsers completely do not understand TypeScript natively. They only speak pure Vanilla JavaScript.
+      <br/><br/>
+      <strong>The Solution:</strong> TypeScript is physically just a "glorified linter" that runs in your terminal. After verifying your code is mathematically type-safe, the build tool surgically deletes every single type definition, leaving behind raw JavaScript. <strong>Static types absolutely do not exist at runtime.</strong>
+    </p>,
+
+    <Flow 
+      key="5" 
+      steps={[
+        {
+          title: "1. Write TypeScript",
+          description: "You explicitly declare your structural interfaces, types, and strict function arguments."
+        },
+        {
+          title: "2. The Compiler Engine",
+          description: "`tsc` statically analyzes the AST (Abstract Syntax Tree) to mathematically prove no types are violated."
+        },
+        {
+          title: "3. Type Erasure",
+          description: "If compilation succeeds, the bundler physically strips away all TypeScript syntax, leaving naked code."
+        },
+        {
+          title: "4. Raw JavaScript",
+          description: "Pure, untouched dynamically valid Vanilla JS is emitted and natively shipped to the client browser."
+        }
+      ]}
+    />,
+
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      Why does everyone prefer TypeScript now?
+    </h3>,
+
+    <Grid key="7" cols={1} gap={6} className="mb-8">
+      <Card title="Structural Autocompletion (Self-Documenting Code)">
+        <p className="text-sm text-foreground mb-4">
+          In large teams, passing a mysterious <code>user</code> object into a JavaScript function requires tracking down 5 different files to guess what properties exist inside it. In TypeScript, pressing <code>CMD + click</code> or typing a period instantly reveals the exact structural shape natively.
+        </p>
+        <Grid cols={2} gap={4}>
+          <CodeBlock
+            title="Vanilla JS (Dangerous)"
+            language="javascript"
+            code={`// Is total a string or number? 
+// Does cart have a 'items' property?
+function checkout(cart) {
+  return cart.total + tax();
+}`}
+          />
+          <CodeBlock
+            title="TypeScript (Safe)"
+            language="typescript"
+            code={`interface Cart {
+  items: string[];
+  total: number;
+}
+function checkout(cart: Cart) {
+  return cart.total + tax();
+}`}
+          />
+        </Grid>
+      </Card>
+
+      <Card title="Painless Enterprise Refactoring">
+        <p className="text-sm text-foreground mb-4">
+          <strong>The Scenario:</strong> Your backend team decides to rename the API property <code>user_id</code> to <code>userId</code>.
+        </p>
+        <p className="text-sm text-muted-foreground space-y-2">
+          In <strong>JavaScript</strong>, this is an absolute nightmare. You run a global "Find and Replace", pray you didn't accidentally overwrite a completely unrelated variable, push to production, and inevitably crash the checkout page.<br/><br/>
+          In <strong>TypeScript</strong>, you simply update the base <code>User</code> interface definition. Instantly, the compiler throws up 45 red squiggly lines explicitly pinpointing the exact components and files that are now mathematically broken. You fix them, and deploy with complete algorithmic confidence.
+        </p>
+      </Card>
+    </Grid>,
+
+    <Callout key="8" type="warning" title="The Runtime Validation Trap">
+      Because of <strong>Type Erasure</strong>, TypeScript cannot physically stop a backend server or a user from unexpectedly sending you a string instead of a number at runtime. The compiler strictly trusts your locally written <code>interface Post</code>. <br/><br/><strong>Solution:</strong> For external API data, you MUST pair TypeScript with runtime validation tools like <strong>Zod</strong> to natively parse and prove the incoming payload shape physically matches your static definitions.
     </Callout>,
   ],
 };
