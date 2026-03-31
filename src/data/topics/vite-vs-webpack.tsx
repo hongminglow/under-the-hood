@@ -1,42 +1,114 @@
 import type { Topic } from "@/data/types";
+import { Table } from "@/components/ui/Table";
+import { Callout } from "@/components/ui/Callout";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
+import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Highlight } from "@/components/ui/Highlight";
 
 export const viteVsWebpackTopic: Topic = {
   id: "vite-vs-webpack",
   title: "Vite vs Webpack",
   description:
-    "Why your React server used to take 45 seconds to start, and why Vite starts in 100 milliseconds.",
-  tags: ["frontend", "performance", "architecture"],
+    "How Vite completely destroyed Webpack's monopoly by fundamentally redefining the frontend build architecture.",
+  tags: ["frontend", "performance", "architecture", "build-tools"],
   icon: "Zap",
   content: [
-    <p key="1">
-      For years, developers accepted that saving a file in React meant waiting 15 seconds for the browser to refresh. Webpack was the enterprise standard, but it slowly strangled productivity. Then Vite arrived and mathematically changed the entire paradigm of local development.
+    <p key="1" className="mb-6">
+      For years, <Highlight variant="primary">Webpack</Highlight> was the undisputed king of frontend build tools. But as web applications scaled to thousands of modules, its internal architecture struggled, turning 1-second local builds into 30-second coffee breaks. Then <Highlight variant="primary">Vite</Highlight> arrived, radically changing the paradigm by leveraging modern browser features and natively compiled languages (Go), instantly becoming the default modern standard.
     </p>,
+
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
-      The Paradigm Shift
+      The Core Paradigm Shift
     </h3>,
-    <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="Webpack (The Monolithic Builder)">
-        <p className="text-sm text-muted-foreground mb-2">
-          When you run <code>npm start</code>, Webpack must physically crawl every single Javascript file, every CSS file, and every image in your entire 10,000-file project. 
+    
+    <Grid key="3" cols={2} gap={6} className="mb-8">
+      <Card title="Webpack (Bundle-Based)">
+        <p className="text-sm text-foreground mb-4">
+          Webpack crawls your entire application. It parses every single JavaScript file, CSS file, and asset, builds a massive dependency graph, and then mathematically mashes them all together into big bundle files <strong>before</strong> the development server can even turn on.
         </p>
         <p className="text-sm text-muted-foreground">
-          It then mashes them all together into massive bundle files before it can even turn the local server on. This is why enormous legacy projects can take minutes to boot.
+          Result: The server startup time scales exponentially as the project grows. A legacy enterprise app might take two minutes just to boot locally.
         </p>
       </Card>
-      <Card title="Vite (The Native ES Module Server)">
-        <p className="text-sm text-muted-foreground mb-2">
-          Vite skips bundling entirely during development. It leverages modern browser support for <code>import x from './y'</code> directly in the HTML.
+      <Card title="Vite (Native ESM Server)">
+        <p className="text-sm text-foreground mb-4">
+          Vite skips bundling entirely during development. It leverages modern browsers' native support for <code>&lt;script type="module"&gt;</code>. Vite instantly turns on the server and only compiles exact files natively when the browser actively HTTP requests them.
         </p>
         <p className="text-sm text-muted-foreground">
-          When you load a page, the browser asks Vite for only the exact files needed for the current screen. Vite instantly serves those untouched, raw Javascript files. The server boots in 100ms because it isn't doing any bundling math.
+          Result: Server startup time is completely decoupled from project size. It boots in ~100ms whether you have 10 files or 10,000.
         </p>
       </Card>
     </Grid>,
-    <Callout key="4" type="tip" title="Production Builds">
-      Vite still bundles your code for Production! It uses Rollup under the hood to ensure everything is minified and compressed. The magic of Vite is exclusively heavily focused on making the local Developer Experience lightning fast.
+
+    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
+      Why Vite Took Over the Industry
+    </h3>,
+
+    <Grid key="5" cols={1} gap={6} className="mb-8">
+      <Card title="1. esbuild (The Unfair Speed Advantage)">
+        <p className="text-sm text-muted-foreground mb-4">
+          Webpack relies on transpilers written in JavaScript (like Babel or tsc), which are tightly bottlenecked by JS engine parse speeds. Vite completely sidesteps this by using <Highlight variant="primary">esbuild</Highlight>, a bundler written in heavily optimized <strong>Go</strong>. esbuild pre-bundles dependencies and parses code roughly 10-100x faster than JavaScript-based tools at the physical CPU level.
+        </p>
+      </Card>
+      
+      <Card title="2. Zero-Config Environment">
+        <p className="text-sm text-muted-foreground mb-4">
+          To get Webpack working with modern standards (React, TypeScript, CSS modules), you must manually install and orchestrate complex chains of loaders (<code>babel-loader</code>, <code>ts-loader</code>, <code>css-loader</code>). Vite supports TypeScript, JSX, CSS processors, and JSON automatically out-of-the-box.
+        </p>
+        <Grid cols={2} gap={4}>
+          <CodeBlock
+            title="webpack.config.js"
+            language="javascript"
+            code={`module.exports = {
+  module: {
+    rules: [
+      { test: /\\.css$/, use: ['style-loader', 'css-loader'] },
+      { test: /\\.(js|jsx)$/, use: 'babel-loader' }
+    ]
+  }
+};`}
+          />
+          <CodeBlock
+            title="vite.config.ts"
+            language="javascript"
+            code={`import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// Everything works automatically.
+export default defineConfig({
+  plugins: [react()]
+})`}
+          />
+        </Grid>
+      </Card>
+      
+      <Card title="3. Constant-Time Hot Module Replacement (HMR)">
+        <p className="text-sm text-muted-foreground">
+          When you edit a file, Webpack has to rebuild part of the bundle to inject the new code, meaning HMR gets linearly slower over time as it processes heavy graphs. With Vite, because it uses native ESM routing, saving a file simply causes the browser to request that single module again. HMR takes the same ~50ms in a tiny app as it does in a massive monolithic application.
+        </p>
+      </Card>
+    </Grid>,
+
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      Technical Comparison
+    </h3>,
+
+    <Table 
+      key="7"
+      headers={["Metric", "Webpack", "Vite"]}
+      rows={[
+        ["Paradigm", "Bundle-based dev server", "Native ESM-based dev server"],
+        ["Dev Startup Time", "O(N) - Slows down as codebase grows", "O(1) - ~100ms regardless of size"],
+        ["HMR Speed", "Slows down eventually", "Instantaneous, constant time"],
+        ["Internal Compiler", "Babel / tsc (JavaScript-based)", "esbuild (Go-based, 100x faster)"],
+        ["Production Build", "Webpack strict bundler", "Rollup (Tree-shaking optimized)"],
+        ["Configuration", "Heavy, verbose 3rd-party mapping", "Strict zero-config philosophy"]
+      ]}
+    />,
+
+    <Callout key="8" type="warning" title="What About Production?">
+      It is a common misconception that Vite doesn't bundle code at all. <strong>Vite strictly bundles code for Production.</strong> However, instead of building its own complex production bundler, it intelligently delegates this task to <Highlight variant="primary">Rollup</Highlight> beneath the hood. Rollup is famous for producing highly optimized, heavily tree-shaken static production assets, guaranteeing your users get the smallest possible payload.
     </Callout>,
   ],
 };

@@ -99,6 +99,7 @@ For inline terminology or status emphasis.
 4. **Spacing:** Ensure meaningful whitespace. The engine handles gaps between components (\`my-8\`).
 5. **Update README.md Counter:** Always update the overall topic counter listed in the \`README.md\` file so the platform progress is accurate.
 6. **Verify Dynamic Sidebar:** Ensure the new topic appears in the sidebar automatically (the counter is dynamic).
+7. **Educational Flow & Structure:** Always structure topics with a clear logical flow: define the core problem, provide technical comparisons (using `<Grid>` or `<Table>`), outline common challenges or issues, and explicitly provide deep-dive actionable **solutions**. Do not merely define what things are—explain how to use/fix them.
 
 ## Outcome Expectations
 
