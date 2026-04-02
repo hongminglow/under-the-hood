@@ -123,6 +123,9 @@ import { softwareTestingStrategiesTopic } from "@/data/topics/software-testing-s
 import { networkPayloadVulnerabilitiesTopic } from "@/data/topics/network-payload-vulnerabilities";
 import { codexVsSonnetTopic } from "@/data/topics/codex-vs-sonnet";
 import { nginxUnderTheHoodTopic } from "@/data/topics/nginx-under-the-hood";
+import { llmWebVsIdeVsCliTopic } from "@/data/topics/llm-web-vs-ide-vs-cli";
+import { skillsVsMcpTopic } from "@/data/topics/skills-vs-mcp";
+import { vibeCodingAiPairProgrammingTopic } from "@/data/topics/vibe-coding-ai-pair-programming";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -304,6 +307,9 @@ export const knowledgeBase: Section[] = [
       promptEngineeringTopic,
       vectorDatabasesEmbeddingsTopic,
       codexVsSonnetTopic,
+      llmWebVsIdeVsCliTopic,
+      skillsVsMcpTopic,
+      vibeCodingAiPairProgrammingTopic,
     ],
   },
 ];
