@@ -131,6 +131,7 @@ To ensure the application remains stable and build-ready, always follow these ru
   - *Bad*: `<h3>Title,` or `<style>content`.
   - *Good*: `<h3>Title</h3>` or `<style>{\`content\`}</style>`.
 - **String Escaping**: Use backticks for complex code strings within `CodeBlock` to avoid breaking JSX parsing.
+- **Inline Strong Spacing**: When a sentence continues immediately after a closing `</strong>` tag, insert `&nbsp;` right after `</strong>` to preserve visual spacing reliably in rendered content.
 
 ### 2. Import Hygiene
 - **Missing Imports**: When you add a new UI component (e.g., `<Table />`), you **MUST** add it to the file's imports:
