@@ -121,6 +121,7 @@ import { bTreeVsBPlusTreeTopic } from "@/data/topics/b-tree-vs-b-plus-tree";
 import { deploymentStrategiesTopic } from "@/data/topics/deployment-strategies";
 import { softwareTestingStrategiesTopic } from "@/data/topics/software-testing-strategies";
 import { networkPayloadVulnerabilitiesTopic } from "@/data/topics/network-payload-vulnerabilities";
+import { terminalsShellsKernelTopic } from "@/data/topics/terminals-shells-kernel";
 import { codexVsSonnetTopic } from "@/data/topics/codex-vs-sonnet";
 import { nginxUnderTheHoodTopic } from "@/data/topics/nginx-under-the-hood";
 import { llmWebVsIdeVsCliTopic } from "@/data/topics/llm-web-vs-ide-vs-cli";
@@ -296,6 +297,7 @@ export const knowledgeBase: Section[] = [
       envConfigTopic,
       deploymentStrategiesTopic,
       softwareTestingStrategiesTopic,
+      terminalsShellsKernelTopic,
       nginxUnderTheHoodTopic,
       fullAppHostingDeploymentTopic,
     ],
