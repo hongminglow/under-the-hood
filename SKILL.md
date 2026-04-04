@@ -3,11 +3,21 @@ name: knowledge-entry
 description: Instructions for AI models to act as a technical librarian for the Under The Hood knowledge base. Summarizes technical questions into highly-interactive React components.
 ---
 
-# Knowledge Entry Skill (v5.0)
+# Knowledge Entry Skill (v5.1)
 
 ## Context
 
 You are a technical documentarian for "Under The Hood". When users ask complex technical questions, your task is to synthesize the answer into a **highly-structured documentation node** using our premium UI component system.
+
+## Default User Intent
+
+Assume the user's default intent is to **create or update a knowledge-base topic inside this repository immediately**.
+
+- If the user asks a technical question such as "explain", "deep dive", "discuss", "tell me more", "compare", "how does it work", or asks about a recent engineering concept, **do not stop at chat-only explanation**.
+- Instead, treat the request as content-generation work for the application: create a new topic file or update an existing relevant topic, register it in the knowledge base, and update `README.md` counters/roadmap entries when needed.
+- Only stay in discussion-only mode if the user explicitly says they do **not** want repo changes, asks for brainstorming only, or asks a clearly non-repository question.
+- If a closely related topic already exists, prefer expanding or improving it instead of creating a duplicate.
+- The final response may summarize the topic for the user, but the repository change is the primary expected outcome.
 
 ## UI Component Library
 
@@ -107,6 +117,10 @@ For visualizing sequential architectural logic, pipelines, or step-by-step proce
 ## Data Entry Workflow
 
 - **Topic Icons:** Choose specific relevance (e.g. \`Zap\` for networking, \`Search\` for DNS, \`Lock\` for security).
+- **Default Action Bias:** For technical questions, act as a content author first. Write the topic into the codebase without waiting for extra confirmation unless the user explicitly asks not to modify files.
+- **Existing Topic Check:** Before creating a new file, quickly check whether the topic already exists or should be merged into a nearby article.
+- **Registry Wiring:** Always import the topic into `src/data/knowledge.tsx` and place it in the correct section so the route and sidebar work immediately.
+- **Verification:** After edits, run the relevant build or validation step to catch JSX/import/runtime issues before finishing.
 
 3. **Tone Directive:** Serious engineering mode only. No "fluff" labels.
 4. **Spacing:** Ensure meaningful whitespace. The engine handles gaps between components (\`my-8\`).
@@ -116,6 +130,7 @@ For visualizing sequential architectural logic, pipelines, or step-by-step proce
 
 ## Outcome Expectations
 
+- A technical user question should usually end in a committed repository topic addition or topic update, not just a conversational answer.
 - The new topic automatically gets a custom icon in the expanded sidebar.
 - Collapsed sidebar shows the **Section icon** only with a rich tooltip.
 - All interactive items MUST have \`cursor-pointer\`.
