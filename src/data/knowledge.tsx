@@ -54,6 +54,7 @@ import { passkeysWebauthnTopic } from "@/data/topics/passkeys-webauthn";
 import { consistentHashingTopic } from "@/data/topics/consistent-hashing";
 import { databaseChoicesAtScaleTopic } from "@/data/topics/database-choices-at-scale";
 import { dynamoDbDeepDiveTopic } from "@/data/topics/dynamodb-deep-dive";
+import { rsaCryptographyTopic } from "@/data/topics/rsa-cryptography";
 
 // ── Batch 2 ───────────────────────────────────────────────────────────
 import { databaseShardingTopic } from "@/data/topics/database-sharding";
@@ -183,6 +184,7 @@ export const knowledgeBase: Section[] = [
       encodingEncryptionHashingTopic,
       backendEncryptionMethodsTopic,
       networkPayloadVulnerabilitiesTopic,
+      rsaCryptographyTopic,
     ],
   },
   {
