@@ -52,6 +52,8 @@ import { distributedTransactionsTopic } from "@/data/topics/distributed-transact
 import { redisInMemoryTopic } from "@/data/topics/redis-in-memory";
 import { passkeysWebauthnTopic } from "@/data/topics/passkeys-webauthn";
 import { consistentHashingTopic } from "@/data/topics/consistent-hashing";
+import { databaseChoicesAtScaleTopic } from "@/data/topics/database-choices-at-scale";
+import { dynamoDbDeepDiveTopic } from "@/data/topics/dynamodb-deep-dive";
 
 // ── Batch 2 ───────────────────────────────────────────────────────────
 import { databaseShardingTopic } from "@/data/topics/database-sharding";
@@ -230,6 +232,8 @@ export const knowledgeBase: Section[] = [
       nPlusOneProblemTopic,
       databaseLockingMvccTopic,
       databaseMigrationsTopic,
+      databaseChoicesAtScaleTopic,
+      dynamoDbDeepDiveTopic,
     ],
   },
   {
