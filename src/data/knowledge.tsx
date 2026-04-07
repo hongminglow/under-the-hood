@@ -27,6 +27,7 @@ import { webSecurityTopic } from "@/data/topics/web-security";
 import { ssrVsCsrTopic } from "@/data/topics/ssr-vs-csr";
 import { designPatternsTopic } from "@/data/topics/design-patterns";
 import { gitInternalsTopic } from "@/data/topics/git-internals";
+import { gitRebaseMergeSquashTopic } from "@/data/topics/git-rebase-merge-squash";
 import { typescriptTypesTopic } from "@/data/topics/typescript-types";
 import { messageQueuesTopic } from "@/data/topics/message-queues";
 import { concurrencyParallelismTopic } from "@/data/topics/concurrency-parallelism";
@@ -117,6 +118,7 @@ import { setintervalVsRequestanimationframeTopic } from "@/data/topics/setinterv
 import { webComponentsShadowDomTopic } from "@/data/topics/web-components-shadow-dom";
 import { sseVsWebsocketTopic } from "@/data/topics/sse-vs-websocket";
 import { cssInJsVsUtilityTopic } from "@/data/topics/css-in-js-vs-utility";
+import { cssSpecificityCascadeTopic } from "@/data/topics/css-specificity-cascade";
 import { htmlVsHtmxTopic } from "@/data/topics/html-vs-htmx";
 import { tauriUnderTheHoodTopic } from "@/data/topics/tauri-under-the-hood";
 import { sagaPatternTopic } from "@/data/topics/saga-pattern";
@@ -263,6 +265,7 @@ export const knowledgeBase: Section[] = [
       htmlVsHtmxTopic,
       webComponentsShadowDomTopic,
       cssInJsVsUtilityTopic,
+      cssSpecificityCascadeTopic,
     ],
   },
   {
@@ -293,6 +296,7 @@ export const knowledgeBase: Section[] = [
     topics: [
       ciCdTopic,
       gitInternalsTopic,
+      gitRebaseMergeSquashTopic,
       kubernetesTopic,
       dockerComposeVsKubernetesVsEksTopic,
       iacTopic,
