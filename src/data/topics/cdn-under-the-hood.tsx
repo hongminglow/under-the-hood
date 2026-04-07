@@ -17,11 +17,11 @@ export const cdnUnderTheHoodTopic: Topic = {
     <p key="1">
       A <strong>Content Delivery Network (CDN)</strong> is a globally
       distributed layer of edge servers that can sit{" "}
-      <strong>in front of your real infrastructure</strong>. It does not
-      replace the idea of an origin by magic. Instead, it becomes the first
-      machine the user usually talks to, and then decides whether it can answer
-      from a nearby cache or whether it must fetch from your real backend or
-      static origin.
+      <strong>in front of your real infrastructure</strong>. It does not replace
+      the idea of an origin by magic. Instead, it becomes the first machine the
+      user usually talks to, and then decides whether it can answer from a
+      nearby cache or whether it must fetch from your real backend or static
+      origin.
     </p>,
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
       The Mental Model Most People Need
@@ -82,10 +82,12 @@ export const cdnUnderTheHoodTopic: Topic = {
       Why The Same Hostname Can Reach The Nearest CDN Server
     </h3>,
     <p key="6">
-      This is the part that feels strange at first: the domain may resolve to
-      a <strong>Cloudflare IP that is advertised from many physical locations
-      at once</strong>. That is not normal unicast routing to one machine. It
-      is usually <strong>anycast</strong>.
+      This is the part that feels strange at first: the domain may resolve to a{" "}
+      <strong>
+        Cloudflare IP that is advertised from many physical locations at once
+      </strong>
+      . That is not normal unicast routing to one machine. It is usually{" "}
+      <strong>anycast</strong>.
     </p>,
     <Grid key="7" cols={2} gap={6}>
       <Card title="Same IP, Many Places" description="Anycast">
@@ -99,8 +101,9 @@ export const cdnUnderTheHoodTopic: Topic = {
       <Card title="Not DNS Magic Alone" description="Routing still matters">
         <p className="mt-2 text-sm leading-relaxed text-foreground/80">
           DNS gives the browser an IP, but <strong>BGP path selection</strong>
-          is what steers packets to a nearby edge server sharing that same IP.
-          So “nearest CDN node” is a networking result, not just a DNS trick.
+          &nbsp;is what steers packets to a nearby edge server sharing that same
+          IP. So “nearest CDN node” is a networking result, not just a DNS
+          trick.
         </p>
       </Card>
     </Grid>,
@@ -147,7 +150,11 @@ export const cdnUnderTheHoodTopic: Topic = {
     </h3>,
     <Table
       key="11"
-      headers={["Situation", "Where The Response Comes From", "Does EC2/NGINX/App Run?"]}
+      headers={[
+        "Situation",
+        "Where The Response Comes From",
+        "Does EC2/NGINX/App Run?",
+      ]}
       rows={[
         [
           "Static asset cache hit",
@@ -191,7 +198,12 @@ user browser
     </h3>,
     <Table
       key="14"
-      headers={["Mode", "DNS Returns", "Who The Browser Connects To", "CDN Behavior"]}
+      headers={[
+        "Mode",
+        "DNS Returns",
+        "Who The Browser Connects To",
+        "CDN Behavior",
+      ]}
       rows={[
         [
           "Proxied / orange cloud",
@@ -220,11 +232,13 @@ user browser
       <Card title="Commonly Cached" description="Easy wins">
         <p className="mt-2 text-sm leading-relaxed text-foreground/80">
           Images, CSS, JS bundles, fonts, public static files, video segments,
-          and versioned assets with long cache headers are the classic CDN
-          wins.
+          and versioned assets with long cache headers are the classic CDN wins.
         </p>
       </Card>
-      <Card title="More Dangerous To Cache" description="Needs deliberate rules">
+      <Card
+        title="More Dangerous To Cache"
+        description="Needs deliberate rules"
+      >
         <p className="mt-2 text-sm leading-relaxed text-foreground/80">
           Personalized HTML, authenticated dashboards, cart state, and many API
           responses can go wrong if cached blindly because the response may be
@@ -263,7 +277,11 @@ user browser
     </h3>,
     <Table
       key="20"
-      headers={["Cloudflare Role", "What It Means", "Same Company, Different Layer"]}
+      headers={[
+        "Cloudflare Role",
+        "What It Means",
+        "Same Company, Different Layer",
+      ]}
       rows={[
         [
           "Registrar",
@@ -310,9 +328,12 @@ user browser
     </Grid>,
     <Callout key="24" type="tip" title="The Real Picture">
       A CDN does not merely “return cache.” It is often a global programmable
-      front door with <strong>anycast routing, TLS termination, cache storage,
-      request filtering, and origin forwarding</strong>. Caching is only one of
-      its jobs.
+      front door with{" "}
+      <strong>
+        anycast routing, TLS termination, cache storage, request filtering, and
+        origin forwarding
+      </strong>
+      . Caching is only one of its jobs.
     </Callout>,
     <h3 key="25" className="text-xl font-bold mt-8 mb-4">
       The Best Mental Model
@@ -321,11 +342,11 @@ user browser
       If you use Cloudflare with EC2, NGINX, and Docker, the browser usually
       reaches <strong>Cloudflare first</strong>, not your Elastic IP directly.
       Cloudflare then decides: <strong>serve cached content nearby</strong>,
-      <strong>run edge rules</strong>, or <strong>forward to your origin</strong>
-      . The reason the same hostname can reach a nearby server is that the
-      request is routed onto Cloudflare’s anycast network, where many edge POPs
-      advertise the same IP space and the internet sends the user to the best
-      available edge path.
+      <strong>run edge rules</strong>, or{" "}
+      <strong>forward to your origin</strong>. The reason the same hostname can
+      reach a nearby server is that the request is routed onto Cloudflare’s
+      anycast network, where many edge POPs advertise the same IP space and the
+      internet sends the user to the best available edge path.
     </p>,
   ],
 };

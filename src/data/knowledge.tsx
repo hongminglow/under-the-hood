@@ -136,6 +136,7 @@ import { fullAppHostingDeploymentTopic } from "@/data/topics/full-app-hosting-de
 import { llmDistillationTrainingEconomicsTopic } from "@/data/topics/llm-distillation-training-economics";
 import { harnessEngineeringTopic } from "@/data/topics/harness-engineering";
 import { domainRegistrarDnsHostingTopic } from "@/data/topics/domain-registrar-dns-hosting";
+import { jenkinsCicdDeepDiveTopic } from "@/data/topics/jenkins-cicd-deep-dive";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -296,6 +297,7 @@ export const knowledgeBase: Section[] = [
     icon: "GitMerge",
     topics: [
       ciCdTopic,
+      jenkinsCicdDeepDiveTopic,
       gitInternalsTopic,
       gitRebaseMergeSquashTopic,
       kubernetesTopic,
