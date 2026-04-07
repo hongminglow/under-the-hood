@@ -701,5 +701,270 @@ a { color: blue; }
       when it targets the parent alone and relies on inheritance to reach the child.
     </Callout>,
 
+    <h3 key="43" className="text-xl font-bold mt-8 mb-4">
+      Same Specificity, Multiple Files — Who Actually Wins?
+    </h3>,
+
+    <p key="44">
+      This is the question most CSS articles skip. When <code>app.css</code>,{" "}
+      <code>index.css</code>, a CSS Module, and a third-party library all have a
+      rule targeting the same element with the{" "}
+      <strong>exact same specificity score</strong>, the browser falls through to
+      the final tie-breaker: <strong>source order</strong>. The rule that appears{" "}
+      <strong>later in the final, concatenated stylesheet the browser sees</strong>{" "}
+      wins. The problem is that "which file loads last" is not obvious — it depends
+      on several layers.
+    </p>,
+
+    <Table
+      key="45"
+      headers={["Factor", "What Controls It", "Who Wins at Equal Specificity"]}
+      rows={[
+        [
+          "HTML <link> / <style> order",
+          "The order you write <link rel=\"stylesheet\"> tags in your HTML file.",
+          "The last <link> tag's rules win. Later in the DOM = later in the cascade.",
+        ],
+        [
+          "JS/Bundler import order (Vite, Webpack)",
+          "The order that import 'x.css' statements appear in your JS entry file.",
+          "The last imported file wins. Vite/Webpack concatenates them in import order.",
+        ],
+        [
+          "Third-party CSS (npm packages)",
+          "Where you import the library relative to your own CSS in your entry file.",
+          "Import third-party first, your CSS last → your rules win at equal specificity.",
+        ],
+        [
+          "CSS Modules (*.module.css)",
+          "Each CSS Module is still injected into the browser's single stylesheet at build time, in the order the component is first imported.",
+          "The component imported later wins. But CSS Modules hash class names (e.g. .btn_a3f2k), so they rarely collide with other files — only with global selectors.",
+        ],
+        [
+          "Inline <style> blocks in HTML",
+          "Their position in the HTML document relative to <link> tags.",
+          "A <style> block placed after all <link> tags wins over all linked stylesheets.",
+        ],
+        [
+          "@layer declarations",
+          "You explicitly control layer order at the top of your CSS.",
+          "Layer order overrides file load order entirely for layered styles. Un-layered styles always win regardless of order.",
+        ],
+      ]}
+    />,
+
+    <Callout key="46" type="warning" title="The Browser Sees One Giant Stylesheet — Not Many Files">
+      The browser does not maintain separate per-file priority. By the time CSS
+      reaches the cascade algorithm, all stylesheets have been merged into a single
+      ordered list of rules. <strong>File boundaries do not exist in the cascade.</strong>{" "}
+      Only the final position of each rule in that merged list matters for source
+      order tie-breaking.
+    </Callout>,
+
+    <h3 key="47" className="text-xl font-bold mt-8 mb-4">
+      How a Bundler (Vite / Webpack) Determines File Order
+    </h3>,
+
+    <p key="48">
+      In a modern React/Vue project with Vite or Webpack, CSS load order is
+      determined by <strong>JS import order</strong>, not alphabetical file names
+      or any other convention.
+    </p>,
+
+    <CodeBlock
+      key="49"
+      title="main.tsx — Import order = CSS load order"
+      language="typescript"
+      code={`// The order these lines appear DIRECTLY controls which CSS wins at equal specificity.
+// Bundler processes each import and appends its CSS to the output in this order.
+
+import 'some-library/dist/styles.css'   // injected FIRST → lowest priority
+import './index.css'                     // injected SECOND
+import './app.css'                       // injected THIRD → highest priority at equal specificity
+
+// Inside a component file:
+import './Button.module.css'             // injected when this component is first imported
+                                         // If Button is imported after app.css,
+                                         // Button.module.css rules appear after app.css.`}
+    />,
+
+    <CodeBlock
+      key="50"
+      title="specificity-tie-example.css — What actually wins"
+      language="css"
+      code={`/* ── some-library/dist/styles.css (injected first) ────────────────────── */
+.btn { background: gray; }           /* score: 0-0-1-0 */
+
+/* ── index.css (injected second) ──────────────────────────────────────── */
+.btn { background: blue; }           /* score: 0-0-1-0 — same specificity */
+
+/* ── app.css (injected third / last) ──────────────────────────────────── */
+.btn { background: green; }          /* score: 0-0-1-0 — WINS! Last position */
+
+/* Result: button is GREEN even though all three scores are identical.
+   Source order (= bundler import order) is the only tie-breaker left. */`}
+    />,
+
+    <h3 key="51" className="text-xl font-bold mt-8 mb-4">
+      CSS Modules: Why They Usually Don't Collide
+    </h3>,
+
+    <p key="52">
+      CSS Modules transform class names into{" "}
+      <strong>unique hashed strings at build time</strong>. A class named{" "}
+      <code>.btn</code> in <code>Button.module.css</code> becomes something like{" "}
+      <code>.btn_a3f2k9</code> in the final CSS. This means two CSS Modules files
+      can both have a <code>.btn</code> rule with the same specificity and{" "}
+      <strong>they will never clash</strong> — they are different selectors by the
+      time the browser sees them.
+    </p>,
+
+    <CodeBlock
+      key="53"
+      title="CSS Modules — what the browser actually sees"
+      language="css"
+      code={`/* You write in Button.module.css: */
+.btn { background: blue; }
+
+/* You write in Card.module.css: */
+.btn { background: red; }
+
+/* But the browser sees (after build): */
+.Button_btn__a3f2k { background: blue; }   /* unique hash per file */
+.Card_btn__7x9q2  { background: red; }    /* completely different selector */
+
+/* Zero collision. Source order is irrelevant because they never target the same element.
+   In your JSX, className={styles.btn} resolves to the correct hashed class automatically. */`}
+    />,
+
+    <Callout key="54" type="tip" title="When CSS Modules DO Have Source Order Issues">
+      CSS Modules only have source order problems when they target{" "}
+      <strong>global selectors</strong> (using <code>:global(.btn)</code>) or when
+      they both apply to the same element via composition (<code>composes</code>).
+      In those cases, the component imported first has its hashed class apply first,
+      and the component imported later wins at equal specificity — exactly like
+      regular CSS.
+    </Callout>,
+
+    <h3 key="55" className="text-xl font-bold mt-8 mb-4">
+      Third-Party CSS: The Right Import Strategy
+    </h3>,
+
+    <Table
+      key="56"
+      headers={["Import Pattern", "Result", "Recommended?"]}
+      rows={[
+        [
+          "Third-party imported AFTER your CSS",
+          "Library wins all specificity ties. Your styles get silently overridden.",
+          "No — avoid this.",
+        ],
+        [
+          "Third-party imported BEFORE your CSS",
+          "Your CSS wins all specificity ties. You can override the library simply by using the same selector.",
+          "Yes — the standard pattern.",
+        ],
+        [
+          "Third-party wrapped in @layer",
+          "Library's layered rules always lose to your un-layered rules, regardless of import order or specificity.",
+          "Best — explicit, immune to import order mistakes.",
+        ],
+        [
+          "CSS Reset / Normalize imported first",
+          "Reset applies first; all your styles override it. Works correctly.",
+          "Yes — correct for resets.",
+        ],
+      ]}
+    />,
+
+    <CodeBlock
+      key="57"
+      title="main.tsx — Recommended import order for a real project"
+      language="typescript"
+      code={`// 1. Third-party base styles first (lowest priority)
+import 'normalize.css'
+import 'some-ui-library/styles.css'
+
+// 2. Your global base styles
+import './styles/reset.css'
+import './styles/tokens.css'        // design tokens / CSS variables
+
+// 3. Your layout and component styles
+import './styles/layout.css'
+import './styles/components.css'
+
+// 4. Your utility/override styles last (highest priority)
+import './styles/utilities.css'
+
+// ↑ This order guarantees your utilities always win at equal specificity
+//   without needing !important at all.`}
+    />,
+
+    <CodeBlock
+      key="58"
+      title="The @layer approach — import-order-proof"
+      language="css"
+      code={`/* Declare your order explicitly at the TOP of your main CSS file.
+   This is immune to accidental import reordering. */
+@layer reset, third-party, base, components, utilities;
+
+/* Wrap third-party library by importing it into a layer */
+@layer third-party {
+  @import url('some-library/styles.css');
+}
+
+/* Your own styles — un-layered, so they ALWAYS beat the third-party layer */
+.btn { background: blue; }    /* wins over any .btn in third-party, always */
+
+/* Or put your own styles in explicitly ordered layers */
+@layer utilities {
+  .btn { background: blue; }  /* utilities layer beats base layer */
+}`}
+    />,
+
+    <Table
+      key="59"
+      headers={["Scenario", "Winner", "Why"]}
+      rows={[
+        [
+          "app.css .btn vs index.css .btn (same specificity)",
+          "Whichever is imported last in your JS entry file",
+          "Source order = bundler import order",
+        ],
+        [
+          "Button.module.css .btn vs Card.module.css .btn",
+          "Neither clash — they are different hashed selectors",
+          "CSS Modules hash prevents collision by design",
+        ],
+        [
+          "Bootstrap .btn vs your .btn (same specificity)",
+          "Your .btn wins if you import Bootstrap first",
+          "Your file appears later in the merged stylesheet",
+        ],
+        [
+          "@layer third-party .btn vs your un-layered .btn",
+          "Your un-layered .btn always wins",
+          "Un-layered beats any layer regardless of specificity",
+        ],
+        [
+          "Inline <style> after <link> tags vs linked CSS",
+          "Inline <style> wins",
+          "It appears later in the document — later = wins",
+        ],
+      ]}
+    />,
+
+    <Callout key="60" type="tip" title="The Practical Summary">
+      When specificity ties, the cascade falls to source order — and source order
+      means <strong>position in the browser's final merged stylesheet</strong>.
+      In a bundled app, that order is controlled by your{" "}
+      <strong>JS import order</strong>. The golden rules:{" "}
+      <strong>import third-party CSS first</strong>, your CSS last. Use{" "}
+      <code>@layer</code> to make this explicit and immune to accidents. Use CSS
+      Modules for component styles to eliminate collisions entirely via hashing. If
+      you cannot control import order (e.g., a library injects its own CSS via JS),{" "}
+      <code>@layer</code> is the only reliable escape hatch.
+    </Callout>,
+
   ],
 };
