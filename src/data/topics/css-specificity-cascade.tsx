@@ -407,8 +407,299 @@ p { color: red; }  /* ← This wins! No layer = highest layer priority */`}
       Using <code>!important</code> to fix specificity wars feels like a quick win, but it permanently removes that property from the normal cascade. The only legitimate uses are: (1) utility classes that must never be overridden (e.g., <code>.hidden</code>), (2) user accessibility overrides, and (3) fighting third-party libraries you cannot modify. In your own component styles, solving the root specificity problem is always the correct answer.
     </Callout>,
 
+    <h3 key="22" className="text-xl font-bold mt-8 mb-4">
+      The Two Extra Cascade Slots: Animations & Transitions
+    </h3>,
+
+    <p key="23" className="mb-4">
+      The cascade has <strong>more than three origins</strong>. The full CSS spec (Cascade Level 5) inserts two extra priority slots — one for <code>@keyframes</code> animations and one for transitions — at positions that initially look bizarre. Understanding <em>why</em> they sit where they do makes the logic click immediately.
+    </p>,
+
+    <Table
+      key="24"
+      headers={["Priority (Low → High)", "Cascade Slot", "What Lives Here"]}
+      rows={[
+        ["1 (Lowest)", "UA normal", "Browser built-in defaults — h1 bold, a blue, etc."],
+        ["2", "User normal", "End-user accessibility preferences, Dark Reader extension"],
+        ["3", "Author @layer (low → high)", "Your layered styles in declared order"],
+        ["4", "Author normal (un-layered)", "Your regular CSS rules — the majority of your code"],
+        ["5 ⚡", "CSS Animations (@keyframes)", "Active animation keyframe values — overrides normal styles"],
+        ["6", "Author !important", "Your !important rules — can stop an animation"],
+        ["7", "User !important", "User accessibility !important — beats your !important"],
+        ["8", "UA !important", "Browser's rare !important overrides"],
+        ["9 👑 (Highest)", "CSS Transitions", "Interpolated in-flight values — beats everything including !important"],
+      ]}
+    />,
+
+    <h3 key="25" className="text-xl font-bold mt-8 mb-4">
+      Why Animations (Slot 5) Sit Above Normal Author Styles
+    </h3>,
+
+    <p key="26" className="mb-4">
+      A <code>@keyframes</code> animation needs to <strong>temporarily override an element's normal CSS values</strong> while it is running — otherwise the animation would have no visible effect. If your stylesheet says <code>opacity: 1</code> and your animation says <code>opacity: 0</code> at the 50% keyframe, the animation value must win during playback. That is why animations are placed in slot 5, above all normal author rules.
+    </p>,
+
+    <p key="27" className="mb-4">
+      But animations deliberately sit <strong>below <code>!important</code> (slot 6)</strong>. This means you can forcibly halt or override a running animation with <code>!important</code> — a useful escape hatch for accessibility (e.g., the <code>prefers-reduced-motion</code> media query).
+    </p>,
+
+    <CodeBlock
+      key="28"
+      title="animation-cascade.css"
+      language="css"
+      code={`/* Normal author rule — slot 4 */
+.box { opacity: 1; background: blue; }
+
+/* Animation — slot 5, beats slot 4 during playback */
+@keyframes fade {
+  50% { opacity: 0; }   /* ← wins over the 'opacity: 1' rule above */
+}
+.box { animation: fade 2s infinite; }
+
+/* !important — slot 6, can STOP the animation mid-track */
+@media (prefers-reduced-motion: reduce) {
+  .box { animation: none !important; }
+  /* This beats slot 5 → animation is disabled for motion-sensitive users */
+}
+
+/* Practical proof — the animation WINS over normal rules */
+.box { opacity: 0.9; }   /* slot 4 — overridden by the keyframe at 50% */
+.box { opacity: 0.9 !important; } /* slot 6 — WOULD override the keyframe */`}
+    />,
+
+    <h3 key="29" className="text-xl font-bold mt-8 mb-4">
+      Why Transitions (Slot 9) Sit Above Everything — Even !important
+    </h3>,
+
+    <p key="30" className="mb-4">
+      This is the most counterintuitive part. CSS transitions sit at the <strong>absolute top of the cascade</strong>, beating every origin including <code>!important</code> from all sources. Here is the reason:
+    </p>,
+
+    <p key="31" className="mb-4">
+      When a transition fires, the browser is computing <strong>intermediate interpolated values</strong> between a start state and an end state — frame by frame, 60 times per second. If any stylesheet rule could override those interpolated values mid-flight, the element would instantly snap to the final value and <strong>no animation would be visible at all</strong>. The transition <em>must</em> own that property for its entire duration, or it physically cannot produce the smooth visual effect.
+    </p>,
+
+    <CodeBlock
+      key="32"
+      title="transition-cascade.css"
+      language="css"
+      code={`/* The transition is declared on the element */
+.btn {
+  background: blue;
+  transition: background 0.4s ease;
+}
+
+/* When the user hovers, background wants to change to red */
+.btn:hover { background: red; }
+
+/* During the 0.4s transition, the browser computes values like:
+   frame 1:  background: rgb(15, 15, 245)   ← interpolated, slot 9
+   frame 12: background: rgb(130, 0, 125)   ← interpolated, slot 9
+   frame 24: background: rgb(239, 0, 15)    ← interpolated, slot 9
+
+   ALL of these beat your normal CSS AND your !important rules.
+   If they didn't, the element would jump directly to 'red' on hover,
+   and the 0.4s visual fade would never render. */
+
+/* Even this cannot interrupt an in-flight transition: */
+.btn { background: green !important; }
+/* ↑ slot 6 — transition slot 9 still wins during the animation frames */
+
+/* The ONLY way to stop a transition mid-flight is to remove it: */
+.btn { transition: none !important; }
+/* ↑ Removing the transition property itself — then there is nothing to interpolate */`}
+    />,
+
+    <Grid key="33" cols={2} gap={6} className="my-8">
+      <Card title="Animation — The Temporary Override" description="Slot 5: above normal, below !important">
+        <p className="text-sm text-muted-foreground mb-2">
+          Animations need to override your normal property values <em>while playing</em>, but you retain the ability to stop them cold with <code>!important</code>. This is intentional — accessibility rules like <code>prefers-reduced-motion</code> must be able to kill animations unconditionally.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          When the animation ends or is paused, the normal cascade resumes and the element reverts to its authored styles.
+        </p>
+      </Card>
+      <Card title="Transition — The Interpolation Lock" description="Slot 9: above everything, even !important">
+        <p className="text-sm text-muted-foreground mb-2">
+          Transitions lock the interpolated intermediate value into the top of the cascade for each frame. Without this, the browser would have no mechanism to render smooth state changes — the element would teleport instantly to its final value.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          Once the transition completes, the lock is released and the normal cascade takes over again. The "winner" at the end is just your regular CSS.
+        </p>
+      </Card>
+    </Grid>,
+
+    <Callout key="34" type="info" title="The Practical Consequence: Why Your !important Sometimes Doesn't Work">
+      If you add <code>color: red !important</code> to an element that is mid-transition, you will still see the smooth colour animation complete before red takes hold. This is the transition cascade slot in action. To truly interrupt a live transition, set <code>transition: none</code> on the element — removing the transition removes its cascade slot entirely, and your <code>!important</code> rule immediately wins.
+    </Callout>,
+
     <Callout key="21" type="tip" title="Modern Best Practice: Lock the Layer Order Early">
       At the top of your main CSS file, declare all layers in one line: <code>@layer reset, base, components, utilities;</code>. This ensures order is explicit and predictable regardless of which files load first — a critical pattern for design systems and large codebases using CSS Modules or PostCSS.
     </Callout>,
+
+    <h3 key="35" className="text-xl font-bold mt-8 mb-4">
+      Common Misconception: "Inheritance Can Outrun Specificity"
+    </h3>,
+
+    <Callout key="36" type="warning" title="Inheritance Is Actually the Weakest Force — Not the Strongest">
+      Inheritance sits at the <strong>very bottom</strong> of the cascade. It is the last resort, not the first.
+      An inherited value is only used when <strong>zero</strong> cascade rules explicitly set that property on the element.
+      Even a universal selector <code>* {"{"} color: blue {"}"}</code> with 0-0-0-0 specificity beats an inherited value from a parent
+      with a massive specificity score like <code>#a #b #c .d .e .f {"{"} color: red {"}"}</code>. The parent's specificity is completely irrelevant
+      to the child — <strong>specificity is only compared between rules targeting the exact same element</strong>.
+    </Callout>,
+
+    <p key="37" className="mb-4">
+      The reason people get confused is a subtle but critical rule: <strong>specificity scores do not travel with the inherited value</strong>.
+      When a browser resolves a property on an element, it only compares rules that <em>directly target that element</em>.
+      A parent rule — no matter how specific — contributes only a naked, weightless inherited value to the child.
+    </p>,
+
+    <CodeBlock
+      key="38"
+      title="case-A-selector-includes-child.css"
+      language="css"
+      code={`/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CASE A — The long selector ENDS with 'a', so it directly targets <a>.
+   Both rules are explicit on <a>. Specificity decides between them.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Selector ends with 'a' — targets <a> directly. Score on <a>: 0-1-3-2 */
+#header .nav ul.list li a { color: red; }
+
+/* Also targets <a> directly. Score on <a>: 0-0-0-1 */
+a { color: blue; }
+
+/* RESULT: RED ✅
+   Both rules directly target <a>, so specificity competes as normal.
+   0-1-3-2  vs  0-0-0-1  →  red wins by a wide margin.
+
+   No inheritance involved here at all. The long selector is not
+   "targeting the parent" — the word 'a' at the end means it applies
+   directly to the <a> element. The ancestors (#header, .nav, ul…) are
+   just context conditions that must be satisfied, not the target.     */`}
+    />,
+
+    <CodeBlock
+      key="38b"
+      title="case-B-selector-stops-at-parent.css"
+      language="css"
+      code={`/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CASE B — The selector ends at 'ul'. It does NOT include 'a'.
+   The <a>'s color only comes from inheritance. That's the key change.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Selector ends with 'ul' — targets <ul> directly. Score on <ul>: 0-2-0-1
+   The <a> inside the <ul> is NOT targeted. It only picks up the color
+   value via inheritance (color is an inherited property).             */
+#wrapper #nav ul { color: red; }
+
+/* Targets <a> directly. Score on <a>: 0-0-0-1 */
+a { color: blue; }
+
+/* RESULT: BLUE ✅
+   Here is where inheritance = zero weight matters:
+
+   The browser is now resolving 'color' for the <a> element.
+   It finds two candidates:
+     1. Inherited value from #wrapper #nav ul  →  "red"  (zero weight, no score)
+     2. Explicit rule  'a { color: blue }'     →  "blue" (score: 0-0-0-1)
+
+   These are NOT compared by specificity score against each other.
+   The inherited value is immediately set aside. Any explicit rule at
+   any specificity — even 0-0-0-1 — beats a bare inherited value.
+   So blue wins.
+
+   The 0-2-0-1 score on #wrapper #nav ul is IRRELEVANT to the <a>.
+   That score only mattered when competing against other rules on <ul>. */`}
+    />,
+
+    <CodeBlock
+      key="39"
+      title="case-C-zero-specificity-beats-inheritance.css"
+      language="css"
+      code={`/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CASE C — Extreme proof: even 0-0-0-0 beats inheritance.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Parent with 10 chained classes — score on parent: 0-0-10-0 (very high) */
+.a.b.c.d.e.f.g.h.i.j { color: red; }
+
+/* Child <p> inherits color:red from the parent.
+   That inherited value has score: nothing. Zero. It doesn't even have a slot.  */
+
+/* Universal selector on every element — score: 0-0-0-0 (the floor) */
+* { color: blue; }
+
+/* RESULT: <p> is BLUE ✅
+
+   Even though the parent's rule scored 0-0-10-0, the <p> never sees
+   that score at all. The <p> only receives the raw value "red" with
+   no score attached. The * rule is explicit on <p> with 0-0-0-0.
+   0-0-0-0 > "no score"  →  blue wins.
+
+   THE ONE-SENTENCE RULE:
+   Explicit always beats inherited. Specificity is never compared
+   between an explicit rule and an inherited value. They are not
+   even in the same category of competition.                          */`}
+    />,
+
+    <Grid key="40" cols={2} gap={6} className="my-8">
+      <Card title="The Rule to Internalize" description="Specificity is always per-element">
+        <p className="text-sm text-muted-foreground mb-2">
+          Specificity scores are <strong>only compared between rules targeting the same element</strong>.
+          A rule on a parent, no matter how specific, <em>does not compete on specificity</em> for the child's properties.
+          It only contributes an inheritance value, which has zero weight in the child's cascade.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          This is why design systems never rely on specificity from ancestor selectors to style children —
+          any direct rule on the child, however weak, will silently override it.
+        </p>
+      </Card>
+      <Card title="When Developers Get Burned" description="The classic parent trap">
+        <p className="text-sm text-muted-foreground mb-2">
+          A common real-world bug: a designer adds <code>#app .theme-dark p {"{"} color: white {"}"}</code> expecting all paragraphs to be white.
+          But a CSS reset somewhere contains <code>p {"{"} color: inherit {"}"}</code> or even <code>p {"{"} color: #333 {"}"}</code> —
+          and that low-specificity rule directly on <code>p</code> silently wins over the inherited white.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          The fix: target the <code>p</code> directly with at least matching specificity, or use <code>@layer</code> to control priority structurally.
+        </p>
+      </Card>
+    </Grid>,
+
+    <Table
+      key="41"
+      headers={["Value Type", "Has Specificity?", "Can It Lose to a Lower Explicit Rule?", "Example"]}
+      rows={[
+        [
+          "Explicit rule on element",
+          "Yes — full score",
+          "Only to a higher-specificity explicit rule",
+          ".btn { color: red } — score 0-0-1-0",
+        ],
+        [
+          "Inherited value from parent",
+          "No — zero weight",
+          "Yes — loses to ANY explicit rule, even * (0-0-0-0)",
+          "color: red inherited from #parent { color: red }",
+        ],
+        [
+          "Initial value (browser default)",
+          "No — zero weight",
+          "Yes — same as inheritance, overridden by any explicit rule",
+          "display: inline — the spec default before any CSS",
+        ],
+      ]}
+    />,
+
+    <Callout key="42" type="success" title="The Corrected Mental Model">
+      Inheritance is a <strong>passive fallback</strong>, not an active cascade participant. Think of it as a default value that gets
+      filled in only when the cascade produces no winner. Once even a single explicit rule targets a property on an element —
+      regardless of specificity — the cascade fires and inheritance is skipped entirely. The phrase "high-specificity parent overrides the child"
+      only holds true when the selector itself includes the child (e.g. <code>#parent .child</code> directly targeting <code>.child</code>), not
+      when it targets the parent alone and relies on inheritance to reach the child.
+    </Callout>,
+
   ],
 };
