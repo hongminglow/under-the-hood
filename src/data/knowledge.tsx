@@ -135,6 +135,7 @@ import { vibeCodingAiPairProgrammingTopic } from "@/data/topics/vibe-coding-ai-p
 import { fullAppHostingDeploymentTopic } from "@/data/topics/full-app-hosting-deployment";
 import { llmDistillationTrainingEconomicsTopic } from "@/data/topics/llm-distillation-training-economics";
 import { harnessEngineeringTopic } from "@/data/topics/harness-engineering";
+import { domainRegistrarDnsHostingTopic } from "@/data/topics/domain-registrar-dns-hosting";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -310,6 +311,7 @@ export const knowledgeBase: Section[] = [
       terminalsShellsKernelTopic,
       nginxUnderTheHoodTopic,
       fullAppHostingDeploymentTopic,
+      domainRegistrarDnsHostingTopic,
     ],
   },
   {
