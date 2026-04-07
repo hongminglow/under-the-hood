@@ -21,11 +21,147 @@ export const cssSpecificityCascadeTopic: Topic = {
     </p>,
 
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
+      The Three Style Origins: Who Writes the CSS?
+    </h3>,
+
+    <p key="2b" className="mb-4">
+      Before specificity or <code>@layer</code> even enters the picture, the browser asks a more fundamental question:{" "}
+      <strong>where did this style come from?</strong> There are exactly three origins, and the cascade ranks them in a fixed priority order.
+      As a developer, <strong>every line of CSS you write is Author style</strong> — the middle tier.
+    </p>,
+
+    <Grid key="2c" cols={3} gap={6} className="my-8">
+      <Card title="1. User-Agent (Browser) Styles" description="The browser's built-in defaults">
+        <p className="text-sm text-muted-foreground mb-2">
+          Every browser ships with a hidden built-in stylesheet called the <strong>User-Agent (UA) stylesheet</strong>.
+          It is the reason an unstyled HTML page still looks readable — headings are bold, links are blue and underlined,
+          lists have bullets, and <code>&lt;h1&gt;</code> is larger than <code>&lt;h2&gt;</code>.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          You never write this. It is baked into Chrome, Firefox, and Safari. Each browser has a slightly different
+          UA stylesheet, which is why a totally blank CSS page can look marginally different across browsers.
+          This is the <strong>lowest priority</strong> origin — anything you write overrides it automatically.
+        </p>
+      </Card>
+      <Card title="2. User Styles" description="The end-user's personal overrides">
+        <p className="text-sm text-muted-foreground mb-2">
+          These are CSS rules the <strong>person visiting your website</strong> has applied themselves — not you the developer.
+          This origin exists primarily for <strong>accessibility</strong>: a user with low vision might install a browser extension
+          or OS setting that forces all text to be at least 20px, or overrides all colors to a high-contrast theme.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          In practice, most users never set these. But when they do, their <code>!important</code> user styles outrank your
+          <code>!important</code> author styles — the cascade deliberately protects the user's accessibility needs above your design choices.
+        </p>
+      </Card>
+      <Card title="3. Author Styles" description="Everything YOU write as a developer">
+        <p className="text-sm text-muted-foreground mb-2">
+          This is <strong>every single CSS file you write</strong>. Your <code>index.css</code>, your Tailwind utilities,
+          your CSS Modules, styled-components, SCSS, inline <code>style</code> attributes — all of it is Author style.
+          It outranks UA styles automatically, which is why writing <code>a {"{"} color: black {"}"}</code> removes the browser's default blue link color.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          The <code>@layer</code> feature only operates <em>within</em> the Author origin — it lets you order your own
+          stylesheets predictably (e.g., third-party library layers vs your own utility layers).
+        </p>
+      </Card>
+    </Grid>,
+
+    <CodeBlock
+      key="2d"
+      title="style-origins-annotated.css"
+      language="css"
+      code={`/* ─── Origin 1: User-Agent stylesheet (inside the browser binary) ───────
+   You never write or see this file. It looks roughly like this:
+   Chrome's built-in defaults for every HTML element.             */
+
+h1 { display: block; font-size: 2em;   font-weight: bold; margin: 0.67em 0; }
+h2 { display: block; font-size: 1.5em; font-weight: bold; margin: 0.83em 0; }
+p  { display: block; margin: 1em 0; }
+a  { color: -webkit-link; text-decoration: underline; cursor: pointer; }
+ul { display: block; list-style-type: disc; margin: 1em 0; padding-left: 40px; }
+b, strong { font-weight: bold; }
+
+/* ─── Origin 2: User stylesheet (end-user personal overrides) ───────────
+   A user installs "Dark Reader" or sets OS accessibility preferences.
+   Most users never configure this — but when they do, it looks like:  */
+
+/* User's personal browser stylesheet — set via browser extensions/prefs */
+* { font-size: 18px !important; }           /* forces minimum readable size */
+body { background: #000 !important;
+       color: #fff !important; }            /* high-contrast accessibility mode */
+
+/* ─── Origin 3: Author stylesheet ← THIS IS YOU, THE DEVELOPER ──────────
+   Everything below is Author style. Your framework, your components,
+   your inline styles — they all live here.                           */
+
+/* CSS Reset (still Author!) — overrides UA defaults intentionally */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, sans-serif; }
+a { color: inherit; text-decoration: none; }   /* removes blue + underline */
+
+/* Your component CSS (Author) */
+.btn {
+  background-color: #6366f1;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+/* Tailwind utility (Author) */
+/* .text-red-500 { color: rgb(239 68 68); } — generated by Tailwind, still Author */
+
+/* Inline style attribute (Author — highest specificity within Author origin) */
+/* <div style="color: red"> — still Author, not a separate origin */`}
+    />,
+
+    <Callout key="2e" type="info" title="What About CSS Resets (Normalize.css, Tailwind Preflight)?">
+      CSS resets like <code>normalize.css</code> or Tailwind's <code>preflight</code> are <strong>still Author styles</strong>.
+      They are just Author styles deliberately written to neutralize UA defaults — effectively filling in a blank canvas before your
+      own design rules apply. They win over UA styles purely because of origin priority, not because of anything special about them.
+    </Callout>,
+
+    <Table
+      key="2f"
+      headers={["Origin", "Who Writes It?", "Common Examples", "Priority (Normal)", "Priority (!important)"]}
+      rows={[
+        [
+          "User-Agent (Browser)",
+          "The browser vendor",
+          "h1 bold, a underlined blue, ul with bullets, p with margins",
+          "Lowest (1st)",
+          "Highest when !important (rare)",
+        ],
+        [
+          "User",
+          "The website visitor",
+          "Dark Reader extension, OS high-contrast mode, browser font size override",
+          "Middle (2nd)",
+          "Highest — beats author !important",
+        ],
+        [
+          "Author",
+          "You, the developer",
+          "Your index.css, Tailwind, CSS Modules, styled-components, inline style=\"\"",
+          "Highest (3rd) — wins by default",
+          "Overrides UA !important, but not User !important",
+        ],
+      ]}
+    />,
+
+    <Callout key="2g" type="tip" title="How to Inspect UA Styles in DevTools">
+      In Chrome DevTools, open the <strong>Elements → Styles</strong> panel and scroll to the bottom.
+      You will see a section labelled <em>"user agent stylesheet"</em> — these are the grey, struck-through rules
+      showing exactly what the browser applied before your CSS overrode them. This is the fastest way to understand
+      why an element has unexpected default spacing, display behaviour, or font sizing.
+    </Callout>,
+
+    <h3 key="3" className="text-xl font-bold mt-8 mb-4">
       The Full Cascade Resolution Order (Highest → Lowest Priority)
     </h3>,
 
     <Flow
-      key="3"
+      key="3f"
       steps={[
         {
           title: "1. Origin & Importance (!important)",
