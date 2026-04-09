@@ -119,6 +119,7 @@ import { webComponentsShadowDomTopic } from "@/data/topics/web-components-shadow
 import { sseVsWebsocketTopic } from "@/data/topics/sse-vs-websocket";
 import { cssInJsVsUtilityTopic } from "@/data/topics/css-in-js-vs-utility";
 import { cssSpecificityCascadeTopic } from "@/data/topics/css-specificity-cascade";
+import { polyfillsDeepDiveTopic } from "@/data/topics/polyfills-deep-dive";
 import { htmlVsHtmxTopic } from "@/data/topics/html-vs-htmx";
 import { tauriUnderTheHoodTopic } from "@/data/topics/tauri-under-the-hood";
 import { sagaPatternTopic } from "@/data/topics/saga-pattern";
@@ -268,6 +269,7 @@ export const knowledgeBase: Section[] = [
       webComponentsShadowDomTopic,
       cssInJsVsUtilityTopic,
       cssSpecificityCascadeTopic,
+      polyfillsDeepDiveTopic,
     ],
   },
   {
