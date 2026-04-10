@@ -139,6 +139,7 @@ import { harnessEngineeringTopic } from "@/data/topics/harness-engineering";
 import { domainRegistrarDnsHostingTopic } from "@/data/topics/domain-registrar-dns-hosting";
 import { htmlEntitiesTopic } from "@/data/topics/html-entities";
 import { jenkinsCicdDeepDiveTopic } from "@/data/topics/jenkins-cicd-deep-dive";
+import { awsServicesMappingTopic } from "@/data/topics/aws-services-mapping";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -318,6 +319,7 @@ export const knowledgeBase: Section[] = [
       nginxUnderTheHoodTopic,
       fullAppHostingDeploymentTopic,
       domainRegistrarDnsHostingTopic,
+      awsServicesMappingTopic,
     ],
   },
   {
