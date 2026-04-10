@@ -140,6 +140,7 @@ import { domainRegistrarDnsHostingTopic } from "@/data/topics/domain-registrar-d
 import { htmlEntitiesTopic } from "@/data/topics/html-entities";
 import { jenkinsCicdDeepDiveTopic } from "@/data/topics/jenkins-cicd-deep-dive";
 import { awsServicesMappingTopic } from "@/data/topics/aws-services-mapping";
+import { paymentGatewayInternalsTopic } from "@/data/topics/payment-gateway-internals";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 export type { Topic, Section };
@@ -338,6 +339,14 @@ export const knowledgeBase: Section[] = [
       harnessEngineeringTopic,
       vibeCodingAiPairProgrammingTopic,
       llmDistillationTrainingEconomicsTopic,
+    ],
+  },
+  {
+    id: "fintech",
+    title: "Fintech & Payments",
+    icon: "CreditCard",
+    topics: [
+      paymentGatewayInternalsTopic,
     ],
   },
 ];

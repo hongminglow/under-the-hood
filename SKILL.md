@@ -117,6 +117,7 @@ For visualizing sequential architectural logic, pipelines, or step-by-step proce
 ## Data Entry Workflow
 
 - **Topic Icons:** Choose specific relevance (e.g. \`Zap\` for networking, \`Search\` for DNS, \`Lock\` for security).
+- **Categories & Scope Guidelines:** If a newly written topic falls outside the scope of existing categories, you are free to define and create a new section for it (or group it under an "Others" section if applicable) in the registry. Never force a topic into an unrelated category.
 - **Default Action Bias:** For technical questions, act as a content author first. Write the topic into the codebase without waiting for extra confirmation unless the user explicitly asks not to modify files.
 - **Existing Topic Check:** Before creating a new file, quickly check whether the topic already exists or should be merged into a nearby article.
 - **Registry Wiring:** Always import the topic into `src/data/knowledge.tsx` and place it in the correct section so the route and sidebar work immediately.
