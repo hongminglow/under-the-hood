@@ -141,8 +141,10 @@ import { htmlEntitiesTopic } from "@/data/topics/html-entities";
 import { jenkinsCicdDeepDiveTopic } from "@/data/topics/jenkins-cicd-deep-dive";
 import { awsServicesMappingTopic } from "@/data/topics/aws-services-mapping";
 import { paymentGatewayInternalsTopic } from "@/data/topics/payment-gateway-internals";
+import { onlineMultiplayerArchitectureTopic } from "@/data/topics/online-multiplayer-architecture";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
+
 export type { Topic, Section };
 
 export const knowledgeBase: Section[] = [
@@ -347,6 +349,14 @@ export const knowledgeBase: Section[] = [
     icon: "CreditCard",
     topics: [
       paymentGatewayInternalsTopic,
+    ],
+  },
+  {
+    id: "game-engineering",
+    title: "Game Engineering",
+    icon: "Gamepad2",
+    topics: [
+      onlineMultiplayerArchitectureTopic,
     ],
   },
 ];
