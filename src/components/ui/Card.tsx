@@ -12,7 +12,7 @@ export function Card({ title, description, children, className }: CardProps) {
   return (
     <div
       className={cn(
-        "rounded-2xl border border-border/60 bg-[#02120a]/40 backdrop-blur-md p-6 shadow-2xl transition-all hover:bg-[#02120a]/60 hover:border-primary/30 group mb-8",
+        "rounded-2xl border border-border/60 bg-[#02120a]/40 backdrop-blur-md p-6 shadow-2xl transition-all hover:bg-[#02120a]/60 hover:border-primary/30 group mb-2",
         className,
       )}
     >
