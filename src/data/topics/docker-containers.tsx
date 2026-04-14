@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Grid } from "@/components/ui/Grid";
 import { Highlight } from "@/components/ui/Highlight";
+import { MistakeCard } from "@/components/ui/MistakeCard";
 import { Step } from "@/components/ui/Step";
 import type { Topic } from "@/data/types";
 
@@ -200,10 +201,13 @@ volumes:
     <h3 key="mistakes-title" className="text-xl font-bold mt-8 mb-4">
       Common Docker Mistakes
     </h3>,
-    <Card key="mistake-1" title="❌ Mistake 1: No .dockerignore File" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;Copying <code>node_modules</code> and <code>.git</code> into the image bloats it by 500MB+.
-      </p>
+    <MistakeCard
+      key="mistake-1"
+      number={1}
+      title="No .dockerignore File"
+      problem="Copying node_modules and .git into the image bloats it by 500MB+."
+      solution="Create a .dockerignore file (like .gitignore) to exclude unnecessary files."
+    >
       <CodeBlock
         language="text"
         code={`# .dockerignore
@@ -214,14 +218,14 @@ node_modules
 dist
 coverage`}
       />
-      <p className="text-sm text-white/90 mt-2">
-        <strong className="text-green-400">Solution:</strong>&nbsp;Create a <code>.dockerignore</code> file (like <code>.gitignore</code>) to exclude unnecessary files.
-      </p>
-    </Card>,
-    <Card key="mistake-2" title="❌ Mistake 2: Running as Root User" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;If an attacker exploits your app, they have root access to the container.
-      </p>
+    </MistakeCard>,
+    <MistakeCard
+      key="mistake-2"
+      number={2}
+      title="Running as Root User"
+      problem="If an attacker exploits your app, they have root access to the container."
+      solution="Create and use a non-root user for running the application."
+    >
       <CodeBlock
         language="dockerfile"
         code={`# BAD: Runs as root (default)
@@ -233,11 +237,14 @@ RUN adduser -S nodejs -u 1001
 USER nodejs
 CMD ["node", "index.js"]`}
       />
-    </Card>,
-    <Card key="mistake-3" title="❌ Mistake 3: Not Using Layer Caching" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;Copying code before installing dependencies invalidates cache on every code change.
-      </p>
+    </MistakeCard>,
+    <MistakeCard
+      key="mistake-3"
+      number={3}
+      title="Not Using Layer Caching"
+      problem="Copying code before installing dependencies invalidates cache on every code change."
+      solution="Copy package.json first, install dependencies, then copy code. Docker caches each layer - if package.json hasn't changed, it reuses the cached npm install layer (saves minutes)."
+    >
       <CodeBlock
         language="dockerfile"
         code={`# BAD: Code changes invalidate npm install cache
@@ -249,10 +256,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .`}
       />
-      <p className="text-sm text-white/90 mt-2">
-        <strong className="text-green-400">Why:</strong>&nbsp;Docker caches each layer. If <code>package.json</code> hasn't changed, it reuses the cached <code>npm install</code> layer (saves minutes).
-      </p>
-    </Card>,
+    </MistakeCard>,
 
     <Callout key="best-practices" type="tip" title="Docker Best Practices Checklist">
       ✅ Use multi-stage builds<br/>

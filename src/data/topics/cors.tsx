@@ -4,6 +4,7 @@ import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Flow } from "@/components/ui/Flow";
 import { Grid } from "@/components/ui/Grid";
 import { Highlight } from "@/components/ui/Highlight";
+import { MistakeCard } from "@/components/ui/MistakeCard";
 import { Table } from "@/components/ui/Table";
 import type { Topic } from "@/data/types";
 
@@ -206,10 +207,13 @@ app.post('/api/transfer', (req, res) => {
     <h3 key="26" className="text-xl font-bold mt-8 mb-4">
       Common CORS Mistakes & Fixes
     </h3>,
-    <Card key="27" title="❌ Mistake 1: CORS Middleware Order" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;CORS middleware placed after routes.
-      </p>
+    <MistakeCard
+      key="mistake-1"
+      number={1}
+      title="CORS Middleware Order"
+      problem="CORS middleware placed after routes."
+      solution="Place CORS middleware before all routes so it runs first."
+    >
       <CodeBlock
         language="javascript"
         code={`// ❌ WRONG: CORS never runs for /api/users
@@ -220,11 +224,14 @@ app.use(cors());
 app.use(cors());
 app.get('/api/users', (req, res) => res.json(users));`}
       />
-    </Card>,
-    <Card key="28" title="❌ Mistake 2: Forgetting OPTIONS Handler" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;Custom route handlers don't respond to OPTIONS.
-      </p>
+    </MistakeCard>,
+    <MistakeCard
+      key="mistake-2"
+      number={2}
+      title="Forgetting OPTIONS Handler"
+      problem="Custom route handlers don't respond to OPTIONS."
+      solution="Explicitly handle OPTIONS requests for each route."
+    >
       <CodeBlock
         language="javascript"
         code={`// ❌ WRONG: OPTIONS returns 404
@@ -234,11 +241,14 @@ app.post('/api/data', handler);
 app.options('/api/data', cors());
 app.post('/api/data', cors(), handler);`}
       />
-    </Card>,
-    <Card key="29" title="❌ Mistake 3: Localhost Port Mismatch" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;<code>localhost:3000</code> ≠ <code>localhost:3001</code>
-      </p>
+    </MistakeCard>,
+    <MistakeCard
+      key="mistake-3"
+      number={3}
+      title="Localhost Port Mismatch"
+      problem="localhost:3000 ≠ localhost:3001"
+      solution="Use regex to allow all localhost ports in development."
+    >
       <CodeBlock
         language="javascript"
         code={`// ❌ WRONG: Only allows port 3000
@@ -247,7 +257,7 @@ origin: 'http://localhost:3000'
 // ✅ CORRECT: Allow all localhost ports in dev
 origin: /^http:\\/\\/localhost:\\d+$/`}
       />
-    </Card>,
+    </MistakeCard>,
 
     <h3 key="30" className="text-xl font-bold mt-8 mb-4">
       Why Postman Doesn't Care

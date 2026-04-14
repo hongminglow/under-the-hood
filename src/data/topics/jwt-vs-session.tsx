@@ -2,6 +2,7 @@ import { Callout } from "@/components/ui/Callout";
 import { Card } from "@/components/ui/Card";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Grid } from "@/components/ui/Grid";
+import { MistakeCard } from "@/components/ui/MistakeCard";
 import { Table } from "@/components/ui/Table";
 import type { Topic } from "@/data/types";
 
@@ -100,30 +101,27 @@ const signature = HMACSHA256(
     <h3 key="mistakes-title" className="text-xl font-bold mt-8 mb-4">
       Common Mistakes
     </h3>,
-    <Card key="mistake-1" title="❌ Mistake 1: Storing JWTs in localStorage" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;Any XSS attack can steal tokens with <code>localStorage.getItem('token')</code>.
-      </p>
-      <p className="text-sm text-white/90">
-        <strong className="text-green-400">Solution:</strong>&nbsp;Store JWTs in httpOnly cookies. The browser sends them automatically, and JavaScript cannot access them.
-      </p>
-    </Card>,
-    <Card key="mistake-2" title="❌ Mistake 2: Not Validating exp Claim" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;Accepting expired tokens allows attackers to reuse old stolen tokens indefinitely.
-      </p>
-      <p className="text-sm text-white/90">
-        <strong className="text-green-400">Solution:</strong>&nbsp;Always check <code>exp</code> claim: <code>if (Date.now() &gt;= payload.exp * 1000) throw new Error('Token expired')</code>
-      </p>
-    </Card>,
-    <Card key="mistake-3" title="❌ Mistake 3: Using Weak Secret Keys" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;Short secrets like "secret123" can be brute-forced in minutes.
-      </p>
-      <p className="text-sm text-white/90">
-        <strong className="text-green-400">Solution:</strong>&nbsp;Use cryptographically random 256-bit keys: <code>openssl rand -base64 32</code>
-      </p>
-    </Card>,
+    <MistakeCard
+      key="mistake-1"
+      number={1}
+      title="Storing JWTs in localStorage"
+      problem="Any XSS attack can steal tokens with localStorage.getItem('token')."
+      solution="Store JWTs in httpOnly cookies. The browser sends them automatically, and JavaScript cannot access them."
+    />,
+    <MistakeCard
+      key="mistake-2"
+      number={2}
+      title="Not Validating exp Claim"
+      problem="Accepting expired tokens allows attackers to reuse old stolen tokens indefinitely."
+      solution={<>Always check <code>exp</code> claim: <code>if (Date.now() &gt;= payload.exp * 1000) throw new Error('Token expired')</code></>}
+    />,
+    <MistakeCard
+      key="mistake-3"
+      number={3}
+      title="Using Weak Secret Keys"
+      problem="Short secrets like 'secret123' can be brute-forced in minutes."
+      solution={<>Use cryptographically random 256-bit keys: <code>openssl rand -base64 32</code></>}
+    />,
 
     <h3 key="rotation-title" className="text-xl font-bold mt-8 mb-4">
       Token Rotation Strategy

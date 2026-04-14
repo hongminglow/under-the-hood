@@ -4,6 +4,7 @@ import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Flow } from "@/components/ui/Flow";
 import { Grid } from "@/components/ui/Grid";
 import { Highlight } from "@/components/ui/Highlight";
+import { MistakeCard } from "@/components/ui/MistakeCard";
 import { Table } from "@/components/ui/Table";
 import type { Topic } from "@/data/types";
 
@@ -249,30 +250,27 @@ const { access_token } = await response.json();
     <h3 key="28" className="text-xl font-bold mt-8 mb-4">
       Common Mistakes
     </h3>,
-    <Card key="29" title="❌ Mistake 1: Using OAuth for Authentication" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;OAuth 2.0 access tokens don't identify users. They only grant permission to access resources.
-      </p>
-      <p className="text-sm text-white/90">
-        <strong className="text-green-400">Solution:</strong>&nbsp;Use OIDC (OpenID Connect) which adds an ID token with user info. All major providers (Google, Auth0, Okta) support OIDC.
-      </p>
-    </Card>,
-    <Card key="30" title="❌ Mistake 2: Storing Tokens in localStorage" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;Vulnerable to XSS attacks. Any malicious script can read localStorage and steal tokens.
-      </p>
-      <p className="text-sm text-white/90">
-        <strong className="text-green-400">Solution:</strong>&nbsp;Store access tokens in memory (React state). Store refresh tokens in httpOnly cookies (inaccessible to JavaScript).
-      </p>
-    </Card>,
-    <Card key="31" title="❌ Mistake 3: Not Validating Redirect URI" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
-      <p className="text-sm text-white/90 mb-2">
-        <strong className="text-red-400">Problem:</strong>&nbsp;Attackers can steal authorization codes by registering malicious redirect URIs.
-      </p>
-      <p className="text-sm text-white/90">
-        <strong className="text-green-400">Solution:</strong>&nbsp;Whitelist exact redirect URIs in your OAuth provider settings. Never use wildcards in production.
-      </p>
-    </Card>,
+    <MistakeCard
+      key="mistake-1"
+      number={1}
+      title="Using OAuth for Authentication"
+      problem="OAuth 2.0 access tokens don't identify users. They only grant permission to access resources."
+      solution="Use OIDC (OpenID Connect) which adds an ID token with user info. All major providers (Google, Auth0, Okta) support OIDC."
+    />,
+    <MistakeCard
+      key="mistake-2"
+      number={2}
+      title="Storing Tokens in localStorage"
+      problem="Vulnerable to XSS attacks. Any malicious script can read localStorage and steal tokens."
+      solution="Store access tokens in memory (React state). Store refresh tokens in httpOnly cookies (inaccessible to JavaScript)."
+    />,
+    <MistakeCard
+      key="mistake-3"
+      number={3}
+      title="Not Validating Redirect URI"
+      problem="Attackers can steal authorization codes by registering malicious redirect URIs."
+      solution="Whitelist exact redirect URIs in your OAuth provider settings. Never use wildcards in production."
+    />,
 
     <Callout key="32" type="tip" title="Quick Decision Tree">
       <strong>Need to access user's data?</strong>&nbsp;→ OAuth 2.0<br/>
