@@ -1,10 +1,10 @@
-import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Highlight } from "@/components/ui/Highlight";
 import { Callout } from "@/components/ui/Callout";
-import { Step } from "@/components/ui/Step";
-import { Grid } from "@/components/ui/Grid";
+import { Card } from "@/components/ui/Card";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Grid } from "@/components/ui/Grid";
+import { Highlight } from "@/components/ui/Highlight";
+import { Step } from "@/components/ui/Step";
+import type { Topic } from "@/data/types";
 
 export const dockerContainersTopic: Topic = {
   id: "docker-containers",
@@ -107,5 +107,160 @@ RUN npm install
 CMD ["npm", "start"]
       `}
     />,
+
+    <h3 key="multistage-title" className="text-xl font-bold mt-8 mb-4">
+      Multi-Stage Builds: Shrinking Images from 1GB to 100MB
+    </h3>,
+    <p key="multistage-desc" className="mb-4">
+      A naive Dockerfile includes build tools, dev dependencies, and source files — bloating the image to over 1GB. <strong>Multi-stage builds</strong>&nbsp;let you compile in one stage and copy only the final artifacts to a minimal runtime image.
+    </p>,
+    <CodeBlock
+      key="multistage-code"
+      title="Multi-Stage Dockerfile (Node.js)"
+      language="dockerfile"
+      code={`# Stage 1: Build stage (includes dev dependencies)
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+
+# Stage 2: Production stage (minimal runtime)
+FROM node:20-alpine
+WORKDIR /app
+
+# Copy only production dependencies and built files
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+COPY package*.json ./
+
+# Run as non-root user for security
+USER node
+
+CMD ["node", "dist/index.js"]
+
+# Result: 150MB instead of 1.2GB`}
+    />,
+    <Callout key="multistage-tip" type="success" title="Why This Works">
+      The final image only contains the <code>node:20-alpine</code> base + production dependencies + compiled code. All build tools (TypeScript compiler, webpack, etc.) are left behind in the builder stage.
+    </Callout>,
+
+    <h3 key="compose-title" className="text-xl font-bold mt-8 mb-4">
+      Docker Compose: Running App + Database Together
+    </h3>,
+    <p key="compose-desc" className="mb-4">
+      Instead of manually starting containers one by one, <strong>Docker Compose</strong>&nbsp;lets you define multi-container applications in a single YAML file.
+    </p>,
+    <CodeBlock
+      key="compose-code"
+      title="docker-compose.yml"
+      language="yaml"
+      code={`version: '3.8'
+
+services:
+  # Your Node.js app
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgres://user:pass@db:5432/myapp
+      - REDIS_URL=redis://cache:6379
+    depends_on:
+      - db
+      - cache
+    volumes:
+      - ./src:/app/src  # Hot reload in development
+  
+  # PostgreSQL database
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=myapp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  
+  # Redis cache
+  cache:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:`}
+    />,
+    <p key="compose-usage" className="text-sm text-muted-foreground mt-4">
+      Start everything with: <code>docker-compose up</code><br/>
+      Stop everything with: <code>docker-compose down</code>
+    </p>,
+
+    <h3 key="mistakes-title" className="text-xl font-bold mt-8 mb-4">
+      Common Docker Mistakes
+    </h3>,
+    <Card key="mistake-1" title="❌ Mistake 1: No .dockerignore File" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
+      <p className="text-sm text-white/90 mb-2">
+        <strong className="text-red-400">Problem:</strong>&nbsp;Copying <code>node_modules</code> and <code>.git</code> into the image bloats it by 500MB+.
+      </p>
+      <CodeBlock
+        language="text"
+        code={`# .dockerignore
+node_modules
+.git
+.env
+*.log
+dist
+coverage`}
+      />
+      <p className="text-sm text-white/90 mt-2">
+        <strong className="text-green-400">Solution:</strong>&nbsp;Create a <code>.dockerignore</code> file (like <code>.gitignore</code>) to exclude unnecessary files.
+      </p>
+    </Card>,
+    <Card key="mistake-2" title="❌ Mistake 2: Running as Root User" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
+      <p className="text-sm text-white/90 mb-2">
+        <strong className="text-red-400">Problem:</strong>&nbsp;If an attacker exploits your app, they have root access to the container.
+      </p>
+      <CodeBlock
+        language="dockerfile"
+        code={`# BAD: Runs as root (default)
+CMD ["node", "index.js"]
+
+# GOOD: Create and use non-root user
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nodejs -u 1001
+USER nodejs
+CMD ["node", "index.js"]`}
+      />
+    </Card>,
+    <Card key="mistake-3" title="❌ Mistake 3: Not Using Layer Caching" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
+      <p className="text-sm text-white/90 mb-2">
+        <strong className="text-red-400">Problem:</strong>&nbsp;Copying code before installing dependencies invalidates cache on every code change.
+      </p>
+      <CodeBlock
+        language="dockerfile"
+        code={`# BAD: Code changes invalidate npm install cache
+COPY . .
+RUN npm install
+
+# GOOD: Copy package.json first, install, then copy code
+COPY package*.json ./
+RUN npm install
+COPY . .`}
+      />
+      <p className="text-sm text-white/90 mt-2">
+        <strong className="text-green-400">Why:</strong>&nbsp;Docker caches each layer. If <code>package.json</code> hasn't changed, it reuses the cached <code>npm install</code> layer (saves minutes).
+      </p>
+    </Card>,
+
+    <Callout key="best-practices" type="tip" title="Docker Best Practices Checklist">
+      ✅ Use multi-stage builds<br/>
+      ✅ Create .dockerignore file<br/>
+      ✅ Run as non-root user<br/>
+      ✅ Copy package.json before code (layer caching)<br/>
+      ✅ Use specific image tags (not <code>:latest</code>)<br/>
+      ✅ Scan images for vulnerabilities (<code>docker scan</code>)
+    </Callout>,
   ],
 };

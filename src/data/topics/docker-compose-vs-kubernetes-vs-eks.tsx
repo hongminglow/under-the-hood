@@ -1,11 +1,11 @@
-import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
-import { Table } from "@/components/ui/Table";
+import { Card } from "@/components/ui/Card";
 import { CodeBlock } from "@/components/ui/CodeBlock";
-import { Step } from "@/components/ui/Step";
+import { Grid } from "@/components/ui/Grid";
 import { Highlight } from "@/components/ui/Highlight";
+import { Step } from "@/components/ui/Step";
+import { Table } from "@/components/ui/Table";
+import type { Topic } from "@/data/types";
 
 export const dockerComposeVsKubernetesVsEksTopic: Topic = {
   id: "docker-compose-vs-kubernetes-vs-eks",
@@ -25,8 +25,8 @@ export const dockerComposeVsKubernetesVsEksTopic: Topic = {
       different orchestration model.
     </p>,
     <Callout key="2" type="warning" title="Important Mental Model">
-      <Highlight variant="primary">Compose vs Kubernetes</Highlight> is a real
-      decision. <Highlight variant="primary">Kubernetes vs EKS</Highlight> is
+      <Highlight variant="warning">Compose vs Kubernetes</Highlight> is a real
+      decision. <Highlight variant="warning">Kubernetes vs EKS</Highlight> is
       usually not: if you already need Kubernetes and you are committed to AWS,
       EKS is simply one way to operate it with less control-plane burden.
     </Callout>,

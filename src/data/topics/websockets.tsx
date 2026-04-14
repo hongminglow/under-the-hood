@@ -1,8 +1,9 @@
-import type { Topic } from "@/data/types";
+import { Callout } from "@/components/ui/Callout";
 import { Card } from "@/components/ui/Card";
+import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
-import { Callout } from "@/components/ui/Callout";
+import type { Topic } from "@/data/types";
 
 export const websocketsTopic: Topic = {
   id: "websockets",
@@ -62,6 +63,212 @@ export const websocketsTopic: Topic = {
     </Grid>,
     <Callout key="9" type="danger" title="The 'Load Balancer' Trap">
       Standard Load Balancers (L4) close connections frequently. For WebSockets, you must enable <strong>Sticky Sessions</strong> (Session Affinity) or use an L7 Proxy (Nginx/Envoy) that explicitly supports the <code>Upgrade</code> header.
+    </Callout>,
+
+    <h3 key="code-title" className="text-xl font-bold mt-8 mb-4">
+      Code Example: WebSocket Client & Server
+    </h3>,
+    <Grid key="code-grid" cols={2} gap={6} className="my-8">
+      <Card title="Client (Browser)">
+        <CodeBlock
+          language="javascript"
+          code={`// Connect to WebSocket server
+const ws = new WebSocket('ws://localhost:8080');
+
+// Connection opened
+ws.onopen = () => {
+  console.log('Connected!');
+  ws.send(JSON.stringify({ type: 'join', room: 'chat' }));
+};
+
+// Listen for messages
+ws.onmessage = (event) => {
+  const data = JSON.parse(event.data);
+  console.log('Received:', data);
+};
+
+// Handle errors
+ws.onerror = (error) => {
+  console.error('WebSocket error:', error);
+};
+
+// Connection closed
+ws.onclose = () => {
+  console.log('Disconnected');
+};`}
+        />
+      </Card>
+      <Card title="Server (Node.js)">
+        <CodeBlock
+          language="javascript"
+          code={`const WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+  
+  ws.on('message', (message) => {
+    const data = JSON.parse(message);
+    
+    // Broadcast to all clients
+    wss.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify({
+          type: 'message',
+          data: data
+        }));
+      }
+    });
+  });
+  
+  ws.on('close', () => {
+    console.log('Client disconnected');
+  });
+});`}
+        />
+      </Card>
+    </Grid>,
+
+    <h3 key="comparison-title" className="text-xl font-bold mt-8 mb-4">
+      WebSockets vs SSE vs Long Polling
+    </h3>,
+    <Table
+      key="comparison-table"
+      headers={["Feature", "WebSockets", "Server-Sent Events (SSE)", "Long Polling"]}
+      rows={[
+        ["Direction", "Bi-directional (client ↔ server)", "Uni-directional (server → client)", "Uni-directional (server → client)"],
+        ["Protocol", "ws:// or wss://", "HTTP/HTTPS", "HTTP/HTTPS"],
+        ["Browser Support", "All modern browsers", "All modern (not IE)", "Universal"],
+        ["Connection", "Persistent TCP", "Persistent HTTP", "Repeated HTTP requests"],
+        ["Overhead", "Low (binary frames)", "Medium (HTTP headers)", "High (new request each time)"],
+        ["Use Case", "Chat, gaming, collaboration", "Live feeds, notifications", "Legacy systems, simple updates"],
+        ["Reconnection", "Manual (exponential backoff)", "Automatic", "Built-in (new request)"],
+        ["Firewall/Proxy", "Can be blocked", "Works everywhere (HTTP)", "Works everywhere (HTTP)"]
+      ]}
+    />,
+
+    <h3 key="reconnect-title" className="text-xl font-bold mt-8 mb-4">
+      Reconnection Strategy: Exponential Backoff
+    </h3>,
+    <p key="reconnect-desc" className="mb-4">
+      WebSocket connections can drop due to network issues, server restarts, or load balancer timeouts. Implement <strong>exponential backoff</strong>&nbsp;to avoid overwhelming the server with reconnection attempts.
+    </p>,
+    <CodeBlock
+      key="reconnect-code"
+      title="Robust WebSocket with Auto-Reconnect"
+      language="javascript"
+      code={`class RobustWebSocket {
+  constructor(url) {
+    this.url = url;
+    this.reconnectDelay = 1000; // Start at 1 second
+    this.maxReconnectDelay = 30000; // Cap at 30 seconds
+    this.reconnectAttempts = 0;
+    this.connect();
+  }
+  
+  connect() {
+    this.ws = new WebSocket(this.url);
+    
+    this.ws.onopen = () => {
+      console.log('Connected');
+      this.reconnectDelay = 1000; // Reset delay on success
+      this.reconnectAttempts = 0;
+    };
+    
+    this.ws.onmessage = (event) => {
+      // Handle messages
+      console.log('Message:', event.data);
+    };
+    
+    this.ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+    
+    this.ws.onclose = () => {
+      console.log('Disconnected. Reconnecting...');
+      this.reconnect();
+    };
+  }
+  
+  reconnect() {
+    this.reconnectAttempts++;
+    
+    setTimeout(() => {
+      console.log(\`Reconnect attempt \${this.reconnectAttempts}\`);
+      this.connect();
+    }, this.reconnectDelay);
+    
+    // Exponential backoff: 1s, 2s, 4s, 8s, 16s, 30s (capped)
+    this.reconnectDelay = Math.min(
+      this.reconnectDelay * 2,
+      this.maxReconnectDelay
+    );
+  }
+  
+  send(data) {
+    if (this.ws.readyState === WebSocket.OPEN) {
+      this.ws.send(JSON.stringify(data));
+    } else {
+      console.warn('WebSocket not open. Message queued.');
+      // Queue message for when connection reopens
+    }
+  }
+}
+
+// Usage
+const ws = new RobustWebSocket('ws://localhost:8080');
+ws.send({ type: 'chat', message: 'Hello!' });`}
+    />,
+
+    <h3 key="queue-title" className="text-xl font-bold mt-8 mb-4">
+      Message Queuing During Disconnection
+    </h3>,
+    <p key="queue-desc" className="mb-4">
+      When the connection drops, you don't want to lose messages. Queue them in memory and flush when reconnected.
+    </p>,
+    <CodeBlock
+      key="queue-code"
+      title="Message Queue Implementation"
+      language="javascript"
+      code={`class QueuedWebSocket extends RobustWebSocket {
+  constructor(url) {
+    super(url);
+    this.messageQueue = [];
+  }
+  
+  connect() {
+    super.connect();
+    
+    // Override onopen to flush queue
+    const originalOnOpen = this.ws.onopen;
+    this.ws.onopen = () => {
+      originalOnOpen?.();
+      this.flushQueue();
+    };
+  }
+  
+  send(data) {
+    if (this.ws.readyState === WebSocket.OPEN) {
+      this.ws.send(JSON.stringify(data));
+    } else {
+      // Queue message if not connected
+      this.messageQueue.push(data);
+      console.log(\`Queued message. Queue size: \${this.messageQueue.length}\`);
+    }
+  }
+  
+  flushQueue() {
+    console.log(\`Flushing \${this.messageQueue.length} queued messages\`);
+    while (this.messageQueue.length > 0) {
+      const message = this.messageQueue.shift();
+      this.ws.send(JSON.stringify(message));
+    }
+  }
+}`}
+    />,
+
+    <Callout key="queue-warning" type="warning" title="Queue Size Limits">
+      Always set a maximum queue size (e.g., 100 messages) to prevent memory leaks if the connection stays down for extended periods. Drop oldest messages when the limit is reached.
     </Callout>,
   ],
 };

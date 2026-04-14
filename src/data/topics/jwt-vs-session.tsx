@@ -1,9 +1,9 @@
-import type { Topic } from "@/data/types";
+import { Callout } from "@/components/ui/Callout";
 import { Card } from "@/components/ui/Card";
+import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
-import { Callout } from "@/components/ui/Callout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import type { Topic } from "@/data/types";
 
 export const jwtVsSessionTopic: Topic = {
   id: "jwt-vs-session",
@@ -96,5 +96,77 @@ const signature = HMACSHA256(
     <Callout key="5" type="tip" title="Use Both (Refresh + Access Tokens)">
       The enterprise standard is giving the user a 15-minute <strong>JWT Access Token</strong> (blazing fast API calls, mathematically secured) and a very long-lived <strong>Session Refresh Token</strong> securely stored in an HttpOnly cookie. If the user's JWT expires, the backend uses the Refresh token in Redis to hand out a new JWT, giving you the extreme speed of JWTs and the instant ban capability of Sessions.
     </Callout>,
+
+    <h3 key="mistakes-title" className="text-xl font-bold mt-8 mb-4">
+      Common Mistakes
+    </h3>,
+    <Card key="mistake-1" title="❌ Mistake 1: Storing JWTs in localStorage" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
+      <p className="text-sm text-white/90 mb-2">
+        <strong className="text-red-400">Problem:</strong>&nbsp;Any XSS attack can steal tokens with <code>localStorage.getItem('token')</code>.
+      </p>
+      <p className="text-sm text-white/90">
+        <strong className="text-green-400">Solution:</strong>&nbsp;Store JWTs in httpOnly cookies. The browser sends them automatically, and JavaScript cannot access them.
+      </p>
+    </Card>,
+    <Card key="mistake-2" title="❌ Mistake 2: Not Validating exp Claim" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
+      <p className="text-sm text-white/90 mb-2">
+        <strong className="text-red-400">Problem:</strong>&nbsp;Accepting expired tokens allows attackers to reuse old stolen tokens indefinitely.
+      </p>
+      <p className="text-sm text-white/90">
+        <strong className="text-green-400">Solution:</strong>&nbsp;Always check <code>exp</code> claim: <code>if (Date.now() &gt;= payload.exp * 1000) throw new Error('Token expired')</code>
+      </p>
+    </Card>,
+    <Card key="mistake-3" title="❌ Mistake 3: Using Weak Secret Keys" className="[&_.group-hover\:text-primary]:group-hover:text-red-700">
+      <p className="text-sm text-white/90 mb-2">
+        <strong className="text-red-400">Problem:</strong>&nbsp;Short secrets like "secret123" can be brute-forced in minutes.
+      </p>
+      <p className="text-sm text-white/90">
+        <strong className="text-green-400">Solution:</strong>&nbsp;Use cryptographically random 256-bit keys: <code>openssl rand -base64 32</code>
+      </p>
+    </Card>,
+
+    <h3 key="rotation-title" className="text-xl font-bold mt-8 mb-4">
+      Token Rotation Strategy
+    </h3>,
+    <p key="rotation-desc" className="mb-4">
+      To balance security and user experience, implement <strong>automatic token rotation</strong>. When a user's access token expires, use their refresh token to issue a new pair of tokens.
+    </p>,
+    <CodeBlock
+      key="rotation-code"
+      title="Token Rotation Implementation"
+      language="javascript"
+      code={`// Backend: Refresh token endpoint
+app.post('/auth/refresh', async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+  
+  // 1. Verify refresh token exists in Redis
+  const userId = await redis.get(\`refresh:\${refreshToken}\`);
+  if (!userId) return res.status(401).json({ error: 'Invalid refresh token' });
+  
+  // 2. Generate new access token (15 min)
+  const newAccessToken = jwt.sign(
+    { userId, role: 'user' },
+    process.env.JWT_SECRET,
+    { expiresIn: '15m' }
+  );
+  
+  // 3. Generate new refresh token (7 days)
+  const newRefreshToken = crypto.randomBytes(32).toString('hex');
+  
+  // 4. Delete old refresh token, store new one
+  await redis.del(\`refresh:\${refreshToken}\`);
+  await redis.setex(\`refresh:\${newRefreshToken}\`, 604800, userId);
+  
+  // 5. Send both tokens
+  res.cookie('refreshToken', newRefreshToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+    maxAge: 7 * 24 * 60 * 60 * 1000
+  });
+  
+  res.json({ accessToken: newAccessToken });
+});`}
+    />,
   ],
 };
