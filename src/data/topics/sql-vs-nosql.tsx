@@ -2,6 +2,7 @@ import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
+import { Table } from "@/components/ui/Table";
 
 export const sqlVsNosqlTopic: Topic = {
   id: "sql-vs-nosql",
@@ -42,5 +43,22 @@ export const sqlVsNosqlTopic: Topic = {
     <Callout key="4" type="tip" title="The Scaling Myth (Horizontal vs Vertical)">
       It is a known physics fact that joining 5 tables together is terribly slow, causing SQL databases to hit physical CPU limits (forcing expensive Vertical Scaling). NoSQL deliberately abandons relations entirely, which allows you to effortlessly split the database across 100 cheap servers (Horizontal Sharding) indefinitely without math conflicts.
     </Callout>,
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      The Schema Flexibility Trade-off
+    </h3>,
+    <p key="6">
+      SQL enforces a <strong>rigid schema</strong>. Every User row must have the exact same columns. Adding a new field requires an <code>ALTER TABLE</code> migration across millions of rows.<br/><br/>
+      NoSQL is <strong>schema-less</strong>. One Product document can have 50 fields, another can have 5. Perfect for rapidly evolving startups, but dangerous for data integrity (no enforcement of required fields).
+    </p>,
+    <Table
+      key="7"
+      headers={["Database", "Type", "Primary Use Case"]}
+      rows={[
+        ["PostgreSQL", "SQL (Relational)", "Transactional systems, complex queries"],
+        ["MongoDB", "NoSQL (Document)", "Flexible schemas, rapid prototyping"],
+        ["Cassandra", "NoSQL (Wide-Column)", "Massive write-heavy workloads (IoT, logs)"],
+        ["Redis", "NoSQL (Key-Value)", "Caching, session storage, real-time leaderboards"]
+      ]}
+    />,
   ],
 };

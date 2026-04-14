@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Table } from "@/components/ui/Table";
 
 export const cachingStrategiesTopic: Topic = {
   id: "caching-strategies",
@@ -74,5 +75,41 @@ TTL (Time-To-Live)
       include mutex locks on the cache key or staggering TTL values with random
       jitter.
     </Callout>,
+    <h4 key="7" className="text-xl font-bold mt-8 mb-4">
+      Cache Stampede Prevention
+    </h4>,
+    <CodeBlock
+      key="8"
+      language="python"
+      title="Probabilistic Early Expiration"
+      code={`import random
+import time
+
+def get_with_early_expiration(key, ttl=3600):
+    cached = redis.get(key)
+    if cached:
+        time_left = redis.ttl(key)
+        # Probabilistically refresh before expiration
+        if time_left < ttl * random.random():
+            refresh_cache(key)  # Async refresh
+        return cached
+    return refresh_cache(key)`}
+    />,
+    <h4 key="9" className="text-xl font-bold mt-8 mb-4">
+      HTTP Cache Headers
+    </h4>,
+    <Table
+      key="10"
+      headers={["Header", "Purpose", "Example"]}
+      rows={[
+        ["Cache-Control", "Defines caching rules", "<code>max-age=3600, public</code>"],
+        ["ETag", "Version identifier for conditional requests", "<code>ETag: \"abc123\"</code>"],
+        ["Last-Modified", "Timestamp of last change", "<code>Last-Modified: Wed, 21 Oct 2025 07:28:00 GMT</code>"],
+        ["Vary", "Cache key depends on request headers", "<code>Vary: Accept-Encoding</code>"]
+      ]}
+    />,
+    <p key="11" className="mt-4">
+      When a browser has a cached asset with an ETag, it sends <code>If-None-Match: "abc123"</code>. If the server's ETag matches, it returns <strong>304 Not Modified</strong>&nbsp;with zero body, saving bandwidth.
+    </p>,
   ],
 };

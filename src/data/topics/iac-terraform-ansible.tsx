@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Table } from "@/components/ui/Table";
 
 export const iacTopic: Topic = {
   id: "iac-terraform",
@@ -73,6 +74,40 @@ export const iacTopic: Topic = {
       infrastructure require a Pull Request. CI/CD pipelines automatically run
       `terraform plan` on the PR, and `terraform apply` on merge, creating a
       perfect audit trail of exactly who modified the infrastructure and why.
+    </Callout>,
+    <h4 key="7" className="text-xl font-bold mt-8 mb-4">
+      Remote State & Locking
+    </h4>,
+    <p key="8">
+      The State File is the single source of truth. If two engineers run <code>terraform apply</code> simultaneously, they could corrupt the state. <strong>Remote State Backends</strong>&nbsp;(S3 + DynamoDB, Terraform Cloud) solve this by storing the state centrally and implementing <strong>State Locking</strong>. When Engineer A starts an apply, the state is locked. Engineer B's apply waits or fails gracefully.
+    </p>,
+    <CodeBlock
+      key="9"
+      language="hcl"
+      title="terraform.tf"
+      code={`terraform {
+  backend "s3" {
+    bucket         = "my-terraform-state"
+    key            = "prod/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "terraform-locks"
+    encrypt        = true
+  }
+}`}
+    />,
+    <h4 key="10" className="text-xl font-bold mt-8 mb-4">
+      Terraform vs Ansible: When to Use Each
+    </h4>,
+    <Table
+      key="11"
+      headers={["Tool", "Purpose", "Best For"]}
+      rows={[
+        ["Terraform", "Provisioning infrastructure (VMs, networks, databases).", "Creating the servers themselves."],
+        ["Ansible", "Configuration management (installing software, updating configs).", "Configuring what runs ON the servers."]
+      ]}
+    />,
+    <Callout key="12" type="tip" title="The Modern Stack">
+      Most teams use <strong>Terraform</strong> to provision the AWS infrastructure, then <strong>Ansible</strong> or <strong>Docker</strong> to configure the applications running on those servers. Terraform creates the EC2 instance; Ansible installs Nginx on it.
     </Callout>,
   ],
 };

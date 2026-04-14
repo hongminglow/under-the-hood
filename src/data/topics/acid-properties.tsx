@@ -48,5 +48,24 @@ export const acidPropertiesTopic: Topic = {
     <Callout key="5" type="warning" title="NoSQL Abandons ACID (Historically)">
       To achieve massive horizontal cloud scale in the 2010s, databases like Cassandra and early MongoDB historically abandoned the 'I' (Isolation) or 'C' (Consistency) to run blazing fast. This is exactly why 99% of global massive banking and fintech institutions strictly use rigid SQL Postgres arrays for their core ledgers, avoiding NoSQL for financial transactions entirely.
     </Callout>,
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      Isolation Levels: The Hidden Complexity
+    </h3>,
+    <p key="7">
+      The "I" in ACID isn't binary. SQL databases offer multiple <strong>Isolation Levels</strong>&nbsp;that trade consistency for performance:
+    </p>,
+    <Table
+      key="8"
+      headers={["Level", "Behavior", "Risk"]}
+      rows={[
+        ["Read Uncommitted", "Can read data from uncommitted transactions.", "Dirty Reads (reading data that gets rolled back)."],
+        ["Read Committed", "Only reads committed data. Default in PostgreSQL.", "Non-Repeatable Reads (same query returns different results)."],
+        ["Repeatable Read", "Guarantees same query returns same result within a transaction.", "Phantom Reads (new rows can appear)."],
+        ["Serializable", "Full isolation. Transactions execute as if they ran one-at-a-time.", "Slowest. Can cause deadlocks."]
+      ]}
+    />,
+    <Callout key="9" type="info" title="Modern NoSQL Evolution">
+      Modern NoSQL databases have evolved. MongoDB 4.0+ supports multi-document ACID transactions. DynamoDB offers <strong>Transactions</strong>&nbsp;for up to 25 items. The line between SQL and NoSQL is blurring.
+    </Callout>,
   ],
 };

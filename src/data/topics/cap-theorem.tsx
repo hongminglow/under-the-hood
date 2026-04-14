@@ -45,5 +45,22 @@ export const capTheoremTopic: Topic = {
       <br/><br/>
       If Instagram suffers a wire snap to the US, the European server explicitly chooses <strong>Availability (AP)</strong>. It stays perfectly alive, happily accepting thousands of European photo 'Likes', mathematically knowing the US server is wildly out of sync. It chooses speed over perfection.
     </Callout>,
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      PACELC: The Extended Reality
+    </h3>,
+    <p key="7">
+      CAP only describes behavior during a network partition. <strong>PACELC</strong>&nbsp;extends this: "If there's a Partition (P), choose Availability (A) or Consistency (C), Else (E) choose Latency (L) or Consistency (C)."<br/><br/>
+      Even when the network is healthy, you must choose: Do you want <strong>low latency</strong> (eventual consistency, replicas might be slightly stale) or <strong>strong consistency</strong> (every read waits for all replicas to sync, adding latency)?
+    </p>,
+    <Table
+      key="8"
+      headers={["Database", "CAP Choice", "PACELC Choice"]}
+      rows={[
+        ["PostgreSQL (Single Node)", "CA (No Partition Tolerance)", "N/A (Not distributed)"],
+        ["MongoDB", "CP", "PC (Prioritizes Consistency over Latency)"],
+        ["Cassandra", "AP", "PA/EL (Prioritizes Availability & Low Latency)"],
+        ["DynamoDB", "AP", "PA/EL (Tunable consistency levels)"]
+      ]}
+    />,
   ],
 };

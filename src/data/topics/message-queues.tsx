@@ -2,6 +2,8 @@ import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
+import { Table } from "@/components/ui/Table";
+import { CodeBlock } from "@/components/ui/CodeBlock";
 
 export const messageQueuesTopic: Topic = {
   id: "message-queues",
@@ -36,5 +38,35 @@ export const messageQueuesTopic: Topic = {
       <strong>RabbitMQ</strong> is a traditional active queue: Once the Email server reads the message, it is permanently deleted from the queue immediately. <br/><br/>
       <strong>Apache Kafka</strong> is a brutal immutable log: Messages are <em>never</em> deleted. Hundreds of different microservices can replay the entire history of every order ever placed from the very beginning of time.
     </Callout>,
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      Message Delivery Guarantees
+    </h3>,
+    <Table
+      key="7"
+      headers={["Guarantee", "Behavior", "Risk"]}
+      rows={[
+        ["At-Most-Once", "Fire and forget. If the worker crashes, the message is lost.", "Data loss. Fast but unreliable."],
+        ["At-Least-Once", "Message is redelivered until acknowledged. Worker might process it twice.", "Duplicate processing. Requires idempotent handlers."],
+        ["Exactly-Once", "Message is processed exactly once, guaranteed.", "Complex to implement. Kafka supports this with transactions."]
+      ]}
+    />,
+    <h3 key="8" className="text-xl font-bold mt-8 mb-4">
+      Dead Letter Queues (DLQ)
+    </h3>,
+    <p key="9">
+      What if a message is malformed and crashes the worker every time? After 3 failed retries, the message is moved to a <strong>Dead Letter Queue</strong>&nbsp;for manual inspection. This prevents one bad message from blocking the entire queue.
+    </p>,
+    <CodeBlock
+      key="10"
+      language="json"
+      title="Example Message"
+      code={`{
+  "type": "OrderPlaced",
+  "orderId": 12345,
+  "userId": 789,
+  "timestamp": "2026-04-14T10:30:00Z",
+  "retryCount": 0
+}`}
+    />,
   ],
 };

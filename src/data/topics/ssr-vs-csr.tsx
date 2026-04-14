@@ -49,5 +49,19 @@ export const ssrVsCsrTopic: Topic = {
     <Callout key="4" type="warning" title="Hydration">
       If a server sends pure HTML (SSR/SSG), it looks great instantly, but buttons won't work yet. React must download the Javascript bundle in the background and silently attach event listeners securely to the static buttons. This process is called <strong>Hydration</strong>.
     </Callout>,
+    <h3 key="5" className="text-xl font-bold mt-8 mb-4">
+      The Performance Metrics
+    </h3>,
+    <p key="6">
+      <strong>Time to First Byte (TTFB):</strong>&nbsp;SSR is slower here because the server must build HTML before sending anything. SSG is instant (served from CDN).<br/><br/>
+      <strong>First Contentful Paint (FCP):</strong>&nbsp;SSR/SSG win massively. Users see content in ~200ms. CSR shows a blank screen for 2-3 seconds.<br/><br/>
+      <strong>Time to Interactive (TTI):</strong>&nbsp;All three must wait for the JS bundle to download and hydrate. SSR/SSG have a "visual advantage" but aren't truly interactive faster.
+    </p>,
+    <h3 key="7" className="text-xl font-bold mt-8 mb-4">
+      The SEO Reality
+    </h3>,
+    <p key="8">
+      Google's crawler <em>can</em> execute JavaScript and index CSR apps, but it's unreliable and slow. If your site takes 5 seconds to render client-side, Google may give up or rank you lower. <strong>SSR/SSG guarantee</strong>&nbsp;that the HTML is immediately crawlable, making them mandatory for content-heavy sites (blogs, e-commerce, marketing pages).
+    </p>,
   ],
 };

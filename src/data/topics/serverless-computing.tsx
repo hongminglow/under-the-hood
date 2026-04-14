@@ -2,6 +2,7 @@ import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
+import { Table } from "@/components/ui/Table";
 
 export const serverlessTopic: Topic = {
   id: "serverless-computing",
@@ -78,6 +79,37 @@ export const serverlessTopic: Topic = {
       by instantly loading pure JS functions without booting a full Node.js or
       OS environment. They run at the network edge, incredibly close to the
       user, with 0ms cold starts.
+    </Callout>,
+    <h4 key="7" className="text-xl font-bold mt-8 mb-4">
+      Serverless Limitations
+    </h4>,
+    <Grid key="8" cols={2} gap={6} className="mb-8">
+      <Card title="Execution Time Limits">
+        <p className="text-sm text-muted-foreground">
+          AWS Lambda has a 15-minute maximum execution time. Long-running tasks (video encoding, ML training) must use traditional servers or Step Functions to orchestrate multiple Lambda invocations.
+        </p>
+      </Card>
+      <Card title="Statelessness">
+        <p className="text-sm text-muted-foreground">
+          Functions are ephemeral. You cannot store data in memory between invocations. Use external storage (S3, DynamoDB, Redis) for state. WebSocket connections require special handling (API Gateway WebSocket APIs).
+        </p>
+      </Card>
+    </Grid>,
+    <h4 key="9" className="text-xl font-bold mt-8 mb-4">
+      Cost Comparison
+    </h4>,
+    <Table
+      key="10"
+      headers={["Scenario", "Traditional Server (EC2)", "Serverless (Lambda)"]}
+      rows={[
+        ["Low Traffic (100 req/day)", "$10/month (t3.micro always on)", "$0.20/month (pay per request)"],
+        ["High Traffic (1M req/day)", "$50/month (larger instance)", "$200/month (but auto-scales)"],
+        ["Spiky Traffic", "Must overprovision for peaks", "Scales instantly, pay only for actual usage"]
+      ]}
+    />,
+    <Callout key="11" type="info" title="When to Use Serverless">
+      Perfect for: Event-driven workloads (image processing on S3 upload), APIs with unpredictable traffic, scheduled tasks (cron jobs).<br/><br/>
+      Avoid for: Long-running processes, high-throughput sustained workloads (cheaper to run a dedicated server), applications requiring persistent connections.
     </Callout>,
   ],
 };

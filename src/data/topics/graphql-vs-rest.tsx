@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { CodeBlock } from "@/components/ui/CodeBlock";
 
 export const graphqlVsRestTopic: Topic = {
   id: "graphql-vs-rest",
@@ -49,5 +50,35 @@ export const graphqlVsRestTopic: Topic = {
     <Callout key="5" type="tip" title="BFF Pattern (Backend for Frontend)">
       Modern companies often stick to pure REST/gRPC for their core microservices, but build a tiny GraphQL translation layer purely to serve their React apps securely.
     </Callout>,
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
+      The N+1 Query Problem (Both Suffer)
+    </h3>,
+    <p key="7">
+      In REST, fetching a list of 10 blog posts and their authors requires 11 requests: <code>GET /posts</code> (1 request) + <code>GET /users/:id</code> (10 requests).<br/><br/>
+      GraphQL <em>appears</em> to solve this with one query, but if the backend resolver is naive, it still fires 10 separate SQL queries. The solution is <strong>DataLoader</strong>, which batches and caches database calls within a single request.
+    </p>,
+    <CodeBlock
+      key="8"
+      language="graphql"
+      title="GraphQL Query"
+      code={`query {
+  posts {
+    title
+    author {
+      name
+      email
+    }
+  }
+}`}
+    />,
+    <h3 key="9" className="text-xl font-bold mt-8 mb-4">
+      When REST Wins
+    </h3>,
+    <ul key="10" className="list-disc pl-6 space-y-2 text-sm">
+      <li><strong>Simple CRUD APIs:</strong>&nbsp;If your API is just basic Create/Read/Update/Delete, REST is simpler.</li>
+      <li><strong>File Uploads:</strong>&nbsp;GraphQL struggles with multipart form data. REST handles it natively.</li>
+      <li><strong>HTTP Caching:</strong>&nbsp;CDNs and browsers cache <code>GET /users/5</code> automatically. GraphQL requires custom cache keys.</li>
+      <li><strong>Monitoring:</strong>&nbsp;REST endpoints are easy to monitor (track <code>/api/orders</code> latency). GraphQL is one endpoint with infinite query variations.</li>
+    </ul>,
   ],
 };

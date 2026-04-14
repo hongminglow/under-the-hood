@@ -2,6 +2,7 @@ import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
+import { Table } from "@/components/ui/Table";
 
 export const databaseReplicationTopic: Topic = {
   id: "database-replication",
@@ -38,5 +39,28 @@ export const databaseReplicationTopic: Topic = {
     <Callout key="6" type="info" title="Automatic Failover">
       If the Primary Master node fails, the system can automatically initiate a global vote, promote a Replica to become the new Primary, and resume write capabilities with minimal downtime.
     </Callout>,
+    <h3 key="7" className="text-xl font-bold mt-8 mb-4">
+      Synchronous vs Asynchronous Replication
+    </h3>,
+    <Table
+      key="8"
+      headers={["Type", "How It Works", "Trade-off"]}
+      rows={[
+        ["Asynchronous", "Primary commits immediately. Replicas sync in the background.", "Fast writes, but risk of data loss if Primary crashes before replication."],
+        ["Synchronous", "Primary waits for at least 1 Replica to confirm before committing.", "Slower writes, but zero data loss. Used in financial systems."],
+        ["Semi-Synchronous", "Primary waits for 1 Replica, others sync async.", "Balanced approach. Default in MySQL."]
+      ]}
+    />,
+    <h3 key="9" className="text-xl font-bold mt-8 mb-4">
+      Read-After-Write Consistency Problem
+    </h3>,
+    <p key="10">
+      User updates their email on the Primary. The app immediately redirects them to their profile page, which reads from a Replica. The Replica hasn't synced yet, so the old email displays. <strong>Solutions:</strong>
+    </p>,
+    <ul key="11" className="list-disc pl-6 space-y-2 text-sm">
+      <li><strong>Sticky Sessions:</strong>&nbsp;Route the user to the same Replica for 5 seconds after a write.</li>
+      <li><strong>Read-Your-Writes:</strong>&nbsp;Force critical reads (like "my profile") to hit the Primary.</li>
+      <li><strong>Timestamp Tracking:</strong>&nbsp;Client sends the timestamp of their last write. Replica waits until it's caught up to that timestamp before responding.</li>
+    </ul>,
   ],
 };
