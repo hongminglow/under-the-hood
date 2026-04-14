@@ -15,10 +15,10 @@ export function Flow({ steps }: FlowProps) {
       <div className="flex flex-col items-stretch gap-4 px-1 md:inline-flex md:min-w-max md:flex-row md:items-stretch">
         {steps.map((step, index) => (
           <React.Fragment key={index}>
-            <div className="flex w-full flex-col rounded-xl border border-border bg-card p-4 text-card-foreground shadow-sm md:h-auto md:w-[240px] md:flex-none self-stretch">
+            <div className="flex w-full flex-col rounded-xl border border-border bg-card p-4 text-card-foreground shadow-sm md:h-auto md:w-[240px] md:flex-none self-stretch overflow-hidden">
               <h4 className="mb-2 text-base font-semibold">{step.title}</h4>
               {step.description && (
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground break-words overflow-hidden">
                   {step.description}
                 </p>
               )}
