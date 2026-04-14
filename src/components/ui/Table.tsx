@@ -10,7 +10,7 @@ export function Table({
   highlightedRows = [],
 }: TableProps) {
   return (
-    <div className="rounded-2xl border border-border/40 overflow-hidden my-8 shadow-xl bg-[#02120a]/20">
+    <div className="rounded-2xl border border-border/40 overflow-hidden mt-8 mb-12 shadow-xl bg-[#02120a]/20">
       <table className="w-full text-left text-sm border-collapse">
         <thead>
           <tr className="bg-secondary/20 border-b border-border/40">

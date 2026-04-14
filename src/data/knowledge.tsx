@@ -1,152 +1,150 @@
-import type { Topic, Section } from "@/data/types";
+import type { Section, Topic } from "@/data/types";
 
-import { tcpIpTopic } from "@/data/topics/tcp-ip";
-import { dnsTopic } from "@/data/topics/dns";
-import { natAddressingTopic } from "@/data/topics/nat-addressing";
-import { webRequestLifecycleTopic } from "@/data/topics/web-request-lifecycle";
-import { renderingPipelineTopic } from "@/data/topics/rendering-pipeline";
-import { corsTopic } from "@/data/topics/cors";
-import { rustSystemsTopic } from "@/data/topics/rust-systems";
-import { sqlVsNosqlTopic } from "@/data/topics/sql-vs-nosql";
-import { oauth2OidcTopic } from "@/data/topics/oauth2-oidc";
-import { dockerContainersTopic } from "@/data/topics/docker-containers";
-import { tcpVsUdpTopic } from "@/data/topics/tcp-vs-udp";
-import { frontendFrameworksTopic } from "@/data/topics/frontend-frameworks";
-import { frameworksVsVanillaJsTopic } from "@/data/topics/frameworks-vs-vanilla-js";
-import { graphqlVsRestTopic } from "@/data/topics/graphql-vs-rest";
-import { microservicesTopic } from "@/data/topics/microservices";
-import { ciCdTopic } from "@/data/topics/ci-cd";
-import { jsEventLoopTopic } from "@/data/topics/js-event-loop";
-import { websocketsTopic } from "@/data/topics/websockets";
-import { jwtVsSessionTopic } from "@/data/topics/jwt-vs-session";
-import { loadBalancingTopic } from "@/data/topics/load-balancing";
-import { garbageCollectionTopic } from "@/data/topics/garbage-collection";
-import { httpEvolutionTopic } from "@/data/topics/http-evolution";
+import { acidPropertiesTopic } from "@/data/topics/acid-properties";
+import { apiRateLimitingTopic } from "@/data/topics/api-rate-limiting";
+import { bloomFiltersTopic } from "@/data/topics/bloom-filters";
+import { browserStorageTopic } from "@/data/topics/browser-storage";
 import { cachingStrategiesTopic } from "@/data/topics/caching-strategies";
-import { webSecurityTopic } from "@/data/topics/web-security";
-import { ssrVsCsrTopic } from "@/data/topics/ssr-vs-csr";
+import { capTheoremTopic } from "@/data/topics/cap-theorem";
+import { ciCdTopic } from "@/data/topics/ci-cd";
+import { concurrencyParallelismTopic } from "@/data/topics/concurrency-parallelism";
+import { consistentHashingTopic } from "@/data/topics/consistent-hashing";
+import { cspTopic } from "@/data/topics/content-security-policy";
+import { corsTopic } from "@/data/topics/cors";
+import { databaseChoicesAtScaleTopic } from "@/data/topics/database-choices-at-scale";
+import { databaseIndexingTopic } from "@/data/topics/database-indexing";
 import { designPatternsTopic } from "@/data/topics/design-patterns";
+import { dnsTopic } from "@/data/topics/dns";
+import { dockerComposeVsKubernetesVsEksTopic } from "@/data/topics/docker-compose-vs-kubernetes-vs-eks";
+import { dockerContainersTopic } from "@/data/topics/docker-containers";
+import { dynamoDbDeepDiveTopic } from "@/data/topics/dynamodb-deep-dive";
+import { frameworksVsVanillaJsTopic } from "@/data/topics/frameworks-vs-vanilla-js";
+import { frontendFrameworksTopic } from "@/data/topics/frontend-frameworks";
+import { garbageCollectionTopic } from "@/data/topics/garbage-collection";
 import { gitInternalsTopic } from "@/data/topics/git-internals";
 import { gitRebaseMergeSquashTopic } from "@/data/topics/git-rebase-merge-squash";
-import { typescriptTypesTopic } from "@/data/topics/typescript-types";
-import { messageQueuesTopic } from "@/data/topics/message-queues";
-import { concurrencyParallelismTopic } from "@/data/topics/concurrency-parallelism";
-import { apiRateLimitingTopic } from "@/data/topics/api-rate-limiting";
-import { capTheoremTopic } from "@/data/topics/cap-theorem";
-import { webhooksVsPollingTopic } from "@/data/topics/webhooks-vs-polling";
-import { stackVsHeapTopic } from "@/data/topics/stack-vs-heap";
-import { kubernetesTopic } from "@/data/topics/kubernetes-architecture";
-import { dockerComposeVsKubernetesVsEksTopic } from "@/data/topics/docker-compose-vs-kubernetes-vs-eks";
-import { webassemblyTopic } from "@/data/topics/webassembly";
-import { serverlessTopic } from "@/data/topics/serverless-computing";
-import { cspTopic } from "@/data/topics/content-security-policy";
-import { iacTopic } from "@/data/topics/iac-terraform-ansible";
-import { oopVsFpTopic } from "@/data/topics/oop-vs-fp";
-import { databaseIndexingTopic } from "@/data/topics/database-indexing";
-import { browserStorageTopic } from "@/data/topics/browser-storage";
-import { viteVsWebpackTopic } from "@/data/topics/vite-vs-webpack";
-import { webRtcTopic } from "@/data/topics/webrtc";
-import { webVitalsTopic } from "@/data/topics/web-vitals";
+import { graphqlVsRestTopic } from "@/data/topics/graphql-vs-rest";
 import { grpcVsRestTopic } from "@/data/topics/grpc-vs-rest";
-import { acidPropertiesTopic } from "@/data/topics/acid-properties";
-import { distributedTransactionsTopic } from "@/data/topics/distributed-transactions";
-import { redisInMemoryTopic } from "@/data/topics/redis-in-memory";
+import { httpEvolutionTopic } from "@/data/topics/http-evolution";
+import { iacTopic } from "@/data/topics/iac-terraform-ansible";
+import { jsEventLoopTopic } from "@/data/topics/js-event-loop";
+import { jwtVsSessionTopic } from "@/data/topics/jwt-vs-session";
+import { kubernetesTopic } from "@/data/topics/kubernetes-architecture";
+import { loadBalancingTopic } from "@/data/topics/load-balancing";
+import { messageQueuesTopic } from "@/data/topics/message-queues";
+import { microservicesTopic } from "@/data/topics/microservices";
+import { natAddressingTopic } from "@/data/topics/nat-addressing";
+import { oauth2OidcTopic } from "@/data/topics/oauth2-oidc";
+import { oopVsFpTopic } from "@/data/topics/oop-vs-fp";
 import { passkeysWebauthnTopic } from "@/data/topics/passkeys-webauthn";
-import { consistentHashingTopic } from "@/data/topics/consistent-hashing";
-import { databaseChoicesAtScaleTopic } from "@/data/topics/database-choices-at-scale";
-import { dynamoDbDeepDiveTopic } from "@/data/topics/dynamodb-deep-dive";
+import { redisInMemoryTopic } from "@/data/topics/redis-in-memory";
+import { renderingPipelineTopic } from "@/data/topics/rendering-pipeline";
 import { rsaCryptographyTopic } from "@/data/topics/rsa-cryptography";
-import { bloomFiltersTopic } from "@/data/topics/bloom-filters";
+import { rustSystemsTopic } from "@/data/topics/rust-systems";
+import { serverlessTopic } from "@/data/topics/serverless-computing";
+import { sqlVsNosqlTopic } from "@/data/topics/sql-vs-nosql";
+import { ssrVsCsrTopic } from "@/data/topics/ssr-vs-csr";
+import { stackVsHeapTopic } from "@/data/topics/stack-vs-heap";
+import { tcpIpTopic } from "@/data/topics/tcp-ip";
+import { tcpVsUdpTopic } from "@/data/topics/tcp-vs-udp";
+import { typescriptTypesTopic } from "@/data/topics/typescript-types";
+import { viteVsWebpackTopic } from "@/data/topics/vite-vs-webpack";
+import { webRequestLifecycleTopic } from "@/data/topics/web-request-lifecycle";
+import { webSecurityTopic } from "@/data/topics/web-security";
+import { webVitalsTopic } from "@/data/topics/web-vitals";
+import { webassemblyTopic } from "@/data/topics/webassembly";
+import { webhooksVsPollingTopic } from "@/data/topics/webhooks-vs-polling";
+import { webRtcTopic } from "@/data/topics/webrtc";
+import { websocketsTopic } from "@/data/topics/websockets";
 
 // ── Batch 2 ───────────────────────────────────────────────────────────
-import { databaseShardingTopic } from "@/data/topics/database-sharding";
-import { databaseReplicationTopic } from "@/data/topics/database-replication";
-import { monorepoVsPolyrepoTopic } from "@/data/topics/monorepo-vs-polyrepo";
-import { restApiDesignTopic } from "@/data/topics/rest-api-design";
-import { circuitBreakerTopic } from "@/data/topics/circuit-breaker-pattern";
-import { eventDrivenArchitectureTopic } from "@/data/topics/event-driven-architecture";
-import { zeroTrustTopic } from "@/data/topics/zero-trust-architecture";
-import { closuresLexicalScopeTopic } from "@/data/topics/closures-lexical-scope";
-import { promisesVsObservablesTopic } from "@/data/topics/promises-vs-observables";
-import { bigOComplexityTopic } from "@/data/topics/big-o-complexity";
-import { hashTablesTopic } from "@/data/topics/hash-tables-internals";
-import { proxyVsReverseProxyTopic } from "@/data/topics/proxy-vs-reverse-proxy";
-import { cdnUnderTheHoodTopic } from "@/data/topics/cdn-under-the-hood";
-import { reactFiberReconciliationTopic } from "@/data/topics/react-fiber-reconciliation";
-import { virtualDomVsSignalsTopic } from "@/data/topics/virtual-dom-vs-signals";
 import { idempotencyTopic } from "@/data/topics/api-idempotency";
-import { processVsThreadTopic } from "@/data/topics/process-vs-thread-vs-coroutine";
+import { bigOComplexityTopic } from "@/data/topics/big-o-complexity";
+import { cdnUnderTheHoodTopic } from "@/data/topics/cdn-under-the-hood";
+import { circuitBreakerTopic } from "@/data/topics/circuit-breaker-pattern";
+import { closuresLexicalScopeTopic } from "@/data/topics/closures-lexical-scope";
+import { databaseReplicationTopic } from "@/data/topics/database-replication";
+import { databaseShardingTopic } from "@/data/topics/database-sharding";
+import { dnsOverHttpsTopic } from "@/data/topics/dns-security-doh-dot";
+import { eventDrivenArchitectureTopic } from "@/data/topics/event-driven-architecture";
+import { hashTablesTopic } from "@/data/topics/hash-tables-internals";
 import { monolithVsMicroservicesTopic } from "@/data/topics/monolith-vs-microservices";
 import { monolithVsMonorepoVsMicrofrontendsTopic } from "@/data/topics/monolith-vs-monorepo-vs-microfrontends";
-import { oauthFlowsTopic } from "@/data/topics/oauth2-flows-deep-dive";
-import { dnsOverHttpsTopic } from "@/data/topics/dns-security-doh-dot";
-import { solidPrinciplesTopic } from "@/data/topics/solid-principles";
+import { monorepoVsPolyrepoTopic } from "@/data/topics/monorepo-vs-polyrepo";
 import { observabilityTopic } from "@/data/topics/observability-monitoring";
+import { processVsThreadTopic } from "@/data/topics/process-vs-thread-vs-coroutine";
+import { promisesVsObservablesTopic } from "@/data/topics/promises-vs-observables";
+import { proxyVsReverseProxyTopic } from "@/data/topics/proxy-vs-reverse-proxy";
+import { reactFiberReconciliationTopic } from "@/data/topics/react-fiber-reconciliation";
+import { restApiDesignTopic } from "@/data/topics/rest-api-design";
+import { solidPrinciplesTopic } from "@/data/topics/solid-principles";
+import { virtualDomVsSignalsTopic } from "@/data/topics/virtual-dom-vs-signals";
+import { zeroTrustTopic } from "@/data/topics/zero-trust-architecture";
 
 // ── Batch 3 (Fullstack & System Design) ──────────────────────────────
 import { apiGatewayPatternTopic } from "@/data/topics/api-gateway-pattern";
-import { connectionPoolingTopic } from "@/data/topics/connection-pooling";
-import { sqlQueryOptimizationTopic } from "@/data/topics/sql-query-optimization";
-import { nPlusOneProblemTopic } from "@/data/topics/n-plus-one-problem";
-import { httpsTlsHandshakeTopic } from "@/data/topics/https-tls-handshake";
-import { stateManagementTopic } from "@/data/topics/state-management";
-import { cssBoxModelTopic } from "@/data/topics/css-box-model";
-import { serviceWorkersPwaTopic } from "@/data/topics/service-workers-pwa";
-import { prototypalInheritanceTopic } from "@/data/topics/prototypal-inheritance";
-import { dependencyInjectionTopic } from "@/data/topics/dependency-injection";
-import { twelveFacorAppTopic } from "@/data/topics/twelve-factor-app";
-import { testingPyramidTopic } from "@/data/topics/testing-pyramid";
-import { encodingEncryptionHashingTopic } from "@/data/topics/encoding-encryption-hashing";
 import { backendEncryptionMethodsTopic } from "@/data/topics/backend-encryption-comparison";
-import { webAccessibilityTopic } from "@/data/topics/web-accessibility";
-import { errorHandlingTopic } from "@/data/topics/error-handling-patterns";
-import { paginationStrategiesTopic } from "@/data/topics/pagination-strategies";
-import { envConfigTopic } from "@/data/topics/env-config-secrets";
-import { databaseMigrationsTopic } from "@/data/topics/database-migrations";
+import { connectionPoolingTopic } from "@/data/topics/connection-pooling";
+import { cssBoxModelTopic } from "@/data/topics/css-box-model";
 import { databaseLockingMvccTopic } from "@/data/topics/database-locking-mvcc";
+import { databaseMigrationsTopic } from "@/data/topics/database-migrations";
+import { dependencyInjectionTopic } from "@/data/topics/dependency-injection";
+import { encodingEncryptionHashingTopic } from "@/data/topics/encoding-encryption-hashing";
+import { envConfigTopic } from "@/data/topics/env-config-secrets";
+import { errorHandlingTopic } from "@/data/topics/error-handling-patterns";
+import { httpsTlsHandshakeTopic } from "@/data/topics/https-tls-handshake";
+import { nPlusOneProblemTopic } from "@/data/topics/n-plus-one-problem";
+import { paginationStrategiesTopic } from "@/data/topics/pagination-strategies";
+import { prototypalInheritanceTopic } from "@/data/topics/prototypal-inheritance";
 import { recursionCallStackTopic } from "@/data/topics/recursion-call-stack";
+import { serviceWorkersPwaTopic } from "@/data/topics/service-workers-pwa";
+import { sqlQueryOptimizationTopic } from "@/data/topics/sql-query-optimization";
+import { stateManagementTopic } from "@/data/topics/state-management";
+import { testingPyramidTopic } from "@/data/topics/testing-pyramid";
+import { twelveFacorAppTopic } from "@/data/topics/twelve-factor-app";
+import { webAccessibilityTopic } from "@/data/topics/web-accessibility";
 
 // ── Batch 4 (AI & Frontend) ─────────────────────────────────────────
-import { howLlmsWorkTopic } from "@/data/topics/how-llms-work";
-import { ragRetrievalAugmentedTopic } from "@/data/topics/rag-retrieval-augmented";
 import { aiAgentsToolUseTopic } from "@/data/topics/ai-agents-tool-use";
-import { promptEngineeringTopic } from "@/data/topics/prompt-engineering";
-import { vectorDatabasesEmbeddingsTopic } from "@/data/topics/vector-databases-embeddings";
-import { reactServerComponentsTopic } from "@/data/topics/react-server-components";
-import { microFrontendsTopic } from "@/data/topics/micro-frontends";
-import { debounceVsThrottleTopic } from "@/data/topics/debounce-vs-throttle";
-import { setintervalVsRequestanimationframeTopic } from "@/data/topics/setinterval-vs-requestanimationframe";
-import { webComponentsShadowDomTopic } from "@/data/topics/web-components-shadow-dom";
-import { sseVsWebsocketTopic } from "@/data/topics/sse-vs-websocket";
+import { awsServicesMappingTopic } from "@/data/topics/aws-services-mapping";
+import { bTreeVsBPlusTreeTopic } from "@/data/topics/b-tree-vs-b-plus-tree";
+import { codexVsSonnetTopic } from "@/data/topics/codex-vs-sonnet";
 import { cssInJsVsUtilityTopic } from "@/data/topics/css-in-js-vs-utility";
 import { cssSpecificityCascadeTopic } from "@/data/topics/css-specificity-cascade";
-import { polyfillsDeepDiveTopic } from "@/data/topics/polyfills-deep-dive";
-import { htmlVsHtmxTopic } from "@/data/topics/html-vs-htmx";
-import { tauriUnderTheHoodTopic } from "@/data/topics/tauri-under-the-hood";
-import { sagaPatternTopic } from "@/data/topics/saga-pattern";
-import { bTreeVsBPlusTreeTopic } from "@/data/topics/b-tree-vs-b-plus-tree";
+import { debounceVsThrottleTopic } from "@/data/topics/debounce-vs-throttle";
 import { deploymentStrategiesTopic } from "@/data/topics/deployment-strategies";
-import { softwareTestingStrategiesTopic } from "@/data/topics/software-testing-strategies";
-import { networkPayloadVulnerabilitiesTopic } from "@/data/topics/network-payload-vulnerabilities";
-import { terminalsShellsKernelTopic } from "@/data/topics/terminals-shells-kernel";
-import { codexVsSonnetTopic } from "@/data/topics/codex-vs-sonnet";
-import { nginxUnderTheHoodTopic } from "@/data/topics/nginx-under-the-hood";
-import { llmWebVsIdeVsCliTopic } from "@/data/topics/llm-web-vs-ide-vs-cli";
-import { skillsVsMcpTopic } from "@/data/topics/skills-vs-mcp";
-import { vibeCodingAiPairProgrammingTopic } from "@/data/topics/vibe-coding-ai-pair-programming";
-import { fullAppHostingDeploymentTopic } from "@/data/topics/full-app-hosting-deployment";
-import { llmDistillationTrainingEconomicsTopic } from "@/data/topics/llm-distillation-training-economics";
-import { harnessEngineeringTopic } from "@/data/topics/harness-engineering";
 import { domainRegistrarDnsHostingTopic } from "@/data/topics/domain-registrar-dns-hosting";
+import { fullAppHostingDeploymentTopic } from "@/data/topics/full-app-hosting-deployment";
+import { harnessEngineeringTopic } from "@/data/topics/harness-engineering";
+import { howLlmsWorkTopic } from "@/data/topics/how-llms-work";
 import { htmlEntitiesTopic } from "@/data/topics/html-entities";
+import { htmlVsHtmxTopic } from "@/data/topics/html-vs-htmx";
 import { jenkinsCicdDeepDiveTopic } from "@/data/topics/jenkins-cicd-deep-dive";
-import { awsServicesMappingTopic } from "@/data/topics/aws-services-mapping";
-import { paymentGatewayInternalsTopic } from "@/data/topics/payment-gateway-internals";
+import { llmDistillationTrainingEconomicsTopic } from "@/data/topics/llm-distillation-training-economics";
+import { llmWebVsIdeVsCliTopic } from "@/data/topics/llm-web-vs-ide-vs-cli";
+import { microFrontendsTopic } from "@/data/topics/micro-frontends";
+import { networkPayloadVulnerabilitiesTopic } from "@/data/topics/network-payload-vulnerabilities";
+import { nginxUnderTheHoodTopic } from "@/data/topics/nginx-under-the-hood";
 import { onlineMultiplayerArchitectureTopic } from "@/data/topics/online-multiplayer-architecture";
+import { paymentGatewayInternalsTopic } from "@/data/topics/payment-gateway-internals";
+import { polyfillsDeepDiveTopic } from "@/data/topics/polyfills-deep-dive";
+import { promptEngineeringTopic } from "@/data/topics/prompt-engineering";
+import { ragRetrievalAugmentedTopic } from "@/data/topics/rag-retrieval-augmented";
+import { reactServerComponentsTopic } from "@/data/topics/react-server-components";
+import { sagaPatternTopic } from "@/data/topics/saga-pattern";
+import { setintervalVsRequestanimationframeTopic } from "@/data/topics/setinterval-vs-requestanimationframe";
+import { skillsVsMcpTopic } from "@/data/topics/skills-vs-mcp";
+import { softwareTestingStrategiesTopic } from "@/data/topics/software-testing-strategies";
+import { sseVsWebsocketTopic } from "@/data/topics/sse-vs-websocket";
+import { tauriUnderTheHoodTopic } from "@/data/topics/tauri-under-the-hood";
+import { terminalsShellsKernelTopic } from "@/data/topics/terminals-shells-kernel";
+import { vectorDatabasesEmbeddingsTopic } from "@/data/topics/vector-databases-embeddings";
+import { vibeCodingAiPairProgrammingTopic } from "@/data/topics/vibe-coding-ai-pair-programming";
+import { webComponentsShadowDomTopic } from "@/data/topics/web-components-shadow-dom";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
-export type { Topic, Section };
+export type { Section, Topic };
 
 export const knowledgeBase: Section[] = [
   {
@@ -190,7 +188,6 @@ export const knowledgeBase: Section[] = [
       cspTopic,
       passkeysWebauthnTopic,
       zeroTrustTopic,
-      oauthFlowsTopic,
       dnsOverHttpsTopic,
       encodingEncryptionHashingTopic,
       backendEncryptionMethodsTopic,
@@ -212,7 +209,6 @@ export const knowledgeBase: Section[] = [
       cachingStrategiesTopic,
       serverlessTopic,
       sagaPatternTopic,
-      distributedTransactionsTopic,
       consistentHashingTopic,
       restApiDesignTopic,
       circuitBreakerTopic,

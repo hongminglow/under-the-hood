@@ -1,67 +1,279 @@
-import type { Topic } from "@/data/types";
+import { Callout } from "@/components/ui/Callout";
 import { Card } from "@/components/ui/Card";
+import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Flow } from "@/components/ui/Flow";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
-import { Callout } from "@/components/ui/Callout";
+import type { Topic } from "@/data/types";
 
 export const sagaPatternTopic: Topic = {
   id: "saga-pattern",
-  title: "The Saga Pattern (Distributed Transactions)",
+  title: "Saga Pattern (Distributed Transactions)",
   description:
-    "How to process an Uber order when the Payment database and the Driver database refuse to talk to each other.",
-  tags: ["architecture", "microservices", "system-design"],
+    "How to maintain ACID-like consistency when operations span across multiple microservice databases without a shared transaction.",
+  tags: ["architecture", "microservices", "system-design", "databases"],
   icon: "Orbit",
   content: [
     <p key="1">
-      The Saga pattern is a failure management strategy for <strong>Distributed Systems</strong>. In a microservices architecture, you cannot use standard ACID transactions across multiple databases. A Saga coordinates a sequence of local transactions to ensure <strong>Eventual Consistency</strong>.
+      In a monolithic database, you use a simple <code>BEGIN TRANSACTION</code>. If an error occurs, you trigger a <code>ROLLBACK</code> and the database fixes itself. But in a <strong>Microservices Architecture</strong>, an "Order Placement" might involve 3 completely separate databases: Order DB, Inventory DB, and Payment DB.
     </p>,
-    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
-      ACID vs. BASE
-    </h3>,
-    <p key="3" className="mb-4 text-sm text-muted-foreground">
-      Monoliths aim for <strong>ACID</strong> (Atomicity, Consistency, Isolation, Durability). Distributed Sagas settle for <strong>BASE</strong> (Basically Available, Soft state, Eventual consistency).
+    <p key="2" className="mt-4 mb-4">
+      Because there is no single shared database, you <em>cannot</em>&nbsp;use a standard SQL <code>ROLLBACK</code>. If Payment fails, how do you un-reserve the Inventory? Enter the <strong>Saga Pattern</strong>.
     </p>,
-    <h3 key="4" className="text-xl font-bold mt-8 mb-4">
-      Saga Implementation Patterns
+
+    <h3 key="3" className="text-xl font-bold mt-8 mb-4">
+      What is a Saga?
     </h3>,
-    <Grid key="5" cols={2} gap={6} className="my-8">
-      <Card title="Choreography (Event-Driven)">
+    <p key="4" className="mb-4">
+      A Saga is a sequence of <strong>local transactions</strong>&nbsp;where each microservice updates its own database and publishes an event to trigger the next step. If any step fails, the Saga executes <strong>compensating transactions</strong>&nbsp;to undo the work of preceding steps.
+    </p>,
+    <Flow
+      key="5"
+      steps={[
+        { title: "1. Order Created", description: "Order Service: status = PENDING" },
+        { title: "2. Inventory Reserved", description: "Inventory Service: items -= quantity" },
+        { title: "3. Payment Processed", description: "Payment Service: charge card" },
+        { title: "4. Order Confirmed", description: "Order Service: status = CONFIRMED" }
+      ]}
+    />,
+    <Callout key="6" type="warning" title="What if Step 3 Fails?">
+      If payment fails, we can't just <code>ROLLBACK</code> across services. Instead, we must execute <strong>compensating transactions</strong>: Inventory Service adds items back, Order Service sets status to CANCELLED.
+    </Callout>,
+
+    <h3 key="7" className="text-xl font-bold mt-8 mb-4">
+      ACID vs BASE
+    </h3>,
+    <Grid key="8" cols={2} gap={6} className="my-8">
+      <Card title="ACID (Monoliths)">
         <p className="text-sm text-muted-foreground mb-2">
-          Decentralized. Each service produces and listens to events from other services.
+          <strong>Atomicity</strong>: All or nothing<br/>
+          <strong>Consistency</strong>: Always valid state<br/>
+          <strong>Isolation</strong>: Transactions don't interfere<br/>
+          <strong>Durability</strong>: Committed = permanent
         </p>
         <p className="text-xs italic text-muted-foreground">
-          <strong>Pros:</strong> Simple for few services. No single point of failure. <strong>Cons:</strong> Hard to debug "Event Storms". Hard to track global state.
+          Perfect consistency, but doesn't scale across services.
+        </p>
+      </Card>
+      <Card title="BASE (Distributed Sagas)">
+        <p className="text-sm text-muted-foreground mb-2">
+          <strong>Basically Available</strong>: System works most of the time<br/>
+          <strong>Soft state</strong>: State may change without input<br/>
+          <strong>Eventual consistency</strong>: Becomes consistent eventually
+        </p>
+        <p className="text-xs italic text-muted-foreground">
+          Trades immediate consistency for scalability and availability.
+        </p>
+      </Card>
+    </Grid>,
+
+    <h3 key="9" className="text-xl font-bold mt-8 mb-4">
+      Saga Implementation: Choreography vs Orchestration
+    </h3>,
+    <Grid key="10" cols={2} gap={6} className="my-8">
+      <Card title="Choreography (Event-Driven)">
+        <p className="text-sm text-muted-foreground mb-2">
+          <strong>Decentralized</strong>. Each service produces and listens to events from other services.
+        </p>
+        <CodeBlock
+          language="javascript"
+          code={`// Order Service
+await db.orders.create({ status: 'PENDING' });
+await eventBus.publish('OrderCreated', { orderId });
+
+// Inventory Service listens
+eventBus.on('OrderCreated', async (event) => {
+  await reserveItems(event.orderId);
+  await eventBus.publish('InventoryReserved', event);
+});`}
+        />
+        <p className="text-xs italic text-muted-foreground mt-2">
+          <strong>Pros</strong>: Simple, no single point of failure<br/>
+          <strong>Cons</strong>: Hard to debug "event storms", difficult to track global state
         </p>
       </Card>
       <Card title="Orchestration (Centralized)">
         <p className="text-sm text-muted-foreground mb-2">
-          Centralized. A "Saga Execution Coordinator" (SEC) tells each service what to do.
+          <strong>Centralized</strong>. A Saga Execution Coordinator (SEC) tells each service what to do.
         </p>
-        <p className="text-xs italic text-muted-foreground">
-          <strong>Pros:</strong> Easy to track complex workflows. Prevents cyclic dependencies. <strong>Cons:</strong> The Orchestrator can become a bottleneck.
+        <CodeBlock
+          language="javascript"
+          code={`// Saga Orchestrator
+class OrderSaga {
+  async execute(orderId) {
+    try {
+      await orderService.create(orderId);
+      await inventoryService.reserve(orderId);
+      await paymentService.charge(orderId);
+      await orderService.confirm(orderId);
+    } catch (error) {
+      await this.compensate(orderId);
+    }
+  }
+}`}
+        />
+        <p className="text-xs italic text-muted-foreground mt-2">
+          <strong>Pros</strong>: Easy to track, prevents cyclic dependencies<br/>
+          <strong>Cons</strong>: Orchestrator can become a bottleneck
         </p>
       </Card>
     </Grid>,
-    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
-      The 'Undo' Button: Compensating Transactions
+
+    <h3 key="11" className="text-xl font-bold mt-8 mb-4">
+      Compensating Transactions: The 'Undo' Button
     </h3>,
     <Table
-      key="7"
-      headers={["Phase", "Action", "Failure Scenario"]}
+      key="12"
+      headers={["Phase", "Forward Action", "Compensating Action"]}
       rows={[
-        ["Forward Action", "Service A reserves inventory.", "Success: Move to Service B."],
-        ["The Crash", "Service B fails to process payment.", "Trigger 'Undo' for Service A."],
-        ["Compensating Action", "Service A <strong>un-reserves</strong> inventory.", "Restores system to a consistent state."]
+        ["Order", "Create order (status: PENDING)", "Cancel order (status: CANCELLED)"],
+        ["Inventory", "Reserve items (stock -= qty)", "Release items (stock += qty)"],
+        ["Payment", "Charge card", "Refund card"],
+        ["Shipping", "Create shipment", "Cancel shipment"]
       ]}
     />,
-    <h3 key="8" className="text-xl font-bold mt-8 mb-4">
-      Reliability: The Transactional Outbox
-    </h3>,
-    <p key="9" className="mb-4">
-      What if a service updates its database but crashes before it can send the 'Success' event to Kafka? Use the <strong>Outbox Pattern</strong>: write the event into an <code>Outbox</code> table in the <em>same</em> local transaction as the data update. A separate process then polls the table and publishes to the message broker.
+    <p key="13" className="mb-4">
+      Each forward action must have a corresponding compensating action. When a step fails, the Saga executes compensations in <strong>reverse order</strong>.
     </p>,
-    <Callout key="10" type="danger" title="The 'Lack of Isolation' Problem">
-      Sagas do not have <strong>Isolation</strong> (the 'I' in ACID). Other users might see the "Soft State" (e.g., an item marked as 'Reserved' but not yet 'Paid') while the Saga is still running. Use <strong>Semantic Locks</strong> or <strong>Versioning</strong> to mitigate this risk.
+    <CodeBlock
+      key="14"
+      title="Compensation Example"
+      language="javascript"
+      code={`class OrderSaga {
+  async execute(orderId) {
+    const completedSteps = [];
+    
+    try {
+      await orderService.create(orderId);
+      completedSteps.push('order');
+      
+      await inventoryService.reserve(orderId);
+      completedSteps.push('inventory');
+      
+      await paymentService.charge(orderId); // FAILS HERE
+      completedSteps.push('payment');
+      
+    } catch (error) {
+      // Compensate in reverse order
+      for (const step of completedSteps.reverse()) {
+        if (step === 'inventory') {
+          await inventoryService.release(orderId);
+        }
+        if (step === 'order') {
+          await orderService.cancel(orderId);
+        }
+      }
+      throw error;
+    }
+  }
+}`}
+    />,
+
+    <h3 key="15" className="text-xl font-bold mt-8 mb-4">
+      The Transactional Outbox Pattern
+    </h3>,
+    <p key="16" className="mb-4">
+      <strong>Problem</strong>: What if a service updates its database but crashes before publishing the event to Kafka? The Saga gets stuck.
+    </p>,
+    <p key="17" className="mb-4">
+      <strong>Solution</strong>: Use the <strong>Outbox Pattern</strong>. Write the event into an <code>outbox</code> table in the <em>same</em>&nbsp;local transaction as the data update. A separate process polls the table and publishes to the message broker.
+    </p>,
+    <CodeBlock
+      key="18"
+      title="Transactional Outbox"
+      language="sql"
+      code={`BEGIN TRANSACTION;
+
+-- Update business data
+INSERT INTO orders (id, status) VALUES (123, 'PENDING');
+
+-- Write event to outbox (same transaction!)
+INSERT INTO outbox (event_type, payload, created_at)
+VALUES ('OrderCreated', '{"orderId": 123}', NOW());
+
+COMMIT;
+
+-- Separate process polls outbox and publishes to Kafka
+SELECT * FROM outbox WHERE published = false ORDER BY created_at;`}
+    />,
+    <Callout key="19" type="success" title="Guaranteed Event Delivery">
+      Because the event is written in the same transaction as the data, either both succeed or both fail. No lost events.
+    </Callout>,
+
+    <h3 key="20" className="text-xl font-bold mt-8 mb-4">
+      The Lack of Isolation Problem
+    </h3>,
+    <p key="21" className="mb-4">
+      Sagas do not have <strong>Isolation</strong>&nbsp;(the 'I' in ACID). Other users might see intermediate "soft state" while the Saga is running.
+    </p>,
+    <Card key="22" title="Example: Dirty Reads">
+      <p className="text-sm text-muted-foreground mb-2">
+        User A starts a Saga to buy the last iPhone. Inventory is reserved (stock = 0). User B tries to buy the same iPhone and sees "Out of Stock". But then User A's payment fails, and the Saga compensates by releasing the inventory. User B missed their chance due to a temporary state.
+      </p>
+    </Card>,
+    <Grid key="23" cols={2} gap={6} className="my-8">
+      <Card title="Solution 1: Semantic Locks">
+        <p className="text-sm text-muted-foreground">
+          Add a <code>reserved_by</code> field to items. Other users see "Reserved" instead of "Out of Stock". If the Saga fails, the reservation expires after a timeout.
+        </p>
+      </Card>
+      <Card title="Solution 2: Versioning">
+        <p className="text-sm text-muted-foreground">
+          Use optimistic locking with version numbers. If two Sagas try to modify the same resource, the second one fails and retries.
+        </p>
+      </Card>
+    </Grid>,
+
+    <h3 key="24" className="text-xl font-bold mt-8 mb-4">
+      Real-World Examples
+    </h3>,
+    <Card key="25" title="Uber: Ride Booking Saga">
+      <p className="text-sm text-muted-foreground mb-2">
+        <strong>Steps</strong>: Create ride → Find driver → Reserve driver → Charge rider → Confirm ride
+      </p>
+      <p className="text-xs text-muted-foreground">
+        If payment fails, the Saga releases the driver and cancels the ride. Uses orchestration with a central Saga coordinator.
+      </p>
+    </Card>,
+    <Card key="26" title="Amazon: Order Fulfillment Saga">
+      <p className="text-sm text-muted-foreground mb-2">
+        <strong>Steps</strong>: Validate order → Reserve inventory → Process payment → Create shipment → Update order status
+      </p>
+      <p className="text-xs text-muted-foreground">
+        Uses choreography with event-driven microservices. Each service listens to domain events and reacts independently.
+      </p>
+    </Card>,
+
+    <h3 key="27" className="text-xl font-bold mt-8 mb-4">
+      When NOT to Use Sagas
+    </h3>,
+    <Callout key="28" type="warning" title="Sagas Add Complexity">
+      Don't use Sagas if you can avoid distributed transactions entirely:
+      <ul className="text-sm mt-2 space-y-1">
+        <li>• <strong>Keep it monolithic</strong>: If your data fits in one database, don't split it</li>
+        <li>• <strong>Eventual consistency is OK</strong>: Some operations don't need immediate consistency</li>
+        <li>• <strong>Use 2PC if possible</strong>: If all databases support XA transactions (rare in cloud)</li>
+      </ul>
+    </Callout>,
+
+    <h3 key="29" className="text-xl font-bold mt-8 mb-4">
+      Saga vs Two-Phase Commit (2PC)
+    </h3>,
+    <Table
+      key="30"
+      headers={["Feature", "Saga Pattern", "Two-Phase Commit (2PC)"]}
+      rows={[
+        ["Consistency", "Eventual", "Immediate (ACID)"],
+        ["Availability", "High (services independent)", "Low (coordinator blocks)"],
+        ["Complexity", "High (compensations)", "Medium (protocol overhead)"],
+        ["Failure Handling", "Compensating transactions", "Automatic rollback"],
+        ["Use Case", "Microservices, cloud-native", "Monoliths, legacy systems"]
+      ]}
+    />,
+
+    <Callout key="31" type="tip" title="Decision Guide">
+      <strong>Use Sagas when</strong>: You have microservices with separate databases, need high availability, and can tolerate eventual consistency.<br/><br/>
+      <strong>Avoid Sagas when</strong>: You can use a single database, need strict ACID guarantees, or operations are simple enough to not need distributed transactions.
     </Callout>,
   ],
 };
