@@ -93,6 +93,7 @@ import { encodingEncryptionHashingTopic } from "@/data/topics/encoding-encryptio
 import { envConfigTopic } from "@/data/topics/env-config-secrets";
 import { errorHandlingTopic } from "@/data/topics/error-handling-patterns";
 import { httpsTlsHandshakeTopic } from "@/data/topics/https-tls-handshake";
+import { multithreadingDatabaseAccessTopic } from "@/data/topics/multithreading-database-access";
 import { nPlusOneProblemTopic } from "@/data/topics/n-plus-one-problem";
 import { paginationStrategiesTopic } from "@/data/topics/pagination-strategies";
 import { prototypalInheritanceTopic } from "@/data/topics/prototypal-inheritance";
@@ -240,6 +241,7 @@ export const knowledgeBase: Section[] = [
       sqlQueryOptimizationTopic,
       nPlusOneProblemTopic,
       databaseLockingMvccTopic,
+      multithreadingDatabaseAccessTopic,
       databaseMigrationsTopic,
       databaseChoicesAtScaleTopic,
       dynamoDbDeepDiveTopic,
