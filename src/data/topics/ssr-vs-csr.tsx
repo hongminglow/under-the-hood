@@ -4,8 +4,6 @@ import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Flow } from "@/components/ui/Flow";
-import { Step } from "@/components/ui/Step";
-import { Highlight } from "@/components/ui/Highlight";
 import { MistakeCard } from "@/components/ui/MistakeCard";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 
@@ -18,7 +16,12 @@ export const ssrVsCsrTopic: Topic = {
   icon: "Globe",
   content: [
     <p key="intro-1">
-      When you run <code>create-react-app</code>, your physical HTML file is literally empty: <code>{"<div id=\"root\"></div>"}</code>. The user stares at a stark white screen for 3 seconds while your massive 2MB <code>bundle.js</code> downloads and magically injects the entire DOM via JavaScript. Every rendering strategy since has been an attempt to solve this exact problem.
+      When you run <code>create-react-app</code>, your physical HTML file is
+      literally empty: <code>{'<div id="root"></div>'}</code>. The user stares
+      at a stark white screen for 3 seconds while your massive 2MB{" "}
+      <code>bundle.js</code> downloads and magically injects the entire DOM via
+      JavaScript. Every rendering strategy since has been an attempt to solve
+      this exact problem.
     </p>,
 
     /* ─── SECTION 1: The Rendering Matrix ──────────────────────────────── */
@@ -55,8 +58,17 @@ export const ssrVsCsrTopic: Topic = {
         ],
       ]}
     />,
-    <Callout key="hydration-callout" type="warning" title="The Hydration tax — every SSR/SSG page pays this">
-      If a server sends pure HTML (SSR/SSG/ISR), it <em>looks</em> great instantly, but buttons won't work yet. React must download the full JavaScript bundle in the background and silently re-attach event listeners to the static DOM nodes. This process is called <strong>Hydration</strong> and it is the reason TTI (Time to Interactive) lags behind FCP (First Contentful Paint) even on SSR pages.
+    <Callout
+      key="hydration-callout"
+      type="warning"
+      title="The Hydration tax — every SSR/SSG page pays this"
+    >
+      If a server sends pure HTML (SSR/SSG/ISR), it <em>looks</em> great
+      instantly, but buttons won't work yet. React must download the full
+      JavaScript bundle in the background and silently re-attach event listeners
+      to the static DOM nodes. This process is called <strong>Hydration</strong>{" "}
+      and it is the reason TTI (Time to Interactive) lags behind FCP (First
+      Contentful Paint) even on SSR pages.
     </Callout>,
 
     /* ─── SECTION 2: Performance Metrics ───────────────────────────────── */
@@ -67,11 +79,41 @@ export const ssrVsCsrTopic: Topic = {
       key="perf-table"
       headers={["Metric", "CSR", "SSR", "SSG / ISR", "What it measures"]}
       rows={[
-        ["TTFB", "🟢 Fast", "🔴 Slow", "🟢 Instant", "Time until browser receives first byte from server."],
-        ["FCP", "🔴 Slow (2–3s blank screen)", "🟢 Fast (~200ms)", "🟢 Instant (~50ms CDN)", "Time until first visible content appears on screen."],
-        ["TTI", "🟡 Varies", "🟡 Varies", "🟡 Varies", "Time until page is fully interactive. ALL strategies wait for JS to hydrate."],
-        ["LCP", "🔴 Penalized by Google", "🟢 Strong", "🟢 Strongest", "Largest Contentful Paint. Directly impacts Google ranking."],
-        ["CLS", "🔴 High risk", "🟡 Medium risk", "🟢 Low risk", "Cumulative Layout Shift — SSR/SSG HTMLs prevent jarring layout jumps."],
+        [
+          "TTFB",
+          "🟢 Fast",
+          "🔴 Slow",
+          "🟢 Instant",
+          "Time until browser receives first byte from server.",
+        ],
+        [
+          "FCP",
+          "🔴 Slow (2–3s blank screen)",
+          "🟢 Fast (~200ms)",
+          "🟢 Instant (~50ms CDN)",
+          "Time until first visible content appears on screen.",
+        ],
+        [
+          "TTI",
+          "🟡 Varies",
+          "🟡 Varies",
+          "🟡 Varies",
+          "Time until page is fully interactive. ALL strategies wait for JS to hydrate.",
+        ],
+        [
+          "LCP",
+          "🔴 Penalized by Google",
+          "🟢 Strong",
+          "🟢 Strongest",
+          "Largest Contentful Paint. Directly impacts Google ranking.",
+        ],
+        [
+          "CLS",
+          "🔴 High risk",
+          "🟡 Medium risk",
+          "🟢 Low risk",
+          "Cumulative Layout Shift — SSR/SSG HTMLs prevent jarring layout jumps.",
+        ],
       ]}
     />,
 
@@ -80,16 +122,34 @@ export const ssrVsCsrTopic: Topic = {
       React Server Components (RSC) — The Paradigm Shift
     </h3>,
     <p key="rsc-sub" className="text-muted-foreground mb-6">
-      Next.js 13+ App Router introduced <strong>React Server Components</strong>, which is the single biggest architectural shift in React since hooks. RSC is <em>not</em> the same as SSR. It changes <em>where</em> components live permanently, not just where they render initially.
+      Next.js 13+ App Router introduced <strong>React Server Components</strong>
+      , which is the single biggest architectural shift in React since hooks.
+      RSC is <em>not</em> the same as SSR. It changes <em>where</em> components
+      live permanently, not just where they render initially.
     </p>,
     <Grid key="rsc-grid" cols={2} gap={6} className="mb-8">
-      <Card title="Server Component (default in App Router)" description="Renders on server. Never ships to client.">
+      <Card
+        title="Server Component (default in App Router)"
+        description="Renders on server. Never ships to client."
+      >
         <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
-          <li>Can <code>async/await</code> directly inside the component — no <code>useEffect</code> needed.</li>
+          <li>
+            Can <code>async/await</code> directly inside the component — no{" "}
+            <code>useEffect</code> needed.
+          </li>
           <li>Can access databases, file system, secret env vars directly.</li>
-          <li><strong>Zero JavaScript sent to the browser</strong> for this component.</li>
-          <li>Cannot use <code>useState</code>, <code>useEffect</code>, or any browser API.</li>
-          <li>Cannot attach event handlers (<code>onClick</code>, <code>onChange</code>).</li>
+          <li>
+            <strong>Zero JavaScript sent to the browser</strong> for this
+            component.
+          </li>
+          <li>
+            Cannot use <code>useState</code>, <code>useEffect</code>, or any
+            browser API.
+          </li>
+          <li>
+            Cannot attach event handlers (<code>onClick</code>,{" "}
+            <code>onChange</code>).
+          </li>
         </ul>
         <CodeBlock
           title="app/products/page.tsx — Server Component"
@@ -102,12 +162,25 @@ export default async function ProductsPage() {
 }`}
         />
       </Card>
-      <Card title="Client Component ('use client')" description="Hydrated on client. Ships JS to browser.">
+      <Card
+        title="Client Component ('use client')"
+        description="Hydrated on client. Ships JS to browser."
+      >
         <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
-          <li>Requires <code>'use client'</code> at the top of the file.</li>
-          <li>Can use <code>useState</code>, <code>useEffect</code>, browser APIs, event handlers.</li>
-          <li>Ships JavaScript to the browser — the component is hydrated on the client.</li>
-          <li>Cannot directly <code>await</code> a database query.</li>
+          <li>
+            Requires <code>'use client'</code> at the top of the file.
+          </li>
+          <li>
+            Can use <code>useState</code>, <code>useEffect</code>, browser APIs,
+            event handlers.
+          </li>
+          <li>
+            Ships JavaScript to the browser — the component is hydrated on the
+            client.
+          </li>
+          <li>
+            Cannot directly <code>await</code> a database query.
+          </li>
           <li>Is the boundary where interactivity begins.</li>
         </ul>
         <CodeBlock
@@ -128,8 +201,16 @@ export function AddToCart({ productId }: { productId: string }) {
         />
       </Card>
     </Grid>,
-    <Callout key="rsc-insight" type="tip" title="The Golden Rule: Push 'use client' as deep as possible">
-      Your page tree should be mostly Server Components (free, fast, zero JS) with <code>'use client'</code> islands pushed to small, interactive leaf nodes. A common mistake is marking an entire layout as a Client Component — this ships the entire component's JS to the browser unnecessarily and defeats the purpose of RSC.
+    <Callout
+      key="rsc-insight"
+      type="tip"
+      title="The Golden Rule: Push 'use client' as deep as possible"
+    >
+      Your page tree should be mostly Server Components (free, fast, zero JS)
+      with <code>'use client'</code> islands pushed to small, interactive leaf
+      nodes. A common mistake is marking an entire layout as a Client Component
+      — this ships the entire component's JS to the browser unnecessarily and
+      defeats the purpose of RSC.
     </Callout>,
 
     /* ─── SECTION 4: Suspense & Streaming ──────────────────────────────── */
@@ -137,26 +218,35 @@ export function AddToCart({ productId }: { productId: string }) {
       Suspense Streaming — Solving the SSR Waterfall
     </h3>,
     <p key="streaming-sub" className="text-muted-foreground mb-6">
-      Traditional SSR had a brutal "all-or-nothing" problem: the server had to finish <em>all</em> data fetching before it could send a <em>single byte</em> of HTML. If one slow database query took 3 seconds, the user waited 3 seconds for a blank screen. <strong>Streaming with Suspense</strong> solves this by sending HTML in chunks.
+      Traditional SSR had a brutal "all-or-nothing" problem: the server had to
+      finish <em>all</em> data fetching before it could send a{" "}
+      <em>single byte</em> of HTML. If one slow database query took 3 seconds,
+      the user waited 3 seconds for a blank screen.{" "}
+      <strong>Streaming with Suspense</strong> solves this by sending HTML in
+      chunks.
     </p>,
     <Flow
       key="streaming-flow"
       steps={[
         {
           title: "1. Shell Sent First",
-          description: "The server immediately streams the page <shell> — header, nav, layout, static content — the moment the request hits. No waiting for any data.",
+          description:
+            "The server immediately streams the page <shell> — header, nav, layout, static content — the moment the request hits. No waiting for any data.",
         },
         {
           title: "2. Suspense Boundaries",
-          description: "Slow sections (product list, user feed) are wrapped in <Suspense fallback={<Skeleton/>}>. These render a loading skeleton instantly.",
+          description:
+            "Slow sections (product list, user feed) are wrapped in <Suspense fallback={<Skeleton/>}>. These render a loading skeleton instantly.",
         },
         {
           title: "3. Async Chunks Stream In",
-          description: "As each async Server Component resolves its data fetch, Next.js streams the completed chunk of HTML into the page — replacing the skeleton inline.",
+          description:
+            "As each async Server Component resolves its data fetch, Next.js streams the completed chunk of HTML into the page — replacing the skeleton inline.",
         },
         {
           title: "4. Progressive Hydration",
-          description: "Client Components within each chunk hydrate independently as their chunk arrives. Interactivity unlocks progressively, not all at once.",
+          description:
+            "Client Components within each chunk hydrate independently as their chunk arrives. Interactivity unlocks progressively, not all at once.",
         },
       ]}
     />,
@@ -192,16 +282,38 @@ export default function Page() {
       The Next.js 15 Caching Model — 4 Layers Deep
     </h3>,
     <p key="cache-sub" className="text-muted-foreground mb-6">
-      Next.js has an aggressive, multi-layered caching system that most developers don't fully understand. Missing any one layer means either stale data or performance regressions. Here's the full stack:
+      Next.js has an aggressive, multi-layered caching system that most
+      developers don't fully understand. Missing any one layer means either
+      stale data or performance regressions. Here's the full stack:
     </p>,
     <Table
       key="cache-table"
       headers={["Cache Layer", "What it caches", "Storage", "Duration"]}
       rows={[
-        ["Request Memoization", "Deduplicated fetch() calls within a single render pass", "In-memory (per request)", "Single render cycle only — cleared after each request"],
-        ["Data Cache", "fetch() responses tagged with cache config", "Server-side persistent cache (filesystem / Redis)", "Persistent until revalidated (revalidate: 3600 or revalidateTag)"],
-        ["Full Route Cache", "The entire rendered HTML + RSC payload of a route", "Server filesystem", "Persistent until revalidation or re-deploy"],
-        ["Router Cache", "RSC payloads prefetched for routes the user may navigate to", "Browser memory (client-side)", "30s for dynamic, 5 min for static — auto-invalidates"],
+        [
+          "Request Memoization",
+          "Deduplicated fetch() calls within a single render pass",
+          "In-memory (per request)",
+          "Single render cycle only — cleared after each request",
+        ],
+        [
+          "Data Cache",
+          "fetch() responses tagged with cache config",
+          "Server-side persistent cache (filesystem / Redis)",
+          "Persistent until revalidated (revalidate: 3600 or revalidateTag)",
+        ],
+        [
+          "Full Route Cache",
+          "The entire rendered HTML + RSC payload of a route",
+          "Server filesystem",
+          "Persistent until revalidation or re-deploy",
+        ],
+        [
+          "Router Cache",
+          "RSC payloads prefetched for routes the user may navigate to",
+          "Browser memory (client-side)",
+          "30s for dynamic, 5 min for static — auto-invalidates",
+        ],
       ]}
     />,
 
@@ -210,10 +322,15 @@ export default function Page() {
       Controlling the Data Cache: <code>fetch()</code> Options
     </h3>,
     <p key="fetch-sub" className="text-muted-foreground mb-6">
-      In Next.js App Router, the native <code>fetch()</code> API is extended with caching controls. This is the primary way you tune how aggressively your server caches external API or database responses:
+      In Next.js App Router, the native <code>fetch()</code> API is extended
+      with caching controls. This is the primary way you tune how aggressively
+      your server caches external API or database responses:
     </p>,
     <Grid key="fetch-grid" cols={2} gap={6} className="mb-4">
-      <Card title="force-cache — Static (SSG behaviour)" description="Cache forever until manually revalidated">
+      <Card
+        title="force-cache — Static (SSG behaviour)"
+        description="Cache forever until manually revalidated"
+      >
         <CodeBlock
           title="fetch with force-cache"
           language="typescript"
@@ -224,9 +341,15 @@ const data = await fetch("https://api.shop.com/products", {
   next: { tags: ["products"] },  // tag it for targeted invalidation
 });`}
         />
-        <p className="text-xs text-muted-foreground mt-3">Use for: product catalogs, blog posts, CMS content — anything that doesn't change per-request.</p>
+        <p className="text-xs text-muted-foreground mt-3">
+          Use for: product catalogs, blog posts, CMS content — anything that
+          doesn't change per-request.
+        </p>
       </Card>
-      <Card title="no-store — Dynamic (SSR behaviour)" description="Never cache — fresh fetch on every request">
+      <Card
+        title="no-store — Dynamic (SSR behaviour)"
+        description="Never cache — fresh fetch on every request"
+      >
         <CodeBlock
           title="fetch with no-store"
           language="typescript"
@@ -236,9 +359,15 @@ const data = await fetch("https://api.shop.com/cart", {
   cache: "no-store",
 });`}
         />
-        <p className="text-xs text-muted-foreground mt-3">Use for: shopping cart, user-specific data, live prices, anything with auth headers.</p>
+        <p className="text-xs text-muted-foreground mt-3">
+          Use for: shopping cart, user-specific data, live prices, anything with
+          auth headers.
+        </p>
       </Card>
-      <Card title="revalidate — Time-Based ISR" description="Cache for N seconds, then background refresh">
+      <Card
+        title="revalidate — Time-Based ISR"
+        description="Cache for N seconds, then background refresh"
+      >
         <CodeBlock
           title="fetch with revalidate"
           language="typescript"
@@ -249,9 +378,15 @@ const data = await fetch("https://api.shop.com/featured", {
   next: { revalidate: 3600 },
 });`}
         />
-        <p className="text-xs text-muted-foreground mt-3">Use for: featured products, news headlines, anything acceptable to be slightly stale.</p>
+        <p className="text-xs text-muted-foreground mt-3">
+          Use for: featured products, news headlines, anything acceptable to be
+          slightly stale.
+        </p>
       </Card>
-      <Card title="tags — On-Demand Invalidation" description="Tag the cache, then surgically invalidate it from a Server Action">
+      <Card
+        title="tags — On-Demand Invalidation"
+        description="Tag the cache, then surgically invalidate it from a Server Action"
+      >
         <CodeBlock
           title="fetch with tags + revalidateTag"
           language="typescript"
@@ -267,7 +402,10 @@ export async function onProductUpdate() {
   revalidateTag("product-42"); // Surgically busts only this product's cache
 }`}
         />
-        <p className="text-xs text-muted-foreground mt-3">Use for: CMS webhooks, admin panel updates — invalidating exactly what changed, nothing more.</p>
+        <p className="text-xs text-muted-foreground mt-3">
+          Use for: CMS webhooks, admin panel updates — invalidating exactly what
+          changed, nothing more.
+        </p>
       </Card>
     </Grid>,
 
@@ -276,7 +414,12 @@ export async function onProductUpdate() {
       React's <code>cache()</code> — Server-Side Request Deduplication
     </h3>,
     <p key="cache-fn-sub" className="text-muted-foreground mb-6">
-      React 18 shipped a native <code>cache()</code> function for use with Server Components. It memoizes a function's return value <em>within a single server render pass</em>. If five different Server Components on the same page all call <code>getUser(userId)</code>, the actual database query only runs <strong>once</strong> — the result is shared across the render tree.
+      React 18 shipped a native <code>cache()</code> function for use with
+      Server Components. It memoizes a function's return value{" "}
+      <em>within a single server render pass</em>. If five different Server
+      Components on the same page all call <code>getUser(userId)</code>, the
+      actual database query only runs <strong>once</strong> — the result is
+      shared across the render tree.
     </p>,
     <Grid key="cache-fn-grid" cols={2} gap={6} className="mb-4">
       <Card title="Without cache() — N database queries">
@@ -304,8 +447,16 @@ export const getUser = cache(async (id: string) => {
         />
       </Card>
     </Grid>,
-    <Callout key="cache-fn-note" type="info" title="cache() vs fetch() deduplication">
-      Next.js already deduplicates <code>fetch()</code> calls automatically within a single render pass. But <code>cache()</code> is for <strong>non-fetch operations</strong> — ORM queries (Prisma, Drizzle), SDK calls (Stripe, Twilio), or any async utility function that doesn't use <code>fetch</code> internally.
+    <Callout
+      key="cache-fn-note"
+      type="info"
+      title="cache() vs fetch() deduplication"
+    >
+      Next.js already deduplicates <code>fetch()</code> calls automatically
+      within a single render pass. But <code>cache()</code> is for{" "}
+      <strong>non-fetch operations</strong> — ORM queries (Prisma, Drizzle), SDK
+      calls (Stripe, Twilio), or any async utility function that doesn't use{" "}
+      <code>fetch</code> internally.
     </Callout>,
 
     /* ─── SECTION 8: Route Segment Config ──────────────────────────────── */
@@ -313,7 +464,9 @@ export const getUser = cache(async (id: string) => {
       Route Segment Config — Page-Level Cache Overrides
     </h3>,
     <p key="segment-sub" className="text-muted-foreground mb-6">
-      Beyond individual <code>fetch()</code> calls, you can control the entire route's rendering and caching strategy from the top of any <code>page.tsx</code> or <code>layout.tsx</code> using exported constants:
+      Beyond individual <code>fetch()</code> calls, you can control the entire
+      route's rendering and caching strategy from the top of any{" "}
+      <code>page.tsx</code> or <code>layout.tsx</code> using exported constants:
     </p>,
     <CodeBlock
       key="segment-code"
@@ -336,22 +489,45 @@ export const runtime = "edge"; // Deploy to Vercel Edge Network globally
       key="dynamic-table"
       headers={["dynamic value", "Behaviour", "Equivalent to"]}
       rows={[
-        ["'auto' (default)", "Next.js decides based on fetch() options and APIs used", "Smart default — varies per component"],
-        ["'force-static'", "Force SSG. Dynamic functions (cookies, headers) return empty values", "SSG — cached at build time"],
-        ["'force-dynamic'", "Force SSR. Every request runs fresh. Cache is bypassed entirely", "SSR — no cache at all"],
-        ["'error'", "Force static but throw a build error if dynamic functions are used", "Strict SSG — catches mistakes at build time"],
+        [
+          "'auto' (default)",
+          "Next.js decides based on fetch() options and APIs used",
+          "Smart default — varies per component",
+        ],
+        [
+          "'force-static'",
+          "Force SSG. Dynamic functions (cookies, headers) return empty values",
+          "SSG — cached at build time",
+        ],
+        [
+          "'force-dynamic'",
+          "Force SSR. Every request runs fresh. Cache is bypassed entirely",
+          "SSR — no cache at all",
+        ],
+        [
+          "'error'",
+          "Force static but throw a build error if dynamic functions are used",
+          "Strict SSG — catches mistakes at build time",
+        ],
       ]}
     />,
 
     /* ─── SECTION 9: revalidatePath & revalidateTag ─────────────────────  */
     <h3 key="revalidate-title" className="text-xl font-bold mt-12 mb-4">
-      On-Demand Revalidation: <code>revalidatePath</code> vs <code>revalidateTag</code>
+      On-Demand Revalidation: <code>revalidatePath</code> vs{" "}
+      <code>revalidateTag</code>
     </h3>,
     <p key="revalidate-sub" className="text-muted-foreground mb-6">
-      Time-based <code>revalidate</code> waits for the timer. But when a CMS editor publishes an article, you want the cache busted <em>right now</em>. Next.js provides two surgical tools for this via Server Actions or Route Handlers:
+      Time-based <code>revalidate</code> waits for the timer. But when a CMS
+      editor publishes an article, you want the cache busted <em>right now</em>.
+      Next.js provides two surgical tools for this via Server Actions or Route
+      Handlers:
     </p>,
     <Grid key="revalidate-grid" cols={2} gap={6} className="mb-4">
-      <Card title="revalidatePath()" description="Invalidates the Full Route Cache for a specific URL path">
+      <Card
+        title="revalidatePath()"
+        description="Invalidates the Full Route Cache for a specific URL path"
+      >
         <CodeBlock
           title="Route Handler — CMS webhook"
           language="typescript"
@@ -370,9 +546,15 @@ export async function POST(req: NextRequest) {
   return Response.json({ revalidated: true });
 }`}
         />
-        <p className="text-xs text-muted-foreground mt-3">⚠️ Busts the <em>entire route's HTML cache</em>. Broader, but simpler. Good for simple CMS setups.</p>
+        <p className="text-xs text-muted-foreground mt-3">
+          ⚠️ Busts the <em>entire route's HTML cache</em>. Broader, but simpler.
+          Good for simple CMS setups.
+        </p>
       </Card>
-      <Card title="revalidateTag()" description="Surgically invalidates the Data Cache for a specific tag">
+      <Card
+        title="revalidateTag()"
+        description="Surgically invalidates the Data Cache for a specific tag"
+      >
         <CodeBlock
           title="Server Action — After admin edit"
           language="typescript"
@@ -389,7 +571,10 @@ export async function updateProduct(id: string, data: FormData) {
   revalidateTag(\`product-\${id}\`); // even more targeted
 }`}
         />
-        <p className="text-xs text-muted-foreground mt-3">✅ More surgical — only re-fetches data, not full HTML. Perfect with fine-grained cache tags.</p>
+        <p className="text-xs text-muted-foreground mt-3">
+          ✅ More surgical — only re-fetches data, not full HTML. Perfect with
+          fine-grained cache tags.
+        </p>
       </Card>
     </Grid>,
 
@@ -398,10 +583,19 @@ export async function updateProduct(id: string, data: FormData) {
       The SEO Reality
     </h3>,
     <p key="seo-1" className="mb-4">
-      Google's crawler <em>can</em> execute JavaScript and index CSR apps, but it's unreliable and slow. If your site takes 5 seconds to render client-side, Google may give up or rank you lower. <strong>SSR/SSG guarantee</strong> that the HTML is immediately crawlable, making them mandatory for content-heavy sites (blogs, e-commerce, marketing pages).
+      Google's crawler <em>can</em> execute JavaScript and index CSR apps, but
+      it's unreliable and slow. If your site takes 5 seconds to render
+      client-side, Google may give up or rank you lower.{" "}
+      <strong>SSR/SSG guarantee</strong> that the HTML is immediately crawlable,
+      making them mandatory for content-heavy sites (blogs, e-commerce,
+      marketing pages).
     </p>,
     <Callout key="seo-callout" type="info" title="Googlebot and ISR/RSC">
-      With ISR and RSC, Googlebot gets the best of both worlds: statically served, fully-rendered HTML at CDN speed. Google's Core Web Vitals crawler measures TTFB, LCP, and CLS — all of which ISR + Suspense streaming optimize aggressively. This is why Next.js App Router is effectively the SEO gold standard for React apps in 2025.
+      With ISR and RSC, Googlebot gets the best of both worlds: statically
+      served, fully-rendered HTML at CDN speed. Google's Core Web Vitals crawler
+      measures TTFB, LCP, and CLS — all of which ISR + Suspense streaming
+      optimize aggressively. This is why Next.js App Router is effectively the
+      SEO gold standard for React apps in 2025.
     </Callout>,
 
     /* ─── SECTION 11: Common Mistakes ──────────────────────────────────── */
@@ -427,7 +621,14 @@ export async function updateProduct(id: string, data: FormData) {
       number={3}
       title="Forgetting that cookies()/headers() opts routes into dynamic rendering"
       problem="Developer calls cookies() or headers() inside a Server Component to read auth. They expect the page to be cached (SSG), but Next.js automatically upgrades the entire route to dynamic (SSR) because these APIs are inherently request-specific."
-      solution={<>Move auth-dependent logic into a separate nested layout or use <code>export const dynamic = 'force-static'</code> carefully. Alternatively, use middleware to handle auth before the route layer, keeping the page itself cache-friendly.</>}
+      solution={
+        <>
+          Move auth-dependent logic into a separate nested layout or use{" "}
+          <code>export const dynamic = 'force-static'</code> carefully.
+          Alternatively, use middleware to handle auth before the route layer,
+          keeping the page itself cache-friendly.
+        </>
+      }
     />,
     <MistakeCard
       key="m4"
