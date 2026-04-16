@@ -1,14 +1,14 @@
-import type { Topic } from "@/data/types";
-import { Grid } from "@/components/ui/Grid";
-import { Card } from "@/components/ui/Card";
-import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { Card } from "@/components/ui/Card";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Grid } from "@/components/ui/Grid";
 import { Step } from "@/components/ui/Step";
+import { Table } from "@/components/ui/Table";
+import type { Topic } from "@/data/types";
 
 export const sqlQueryOptimizationTopic: Topic = {
   id: "sql-query-optimization",
-  title: "SQL Query Optimization (EXPLAIN ANALYZE)",
+  title: "SQL Query Optimization",
   description:
     "How to medically diagnose exactly why your massive complex JOIN query is suddenly taking 14 agonizing seconds.",
   tags: ["database", "performance", "sql"],
