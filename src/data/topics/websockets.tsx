@@ -137,15 +137,20 @@ wss.on('connection', (ws) => {
       headers={["Feature", "WebSockets", "Server-Sent Events (SSE)", "Long Polling"]}
       rows={[
         ["Direction", "Bi-directional (client ↔ server)", "Uni-directional (server → client)", "Uni-directional (server → client)"],
-        ["Protocol", "ws:// or wss://", "HTTP/HTTPS", "HTTP/HTTPS"],
+        ["Protocol", "ws:// or wss://", "HTTP/HTTPS (HTTP/2 recommended)", "HTTP/HTTPS"],
         ["Browser Support", "All modern browsers", "All modern (not IE)", "Universal"],
         ["Connection", "Persistent TCP", "Persistent HTTP", "Repeated HTTP requests"],
         ["Overhead", "Low (binary frames)", "Medium (HTTP headers)", "High (new request each time)"],
-        ["Use Case", "Chat, gaming, collaboration", "Live feeds, notifications", "Legacy systems, simple updates"],
-        ["Reconnection", "Manual (exponential backoff)", "Automatic", "Built-in (new request)"],
-        ["Firewall/Proxy", "Can be blocked", "Works everywhere (HTTP)", "Works everywhere (HTTP)"]
+        ["Use Case", "Chat, gaming, collaboration", "Live feeds, notifications, streaming", "Legacy systems, simple updates"],
+        ["Reconnection", "Manual (exponential backoff)", "<strong>Automatic</strong> (browser handles)", "Built-in (new request)"],
+        ["Firewall/Proxy", "Can be blocked", "Works everywhere (HTTP)", "Works everywhere (HTTP)"],
+        ["HTTP/2 Multiplexing", "N/A (not HTTP)", "<strong>100+ streams</strong> over single TCP", "N/A"],
+        ["Last-Event-ID", "N/A", "<strong>Replay missed messages</strong> on reconnect", "N/A"]
       ]}
     />,
+    <Callout key="sse-tip" type="tip" title="When to Choose SSE Over WebSockets">
+      If your app is mostly <strong>Read-Only</strong>&nbsp;(stock tickers, social feeds, ChatGPT-style streaming, live dashboards), <strong>SSE is almost always better</strong>&nbsp;than WebSockets. It's easier to scale, works over standard HTTP, has automatic reconnection, and better firewall compatibility. With HTTP/2, you can open 100+ SSE streams over a single TCP connection, bypassing the old "6-connection limit" from HTTP/1.1.
+    </Callout>,
 
     <h3 key="reconnect-title" className="text-xl font-bold mt-8 mb-4">
       Reconnection Strategy: Exponential Backoff

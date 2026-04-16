@@ -136,7 +136,6 @@ import { sagaPatternTopic } from "@/data/topics/saga-pattern";
 import { setintervalVsRequestanimationframeTopic } from "@/data/topics/setinterval-vs-requestanimationframe";
 import { skillsVsMcpTopic } from "@/data/topics/skills-vs-mcp";
 import { softwareTestingStrategiesTopic } from "@/data/topics/software-testing-strategies";
-import { sseVsWebsocketTopic } from "@/data/topics/sse-vs-websocket";
 import { tauriUnderTheHoodTopic } from "@/data/topics/tauri-under-the-hood";
 import { terminalsShellsKernelTopic } from "@/data/topics/terminals-shells-kernel";
 import { vectorDatabasesEmbeddingsTopic } from "@/data/topics/vector-databases-embeddings";
@@ -167,7 +166,6 @@ export const knowledgeBase: Section[] = [
       proxyVsReverseProxyTopic,
       cdnUnderTheHoodTopic,
       httpsTlsHandshakeTopic,
-      sseVsWebsocketTopic,
     ],
   },
   {
