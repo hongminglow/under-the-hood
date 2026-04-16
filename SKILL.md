@@ -158,6 +158,52 @@ For visualizing sequential architectural logic, pipelines, or step-by-step proce
 
 To ensure the application remains stable and build-ready, always follow these rules:
 
+### 0. CRITICAL: Import-First Workflow ⚠️
+
+**BEFORE adding any new component to a topic file, ALWAYS update imports FIRST.**
+
+#### Mandatory Workflow:
+1. **Read the file** → Identify existing imports at the top
+2. **Plan components** → List ALL new components you'll add (Grid, Card, CodeBlock, MistakeCard, Flow, etc.)
+3. **Update imports FIRST** → Use `strReplace` on the import section BEFORE touching content
+4. **Then add content** → Use `strReplace` on the content section
+5. **Run diagnostics** → Verify no missing imports with `getDiagnostics`
+
+#### Import Checklist (Copy-Paste This):
+```tsx
+// When you use these components, they MUST be imported:
+<Grid>          → import { Grid } from "@/components/ui/Grid";
+<Card>          → import { Card } from "@/components/ui/Card";
+<CodeBlock>     → import { CodeBlock } from "@/components/ui/CodeBlock";
+<MistakeCard>   → import { MistakeCard } from "@/components/ui/MistakeCard";
+<Flow>          → import { Flow } from "@/components/ui/Flow";
+<Highlight>     → import { Highlight } from "@/components/ui/Highlight";
+<Table>         → import { Table } from "@/components/ui/Table";
+<Callout>       → import { Callout } from "@/components/ui/Callout";
+<Step>          → import { Step } from "@/components/ui/Step";
+```
+
+#### Example Workflow:
+```tsx
+// Step 1: Read file, see existing imports
+import { Table } from "@/components/ui/Table";
+import { Callout } from "@/components/ui/Callout";
+
+// Step 2: Plan to add Grid, Card, CodeBlock, MistakeCard
+
+// Step 3: Update imports FIRST (strReplace on import section)
+import { Table } from "@/components/ui/Table";
+import { Callout } from "@/components/ui/Callout";
+import { Grid } from "@/components/ui/Grid";
+import { Card } from "@/components/ui/Card";
+import { CodeBlock } from "@/components/ui/CodeBlock";
+import { MistakeCard } from "@/components/ui/MistakeCard";
+
+// Step 4: NOW add content with those components
+```
+
+**Rule:** If you use a component in content, it MUST be in imports. Zero exceptions. No excuses.
+
 ### 1. JSX Syntax Integrity
 - **Unclosed Tags**: Browsers and the build engine will crash if tags are not explicitly closed. 
   - *Bad*: `<h3>Title,` or `<style>content`.
@@ -165,7 +211,7 @@ To ensure the application remains stable and build-ready, always follow these ru
 - **String Escaping**: Use backticks for complex code strings within `CodeBlock` to avoid breaking JSX parsing.
 - **Inline Strong Spacing**: When a sentence continues immediately after a closing `</strong>` tag, insert `&nbsp;` right after `</strong>` to preserve visual spacing reliably in rendered content.
 
-### 2. Import Hygiene
+### 2. Import Hygiene (CRITICAL - READ SECTION 0 FIRST)
 - **Missing Imports**: When you add a new UI component (e.g., `<Table />`), you **MUST** add it to the file's imports:
   ```tsx
   import { Table } from "@/components/ui/Table";
