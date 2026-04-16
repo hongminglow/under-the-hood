@@ -114,6 +114,7 @@ import { cssInJsVsUtilityTopic } from "@/data/topics/css-in-js-vs-utility";
 import { cssSpecificityCascadeTopic } from "@/data/topics/css-specificity-cascade";
 import { debounceVsThrottleTopic } from "@/data/topics/debounce-vs-throttle";
 import { deploymentStrategiesTopic } from "@/data/topics/deployment-strategies";
+import { agGridRenderingInternalsTopic } from "@/data/topics/ag-grid-rendering-internals";
 import { frontendLargeDatasetTopic } from "@/data/topics/frontend-large-dataset-strategies";
 import { domainRegistrarDnsHostingTopic } from "@/data/topics/domain-registrar-dns-hosting";
 import { fullAppHostingDeploymentTopic } from "@/data/topics/full-app-hosting-deployment";
@@ -268,6 +269,7 @@ export const knowledgeBase: Section[] = [
       reactServerComponentsTopic,
       microFrontendsTopic,
       frontendLargeDatasetTopic,
+      agGridRenderingInternalsTopic,
       debounceVsThrottleTopic,
       setintervalVsRequestanimationframeTopic,
       htmlVsHtmxTopic,
