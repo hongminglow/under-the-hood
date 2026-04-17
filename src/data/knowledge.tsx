@@ -142,6 +142,13 @@ import { vectorDatabasesEmbeddingsTopic } from "@/data/topics/vector-databases-e
 import { vibeCodingAiPairProgrammingTopic } from "@/data/topics/vibe-coding-ai-pair-programming";
 import { webComponentsShadowDomTopic } from "@/data/topics/web-components-shadow-dom";
 
+// ── Batch 5 (Core Gaps) ──────────────────────────────────────────────
+import { consensusRaftPaxosTopic } from "@/data/topics/consensus-raft-paxos";
+import { raceConditionsDistributedLocksTopic } from "@/data/topics/race-conditions-distributed-locks";
+import { domainDrivenDesignTopic } from "@/data/topics/domain-driven-design";
+import { backpressureFlowControlTopic } from "@/data/topics/backpressure-flow-control";
+import { dataSerializationFormatsTopic } from "@/data/topics/data-serialization-formats";
+
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
 export type { Section, Topic };
@@ -218,6 +225,11 @@ export const knowledgeBase: Section[] = [
       dependencyInjectionTopic,
       paginationStrategiesTopic,
       tauriUnderTheHoodTopic,
+      consensusRaftPaxosTopic,
+      raceConditionsDistributedLocksTopic,
+      domainDrivenDesignTopic,
+      backpressureFlowControlTopic,
+      dataSerializationFormatsTopic,
     ],
   },
   {
