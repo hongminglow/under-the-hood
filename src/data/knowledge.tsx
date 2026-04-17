@@ -68,8 +68,6 @@ import { databaseShardingTopic } from "@/data/topics/database-sharding";
 import { dnsOverHttpsTopic } from "@/data/topics/dns-security-doh-dot";
 import { eventDrivenArchitectureTopic } from "@/data/topics/event-driven-architecture";
 import { hashTablesTopic } from "@/data/topics/hash-tables-internals";
-import { monolithVsMicroservicesTopic } from "@/data/topics/monolith-vs-microservices";
-import { monolithVsMonorepoVsMicrofrontendsTopic } from "@/data/topics/monolith-vs-monorepo-vs-microfrontends";
 import { monorepoVsPolyrepoTopic } from "@/data/topics/monorepo-vs-polyrepo";
 import { observabilityTopic } from "@/data/topics/observability-monitoring";
 import { processVsThreadTopic } from "@/data/topics/process-vs-thread-vs-coroutine";
@@ -215,8 +213,6 @@ export const knowledgeBase: Section[] = [
       circuitBreakerTopic,
       eventDrivenArchitectureTopic,
       idempotencyTopic,
-      monolithVsMicroservicesTopic,
-      monolithVsMonorepoVsMicrofrontendsTopic,
       solidPrinciplesTopic,
       apiGatewayPatternTopic,
       dependencyInjectionTopic,
