@@ -148,6 +148,7 @@ import { raceConditionsDistributedLocksTopic } from "@/data/topics/race-conditio
 import { domainDrivenDesignTopic } from "@/data/topics/domain-driven-design";
 import { backpressureFlowControlTopic } from "@/data/topics/backpressure-flow-control";
 import { dataSerializationFormatsTopic } from "@/data/topics/data-serialization-formats";
+import { cqrsPatternTopic } from "@/data/topics/cqrs-pattern";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
@@ -230,6 +231,7 @@ export const knowledgeBase: Section[] = [
       domainDrivenDesignTopic,
       backpressureFlowControlTopic,
       dataSerializationFormatsTopic,
+      cqrsPatternTopic,
     ],
   },
   {
