@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { Flow } from "@/components/ui/Flow";
 
 export const cqrsPatternTopic: Topic = {
 	id: "cqrs-pattern",
@@ -136,25 +137,33 @@ export const cqrsPatternTopic: Topic = {
 		/>,
 
 		<h3 key="10" className="text-xl font-bold mt-8 mb-4">
-			Real-World Architecture
+			Real-World Examples: Choosing the Right DBs
 		</h3>,
-		<p key="10a" className="mb-4">
-			A production CQRS system typically looks like this:
+		<p key="10a" className="mb-4 font-bold text-primary">
+			Scenario A: The Standard Enterprise Setup
 		</p>,
-		<ul key="10b" className="list-disc pl-5 text-sm text-muted-foreground space-y-2 mb-8">
-			<li>
-				<strong>Write Side:</strong> API → Command Handler → Validate Business Rules → Write to PostgreSQL → Publish{" "}
-				<code>OrderPlaced</code> event to Kafka.
-			</li>
-			<li>
-				<strong>Projector:</strong> Kafka Consumer → Read <code>OrderPlaced</code> → Update Elasticsearch index + Redis
-				cache + Materialized View.
-			</li>
-			<li>
-				<strong>Read Side:</strong> API → Query Handler → Read from Elasticsearch (for search) or Redis (for dashboard
-				counts). No JOINs, no locking, sub-millisecond responses.
-			</li>
-		</ul>,
+		<p key="10a-desc" className="mb-4">
+			A very common enterprise setup uses <strong>PostgreSQL for writes</strong> (because you need strict ACID transactions, foreign keys, and data integrity when processing payments) and <strong>MongoDB or Elasticsearch for reads</strong> (because you want to fetch a massive, fully-assembled JSON document instantly without running 8 costly SQL <code>JOIN</code>s).
+		</p>,
+		<Flow key="10b" steps={[
+			{ title: "1. The Write (PostgreSQL)", description: <>A user places an order. The API validates the business rules and inserts rows into the <code>orders</code> and <code>order_items</code> tables in PostgreSQL. If anything fails, the transaction rolls back.</> },
+			{ title: "2. The Sync (Event Bus)", description: <>Immediately after the Postgres commit, the system publishes an <code>OrderPlaced</code> event to a message broker like <strong>Kafka</strong> (often using a tool like Debezium for CDC).</> },
+			{ title: "3. The Projector (Worker)", description: <>A backend worker listens to that Kafka queue. It picks up the <code>OrderPlaced</code> event, grabs nested data, and constructs a "fat", denormalized JSON document representing the dashboard UI.</> },
+			{ title: "4. The Read (MongoDB)", description: <>The worker saves this JSON document into MongoDB. When the user opens their app, the Query API fetches the ready-made document instantly. Zero <code>JOIN</code>s required.</> }
+		]} />,
+
+		<p key="10c" className="mb-4 mt-8 font-bold text-primary">
+			Scenario B: The Extreme Ingest Setup (DynamoDB to PostgreSQL)
+		</p>,
+		<p key="10c-desc" className="mb-4">
+			If your system is an IoT platform ingesting 100,000 events per second, PostgreSQL would collapse under the write contention lock limits. In this case, the architecture is flipped: NoSQL handles the brutal, infinite writes, and the relational database handles the complex analytical reads.
+		</p>,
+		<Flow key="10d" steps={[
+			{ title: "1. The Write (DynamoDB)", description: <>An IoT device emits a sensor reading. The lightweight API instantly blind-writes the raw data directly into <strong>DynamoDB</strong>, which scales infinitely for simple <code>PUT</code> operations without locks.</> },
+			{ title: "2. The Sync (DynamoDB Streams)", description: <>DynamoDB has a <strong>built-in event queue</strong>. Every time a row is written, DynamoDB automatically drops a Change Event into DynamoDB Streams.</> },
+			{ title: "3. The Projector (Lambda)", description: <>A tiny serverless worker function (like AWS Lambda) is configured to continuously listen to that stream and grab batches of the new events efficiently.</> },
+			{ title: "4. The Read (PostgreSQL)", description: <>The Lambda function transforms the raw data and executes SQL <code>UPDATE</code> statements against PostgreSQL, allowing data analysts to run complex <code>JOIN</code> reports safely in Postgres.</> }
+		]} />,
 
 		<Callout key="11" type="warning" title="Eventual Consistency: The Trade-off">
 			With async projections, a user might place an order and <em>not immediately</em> see it on their dashboard

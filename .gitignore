@@ -27,3 +27,4 @@ dist-ssr
 # Agent Skills
 .kiro/*
 .shared/*
+.gemini/*
