@@ -141,6 +141,8 @@ import { terminalsShellsKernelTopic } from "@/data/topics/terminals-shells-kerne
 import { vectorDatabasesEmbeddingsTopic } from "@/data/topics/vector-databases-embeddings";
 import { vibeCodingAiPairProgrammingTopic } from "@/data/topics/vibe-coding-ai-pair-programming";
 import { webComponentsShadowDomTopic } from "@/data/topics/web-components-shadow-dom";
+import { moeArchitectureTopic } from "@/data/topics/moe-architecture";
+import { llmQuantizationTopic } from "@/data/topics/llm-quantization";
 
 // ── Batch 5 (Core Gaps) ──────────────────────────────────────────────
 import { consensusRaftPaxosTopic } from "@/data/topics/consensus-raft-paxos";
@@ -353,6 +355,8 @@ export const knowledgeBase: Section[] = [
       harnessEngineeringTopic,
       vibeCodingAiPairProgrammingTopic,
       llmDistillationTrainingEconomicsTopic,
+      moeArchitectureTopic,
+      llmQuantizationTopic,
     ],
   },
   {
