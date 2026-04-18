@@ -140,7 +140,7 @@ export const moeArchitectureTopic: Topic = {
     </h3>,
     <Grid key="pros-cons-grid" cols={2} gap={6} className="my-8">
       <Card title="Pros">
-        <ul className="text-xs text-muted-foreground space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Blistering Inference Speed:</strong> Active parameter count
             remains low, meaning less compute time per token.
@@ -162,7 +162,7 @@ export const moeArchitectureTopic: Topic = {
         </ul>
       </Card>
       <Card title="Cons">
-        <ul className="text-xs text-muted-foreground space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>VRAM Hungry:</strong> Every single parameter must be kept in
             memory. You cannot page experts in and out of GPU memory fast enough

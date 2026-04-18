@@ -35,7 +35,7 @@ export const sdlcMethodologiesTopic: Topic = {
     </p>,
     <Grid key="spectrum-grid" cols={2} gap={6} className="mb-8">
       <Card title="Predictive / Plan-Driven">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             Define <strong>all requirements upfront</strong> before writing a
             single line of code.
@@ -55,7 +55,7 @@ export const sdlcMethodologiesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Adaptive / Iterative">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             Requirements <strong>emerge over time</strong> through short
             feedback cycles between the team and stakeholders.
@@ -87,7 +87,7 @@ export const sdlcMethodologiesTopic: Topic = {
     </p>,
     <Grid key="waterfall-grid" cols={2} gap={6} className="mb-6">
       <Card title="Pros">
-        <ul className="text-xs space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Highly predictable cost & timeline.</strong> The entire
             scope is defined upfront, so budgeting is straightforward.
@@ -109,7 +109,7 @@ export const sdlcMethodologiesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Cons">
-        <ul className="text-xs space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Catastrophically late feedback.</strong> Users see the
             product for the first time <em>after</em> it's built. Discovering
@@ -155,7 +155,7 @@ export const sdlcMethodologiesTopic: Topic = {
     </p>,
     <Grid key="agile-values-grid" cols={2} gap={6} className="mb-8">
       <Card title="The 4 Agile Values">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Individuals & interactions</strong> over processes & tools
           </li>
@@ -171,7 +171,7 @@ export const sdlcMethodologiesTopic: Topic = {
         </ul>
       </Card>
       <Card title="What Agile Actually Means in Practice">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             Deliver working software <strong>frequently</strong> (weeks, not
             months) so you get real feedback while change is still cheap.
@@ -203,7 +203,7 @@ export const sdlcMethodologiesTopic: Topic = {
     </p>,
     <Grid key="scrum-grid" cols={2} gap={6} className="mb-6">
       <Card title="Scrum Roles">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Product Owner (PO):</strong> Owns the Product Backlog.
             Prioritizes features by business value. The single voice of the
@@ -222,7 +222,7 @@ export const sdlcMethodologiesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Scrum Ceremonies">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Sprint Planning:</strong> Team selects items from the
             backlog and commits to what they will deliver this sprint.
@@ -244,7 +244,7 @@ export const sdlcMethodologiesTopic: Topic = {
     </Grid>,
     <Grid key="scrum-pros-cons" cols={2} gap={6} className="mb-8">
       <Card title="Pros">
-        <ul className="text-xs space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>Regular delivery creates a <strong>rhythm and momentum</strong> the entire company can plan around.</li>
           <li>Velocity metrics (story points per sprint) give a <strong>data-driven forecast</strong> of future delivery pace.</li>
           <li>Sprint Reviews create a natural <strong>stakeholder feedback loop</strong> every 2–4 weeks.</li>
@@ -252,7 +252,7 @@ export const sdlcMethodologiesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Cons">
-        <ul className="text-xs space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Ceremony overhead.</strong> Small teams burn non-trivial
             time in standups, planning, reviews, and retros. At 2-week sprints,
@@ -289,7 +289,7 @@ export const sdlcMethodologiesTopic: Topic = {
     </p>,
     <Grid key="kanban-principles-grid" cols={2} gap={6} className="mb-6">
       <Card title="The 4 Core Kanban Principles">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Visualise the Workflow:</strong> Every task on a board.
             Every column is a stage (Backlog → In Progress → Review → Done).
@@ -311,7 +311,7 @@ export const sdlcMethodologiesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Kanban vs Scrum — Key Differences">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>No Sprints.</strong> Work is delivered continuously, item by
             item, not in batched sprint increments.
@@ -352,7 +352,7 @@ export const sdlcMethodologiesTopic: Topic = {
     </p>,
     <Grid key="xp-grid" cols={2} gap={6} className="mb-6">
       <Card title="Core XP Practices">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Test-Driven Development (TDD):</strong> Write the failing
             test first. Write the minimal code to make it pass. Refactor. No
@@ -380,7 +380,7 @@ export const sdlcMethodologiesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Trade-Offs">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Higher upfront investment:</strong> Pair programming
             effectively doubles engineer hours per story. But it halves defect
@@ -418,7 +418,7 @@ export const sdlcMethodologiesTopic: Topic = {
     </p>,
     <Grid key="safe-grid" cols={2} gap={6} className="mb-8">
       <Card title="Who SAFe Is For">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             Large enterprises where multiple Scrum teams share infrastructure,
             APIs, or databases and need to <strong>coordinate releases</strong>.
@@ -436,7 +436,7 @@ export const sdlcMethodologiesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Common Criticisms">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>"Wagile":</strong> SAFe critics argue it re-introduces
             Waterfall at the programme level (quarterly PI plans are essentially
@@ -541,7 +541,7 @@ export const sdlcMethodologiesTopic: Topic = {
     </h3>,
     <Grid key="impact-grid" cols={2} gap={6} className="mb-8">
       <Card title="Speed to Market">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Waterfall:</strong> Slow. All features ship together at the
             end. First usable version arrives after the full project duration.
@@ -559,7 +559,7 @@ export const sdlcMethodologiesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Cost Dynamics">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Waterfall is cheapest… if requirements don't change.</strong>{" "}
             No rework. But the moment scope changes, costs spike dramatically
@@ -578,7 +578,7 @@ export const sdlcMethodologiesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Code Quality Over Time">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Waterfall:</strong> Quality front-loaded in design but
             frequently degraded at implementation under schedule pressure.
@@ -597,7 +597,7 @@ export const sdlcMethodologiesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Team & Organisational Health">
-        <ul className="text-sm space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Waterfall:</strong> Low autonomy, high documentation burden.
             "Just follow the spec" is demotivating for senior engineers.
