@@ -4,7 +4,7 @@ import { cn } from "../../utils/utils";
 interface MistakeCardProps {
   number: number;
   title: string;
-  problem: string;
+  problem: string | React.ReactNode;
   solution: string | React.ReactNode;
   children?: React.ReactNode;
   className?: string;
