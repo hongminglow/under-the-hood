@@ -129,6 +129,7 @@ import { nginxUnderTheHoodTopic } from "@/data/topics/nginx-under-the-hood";
 import { onlineMultiplayerArchitectureTopic } from "@/data/topics/online-multiplayer-architecture";
 import { gameEnginesComparisonTopic } from "@/data/topics/game-engines-comparison";
 import { realtimeCountersTopic } from "@/data/topics/realtime-counters";
+import { sdlcMethodologiesTopic } from "@/data/topics/sdlc-methodologies";
 import { paymentGatewayInternalsTopic } from "@/data/topics/payment-gateway-internals";
 import { polyfillsDeepDiveTopic } from "@/data/topics/polyfills-deep-dive";
 import { promptEngineeringTopic } from "@/data/topics/prompt-engineering";
@@ -237,6 +238,7 @@ export const knowledgeBase: Section[] = [
       backpressureFlowControlTopic,
       dataSerializationFormatsTopic,
       cqrsPatternTopic,
+      sdlcMethodologiesTopic,
     ],
   },
   {
