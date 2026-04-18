@@ -127,6 +127,7 @@ import { microFrontendsTopic } from "@/data/topics/micro-frontends";
 import { networkPayloadVulnerabilitiesTopic } from "@/data/topics/network-payload-vulnerabilities";
 import { nginxUnderTheHoodTopic } from "@/data/topics/nginx-under-the-hood";
 import { onlineMultiplayerArchitectureTopic } from "@/data/topics/online-multiplayer-architecture";
+import { gameEnginesComparisonTopic } from "@/data/topics/game-engines-comparison";
 import { paymentGatewayInternalsTopic } from "@/data/topics/payment-gateway-internals";
 import { polyfillsDeepDiveTopic } from "@/data/topics/polyfills-deep-dive";
 import { promptEngineeringTopic } from "@/data/topics/prompt-engineering";
@@ -369,7 +370,7 @@ export const knowledgeBase: Section[] = [
     id: "game-engineering",
     title: "Game Engineering",
     icon: "Gamepad2",
-    topics: [onlineMultiplayerArchitectureTopic],
+    topics: [onlineMultiplayerArchitectureTopic, gameEnginesComparisonTopic],
   },
 ];
 
