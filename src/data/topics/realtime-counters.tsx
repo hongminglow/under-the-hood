@@ -363,7 +363,64 @@ app.get('/live/downloads/:pkg', (req, res) => {
       solution="npm's download API is aggregated from CDN logs processed in daily batches. The numbers can be 12–24 hours behind reality. For genuinely real-time data, you need to instrument your own event pipeline, not rely on a registry's reporting endpoint."
     />,
 
-    /* ── SECTION 9: Closing Callout ─────────────────────────────────────── */
+    /* ── SECTION 9: The Frontend Animation Trick ────────────────────────── */
+    <h3 key="h3-frontend-trick" className="text-xl font-bold mt-12 mb-4">
+      The Frontend Illusion: Number Interpolation
+    </h3>,
+    <p key="frontend-trick-sub" className="mb-4">
+      As discussed, maintaining genuine sub-second updates for a massive
+      audience destroys server capacity. The industry standard trick is to
+      poll every 5-10 seconds, and use client-side javascript to smoothly{" "}
+      <strong>interpolate (animate)</strong> between the old number and the new
+      number natively in the browser. 
+    </p>,
+    <Card key="frontend-trick-card" title="Interpolating a Counter in React">
+        <CodeBlock
+          language="tsx"
+          code={`import { useState, useEffect } from 'react';
+
+// Imagine this runs every 10 seconds (via Long Polling or SSE).
+// The server tells us: "The count is now 9,999"
+// But currently, the UI is showing "1,000".
+
+export default function AnimatedCounter({ targetValue }: { targetValue: number }) {
+  const [displayValue, setDisplayValue] = useState(targetValue);
+
+  useEffect(() => {
+    // 1. Calculate how far we have to jump
+    const distance = targetValue - displayValue;
+    if (distance === 0) return;
+
+    // 2. We want to complete the animation in exactly 1.5 seconds.
+    // Meaning the UI will "tick" up visually, instead of instantly snapping.
+    const durationMs = 1500;
+    const startObj = { value: displayValue };
+    const startTime = performance.now();
+    
+    // 3. Use standard requestAnimationFrame to smoothly tick the number
+    function updateCounter(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / durationMs, 1);
+      
+      // Easing function makes it slow down right before it hits the target
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      
+      setDisplayValue(Math.floor(startObj.value + distance * easeOutQuart));
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      }
+    }
+    
+    requestAnimationFrame(updateCounter);
+  }, [targetValue]); // Only runs when the server pushes a new targetValue
+
+  return <div className="font-mono text-4xl">{displayValue.toLocaleString()}</div>;
+}`}
+        />
+    </Card>,
+
+    /* ── SECTION 10: Closing Callout ─────────────────────────────────────── */
     <Callout key="final-tip" type="tip" title="The Counter Illusion">
       Many "real-time" counters you see on the web are{" "}
       <strong>animated interpolations</strong> of infrequently-fetched numbers.
