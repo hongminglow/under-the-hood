@@ -183,19 +183,19 @@ export const developerToolchainLayersTopic: Topic = {
           and proper error objects.
         </p>
         <p className="text-slate-400 text-sm">
-          <Highlight variant="success">stripe</Highlight> — Official Stripe
+          <Highlight variant="info">stripe</Highlight> — Official Stripe
           Node SDK
           <br />
-          <Highlight variant="success">firebase</Highlight> — Google's Firebase
+          <Highlight variant="info">firebase</Highlight> — Google's Firebase
           SDK
           <br />
-          <Highlight variant="success">@aws-sdk/client-s3</Highlight> — AWS
+          <Highlight variant="info">@aws-sdk/client-s3</Highlight> — AWS
           SDK v3 S3 client
           <br />
-          <Highlight variant="success">@supabase/supabase-js</Highlight> —
+          <Highlight variant="info">@supabase/supabase-js</Highlight> —
           Supabase client SDK
           <br />
-          <Highlight variant="success">openai</Highlight> — OpenAI official SDK
+          <Highlight variant="info">openai</Highlight> — OpenAI official SDK
         </p>
         <p className="text-slate-400 text-sm mt-3">
           The key distinction: an SDK is <strong>provider-maintained</strong>.
