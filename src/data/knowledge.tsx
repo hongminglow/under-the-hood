@@ -155,6 +155,9 @@ import { backpressureFlowControlTopic } from "@/data/topics/backpressure-flow-co
 import { dataSerializationFormatsTopic } from "@/data/topics/data-serialization-formats";
 import { cqrsPatternTopic } from "@/data/topics/cqrs-pattern";
 
+// ── Batch 6 ──────────────────────────────────────────────────────────
+import { codeObfuscationTopic } from "@/data/topics/code-obfuscation";
+
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
 export type { Section, Topic };
@@ -206,6 +209,7 @@ export const knowledgeBase: Section[] = [
       backendEncryptionMethodsTopic,
       networkPayloadVulnerabilitiesTopic,
       rsaCryptographyTopic,
+      codeObfuscationTopic,
     ],
   },
   {
