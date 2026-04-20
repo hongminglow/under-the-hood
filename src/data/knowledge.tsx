@@ -148,6 +148,7 @@ import { moeArchitectureTopic } from "@/data/topics/moe-architecture";
 import { llmQuantizationTopic } from "@/data/topics/llm-quantization";
 
 // ── Batch 5 (Core Gaps) ──────────────────────────────────────────────
+import { developerToolchainLayersTopic } from "@/data/topics/developer-toolchain-layers";
 import { consensusRaftPaxosTopic } from "@/data/topics/consensus-raft-paxos";
 import { raceConditionsDistributedLocksTopic } from "@/data/topics/race-conditions-distributed-locks";
 import { domainDrivenDesignTopic } from "@/data/topics/domain-driven-design";
@@ -320,6 +321,7 @@ export const knowledgeBase: Section[] = [
       prototypalInheritanceTopic,
       errorHandlingTopic,
       recursionCallStackTopic,
+      developerToolchainLayersTopic,
     ],
   },
   {
