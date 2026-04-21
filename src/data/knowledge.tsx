@@ -158,6 +158,7 @@ import { cqrsPatternTopic } from "@/data/topics/cqrs-pattern";
 
 // ── Batch 6 ──────────────────────────────────────────────────────────
 import { codeObfuscationTopic } from "@/data/topics/code-obfuscation";
+import { reactTransitionsDeferredTopic } from "@/data/topics/react-transitions-deferred";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
@@ -300,6 +301,7 @@ export const knowledgeBase: Section[] = [
       cssSpecificityCascadeTopic,
       polyfillsDeepDiveTopic,
       htmlEntitiesTopic,
+      reactTransitionsDeferredTopic,
     ],
   },
   {
