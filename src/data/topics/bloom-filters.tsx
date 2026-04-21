@@ -23,15 +23,15 @@ export const bloomFiltersTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-6">
       <Card title="Inserting 'alice'">
-        <p className="text-sm text-slate-400 mb-2">Three hash functions produce three positions.</p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-sm text-muted-foreground mb-2">Three hash functions produce three positions.</p>
+        <p className="text-xs italic text-muted-foreground">
           <strong>hash₁("alice") → 3, hash₂("alice") → 7, hash₃("alice") → 14.</strong><br /><br />
           The filter sets bits 3, 7, and 14 to <code>1</code>. The string "alice" itself is never stored — only the flipped bits.
         </p>
       </Card>
       <Card title="Querying 'alice'">
-        <p className="text-sm text-slate-400 mb-2">Re-hash, check all positions.</p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-sm text-muted-foreground mb-2">Re-hash, check all positions.</p>
+        <p className="text-xs italic text-muted-foreground">
           If bits 3, 7, and 14 are all <code>1</code> → <strong>"Possibly in set"</strong> (go hit the DB to confirm).<br /><br />
           If any bit is <code>0</code> → <strong>"Definitely NOT in set"</strong> (skip the DB entirely). This is a guaranteed negative.
         </p>
@@ -59,34 +59,34 @@ export const bloomFiltersTopic: Topic = {
     </h3>,
     <Grid key="9" cols={2} gap={6} className="my-6">
       <Card title="Databases: Cassandra & RocksDB">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Avoiding expensive disk lookups.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Each SSTable on disk has an associated Bloom Filter in memory. Before a read query hits the disk, the filter checks all SSTables. Only the one(s) that say "possibly contains key" are actually read. This dramatically reduces I/O on read-heavy workloads.
         </p>
       </Card>
       <Card title="Web: CDN Cache Membership">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Is this asset already cached on this edge node?
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           CDNs like Akamai and Cloudflare maintain Bloom Filters at each edge to determine whether a URL is cached locally before forwarding the request upstream. A false positive costs one unnecessary upstream request; a false negative never occurs.
         </p>
       </Card>
       <Card title="Security: Malicious URL Detection">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Google Chrome's Safe Browsing feature.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Chrome ships a local Bloom Filter containing millions of known-malicious URL hashes. On every navigation, it does a local O(1) filter check. Only potential "hits" trigger a real network lookup to Google's servers. The filter keeps billions of benign navigations completely private.
         </p>
       </Card>
       <Card title="Distributed Systems: Deduplication">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Has this event/message already been processed?
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           In Kafka consumers, Bloom Filters serve as ultra-fast idempotency checks for event IDs. Before processing a message, the consumer checks the filter. If "definitely not seen" → process it. If "possibly seen" → check the slower deduplication store.
         </p>
       </Card>

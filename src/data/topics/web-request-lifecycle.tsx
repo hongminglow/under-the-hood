@@ -32,18 +32,18 @@ export const webRequestLifecycleTopic: Topic = {
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <Card title="The HTTP Request">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           The browser sends the <strong>HTTP GET/POST</strong> header.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Include Cookies, User-Agent, and Accept-Encoding. If it's a cross-origin API call, the browser first sends an <strong>OPTIONS (CORS Pre-flight)</strong> request.
         </p>
       </Card>
       <Card title="Server Processing (TTFB)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           The backend wakes up. Load Balancer → Nginx → Application Code.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           <strong>Time to First Byte (TTFB)</strong> measures how long the server took to query the DB and start streaming the response back.
         </p>
       </Card>

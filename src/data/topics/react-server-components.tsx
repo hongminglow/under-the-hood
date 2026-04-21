@@ -36,18 +36,18 @@ export const reactServerComponentsTopic: Topic = {
     </p>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="Async Components">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Server Components can be <code>async</code>.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           You can <code>await db.query()</code> directly inside the component body. No <code>useEffect</code> or <code>fetch()</code> waterfalls are needed.
         </p>
       </Card>
       <Card title="Server Actions">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           The built-in RPC (Remote Procedure Call) layer.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Functions marked with <code>'use server'</code> can be called directly from client buttons. React handles the POST request and state synchronization automatically.
         </p>
       </Card>

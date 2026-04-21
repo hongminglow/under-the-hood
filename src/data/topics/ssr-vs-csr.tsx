@@ -341,7 +341,7 @@ const data = await fetch("https://api.shop.com/products", {
   next: { tags: ["products"] },  // tag it for targeted invalidation
 });`}
         />
-        <p className="text-xs text-slate-400 mt-3">
+        <p className="text-xs text-muted-foreground mt-3">
           Use for: product catalogs, blog posts, CMS content — anything that
           doesn't change per-request.
         </p>
@@ -359,7 +359,7 @@ const data = await fetch("https://api.shop.com/cart", {
   cache: "no-store",
 });`}
         />
-        <p className="text-xs text-slate-400 mt-3">
+        <p className="text-xs text-muted-foreground mt-3">
           Use for: shopping cart, user-specific data, live prices, anything with
           auth headers.
         </p>
@@ -378,7 +378,7 @@ const data = await fetch("https://api.shop.com/featured", {
   next: { revalidate: 3600 },
 });`}
         />
-        <p className="text-xs text-slate-400 mt-3">
+        <p className="text-xs text-muted-foreground mt-3">
           Use for: featured products, news headlines, anything acceptable to be
           slightly stale.
         </p>
@@ -402,7 +402,7 @@ export async function onProductUpdate() {
   revalidateTag("product-42"); // Surgically busts only this product's cache
 }`}
         />
-        <p className="text-xs text-slate-400 mt-3">
+        <p className="text-xs text-muted-foreground mt-3">
           Use for: CMS webhooks, admin panel updates — invalidating exactly what
           changed, nothing more.
         </p>
@@ -546,7 +546,7 @@ export async function POST(req: NextRequest) {
   return Response.json({ revalidated: true });
 }`}
         />
-        <p className="text-xs text-slate-400 mt-3">
+        <p className="text-xs text-muted-foreground mt-3">
           ⚠️ Busts the <em>entire route's HTML cache</em>. Broader, but simpler.
           Good for simple CMS setups.
         </p>
@@ -571,7 +571,7 @@ export async function updateProduct(id: string, data: FormData) {
   revalidateTag(\`product-\${id}\`); // even more targeted
 }`}
         />
-        <p className="text-xs text-slate-400 mt-3">
+        <p className="text-xs text-muted-foreground mt-3">
           ✅ More surgical — only re-fetches data, not full HTML. Perfect with
           fine-grained cache tags.
         </p>

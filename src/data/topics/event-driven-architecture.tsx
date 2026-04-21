@@ -21,12 +21,12 @@ export const eventDrivenArchitectureTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="The Synchronous Web">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Services are strictly coupled. They specifically demand things from each other: `EmailServer.send(userId)`. When one server struggles, the latency propagates mathematically across all tight functions until the entire app freezes.
         </p>
       </Card>
       <Card title="Event-Driven (PubSub)">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           The `Order Service` never talks to the `Email Service`. Instead, when an order is placed, it just screams a message into the void (Kafka/RabbitMQ): "EVENT OCCURRED: USER 5 ORDERED A MACBOOK." 
         </p>
       </Card>
@@ -56,12 +56,12 @@ export const eventDrivenArchitectureTopic: Topic = {
     </p>,
     <Grid key="7b" cols={2} gap={6} className="my-8">
       <Card title="Idempotency Key">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Every event carries a unique <code>event_id</code>. Before processing, the consumer checks a <strong>deduplication table</strong> (Redis SET or DB unique constraint). If the ID exists, skip processing silently.
         </p>
       </Card>
       <Card title="Transactional Outbox">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Instead of publishing events directly to Kafka, the producer writes the event to an <strong>outbox table</strong> inside the same database transaction as the business write. A separate poller reads the outbox and publishes to the broker. This guarantees the event is published if and only if the business write succeeds.
         </p>
       </Card>

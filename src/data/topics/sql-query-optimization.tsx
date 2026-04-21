@@ -132,22 +132,22 @@ LIMIT 50;
     />,
     <Grid key="8" cols={2} gap={6} className="my-8">
       <Card title="Seq Scan vs Index Scan" description="Use the right mental model">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           A <strong>Seq Scan</strong> is not automatically bad. If you need 40%
           of a table, hopping through an index can be slower than reading the
           pages sequentially.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           An <strong>Index Scan</strong> wins when the predicate is selective
           enough that jumping directly to a few rows avoids massive IO.
         </p>
       </Card>
       <Card title="Hash Join vs Nested Loop" description="The classic trade-off">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           <strong>Nested Loop</strong> is amazing when you already reduced the
           outer rows to a tiny set and the inner side is indexed.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           <strong>Hash Join</strong> usually wins when joining larger sets on an
           equality key, especially after light filtering.
         </p>

@@ -30,10 +30,10 @@ export const rsaCryptographyTopic: Topic = {
     </p>,
     <Grid key="5" cols={2} gap={6} className="my-6">
       <Card title="🔓 Public Key">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Published openly. Posted on your website, your TLS certificate, your SSH profile. <strong>Everyone gets a copy.</strong>
         </p>
-        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
+        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
           <li>Used to <strong>encrypt</strong> data for the owner</li>
           <li>Used to <strong>verify</strong> a signature from the owner</li>
           <li>Cannot decrypt anything the public key encrypted</li>
@@ -41,10 +41,10 @@ export const rsaCryptographyTopic: Topic = {
         </ul>
       </Card>
       <Card title="🔐 Private Key">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Never shared. Hidden on the server's disk, in a hardware security module (HSM), or in a smart card. <strong>Only the owner holds this.</strong>
         </p>
-        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
+        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
           <li>Used to <strong>decrypt</strong> data that was encrypted with the public key</li>
           <li>Used to <strong>sign</strong> data to prove identity</li>
           <li>Cannot be derived from the public key (computationally infeasible)</li>

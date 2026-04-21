@@ -32,35 +32,35 @@ export const cssSpecificityCascadeTopic: Topic = {
 
     <Grid key="2c" cols={3} gap={6} className="my-8">
       <Card title="1. User-Agent (Browser) Styles" description="The browser's built-in defaults">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Every browser ships with a hidden built-in stylesheet called the <strong>User-Agent (UA) stylesheet</strong>.
           It is the reason an unstyled HTML page still looks readable — headings are bold, links are blue and underlined,
           lists have bullets, and <code>&lt;h1&gt;</code> is larger than <code>&lt;h2&gt;</code>.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           You never write this. It is baked into Chrome, Firefox, and Safari. Each browser has a slightly different
           UA stylesheet, which is why a totally blank CSS page can look marginally different across browsers.
           This is the <strong>lowest priority</strong> origin — anything you write overrides it automatically.
         </p>
       </Card>
       <Card title="2. User Styles" description="The end-user's personal overrides">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           These are CSS rules the <strong>person visiting your website</strong> has applied themselves — not you the developer.
           This origin exists primarily for <strong>accessibility</strong>: a user with low vision might install a browser extension
           or OS setting that forces all text to be at least 20px, or overrides all colors to a high-contrast theme.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           In practice, most users never set these. But when they do, their <code>!important</code> user styles outrank your
           <code>!important</code> author styles — the cascade deliberately protects the user's accessibility needs above your design choices.
         </p>
       </Card>
       <Card title="3. Author Styles" description="Everything YOU write as a developer">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           This is <strong>every single CSS file you write</strong>. Your <code>index.css</code>, your Tailwind utilities,
           your CSS Modules, styled-components, SCSS, inline <code>style</code> attributes — all of it is Author style.
           It outranks UA styles automatically, which is why writing <code>a {"{"} color: black {"}"}</code> removes the browser's default blue link color.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           The <code>@layer</code> feature only operates <em>within</em> the Author origin — it lets you order your own
           stylesheets predictably (e.g., third-party library layers vs your own utility layers).
         </p>
@@ -268,12 +268,12 @@ p { color: red; }  /* ← This wins! No layer = highest layer priority */`}
 
     <Grid key="11" cols={2} gap={6} className="my-8">
       <Card title="Why Use @layer?" description="Design for overridability">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Third-party libraries (Bootstrap, Material UI) can import into a low-priority <code>@layer base</code>. Your own un-layered utilities will <strong>always</strong> override them without needing <code>!important</code> or specificity wars.
         </p>
       </Card>
       <Card title="@layer vs !important" description="The priority flip">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           <code>!important</code> reverses layer order — a <code>!important</code> rule in <code>@layer base</code> will <strong>beat</strong> a <code>!important</code> rule in <code>@layer utilities</code>. This makes them useful for defensive overrides in reset layers.
         </p>
       </Card>
@@ -512,18 +512,18 @@ p { color: red; }  /* ← This wins! No layer = highest layer priority */`}
 
     <Grid key="33" cols={2} gap={6} className="my-8">
       <Card title="Animation — The Temporary Override" description="Slot 5: above normal, below !important">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Animations need to override your normal property values <em>while playing</em>, but you retain the ability to stop them cold with <code>!important</code>. This is intentional — accessibility rules like <code>prefers-reduced-motion</code> must be able to kill animations unconditionally.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           When the animation ends or is paused, the normal cascade resumes and the element reverts to its authored styles.
         </p>
       </Card>
       <Card title="Transition — The Interpolation Lock" description="Slot 9: above everything, even !important">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Transitions lock the interpolated intermediate value into the top of the cascade for each frame. Without this, the browser would have no mechanism to render smooth state changes — the element would teleport instantly to its final value.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Once the transition completes, the lock is released and the normal cascade takes over again. The "winner" at the end is just your regular CSS.
         </p>
       </Card>
@@ -646,23 +646,23 @@ a { color: blue; }
 
     <Grid key="40" cols={2} gap={6} className="my-8">
       <Card title="The Rule to Internalize" description="Specificity is always per-element">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Specificity scores are <strong>only compared between rules targeting the same element</strong>.
           A rule on a parent, no matter how specific, <em>does not compete on specificity</em> for the child's properties.
           It only contributes an inheritance value, which has zero weight in the child's cascade.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           This is why design systems never rely on specificity from ancestor selectors to style children —
           any direct rule on the child, however weak, will silently override it.
         </p>
       </Card>
       <Card title="When Developers Get Burned" description="The classic parent trap">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           A common real-world bug: a designer adds <code>#app .theme-dark p {"{"} color: white {"}"}</code> expecting all paragraphs to be white.
           But a CSS reset somewhere contains <code>p {"{"} color: inherit {"}"}</code> or even <code>p {"{"} color: #333 {"}"}</code> —
           and that low-specificity rule directly on <code>p</code> silently wins over the inherited white.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           The fix: target the <code>p</code> directly with at least matching specificity, or use <code>@layer</code> to control priority structurally.
         </p>
       </Card>

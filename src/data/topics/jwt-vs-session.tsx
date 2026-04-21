@@ -7,133 +7,170 @@ import { Table } from "@/components/ui/Table";
 import type { Topic } from "@/data/types";
 
 export const jwtVsSessionTopic: Topic = {
-  id: "jwt-vs-session",
-  title: "JWT vs Session Storage",
-  description:
-    "The massive architectural debate over how to properly keep users logged into your application.",
-  tags: ["security", "auth", "backend"],
-  icon: "Cookie",
-  content: [
-    <p key="1">
-      Once a user supplies a valid email and password, how do you remember they are logged in on the next request? HTTP is entirely stateless. You must pass a special token back and forth with every request.
-    </p>,
-    <h3 key="2" className="text-xl font-bold mt-8 mb-4">
-      The Stateful Server vs The Stateless Token
-    </h3>,
-    <Table
-      key="3"
-      headers={["Feature", "Sessions (Stateful)", "JWTs (Stateless)"]}
-      rows={[
-        [
-          "How it works",
-          "Server saves 'user_id=5' in a Redis database. Hands the browser a short random string (Session ID).",
-          "Server cryptographically signs a string containing 'user_id=5' and hands it to the browser."
-        ],
-        [
-          "Database Trips",
-          "Slow. Every single API request requires the backend to query Redis to ensure the session hasn't expired.",
-          "Fast! The backend just verifies the cryptography mathematically. Zero database queries."
-        ],
-        [
-          "Log Out / Revocation",
-          "Instant! The backend just deletes the ID from Redis, banning the user completely.",
-          "Terrible. Because it's stateless, you literally cannot mathematically revoke a JWT before it expires. You must rely on complicated 'Token Blacklists'."
-        ],
-      ]}
-    />,
-    <h3 key="verify-title" className="text-xl font-bold mt-12 mb-4">
-      How the Server Verifies Stateless JWTs Instantly
-    </h3>,
-    <p key="verify-desc" className="mb-6 text-muted-foreground">
-      A massive misconception is that JWTs are encrypted. They are <strong>not</strong>. The Header and Payload are just base64url encoded strings that anyone can decode. The entire security model relies entirely on the third part: <strong>The Signature</strong>.
-    </p>,
-    <Grid key="verify-grid" cols={3} gap={6} className="mb-8">
-      <Card title="1. Header (Base64)">
-        <p className="text-sm font-mono text-slate-400 break-all">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</p>
-        <p className="text-xs mt-2 border-t border-border pt-2 text-slate-400">Tells the server which algorithm to use (e.g., HS256).</p>
-      </Card>
-      <Card title="2. Payload (Base64)">
-        <p className="text-sm font-mono text-slate-400 break-all">eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIn0</p>
-        <p className="text-xs mt-2 border-t border-border pt-2 text-slate-400">Contains the actual user data and expiration time.</p>
-      </Card>
-      <Card title="3. Signature (Hashed)">
-        <p className="text-sm font-mono text-slate-400 break-all">SflKxwRJSMeKKF..._adQssw5c</p>
-        <p className="text-xs mt-2 border-t border-border pt-2 text-slate-400">The cryptographic lock that prevents tampering.</p>
-      </Card>
-    </Grid>,
-    <Card key="verify-math" title="The Mathematics of Verification">
-      <p className="text-sm text-slate-400 mb-4">
-        When the server issues a JWT, it performs this calculation using a wildly long <strong>Secret Key</strong> that never leaves the backend environment (e.g., <code>process.env.JWT_SECRET</code>):
-      </p>
-      <CodeBlock
-        title="Server Side Hashing"
-        language="javascript"
-        code={`// The server combines the Base64 Header and Payload, and hashes them using its Secret Key
+	id: "jwt-vs-session",
+	title: "JWT vs Session Storage",
+	description: "The massive architectural debate over how to properly keep users logged into your application.",
+	tags: ["security", "auth", "backend"],
+	icon: "Cookie",
+	content: [
+		<p key="1">
+			Once a user supplies a valid email and password, how do you remember they are logged in on the next request? HTTP
+			is entirely stateless. You must pass a special token back and forth with every request.
+		</p>,
+		<h3 key="2" className="text-xl font-bold mt-8 mb-4">
+			The Stateful Server vs The Stateless Token
+		</h3>,
+		<Table
+			key="3"
+			headers={["Feature", "Sessions (Stateful)", "JWTs (Stateless)"]}
+			rows={[
+				[
+					"How it works",
+					"Server saves 'user_id=5' in a Redis database. Hands the browser a short random string (Session ID).",
+					"Server cryptographically signs a string containing 'user_id=5' and hands it to the browser.",
+				],
+				[
+					"Database Trips",
+					"Slow. Every single API request requires the backend to query Redis to ensure the session hasn't expired.",
+					"Fast! The backend just verifies the cryptography mathematically. Zero database queries.",
+				],
+				[
+					"Log Out / Revocation",
+					"Instant! The backend just deletes the ID from Redis, banning the user completely.",
+					"Terrible. Because it's stateless, you literally cannot mathematically revoke a JWT before it expires. You must rely on complicated 'Token Blacklists'.",
+				],
+			]}
+		/>,
+		<h3 key="verify-title" className="text-xl font-bold mt-12 mb-4">
+			How the Server Verifies Stateless JWTs Instantly
+		</h3>,
+		<p key="verify-desc" className="mb-6 text-muted-foreground">
+			A massive misconception is that JWTs are encrypted. They are <strong>not</strong>. The Header and Payload are just
+			base64url encoded strings that anyone can decode. The entire security model relies entirely on the third part:{" "}
+			<strong>The Signature</strong>.
+		</p>,
+		<Grid key="verify-grid" cols={3} gap={6} className="mb-8">
+			<Card title="1. Header (Base64)">
+				<p className="text-sm font-mono text-muted-foreground break-all">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</p>
+				<p className="text-xs mt-2 border-t border-border pt-2 text-muted-foreground">
+					Tells the server which algorithm to use (e.g., HS256).
+				</p>
+			</Card>
+			<Card title="2. Payload (Base64)">
+				<p className="text-sm font-mono text-muted-foreground break-all">
+					eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIn0
+				</p>
+				<p className="text-xs mt-2 border-t border-border pt-2 text-muted-foreground">
+					Contains the actual user data and expiration time.
+				</p>
+			</Card>
+			<Card title="3. Signature (Hashed)">
+				<p className="text-sm font-mono text-muted-foreground break-all">SflKxwRJSMeKKF..._adQssw5c</p>
+				<p className="text-xs mt-2 border-t border-border pt-2 text-muted-foreground">
+					The cryptographic lock that prevents tampering.
+				</p>
+			</Card>
+		</Grid>,
+		<Card key="verify-math" title="The Mathematics of Verification">
+			<p className="text-sm text-muted-foreground mb-4">
+				When the server issues a JWT, it performs this calculation using a wildly long <strong>Secret Key</strong> that
+				never leaves the backend environment (e.g., <code>process.env.JWT_SECRET</code>):
+			</p>
+			<CodeBlock
+				title="Server Side Hashing"
+				language="javascript"
+				code={`// The server combines the Base64 Header and Payload, and hashes them using its Secret Key
 const signature = HMACSHA256(
   base64UrlEncode(header) + "." + base64UrlEncode(payload),
   process.env.JWT_SECRET
 )`}
-      />
-      <p className="text-sm text-slate-400 mt-4">
-        When the user sends the JWT back to an API Route, the server splits the string by the periods. It takes the unverified Header and Payload from the token, and runs the <strong>exact same mathematical formula</strong> using its internal Secret Key. If the resulting hash perfectly matches the Signature attached to the token, the server instantly knows two absolute truths:
-      </p>
-      <ul className="list-disc pl-5 mt-4 text-sm text-slate-400 space-y-2">
-        <li><strong>Auth Authenticity:</strong> The token was definitely generated by this server (because only this server has the Secret Key to create that matching hash).</li>
-        <li><strong>Data Integrity:</strong> The payload has not been tampered with. If a hacker intercepts the token and changes their base64 <code>{"{ \"user_id\": 5 }"}</code> to <code>{"{ \"user_id\": 1 }"}</code>, the resulting mathematical hash run by the server will radically change, invalidating the signature instantly.</li>
-      </ul>
-    </Card>,
-    <Grid key="4" cols={2} gap={6} className="my-12">
-      <Card title="LocalStorage Nightmare for JWTs">
-        <p className="text-sm text-slate-400">
-          Millions of tutorials tell developers to save JWTs in React's `localStorage`. This is catastrophically vulnerable to XSS (Cross Site Scripting). If a hacker runs 1 line of JS on your website, they steal the raw token instantly.
-        </p>
-      </Card>
-      <Card title="The HttpOnly Cookie Saving Grace">
-        <p className="text-sm text-slate-400">
-          Always store tokens (Session IDs or JWTs) inside an <code>HttpOnly, Secure</code> browser cookie. Javascript cannot physically read these cookies. The browser securely attaches them to API requests automatically.
-        </p>
-      </Card>
-    </Grid>,
-    <Callout key="5" type="tip" title="Use Both (Refresh + Access Tokens)">
-      The enterprise standard is giving the user a 15-minute <strong>JWT Access Token</strong> (blazing fast API calls, mathematically secured) and a very long-lived <strong>Session Refresh Token</strong> securely stored in an HttpOnly cookie. If the user's JWT expires, the backend uses the Refresh token in Redis to hand out a new JWT, giving you the extreme speed of JWTs and the instant ban capability of Sessions.
-    </Callout>,
+			/>
+			<p className="text-sm text-slate-300 mt-4">
+				When the user sends the JWT back to an API Route, the server splits the string by the periods. It takes the
+				unverified Header and Payload from the token, and runs the <strong>exact same mathematical formula</strong>{" "}
+				using its internal Secret Key. If the resulting hash perfectly matches the Signature attached to the token, the
+				server instantly knows two absolute truths:
+			</p>
+			<ul className="list-disc pl-5 mt-4 text-sm text-slate-400 space-y-2">
+				<li>
+					<strong>Auth Authenticity:</strong> The token was definitely generated by this server (because only this
+					server has the Secret Key to create that matching hash).
+				</li>
+				<li>
+					<strong>Data Integrity:</strong> The payload has not been tampered with. If a hacker intercepts the token and
+					changes their base64 <code>{'{ "user_id": 5 }'}</code> to <code>{'{ "user_id": 1 }'}</code>, the resulting
+					mathematical hash run by the server will radically change, invalidating the signature instantly.
+				</li>
+			</ul>
+		</Card>,
+		<Grid key="4" cols={2} gap={6} className="my-12">
+			<Card title="LocalStorage Nightmare for JWTs">
+				<p className="text-sm text-muted-foreground">
+					Millions of tutorials tell developers to save JWTs in React's `localStorage`. This is catastrophically
+					vulnerable to XSS (Cross Site Scripting). If a hacker runs 1 line of JS on your website, they steal the raw
+					token instantly.
+				</p>
+			</Card>
+			<Card title="The HttpOnly Cookie Saving Grace">
+				<p className="text-sm text-muted-foreground">
+					Always store tokens (Session IDs or JWTs) inside an <code>HttpOnly, Secure</code> browser cookie. Javascript
+					cannot physically read these cookies. The browser securely attaches them to API requests automatically.
+				</p>
+			</Card>
+		</Grid>,
+		<Callout key="5" type="tip" title="Use Both (Refresh + Access Tokens)">
+			The enterprise standard is giving the user a 15-minute <strong>JWT Access Token</strong> (blazing fast API calls,
+			mathematically secured) and a very long-lived <strong>Session Refresh Token</strong> securely stored in an
+			HttpOnly cookie. If the user's JWT expires, the backend uses the Refresh token in Redis to hand out a new JWT,
+			giving you the extreme speed of JWTs and the instant ban capability of Sessions.
+		</Callout>,
 
-    <h3 key="mistakes-title" className="text-xl font-bold mt-8 mb-4">
-      Common Mistakes
-    </h3>,
-    <MistakeCard
-      key="mistake-1"
-      number={1}
-      title="Storing JWTs in localStorage"
-      problem="Any XSS attack can steal tokens with localStorage.getItem('token')."
-      solution="Store JWTs in httpOnly cookies. The browser sends them automatically, and JavaScript cannot access them."
-    />,
-    <MistakeCard
-      key="mistake-2"
-      number={2}
-      title="Not Validating exp Claim"
-      problem="Accepting expired tokens allows attackers to reuse old stolen tokens indefinitely."
-      solution={<>Always check <code>exp</code> claim: <code>if (Date.now() &gt;= payload.exp * 1000) throw new Error('Token expired')</code></>}
-    />,
-    <MistakeCard
-      key="mistake-3"
-      number={3}
-      title="Using Weak Secret Keys"
-      problem="Short secrets like 'secret123' can be brute-forced in minutes."
-      solution={<>Use cryptographically random 256-bit keys: <code>openssl rand -base64 32</code></>}
-    />,
+		<h3 key="mistakes-title" className="text-xl font-bold mt-8 mb-4">
+			Common Mistakes
+		</h3>,
+		<MistakeCard
+			key="mistake-1"
+			number={1}
+			title="Storing JWTs in localStorage"
+			problem="Any XSS attack can steal tokens with localStorage.getItem('token')."
+			solution="Store JWTs in httpOnly cookies. The browser sends them automatically, and JavaScript cannot access them."
+		/>,
+		<MistakeCard
+			key="mistake-2"
+			number={2}
+			title="Not Validating exp Claim"
+			problem="Accepting expired tokens allows attackers to reuse old stolen tokens indefinitely."
+			solution={
+				<>
+					Always check <code>exp</code> claim:{" "}
+					<code>if (Date.now() &gt;= payload.exp * 1000) throw new Error('Token expired')</code>
+				</>
+			}
+		/>,
+		<MistakeCard
+			key="mistake-3"
+			number={3}
+			title="Using Weak Secret Keys"
+			problem="Short secrets like 'secret123' can be brute-forced in minutes."
+			solution={
+				<>
+					Use cryptographically random 256-bit keys: <code>openssl rand -base64 32</code>
+				</>
+			}
+		/>,
 
-    <h3 key="rotation-title" className="text-xl font-bold mt-8 mb-4">
-      Token Rotation Strategy
-    </h3>,
-    <p key="rotation-desc" className="mb-4">
-      To balance security and user experience, implement <strong>automatic token rotation</strong>. When a user's access token expires, use their refresh token to issue a new pair of tokens.
-    </p>,
-    <CodeBlock
-      key="rotation-code"
-      title="Token Rotation Implementation"
-      language="javascript"
-      code={`// Backend: Refresh token endpoint
+		<h3 key="rotation-title" className="text-xl font-bold mt-8 mb-4">
+			Token Rotation Strategy
+		</h3>,
+		<p key="rotation-desc" className="mb-4">
+			To balance security and user experience, implement <strong>automatic token rotation</strong>. When a user's access
+			token expires, use their refresh token to issue a new pair of tokens.
+		</p>,
+		<CodeBlock
+			key="rotation-code"
+			title="Token Rotation Implementation"
+			language="javascript"
+			code={`// Backend: Refresh token endpoint
 app.post('/auth/refresh', async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
   
@@ -165,6 +202,6 @@ app.post('/auth/refresh', async (req, res) => {
   
   res.json({ accessToken: newAccessToken });
 });`}
-    />,
-  ],
+		/>,
+	],
 };

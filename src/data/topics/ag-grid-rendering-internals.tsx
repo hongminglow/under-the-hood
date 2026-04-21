@@ -104,7 +104,7 @@ export const agGridRenderingInternalsTopic: Topic = {
         on the actual row container. Instead, it builds its own scroll
         infrastructure consisting of two separate elements:
       </p>
-      <ul className="text-sm text-slate-400 space-y-4 list-disc pl-4 mb-4">
+      <ul className="text-sm text-muted-foreground space-y-4 list-disc pl-4 mb-4">
         <li>
           <strong className="text-white">The Spacer:</strong> A tall, empty{" "}
           <code>div</code> whose height is exactly{" "}

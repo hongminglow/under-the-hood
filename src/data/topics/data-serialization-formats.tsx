@@ -39,18 +39,18 @@ export const dataSerializationFormatsTopic: Topic = {
     </p>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <Card title="Protocol Buffers (Google)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Define schemas in <code>.proto</code> files. Code generators produce type-safe classes in any language. Fields are identified by numeric tags, not names. Adding new fields is backward-compatible as long as you never reuse tag numbers.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Used by: gRPC, Google internal services, Envoy, Kubernetes API extensions.
         </p>
       </Card>
       <Card title="Apache Avro (Confluent/Kafka)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Schema is defined in JSON but stored in a <strong>Schema Registry</strong>, not embedded in the payload. The producer and consumer negotiate schemas at connection time. Supports full schema evolution (add, remove, rename fields).
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Used by: Kafka (with Confluent Schema Registry), Apache Spark, Hadoop ecosystem.
         </p>
       </Card>
@@ -78,7 +78,7 @@ export const dataSerializationFormatsTopic: Topic = {
     </h3>,
     <Grid key="9" cols={2} gap={6} className="my-8">
       <Card title="Use JSON When...">
-        <ul className="text-sm text-slate-400 list-disc pl-4 space-y-1">
+        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
           <li>Building public APIs consumed by external developers</li>
           <li>Low traffic volume where bandwidth isn't a concern</li>
           <li>Debugging and quick prototyping (human readable)</li>
@@ -86,7 +86,7 @@ export const dataSerializationFormatsTopic: Topic = {
         </ul>
       </Card>
       <Card title="Use Binary When...">
-        <ul className="text-sm text-slate-400 list-disc pl-4 space-y-1">
+        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
           <li>Internal service-to-service communication (gRPC + Protobuf)</li>
           <li>High-throughput event streaming (Kafka + Avro)</li>
           <li>Mobile apps where bandwidth is limited and expensive</li>

@@ -27,28 +27,28 @@ export const gitRebaseMergeSquashTopic: Topic = {
 
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="git merge" description="Preserves all history, adds a merge commit">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Takes two branch tips and creates a new <strong>merge commit</strong> that has two parents.
           Every original commit stays intact with its original SHA and timestamp.
           History is a <em>non-linear DAG</em> (directed acyclic graph), not a straight line.
         </p>
       </Card>
       <Card title="git rebase" description="Rewrites commits onto a new base">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Lifts your branch's commits off their original base and replays them one-by-one on top of the target.
           Each commit gets a <strong>new SHA</strong>. History stays a perfectly straight line — as if the branch
           was always started from the new base.
         </p>
       </Card>
       <Card title="Squash merge / git rebase --squash" description="Collapses N commits into 1">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           All commits from a feature branch are <strong>combined into a single new commit</strong> on the target branch.
           Individual commit history from the branch is completely discarded after the merge.
           Produces the cleanest main branch log.
         </p>
       </Card>
       <Card title="git cherry-pick" description="Copy a specific commit anywhere">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Takes any commit by its SHA from any branch and <strong>replays it as a new commit</strong> on the current branch.
           The original commit is unchanged. You end up with two commits that contain the same change but with different SHAs.
         </p>

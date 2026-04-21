@@ -23,12 +23,12 @@ export const microservicesTopic: Topic = {
     </h3>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <Card title="Network Unreliability">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           In a monolith, calling `auth.getUser()` is a sub-millisecond RAM memory operation. In a Microservice, `Auth Service` must send an HTTP request across a physical datacenter wire to `User Service`. That wire can snap, lag, or timeout. What used to be a simple function call is now a fragile distributed system requiring retries and Circuit Breakers.
         </p>
       </Card>
       <Card title="Data Isolation Hell">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Microservices mandate that EVERY service must have its very own independent SQL database. You can no longer write a beautiful `JOIN` query between the Users table and the Orders table, because they literally live on completely separate physical hard drives handled by different teams.
         </p>
       </Card>
@@ -45,12 +45,12 @@ export const microservicesTopic: Topic = {
     </p>,
     <Grid key="8" cols={2} gap={6} className="my-8">
       <Card title="Saga Pattern">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Break the transaction into a series of local transactions. If one fails, execute compensating transactions to undo previous steps (e.g., "Cancel Order" if inventory update fails).
         </p>
       </Card>
       <Card title="Two-Phase Commit (2PC)">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           A coordinator asks all services to "prepare" the transaction. If all agree, it sends "commit". If any fail, it sends "rollback". Slow and fragile (coordinator is a single point of failure).
         </p>
       </Card>
@@ -84,34 +84,34 @@ export const microservicesTopic: Topic = {
     </h3>,
     <Grid key="14" cols={2} gap={6} className="my-8">
       <Card title="Observability Nightmare">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Debugging distributed traces across 50 services.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           A single user request now touches 12 services. When it fails, you need distributed tracing (Jaeger, Zipkin) to follow the request across service boundaries. Logs are scattered across 50 different servers. You need centralized logging (ELK, Datadog) costing $50k+/year.
         </p>
       </Card>
       <Card title="Network Latency Tax">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Every service call adds 5-50ms overhead.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           In a monolith, 10 function calls = 0.1ms. In microservices, 10 HTTP calls = 50-500ms. Even within the same datacenter, network I/O is <strong>1000x slower</strong>&nbsp;than in-memory function calls. This compounds with every hop.
         </p>
       </Card>
       <Card title="Deployment Complexity">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Kubernetes, service meshes, API gateways.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           You now need Kubernetes (or ECS/Nomad), an API Gateway (Kong, Envoy), service mesh (Istio, Linkerd), secret management (Vault), and CI/CD pipelines for 50 repos. DevOps team grows from 2 to 10 engineers.
         </p>
       </Card>
       <Card title="Data Consistency Chaos">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Eventual consistency everywhere.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           You lose ACID transactions. A user's order might show as "paid" in Order Service but "pending" in Inventory Service for 30 seconds. You need Saga patterns, event sourcing, or accept eventual consistency.
         </p>
       </Card>
@@ -139,7 +139,7 @@ export const microservicesTopic: Topic = {
     </p>,
     <Grid key="19" cols={2} gap={6} className="my-8">
       <Card title="The Pain (2001-2006)">
-        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
+        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
           <li>Productivity dropped 50% for 2 years</li>
           <li>Outages increased 3x due to cascading failures</li>
           <li>Teams spent 70% of time on infrastructure, 30% on features</li>
@@ -147,7 +147,7 @@ export const microservicesTopic: Topic = {
         </ul>
       </Card>
       <Card title="The Payoff (2006+)">
-        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
+        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
           <li>Teams could deploy independently 50+ times/day</li>
           <li>AWS was born from internal tooling (EC2, S3, Lambda)</li>
           <li>Black Friday traffic scaled horizontally without rewrites</li>
@@ -233,7 +233,7 @@ const user = await fetch('http://auth-service/user/123', {
     </p>,
     <Grid key="30" cols={2} gap={6} className="my-8">
       <Card title="Modular Monolith Benefits">
-        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
+        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
           <li>ACID transactions still work</li>
           <li>Single deployment (no distributed tracing needed)</li>
           <li>Refactoring is easy (move code between modules)</li>
@@ -241,7 +241,7 @@ const user = await fetch('http://auth-service/user/123', {
         </ul>
       </Card>
       <Card title="Examples in the Wild">
-        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
+        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
           <li><strong>Shopify:</strong>&nbsp;Modular monolith serving millions of stores</li>
           <li><strong>GitHub:</strong>&nbsp;Rails monolith with clear module boundaries</li>
           <li><strong>Stack Overflow:</strong>&nbsp;Monolith handling 5000 req/sec</li>

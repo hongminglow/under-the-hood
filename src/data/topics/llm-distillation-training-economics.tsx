@@ -23,14 +23,14 @@ export const llmDistillationTrainingEconomicsTopic: Topic = {
     </p>,
     <Grid key="2" cols={2} gap={6}>
       <Card title="Teacher Model" description="Expensive but powerful">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Usually large, slow, and expensive to train or serve. It has a higher
           capability ceiling and can produce richer reasoning traces or better
           answers.
         </p>
       </Card>
       <Card title="Student Model" description="Cheaper to run at scale">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Trained to imitate useful behavior from the teacher. It usually loses
           some top-end ability, but gains lower latency, lower serving cost, and
           easier deployment.
@@ -218,7 +218,7 @@ export const llmDistillationTrainingEconomicsTopic: Topic = {
     </p>,
     <Grid key="21" cols={2} gap={6}>
       <Card title="Where Distillation Helps" description="Capability transfer">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           A reasoning-heavy teacher can transfer better problem-solving behavior
           into smaller dense models. This lets a cheaper model feel surprisingly
           strong for its size.
@@ -228,7 +228,7 @@ export const llmDistillationTrainingEconomicsTopic: Topic = {
         title="Where Architecture Helps"
         description="Raw compute economics"
       >
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           If only a subset of parameters is active per token, or lower precision
           is used efficiently, the compute bill falls dramatically even before
           distillation enters the picture.

@@ -24,18 +24,18 @@ export const polyfillsDeepDiveTopic: Topic = {
 
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="Polyfills (API Patching)" description="Adding missing objects and functions">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           A polyfill detects if an API is missing on the global <code>window</code> object (like <code>Promise</code>, <code>fetch</code>, or <code>Array.prototype.includes</code>) and <strong>injects a custom implementation</strong> mimicking the standard.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           It happens <em>at runtime</em> in the browser. It creates objects that didn't exist.
         </p>
       </Card>
       <Card title="Transpilation (Syntax Conversion)" description="Rewriting modern syntax to old syntax">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Older browsers cannot parse modern syntax like Arrow Functions (<code>{"() => {}"}</code>) or Optional Chaining (<code>?.</code>). A browser will throw a fatal <code>SyntaxError</code> before any code runs.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Transpilers (like Babel, SWC) rewrite the code <em>during the build step</em> into older, compatible syntax.
         </p>
       </Card>

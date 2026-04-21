@@ -20,12 +20,12 @@ export const backendEncryptionMethodsTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="Encryption in Transit">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Handled by <strong>TLS 1.3</strong>. Once the packet reaches your Load Balancer, it is typically decrypted (TLS Termination).
         </p>
       </Card>
       <Card title="Encryption at Rest">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Handled by the Cloud Provider (AWS EBS/RDS). Protects against someone physically walking away with a hard drive.
         </p>
       </Card>

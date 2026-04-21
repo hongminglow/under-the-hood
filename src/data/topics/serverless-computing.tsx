@@ -85,12 +85,12 @@ export const serverlessTopic: Topic = {
     </h4>,
     <Grid key="8" cols={2} gap={6} className="mb-8">
       <Card title="Execution Time Limits">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           AWS Lambda has a 15-minute maximum execution time. Long-running tasks (video encoding, ML training) must use traditional servers or Step Functions to orchestrate multiple Lambda invocations.
         </p>
       </Card>
       <Card title="Statelessness">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Functions are ephemeral. You cannot store data in memory between invocations. Use external storage (S3, DynamoDB, Redis) for state. WebSocket connections require special handling (API Gateway WebSocket APIs).
         </p>
       </Card>

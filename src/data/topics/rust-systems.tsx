@@ -35,7 +35,7 @@ export const rustSystemsTopic: Topic = {
         title="Fearless Concurrency"
         description="Engine-grade multi-threading"
       >
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Writing parallel engines is notoriously difficult. Rust's strict type
           system ensures thread safety, allowing engineers to write highly
           concurrent code without fear of deadlocks or race conditions.

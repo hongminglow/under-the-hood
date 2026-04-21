@@ -19,18 +19,18 @@ export const concurrencyParallelismTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="Concurrency (The Single Juggler)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Dealing intelligently with multiple tasks at once on one strict physical CPU core.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           NodeJS inherently operates this way. It rapidly switches your single CPU core back and forth between handling an HTTP request, querying a database, and writing a file. The processor switches contexts so extremely quickly that humans perceive everything happening functionally simultaneously.
         </p>
       </Card>
       <Card title="Parallelism (The Hiring Spree)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Actually physically executing entirely multiple independent algorithms at the literal exact nanosecond.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           This demands separate hardware cores natively. If you render a complex 3D video game frame, your modern GPU activates 4,000 independent physical pixel-processing cores simultaneously in parallel to perfectly paint your screen monitor in completely isolated independent physical lanes.
         </p>
       </Card>

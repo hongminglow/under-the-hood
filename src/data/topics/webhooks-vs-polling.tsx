@@ -32,18 +32,18 @@ export const webhooksVsPollingTopic: Topic = {
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <Card title="Long Polling: The Middle Ground">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Between polling and WebSockets lies <strong>Long Polling</strong>.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           The client sends a request. The server <strong>suspends</strong> it. If data arrives within 30s, it responds immediately. If not, it returns a 204 No Content, and the client loops back. It's the "stateless" way to fake real-time.
         </p>
       </Card>
       <Card title="The Polling CPU Trap">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Short polling is <strong>Resource Exhaustion</strong> by design.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Even if no data changes for 24 hours, your database will be queried 17,280 times (at 5s intervals). This creates "Thundering Herd" problems at scale.
         </p>
       </Card>

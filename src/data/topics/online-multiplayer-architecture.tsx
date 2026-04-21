@@ -172,7 +172,7 @@ export const onlineMultiplayerArchitectureTopic: Topic = {
 
     <Grid key="16" cols={2} gap={6}>
       <Card title="The 'Hot Path' (In-Memory)" description="Zero IO allowed">
-        <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
           Player movement, HP pooling, ammo count, and spells are never written
           to disk during a match. They live entirely in C++/C#/Rust memory
           structs on the Dedicated Server instance. This ensures single-digit
@@ -180,7 +180,7 @@ export const onlineMultiplayerArchitectureTopic: Topic = {
         </p>
       </Card>
       <Card title="The 'Cold Path' (Asynchronous)" description="Account Persistence">
-        <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
           At the very end of a match, the server serializes the final state
           (e.g., 'Player A got 10 kills, gained 20 XP'). It drops this message
           into an asynchronous queue (like Kafka or RabbitMQ). A separate backend

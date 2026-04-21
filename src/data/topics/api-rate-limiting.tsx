@@ -41,12 +41,12 @@ export const apiRateLimitingTopic: Topic = {
     />,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <Card title="Architectural Placement">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Never write an API Rate Limiter locally in Node.js memory! If you have 5 load-balanced servers, a hacker will just hit all 5 servers independently. Rate limits must be stored rapidly into a centralized lightning-fast cache like <strong>Redis</strong> or pushed up entirely into an API Gateway like AWS API Gateway, keeping the malicious traffic extremely far away from your precious codebase.
         </p>
       </Card>
       <Card title="The Client Headers">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Good APIs strictly tell the frontend exactly how many tokens they have left so they do not blindly guess.
         </p>
         <ul className="text-xs mt-2 border-l border-border pl-3 text-muted-foreground/80 font-mono space-y-1">

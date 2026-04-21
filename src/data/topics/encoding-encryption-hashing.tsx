@@ -44,7 +44,7 @@ export const encodingEncryptionHashingTopic: Topic = {
 
     <Grid key="5" cols={1} gap={6} className="mb-8">
       <Card title="How HMAC-SHA256 Actually Works">
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-muted-foreground mb-4">
           HMAC strictly guarantees that a payload was absolutely not tampered with during network transit. It mathematically combines the raw, exposed Payload with a highly classified Secret Key, and Hashes the result securely to prove identity.
         </p>
         <CodeBlock
@@ -85,7 +85,7 @@ const signature = HMAC_SHA256(payload, "MY_SUPER_SECRET_BACKEND_KEY");
         <p className="text-sm text-foreground mb-2">
           <strong>The Avalanche Effect:</strong> If you change a single literal bit in a massive 50GB file, the entire resulting 256-bit (64-character) SHA-256 hash completely and wildly scrambles. You cannot reverse-engineer patterns.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           <strong>The Scale of 2^256:</strong> There are theoretically more possible SHA-256 hashes than there are physical atoms in the entire observable universe. It is physically impossible for modern hardware computers to blindly guess or bruteforce the input mathematically.
         </p>
       </Card>
@@ -93,7 +93,7 @@ const signature = HMAC_SHA256(payload, "MY_SUPER_SECRET_BACKEND_KEY");
         <p className="text-sm text-foreground mb-2">
           <strong>Collision Attacks:</strong> Hackers discovered severe mathematical weaknesses in MD5 and SHA-1 where two completely different files could magically generate the exact same Hash (a Collision). This destroys file integrity.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           <strong>Speed Vulnerability:</strong> MD5 hashes run so rapidly efficiently that a modern GPU can compute 100 Billion variants per second. This makes it utterly trivial to crack using a <strong>Rainbow Table</strong> (a pre-calculated 100TB database of common passwords and their known resulting hashes).
         </p>
       </Card>

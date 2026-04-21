@@ -103,7 +103,7 @@ function checkout(cart: Cart) {
         <p className="text-sm text-foreground mb-4">
           <strong>The Scenario:</strong> Your backend team decides to rename the API property <code>user_id</code> to <code>userId</code>.
         </p>
-        <p className="text-sm text-slate-400 space-y-2">
+        <p className="text-sm text-muted-foreground space-y-2">
           In <strong>JavaScript</strong>, this is an absolute nightmare. You run a global "Find and Replace", pray you didn't accidentally overwrite a completely unrelated variable, push to production, and inevitably crash the checkout page.<br/><br/>
           In <strong>TypeScript</strong>, you simply update the base <code>User</code> interface definition. Instantly, the compiler throws up 45 red squiggly lines explicitly pinpointing the exact components and files that are now mathematically broken. You fix them, and deploy with complete algorithmic confidence.
         </p>

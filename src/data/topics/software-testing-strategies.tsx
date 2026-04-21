@@ -34,18 +34,18 @@ export const softwareTestingStrategiesTopic: Topic = {
     />,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <Card title="Smoke vs. Sanity Testing">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Often confused, but serve different purposes in the release cycle.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           <strong>Smoke Testing</strong> checks if the build is stable enough to test at all (e.g., "Does the app crash on startup?"). <strong>Sanity Testing</strong> checks if a specific recent change or bug fix actually works.
         </p>
       </Card>
       <Card title="TDD vs. BDD">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Methodologies driving how tests are written.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           <strong>Test-Driven Development (TDD)</strong> tests the implementation details (developer-focused). <strong>Behavior-Driven Development (BDD)</strong> tests the user behavior often using plain English syntax like Gherkin (product-focused).
         </p>
       </Card>

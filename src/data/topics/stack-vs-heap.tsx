@@ -82,7 +82,7 @@ export const stackVsHeapTopic: Topic = {
 
     <Grid key="7" cols={2} gap={6} className="mb-8">
       <Card title="Bad: Mutating the Heap (No Render)">
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-muted-foreground mb-4">
           Modifying an object property changes the Heap, but the Stack's pointer address (e.g., <code>0x1F4A</code>) stays completely identical. React falsely assumes nothing mathematically changed.
         </p>
         <CodeBlock
@@ -101,7 +101,7 @@ function badUpdate() {
       </Card>
 
       <Card title="Good: Creating a New Pointer">
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-muted-foreground mb-4">
           By spreading properties into a brand new object, you explicitly force JavaScript to allocate a completely new slot in the Heap. The Stack natively receives a new pointer (e.g., <code>0x9B2C</code>).
         </p>
         <CodeBlock

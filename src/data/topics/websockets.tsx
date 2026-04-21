@@ -45,18 +45,18 @@ export const websocketsTopic: Topic = {
     </ul>,
     <Grid key="8" cols={2} gap={6} className="my-8">
       <Card title="Heartbeats: Ping & Pong">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           TCP connections can "silently" die if no data moves.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           WebSockets use <strong>Ping</strong> frames from the server and <strong>Pong</strong> replies from the client to ensure the "pipe" is still physically open. If a Pong is missed, the server closes the socket to save RAM.
         </p>
       </Card>
       <Card title="Scaling: The Redis Factor">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           WebSocket servers are <strong>Stateful</strong>.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           If User A is on Server 1 and User B is on Server 2, they can't chat! Solution: Use <strong>Redis Pub/Sub</strong> as a backbone. Server 1 publishes the message to Redis; all other servers listen and push it to their locally connected users.
         </p>
       </Card>

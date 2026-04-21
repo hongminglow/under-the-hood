@@ -68,7 +68,7 @@ export const domainRegistrarDnsHostingTopic: Topic = {
     </h3>,
     <Grid key="6" cols={2} gap={6}>
       <Card title="Global Coordination" description="Names must be unique">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           The internet cannot allow two unrelated people to both own{" "}
           <code>example.com</code> at the same time. Registrars exist as the
           retail layer that interacts with domain registries and standardized
@@ -76,7 +76,7 @@ export const domainRegistrarDnsHostingTopic: Topic = {
         </p>
       </Card>
       <Card title="Operational Management" description="Renewals and records">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Registrars handle registration periods, renewals, transfer locks,
           nameserver updates, ownership/contact metadata, and policy-related
           operations so domain management is not done manually against each TLD
@@ -242,14 +242,14 @@ export const domainRegistrarDnsHostingTopic: Topic = {
     </h3>,
     <Grid key="16" cols={2} gap={6}>
       <Card title="Sometimes They Also Offer Hosting" description="Bundled services exist">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Some registrars also sell shared hosting, WordPress hosting, email,
           or basic site builders. In those cases the same company may provide
           both the domain registration layer and the hosting layer.
         </p>
       </Card>
       <Card title="But Those Are Separate Roles" description="Same company, different job">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Even if one dashboard sells both, the jobs remain conceptually
           different. The registrar function controls the name. The hosting
           function serves the files or application logic behind that name.
@@ -387,14 +387,14 @@ Hosting:
     </p>,
     <Grid key="25" cols={2} gap={6}>
       <Card title="What The Platform Abstracts" description="Infra you stop thinking about">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Build images, deployment rollouts, reverse proxies, TLS termination,
           cache headers, global replication, health checks, and often log or
           metrics plumbing.
         </p>
       </Card>
       <Card title="What Still Exists" description="The hidden machinery is still real">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           DNS records, routing tables, edge POPs, object storage, compute
           fleets, and some form of origin execution still exist even if you
           never SSH into a box.

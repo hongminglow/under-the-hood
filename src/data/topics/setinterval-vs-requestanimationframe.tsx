@@ -36,18 +36,18 @@ export const setintervalVsRequestanimationframeTopic: Topic = {
     </p>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="Gaming Mice & Input">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           High-frequency polling (1,000Hz).
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Using <code>mousemove</code> with <code>setInterval</code> causes "Input Overload". <code>rAF</code> naturally "buffers" these inputs, executing your logic only when a frame is actually ready to be painted.
         </p>
       </Card>
       <Card title="Layout Thrashing">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Read/Write cycles in the loop.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           <code>rAF</code> helps prevent "Layout Thrashing" because the browser batches your DOM changes right before the <strong>Layout & Paint</strong> stage of the rendering pipeline.
         </p>
       </Card>

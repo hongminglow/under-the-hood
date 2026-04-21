@@ -19,18 +19,18 @@ export const reactFiberReconciliationTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="The Diffing Engine">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           React maintains a massive invisible Javascript JSON object representing the DOM (The Virtual DOM). 
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           When state changes, it generates a brand new JSON object. It then performs an exhaustive tree-diffing algorithm comparing the new JSON against the old JSON. It spots exactly three attributes that changed, and batches those changes into one native DOM instruction.
         </p>
       </Card>
       <Card title="The Fiber Scheduler">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Before React 16, this tree-diffing could not be stopped. A massive tree would lock up the browser for 200ms, creating jitter.
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Fiber introduced a pauseable stack. React can now pause its intense JSON calculation, let the browser quickly render a user typing frame (to hit 60FPS), and resume calculating the massive table update.
         </p>
       </Card>

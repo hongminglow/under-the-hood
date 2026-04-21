@@ -19,18 +19,18 @@ export const virtualDomVsSignalsTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="The VDOM Tax (React)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           When a parent component updates state, React natively re-runs the entire function for practically every single child component down the tree automatically. 
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           You are entirely forced to manually write `React.memo` or `useMemo` specifically everywhere to stop this top-down execution logic cascade. It shifts extreme architectural burden to the developer.
         </p>
       </Card>
       <Card title="Signals (Solid, Preact)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Signals are mathematically reactive nodes. When <code>count</code> updates, only the exact <code>{"<span>count</span>"}</code> string physically updates directly. 
         </p>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           There is absolutely zero VDOM overhead. It skips the parent component. It skips the children components. It targets the physical DOM pixel surgically. It operates exactly like an Excel spreadsheet cell.
         </p>
       </Card>

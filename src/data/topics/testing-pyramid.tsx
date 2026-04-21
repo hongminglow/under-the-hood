@@ -20,13 +20,13 @@ export const testingPyramidTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="The Traditional Pyramid">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Focuses on <strong>Unit Tests</strong>. Great for complex logic and algorithms, but can suffer from "tests pass, app broken" if the pieces don't fit together.
         </p>
         <p className="text-xs font-mono text-blue-500">Fast CI / Low Dev Confidence</p>
       </Card>
       <Card title="The Testing Trophy">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Focuses on <strong>Integration Tests</strong> (Testing Library). Tests how components interact as a user would, without the overhead of a full browser.
         </p>
         <p className="text-xs font-mono text-green-500">Medium Speed / High Confidence</p>

@@ -36,18 +36,18 @@ export const webRtcTopic: Topic = {
     </h3>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="STUN (Session Traversal Utilities for NAT)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           A "Mirror" server. You ask it: "What's my Public IP?"
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Free, very fast, and handles ~80% of consumer internet connections. It allows <strong>Hole Punching</strong> through common NAT routers.
         </p>
       </Card>
       <Card title="TURN (Traversal Using Relays around NAT)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           The "Relay" fallback. If STUN fails, traffic is routed <strong>Through</strong> this server.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Expensive (bandwidth costs). Used for strict corporate firewalls (Symmetric NAT) that block direct UDP traffic.
         </p>
       </Card>

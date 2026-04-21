@@ -40,7 +40,7 @@ export const networkPayloadVulnerabilitiesTopic: Topic = {
     </h3>,
     <Grid key="7" cols={2} gap={6} className="my-8">
       <Card title="Certificate Pinning">
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-muted-foreground mb-4">
           The app hardcodes the expected public key or certificate hash of the real server. Even if the device trusts the proxy's fake CA, the app will reject the connection because the fake certificate's hash doesn't match the pinned hash.
         </p>
         <CodeBlock
@@ -50,7 +50,7 @@ export const networkPayloadVulnerabilitiesTopic: Topic = {
         />
       </Card>
       <Card title="Message-Level Encryption (JWE)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Encrypt the payload itself <em>before</em> sending it over TLS. The client encrypts the JSON using the server's public key (e.g., using JWE). The proxy can intercept the TLS tunnel, but it only sees an encrypted blob that it cannot decrypt without the server's private key.
         </p>
       </Card>

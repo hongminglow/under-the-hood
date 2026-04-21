@@ -27,7 +27,7 @@ export const skillsVsMcpTopic: Topic = {
         title="MCP"
         description="The protocol / transport / capability layer"
       >
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           MCP exposes tools, files, prompts, resources, or APIs to the model in
           a structured way. It answers: <strong>What can the agent access?</strong>
         </p>
@@ -36,7 +36,7 @@ export const skillsVsMcpTopic: Topic = {
         title="Skills"
         description="The workflow / policy / know-how layer"
       >
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Skills bundle instructions, conventions, recipes, and decision rules.
           They answer: <strong>How should the agent approach this task?</strong>
         </p>
@@ -134,7 +134,7 @@ export const skillsVsMcpTopic: Topic = {
         title="Live System Access"
         description="Skills cannot replace capabilities"
       >
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           If the agent must read a design file, query a ticket system, inspect a
           database, or browse internal docs, you still need a capability layer
           like MCP. A skill cannot magically fetch data it cannot access.
@@ -144,7 +144,7 @@ export const skillsVsMcpTopic: Topic = {
         title="Standardization Across Tools"
         description="One protocol, many integrations"
       >
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           MCP becomes powerful when you want one model interface to talk to many
           external systems without handcrafting each integration differently for
           every vendor or product surface.

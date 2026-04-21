@@ -155,7 +155,7 @@ export const sdlcMethodologiesTopic: Topic = {
     </p>,
     <Grid key="agile-values-grid" cols={2} gap={6} className="mb-8">
       <Card title="The 4 Agile Values">
-        <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
+        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
           <li>
             <strong>Individuals & interactions</strong> over processes & tools
           </li>

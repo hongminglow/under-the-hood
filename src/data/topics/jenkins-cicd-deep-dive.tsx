@@ -33,14 +33,14 @@ export const jenkinsCicdDeepDiveTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6}>
       <Card title="Continuous Integration" description="The 'CI' part">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Every push triggers a build and test run automatically. The goal is to
           detect integration failures immediately — within minutes of the commit —
           while the context is still fresh in the developer's mind.
         </p>
       </Card>
       <Card title="Continuous Delivery / Deployment" description="The 'CD' part">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           After tests pass, the pipeline packages the artifact and either{" "}
           <strong>gates it for a manual release button</strong> (Continuous
           Delivery) or <strong>ships it to production automatically</strong>{" "}
@@ -284,7 +284,7 @@ export const jenkinsCicdDeepDiveTopic: Topic = {
     </p>,
     <Grid key="19" cols={2} gap={6}>
       <Card title="Parallel Stages" description="Run independent steps at the same time">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Jenkins declarative pipelines support a <code>parallel</code> block.
           If unit tests, linting, and security scans are independent, they can
           all run simultaneously. If each takes 3 minutes and you have 3 agents,
@@ -292,7 +292,7 @@ export const jenkinsCicdDeepDiveTopic: Topic = {
         </p>
       </Card>
       <Card title="Distributed Agents" description="Horizontal scale for builds">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Jenkins can launch agents on demand — Kubernetes plugin spins up a
           fresh pod per build, runs it, then destroys it. No queue waiting for a
           shared agent. Cost scales with demand instead of paying for idle
@@ -300,7 +300,7 @@ export const jenkinsCicdDeepDiveTopic: Topic = {
         </p>
       </Card>
       <Card title="Dependency Caching" description="Don't redownload what hasn't changed">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Cache <code>node_modules</code>, Maven <code>.m2</code>, or Gradle
           caches between runs using the Jenkins Workspace or an external cache
           layer (S3, Artifactory). A warm cache turns a 4-minute{" "}
@@ -308,21 +308,21 @@ export const jenkinsCicdDeepDiveTopic: Topic = {
         </p>
       </Card>
       <Card title="Incremental Builds" description="Only rebuild what changed">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           In monorepos, tools like Nx or Turborepo detect which packages changed
           and only run tests for affected modules. Jenkins triggers the build;
           the build tool decides what to actually execute.
         </p>
       </Card>
       <Card title="Test Splitting" description="Divide test suite across agents">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Large test suites can be split across multiple agents. Jenkins collects
           and merges JUnit XML reports from all agents afterward. A 30-minute
           test suite distributed across 10 agents takes ~3 minutes.
         </p>
       </Card>
       <Card title="Docker Layer Caching" description="Reuse image layers">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Structure Dockerfiles so infrequently changing layers (OS, dependencies)
           come first. Jenkins with a local Docker daemon or BuildKit reuses cached
           layers, cutting image build time from minutes to seconds when only app
@@ -494,28 +494,28 @@ export const jenkinsCicdDeepDiveTopic: Topic = {
     </h3>,
     <Grid key="28" cols={2} gap={6}>
       <Card title="Air-Gapped / On-Premise" description="No cloud allowed">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Banks, defense contractors, and regulated industries often cannot or
           will not send code to cloud CI providers. Jenkins runs entirely
           on-premises with no external dependency.
         </p>
       </Card>
       <Card title="Complex Multi-System Orchestration" description="Beyond simple build-test-deploy">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Jenkins excels at orchestrating complex, multi-team pipelines that span
           multiple repositories, artifact systems, environments, and approval
           gates — all wired together through its plugin ecosystem.
         </p>
       </Card>
       <Card title="Legacy Enterprise Investments" description="Already standardized on Jenkins">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Many enterprises have years of shared libraries, custom plugins, and
           team knowledge invested in Jenkins. Migration costs are real. Jenkins
           remains the dominant tool in large enterprise environments.
         </p>
       </Card>
       <Card title="Maximum Flexibility" description="Build anything">
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Because Jenkins runs your own servers with your own plugins, you can
           wire nearly any tool into it. Building a pipeline that triggers a
           mainframe job, sends an MQTT message, and deploys to an on-prem

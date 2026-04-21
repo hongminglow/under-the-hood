@@ -36,18 +36,18 @@ export const databaseMigrationsTopic: Topic = {
     </h3>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="The Lock Trap">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           <code>ALTER TABLE users ADD bio TEXT DEFAULT 'N/A';</code>
         </p>
-        <p className="text-xs text-slate-400 italic">
+        <p className="text-xs text-muted-foreground italic">
           PostgreSQL must physically rewrite every row to add the default value. On 10M rows, this leads to an <strong>Exclusive Lock</strong>, blocking all Reads and Writes for minutes.
         </p>
       </Card>
       <Card title="The Safe Fix">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Add the column as <strong>NULL</strong> without a default.
         </p>
-        <p className="text-xs text-slate-400 italic">
+        <p className="text-xs text-muted-foreground italic">
           Adding a nullable column is a <strong>Metadata-only</strong> change (takes ~1ms). You then backfill the 'N/A' value in small chunks (e.g., 5,000 rows at a time).
         </p>
       </Card>

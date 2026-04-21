@@ -38,18 +38,18 @@ export const howLlmsWorkTopic: Topic = {
     </p>,
     <Grid key="7" cols={2} gap={6} className="my-8">
       <Card title="Context Window (RAM)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           The context window is physically limited by <strong>GPU VRAM</strong>.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Increasing the window linearly increases the KV Cache size. A 128k context window requires ~10GB of VRAM just to 'remember' the conversation history.
         </p>
       </Card>
       <Card title="In-Context Learning">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           The model doesn't 'learn' while you chat.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           It uses <strong>Self-Attention</strong> to relate new tokens to the patterns found in your prompt. This allows it to follow instructions (few-shot) without weight updates.
         </p>
       </Card>

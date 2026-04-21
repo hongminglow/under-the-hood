@@ -36,18 +36,18 @@ export const serviceWorkersPwaTopic: Topic = {
     </h3>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="Stale-While-Revalidate">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Serve <strong>instantly</strong> from cache, then update in background.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Perfect for avatars and news feeds. User gets speed now, fresh data in the next visit.
         </p>
       </Card>
       <Card title="Cache-First (Offline-First)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Only check network if the cache is empty.
         </p>
-        <p className="text-xs italic text-slate-400">
+        <p className="text-xs italic text-muted-foreground">
           Best for static fonts, icons, and CSS. This makes your app feel like it's running locally on the SSD.
         </p>
       </Card>

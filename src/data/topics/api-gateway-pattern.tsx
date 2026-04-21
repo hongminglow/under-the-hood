@@ -21,12 +21,12 @@ export const apiGatewayPatternTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="Reverse Proxy & Routing">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           The Gateway maps external URLs (<code>/orders</code>) to internal private IPs (<code>10.0.1.4</code>). It supports <strong>Canary Releases</strong> by routing 5% of traffic to a new version.
         </p>
       </Card>
       <Card title="BFF (Backend for Frontend)">
-        <p className="text-sm text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           A mobile app needs a different JSON structure than a desktop app. The Gateway can <strong>Transform payloads</strong> on the fly, tailoring the response to the specific device.
         </p>
       </Card>
@@ -40,12 +40,12 @@ export const apiGatewayPatternTopic: Topic = {
     </p>,
     <Grid key="3c" cols={2} gap={6} className="my-8">
       <Card title="Without Aggregation">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Client makes 5 sequential HTTP requests. Each incurs DNS, TCP handshake, and TLS overhead. Total latency: <strong>sum of all 5 calls</strong>. Mobile users on 3G suffer enormously.
         </p>
       </Card>
       <Card title="With Aggregation">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Client makes 1 request. Gateway fans out 5 internal calls <strong>in parallel</strong> over the private network (no TLS overhead). Total latency: <strong>max of the 5 calls</strong>. Dramatic improvement.
         </p>
       </Card>

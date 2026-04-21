@@ -60,12 +60,12 @@ export const consensusRaftPaxosTopic: Topic = {
     </h3>,
     <Grid key="8" cols={2} gap={6} className="my-8">
       <Card title="Kubernetes (etcd)">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Every <code>kubectl apply</code> writes to <strong>etcd</strong>, a Raft-based key-value store. The entire cluster state (pods, services, secrets) is consensus-replicated across 3-5 etcd nodes. If etcd loses quorum, <strong>your entire Kubernetes cluster freezes</strong>.
         </p>
       </Card>
       <Card title="Kafka (Leader Election)">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           Each Kafka partition has a <strong>Leader Replica</strong>. When a broker crashes, the controller uses a consensus mechanism (now KRaft, replacing ZooKeeper) to elect a new partition leader. During election, that partition is temporarily unavailable for writes.
         </p>
       </Card>
