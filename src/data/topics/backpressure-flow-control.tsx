@@ -43,22 +43,22 @@ export const backpressureFlowControlTopic: Topic = {
     </h3>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="TCP (Sliding Window)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           TCP has backpressure built in. The receiver advertises a <strong>window size</strong> — the amount of data it can buffer. If the receiver's buffer fills up, the window shrinks to zero, and the sender physically stops transmitting until the receiver drains its buffer.
         </p>
       </Card>
       <Card title="Kafka (Consumer Lag)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Kafka consumers pull messages at their own pace. If a consumer falls behind, <strong>Consumer Lag</strong> grows (the offset gap between the latest produced message and the latest consumed message). Monitoring lag is the primary Kafka health signal.
         </p>
       </Card>
       <Card title="Node.js Streams">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Node.js Readable streams have a <code>highWaterMark</code> (default 16KB). When the internal buffer exceeds this, <code>.read()</code> returns null and the stream pauses until the consumer drains data. If you pipe a fast file read into a slow HTTP upload without respecting this, you'll OOM.
         </p>
       </Card>
       <Card title="RxJS / Reactive Streams">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Reactive frameworks provide explicit backpressure operators: <code>buffer()</code>, <code>throttle()</code>, <code>debounce()</code>, <code>sample()</code>. The Reactive Streams specification (used by Java's Project Reactor and Akka) mandates that a <code>Subscriber</code> signals demand via <code>request(n)</code>.
         </p>
       </Card>

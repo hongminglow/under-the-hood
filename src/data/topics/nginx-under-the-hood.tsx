@@ -139,7 +139,7 @@ export const nginxUnderTheHoodTopic: Topic = {
           <strong>The Problem:</strong> When the Node.js or Python backend logs a user's IP, it records the internal IP address of the NGINX server itself, because mathematically, NGINX is the entity that established the final TCP connection to the backend.
         </p>
         <p className="text-sm font-semibold mb-2">Solution:</p>
-        <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+        <ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
           <li>Ensure NGINX utilizes <code>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code>.</li>
           <li>Configure your Express/backend framework to trust the proxy (e.g., <code>app.set('trust proxy', 1)</code> in Express) so it extracts the real IP from the header instead of the TCP socket.</li>
         </ul>
@@ -150,7 +150,7 @@ export const nginxUnderTheHoodTopic: Topic = {
           <strong>The Problem:</strong> Users attempting to upload a 50MB video file get instantly rejected by NGINX with a <strong>413 Request Entity Too Large</strong> error, before the request even reaches the backend API.
         </p>
         <p className="text-sm font-semibold mb-2">Solution:</p>
-        <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+        <ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
           <li>NGINX aggressively protects backends by defaulting max body sizes to 1MB.</li>
           <li>Explicitly override this limit inside your server or location block via <code>client_max_body_size 100M;</code>.</li>
         </ul>

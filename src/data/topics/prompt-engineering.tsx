@@ -35,18 +35,18 @@ export const promptEngineeringTopic: Topic = {
     </h3>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="Temperature (0 to 1)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Controls the <strong>Softmax</strong> randomness.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           T=0 is 'Greedy' (always picks the #1 most likely word). T=0.8 is 'Creative' (picks from a wider distribution).
         </p>
       </Card>
       <Card title="Top-P (Nucleus Sampling)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Limits the vocabulary based on <strong>Probability Mass</strong>.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Top-P=0.9 means the model only considers the smallest set of words whose collective probability is 90%.
         </p>
       </Card>

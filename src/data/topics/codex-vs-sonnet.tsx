@@ -21,19 +21,19 @@ export const codexVsSonnetTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="Codex Architecture">
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-slate-400 mb-4">
           Built strictly as an expert developer-in-the-loop. It focuses on taking immediate, executable actions inside a sandbox.
         </p>
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+        <ul className="text-sm text-slate-400 list-disc pl-4 space-y-2">
           <li><strong>Training:</strong> Heavily biased toward vast amounts of GitHub repositories, commit histories, and terminal outputs.</li>
           <li><strong>Decision Logic:</strong> Iterative trial-and-error—it prefers to write code, execute a test, read the stack trace, and fix the bug in a rapid loop.</li>
         </ul>
       </Card>
       <Card title="Sonnet / Opus Architecture">
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-slate-400 mb-4">
           Massive frontier models (utilizing Mixture of Experts) tuned heavily by Constitutional AI to excel at deep, generalized reasoning.
         </p>
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+        <ul className="text-sm text-slate-400 list-disc pl-4 space-y-2">
           <li><strong>Training:</strong> Broad world knowledge combined with complex instruction-following datasets.</li>
           <li><strong>Decision Logic:</strong> Holistic architectural planning—it analyzes system trade-offs and generates comprehensive mental models before touching code.</li>
         </ul>

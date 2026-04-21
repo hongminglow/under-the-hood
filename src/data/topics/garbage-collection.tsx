@@ -77,7 +77,7 @@ export const garbageCollectionTopic: Topic = {
           <strong>The Problem:</strong> If you rapidly create millions of temporary objects inside a hot loop (like a `map` function rendering a huge 3D canvas or chart), the V8 engine is forced to repeatedly trigger massive GC pauses to clean them up, violently dropping your overall framerate.
         </p>
         <p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-        <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+        <ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
           <li><strong>Object Pooling:</strong> Instead of creating new objects and throwing them away, architect a stable array of pre-allocated reusable objects. Update their properties instead of continually instantiating brand new ones.</li>
           <li><strong>Mutating vs Spreading:</strong> In extremely performance-critical hot paths, using the modern array spread operator <code>[...arr, newItem]</code> is dangerous because it rapidly generates brand new arrays every single tick. Use direct mutation <code>arr.push()</code> when the isolated logic safely allows it.</li>
         </ul>

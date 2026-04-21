@@ -45,23 +45,23 @@ export const sagaPatternTopic: Topic = {
     </h3>,
     <Grid key="8" cols={2} gap={6} className="my-8">
       <Card title="ACID (Monoliths)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <strong>Atomicity</strong>: All or nothing<br/>
           <strong>Consistency</strong>: Always valid state<br/>
           <strong>Isolation</strong>: Transactions don't interfere<br/>
           <strong>Durability</strong>: Committed = permanent
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Perfect consistency, but doesn't scale across services.
         </p>
       </Card>
       <Card title="BASE (Distributed Sagas)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <strong>Basically Available</strong>: System works most of the time<br/>
           <strong>Soft state</strong>: State may change without input<br/>
           <strong>Eventual consistency</strong>: Becomes consistent eventually
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Trades immediate consistency for scalability and availability.
         </p>
       </Card>
@@ -72,7 +72,7 @@ export const sagaPatternTopic: Topic = {
     </h3>,
     <Grid key="10" cols={2} gap={6} className="my-8">
       <Card title="Choreography (Event-Driven)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <strong>Decentralized</strong>. Each service produces and listens to events from other services.
         </p>
         <CodeBlock
@@ -87,13 +87,13 @@ eventBus.on('OrderCreated', async (event) => {
   await eventBus.publish('InventoryReserved', event);
 });`}
         />
-        <p className="text-xs italic text-muted-foreground mt-2">
+        <p className="text-xs italic text-slate-400 mt-2">
           <strong>Pros</strong>: Simple, no single point of failure<br/>
           <strong>Cons</strong>: Hard to debug "event storms", difficult to track global state
         </p>
       </Card>
       <Card title="Orchestration (Centralized)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <strong>Centralized</strong>. A Saga Execution Coordinator (SEC) tells each service what to do.
         </p>
         <CodeBlock
@@ -112,7 +112,7 @@ class OrderSaga {
   }
 }`}
         />
-        <p className="text-xs italic text-muted-foreground mt-2">
+        <p className="text-xs italic text-slate-400 mt-2">
           <strong>Pros</strong>: Easy to track, prevents cyclic dependencies<br/>
           <strong>Cons</strong>: Orchestrator can become a bottleneck
         </p>
@@ -207,18 +207,18 @@ SELECT * FROM outbox WHERE published = false ORDER BY created_at;`}
       Sagas do not have <strong>Isolation</strong>&nbsp;(the 'I' in ACID). Other users might see intermediate "soft state" while the Saga is running.
     </p>,
     <Card key="22" title="Example: Dirty Reads">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         User A starts a Saga to buy the last iPhone. Inventory is reserved (stock = 0). User B tries to buy the same iPhone and sees "Out of Stock". But then User A's payment fails, and the Saga compensates by releasing the inventory. User B missed their chance due to a temporary state.
       </p>
     </Card>,
     <Grid key="23" cols={2} gap={6} className="my-8">
       <Card title="Solution 1: Semantic Locks">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Add a <code>reserved_by</code> field to items. Other users see "Reserved" instead of "Out of Stock". If the Saga fails, the reservation expires after a timeout.
         </p>
       </Card>
       <Card title="Solution 2: Versioning">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Use optimistic locking with version numbers. If two Sagas try to modify the same resource, the second one fails and retries.
         </p>
       </Card>
@@ -228,18 +228,18 @@ SELECT * FROM outbox WHERE published = false ORDER BY created_at;`}
       Real-World Examples
     </h3>,
     <Card key="25" title="Uber: Ride Booking Saga">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         <strong>Steps</strong>: Create ride → Find driver → Reserve driver → Charge rider → Confirm ride
       </p>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs text-slate-400">
         If payment fails, the Saga releases the driver and cancels the ride. Uses orchestration with a central Saga coordinator.
       </p>
     </Card>,
     <Card key="26" title="Amazon: Order Fulfillment Saga">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         <strong>Steps</strong>: Validate order → Reserve inventory → Process payment → Create shipment → Update order status
       </p>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs text-slate-400">
         Uses choreography with event-driven microservices. Each service listens to domain events and reacts independently.
       </p>
     </Card>,

@@ -36,18 +36,18 @@ export const tauriUnderTheHoodTopic: Topic = {
     </p>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="TAO (Window Manager)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Handles the <strong>Windowing</strong> logic across Windows, macOS, Linux, and now Mobile.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           It creates the physical OS window, manages menus, and handles native system events (resize, minimize).
         </p>
       </Card>
       <Card title="WRY (WebView Render)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Hooks into the <strong>System WebView</strong> (WebView2, WebKit).
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           It creates the 'Frame' where your React/JS lives. Because it use the OS's engine, security updates are handled by the OS, not the app.
         </p>
       </Card>

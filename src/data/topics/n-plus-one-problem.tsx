@@ -25,7 +25,7 @@ export const nPlusOneProblemTopic: Topic = {
         </p>
       </Card>
       <Card title="The Network Cost">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Even if each query takes 1ms, doing 100 queries means 100ms of <strong>Network Round-Trip Time (RTT)</strong>. Your app spends more time waiting for the wire than the database spends searching.
         </p>
       </Card>

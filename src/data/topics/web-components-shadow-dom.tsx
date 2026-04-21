@@ -32,18 +32,18 @@ export const webComponentsShadowDomTopic: Topic = {
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <Card title="connectedCallback">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Invoked when the element is first <strong>appended</strong> to the DOM.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           This is where you perform data fetching, setup event listeners, and render the initial Shadow DOM tree.
         </p>
       </Card>
       <Card title="attributeChangedCallback">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Invoked when an <strong>observed attribute</strong> is updated.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           The native version of <code>componentDidUpdate</code>. It allows you to synchronize the component's internal state with its HTML attributes.
         </p>
       </Card>

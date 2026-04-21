@@ -23,12 +23,12 @@ export const databaseReplicationTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <Card title="The Primary (The Boss)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           ALL `INSERT`, `UPDATE`, and `DELETE` queries strictly hit the Primary Database. The moment the query finishes, the Primary writes it to a WAL (Write-Ahead Log).
         </p>
       </Card>
       <Card title="The Replicas (The Workers)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           You spin up multiple "Read-Replica" databases globally. They ping the Primary to check for changes and copy the logs. Read queries (`SELECT`) hit the Replicas, offloading work from the Primary.
         </p>
       </Card>

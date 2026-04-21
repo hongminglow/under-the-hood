@@ -23,13 +23,13 @@ export const envConfigTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <Card title="Build-time Variables">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Injected during <code>docker build</code> or <code>npm run build</code>.
         </p>
         <p className="text-xs italic text-red-500 font-bold underline">Warning: Hardcoded in the final JS bundle / Image layer.</p>
       </Card>
       <Card title="Runtime Variables">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Injected when the container starts (<code>process.env</code>). 
         </p>
         <p className="text-xs italic text-green-500 font-bold underline">Success: Secure and hot-swappable without rebuilding.</p>

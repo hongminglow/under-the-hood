@@ -38,18 +38,18 @@ export const vectorDatabasesEmbeddingsTopic: Topic = {
     </p>,
     <Grid key="7" cols={2} gap={6} className="my-8">
       <Card title="Metadata Filtering">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           "Find docs similar to X, but ONLY for <code>user_id=42</code>."
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           <strong>Pre-filtering</strong> is superior; it limits the search space <em>before</em> the vector calculation, ensuring 100% accuracy for the filter.
         </p>
       </Card>
       <Card title="Product Quantization (PQ)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Compressing 1536-dim vectors.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           PQ divides vectors into sub-spaces and replaces them with 'centroid' codes. This reduces memory by 90% while maintaining ~95% search accuracy.
         </p>
       </Card>

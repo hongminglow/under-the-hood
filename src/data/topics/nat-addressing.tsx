@@ -34,18 +34,18 @@ export const natAddressingTopic: Topic = {
     </h3>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="SNAT (Source NAT)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Used when internal devices go <strong>Out</strong> to the internet.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Your home router changing your phone's IP to the ISP's public IP.
         </p>
       </Card>
       <Card title="DNAT (Destination NAT)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Used to allow external traffic <strong>In</strong> to a specific server.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Commonly known as <strong>Port Forwarding</strong>. Maps Public Port 80 → Internal Server Port 80.
         </p>
       </Card>

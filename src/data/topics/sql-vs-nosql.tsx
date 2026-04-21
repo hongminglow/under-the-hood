@@ -26,27 +26,27 @@ export const sqlVsNosqlTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="SQL (PostgreSQL / MySQL)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Data is aggressively broken apart (Normalized) into dozens of strict
           tables to prevent duplication. To load a User's profile, you must
           dynamically <code>JOIN</code> the User table with the Comments table
           and the Address table.
         </p>
         <p className="text-sm font-semibold mt-3">Best for:</p>
-        <ul className="list-disc pl-5 text-sm text-muted-foreground mt-1 space-y-1">
+        <ul className="list-disc pl-5 text-sm text-slate-400 mt-1 space-y-1">
           <li>Financial systems requiring extreme ACID safety.</li>
           <li>Highly interconnected data (Social Networks).</li>
         </ul>
       </Card>
       <Card title="NoSQL (MongoDB / DynamoDB)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Data is clumped together (Denormalized) into massive, flexible JSON
           blobs. To load a User's profile, you pull exactly 1 massive JSON
           document holding their Address and Comments naturally inside of it.
           Zero `JOIN`ing required.
         </p>
         <p className="text-sm font-semibold mt-3">Best for:</p>
-        <ul className="list-disc pl-5 text-sm text-muted-foreground mt-1 space-y-1">
+        <ul className="list-disc pl-5 text-sm text-slate-400 mt-1 space-y-1">
           <li>Rapidly changing schemas (Startups).</li>
           <li>
             Catalog systems (Amazon Products) where every item has entirely
@@ -107,10 +107,10 @@ export const sqlVsNosqlTopic: Topic = {
     </h3>,
     <Grid key="9" cols={2} gap={6} className="my-8">
       <Card title="Complex Relationships">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Many-to-many relationships, deep JOINs.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Social networks (users, friends, posts, comments, likes), e-commerce
           (products, categories, orders, reviews), ERP systems. SQL's{" "}
           <code>JOIN</code>&nbsp;operations are optimized for relational
@@ -119,10 +119,10 @@ export const sqlVsNosqlTopic: Topic = {
         </p>
       </Card>
       <Card title="ACID Transactions">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Financial operations, inventory management.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Banking (transfer $100 from A to B atomically), payment processing,
           stock trading. SQL guarantees <strong>atomicity</strong>: either all
           operations succeed or all fail. NoSQL historically sacrificed this for
@@ -130,10 +130,10 @@ export const sqlVsNosqlTopic: Topic = {
         </p>
       </Card>
       <Card title="Structured, Stable Data">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Schema rarely changes, data integrity critical.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Healthcare records (strict HIPAA compliance), government systems,
           legacy enterprise apps. SQL enforces constraints (
           <code>NOT NULL</code>, <code>FOREIGN KEY</code>, <code>CHECK</code>)
@@ -141,10 +141,10 @@ export const sqlVsNosqlTopic: Topic = {
         </p>
       </Card>
       <Card title="Complex Queries & Analytics">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Aggregations, window functions, CTEs.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Business intelligence dashboards, reporting systems. SQL's query
           language is <strong>50 years mature</strong>&nbsp;with advanced
           features (recursive CTEs, window functions, materialized views). NoSQL
@@ -158,10 +158,10 @@ export const sqlVsNosqlTopic: Topic = {
     </h3>,
     <Grid key="11" cols={2} gap={6} className="my-8">
       <Card title="Massive Scale (Horizontal)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Billions of records, petabytes of data.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           IoT sensor data (millions of writes/sec), social media feeds
           (Facebook's 2.9B users), log aggregation. NoSQL databases like
           Cassandra can scale to <strong>1000+ nodes</strong>&nbsp;linearly. SQL
@@ -170,10 +170,10 @@ export const sqlVsNosqlTopic: Topic = {
         </p>
       </Card>
       <Card title="Flexible/Evolving Schema">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Rapid prototyping, frequent schema changes.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Startups iterating on product-market fit, content management systems
           (every article has different fields), product catalogs (phones have
           "screen_size", books have "author"). Adding a field in MongoDB = just
@@ -181,10 +181,10 @@ export const sqlVsNosqlTopic: Topic = {
         </p>
       </Card>
       <Card title="Document-Centric Data">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Self-contained entities, minimal relationships.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           User profiles (all data in one document), blog posts (content +
           metadata + comments embedded), product listings. If your data
           naturally maps to JSON and you rarely need to JOIN across collections,
@@ -192,10 +192,10 @@ export const sqlVsNosqlTopic: Topic = {
         </p>
       </Card>
       <Card title="High Write Throughput">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Write-heavy workloads, append-only logs.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Time-series data (metrics, logs, events), real-time analytics,
           clickstream tracking. Cassandra and DynamoDB are optimized for{" "}
           <strong>write amplification</strong>. SQL databases struggle with
@@ -271,10 +271,10 @@ export const sqlVsNosqlTopic: Topic = {
     </p>,
     <Grid key="16" cols={2} gap={6} className="my-8">
       <Card title="Data Duplication Nightmare">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Denormalization = copying data everywhere.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           In SQL, a user's email exists once. In NoSQL, if you embed user data
           in 1000 documents (orders, comments, posts), updating the email
           requires <strong>1000 writes</strong>. This is called "write
@@ -282,20 +282,20 @@ export const sqlVsNosqlTopic: Topic = {
         </p>
       </Card>
       <Card title="No Foreign Key Constraints">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Referential integrity enforced in application code.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           SQL prevents orphaned records (can't delete a user if orders reference
           them). NoSQL doesn't care—you can delete a user and leave 1000 orders
           pointing to a non-existent user. Your app must handle this.
         </p>
       </Card>
       <Card title="Eventual Consistency">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Reads might return stale data.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           In distributed NoSQL (Cassandra, DynamoDB), writes propagate across
           nodes over seconds. A user updates their profile, but reads from
           another node show old data. This is{" "}
@@ -304,10 +304,10 @@ export const sqlVsNosqlTopic: Topic = {
         </p>
       </Card>
       <Card title="Limited Query Capabilities">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           No JOINs, limited aggregations.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           MongoDB's aggregation pipeline is powerful but nowhere near SQL's
           expressiveness. Complex analytics queries (recursive CTEs, window
           functions, lateral joins) are impossible. You'll need to export data
@@ -327,7 +327,7 @@ export const sqlVsNosqlTopic: Topic = {
     </p>,
     <Grid key="19" cols={2} gap={6} className="my-8">
       <Card title="What Went Wrong">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li>
             Default write concern: <code>w:0</code>&nbsp;(fire-and-forget)
           </li>
@@ -338,7 +338,7 @@ export const sqlVsNosqlTopic: Topic = {
         </ul>
       </Card>
       <Card title="How MongoDB Fixed It">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li>
             Changed default to <code>w:1</code>&nbsp;(wait for primary
             acknowledgment)
@@ -548,7 +548,7 @@ class UserService {
     </p>,
     <Grid key="35" cols={2} gap={6} className="my-8">
       <Card title="NewSQL Advantages">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li>ACID transactions across distributed nodes</li>
           <li>Horizontal scaling like NoSQL (add nodes = more capacity)</li>
           <li>SQL query language (no learning curve)</li>
@@ -557,7 +557,7 @@ class UserService {
         </ul>
       </Card>
       <Card title="NewSQL Tradeoffs">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li>Higher latency than single-node SQL (consensus overhead)</li>
           <li>More expensive (distributed systems are complex)</li>
           <li>Less mature ecosystem (fewer tools, extensions)</li>

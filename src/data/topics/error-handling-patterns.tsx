@@ -23,7 +23,7 @@ export const errorHandlingTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <Card title="Operational (Trusted)">
-        <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
+        <ul className="list-disc pl-5 text-sm text-slate-400 space-y-1">
           <li>User input validation failed.</li>
           <li>External API timeout.</li>
           <li>Database connection loss.</li>
@@ -31,7 +31,7 @@ export const errorHandlingTopic: Topic = {
         <p className="text-xs mt-4 text-green-500 font-bold">Strategy: Handle & Continue.</p>
       </Card>
       <Card title="Programmer (Untrusted)">
-        <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
+        <ul className="list-disc pl-5 text-sm text-slate-400 space-y-1">
           <li>Reading property of null.</li>
           <li>Passing wrong types to functions.</li>
           <li>Infinite loops.</li>

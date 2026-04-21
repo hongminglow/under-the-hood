@@ -19,21 +19,21 @@ export const webSecurityTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="XSS (Cross-Site Scripting)" description="Stealing from the inside">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           A hacker uploads a comment to a forum containing a literal <code>&lt;script&gt;</code> tag. Your React app blindly renders it into the DOM. The script physically executes on a victim's browser, instantly stealing their `localStorage` JWT token and emailing it to the hacker.
         </p>
         <p className="text-sm font-semibold mt-3">The Fix:</p>
-        <ul className="list-disc pl-5 text-sm text-muted-foreground mt-1">
+        <ul className="list-disc pl-5 text-sm text-slate-400 mt-1">
           <li>React inherently defeats 90% of XSS by escaping all <code>{"{variables}"}</code>.</li>
           <li>Never use <code>dangerouslySetInnerHTML</code> unless strictly passing it through DOMPurify first!</li>
         </ul>
       </Card>
       <Card title="CSRF (Cross-Site Request Forgery)" description="Tricking the browser">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           You are logged into `bank.com` securely. You wander to `evil.com`. `evil.com` places a hidden image tag on the page pointing to <code>https://bank.com/transfer?amount=10000</code>. Since you legally have bank cookies, your browser automatically attaches them to the image request, transferring your money silently!
         </p>
         <p className="text-sm font-semibold mt-3">The Fix:</p>
-        <ul className="list-disc pl-5 text-sm text-muted-foreground mt-1">
+        <ul className="list-disc pl-5 text-sm text-slate-400 mt-1">
           <li>Ensure all sensitive actions are HTTP POST, never GET.</li>
           <li>Mark your backend authentication cookies strictly as <code>SameSite=Lax</code> or <code>SameSite=Strict</code> so the browser outright refuses to send them if the request originates from `evil.com`.</li>
         </ul>

@@ -23,12 +23,12 @@ export const webAccessibilityTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <Card title="WAI-ARIA Roles">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           When native HTML isn't enough (e.g., a complex <strong>Combobox</strong>), use <code>role="combobox"</code> and <code>aria-expanded</code> to manually update the Accessibility Tree.
         </p>
       </Card>
       <Card title="Focus Management">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           When a Modal opens, you must <strong>Trap Focus</strong> inside it. If the user hits 'Tab', they shouldn't accidentally click a button in the background.
         </p>
       </Card>

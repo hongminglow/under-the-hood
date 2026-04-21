@@ -28,25 +28,25 @@ export const htmlEntitiesTopic: Topic = {
 
     <Grid key="3" cols={2} gap={6} className="my-6">
       <Card title="1. Escaping Reserved Characters">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           HTML is a markup language built on angle brackets (<code>&lt;</code>{" "}
           and <code>&gt;</code>). If you want to write a blog post about math
           and type <code>5 &lt; 10</code>, the browser's parser immediately
           thinks you are trying to open a new HTML element called{" "}
           <code>&lt; 10&gt;</code>.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           To tell the browser "I mean the literal character, not a code tag",
           you must write <code>5 &amp;lt; 10</code>.
         </p>
       </Card>
       <Card title="2. Whitespace Collapse & Invisible Characters">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Browsers automatically collapse multiple spaces, tabs, and line breaks
           into a <strong>single space</strong>. If you type 10 spaces between
           words, the browser renders only 1.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           To force the browser to render exact, unbreakable spacing, we use the
           Non-Breaking Space entity: <code>&amp;nbsp;</code>.
         </p>

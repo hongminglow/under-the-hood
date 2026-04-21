@@ -88,7 +88,7 @@ export const dynamoDbDeepDiveTopic: Topic = {
     </p>,
     <Grid key="11" cols={2} gap={6} className="my-6">
       <Card title="How LSM Tree Writes Work">
-        <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
+        <ol className="text-sm text-slate-400 space-y-1 list-decimal list-inside">
           <li>
             Write lands in an in-memory buffer (<strong>MemTable</strong>)
           </li>
@@ -101,7 +101,7 @@ export const dynamoDbDeepDiveTopic: Topic = {
         </ol>
       </Card>
       <Card title="Why This Beats B-Trees at Scale">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li>
             Every write is a sequential append — disk I/O is maximally efficient
           </li>
@@ -326,7 +326,7 @@ const recent = await dynamo.query({
     </h3>,
     <Grid key="31" cols={2} gap={6} className="my-6">
       <Card title="❌ Avoid DynamoDB When...">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li>
             You need complex multi-table JOINs or ad-hoc analytics queries
           </li>
@@ -349,7 +349,7 @@ const recent = await dynamo.query({
         </ul>
       </Card>
       <Card title="✅ DynamoDB Shines When...">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li>
             You need guaranteed single-digit ms SLA at unpredictable scale
           </li>

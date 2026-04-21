@@ -79,12 +79,12 @@ export const frontendLargeDatasetTopic: Topic = {
     </h3>,
     <Grid key="7" cols={2} gap={6}>
       <Card title="How It Works">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Backend returns 50 rows per page. Frontend renders exactly 50 rows. User clicks "Next" to fetch page 2. DOM never exceeds 50 rows.
         </p>
       </Card>
       <Card title="The Hidden Cost">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Users must manually click through pages. If they want row 4,832, they need to click "Next" 96 times. Search engines can't crawl paginated content easily (requires <code>rel="next"</code> hints).
         </p>
       </Card>
@@ -158,14 +158,14 @@ return (
     />,
     <Grid key="14" cols={2} gap={6}>
       <Card title="Pros">
-        <ul className="text-sm space-y-1 list-disc pl-4 text-muted-foreground">
+        <ul className="text-sm space-y-1 list-disc pl-4 text-slate-400">
           <li>Seamless UX (no clicking)</li>
           <li>Works great for feeds (Twitter, Instagram)</li>
           <li>Easy to implement with React Query</li>
         </ul>
       </Card>
       <Card title="Cons">
-        <ul className="text-sm space-y-1 list-disc pl-4 text-muted-foreground">
+        <ul className="text-sm space-y-1 list-disc pl-4 text-slate-400">
           <li>Memory grows indefinitely</li>
           <li>Scroll position is fragile (hard to "jump to top")</li>
           <li>Browser slows down after 1,000+ items</li>
@@ -241,12 +241,12 @@ const VirtualTable = ({ data }) => {
     </p>,
     <Grid key="23" cols={2} gap={6}>
       <Card title="Gmail's Approach">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Gmail loads ~50 emails initially. As you scroll, it fetches more in chunks of 50. But it uses virtual scrolling, so the DOM only holds ~30 email rows at any time. This is why Gmail can handle 100,000+ emails without crashing.
         </p>
       </Card>
       <Card title="Slack's Approach">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Slack loads the most recent 100 messages. Scrolling up triggers a fetch for older messages. Virtual scrolling keeps the DOM at ~50 messages. Scrolling down past the initial 100 fetches newer messages. Bidirectional windowing.
         </p>
       </Card>

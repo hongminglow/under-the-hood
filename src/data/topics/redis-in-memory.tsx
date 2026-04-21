@@ -68,34 +68,34 @@ export const redisInMemoryTopic: Topic = {
     </p>,
     <Grid key="g-ds" cols={2} gap={6} className="my-8">
       <Card title="Sorted Sets (ZSET)" description="Leaderboards & Rankings">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Store members with a float <strong>score</strong>. Redis keeps them sorted automatically in O(log N).
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Use case: Global game leaderboard — <code>ZADD leaderboard 50234 "player:99"</code> then <code>ZRANGE leaderboard 0 9 REV WITHSCORES</code> returns the top 10 instantly. No <code>ORDER BY</code> SQL scan needed.
         </p>
       </Card>
       <Card title="Pub/Sub + Streams" description="Real-time Events">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Channels where publishers push messages and all subscribers receive them instantly.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Use case: WebSocket chat backend. User sends a message → your Node server publishes to <code>PUBLISH room:42 message</code> → all other subscribers (Node instances) receive it and push to their connected clients. Zero polling.
         </p>
       </Card>
       <Card title="Hashes" description="Object Storage">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           A key maps to a sub-dictionary of field/value pairs — like a row in a table.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Use case: <code>HSET user:42 name "Alice" plan "pro" credits 500</code>. Fetch one field: <code>HGET user:42 credits</code>. Avoids deserialising a full JSON blob to read one property.
         </p>
       </Card>
       <Card title="Lists" description="Queues & Activity Feeds">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           A doubly-linked list. Push/pop from either end in O(1).
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Use case: Job queue — workers <code>BRPOP jobs 0</code> (blocking pop) and wait for the next task. Also perfect for "last 100 activity feed items" with <code>LPUSH</code> + <code>LTRIM</code>.
         </p>
       </Card>

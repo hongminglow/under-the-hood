@@ -41,7 +41,7 @@ export const webVitalsTopic: Topic = {
           <strong>The Problem:</strong> LCP is almost always bottlenecked by either slow server response times (TTFB) or client-side rendering architecture where a huge JavaScript bundle must be downloaded and parsed before an image even begins downloading.
         </p>
         <p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-        <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+        <ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
           <li><strong>Server-Side Rendering (SSR):</strong> Use frameworks like Next.js or Astro to return fully constructed HTML instantly, sending the LCP element immediately to the browser without a Javascript wall.</li>
           <li><strong>Preloading Critical Assets:</strong> Add <code>&lt;link rel="preload" as="image" href="..." /&gt;</code> into the <code>&lt;head&gt;</code> for your hero image so the browser physically fetches it with priority immediately.</li>
           <li><strong>Asset Optimization:</strong> Serve images in modernized formats like WebP or AVIF and physically cache them heavily behind a global Edge CDN.</li>
@@ -53,7 +53,7 @@ export const webVitalsTopic: Topic = {
           <strong>The Problem:</strong> INP fails when the browser's Main Thread is heavily blocked by synchronous JavaScript execution. If the user clicks a button but React is busy computing a massive 500-item state array, the visual click effect is delayed.
         </p>
         <p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-        <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+        <ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
           <li><strong>Yielding to the Main Thread:</strong> Break massive, long-running mathematical or fetching tasks into smaller chunks utilizing <code>setTimeout</code> or <code>requestIdleCallback</code> so the browser has a scheduled gap to visually update.</li>
           <li><strong>Web Workers:</strong> Offload heavy data processing to a background Web Worker isolated thread entirely independent of the main UI thread.</li>
           <li><strong>Throttle & Debounce:</strong> For subsequent rapid inputs, ensure you debounce the UI state changes aggressively to prevent unnecessary re-rendering storms.</li>
@@ -65,7 +65,7 @@ export const webVitalsTopic: Topic = {
           <strong>The Problem:</strong> CLS happens when asynchronous visual elements suddenly arrive over the network and forcefully push existing DOM nodes downward, causing text jumps and frustrating mis-clicks.
         </p>
         <p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-        <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+        <ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
           <li><strong>Explicit Dimensions:</strong> Always declare strict <code>width</code> and <code>height</code> attributes (or <code>aspect-ratio</code> in CSS) precisely on all images or iframes so the browser naturally reserves that exact box before data loads.</li>
           <li><strong>Layout Skeletons:</strong> Before a dynamic component loads, insert structured Skeleton loaders of the exact final dimensions to prevent pushing real content later.</li>
           <li><strong>Web Fonts Protection:</strong> Use <code>font-display: optional</code> to avoid the "Flash of Unstyled Text" (FOUT) jumping layout bug when custom fonts replace default fonts.</li>

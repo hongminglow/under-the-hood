@@ -61,7 +61,7 @@ export const vibeCodingAiPairProgrammingTopic: Topic = {
     </h3>,
     <Grid key="6" cols={2} gap={6}>
       <Card title="Include These" description="High-signal prompt ingredients">
-        <ul className="list-disc pl-5 text-sm space-y-2 text-foreground/80">
+        <ul className="list-disc pl-5 text-sm space-y-2 text-slate-300">
           <li>
             The exact goal: bugfix, refactor, feature, explanation, review.
           </li>
@@ -81,7 +81,7 @@ export const vibeCodingAiPairProgrammingTopic: Topic = {
         </ul>
       </Card>
       <Card title="Avoid These" description="Low-signal prompt habits">
-        <ul className="list-disc pl-5 text-sm space-y-2 text-foreground/80">
+        <ul className="list-disc pl-5 text-sm space-y-2 text-slate-300">
           <li>
             <code>Fix this</code> with no error or failing behavior attached.
           </li>
@@ -220,13 +220,13 @@ If you discover this needs a broader refactor, pause and say why before changing
     </h3>,
     <Grid key="21" cols={2} gap={6}>
       <Card title="Bad Correction" description="Creates more confusion">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           "No not like that, do it better." This does not tell the model what
           was wrong: logic, style, performance, UX, architecture, or tests.
         </p>
       </Card>
       <Card title="Good Correction" description="Points to the real delta">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           "Keep your pagination fix, but revert the UI restyle. I only wanted
           the data bug fixed. Do not change markup or class names." This narrows
           the correction to the exact dimension that drifted.

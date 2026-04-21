@@ -54,7 +54,7 @@ export const llmWebVsIdeVsCliTopic: Topic = {
         title="Web Apps Feel Smarter in Conversation"
         description="Less local noise, more general reasoning"
       >
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           A chat product can spend more of its token budget on conversation,
           explanation quality, writing style, and broad reasoning because it is
           not busy indexing your repo, formatting patches, or managing shell
@@ -65,7 +65,7 @@ export const llmWebVsIdeVsCliTopic: Topic = {
         title="CLI Agents Feel Stronger at Shipping"
         description="They can verify reality"
       >
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           A coding CLI may feel more capable because it can{" "}
           <strong>read the files, run the build, see the failure, patch the
           code, and retry</strong>. Even if its raw model is not "smarter" in
@@ -162,14 +162,14 @@ export const llmWebVsIdeVsCliTopic: Topic = {
     </h3>,
     <Grid key="16" cols={2} gap={6}>
       <Card title="IDE Extension" description="Optimized for typing flow">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           IDE tools often use prefix/suffix context around your cursor, linter
           diagnostics, AST symbols, and open tabs. Their job is to stay
           low-latency and unobtrusive while you are coding live.
         </p>
       </Card>
       <Card title="CLI Agent" description="Optimized for task completion">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           CLI agents are less about tiny completions and more about{" "}
           <strong>end-to-end execution</strong>: search the repo, edit multiple
           files, run commands, inspect failures, and converge toward a working

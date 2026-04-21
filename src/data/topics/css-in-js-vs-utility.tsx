@@ -20,34 +20,34 @@ export const cssInJsVsUtilityTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="1. SCSS / SASS (The Preprocessors)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Adding superpowers to traditional CSS.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           <strong>Sass</strong> started as an indentation-based syntax, while <strong>SCSS</strong> (Sassy CSS) is an extension of standard CSS using brackets. They allow variables, nesting, and mixins. Great for traditional websites, but global name-spacing often leads to "append-only stylesheets" where nobody deletes old code for fear of breaking things.
         </p>
       </Card>
       <Card title="2. Inline Styles">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <code>style={"{{ color: 'red' }}"}</code> injected directly into HTML.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Highly dynamic but lacks fundamental CSS features like media queries, keyframe animations, and pseudo-classes (e.g., <code>:hover</code>). It is impossible to cache inline styles effectively, making it poor for large-scale web architectures.
         </p>
       </Card>
       <Card title="3. CSS-in-JS (Styled Components, Emotion)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Generating styles at runtime via Javascript.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Loved for perfectly scoping styles to components and easily accepting React props for dynamic styling. However, compiling CSS in the browser adds <strong>Runtime Overhead</strong> and completely breaks inside modern Server-Side Rendering patterns like React Server Components (RSC).
         </p>
       </Card>
       <Card title="4. Utility-First (Tailwind CSS)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Predefined atomic classes (<code>p-4</code>, <code>bg-blue-500</code>).
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Currently the industry favorite. It shifts styling from runtime to <strong>Build-time</strong> via static analysis. It eliminates naming fatigue, prevents CSS bloat (the bundle stops growing once common utilities are used), and is highly cacheable. The tradeoff? "Ugly" HTML files filled with massive class strings.
         </p>
       </Card>

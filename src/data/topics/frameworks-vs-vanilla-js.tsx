@@ -24,7 +24,7 @@ export const frameworksVsVanillaJsTopic: Topic = {
     
     <Grid key="3" cols={2} gap={6} className="mb-8">
       <Card title="Vanilla JS (Imperative)">
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-slate-400 mb-4">
           You explicitly describe <strong>how</strong> to update the UI step-by-step. It interacts directly with the browser's Real DOM, making it blazingly fast but difficult to scale as state complexity grows.
         </p>
         <CodeBlock
@@ -38,7 +38,7 @@ btn.addEventListener('click', () => {
         />
       </Card>
       <Card title="React (Declarative)">
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-slate-400 mb-4">
           You describe <strong>what</strong> the UI should look like for a given state. React handles the underlying details of updating the DOM efficiently via its Virtual DOM and reconciliation algorithm.
         </p>
         <CodeBlock

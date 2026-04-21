@@ -19,18 +19,18 @@ export const webassemblyTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="The Translation (Compilation)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           You literally write standard C++ or Rust code: <code>fn calculate_physics()</code>. 
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Instead of compiling it to an `.exe` file for Windows, you compile it into a highly compressed `.wasm` binary file format.
         </p>
       </Card>
       <Card title="The Native Speed">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Browsers have a secure underlying Virtual Machine specifically designed to read `.wasm` binaries. 
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Because the Wasm file consists of parsed and optimized bytes, the browser skips reading expensive code and executes it natively at near-native CPU speeds.
         </p>
       </Card>

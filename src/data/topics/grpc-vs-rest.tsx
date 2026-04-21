@@ -37,18 +37,18 @@ export const grpcVsRestTopic: Topic = {
     </p>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="Code Generation">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           gRPC generates the <strong>Client & Server Stubs</strong>.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           You write a <code>service.proto</code> file. gRPC automatically compiles it into TypeScript, Go, or Python. You call <code>client.getUser()</code> as if it were a local function.
         </p>
       </Card>
       <Card title="Streaming Capabilities">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Harnessing the power of HTTP/2.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Supports <strong>Bidirectional Streaming</strong>: The server can push data elements one-by-one as they are processed, rather than waiting for a giant batch to finish.
         </p>
       </Card>

@@ -22,12 +22,12 @@ export const databaseIndexingTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <Card title="O(log N) Searching" description="Sub-millisecond Jumps">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Instead of reading 10,000,000 rows sequentially like a mindless zombie, the database checks the root node of the Tree. "Is 'john' alphabetically before or after 'm'?" It strictly cuts half the database perfectly in half 20 times (Log N algorithms), instantly discovering John's exact hard-drive pointer in less than 24 physical jumps.
         </p>
       </Card>
       <Card title="The Hidden Tax" description="Slowing down Writes">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           If Indexes are utterly magical, why don't you natively index all 50 columns? Because <strong>every single `INSERT` or `UPDATE`</strong> you commit suddenly forces Postgres to dynamically restructure almost all 50 mathematical B-Trees mathematically before returning `200 OK` to the API. It permanently slows down writes strictly for the benefit of blazing fast reads.
         </p>
       </Card>

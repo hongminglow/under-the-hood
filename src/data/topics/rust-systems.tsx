@@ -24,7 +24,7 @@ export const rustSystemsTopic: Topic = {
         title="Memory Safety Without GC"
         description="The core of Rust's dominance"
       >
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Unlike C/C++, Rust guarantees memory safety at compile-time via the{" "}
           <Highlight variant="primary">Ownership Model</Highlight> and Borrow
           Checker, eliminating entire classes of bugs (segmentation faults, data
@@ -35,7 +35,7 @@ export const rustSystemsTopic: Topic = {
         title="Fearless Concurrency"
         description="Engine-grade multi-threading"
       >
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Writing parallel engines is notoriously difficult. Rust's strict type
           system ensures thread safety, allowing engineers to write highly
           concurrent code without fear of deadlocks or race conditions.

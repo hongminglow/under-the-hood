@@ -34,14 +34,14 @@ export const dockerContainersTopic: Topic = {
     </h4>,
     <Grid key="4" cols={2} gap={6} className="my-6">
       <Card title="Absolute Consistency" description="No More Surprises">
-        <p className="text-sm mt-2 text-muted-foreground">
+        <p className="text-sm mt-2 text-slate-400">
           Since the container includes the code, the runtime (like Node or Python),
           and the operating system details, it behaves exactly the same on your
           laptop, on your co-worker's MacBook, and on the AWS production cloud.
         </p>
       </Card>
       <Card title="Speed & Efficiency" description="Lighter than VMs">
-        <p className="text-sm mt-2 text-muted-foreground">
+        <p className="text-sm mt-2 text-slate-400">
           Unlike traditional Virtual Machines (VMs) that boot up entirely new
           heavy operating systems, containers share the host's OS. They are tiny,
           fast, and start in milliseconds.

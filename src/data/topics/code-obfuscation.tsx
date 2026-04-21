@@ -76,68 +76,68 @@ export const codeObfuscationTopic: Topic = {
 
     <Grid key="5" cols={2} gap={6} className="mb-8">
       <Card title="1. Identifier Mangling">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Every meaningful variable, function, and class name is replaced with a
           meaningless single-character or random token.{" "}
           <code>calculateInvoiceTotal()</code> becomes <code>a()</code>.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           This is the most universally applied layer. It eliminates semantic
           hints that guide a human reader through unfamiliar code structure.
         </p>
       </Card>
       <Card title="2. String Encryption">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Hardcoded string literals (<code>"api.internal.corp"</code>,{" "}
           <code>"SECRET_ROUTE"</code>) are replaced with runtime-decryption
           calls that only materialise the value at execution time.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Without this, even heavily mangled code leaks intent through its
           string constants — endpoints, feature flags, error messages.
         </p>
       </Card>
       <Card title="3. Control Flow Flattening">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           A clean <code>if/else</code> or <code>for</code> loop is decomposed
           into a giant <code>switch</code> dispatch table driven by an opaque
           state variable. The logic is functionally identical but the structural
           story is gone.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Static analysis tools and disassemblers fail to reconstruct a coherent
           call graph.
         </p>
       </Card>
       <Card title="4. Dead Code Injection">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Hundreds of fake branches, unreachable functions, and bogus
           computations are inserted. A reverse engineer cannot distinguish real
           logic from noise without executing every branch.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Cost: binary/bundle size grows. Used surgically only in the
           highest-sensitivity modules.
         </p>
       </Card>
       <Card title="5. Opaque Predicates">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Boolean conditions that always evaluate to the same value (always-true
           or always-false) are built from mathematically complex expressions.
           Tools cannot statically determine the branch outcome.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Example: <code>if ((x*x + x) % 2 === 0)</code> is always true for any
           integer <code>x</code>, but a static analyser may not know that.
         </p>
       </Card>
       <Card title="6. Anti-Debugging Traps">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Code that actively detects if a debugger is attached (via timing
           attacks, <code>debugger</code> statement loops, or DevTools detection)
           and deliberately crashes or misbehaves when one is found.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Common in DRM implementations, mobile banking apps, and game
           anti-cheat systems.
         </p>
@@ -270,7 +270,7 @@ function a(_0x3f4e) {
 
     <Grid key="13" cols={2} gap={6} className="mb-8 mt-6">
       <Card title="✅ Obfuscation Protects Against">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           - Casual competitor bundle inspection
           <br />
           - Automated scraping of proprietary algorithms
@@ -282,7 +282,7 @@ function a(_0x3f4e) {
         </p>
       </Card>
       <Card title="❌ Obfuscation Does NOT Protect Against">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           - A determined security researcher with a deobfuscator tool
           <br />
           - Runtime inspection via breakpoints on a live execution

@@ -36,18 +36,18 @@ export const bTreeVsBPlusTreeTopic: Topic = {
     </p>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="The Linked Leaf Chain">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           B+ Trees connect all leaf nodes via a <strong>Doubly Linked List</strong>.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           This allows the database engine to perform "Range Scans" (<code>WHERE id &gt; 100 AND id &lt; 500</code>) by finding the first leaf and simply walking horizontally.
         </p>
       </Card>
       <Card title="LSM Trees (The Alternative)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Used in NoSQL (Cassandra, RocksDB) for <strong>Write-Heavy</strong> workloads.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Unlike B+ Trees which update in-place (slow random writes), LSM Trees append to an immutable log and "Merge" later. High write throughput, slower reads.
         </p>
       </Card>

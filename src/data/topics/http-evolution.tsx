@@ -37,18 +37,18 @@ export const httpEvolutionTopic: Topic = {
     </p>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <Card title="Multiplexing vs. Pipelining">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           HTTP/1.1 used "Pipelining" (sending multiple requests without waiting for responses), but it was buggy and suffered from <strong>Head-of-Line Blocking</strong> (if request #1 is slow, #2 is stuck).
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           HTTP/2 Multiplexing allows the server to send pieces of Image A and JavaScript B simultaneously, reassembling them at the destination perfectly.
         </p>
       </Card>
       <Card title="Server Push">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           The server can send assets <strong>before the browser asks</strong>.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           If a user asks for <code>index.html</code>, the server knows they'll need <code>styles.css</code>, so it "pushes" the CSS immediately, saving a full round-trip.
         </p>
       </Card>

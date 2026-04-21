@@ -60,18 +60,18 @@ export const tcpVsUdpTopic: Topic = {
     </h3>,
     <Grid key="9" cols={2} gap={6} className="my-8">
       <Card title="The TCP 'Wait' State">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           TCP uses <strong>Automatic Repeat Request (ARQ)</strong>.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           If Packet #2 is missing, TCP stops the entire stream until the sender retransmits #2. This causes "Micro-stuttering" in real-time apps.
         </p>
       </Card>
       <Card title="The UDP 'Forgive' State">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           UDP lets the <strong>Application</strong>&nbsp;handle errors.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           If a video packet is lost, the player just shows a glitchy pixel for 1/60th of a second and moves on. Performance is preserved.
         </p>
       </Card>
@@ -109,18 +109,18 @@ Result: 100ms delay for packets that were already there.`}
     </p>,
     <Grid key="16" cols={2} gap={6} className="my-8">
       <Card title="Slow Start Phase">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           TCP starts by sending just <strong>1-10 packets</strong>, then doubles the window size every RTT until loss occurs.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           On high-bandwidth networks, this means it takes several RTTs to "ramp up" to full speed. For short-lived connections (like API requests), you never reach full throughput.
         </p>
       </Card>
       <Card title="UDP: No Brakes">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           UDP has <strong>zero congestion control</strong>. It will happily flood the network at line rate.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           This is why protocols like QUIC and WebRTC implement their own congestion control on top of UDP. Raw UDP can be a "bad network citizen" if misused.
         </p>
       </Card>
@@ -130,17 +130,17 @@ Result: 100ms delay for packets that were already there.`}
       Real-World War Stories
     </h3>,
     <Card key="18" title="Story 1: Netflix's UDP Migration">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         Netflix experimented with UDP for video streaming to reduce buffering. The result? <strong>30% reduction in rebuffering events</strong>&nbsp;on lossy networks. By implementing custom Forward Error Correction (FEC) on top of UDP, they could recover from packet loss without waiting for retransmissions.
       </p>
     </Card>,
     <Card key="19" title="Story 2: The DNS UDP Limit">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         DNS uses UDP for speed, but UDP packets are limited to <strong>512 bytes</strong>&nbsp;(originally) to avoid fragmentation. When DNSSEC responses grew larger, DNS had to fall back to TCP, adding 100ms+ latency. The solution? <strong>EDNS0</strong>&nbsp;extended UDP to 4096 bytes, and modern resolvers use TCP only as a last resort.
       </p>
     </Card>,
     <Card key="20" title="Story 3: Gaming's 'Lag Compensation'">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         Call of Duty and Fortnite use UDP for player movement but implement <strong>client-side prediction</strong>&nbsp;and <strong>server reconciliation</strong>. If a UDP packet is lost, the client predicts where you'll be, and the server corrects it later. This creates the illusion of smooth gameplay even with 5-10% packet loss.
       </p>
     </Card>,
@@ -170,26 +170,26 @@ Result: 100ms delay for packets that were already there.`}
     </h3>,
     <Grid key="26" cols={2} gap={6} className="my-8">
       <Card title="When to Choose TCP">
-        <ul className="text-sm text-muted-foreground space-y-2">
+        <ul className="text-sm text-slate-400 space-y-2">
           <li>• File transfers (FTP, SFTP)</li>
           <li>• Database queries (PostgreSQL, MySQL)</li>
           <li>• RESTful APIs (HTTP/1.1, HTTP/2)</li>
           <li>• Email (SMTP, IMAP)</li>
           <li>• SSH remote shells</li>
         </ul>
-        <p className="text-xs italic text-muted-foreground mt-4">
+        <p className="text-xs italic text-slate-400 mt-4">
           Rule: If <strong>every byte matters</strong>&nbsp;and latency is acceptable, use TCP.
         </p>
       </Card>
       <Card title="When to Choose UDP">
-        <ul className="text-sm text-muted-foreground space-y-2">
+        <ul className="text-sm text-slate-400 space-y-2">
           <li>• VoIP (Zoom, Discord voice)</li>
           <li>• Live video streaming (Twitch, WebRTC)</li>
           <li>• Online gaming (player positions)</li>
           <li>• DNS lookups</li>
           <li>• IoT sensor data (temperature, GPS)</li>
         </ul>
-        <p className="text-xs italic text-muted-foreground mt-4">
+        <p className="text-xs italic text-slate-400 mt-4">
           Rule: If <strong>freshness &gt; completeness</strong>&nbsp;and you can tolerate loss, use UDP.
         </p>
       </Card>
@@ -249,10 +249,10 @@ udpServer.bind(8081);`}
       Many modern protocols implement <strong>selective reliability</strong>&nbsp;on top of UDP. Instead of retransmitting everything (TCP) or nothing (raw UDP), they retransmit only critical packets.
     </p>,
     <Card key="34" title="Example: WebRTC Data Channels">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         WebRTC lets you configure per-channel reliability:
       </p>
-      <ul className="text-xs text-muted-foreground space-y-1">
+      <ul className="text-xs text-slate-400 space-y-1">
         <li>• <strong>Reliable ordered</strong>: Chat messages (TCP-like)</li>
         <li>• <strong>Unreliable unordered</strong>: Mouse positions (raw UDP)</li>
         <li>• <strong>Reliable unordered</strong>: File chunks (no HOL blocking)</li>

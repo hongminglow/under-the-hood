@@ -99,7 +99,7 @@ export const harnessEngineeringTopic: Topic = {
         title="Weak Harness"
         description="High intelligence, low grounding"
       >
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           The agent may sound smart, but it guesses APIs, misses repo
           conventions, over-edits files, or repeats the same broken command
           because nothing in the environment teaches it faster than trial and
@@ -110,7 +110,7 @@ export const harnessEngineeringTopic: Topic = {
         title="Strong Harness"
         description="Moderate intelligence, high leverage"
       >
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Even a less impressive model can perform surprisingly well when the
           repository is legible, the tasks are structured, and fast feedback
           tells it exactly what failed and how to recover.
@@ -160,7 +160,7 @@ export const harnessEngineeringTopic: Topic = {
         title="What It Usually Is"
         description="Behavior shaping without changing model weights"
       >
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Most harness engineering does <strong>not</strong> retrain the base
           model. It improves outcomes by changing the agent’s operating
           conditions: what it sees, what it can do, how it is checked, and how
@@ -171,7 +171,7 @@ export const harnessEngineeringTopic: Topic = {
         title="Where It Can Touch Training"
         description="Great harnesses can produce great training data"
       >
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Accepted patches, tool traces, review loops, and high-quality failure
           corrections can later become synthetic data for SFT, preference
           tuning, or distillation. The harness is often what makes those traces
@@ -249,14 +249,14 @@ export const harnessEngineeringTopic: Topic = {
     </p>,
     <Grid key="18" cols={2} gap={6}>
       <Card title="Harness Inputs" description="What the agent receives">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Topic conventions, section taxonomy, component recipes, README counter
           rules, and examples from existing topic files all act as
           feedforward controls.
         </p>
       </Card>
       <Card title="Harness Feedback" description="What keeps quality stable">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           TypeScript, the build step, import validation, and visible rendering
           errors act as sensors. When a mistake appears, the repo instructions
           can be tightened so the same failure becomes less likely next time.

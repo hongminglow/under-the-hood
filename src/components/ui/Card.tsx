@@ -30,7 +30,7 @@ export function Card({ title, description, children, className }: CardProps) {
           )}
         </div>
       )}
-      <div className="text-foreground/80 leading-relaxed text-sm">
+      <div className="text-slate-300 leading-relaxed text-sm">
         {children}
       </div>
     </div>

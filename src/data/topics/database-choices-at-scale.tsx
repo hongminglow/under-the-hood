@@ -47,7 +47,7 @@ export const databaseChoicesAtScaleTopic: Topic = {
     </p>,
     <Grid key="7" cols={2} gap={6} className="my-6">
       <Card title="Why PostgreSQL?">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li>ACID guarantees — critical for financial transactions and consistency</li>
           <li>Rich query language: JOINs, window functions, CTEs</li>
           <li>PostGIS extension for geospatial queries</li>
@@ -56,7 +56,7 @@ export const databaseChoicesAtScaleTopic: Topic = {
         </ul>
       </Card>
       <Card title="How They Scaled It">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li>Horizontal sharding by <code>user_id</code></li>
           <li>Thousands of read replicas for follower feed queries</li>
           <li>Django ORM with custom shard routing logic</li>
@@ -73,7 +73,7 @@ export const databaseChoicesAtScaleTopic: Topic = {
     </p>,
     <Grid key="10" cols={2} gap={6} className="my-6">
       <Card title="Why Cassandra?">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li>Linear horizontal scalability — add nodes, get proportional throughput</li>
           <li>Masterless architecture: no single point of failure</li>
           <li>Multi-datacenter replication built-in (global availability)</li>
@@ -82,7 +82,7 @@ export const databaseChoicesAtScaleTopic: Topic = {
         </ul>
       </Card>
       <Card title="The Trade-offs">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li>No JOINs — data must be denormalized by access pattern</li>
           <li>Queries must match a partition key — no arbitrary WHERE clauses</li>
           <li>Eventual consistency by default — "last write wins"</li>
@@ -133,17 +133,17 @@ SELECT * FROM viewing_history WHERE show_id = ?;
     </p>,
     <Grid key="18" cols={3} gap={6} className="my-6">
       <Card title="MySQL + MyRocks">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Facebook's custom storage engine reduces disk space by 50% vs InnoDB using LSM trees — critical at petabyte scale. They contribute the most patches back to MySQL and MariaDB of any single company.
         </p>
       </Card>
       <Card title="TAO (The Associations & Objects)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Facebook's social graph (who follows whom, who liked what) lives in TAO — a distributed caching and persistence layer on top of MySQL designed for graph traversal. It handles trillions of edges.
         </p>
       </Card>
       <Card title="Cassandra for Inbox">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Facebook Messenger moved to Cassandra (HBase, specifically) for message storage due to its linear write scalability — the exact same reason as Netflix.
         </p>
       </Card>
@@ -170,7 +170,7 @@ SELECT * FROM viewing_history WHERE show_id = ?;
     </p>,
     <Grid key="25" cols={2} gap={6} className="my-6">
       <Card title="Why DynamoDB?">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li>Guaranteed single-digit millisecond latency at any scale</li>
           <li>No operational overhead — fully serverless, auto-scaling</li>
           <li>Multi-region Active-Active replication with Global Tables</li>
@@ -178,7 +178,7 @@ SELECT * FROM viewing_history WHERE show_id = ?;
         </ul>
       </Card>
       <Card title="The DynamoDB Tax">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li>No JOINs, limited query patterns (must use GSI for secondary access)</li>
           <li>Expensive at high sustained throughput vs self-hosted alternatives</li>
           <li>AWS vendor lock-in — no clean migration path</li>
@@ -214,7 +214,7 @@ SELECT * FROM viewing_history WHERE show_id = ?;
     </p>,
     <Grid key="30" cols={2} gap={6} className="my-6">
       <Card title="Uber's Stack Example">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li><strong>MySQL</strong> — trip history, driver/rider profiles</li>
           <li><strong>Redis</strong> — driver location cache, surge pricing state</li>
           <li><strong>Elasticsearch</strong> — search by location, destination autocomplete</li>
@@ -222,7 +222,7 @@ SELECT * FROM viewing_history WHERE show_id = ?;
         </ul>
       </Card>
       <Card title="Airbnb's Stack Example">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li><strong>MySQL</strong> — core transactional data (bookings, listings)</li>
           <li><strong>DynamoDB</strong> — messaging, dynamic feature configs</li>
           <li><strong>Elasticsearch</strong> — listing search with geo + filters</li>

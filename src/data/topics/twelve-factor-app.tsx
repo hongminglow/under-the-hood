@@ -20,12 +20,12 @@ export const twelveFacorAppTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="III. Config (Environment Vars)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Store configuration in <strong>Environment Variables</strong>, not code. The same build artifact should run in Dev, Staging, and Prod without recompilation.
         </p>
       </Card>
       <Card title="VI. Processes (Statelessness)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <strong>The Most Critical Factor:</strong> Processes must be stateless. Any data that needs to persist must be stored in a <strong>Backing Service</strong> (DB, Redis, S3).
         </p>
       </Card>

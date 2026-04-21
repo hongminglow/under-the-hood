@@ -75,7 +75,7 @@ export const terminalsShellsKernelTopic: Topic = {
     </h3>,
     <Grid key="12" cols={3} gap={6} className="my-8">
       <Card title="macOS">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li><strong>Terminal.app</strong> — Built-in, basic</li>
           <li><strong>iTerm2</strong> — Community favorite; split panes, rich profiles</li>
           <li><strong>Warp</strong> — AI-powered, blocks output</li>
@@ -83,7 +83,7 @@ export const terminalsShellsKernelTopic: Topic = {
         </ul>
       </Card>
       <Card title="Windows">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li><strong>Windows Terminal</strong> — Microsoft's modern multi-tab emulator</li>
           <li><strong>cmd.exe</strong> — Classic, legacy</li>
           <li><strong>ConEmu / Cmder</strong> — Popular third-party emulators</li>
@@ -91,7 +91,7 @@ export const terminalsShellsKernelTopic: Topic = {
         </ul>
       </Card>
       <Card title="Linux">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li><strong>GNOME Terminal</strong> — Default on Ubuntu/GNOME</li>
           <li><strong>Konsole</strong> — Default on KDE Plasma</li>
           <li><strong>Alacritty</strong> — GPU-accelerated, minimal</li>
@@ -140,12 +140,12 @@ zsh --version       # Check Zsh version`}
     </p>,
     <Grid key="19" cols={2} gap={6} className="my-8">
       <Card title="WSL1 (Legacy)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Translated Linux syscalls into Windows NT syscalls. Fast file I/O on the Windows filesystem, but incomplete Linux compatibility — some syscalls were missing or broken.
         </p>
       </Card>
       <Card title="WSL2 (Current Standard)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Runs a <strong>real Linux Kernel</strong> in a lightweight Hyper-V VM. Near-100% Linux compatibility. You get a genuine Ubuntu/Debian/Kali instance running alongside Windows. The trade-off is slightly slower cross-filesystem I/O (Linux ↔ Windows drives).
         </p>
       </Card>

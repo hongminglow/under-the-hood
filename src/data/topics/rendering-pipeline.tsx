@@ -35,18 +35,18 @@ export const renderingPipelineTopic: Topic = {
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <Card title="Layout (Reflow)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           The most <strong>expensive</strong> operation.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Triggered by changing <code>width</code>, <code>height</code>, or <code>margin</code>. Since elements affect each other, changing one box often forces the browser to recalculate the positions of <em>every other box</em> on the page.
         </p>
       </Card>
       <Card title="Repaint (Paint)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Cheaper but still heavy.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Triggered by changing <code>color</code>, <code>visibility</code>, or <code>background-image</code>. Geometry doesn't change, so the browser just "re-inks" the existing boxes.
         </p>
       </Card>

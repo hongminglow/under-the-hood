@@ -52,7 +52,7 @@ export const microFrontendsTopic: Topic = {
           <strong>The Problem:</strong> Previously, if Team A's Cart App and Team B's Product App both used React, the final user physically downloaded React twice.
         </p>
         <p className="text-sm font-semibold mb-2">Architectural Solution:</p>
-        <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+        <ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
           <li>Module Federation solves this natively via <code>shared</code> singletons.</li>
           <li>The <strong>Host</strong> app declares React as a shared dependency. When the <strong>Remote</strong> app arrives over the network, it physically checks if the Host already loaded React.</li>
           <li>If yes, it cleverly skips downloading its own copy. This enables extremely fast performance while maintaining entirely isolated Git repositories for each team.</li>
@@ -64,7 +64,7 @@ export const microFrontendsTopic: Topic = {
           <strong>The Problem:</strong> How do you structurally divide the screen real estate between different enterprise teams?
         </p>
         <p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-        <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+        <ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
           <li><strong>Vertical Split (Recommended):</strong> Team A owns <code>/checkout</code> entirely. When navigated there, the Shell mounts Team A's comprehensive app. Cleanest separation of concerns.</li>
           <li><strong>Horizontal Split:</strong> Team A owns only the Navbar, Team B owns the Sidebar. Both load simultaneously. Much higher complexity, requiring strict API communication contracts (using Custom Events) to talk to each other.</li>
         </ul>

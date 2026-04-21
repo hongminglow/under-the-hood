@@ -102,7 +102,7 @@ export const jsEventLoopTopic: Topic = {
 					Queue up to the main thread. The server completely freezes and dies.
 				</p>
 				<p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+				<ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
 					<li>
 						<strong>Offload to Worker Threads:</strong> For Node.js, specifically spin up the{" "}
 						<code>worker_threads</code> module to execute massive mathematical operations on entirely separate CPU

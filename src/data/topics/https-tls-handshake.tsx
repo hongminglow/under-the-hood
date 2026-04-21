@@ -20,18 +20,18 @@ export const httpsTlsHandshakeTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <Card title="Asymmetric: The Handshake">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Using <strong>Public/Private Keys</strong> (RSA/ECC) for the initial "Hello".
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Slower but secure. It allows two strangers to exchange a secret "Symmetric Key" without anyone else seeing it.
         </p>
       </Card>
       <Card title="Symmetric: The Session">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Using a <strong>Shared Secret</strong> (AES-256) for the actual data.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Blazing fast and hardware-accelerated. Once the secret is exchanged, the public/private keys are no longer used for the rest of the session.
         </p>
       </Card>

@@ -30,10 +30,10 @@ export const rsaCryptographyTopic: Topic = {
     </p>,
     <Grid key="5" cols={2} gap={6} className="my-6">
       <Card title="🔓 Public Key">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Published openly. Posted on your website, your TLS certificate, your SSH profile. <strong>Everyone gets a copy.</strong>
         </p>
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li>Used to <strong>encrypt</strong> data for the owner</li>
           <li>Used to <strong>verify</strong> a signature from the owner</li>
           <li>Cannot decrypt anything the public key encrypted</li>
@@ -41,10 +41,10 @@ export const rsaCryptographyTopic: Topic = {
         </ul>
       </Card>
       <Card title="🔐 Private Key">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Never shared. Hidden on the server's disk, in a hardware security module (HSM), or in a smart card. <strong>Only the owner holds this.</strong>
         </p>
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc list-inside">
           <li>Used to <strong>decrypt</strong> data that was encrypted with the public key</li>
           <li>Used to <strong>sign</strong> data to prove identity</li>
           <li>Cannot be derived from the public key (computationally infeasible)</li>
@@ -182,7 +182,7 @@ You'd have to factor n back into p and q — impossible for 2048-bit numbers.`}
     </h3>,
     <Grid key="26" cols={2} gap={6} className="my-6">
       <Card title="Known Vulnerabilities">
-        <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-2 list-disc list-inside">
           <li><strong>Small key sizes:</strong> 512-bit RSA was broken in 1999. 1024-bit is now considered weak. The standard minimum is <strong>2048-bit</strong>, with 4096-bit recommended for long-lived keys.</li>
           <li><strong>PKCS#1 v1.5 padding attacks (Bleichenbacher):</strong> A 1998 attack that exploits weak padding schemes to decrypt RSA without the private key given enough oracle queries.</li>
           <li><strong>Quantum threat:</strong> Shor's algorithm running on a sufficiently powerful quantum computer could factor RSA's modulus in polynomial time — breaking all existing RSA keys.</li>
@@ -190,7 +190,7 @@ You'd have to factor n back into p and q — impossible for 2048-bit numbers.`}
         </ul>
       </Card>
       <Card title="Modern Mitigations">
-        <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
+        <ul className="text-sm text-slate-400 space-y-2 list-disc list-inside">
           <li><strong>OAEP padding:</strong> Replaces vulnerable PKCS#1 v1.5 with Optimal Asymmetric Encryption Padding — prevents padding oracle attacks.</li>
           <li><strong>ECDH/ECDSA replacing RSA:</strong> Elliptic Curve Diffie-Hellman provides equivalent security with much smaller keys (256-bit ECDH ≈ 3072-bit RSA). TLS 1.3 mandates ECDH for key exchange.</li>
           <li><strong>Perfect Forward Secrecy (PFS):</strong> TLS 1.3 generates ephemeral session keys — even if the server's private key leaks, past sessions are safe.</li>

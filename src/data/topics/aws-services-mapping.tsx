@@ -31,7 +31,7 @@ export const awsServicesMappingTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="mt-4">
       <Card title="High Availability (Multi-AZ)" description="Automatic Failover">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Setting up a Postgres primary-replica failover cluster takes significant
           expertise. In AWS RDS, making a database highly available across multiple
           datacenters (Availability Zones) is a single checkbox. If a datacenter
@@ -39,7 +39,7 @@ export const awsServicesMappingTopic: Topic = {
         </p>
       </Card>
       <Card title="Automated Backups & Patching" description="Sleep safely">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Managed services automatically take daily snapshots, retain them for 35
           days, and allow Point-In-Time recovery (restore to 2:15 PM yesterday).
           They also automatically apply minor version security patches during a
@@ -47,7 +47,7 @@ export const awsServicesMappingTopic: Topic = {
         </p>
       </Card>
       <Card title="Elastic Scalability" description="Scale without downtime">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           If your NGINX load balancer runs out of CPU, you have to manually provision
           a bigger box and migrate traffic. An AWS Application Load Balancer (ALB)
           automatically scales its own underlying nodes to handle sudden traffic
@@ -55,7 +55,7 @@ export const awsServicesMappingTopic: Topic = {
         </p>
       </Card>
       <Card title="Security & Compliance" description="IAM & VPC integration">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Managed services integrate natively with AWS IAM (Identity and Access
           Management) and VPCs (Virtual Private Clouds). You can use cryptographic
           roles rather than hardcoding passwords, and isolate databases on private
@@ -168,7 +168,7 @@ export const awsServicesMappingTopic: Topic = {
     </p>,
     <Grid key="13" cols={2} gap={6}>
       <Card title="The Hard Way: Self-Hosted Postgres" description="On EC2">
-        <ul className="list-disc pl-5 mt-2 text-sm text-foreground/80 space-y-1">
+        <ul className="list-disc pl-5 mt-2 text-sm text-slate-300 space-y-1">
           <li>Provision primary and replica EC2 instances.</li>
           <li>Configure `pg_hba.conf` and streaming replication.</li>
           <li>Write custom bash scripts for daily `pg_dump` to S3.</li>
@@ -177,7 +177,7 @@ export const awsServicesMappingTopic: Topic = {
         </ul>
       </Card>
       <Card title="The AWS Way: Amazon RDS" description="Managed Service">
-        <ul className="list-disc pl-5 mt-2 text-sm text-foreground/80 space-y-1">
+        <ul className="list-disc pl-5 mt-2 text-sm text-slate-300 space-y-1">
           <li>Click 'Create Database'. Check the 'Multi-AZ' box.</li>
           <li>AWS provisions a primary and a synchronous standby replica in a different datacenter.</li>
           <li>AWS writes continuous WAL logs to S3. Point-in-time recovery to any second is possible.</li>

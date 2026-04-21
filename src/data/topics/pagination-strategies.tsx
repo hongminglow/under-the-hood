@@ -30,18 +30,18 @@ export const paginationStrategiesTopic: Topic = {
     />,
     <Grid key="2" cols={2} gap={6} className="my-8">
       <Card title="The OFFSET Trap">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <code>SELECT * FROM logs LIMIT 20 OFFSET 100000;</code>
         </p>
-        <p className="text-xs text-muted-foreground italic">
+        <p className="text-xs text-slate-400 italic">
           The database must <strong>load and discard</strong> the first 100,000 rows just to show you row 100,001. This consumes massive I/O and RAM.
         </p>
       </Card>
       <Card title="The Keyset Advantage">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <code>SELECT * FROM logs WHERE id &lt; 9821 LIMIT 20;</code>
         </p>
-        <p className="text-xs text-muted-foreground italic">
+        <p className="text-xs text-slate-400 italic">
           The database uses the B-Tree index to <strong>jump directly</strong> to the specified record. Page 1,000,000 is as fast as Page 1.
         </p>
       </Card>

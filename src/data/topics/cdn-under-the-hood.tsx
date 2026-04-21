@@ -91,7 +91,7 @@ export const cdnUnderTheHoodTopic: Topic = {
     </p>,
     <Grid key="7" cols={2} gap={6}>
       <Card title="Same IP, Many Places" description="Anycast">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Multiple Cloudflare edge locations advertise the same public IP
           prefixes. Internet routers use BGP to send your packets toward the
           best topological path, which is often the nearest or best-connected
@@ -99,7 +99,7 @@ export const cdnUnderTheHoodTopic: Topic = {
         </p>
       </Card>
       <Card title="Not DNS Magic Alone" description="Routing still matters">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           DNS gives the browser an IP, but <strong>BGP path selection</strong>
           &nbsp;is what steers packets to a nearby edge server sharing that same
           IP. So “nearest CDN node” is a networking result, not just a DNS
@@ -230,7 +230,7 @@ user browser
     </h3>,
     <Grid key="17" cols={2} gap={6}>
       <Card title="Commonly Cached" description="Easy wins">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Images, CSS, JS bundles, fonts, public static files, video segments,
           and versioned assets with long cache headers are the classic CDN wins.
         </p>
@@ -239,7 +239,7 @@ user browser
         title="More Dangerous To Cache"
         description="Needs deliberate rules"
       >
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Personalized HTML, authenticated dashboards, cart state, and many API
           responses can go wrong if cached blindly because the response may be
           user-specific or short-lived.
@@ -312,14 +312,14 @@ user browser
     </h3>,
     <Grid key="23" cols={2} gap={6}>
       <Card title="Security & Filtering" description="Edge before origin">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Cloudflare can enforce WAF rules, block bad bots, rate-limit abusive
           clients, inspect paths, and sometimes stop attacks before they ever
           touch your EC2 box.
         </p>
       </Card>
       <Card title="Edge Logic" description="Not just static caching">
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Modern CDNs can rewrite headers, redirect traffic, verify tokens,
           resize images, personalize simple logic, or run edge code without
           waking your main origin for every request.

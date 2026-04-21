@@ -80,18 +80,18 @@ export const acidPropertiesTopic: Topic = {
     </p>,
     <Grid key="12" cols={2} gap={6} className="my-8">
       <Card title="Why WAL is Fast">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Sequential writes vs. random writes.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Writing to the end of a log file is <strong>100x faster</strong>&nbsp;than seeking to random disk locations to update data pages. SSDs and HDDs both optimize for sequential I/O. PostgreSQL's WAL can sustain 10,000+ writes/sec on commodity hardware.
         </p>
       </Card>
       <Card title="Crash Recovery">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Replaying the log after power loss.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           On restart, the database reads the WAL from the last checkpoint and replays every committed transaction. Uncommitted transactions are discarded. This is how PostgreSQL guarantees <strong>zero data loss</strong>&nbsp;even during kernel panics.
         </p>
       </Card>
@@ -258,7 +258,7 @@ WHERE user_id = 123 AND version = 5;  -- Fails if version changed`}
     </p>,
     <Grid key="34" cols={2} gap={6} className="my-8">
       <Card title="What Went Wrong">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li>Custom database bypassed PostgreSQL's constraint checking</li>
           <li>Two threads read balance = $1000 simultaneously</li>
           <li>Both approved $800 withdrawals</li>
@@ -266,7 +266,7 @@ WHERE user_id = 123 AND version = 5;  -- Fails if version changed`}
         </ul>
       </Card>
       <Card title="The Fix">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li>Migrated to PostgreSQL with CHECK constraints</li>
           <li>Used SELECT FOR UPDATE to lock rows during reads</li>
           <li>Added SERIALIZABLE isolation for critical paths</li>

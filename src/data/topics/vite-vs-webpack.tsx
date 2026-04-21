@@ -27,7 +27,7 @@ export const viteVsWebpackTopic: Topic = {
         <p className="text-sm text-foreground mb-4">
           Webpack crawls your entire application. It parses every single JavaScript file, CSS file, and asset, builds a massive dependency graph, and then mathematically mashes them all together into big bundle files <strong>before</strong> the development server can even turn on.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Result: The server startup time scales exponentially as the project grows. A legacy enterprise app might take two minutes just to boot locally.
         </p>
       </Card>
@@ -35,7 +35,7 @@ export const viteVsWebpackTopic: Topic = {
         <p className="text-sm text-foreground mb-4">
           Vite skips bundling entirely during development. It leverages modern browsers' native support for <code>&lt;script type="module"&gt;</code>. Vite instantly turns on the server and only compiles exact files natively when the browser actively HTTP requests them.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Result: Server startup time is completely decoupled from project size. It boots in ~100ms whether you have 10 files or 10,000.
         </p>
       </Card>
@@ -47,13 +47,13 @@ export const viteVsWebpackTopic: Topic = {
 
     <Grid key="5" cols={1} gap={6} className="mb-8">
       <Card title="1. esbuild (The Unfair Speed Advantage)">
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-slate-400 mb-4">
           Webpack relies on transpilers written in JavaScript (like Babel or tsc), which are tightly bottlenecked by JS engine parse speeds. Vite completely sidesteps this by using <Highlight variant="primary">esbuild</Highlight>, a bundler written in heavily optimized <strong>Go</strong>. esbuild pre-bundles dependencies and parses code roughly 10-100x faster than JavaScript-based tools at the physical CPU level.
         </p>
       </Card>
       
       <Card title="2. Zero-Config Environment">
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-slate-400 mb-4">
           To get Webpack working with modern standards (React, TypeScript, CSS modules), you must manually install and orchestrate complex chains of loaders (<code>babel-loader</code>, <code>ts-loader</code>, <code>css-loader</code>). Vite supports TypeScript, JSX, CSS processors, and JSON automatically out-of-the-box.
         </p>
         <Grid cols={2} gap={4}>
@@ -84,7 +84,7 @@ export default defineConfig({
       </Card>
       
       <Card title="3. Constant-Time Hot Module Replacement (HMR)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           When you edit a file, Webpack has to rebuild part of the bundle to inject the new code, meaning HMR gets linearly slower over time as it processes heavy graphs. With Vite, because it uses native ESM routing, saving a file simply causes the browser to request that single module again. HMR takes the same ~50ms in a tiny app as it does in a massive monolithic application.
         </p>
       </Card>

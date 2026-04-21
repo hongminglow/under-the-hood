@@ -26,22 +26,22 @@ export const cqrsPatternTopic: Topic = {
 		</h3>,
 		<Grid key="3" cols={2} gap={6} className="my-8">
 			<Card title="Command Side (Write)">
-				<p className="text-sm text-muted-foreground mb-2">
+				<p className="text-sm text-slate-400 mb-2">
 					Handles <strong>Commands</strong>: <code>PlaceOrder</code>, <code>CancelOrder</code>,{" "}
 					<code>UpdateAddress</code>. Each command validates business rules, mutates state, and writes to the{" "}
 					<strong>write database</strong> (optimized for transactional integrity — normalized, ACID-compliant).
 				</p>
-				<p className="text-xs italic text-muted-foreground">
+				<p className="text-xs italic text-slate-400">
 					Think: PostgreSQL with strict foreign keys, constraints, and normalized tables.
 				</p>
 			</Card>
 			<Card title="Query Side (Read)">
-				<p className="text-sm text-muted-foreground mb-2">
+				<p className="text-sm text-slate-400 mb-2">
 					Handles <strong>Queries</strong>: <code>GetOrderSummary</code>, <code>GetDashboardStats</code>,{" "}
 					<code>SearchProducts</code>. Reads from a <strong>read database</strong> that is pre-computed, denormalized,
 					and optimized purely for query speed.
 				</p>
-				<p className="text-xs italic text-muted-foreground">
+				<p className="text-xs italic text-slate-400">
 					Think: Elasticsearch for search, Redis for dashboards, materialized views for reports.
 				</p>
 			</Card>
@@ -86,20 +86,20 @@ export const cqrsPatternTopic: Topic = {
 		</p>,
 		<Grid key="7" cols={2} gap={6} className="my-8">
 			<Card title="Synchronous Projection">
-				<p className="text-sm text-muted-foreground mb-2">
+				<p className="text-sm text-slate-400 mb-2">
 					After a write succeeds, the application <strong>immediately</strong> updates the read model in the same
 					request cycle. Simple, consistent, but couples the two sides together and adds latency to every write.
 				</p>
-				<p className="text-xs italic text-muted-foreground">
+				<p className="text-xs italic text-slate-400">
 					Good for: Low-traffic systems where consistency matters more than write speed.
 				</p>
 			</Card>
 			<Card title="Asynchronous Projection (Event-Driven)">
-				<p className="text-sm text-muted-foreground mb-2">
+				<p className="text-sm text-slate-400 mb-2">
 					The write side publishes a <strong>Domain Event</strong> (e.g., <code>OrderPlaced</code>) to a message broker
 					(Kafka, RabbitMQ). A separate projector service consumes events and updates the read model asynchronously.
 				</p>
-				<p className="text-xs italic text-muted-foreground">
+				<p className="text-xs italic text-slate-400">
 					Good for: High-traffic systems. The read model is <strong>eventually consistent</strong> — there's a brief
 					delay (milliseconds to seconds) before reads reflect the latest write.
 				</p>

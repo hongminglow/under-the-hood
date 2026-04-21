@@ -33,18 +33,18 @@ export const ragRetrievalAugmentedTopic: Topic = {
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <Card title="Semantic Chunking">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Don't just split text every 500 characters.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Use the embedding model to find where the <strong>meaning</strong> changes. This ensures that a paragraph isn't cut in half, preserving context for the LLM.
         </p>
       </Card>
       <Card title="HyDE (Hypothetical Doc)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Improve search by 'Hallucinating' first.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           The LLM generates a <strong>fake answer</strong> to the user's question, then we embed that fake answer to search for similar REAL documents. This bridges the 'Question vs. Answer' embedding gap.
         </p>
       </Card>

@@ -30,7 +30,7 @@ export const corsTopic: Topic = {
       Without CORS, the web would be a security nightmare. Imagine this attack scenario:
     </p>,
     <Card key="5" title="The Attack Without CORS Protection">
-      <ol className="text-sm text-muted-foreground space-y-2">
+      <ol className="text-sm text-slate-400 space-y-2">
         <li>1. You log into <code>bank.com</code> and get an authentication cookie.</li>
         <li>2. You visit <code>evil-site.com</code> (maybe from a phishing email).</li>
         <li>3. Evil site runs JavaScript: <code>fetch('https://bank.com/transfer', &#123; method: 'POST', body: JSON.stringify(&#123; to: 'attacker', amount: 10000 &#125;) &#125;)</code></li>
@@ -78,12 +78,12 @@ export const corsTopic: Topic = {
     />,
     <Grid key="13" cols={2} gap={6} className="my-8">
       <Card title="The Browser's Paranoia">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Before sending your actual POST request, the browser halts completely. It sends a tiny, invisible <code>OPTIONS</code> request to your backend asking, "Hey Backend, my user is on <code>localhost</code>, are they mathematically allowed to send you this POST?"
         </p>
       </Card>
       <Card title="The Backend's Permission">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           If your API server replies with the header <code>Access-Control-Allow-Origin: localhost:3000</code>, the browser sighs in relief and instantly fires the actual POST request. If the backend doesn't reply with that exact header, the browser instantly throws an error and destroys your request.
         </p>
       </Card>
@@ -282,7 +282,7 @@ origin: /^http:\\/\\/localhost:\\d+$/`}
     </h3>,
     <Grid key="34" cols={2} gap={6} className="my-8">
       <Card title="1. Proxy Server (Dev)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           In development, use a proxy to avoid CORS entirely.
         </p>
         <CodeBlock
@@ -296,7 +296,7 @@ origin: /^http:\\/\\/localhost:\\d+$/`}
         />
       </Card>
       <Card title="2. Same-Origin Deployment">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Deploy frontend and backend on the same domain.
         </p>
         <CodeBlock
@@ -309,7 +309,7 @@ No CORS needed - same origin!`}
       </Card>
     </Grid>,
     <Card key="35" title="3. JSONP (Legacy, Avoid)">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         Before CORS, developers used JSONP (JSON with Padding) by injecting <code>&lt;script&gt;</code> tags. This is <strong>insecure</strong>&nbsp;and deprecated. Never use it.
       </p>
     </Card>,
@@ -318,17 +318,17 @@ No CORS needed - same origin!`}
       Real-World War Stories
     </h3>,
     <Card key="37" title="Story 1: The Wildcard Disaster">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         A startup set <code>Access-Control-Allow-Origin: *</code> with <code>credentials: true</code> on their payment API. Attackers created phishing sites that made authenticated requests, draining user accounts. The fix? Whitelist only their official domain. Cost: $2M in refunds.
       </p>
     </Card>,
     <Card key="38" title="Story 2: The Preflight Performance Hit">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         A high-traffic API was getting <strong>double the requests</strong>&nbsp;due to preflight OPTIONS calls. They added <code>Access-Control-Max-Age: 86400</code> to cache preflight responses for 24 hours. Result: 50% reduction in OPTIONS traffic, saving $10K/month in server costs.
       </p>
     </Card>,
     <Card key="39" title="Story 3: The Mobile App Confusion">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         A team spent 3 days debugging CORS errors in their React Native app. The issue? React Native doesn't enforce CORS (it's not a browser). The real problem was a typo in the API URL. Always check if CORS is actually relevant to your environment.
       </p>
     </Card>,
@@ -338,7 +338,7 @@ No CORS needed - same origin!`}
     </h3>,
     <Grid key="41" cols={2} gap={6} className="my-8">
       <Card title="✅ DO">
-        <ul className="text-sm text-muted-foreground space-y-2">
+        <ul className="text-sm text-slate-400 space-y-2">
           <li>• Whitelist specific origins (never use <code>*</code> with credentials)</li>
           <li>• Use <code>Access-Control-Max-Age</code> to reduce preflight overhead</li>
           <li>• Validate origin dynamically from a database/config</li>
@@ -347,7 +347,7 @@ No CORS needed - same origin!`}
         </ul>
       </Card>
       <Card title="❌ DON'T">
-        <ul className="text-sm text-muted-foreground space-y-2">
+        <ul className="text-sm text-slate-400 space-y-2">
           <li>• Use <code>Access-Control-Allow-Origin: *</code> with authentication</li>
           <li>• Trust the <code>Origin</code> header without validation</li>
           <li>• Disable CORS entirely (use proxy instead)</li>

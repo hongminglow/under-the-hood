@@ -26,12 +26,12 @@ export const messageQueuesTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <Card title="The Producer (Your API)" description="Fast and Forgetful">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           It blindly drops messages onto the conveyor belt and walks away. It never cares who processes the email or how long it takes.
         </p>
       </Card>
       <Card title="The Workers (Consumers)" description="Slow and Steady">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Five separate background servers blindly pull tasks off the conveyor belt to send emails. If Black Friday happens and 10,000 orders drop on the belt, the API never crashes. The Workers just peacefully spend the next hour chewing through the backlog line.
         </p>
       </Card>
@@ -76,34 +76,34 @@ export const messageQueuesTopic: Topic = {
     </h3>,
     <Grid key="12" cols={2} gap={6} className="my-8">
       <Card title="Traffic Spike Protection">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Black Friday: 10,000 orders/sec → 100 orders/sec.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Without queues, your API servers crash under load. With queues, the API accepts all 10,000 orders instantly (writes to queue in 1ms), returns success, and workers process them over the next hour. The queue acts as a <strong>shock absorber</strong>.
         </p>
       </Card>
       <Card title="Decoupling Services">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Order Service doesn't know Email Service exists.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Order Service publishes "OrderPlaced" event. Email Service, SMS Service, Analytics Service all subscribe independently. You can add new consumers without touching the producer. This is <strong>event-driven architecture</strong>.
         </p>
       </Card>
       <Card title="Retry & Fault Tolerance">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Email service crashes? Message stays in queue.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           If a worker crashes mid-processing, the message isn't lost. It becomes "visible" again after a timeout and another worker picks it up. With <HighlightText variant="primary">at-least-once delivery</HighlightText>, no message is ever lost.
         </p>
       </Card>
       <Card title="Rate Limiting Downstream">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           Third-party API allows 100 req/sec max.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-slate-400">
           Your app receives 1000 orders/sec but Stripe only allows 100 charges/sec. Queue buffers the requests, and workers consume at exactly 100/sec to avoid rate limit errors.
         </p>
       </Card>
@@ -133,7 +133,7 @@ export const messageQueuesTopic: Topic = {
     </h3>,
     <Grid key="16" cols={2} gap={6} className="my-8">
       <Card title="Use RabbitMQ When...">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li><strong>Task queues:</strong>&nbsp;Background jobs (email, image processing)</li>
           <li><strong>RPC patterns:</strong>&nbsp;Request-reply with correlation IDs</li>
           <li><strong>Complex routing:</strong>&nbsp;Topic exchanges, routing keys, bindings</li>
@@ -142,7 +142,7 @@ export const messageQueuesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Use Kafka When...">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li><strong>Event streaming:</strong>&nbsp;Audit logs, user activity, CDC</li>
           <li><strong>Replay needed:</strong>&nbsp;Reprocess last 7 days of events</li>
           <li><strong>High throughput:</strong>&nbsp;1M+ messages/sec</li>
@@ -151,7 +151,7 @@ export const messageQueuesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Use AWS SQS When...">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li><strong>AWS-native:</strong>&nbsp;Lambda triggers, S3 events</li>
           <li><strong>Zero ops:</strong>&nbsp;No servers to manage, auto-scales</li>
           <li><strong>Serverless:</strong>&nbsp;Pay per message, not per hour</li>
@@ -160,7 +160,7 @@ export const messageQueuesTopic: Topic = {
         </ul>
       </Card>
       <Card title="Use MQTT When...">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li><strong>IoT devices:</strong>&nbsp;Sensors, smart home, wearables</li>
           <li><strong>Low bandwidth:</strong>&nbsp;2G/3G networks, satellite</li>
           <li><strong>Real-time pub/sub:</strong>&nbsp;Chat, live dashboards</li>
@@ -205,7 +205,7 @@ consumer.seekToTimestamp(yesterday);  // Rewind to timestamp
     </p>,
     <Grid key="22" cols={2} gap={6} className="my-8">
       <Card title="Before Kafka (RabbitMQ)">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li>Messages deleted after consumption (no replay)</li>
           <li>Broker restarts = lost messages</li>
           <li>Couldn't rebuild driver location history</li>
@@ -213,7 +213,7 @@ consumer.seekToTimestamp(yesterday);  // Rewind to timestamp
         </ul>
       </Card>
       <Card title="After Kafka">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li>All trip events retained for 30 days</li>
           <li>ML team replays events to train models</li>
           <li>Fraud detection analyzes historical patterns</li>
@@ -298,7 +298,7 @@ async function handleOrder(message) {
     </h3>,
     <Grid key="28" cols={2} gap={6} className="my-8">
       <Card title="Pros">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li><strong>Decoupling:</strong>&nbsp;Services don't need to know about each other</li>
           <li><strong>Scalability:</strong>&nbsp;Add more workers to process faster</li>
           <li><strong>Fault tolerance:</strong>&nbsp;Messages survive crashes</li>
@@ -308,7 +308,7 @@ async function handleOrder(message) {
         </ul>
       </Card>
       <Card title="Cons">
-        <ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-xs text-slate-400 space-y-1 list-disc pl-4">
           <li><strong>Complexity:</strong>&nbsp;Another system to monitor and debug</li>
           <li><strong>Eventual consistency:</strong>&nbsp;Data isn't immediately consistent</li>
           <li><strong>Ordering challenges:</strong>&nbsp;Hard to guarantee order at scale</li>

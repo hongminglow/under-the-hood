@@ -69,44 +69,44 @@ export const dnsTopic: Topic = {
     </h3>,
     <Grid key="actors-grid" cols={2} gap={6} className="mb-8">
       <Card title="Recursive Resolver" description="Run By: ISP / Public DNS Providers">
-        <p className="text-sm text-muted-foreground mb-3">
+        <p className="text-sm text-slate-400 mb-3">
           This is the server your computer actually <em>talks to</em>. You configure it in your Network Settings (DHCP usually assigns your ISP's resolver automatically). Popular alternatives:
         </p>
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc pl-4">
           <li><code>1.1.1.1</code> — Cloudflare (fastest globally)</li>
           <li><code>8.8.8.8</code> — Google Public DNS</li>
           <li><code>9.9.9.9</code> — Quad9 (privacy-focused)</li>
         </ul>
-        <p className="text-xs mt-3 border-t border-border pt-3 text-muted-foreground">
+        <p className="text-xs mt-3 border-t border-border pt-3 text-slate-400">
           The resolver caches every answer it gets from Root/TLD/Authoritative servers for the duration of the record's TTL. This is why changing your DNS record doesn't propagate instantly — every resolver on earth has to wait for its own cached copy to expire.
         </p>
       </Card>
       <Card title="Authoritative Nameserver" description="Run By: You (via your DNS Provider)">
-        <p className="text-sm text-muted-foreground mb-3">
+        <p className="text-sm text-slate-400 mb-3">
           This is the server you actually control as a developer/DevOps engineer. <strong>This is where you set your A, CNAME, MX records.</strong> When you buy a domain from Namecheap or GoDaddy, you configure which Authoritative Nameserver to use:
         </p>
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc pl-4">
+        <ul className="text-sm text-slate-400 space-y-1 list-disc pl-4">
           <li><strong>AWS Route 53</strong> — enterprise, latency-based routing</li>
           <li><strong>Cloudflare DNS</strong> — free tier, proxied CDN records</li>
           <li><strong>GoDaddy / Namecheap DNS</strong> — included with domain purchase</li>
         </ul>
-        <p className="text-xs mt-3 border-t border-border pt-3 text-muted-foreground">
+        <p className="text-xs mt-3 border-t border-border pt-3 text-slate-400">
           The Registrar (where you bought the domain) points the TLD server to YOUR chosen Authoritative Nameserver via NS records.
         </p>
       </Card>
       <Card title="Domain Registrar" description="Run By: ICANN-Accredited Companies">
-        <p className="text-sm text-muted-foreground mb-3">
+        <p className="text-sm text-slate-400 mb-3">
           The company you <em>rent</em> your domain name from (Namecheap, GoDaddy, Google Domains, Cloudflare Registrar). Their one critical job in DNS is to update the TLD Registry's database with your <strong>NS (Nameserver) records</strong> — telling the world which Authoritative DNS server is in charge of your domain.
         </p>
-        <p className="text-xs mt-3 border-t border-border pt-3 text-muted-foreground">
+        <p className="text-xs mt-3 border-t border-border pt-3 text-slate-400">
           Registrar ≠ DNS Provider. You can buy from Namecheap but use Cloudflare as your DNS. You do this by setting custom nameservers in your Registrar's dashboard.
         </p>
       </Card>
       <Card title="Root Name Servers" description="Run By: 12 Organisations (ICANN Oversight)">
-        <p className="text-sm text-muted-foreground mb-3">
+        <p className="text-sm text-slate-400 mb-3">
           There are only <strong>13 sets of Root Name Servers</strong> (labeled A–M), operated by ICANN, NASA, RIPE NCC, and others. In reality, hundreds of physical machines worldwide respond to those 13 addresses via <strong>Anycast routing</strong>. They are the very top of the DNS tree.
         </p>
-        <p className="text-xs mt-3 border-t border-border pt-3 text-muted-foreground">
+        <p className="text-xs mt-3 border-t border-border pt-3 text-slate-400">
           They do NOT hold domain records. They only know: "For <code>.com</code> TLD, go ask Verisign's servers at <code>a.gtld-servers.net</code>."
         </p>
       </Card>
@@ -198,22 +198,22 @@ export const dnsTopic: Topic = {
     </p>,
     <Grid key="ttl-grid" cols={3} gap={6} className="mb-8">
       <Card title="Low TTL (60–300s)" description="Use Before: Migrations, Deployments">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Set TTL to 60s <strong>24–48 hours before a major migration</strong>. When you flip the A record, resolvers worldwide will pick up the change within 60 seconds instead of days.
         </p>
-        <p className="text-xs text-muted-foreground mt-3 border-t border-border pt-2">⚠️ Cost: More DNS queries = more load on your Authoritative server.</p>
+        <p className="text-xs text-slate-400 mt-3 border-t border-border pt-2">⚠️ Cost: More DNS queries = more load on your Authoritative server.</p>
       </Card>
       <Card title="High TTL (3600–86400s)" description="Use For: Stable Production Records">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Stable records (MX, NS, CAA) can have very high TTLs. Resolvers cache aggressively, reducing your DNS query volume and improving performance for all users globally.
         </p>
-        <p className="text-xs text-muted-foreground mt-3 border-t border-border pt-2">⚠️ Cost: Slow rollback if something goes wrong — you're stuck for up to 24 hours.</p>
+        <p className="text-xs text-slate-400 mt-3 border-t border-border pt-2">⚠️ Cost: Slow rollback if something goes wrong — you're stuck for up to 24 hours.</p>
       </Card>
       <Card title="Negative TTL (SOA)" description="The Forgotten Cache">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           When a domain doesn't exist (NXDOMAIN), resolvers cache <em>that failure</em> based on the SOA record's minimum TTL. If you just registered a domain and DNS is "not found" — this is why.
         </p>
-        <p className="text-xs text-muted-foreground mt-3 border-t border-border pt-2">Fix: Wait it out. You cannot force remote resolvers to clear their negative cache.</p>
+        <p className="text-xs text-slate-400 mt-3 border-t border-border pt-2">Fix: Wait it out. You cannot force remote resolvers to clear their negative cache.</p>
       </Card>
     </Grid>,
 
@@ -226,7 +226,7 @@ export const dnsTopic: Topic = {
     </p>,
     <Grid key="cdn-grid" cols={2} gap={6} className="mb-8">
       <Card title="DNS-Only Mode (Grey Cloud)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           The A record exposes your <strong>real server IP</strong> to the world. Any <code>dig app.myshop.com</code> command returns your actual EC2/VPS IP. Your server handles TLS, DDoS, caching — everything.
         </p>
         <CodeBlock
@@ -239,7 +239,7 @@ app.myshop.com.   300   IN   A   152.42.189.33
         />
       </Card>
       <Card title="Proxied Mode (Orange Cloud)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           Cloudflare's edge IP is returned. All traffic flows through Cloudflare's global PoPs first. Your origin IP is <strong>hidden</strong>. You get free DDoS protection, CDN caching, and WAF.
         </p>
         <CodeBlock
@@ -265,7 +265,7 @@ app.myshop.com.   300   IN   A   104.21.55.12
     </p>,
     <Grid key="dnssec-grid" cols={2} gap={6} className="mb-4">
       <Card title="Without DNSSEC" description="Status: Vulnerable">
-        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+        <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
           <li>DNS responses are plain UDP packets with no authentication.</li>
           <li>Any resolver between you and the authoritative server can forge a response.</li>
           <li>Attack: Attacker stuffs resolver cache with <code>bank.com → attacker-ip</code>.</li>
@@ -273,7 +273,7 @@ app.myshop.com.   300   IN   A   104.21.55.12
         </ul>
       </Card>
       <Card title="With DNSSEC" description="Status: Cryptographically Verified">
-        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+        <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
           <li>Each DNS record is <strong>digitally signed</strong> with a private key held by the zone owner.</li>
           <li>The resolver can verify the signature against the public key published in the DNS zone (DNSKEY record).</li>
           <li>Chain of trust: Root → TLD → Authoritative, each layer signs the next.</li>

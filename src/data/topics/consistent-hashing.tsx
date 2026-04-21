@@ -22,12 +22,12 @@ export const consistentHashingTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <Card title="The Catastrophic Crash">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           What happens when Server 2 physically dies? The equation suddenly becomes <code>10080 % 2 Servers = Server ?</code>. The math fundamentally changes for <strong>literally every single one of the 10,000 files</strong>. The entire caching system instantly invalidates, and 10,000 raw requests brutally hammer your database simultaneously.
         </p>
       </Card>
       <Card title="Consistent Hashing (The Ring)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           We map the 3 servers onto a massive mathematical "Circle" (A ring from 0 to 360 degrees). When a file is uploaded, we hash it to a random degree (e.g., 45°). We map it to the FIRST server we see by walking strictly clockwise.
         </p>
       </Card>

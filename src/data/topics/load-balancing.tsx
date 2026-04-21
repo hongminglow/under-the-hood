@@ -34,15 +34,15 @@ export const loadBalancingTopic: Topic = {
     </h3>,
     <Grid key="5" cols={3} gap={4} className="my-8">
       <Card title="Round Robin">
-        <p className="text-xs text-muted-foreground mb-2">Each server gets one request in a circular queue.</p>
+        <p className="text-xs text-slate-400 mb-2">Each server gets one request in a circular queue.</p>
         <p className="text-xs italic">Best for identical, stateless server hardware.</p>
       </Card>
       <Card title="Least Connections">
-        <p className="text-xs text-muted-foreground mb-2">Sends traffic to the server with the fewest active sessions.</p>
+        <p className="text-xs text-slate-400 mb-2">Sends traffic to the server with the fewest active sessions.</p>
         <p className="text-xs italic">Best for long-lived tasks (WebSocket, Streaming).</p>
       </Card>
       <Card title="Consistent Hashing">
-        <p className="text-xs text-muted-foreground mb-2">Ensures a specific user (by IP) always hits the same server.</p>
+        <p className="text-xs text-slate-400 mb-2">Ensures a specific user (by IP) always hits the same server.</p>
         <p className="text-xs italic">Essential for stateful apps using local caching.</p>
       </Card>
     </Grid>,
@@ -105,13 +105,13 @@ app.get('/ping', (req, res) => {
       Real-World Failure Story: The AWS ELB Outage (2017)
     </h3>,
     <Card key="story-card" title="What Happened">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         On February 28, 2017, AWS S3 went down in us-east-1, taking down half the internet. But the root cause wasn't S3 itself — it was the <strong>Elastic Load Balancer (ELB) health checks</strong>.
       </p>
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-400 mb-2">
         <strong>The Chain Reaction:</strong>
       </p>
-      <ol className="text-sm text-muted-foreground space-y-2 pl-5">
+      <ol className="text-sm text-slate-400 space-y-2 pl-5">
         <li>1. An engineer ran a debugging command to remove a few S3 servers</li>
         <li>2. A typo removed <em>way more servers</em> than intended</li>
         <li>3. ELB health checks started failing because S3 was overloaded</li>
@@ -132,12 +132,12 @@ app.get('/ping', (req, res) => {
     </p>,
     <Grid key="affinity-grid" cols={2} gap={6} className="my-8">
       <Card title="The Problem">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           User A is "stuck" to Server 1. Server 1 crashes. Load balancer detects failure and removes it. User A's next request goes to Server 2, but Server 2 has no idea who User A is. Session lost.
         </p>
       </Card>
       <Card title="The Solution">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <strong>Never store session state in memory</strong>. Use Redis or a database for session storage. Any server can handle any request because session data is centralized.
         </p>
       </Card>

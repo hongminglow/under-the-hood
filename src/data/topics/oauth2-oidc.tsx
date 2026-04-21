@@ -31,12 +31,12 @@ export const oauth2OidcTopic: Topic = {
     </p>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <Card title="The OAuth 2.0 Access Token">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           A purely opaque string designed only to unlock specific API doors (like an Arcade Token). It doesn't contain the user's name or email. It simply says "This token holder can read calendars."
         </p>
       </Card>
       <Card title="OIDC (OpenID Connect)">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400">
           An extension bolted directly on top of OAuth. It provides an <strong>ID Token</strong>&nbsp;(always a JWT) alongside the Access Token. The ID Token definitively answers "Who is this person? What is their email?" and allows true "Login with Google" systems to exist securely.
         </p>
       </Card>
@@ -192,30 +192,30 @@ const { access_token } = await response.json();
     </h3>,
     <Grid key="25" cols={3} gap={4} className="my-8">
       <Card title="Access Token">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <strong>Purpose</strong>: Access protected resources (APIs)
         </p>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-slate-400">
           • Opaque or JWT<br/>
           • Short-lived (15 min - 1 hour)<br/>
           • Sent with every API request
         </p>
       </Card>
       <Card title="ID Token (OIDC)">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <strong>Purpose</strong>: Prove user identity
         </p>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-slate-400">
           • Always JWT<br/>
           • Contains user info (email, name)<br/>
           • Used once at login
         </p>
       </Card>
       <Card title="Refresh Token">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           <strong>Purpose</strong>: Get new access tokens
         </p>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-slate-400">
           • Opaque string<br/>
           • Long-lived (days/months)<br/>
           • Stored securely, never sent to APIs
@@ -228,7 +228,7 @@ const { access_token } = await response.json();
     </h3>,
     <Grid key="27" cols={2} gap={6} className="my-8">
       <Card title="When to Use Each Flow">
-        <ul className="text-sm text-muted-foreground space-y-2">
+        <ul className="text-sm text-slate-400 space-y-2">
           <li>• <strong>React/Vue SPA</strong>: Authorization Code + PKCE</li>
           <li>• <strong>Next.js/Remix</strong>: Authorization Code (backend)</li>
           <li>• <strong>Mobile Apps</strong>: Authorization Code + PKCE</li>
@@ -237,7 +237,7 @@ const { access_token } = await response.json();
         </ul>
       </Card>
       <Card title="Security Best Practices">
-        <ul className="text-sm text-muted-foreground space-y-2">
+        <ul className="text-sm text-slate-400 space-y-2">
           <li>• Always use HTTPS for redirect URIs</li>
           <li>• Validate <code>state</code> parameter (CSRF protection)</li>
           <li>• Store refresh tokens in httpOnly cookies</li>

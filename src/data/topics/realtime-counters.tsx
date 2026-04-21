@@ -38,7 +38,7 @@ export const realtimeCountersTopic: Topic = {
     </p>,
     <Grid key="naive-grid" cols={2} gap={6} className="mb-8">
       <Card title="What Actually Happens at Scale">
-        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+        <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
           <li>
             <strong>React gets downloaded ~50M times per week.</strong> That's
             roughly <strong>400 writes per second</strong>, sustained, 24/7.
@@ -58,7 +58,7 @@ export const realtimeCountersTopic: Topic = {
         </ul>
       </Card>
       <Card title="The Fundamental Problem">
-        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+        <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
           <li>
             <strong>Hot Row Contention:</strong> A single counter row becomes a
             global bottleneck. Every INCR serializes behind the last.
@@ -130,7 +130,7 @@ export const realtimeCountersTopic: Topic = {
     </p>,
     <Grid key="npm-grid" cols={2} gap={6} className="mb-8">
       <Card title="What Gets Counted">
-        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+        <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
           <li>
             A "download" is recorded every time the CDN successfully delivers a
             package tarball (the physical <code>.tgz</code>).
@@ -148,7 +148,7 @@ export const realtimeCountersTopic: Topic = {
         </ul>
       </Card>
       <Card title="The CDN Log Pipeline">
-        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+        <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
           <li>
             CDN edge nodes (Cloudflare, Fastly) log every tarball delivery as a
             structured access log line.

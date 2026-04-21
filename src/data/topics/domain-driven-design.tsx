@@ -35,22 +35,22 @@ export const domainDrivenDesignTopic: Topic = {
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <Card title="Entity">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           An object with a <strong>unique identity</strong> that persists over time. Two <code>User</code> objects with different IDs are different users, even if they share the same name and email.
         </p>
       </Card>
       <Card title="Value Object">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           An object defined entirely by its <strong>attributes</strong>, with no identity. A <code>Money(100, "USD")</code> is equal to another <code>Money(100, "USD")</code> regardless of which instance you hold.
         </p>
       </Card>
       <Card title="Aggregate">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           A cluster of Entities and Value Objects treated as a <strong>single transactional unit</strong>. The <strong>Aggregate Root</strong> (e.g., <code>Order</code>) is the only entry point. You never modify an <code>OrderItem</code> directly — you always go through the <code>Order</code>.
         </p>
       </Card>
       <Card title="Domain Event">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           A record that <strong>something meaningful happened</strong> in the domain: <code>OrderPlaced</code>, <code>PaymentFailed</code>, <code>InventoryReserved</code>. These are the glue between Bounded Contexts.
         </p>
       </Card>
@@ -61,12 +61,12 @@ export const domainDrivenDesignTopic: Topic = {
     </h3>,
     <Grid key="7" cols={2} gap={6} className="my-8">
       <Card title="❌ Split by Technical Layer">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           "API Service," "Database Service," "Auth Service." Every feature change touches all three services. Deployments are coupled. You got a Distributed Monolith.
         </p>
       </Card>
       <Card title="✅ Split by Business Domain">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-400 mb-2">
           "Order Service," "Shipping Service," "Billing Service." Each owns its own API, database, and business logic. Teams can deploy independently. This is the DDD way.
         </p>
       </Card>
