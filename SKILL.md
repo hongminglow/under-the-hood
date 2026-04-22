@@ -1,9 +1,9 @@
 ---
-name: knowledge-entry
+name: under-the-hood
 description: Instructions for AI models to act as a technical librarian for the Under The Hood knowledge base. Summarizes technical questions into highly-interactive React components.
 ---
 
-# Knowledge Entry Skill (v5.1)
+# Knowledge Entry Skill (v5.2)
 
 ## Context
 
@@ -240,114 +240,222 @@ import { MistakeCard } from "@/components/ui/MistakeCard";
 
 ## 🎨 Card Text Color Styling Guide (Global Standard)
 
-The color system uses two semantic values:
+### Core principle
 
-- **`text-muted-foreground`** = theme green (`#6ee7b7`) — accent color, for scannable/short content
-- **`text-slate-300`** = primary body text — for dense prose inside rich cards
-- **`text-slate-400`** = secondary/dimmer text — for supporting text inside rich cards
+Use this mental model everywhere in the app:
 
-The Card component's default children wrapper is `text-slate-300`. You only need to declare a color class if you want green (`text-muted-foreground`) or to distinguish primary vs secondary slate within a rich card.
+- **Green (`text-muted-foreground`) = scan**
+- **Slate (`text-slate-300` / `text-slate-400`) = read**
 
-### Decision Rules (apply in order)
+If a reader should be able to skim the content quickly, it should usually be green.
+If the reader needs to slow down and read full explanations, it should usually be slate.
 
-#### Rule 1: Standalone Card (outside `<Grid>`)
+The visual reference for "good gray usage" is the long-form, explanation-heavy style used in `developer-toolchain-layers.tsx`.
 
-| Content type                                          | Color                               |
-| ----------------------------------------------------- | ----------------------------------- |
-| Short intro / lead-in sentence (1 line, draws eye in) | `text-muted-foreground`             |
-| Long explanatory paragraph (body prose)               | `text-slate-300`                    |
-| Dense multi-sentence bullet list                      | `text-slate-400`                    |
-| Short scannable bullet list (one idea per item)       | `text-muted-foreground`             |
-| Content following a `<CodeBlock>`                     | `text-slate-300` / `text-slate-400` |
+### Color meanings
 
-> **Key insight**: When a standalone card has substantial volume of green text it becomes visually overwhelming. Use green only as an accent for the opening sentence, then switch to slate for body content.
+- **`text-muted-foreground`** = theme green. Use for short, scannable, high-signal content.
+- **`text-slate-300`** = primary gray body text. Use for long explanatory prose.
+- **`text-slate-400`** = secondary/supporting gray. Use for dense supporting bullets, footnotes, or explanation-heavy lists.
 
-#### Rule 2: Grid Card
+### Important default behavior
 
-| Content type                                                                       | Color                                                     |
-| ---------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| 1–2 short paragraphs (no list/Highlight)                                           | `text-muted-foreground`                                   |
-| Short scannable bullet list — checklist, pros/cons, when-to-use, one idea per item | `text-muted-foreground`                                   |
-| Card containing `<Highlight>` badges alongside text                                | `text-slate-300` (primary) / `text-slate-400` (secondary) |
-| Card containing `<CodeBlock>`                                                      | surrounding text → `text-slate-300` / `text-slate-400`    |
-| Dense multi-sentence bullet list where items require reading in sequence           | `text-slate-400`                                          |
-| Long explanatory paragraph(s) + list or Highlight                                  | `text-slate-300` (paragraph) + `text-slate-400` (list)    |
+The `Card` component's default children wrapper is `text-slate-300`.
 
-#### Rule 3: Consistency within a Grid section
+That means simple cards will accidentally stay gray unless you explicitly opt them into green.
 
-Cards that sit **side-by-side in the same `<Grid>`** should use matching colors unless one has significantly richer content (e.g., a `<CodeBlock>` or `<Highlight>` badge the other doesn't have). Avoid one green card next to one slate card when the content complexity is similar.
+**Practical rule:** if a card is meant to feel short, punchy, checklist-like, or easy to skim, add an explicit green class. Do not rely on the default wrapper.
 
-#### Rule 4: The "short vs dense" bullet list test
+### Decision order
 
-Ask: **Is each item one idea I can scan in under 2 seconds?**
+#### Rule 1: Start with structure, not color
 
-- ✅ Yes → `text-muted-foreground` (green)
-- ❌ No (multi-sentence reasoning, explanation, or contains inline `<code>` that is part of a command/config) → `text-slate-400`
+Ask where the content lives first.
 
-> **Note**: Inline `<code>` for cosmetic labeling (e.g., `` `user_id` ``, `` `w:1` ``) does NOT make a list "dense". Only inline `<code>` containing full configuration commands or multi-token expressions counts as heavy.
+- **Inside a Card**: decide between green-scan vs slate-read.
+- **Outside a Card**: default to slate for article prose, ordered process lists, and explanatory body content.
 
-### Reference Examples
+Non-card article content is usually not where the bright green treatment belongs.
+
+#### Rule 2: Bullet-point card content is green by default
+
+If a card is primarily made of bullets, checklists, pros/cons, "when to use", comparison bullets, actor summaries, or short role summaries, make the card content green.
+
+Good green use cases:
+
+- simple pros/cons cards
+- short protocol comparison bullets
+- role/actor cards
+- quick "do / don't" lists
+- short decision or scenario lists
+
+If the bullets read like one idea per line, the whole list should almost always be green.
+
+#### Rule 3: Long explanation cards stay slate
+
+Use slate when the card contains any of these:
+
+- long paragraph-style explanation
+- multi-sentence reasoning in each bullet
+- `<CodeBlock>`
+- `<Highlight>` used inline inside dense explanatory prose
+- a paragraph + dense explanatory list combo
+
+Use:
+
+- `text-slate-300` for the main body paragraph
+- `text-slate-400` for dense supporting lists or secondary detail
+
+#### Rule 4: Dense lists may use green keywords only
+
+If a list is too dense to make fully green, keep the list slate and color only the leading keyword or label.
+
+Preferred pattern:
 
 ```tsx
-{/* ✅ SHORT SCANNABLE LIST → green */}
-<Card title="When to Choose TCP">
-  <ul className="text-sm text-muted-foreground space-y-2">
-    <li>• File transfers (FTP, SFTP)</li>
-    <li>• Database queries (PostgreSQL, MySQL)</li>
-  </ul>
-</Card>
-
-{/* ✅ PROS/CONS CHECKLIST → green */}
-<Card title="✅ DO">
-  <ul className="text-sm text-muted-foreground space-y-2">
-    <li>• Whitelist specific origins (never use * with credentials)</li>
-    <li>• Use HTTPS for all cross-origin requests</li>
-  </ul>
-</Card>
-
-{/* ✅ RICH CARD with Highlight + long paragraph → slate */}
-<Card title="Memory Safety Without GC">
-  <p className="text-slate-300 text-sm leading-relaxed mb-3">
-    Unlike C/C++, Rust guarantees memory safety via the{" "}
-    <Highlight variant="primary">Ownership Model</Highlight> and Borrow
-    Checker, eliminating entire classes of bugs without GC overhead.
-  </p>
-  <p className="text-slate-400 text-sm">Supporting detail...</p>
-</Card>
-
-{/* ✅ DENSE PROBLEM/SOLUTION CARD → slate */}
-<Card title="Fixing LCP (Loading Constraints)">
-  <p className="text-sm text-foreground mb-4"><strong>The Problem:</strong> ...</p>
-  <ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
-    <li><strong>Server-Side Rendering:</strong> Use Next.js to return fully constructed HTML...</li>
-    <li><strong>Preloading Critical Assets:</strong> Add &lt;link rel="preload"...&gt; to &lt;head&gt;</li>
-  </ul>
-</Card>
-
-{/* ✅ CONTENT-HEAVY STANDALONE CARD (CodeBlock inside) → green lead-in, slate body */}
-<Card title="The Mathematics of Verification">
-  <p className="text-sm text-muted-foreground mb-4">
-    Short intro sentence here — draws the eye in.
-  </p>
-  <CodeBlock ... />
-  <p className="text-sm text-slate-300 mt-4">
-    Long explanatory paragraph after the code block goes here...
-  </p>
-  <ul className="list-disc pl-5 mt-4 text-sm text-slate-400 space-y-2">
-    <li><strong>Key point:</strong> Multi-sentence explanation...</li>
-  </ul>
-</Card>
+<ul className="text-sm text-slate-400 space-y-2 list-disc pl-5">
+	<li>
+		<strong className="text-muted-foreground">Quantum threat:</strong> Shor's algorithm could break RSA once large-scale
+		quantum hardware exists.
+	</li>
+</ul>
 ```
 
-### Quick-Reference Cheat Sheet
+Use this for:
 
-| Scenario                                 | Class to use                                         |
-| ---------------------------------------- | ---------------------------------------------------- |
-| Simple 1-line intro in any card          | `text-muted-foreground`                              |
-| Short bullet checklist (≤1 idea/item)    | `text-muted-foreground`                              |
-| 2 short paragraphs, no list/highlight    | `text-muted-foreground`                              |
-| Body prose after a CodeBlock             | `text-slate-300`                                     |
-| Dense bullet list (multi-sentence items) | `text-slate-400`                                     |
-| Secondary/supporting text in rich card   | `text-slate-400`                                     |
-| Card has `<Highlight>` badges            | `text-slate-300` primary, `text-slate-400` secondary |
-| Card has `<CodeBlock>`                   | surrounding text → slate                             |
+- `Keyword:` + explanation
+- hardware/spec lists outside cards
+- dense risk/mitigation lists
+- explanation-heavy security or architecture bullets
+
+Do **not** use keyword-only accents when the entire list is already short and scannable. In those cases, make the whole list green instead.
+
+#### Rule 5: Grid consistency matters
+
+Within the same `<Grid>`, cards with similar content density should usually share the same treatment.
+
+- simple card next to simple card → both green
+- rich/dense card next to rich/dense card → both slate
+- only split styles when one card is clearly heavier because it has code, highlight-heavy prose, or much denser explanation
+
+### Fast classification test
+
+Ask these in order:
+
+1. Is this content mainly for scanning? → green.
+2. Is it mainly for reading and explanation? → slate.
+3. Is it a bullet-heavy card? → green by default.
+4. Is it a dense explanatory list? → slate list, optional green keyword accents.
+5. Is it outside a card in normal article flow? → usually slate.
+
+### Common failure modes for future agents
+
+- **Failure mode 1: Leaving simple card bullets gray because of the Card default wrapper.**
+  Fix: explicitly add `text-muted-foreground` to the list or paragraph.
+
+- **Failure mode 2: Turning long explanatory card prose fully green.**
+  Fix: move long reading-heavy content back to `text-slate-300` / `text-slate-400`.
+
+- **Failure mode 3: Mixing one green card and one gray card inside the same Grid even though both are equally simple.**
+  Fix: normalize both cards to the same treatment.
+
+- **Failure mode 4: Coloring both the keyword and the full dense sentence green.**
+  Fix: in dense lists, keep the body slate and accent only the leading label.
+
+- **Failure mode 5: Treating non-card ordered/explanatory lists like card checklists.**
+  Fix: article-body ordered lists and narrative process lists usually stay slate.
+
+### Reference examples
+
+```tsx
+{
+	/* ✅ SIMPLE BULLET CARD → green */
+}
+<Card title="When to Choose TCP">
+	<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+		<li>File transfers (FTP, SFTP)</li>
+		<li>Database queries (PostgreSQL, MySQL)</li>
+	</ul>
+</Card>;
+
+{
+	/* ✅ SIMPLE EXPLANATION CARD → green */
+}
+<Card title="React: The Startup Default">
+	<p className="text-sm text-muted-foreground mb-4">
+		React is a library, not a framework. It handles UI rendering but leaves routing and state choices up to you.
+	</p>
+	<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+		<li>
+			<strong>Scenario:</strong> Startups and custom interfaces.
+		</li>
+		<li>
+			<strong>The Why:</strong> Massive ecosystem and hiring pool.
+		</li>
+	</ul>
+</Card>;
+
+{
+	/* ✅ LONG EXPLANATION CARD → slate */
+}
+<Card title="Memory Safety Without GC">
+	<p className="text-sm text-slate-300 leading-relaxed mb-3">
+		Unlike C/C++, Rust guarantees memory safety via the <Highlight variant="primary">Ownership Model</Highlight> and
+		Borrow Checker, eliminating entire bug classes without GC overhead.
+	</p>
+	<p className="text-sm text-slate-400">Supporting detail...</p>
+</Card>;
+
+{
+	/* ✅ DENSE LIST → slate body, green keyword */
+}
+<Card title="Known Vulnerabilities">
+	<ul className="text-sm text-slate-400 space-y-2 list-disc pl-5">
+		<li>
+			<strong className="text-muted-foreground">Quantum threat:</strong> Shor's algorithm could break RSA once practical
+			quantum hardware exists.
+		</li>
+		<li>
+			<strong className="text-muted-foreground">No Forward Secrecy:</strong> If the private key leaks, old recorded
+			sessions can be decrypted.
+		</li>
+	</ul>
+</Card>;
+
+{
+	/* ✅ NON-CARD ORDERED LIST → slate */
+}
+<ul className="list-decimal pl-5 text-sm text-slate-300 space-y-2">
+	<li>
+		<strong>Data (Layer 7)</strong> is created.
+	</li>
+	<li>It is encrypted and wrapped as it moves down the stack.</li>
+</ul>;
+
+{
+	/* ✅ OUTSIDE-CARD SPEC LIST → gray body, green keyword */
+}
+<ul className="list-disc pl-5 space-y-2 text-sm text-slate-400">
+	<li>
+		<strong className="text-muted-foreground">High Clock Speeds:</strong> Game simulation is often bottlenecked by
+		single-thread performance.
+	</li>
+	<li>
+		<strong className="text-muted-foreground">Bare Metal:</strong> Hypervisor jitter matters for highly competitive
+		games.
+	</li>
+</ul>;
+```
+
+### Quick-reference cheat sheet
+
+| Scenario                                       | Class to use                               |
+| ---------------------------------------------- | ------------------------------------------ |
+| Simple bullet card                             | `text-muted-foreground`                    |
+| Short paragraph card with easy-to-skim content | `text-muted-foreground`                    |
+| Long explanatory card paragraph                | `text-slate-300`                           |
+| Dense explanatory card list                    | `text-slate-400`                           |
+| Leading keyword in dense slate list            | `strong className="text-muted-foreground"` |
+| Card with CodeBlock / heavy prose              | surrounding text → slate                   |
+| Ordered article-body list outside cards        | usually `text-slate-300`                   |
+| Outside-card dense spec/explanation bullets    | `text-slate-400` + green keyword accents   |

@@ -79,11 +79,11 @@ export const dnsTopic: Topic = {
 		</h3>,
 		<Grid key="actors-grid" cols={2} gap={6} className="mb-8">
 			<Card title="Recursive Resolver" description="Run By: ISP / Public DNS Providers">
-				<p className="text-sm text-slate-400 mb-3">
+				<p className="text-sm text-muted-foreground mb-3">
 					This is the server your computer actually <em>talks to</em>. You configure it in your Network Settings (DHCP
 					usually assigns your ISP's resolver automatically). Popular alternatives:
 				</p>
-				<ul className="text-sm text-slate-400 space-y-1 list-disc pl-4">
+				<ul className="text-sm text-muted-foreground space-y-1 list-disc pl-4">
 					<li>
 						<code>1.1.1.1</code> — Cloudflare (fastest globally)
 					</li>
@@ -94,7 +94,7 @@ export const dnsTopic: Topic = {
 						<code>9.9.9.9</code> — Quad9 (privacy-focused)
 					</li>
 				</ul>
-				<p className="text-xs mt-3 border-t border-border pt-3 text-slate-400">
+				<p className="text-xs mt-3 border-t border-border pt-3 text-muted-foreground">
 					The resolver caches every answer it gets from Root/TLD/Authoritative servers for the duration of the record's
 					TTL. This is why changing your DNS record doesn't propagate instantly — every resolver on earth has to wait
 					for its own cached copy to expire.
@@ -123,24 +123,24 @@ export const dnsTopic: Topic = {
 				</p>
 			</Card>
 			<Card title="Domain Registrar" description="Run By: ICANN-Accredited Companies">
-				<p className="text-sm text-slate-400 mb-3">
+				<p className="text-sm text-muted-foreground mb-3">
 					The company you <em>rent</em> your domain name from (Namecheap, GoDaddy, Google Domains, Cloudflare
 					Registrar). Their one critical job in DNS is to update the TLD Registry's database with your{" "}
 					<strong>NS (Nameserver) records</strong> — telling the world which Authoritative DNS server is in charge of
 					your domain.
 				</p>
-				<p className="text-xs mt-3 border-t border-border pt-3 text-slate-400">
+				<p className="text-xs mt-3 border-t border-border pt-3 text-muted-foreground">
 					Registrar ≠ DNS Provider. You can buy from Namecheap but use Cloudflare as your DNS. You do this by setting
 					custom nameservers in your Registrar's dashboard.
 				</p>
 			</Card>
 			<Card title="Root Name Servers" description="Run By: 12 Organisations (ICANN Oversight)">
-				<p className="text-sm text-slate-400 mb-3">
+				<p className="text-sm text-muted-foreground mb-3">
 					There are only <strong>13 sets of Root Name Servers</strong> (labeled A–M), operated by ICANN, NASA, RIPE NCC,
 					and others. In reality, hundreds of physical machines worldwide respond to those 13 addresses via{" "}
 					<strong>Anycast routing</strong>. They are the very top of the DNS tree.
 				</p>
-				<p className="text-xs mt-3 border-t border-border pt-3 text-slate-400">
+				<p className="text-xs mt-3 border-t border-border pt-3 text-muted-foreground">
 					They do NOT hold domain records. They only know: "For <code>.com</code> TLD, go ask Verisign's servers at{" "}
 					<code>a.gtld-servers.net</code>."
 				</p>
@@ -389,7 +389,7 @@ app.myshop.com.   300   IN   A   104.21.55.12
 		</p>,
 		<Grid key="dnssec-grid" cols={2} gap={6} className="mb-4">
 			<Card title="Without DNSSEC" description="Status: Vulnerable">
-				<ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
 					<li>DNS responses are plain UDP packets with no authentication.</li>
 					<li>Any resolver between you and the authoritative server can forge a response.</li>
 					<li>
@@ -399,7 +399,7 @@ app.myshop.com.   300   IN   A   104.21.55.12
 				</ul>
 			</Card>
 			<Card title="With DNSSEC" description="Status: Cryptographically Verified">
-				<ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
 					<li>
 						Each DNS record is <strong>digitally signed</strong> with a private key held by the zone owner.
 					</li>

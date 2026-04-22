@@ -6,57 +6,38 @@ import { Table } from "@/components/ui/Table";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 
 export const idempotencyTopic: Topic = {
-  id: "api-idempotency",
-  title: "Idempotency in APIs",
-  description:
-    "The subtle but critical API property that prevents double charges, duplicate orders, and data corruption in distributed systems.",
-  tags: ["api", "architecture", "dist-systems", "interview"],
-  icon: "Repeat2",
-  content: [
-    <p key="1">
-      An operation is <strong>idempotent</strong> if performing it{" "}
-      <strong>multiple times</strong> produces the{" "}
-      <strong>exact same result</strong> as performing it once. In distributed
-      systems where networks are unreliable, the client might{" "}
-      <strong>retry a request</strong> because the response was lost — even
-      though the server already processed it. Without idempotency, the user gets{" "}
-      <strong>charged twice</strong>.
-    </p>,
-    <Table
-      key="2"
-      headers={["HTTP Method", "Idempotent?", "Why"]}
-      rows={[
-        ["GET", "✅ Yes", "Reading data never changes state."],
-        [
-          "PUT",
-          "✅ Yes",
-          "Replacing with the same payload produces same result.",
-        ],
-        [
-          "DELETE",
-          "✅ Yes",
-          "Deleting an already-deleted resource = same outcome.",
-        ],
-        [
-          "POST",
-          "❌ No",
-          "Each call creates a NEW resource (unless you add idempotency).",
-        ],
-        [
-          "PATCH",
-          "⚠️ Depends",
-          "If patch increments (x + 1), it's not idempotent.",
-        ],
-      ]}
-    />,
-    <h4 key="3" className="text-xl font-bold mt-8 mb-4">
-      Making POST Idempotent: Idempotency Keys
-    </h4>,
-    <CodeBlock
-      key="4"
-      language="typescript"
-      title="Stripe's Idempotency Key Pattern"
-      code={`// Client generates a unique key for each logical operation
+	id: "api-idempotency",
+	title: "Idempotency in APIs",
+	description:
+		"The subtle but critical API property that prevents double charges, duplicate orders, and data corruption in distributed systems.",
+	tags: ["api", "architecture", "dist-systems", "interview"],
+	icon: "Repeat2",
+	content: [
+		<p key="1">
+			An operation is <strong>idempotent</strong> if performing it <strong>multiple times</strong> produces the{" "}
+			<strong>exact same result</strong> as performing it once. In distributed systems where networks are unreliable,
+			the client might <strong>retry a request</strong> because the response was lost — even though the server already
+			processed it. Without idempotency, the user gets <strong>charged twice</strong>.
+		</p>,
+		<Table
+			key="2"
+			headers={["HTTP Method", "Idempotent?", "Why"]}
+			rows={[
+				["GET", "✅ Yes", "Reading data never changes state."],
+				["PUT", "✅ Yes", "Replacing with the same payload produces same result."],
+				["DELETE", "✅ Yes", "Deleting an already-deleted resource = same outcome."],
+				["POST", "❌ No", "Each call creates a NEW resource (unless you add idempotency)."],
+				["PATCH", "⚠️ Depends", "If patch increments (x + 1), it's not idempotent."],
+			]}
+		/>,
+		<h4 key="3" className="text-xl font-bold mt-8 mb-4">
+			Making POST Idempotent: Idempotency Keys
+		</h4>,
+		<CodeBlock
+			key="4"
+			language="typescript"
+			title="Stripe's Idempotency Key Pattern"
+			code={`// Client generates a unique key for each logical operation
 const response = await fetch('/api/charges', {
   method: 'POST',
   headers: {
@@ -70,32 +51,27 @@ const response = await fetch('/api/charges', {
 // 1. Check if idempotency key exists in Redis/DB
 // 2. If yes → return the cached response (no re-processing)
 // 3. If no → process the charge, store the response with the key`}
-    />,
-    <Grid key="5" cols={2} gap={6} className="my-8">
-      <Card title="Without Idempotency">
-        <p className="text-sm">
-          Client sends POST /charge. Server processes it. Response lost in
-          transit. Client retries. Server processes it <strong>again</strong>.
-          User is charged <strong>$200 instead of $100</strong>.
-        </p>
-      </Card>
-      <Card title="With Idempotency Key">
-        <p className="text-sm">
-          Client sends POST /charge with key <code>abc123</code>. Server
-          processes it, stores result keyed by <code>abc123</code>. Response
-          lost. Client retries with same <code>abc123</code>. Server returns{" "}
-          <strong>cached result</strong>. User charged exactly{" "}
-          <strong>$100</strong>.
-        </p>
-      </Card>
-    </Grid>,
-    <Callout key="6" type="warning" title="The Database Insert Trap">
-      <code>INSERT INTO orders ...</code> is <strong>never idempotent</strong> —
-      retrying creates duplicate rows. Fix: use a{" "}
-      <strong>unique constraint</strong> on the idempotency key column, or use{" "}
-      <code>INSERT ... ON CONFLICT DO NOTHING</code> (PostgreSQL) to skip
-      duplicate inserts. Every payment and order system in production must
-      handle this.
-    </Callout>,
-  ],
+		/>,
+		<Grid key="5" cols={2} gap={6} className="my-8">
+			<Card title="Without Idempotency">
+				<p className="text-sm text-muted-foreground">
+					Client sends POST /charge. Server processes it. Response lost in transit. Client retries. Server processes it{" "}
+					<strong>again</strong>. User is charged <strong>$200 instead of $100</strong>.
+				</p>
+			</Card>
+			<Card title="With Idempotency Key">
+				<p className="text-sm text-muted-foreground">
+					Client sends POST /charge with key <code>abc123</code>. Server processes it, stores result keyed by{" "}
+					<code>abc123</code>. Response lost. Client retries with same <code>abc123</code>. Server returns{" "}
+					<strong>cached result</strong>. User charged exactly <strong>$100</strong>.
+				</p>
+			</Card>
+		</Grid>,
+		<Callout key="6" type="warning" title="The Database Insert Trap">
+			<code>INSERT INTO orders ...</code> is <strong>never idempotent</strong> — retrying creates duplicate rows. Fix:
+			use a <strong>unique constraint</strong> on the idempotency key column, or use{" "}
+			<code>INSERT ... ON CONFLICT DO NOTHING</code> (PostgreSQL) to skip duplicate inserts. Every payment and order
+			system in production must handle this.
+		</Callout>,
+	],
 };

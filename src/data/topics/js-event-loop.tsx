@@ -95,14 +95,14 @@ export const jsEventLoopTopic: Topic = {
 
 		<Grid key="8" cols={1} gap={6} className="mb-8">
 			<Card title="The 'While(true)' Total Freeze">
-				<p className="text-sm text-foreground mb-4">
+				<p className="text-sm text-muted-foreground mb-4">
 					<strong>The Problem:</strong> Junior developers often write heavy CPU intensive code (calculating prime
 					numbers, massive array sorting) inside a standard route handler. Because it is synchronous math, the Call
 					Stack sits occupied indefinitely. The Event Loop physically cannot push finished network responses from the
 					Queue up to the main thread. The server completely freezes and dies.
 				</p>
 				<p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-				<ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
+				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
 					<li>
 						<strong>Offload to Worker Threads:</strong> For Node.js, specifically spin up the{" "}
 						<code>worker_threads</code> module to execute massive mathematical operations on entirely separate CPU

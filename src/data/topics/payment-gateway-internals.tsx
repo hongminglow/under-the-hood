@@ -134,14 +134,14 @@ export const paymentGatewayInternalsTopic: Topic = {
 
 		<Grid key="9" cols={2} gap={6}>
 			<Card title="Gateway Tokenisation" description="One-time payment tokens">
-				<p className="mt-2 text-sm text-muted-foreground">
+				<p className="mt-2 text-sm text-foreground/80">
 					Stripe/Braintree JS SDK sends the raw PAN to the gateway's PCI vault. The vault stores the PAN, generates a
 					random token (<code>tok_...</code>) and returns only the token to your JavaScript. Your server never touches
 					card data. The token can only be used once and expires in minutes.
 				</p>
 			</Card>
 			<Card title="Network Tokenisation (EMV)" description="Replacing PAN at the network level">
-				<p className="mt-2 text-sm text-muted-foreground">
+				<p className="mt-2 text-sm text-foreground/80">
 					Visa's Token Service (VTS) and Mastercard's MDES replace the PAN with a <strong>network token</strong> that is
 					device- and merchant-bound. Even if intercepted, a token from Amazon cannot be replayed at Google Pay. Used by
 					Apple Pay, Google Pay, and Samsung Pay. Significantly reduces fraud on card-on-file transactions.
@@ -294,7 +294,7 @@ const paymentIntent = await stripe.paymentIntents.create({
 				/>
 			</Card>
 			<Card title="Why Using Stripe Simplifies PCI Scope" description="SAQ A vs SAQ D">
-				<p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+				<p className="mt-2 text-sm text-foreground/80 leading-relaxed">
 					If you use Stripe.js / hosted payment fields, raw card data is collected inside Stripe-owned iframes. Your
 					servers, <strong>never see PAN, CVV, or expiry</strong>. This reduces your PCI scope to <strong>SAQ A</strong>{" "}
 					— the simplest self-assessment, only 22 requirements. Handling card data server-side jumps you to{" "}
@@ -509,7 +509,7 @@ export async function POST(req: NextRequest) {
 
 		<Grid key="35" cols={2} gap={6}>
 			<Card title="What You Must Always Do" description="Non-negotiable defences">
-				<ul className="list-disc pl-5 mt-2 text-sm text-muted-foreground space-y-1">
+				<ul className="list-disc pl-5 mt-2 text-sm text-foreground/80 space-y-1">
 					<li>Use hosted payment fields (Stripe Elements / Braintree Drop-in) — keep PAN out of your DOM.</li>
 					<li>Verify all webhook signatures (HMAC-SHA256) before fulfilling orders.</li>
 					<li>Calculate order amounts server-side from your database — never trust client-supplied amounts.</li>
@@ -520,7 +520,7 @@ export async function POST(req: NextRequest) {
 				</ul>
 			</Card>
 			<Card title="What You Must Never Do" description="Instant compliance violations">
-				<ul className="list-disc pl-5 mt-2 text-sm text-muted-foreground space-y-1">
+				<ul className="list-disc pl-5 mt-2 text-sm text-foreground/80 space-y-1">
 					<li>Never log raw PAN, CVV, or full card expiry — even in debug mode.</li>
 					<li>Never store CVV after authorisation — prohibited by PCI DSS Rule 3.2.</li>
 					<li>Never pass card data through your own server unless SAQ D compliant.</li>
