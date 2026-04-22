@@ -2,6 +2,7 @@ import type { Section, Topic } from "@/data/types";
 
 import { acidPropertiesTopic } from "@/data/topics/acid-properties";
 import { apiRateLimitingTopic } from "@/data/topics/api-rate-limiting";
+import { aspNetFrontendWorldTopic } from "@/data/topics/aspnet-frontend-world";
 import { bloomFiltersTopic } from "@/data/topics/bloom-filters";
 import { browserStorageTopic } from "@/data/topics/browser-storage";
 import { cachingStrategiesTopic } from "@/data/topics/caching-strategies";
@@ -276,6 +277,7 @@ export const knowledgeBase: Section[] = [
     title: "Frontend & UI",
     icon: "LayoutTemplate",
     topics: [
+      aspNetFrontendWorldTopic,
       frontendFrameworksTopic,
       frameworksVsVanillaJsTopic,
       ssrVsCsrTopic,
