@@ -264,27 +264,50 @@ export const aspNetFrontendWorldTopic: Topic = {
 			Those are two very different forms of relevance.
 		</Callout>,
 
-		<h2 key="choose-title" className="text-xl font-bold text-white mt-10 mb-4">
-			When ASP.NET Is the Smart Frontend Choice
-		</h2>,
-		<Grid key="choose-grid" cols={2} gap={6} className="my-8">
-			<Card title="Choose It When..." description="The stack should amplify existing strengths.">
-				<ul className="list-disc pl-5 text-sm text-slate-300 space-y-2">
-					<li>Your company is already deeply invested in C#, .NET, Azure, and Microsoft identity.</li>
-					<li>Your app is form-heavy, data-heavy, internal, compliance-heavy, or admin-centric.</li>
-					<li>You want fewer moving parts than a separate SPA + API + auth choreography.</li>
-					<li>You care more about long-term maintainability and organizational consistency than trend alignment.</li>
-				</ul>
-			</Card>
-			<Card title="Avoid It When..." description="The ecosystem mismatch becomes the real cost.">
-				<ul className="list-disc pl-5 text-sm text-slate-300 space-y-2">
-					<li>Your frontend team is strongly JS/TS-native and depends heavily on that ecosystem.</li>
-					<li>You need maximum access to browser-first libraries, design systems, and community examples.</li>
-					<li>You are building a very public, design-led SPA where frontend experimentation velocity matters most.</li>
-					<li>You want the broadest possible hiring pool of dedicated frontend engineers.</li>
-				</ul>
-			</Card>
-		</Grid>,
+			<h2 key="choose-title" className="text-xl font-bold text-white mt-10 mb-4">
+				When ASP.NET Is the Smart Frontend Choice
+			</h2>,
+			<Grid key="choose-grid" cols={2} gap={6} className="my-8">
+				<Card title="Choose It When..." description="The stack should amplify existing strengths.">
+					<p className="text-sm text-slate-300 leading-relaxed">
+						<strong className="text-muted-foreground">Strong .NET investment:</strong> The company already runs
+						heavily on C#, Azure, Microsoft identity, and existing .NET operational practices.
+					</p>
+					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+						<strong className="text-muted-foreground">Business-heavy UI:</strong> The app is form-heavy, data-heavy,
+						internal, compliance-sensitive, or centered around admin workflows rather than consumer-grade frontend
+						novelty.
+					</p>
+					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+						<strong className="text-muted-foreground">Simpler architecture:</strong> You want fewer moving parts than
+						a separate SPA, API, auth, and deployment choreography stitched together across multiple stacks.
+					</p>
+					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+						<strong className="text-muted-foreground">Long-horizon maintainability:</strong> Organizational
+						consistency and full-stack coherence matter more than following the center of gravity of frontend trends.
+					</p>
+				</Card>
+				<Card title="Avoid It When..." description="The ecosystem mismatch becomes the real cost.">
+					<p className="text-sm text-slate-300 leading-relaxed">
+						<strong className="text-muted-foreground">JS ecosystem dependence:</strong> Your frontend team is
+						strongly JavaScript or TypeScript-native and relies heavily on that ecosystem's patterns, tools, and
+						component libraries.
+					</p>
+					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+						<strong className="text-muted-foreground">Browser-first leverage:</strong> You need maximum access to the
+						broadest set of browser-first libraries, design systems, community examples, and experimental UI tooling.
+					</p>
+					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+						<strong className="text-muted-foreground">Public-facing product velocity:</strong> You are building a
+						highly design-led SPA where frontend iteration speed and ecosystem gravity matter more than full-stack
+						language unification.
+					</p>
+					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+						<strong className="text-muted-foreground">Hiring breadth:</strong> You want the broadest possible hiring
+						pool of dedicated frontend specialists rather than a more backend-leaning full-stack team shape.
+					</p>
+				</Card>
+			</Grid>,
 
 		<h2 key="closing-title" className="text-xl font-bold text-white mt-10 mb-4">
 			The Real Position of ASP.NET in Frontend Architecture
