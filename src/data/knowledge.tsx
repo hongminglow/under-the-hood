@@ -160,6 +160,7 @@ import { cqrsPatternTopic } from "@/data/topics/cqrs-pattern";
 // ── Batch 6 ──────────────────────────────────────────────────────────
 import { codeObfuscationTopic } from "@/data/topics/code-obfuscation";
 import { reactTransitionsDeferredTopic } from "@/data/topics/react-transitions-deferred";
+import { apiParadigmsComparisonTopic } from "@/data/topics/api-paradigms-comparison";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
@@ -222,6 +223,7 @@ export const knowledgeBase: Section[] = [
     topics: [
       rustSystemsTopic,
       dockerContainersTopic,
+      apiParadigmsComparisonTopic,
       graphqlVsRestTopic,
       microservicesTopic,
       designPatternsTopic,
