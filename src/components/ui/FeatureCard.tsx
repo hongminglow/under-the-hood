@@ -25,7 +25,7 @@ interface ThemeClasses {
 
 const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 	emerald: {
-		border: "border-emerald-900/50",
+		border: "border-emerald-900/50 hover:border-emerald-500/50 transition-colors duration-300",
 		bgGradient: "from-emerald-900/20",
 		iconWrapper: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
 		title: "text-emerald-50",
@@ -33,7 +33,7 @@ const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 		content: "text-emerald-100/70",
 	},
 	teal: {
-		border: "border-teal-900/50",
+		border: "border-teal-900/50 hover:border-teal-500/50 transition-colors duration-300",
 		bgGradient: "from-teal-900/20",
 		iconWrapper: "bg-teal-500/10 border-teal-500/20 text-teal-400",
 		title: "text-teal-50",
@@ -41,7 +41,7 @@ const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 		content: "text-teal-100/70",
 	},
 	cyan: {
-		border: "border-cyan-900/50",
+		border: "border-cyan-900/50 hover:border-cyan-500/50 transition-colors duration-300",
 		bgGradient: "from-cyan-900/20",
 		iconWrapper: "bg-cyan-500/10 border-cyan-500/20 text-cyan-400",
 		title: "text-cyan-50",
@@ -49,7 +49,7 @@ const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 		content: "text-cyan-100/70",
 	},
 	sky: {
-		border: "border-sky-900/50",
+		border: "border-sky-900/50 hover:border-sky-500/50 transition-colors duration-300",
 		bgGradient: "from-sky-900/20",
 		iconWrapper: "bg-sky-500/10 border-sky-500/20 text-sky-400",
 		title: "text-sky-50",
@@ -57,7 +57,7 @@ const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 		content: "text-sky-100/70",
 	},
 	indigo: {
-		border: "border-indigo-900/50",
+		border: "border-indigo-900/50 hover:border-indigo-500/50 transition-colors duration-300",
 		bgGradient: "from-indigo-900/20",
 		iconWrapper: "bg-indigo-500/10 border-indigo-500/20 text-indigo-400",
 		title: "text-indigo-50",
@@ -65,7 +65,7 @@ const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 		content: "text-indigo-100/70",
 	},
 	violet: {
-		border: "border-violet-900/50",
+		border: "border-violet-900/50 hover:border-violet-500/50 transition-colors duration-300",
 		bgGradient: "from-violet-900/20",
 		iconWrapper: "bg-violet-500/10 border-violet-500/20 text-violet-400",
 		title: "text-violet-50",
@@ -73,7 +73,7 @@ const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 		content: "text-violet-100/70",
 	},
 	purple: {
-		border: "border-purple-900/50",
+		border: "border-purple-900/50 hover:border-purple-500/50 transition-colors duration-300",
 		bgGradient: "from-purple-900/20",
 		iconWrapper: "bg-purple-500/10 border-purple-500/20 text-purple-400",
 		title: "text-purple-50",
@@ -81,7 +81,7 @@ const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 		content: "text-purple-100/70",
 	},
 	fuchsia: {
-		border: "border-fuchsia-900/50",
+		border: "border-fuchsia-900/50 hover:border-fuchsia-500/50 transition-colors duration-300",
 		bgGradient: "from-fuchsia-900/20",
 		iconWrapper: "bg-fuchsia-500/10 border-fuchsia-500/20 text-fuchsia-400",
 		title: "text-fuchsia-50",
@@ -89,7 +89,7 @@ const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 		content: "text-fuchsia-100/70",
 	},
 	amber: {
-		border: "border-amber-900/50",
+		border: "border-amber-900/50 hover:border-amber-500/50 transition-colors duration-300",
 		bgGradient: "from-amber-900/20",
 		iconWrapper: "bg-amber-500/10 border-amber-500/20 text-amber-400",
 		title: "text-amber-50",
@@ -97,7 +97,7 @@ const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 		content: "text-amber-100/70",
 	},
 	rose: {
-		border: "border-rose-900/50",
+		border: "border-rose-900/50 hover:border-rose-500/50 transition-colors duration-300",
 		bgGradient: "from-rose-900/20",
 		iconWrapper: "bg-rose-500/10 border-rose-500/20 text-rose-400",
 		title: "text-rose-50",
@@ -105,7 +105,7 @@ const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 		content: "text-rose-100/70",
 	},
 	slate: {
-		border: "border-slate-800/50",
+		border: "border-slate-800/50 hover:border-slate-500/50 transition-colors duration-300",
 		bgGradient: "from-slate-800/30",
 		iconWrapper: "bg-slate-500/10 border-slate-500/20 text-slate-400",
 		title: "text-slate-50",

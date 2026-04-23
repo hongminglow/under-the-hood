@@ -8,7 +8,7 @@ import { Step } from "@/components/ui/Step";
 import { Highlight } from "@/components/ui/Highlight";
 import { MistakeCard } from "@/components/ui/MistakeCard";
 import { CodeBlock } from "@/components/ui/CodeBlock";
-import { Network, Server, ShieldCheck, ShieldAlert, Globe, Timer, Hourglass, AlertTriangle } from "lucide-react";
+import { Network, Server, ShieldCheck, ShieldAlert, Globe, Timer, Hourglass, AlertTriangle, Cloud, CloudOff } from "lucide-react";
 
 import { FeatureCard } from "@/components/ui/FeatureCard";
 
@@ -403,35 +403,48 @@ export const dnsTopic: Topic = {
 			longer points to your server — it points to <strong>Cloudflare's edge network</strong>. Your real server IP
 			becomes completely hidden from the public internet.
 		</p>,
-		<Grid key="cdn-grid" cols={2} gap={6} className="mb-8">
-			<Card title="DNS-Only Mode (Grey Cloud)">
-				<p className="text-sm text-slate-400">
-					The A record exposes your <strong>real server IP</strong> to the world. Any <code>dig app.myshop.com</code>{" "}
-					command returns your actual EC2/VPS IP. Your server handles TLS, DDoS, caching — everything.
+		<Grid key="cdn-grid" cols={2} gap={6} className="mb-8 items-stretch">
+			<FeatureCard
+				icon={CloudOff}
+				title="DNS-Only Mode"
+				subtitle="The Grey Cloud"
+				theme="slate"
+			>
+				<p className="text-sm text-slate-300 leading-relaxed mb-5">
+					The A record exposes your <strong className="text-slate-100">real server IP</strong> to the world. Any <code className="bg-slate-900 px-1 py-0.5 rounded border border-slate-700/50 text-slate-300">dig</code> command returns your actual EC2/VPS IP. Your server handles TLS, DDoS, caching — everything.
 				</p>
-				<CodeBlock
-					title="dig output — DNS Only"
-					language="bash"
-					code={`$ dig app.myshop.com
+				<div className="mt-auto">
+					<CodeBlock
+						title="dig output — DNS Only"
+						language="bash"
+						code={`$ dig app.myshop.com
 ;; ANSWER SECTION:
 app.myshop.com.   300   IN   A   152.42.189.33
 # ^ Your real server IP is publicly visible`}
-				/>
-			</Card>
-			<Card title="Proxied Mode (Orange Cloud)">
-				<p className="text-sm text-slate-400">
-					Cloudflare's edge IP is returned. All traffic flows through Cloudflare's global PoPs first. Your origin IP is{" "}
-					<strong>hidden</strong>. You get free DDoS protection, CDN caching, and WAF.
+					/>
+				</div>
+			</FeatureCard>
+
+			<FeatureCard
+				icon={Cloud}
+				title="Proxied Mode"
+				subtitle="The Orange Cloud"
+				theme="amber"
+			>
+				<p className="text-sm text-amber-200/80 leading-relaxed mb-5">
+					Cloudflare's edge IP is returned. All traffic flows through Cloudflare's global PoPs first. Your origin IP is <strong className="text-amber-400">hidden</strong>. You get free DDoS protection, CDN caching, and WAF.
 				</p>
-				<CodeBlock
-					title="dig output — Proxied"
-					language="bash"
-					code={`$ dig app.myshop.com
+				<div className="mt-auto">
+					<CodeBlock
+						title="dig output — Proxied"
+						language="bash"
+						code={`$ dig app.myshop.com
 ;; ANSWER SECTION:
 app.myshop.com.   300   IN   A   104.21.55.12
 # ^ Cloudflare's IP. Your server is invisible.`}
-				/>
-			</Card>
+					/>
+				</div>
+			</FeatureCard>
 		</Grid>,
 		<Callout key="cdn-callout" type="info" title="Cloudflare Proxied Records Break Some Things">
 			When a record is proxied, only HTTP/HTTPS (ports 80/443) traffic is forwarded to your origin. If your app uses a
