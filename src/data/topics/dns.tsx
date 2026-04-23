@@ -8,6 +8,9 @@ import { Step } from "@/components/ui/Step";
 import { Highlight } from "@/components/ui/Highlight";
 import { MistakeCard } from "@/components/ui/MistakeCard";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Network, Server, ShieldCheck, ShieldAlert, Globe, Timer, Hourglass, AlertTriangle } from "lucide-react";
+
+import { FeatureCard } from "@/components/ui/FeatureCard";
 
 export const dnsTopic: Topic = {
 	id: "dns",
@@ -77,74 +80,113 @@ export const dnsTopic: Topic = {
 		<h3 key="actors-title" className="text-xl font-bold mt-12 mb-4">
 			The DNS Actors — Who Runs What?
 		</h3>,
-		<Grid key="actors-grid" cols={2} gap={6} className="mb-8">
-			<Card title="Recursive Resolver" description="Run By: ISP / Public DNS Providers">
-				<p className="text-sm text-muted-foreground mb-3">
-					This is the server your computer actually <em>talks to</em>. You configure it in your Network Settings (DHCP
-					usually assigns your ISP's resolver automatically). Popular alternatives:
+		<Grid key="actors-grid" cols={2} gap={6} className="mb-10">
+			<FeatureCard icon={Network} title="Recursive Resolver" subtitle="Run By: ISP / Public DNS" theme="emerald">
+				<p className="mb-5">
+					This is the server your computer actually{" "}
+					<em className="not-italic font-medium text-emerald-300">talks to</em>. You configure it in your Network
+					Settings (DHCP usually assigns your ISP's resolver automatically).
 				</p>
-				<ul className="text-sm text-muted-foreground space-y-1 list-disc pl-4">
-					<li>
-						<code>1.1.1.1</code> — Cloudflare (fastest globally)
-					</li>
-					<li>
-						<code>8.8.8.8</code> — Google Public DNS
-					</li>
-					<li>
-						<code>9.9.9.9</code> — Quad9 (privacy-focused)
-					</li>
-				</ul>
-				<p className="text-xs mt-3 border-t border-border pt-3 text-muted-foreground">
-					The resolver caches every answer it gets from Root/TLD/Authoritative servers for the duration of the record's
-					TTL. This is why changing your DNS record doesn't propagate instantly — every resolver on earth has to wait
-					for its own cached copy to expire.
+				<div className="bg-black/30 rounded-lg p-4 border border-white/10 mb-5">
+					<p className="text-xs uppercase tracking-wider mb-3 font-semibold opacity-80">Popular Alternatives</p>
+					<ul className="space-y-3">
+						<li className="flex items-center gap-3">
+							<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+							<code className="bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800/50">
+								1.1.1.1
+							</code>{" "}
+							Cloudflare (Fastest)
+						</li>
+						<li className="flex items-center gap-3">
+							<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+							<code className="bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800/50">
+								8.8.8.8
+							</code>{" "}
+							Google Public DNS
+						</li>
+						<li className="flex items-center gap-3">
+							<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+							<code className="bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800/50">
+								9.9.9.9
+							</code>{" "}
+							Quad9 (Privacy)
+						</li>
+					</ul>
+				</div>
+				<p className="text-xs mt-auto pt-4 border-t border-white/10 opacity-70">
+					Caches answers from Root/TLD/Authoritative servers based on TTL. Changing DNS records doesn't propagate
+					instantly due to this cache.
 				</p>
-			</Card>
-			<Card title="Authoritative Nameserver" description="Run By: You (via your DNS Provider)">
-				<p className="text-sm text-muted-foreground mb-3">
-					This is the server you actually control as a developer/DevOps engineer.{" "}
-					<strong>This is where you set your A, CNAME, MX records.</strong> When you buy a domain from Namecheap or
-					GoDaddy, you configure which Authoritative Nameserver to use:
+			</FeatureCard>
+
+			<FeatureCard icon={Server} title="Authoritative Nameserver" subtitle="Run By: You (via Provider)" theme="teal">
+				<p className="mb-5">
+					The final source of truth.{" "}
+					<strong className="font-medium text-teal-300">This is where you set your A, CNAME, MX records.</strong> When
+					you buy a domain, you point it to this server.
 				</p>
-				<ul className="text-sm text-muted-foreground space-y-1 list-disc pl-4">
-					<li>
-						<strong>AWS Route 53</strong> — enterprise, latency-based routing
-					</li>
-					<li>
-						<strong>Cloudflare DNS</strong> — free tier, proxied CDN records
-					</li>
-					<li>
-						<strong>GoDaddy / Namecheap DNS</strong> — included with domain purchase
-					</li>
-				</ul>
-				<p className="text-xs mt-3 border-t border-border pt-3 text-muted-foreground">
-					The Registrar (where you bought the domain) points the TLD server to YOUR chosen Authoritative Nameserver via
-					NS records.
+				<div className="bg-black/30 rounded-lg p-4 border border-white/10 mb-5">
+					<p className="text-xs uppercase tracking-wider mb-3 font-semibold opacity-80">Common Providers</p>
+					<ul className="space-y-3">
+						<li className="flex items-center gap-3">
+							<span className="w-1.5 h-1.5 rounded-full bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"></span>
+							<strong className="font-medium text-teal-200">AWS Route 53</strong> — Enterprise routing
+						</li>
+						<li className="flex items-center gap-3">
+							<span className="w-1.5 h-1.5 rounded-full bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"></span>
+							<strong className="font-medium text-teal-200">Cloudflare DNS</strong> — Proxied CDN records
+						</li>
+						<li className="flex items-center gap-3">
+							<span className="w-1.5 h-1.5 rounded-full bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"></span>
+							<strong className="font-medium text-teal-200">GoDaddy / Namecheap</strong> — Included DNS
+						</li>
+					</ul>
+				</div>
+				<p className="text-xs mt-auto pt-4 border-t border-white/10 opacity-70">
+					The Registrar points the TLD server to your Authoritative Nameserver using NS records.
 				</p>
-			</Card>
-			<Card title="Domain Registrar" description="Run By: ICANN-Accredited Companies">
-				<p className="text-sm text-muted-foreground mb-3">
-					The company you <em>rent</em> your domain name from (Namecheap, GoDaddy, Google Domains, Cloudflare
-					Registrar). Their one critical job in DNS is to update the TLD Registry's database with your{" "}
-					<strong>NS (Nameserver) records</strong> — telling the world which Authoritative DNS server is in charge of
-					your domain.
+			</FeatureCard>
+
+			<FeatureCard icon={ShieldCheck} title="Domain Registrar" subtitle="Run By: ICANN-Accredited" theme="cyan">
+				<p className="mb-5">
+					The company you <em className="not-italic font-medium text-cyan-300">rent</em> your domain from (e.g.
+					Namecheap, Google Domains). Their critical job is to update the TLD Registry's database.
 				</p>
-				<p className="text-xs mt-3 border-t border-border pt-3 text-muted-foreground">
-					Registrar ≠ DNS Provider. You can buy from Namecheap but use Cloudflare as your DNS. You do this by setting
-					custom nameservers in your Registrar's dashboard.
+				<div className="bg-black/30 rounded-lg p-5 border border-white/10 mb-5">
+					<p>
+						They define your{" "}
+						<strong className="font-semibold px-1 bg-cyan-900/20 rounded text-cyan-300">NS (Nameserver) records</strong>
+						, telling the world which Authoritative DNS server is in charge of your domain.
+					</p>
+				</div>
+				<p className="text-xs mt-auto pt-4 border-t border-white/10 opacity-70">
+					Registrar ≠ DNS Provider. You can buy from Namecheap but use Cloudflare as your DNS by updating custom
+					nameservers.
 				</p>
-			</Card>
-			<Card title="Root Name Servers" description="Run By: 12 Organisations (ICANN Oversight)">
-				<p className="text-sm text-muted-foreground mb-3">
-					There are only <strong>13 sets of Root Name Servers</strong> (labeled A–M), operated by ICANN, NASA, RIPE NCC,
-					and others. In reality, hundreds of physical machines worldwide respond to those 13 addresses via{" "}
-					<strong>Anycast routing</strong>. They are the very top of the DNS tree.
+			</FeatureCard>
+
+			<FeatureCard icon={Globe} title="Root Name Servers" subtitle="Run By: 12 Organisations" theme="sky">
+				<p className="mb-5">
+					There are only <strong className="font-medium text-sky-300">13 sets of Root Name Servers</strong> (A–M),
+					operated by ICANN, NASA, RIPE NCC, etc.
 				</p>
-				<p className="text-xs mt-3 border-t border-border pt-3 text-muted-foreground">
-					They do NOT hold domain records. They only know: "For <code>.com</code> TLD, go ask Verisign's servers at{" "}
-					<code>a.gtld-servers.net</code>."
+				<div className="bg-black/30 rounded-lg p-5 border border-white/10 mb-5">
+					<p>
+						They are the top of the DNS tree. Responding to queries via{" "}
+						<strong className="font-medium text-sky-300">Anycast routing</strong> to hundreds of physical machines
+						worldwide.
+					</p>
+				</div>
+				<p className="text-xs mt-auto pt-4 border-t border-white/10 opacity-70">
+					They do NOT hold domain records. They only know: "For{" "}
+					<code className="bg-sky-950 px-1.5 py-0.5 rounded border border-sky-800/50 text-sky-300">.com</code> TLD, go
+					ask Verisign's servers at{" "}
+					<code className="bg-sky-950 px-1.5 py-0.5 rounded border border-sky-800/50 text-sky-300">
+						a.gtld-servers.net
+					</code>
+					."
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		/* ─── SECTION 3: Detailed Step-By-Step ─────────────────────────────── */
@@ -302,34 +344,54 @@ export const dnsTopic: Topic = {
 			cache your answer before asking again. This single number is the root cause of <em>all</em> "why isn't my DNS
 			change live yet?" frustration.
 		</p>,
-		<Grid key="ttl-grid" cols={3} gap={6} className="mb-8">
-			<Card title="Low TTL (60–300s)" description="Use Before: Migrations, Deployments">
-				<p className="text-sm text-muted-foreground">
-					Set TTL to 60s <strong>24–48 hours before a major migration</strong>. When you flip the A record, resolvers
-					worldwide will pick up the change within 60 seconds instead of days.
+		<Grid key="ttl-grid" cols={3} gap={6} className="mb-8 items-stretch">
+			<FeatureCard
+				icon={Timer}
+				title="Low TTL (60–300s)"
+				subtitle="Use Before: Migrations"
+				theme="amber"
+			>
+				<p className="mb-5">
+					Set TTL to 60s <strong className="font-medium text-amber-300">24–48 hours before a major migration</strong>. When you flip the A record, resolvers worldwide will pick up the change within 60 seconds instead of days.
 				</p>
-				<p className="text-xs text-muted-foreground mt-3 border-t border-border pt-2">
-					⚠️ Cost: More DNS queries = more load on your Authoritative server.
+				<div className="bg-black/30 rounded-lg p-4 border border-white/5 mt-auto">
+					<p className="text-amber-200/90 text-sm leading-relaxed">
+						<span className="text-amber-500 font-bold mr-1">⚠️ Cost:</span> More DNS queries = more load on your Authoritative server.
+					</p>
+				</div>
+			</FeatureCard>
+
+			<FeatureCard
+				icon={Hourglass}
+				title="High TTL (3600–86400s)"
+				subtitle="Use For: Stable Records"
+				theme="emerald"
+			>
+				<p className="mb-5">
+					Stable records (MX, NS, CAA) can have very high TTLs. Resolvers cache aggressively, <strong className="font-medium text-emerald-300">reducing your DNS query volume</strong> and improving performance globally.
 				</p>
-			</Card>
-			<Card title="High TTL (3600–86400s)" description="Use For: Stable Production Records">
-				<p className="text-sm text-muted-foreground">
-					Stable records (MX, NS, CAA) can have very high TTLs. Resolvers cache aggressively, reducing your DNS query
-					volume and improving performance for all users globally.
+				<div className="bg-black/30 rounded-lg p-4 border border-white/5 mt-auto">
+					<p className="text-emerald-200/90 text-sm leading-relaxed">
+						<span className="text-emerald-500 font-bold mr-1">⚠️ Risk:</span> Slow rollback if something goes wrong — you're stuck for up to 24 hours.
+					</p>
+				</div>
+			</FeatureCard>
+
+			<FeatureCard
+				icon={AlertTriangle}
+				title="Negative TTL (SOA)"
+				subtitle="The Forgotten Cache"
+				theme="rose"
+			>
+				<p className="mb-5">
+					When a domain doesn't exist (NXDOMAIN), resolvers cache <em className="not-italic font-medium text-rose-300">that failure</em> based on the SOA record's minimum TTL. If you just registered a domain and it's "not found" — this is why.
 				</p>
-				<p className="text-xs text-muted-foreground mt-3 border-t border-border pt-2">
-					⚠️ Cost: Slow rollback if something goes wrong — you're stuck for up to 24 hours.
-				</p>
-			</Card>
-			<Card title="Negative TTL (SOA)" description="The Forgotten Cache">
-				<p className="text-sm text-muted-foreground">
-					When a domain doesn't exist (NXDOMAIN), resolvers cache <em>that failure</em> based on the SOA record's
-					minimum TTL. If you just registered a domain and DNS is "not found" — this is why.
-				</p>
-				<p className="text-xs text-muted-foreground mt-3 border-t border-border pt-2">
-					Fix: Wait it out. You cannot force remote resolvers to clear their negative cache.
-				</p>
-			</Card>
+				<div className="bg-black/30 rounded-lg p-4 border border-white/5 mt-auto">
+					<p className="text-rose-200/90 text-sm leading-relaxed">
+						<span className="text-rose-400 font-bold mr-1">💡 Fix:</span> Wait it out. You cannot force remote resolvers to clear their negative cache.
+					</p>
+				</div>
+			</FeatureCard>
 		</Grid>,
 
 		/* ─── SECTION 7: CDN & Cloudflare Proxied Records ──────────────────── */
@@ -387,29 +449,54 @@ app.myshop.com.   300   IN   A   104.21.55.12
 			<code>yourbank.com</code> to a malicious clone. This is called <strong>DNS Cache Poisoning</strong>. DNSSEC fixes
 			this.
 		</p>,
-		<Grid key="dnssec-grid" cols={2} gap={6} className="mb-4">
-			<Card title="Without DNSSEC" description="Status: Vulnerable">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
-					<li>DNS responses are plain UDP packets with no authentication.</li>
-					<li>Any resolver between you and the authoritative server can forge a response.</li>
-					<li>
-						Attack: Attacker stuffs resolver cache with <code>bank.com → attacker-ip</code>.
+		<Grid key="dnssec-grid" cols={2} gap={6} className="mb-4 items-stretch">
+			<FeatureCard
+				icon={ShieldAlert}
+				title="Without DNSSEC"
+				subtitle="Status: Vulnerable"
+				theme="rose"
+			>
+				<ul className="space-y-4 mb-5">
+					<li className="flex items-start gap-3">
+						<span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(244,63,94,0.8)]"></span>
+						<span className="text-rose-100/80 leading-relaxed">DNS responses are plain UDP packets with <strong>no authentication</strong>.</span>
 					</li>
-					<li>Victims are silently redirected with zero indication of tampering.</li>
+					<li className="flex items-start gap-3">
+						<span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(244,63,94,0.8)]"></span>
+						<span className="text-rose-100/80 leading-relaxed">Any resolver between you and the authoritative server can forge a response.</span>
+					</li>
 				</ul>
-			</Card>
-			<Card title="With DNSSEC" description="Status: Cryptographically Verified">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
-					<li>
-						Each DNS record is <strong>digitally signed</strong> with a private key held by the zone owner.
+				<div className="bg-black/30 rounded-lg p-4 border border-white/5 mt-auto">
+					<p className="text-rose-200/90 text-sm leading-relaxed mb-2">
+						<strong className="text-rose-400 font-bold">Attack:</strong> Attacker stuffs resolver cache with <code className="bg-rose-950 px-1 py-0.5 rounded text-rose-300 border border-rose-800/50 text-xs">bank.com → attacker-ip</code>.
+					</p>
+					<p className="text-rose-200/70 text-xs italic">Victims are silently redirected with zero indication of tampering.</p>
+				</div>
+			</FeatureCard>
+
+			<FeatureCard
+				icon={ShieldCheck}
+				title="With DNSSEC"
+				subtitle="Status: Cryptographically Verified"
+				theme="emerald"
+			>
+				<ul className="space-y-4 mb-5">
+					<li className="flex items-start gap-3">
+						<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+						<span className="text-emerald-100/80 leading-relaxed">Each DNS record is <strong>digitally signed</strong> with a private key held by the zone owner.</span>
 					</li>
-					<li>
-						The resolver can verify the signature against the public key published in the DNS zone (DNSKEY record).
+					<li className="flex items-start gap-3">
+						<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+						<span className="text-emerald-100/80 leading-relaxed">The resolver can verify the signature against the public key published in the DNS zone (DNSKEY).</span>
 					</li>
-					<li>Chain of trust: Root → TLD → Authoritative, each layer signs the next.</li>
-					<li>Tampered records produce an invalid signature → resolver refuses them.</li>
 				</ul>
-			</Card>
+				<div className="bg-black/30 rounded-lg p-4 border border-white/5 mt-auto">
+					<p className="text-emerald-200/90 text-sm leading-relaxed mb-2">
+						<strong className="text-emerald-500 font-bold">Chain of trust:</strong> Root → TLD → Authoritative, each layer signs the next.
+					</p>
+					<p className="text-emerald-200/70 text-xs italic">Tampered records produce an invalid signature → resolver refuses them.</p>
+				</div>
+			</FeatureCard>
 		</Grid>,
 
 		/* ─── SECTION 9: Common DNS Tools ──────────────────────────────────── */

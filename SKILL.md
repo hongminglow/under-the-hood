@@ -68,7 +68,7 @@ For comparing protocols, flags, or data structures.
 />
 ```
 
-#### **3. Grid (New)**
+#### **3. Grid**
 
 For side-by-side comparisons or multi-column layouts.
 
@@ -76,6 +76,29 @@ For side-by-side comparisons or multi-column layouts.
 <Grid cols={2} gap={6}>
 	<Card title="Pros">...</Card>
 	<Card title="Cons">...</Card>
+</Grid>
+```
+
+#### **4. FeatureCard (New)**
+
+For rich, dense cards that explain actors, roles, or deep-dive concepts. Instead of a single boring color, use `FeatureCard` with the `theme` prop to create a visually interesting gradient and icon header.
+
+**When to use `<Card>` vs `<FeatureCard>`:**
+- Use basic `<Card>` for short, simple bullet lists or text snippets (low visual priority).
+- Use `<FeatureCard>` for primary content sections that describe actors, distinct roles, detailed pros/cons, or conceptual deep-dives.
+
+**Important Rules for Theming `FeatureCard`:**
+1. **Semantic Contrasts (Yes/No, Pros/Cons):** When comparing opposing concepts (e.g., "With vs Without", "Good vs Bad"), use semantic themes to visually convey meaning:
+   - Vulnerable / Cons / Errors: `theme="rose"` or `theme="slate"`
+   - Secure / Pros / Success: `theme="emerald"`
+   - Warnings / High Load / Tradeoffs: `theme="amber"`
+2. **Neutral Progressions (Lists, Actors):** When displaying a neutral list of concepts (like DNS Actors) in a `<Grid>`, ALWAYS alternate the `theme` prop in a cool progression (e.g., `"emerald"`, `"teal"`, `"cyan"`, `"sky"`, `"indigo"`, `"violet"`) to break monotony and create depth without breaking the dark theme.
+
+```tsx
+<Grid cols={2} gap={6}>
+	{/* Semantic Comparison Example */}
+	<FeatureCard icon={ShieldAlert} title="Without DNSSEC" subtitle="Status: Vulnerable" theme="rose">...</FeatureCard>
+	<FeatureCard icon={ShieldCheck} title="With DNSSEC" subtitle="Status: Secure" theme="emerald">...</FeatureCard>
 </Grid>
 ```
 
@@ -181,6 +204,7 @@ To ensure the application remains stable and build-ready, always follow these ru
 <Table>         → import { Table } from "@/components/ui/Table";
 <Callout>       → import { Callout } from "@/components/ui/Callout";
 <Step>          → import { Step } from "@/components/ui/Step";
+<FeatureCard>   → import { FeatureCard } from "@/components/ui/FeatureCard";
 ```
 
 #### Example Workflow:
