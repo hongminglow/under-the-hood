@@ -284,51 +284,69 @@ export const jenkinsCicdDeepDiveTopic: Topic = {
       A naive pipeline runs every step sequentially. A well-optimized Jenkins
       pipeline uses several techniques to cut wall-clock time dramatically.
     </p>,
-    <Grid key="19" cols={2} gap={6}>
+    <Grid key="19" cols={1} gap={6}>
       <Card title="Parallel Stages" description="Run independent steps at the same time">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Jenkins declarative pipelines support a <code>parallel</code> block.
           If unit tests, linting, and security scans are independent, they can
           all run simultaneously. If each takes 3 minutes and you have 3 agents,
           total time is 3 min instead of 9 min.
         </p>
+        <p className="mt-3 text-xs text-slate-500">
+          <strong className="text-muted-foreground">Why it matters:</strong> This is usually the fastest wall-clock win because you are removing idle waiting, not just shaving seconds off one command.
+        </p>
       </Card>
       <Card title="Distributed Agents" description="Horizontal scale for builds">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Jenkins can launch agents on demand — Kubernetes plugin spins up a
           fresh pod per build, runs it, then destroys it. No queue waiting for a
           shared agent. Cost scales with demand instead of paying for idle
           machines.
         </p>
+        <p className="mt-3 text-xs text-slate-500">
+          <strong className="text-muted-foreground">Why it matters:</strong> Teams stop blocking one another on a fixed build fleet, which matters more than raw build speed once many repositories are active at once.
+        </p>
       </Card>
       <Card title="Dependency Caching" description="Don't redownload what hasn't changed">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Cache <code>node_modules</code>, Maven <code>.m2</code>, or Gradle
           caches between runs using the Jenkins Workspace or an external cache
           layer (S3, Artifactory). A warm cache turns a 4-minute{" "}
           <code>npm install</code> into a 10-second restore.
         </p>
+        <p className="mt-3 text-xs text-slate-500">
+          <strong className="text-muted-foreground">Why it matters:</strong> Dependency install time is often pure wasted repetition, so caching improves both feedback speed and infrastructure cost.
+        </p>
       </Card>
       <Card title="Incremental Builds" description="Only rebuild what changed">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           In monorepos, tools like Nx or Turborepo detect which packages changed
           and only run tests for affected modules. Jenkins triggers the build;
           the build tool decides what to actually execute.
         </p>
+        <p className="mt-3 text-xs text-slate-500">
+          <strong className="text-muted-foreground">Why it matters:</strong> This prevents giant repositories from paying the full test cost for tiny localized edits.
+        </p>
       </Card>
       <Card title="Test Splitting" description="Divide test suite across agents">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Large test suites can be split across multiple agents. Jenkins collects
           and merges JUnit XML reports from all agents afterward. A 30-minute
           test suite distributed across 10 agents takes ~3 minutes.
         </p>
+        <p className="mt-3 text-xs text-slate-500">
+          <strong className="text-muted-foreground">Why it matters:</strong> This is how slow enterprise suites stay survivable without deleting important integration coverage.
+        </p>
       </Card>
       <Card title="Docker Layer Caching" description="Reuse image layers">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Structure Dockerfiles so infrequently changing layers (OS, dependencies)
           come first. Jenkins with a local Docker daemon or BuildKit reuses cached
           layers, cutting image build time from minutes to seconds when only app
           code changes.
+        </p>
+        <p className="mt-3 text-xs text-slate-500">
+          <strong className="text-muted-foreground">Why it matters:</strong> Container-heavy pipelines feel much faster when code changes no longer invalidate the expensive base layers on every run.
         </p>
       </Card>
     </Grid>,
@@ -494,34 +512,46 @@ export const jenkinsCicdDeepDiveTopic: Topic = {
     <h3 key="27" className="text-xl font-bold mt-8 mb-4">
       When Jenkins Still Wins
     </h3>,
-    <Grid key="28" cols={2} gap={6}>
+    <Grid key="28" cols={1} gap={6}>
       <Card title="Air-Gapped / On-Premise" description="No cloud allowed">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Banks, defense contractors, and regulated industries often cannot or
           will not send code to cloud CI providers. Jenkins runs entirely
           on-premises with no external dependency.
         </p>
+        <p className="mt-3 text-xs text-slate-500">
+          <strong className="text-muted-foreground">Why it matters:</strong> This is the strongest non-negotiable reason Jenkins survives in regulated environments even when newer tools feel nicer.
+        </p>
       </Card>
       <Card title="Complex Multi-System Orchestration" description="Beyond simple build-test-deploy">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Jenkins excels at orchestrating complex, multi-team pipelines that span
           multiple repositories, artifact systems, environments, and approval
           gates — all wired together through its plugin ecosystem.
         </p>
+        <p className="mt-3 text-xs text-slate-500">
+          <strong className="text-muted-foreground">Why it matters:</strong> Many enterprises are not just building software; they are coordinating dozens of legacy systems around that software.
+        </p>
       </Card>
       <Card title="Legacy Enterprise Investments" description="Already standardized on Jenkins">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Many enterprises have years of shared libraries, custom plugins, and
           team knowledge invested in Jenkins. Migration costs are real. Jenkins
           remains the dominant tool in large enterprise environments.
         </p>
+        <p className="mt-3 text-xs text-slate-500">
+          <strong className="text-muted-foreground">Why it matters:</strong> Replacing the CI platform can cost more than the tooling pain it solves if the organization already has deep Jenkins infrastructure.
+        </p>
       </Card>
       <Card title="Maximum Flexibility" description="Build anything">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Because Jenkins runs your own servers with your own plugins, you can
           wire nearly any tool into it. Building a pipeline that triggers a
           mainframe job, sends an MQTT message, and deploys to an on-prem
           Kubernetes cluster is entirely achievable.
+        </p>
+        <p className="mt-3 text-xs text-slate-500">
+          <strong className="text-muted-foreground">Why it matters:</strong> Jenkins keeps winning where the pipeline has to reflect a messy real-world enterprise, not a clean greenfield SaaS workflow.
         </p>
       </Card>
     </Grid>,

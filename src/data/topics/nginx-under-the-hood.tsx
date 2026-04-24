@@ -155,36 +155,42 @@ export const nginxUnderTheHoodTopic: Topic = {
 
 		<Grid key="pitfalls-grid" cols={1} gap={6} className="mb-8">
 			<Card title="The 'Lost Client IP' Problem">
-				<p className="text-sm text-muted-foreground mb-4">
-					<strong>The Problem:</strong> When the Node.js or Python backend logs a user's IP, it records the internal IP
+				<p className="text-sm text-slate-300 mb-3">
+					<strong className="text-red-400">The Problem:</strong> When the Node.js or Python backend logs a user's IP, it records the internal IP
 					address of the NGINX server itself, because mathematically, NGINX is the entity that established the final TCP
 					connection to the backend.
 				</p>
-				<p className="text-sm font-semibold mb-2">Solution:</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+				<p className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">What to do instead</p>
+				<ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
 					<li>
-						Ensure NGINX utilizes <code>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code>.
+						<strong className="text-emerald-300">Forward the real client IP:</strong> Ensure NGINX utilizes <code>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code>.
 					</li>
 					<li>
-						Configure your Express/backend framework to trust the proxy (e.g., <code>app.set('trust proxy', 1)</code> in
+						<strong className="text-emerald-300">Trust the proxy explicitly:</strong> Configure your Express/backend framework to trust the proxy (e.g., <code>app.set('trust proxy', 1)</code> in
 						Express) so it extracts the real IP from the header instead of the TCP socket.
 					</li>
 				</ul>
+				<p className="mt-4 text-xs text-slate-500">
+					<strong className="text-muted-foreground">Why it matters:</strong> Without this, rate limiting, geo rules, audit logs, and abuse detection all end up blaming the proxy instead of the real user.
+				</p>
 			</Card>
 
 			<Card title="Buffer Overflows via Large Uploads">
-				<p className="text-sm text-muted-foreground mb-4">
-					<strong>The Problem:</strong> Users attempting to upload a 50MB video file get instantly rejected by NGINX
+				<p className="text-sm text-slate-300 mb-3">
+					<strong className="text-red-400">The Problem:</strong> Users attempting to upload a 50MB video file get instantly rejected by NGINX
 					with a <strong>413 Request Entity Too Large</strong> error, before the request even reaches the backend API.
 				</p>
-				<p className="text-sm font-semibold mb-2">Solution:</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
-					<li>NGINX aggressively protects backends by defaulting max body sizes to 1MB.</li>
+				<p className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">What to do instead</p>
+				<ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
+					<li><strong className="text-emerald-300">Understand the default guardrail:</strong> NGINX aggressively protects backends by defaulting max body sizes to 1MB.</li>
 					<li>
-						Explicitly override this limit inside your server or location block via{" "}
+						<strong className="text-emerald-300">Raise the limit where needed:</strong> Explicitly override this limit inside your server or location block via{" "}
 						<code>client_max_body_size 100M;</code>.
 					</li>
 				</ul>
+				<p className="mt-4 text-xs text-slate-500">
+					<strong className="text-muted-foreground">Why it matters:</strong> The backend may be perfectly capable of handling large uploads, but the proxy can silently become the real bottleneck if its limits are left at the default.
+				</p>
 			</Card>
 		</Grid>,
 

@@ -2,7 +2,6 @@ import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
-import { Highlight } from "@/components/ui/Highlight";
 import { Grid } from "@/components/ui/Grid";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { Boxes, FunctionSquare } from "lucide-react";
@@ -16,7 +15,7 @@ export const oopVsFpTopic: Topic = {
   icon: "Binary",
   content: [
     <p key="1">
-      For decades, <Highlight variant="info">Object-Oriented Programming (OOP)</Highlight> dominated the enterprise. You built a `Car` class with internal fuel state, and called `car.drive()`. But as apps got massive, tracking which object mutated the shared state became a nightmare. <Highlight variant="primary">Functional Programming (FP)</Highlight> emerged to ban internal state completely.
+      For decades, <span className="px-1.5 py-0.5 rounded-md border text-[13px] font-bold tracking-tight bg-amber-500/10 text-amber-300 border-amber-500/20">Object-Oriented Programming (OOP)</span> dominated the enterprise. You built a `Car` class with internal fuel state, and called `car.drive()`. But as apps got massive, tracking which object mutated the shared state became a nightmare. <span className="px-1.5 py-0.5 rounded-md border text-[13px] font-bold tracking-tight bg-emerald-500/10 text-emerald-300 border-emerald-500/20">Functional Programming (FP)</span> emerged to ban internal state completely.
     </p>,
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
       The Core Philosophies

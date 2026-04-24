@@ -371,8 +371,8 @@ async function handleOrder(message) {
 			Pros and Cons of Message Queues
 		</h3>,
 		<Grid key="28" cols={2} gap={6} className="my-8">
-			<Card title="Pros">
-				<ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+			<FeatureCard icon={Boxes} title="Pros" subtitle="Why queues help at scale" theme="emerald">
+				<ul className="text-xs text-emerald-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>Decoupling:</strong>&nbsp;Services don't need to know about each other
 					</li>
@@ -392,9 +392,9 @@ async function handleOrder(message) {
 						<strong>Retry logic:</strong>&nbsp;Built-in retry and DLQ
 					</li>
 				</ul>
-			</Card>
-			<Card title="Cons">
-				<ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={Send} title="Cons" subtitle="What queues make harder" theme="rose">
+				<ul className="text-xs text-rose-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>Complexity:</strong>&nbsp;Another system to monitor and debug
 					</li>
@@ -414,7 +414,7 @@ async function handleOrder(message) {
 						<strong>Cost:</strong>&nbsp;Managed services (AWS MSK) can be expensive
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="29" className="text-xl font-bold mt-8 mb-4">
