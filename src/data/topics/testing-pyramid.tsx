@@ -28,11 +28,11 @@ export const testingPyramidTopic: Topic = {
         <p className="font-mono text-xs uppercase tracking-wider text-amber-300/80">Fast CI / Lower product confidence</p>
       </FeatureCard>
       <FeatureCard icon={Trophy} title="The Testing Trophy" subtitle="Theme: behavior confidence" theme="emerald">
-        <p className="mb-3 text-emerald-100/80">
-          Focuses on <strong className="text-emerald-300">Integration Tests</strong>. Components, hooks, and user events are
+        <p className="mb-3 text-red-100/80">
+          Focuses on <strong className="text-red-300">Integration Tests</strong>. Components, hooks, and user events are
           exercised together, without paying the full cost of driving a real browser for every scenario.
         </p>
-        <p className="font-mono text-xs uppercase tracking-wider text-emerald-300/80">Medium speed / High user confidence</p>
+        <p className="font-mono text-xs uppercase tracking-wider text-red-300/80">Medium speed / High user confidence</p>
       </FeatureCard>
     </Grid>,
     <Table

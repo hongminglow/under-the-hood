@@ -30,8 +30,8 @@ export const webAccessibilityTopic: Topic = {
         </p>
       </FeatureCard>
       <FeatureCard icon={Focus} title="Focus Management" subtitle="Keyboard users need a controlled route" theme="emerald">
-        <p className="text-emerald-100/80">
-          When a modal opens, you must <strong className="text-emerald-300">trap focus</strong> inside it. If the user hits
+        <p className="text-red-100/80">
+          When a modal opens, you must <strong className="text-red-300">trap focus</strong> inside it. If the user hits
           <code>Tab</code>, they should not accidentally reach a hidden button in the background.
         </p>
       </FeatureCard>

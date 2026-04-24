@@ -29,9 +29,9 @@ export const zeroTrustTopic: Topic = {
 		</h4>,
 		<Grid key="4" cols={2} gap={6} className="mb-8">
 			<FeatureCard icon={ShieldCheck} title="Never Trust, Always Verify" subtitle="Per-request identity proof" theme="emerald">
-				<p className="text-emerald-100/80">
+				<p className="text-red-100/80">
 					Every request is treated as if it originates from an open, untrusted network. Identity verification happens on{" "}
-					<strong className="text-emerald-300">every single request</strong>, not just at login.
+					<strong className="text-red-300">every single request</strong>, not just at login.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={KeyRound} title="Least Privilege Access" subtitle="Smallest useful permission set" theme="cyan">
@@ -55,7 +55,7 @@ export const zeroTrustTopic: Topic = {
 		</Grid>,
 		<Table
 			key="5"
-			headers={["Aspect", "<span class='text-amber-300'>Traditional (Perimeter)</span>", "<span class='text-emerald-300'>Zero Trust</span>"]}
+			headers={["Aspect", "<span class='text-amber-300'>Traditional (Perimeter)</span>", "<span class='text-red-300'>Zero Trust</span>"]}
 			rows={[
 				["Trust Model", "Trust internal, block external", "Trust nothing, verify everything"],
 				["Access Control", "VPN + firewall", "Identity-based, per-request"],

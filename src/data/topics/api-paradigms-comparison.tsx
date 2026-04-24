@@ -17,22 +17,22 @@ import {
 } from "lucide-react";
 
 const paradigmLabelClass: Record<string, string> = {
-  REST: "font-semibold text-emerald-300",
-  GraphQL: "font-semibold text-teal-300",
+  REST: "font-semibold text-red-300",
+  GraphQL: "font-semibold text-amber-300",
   gRPC: "font-semibold text-cyan-300",
   "gRPC streaming": "font-semibold text-cyan-300",
   WebSockets: "font-semibold text-sky-300",
   SSE: "font-semibold text-indigo-300",
   tRPC: "font-semibold text-violet-300",
-  Webhooks: "font-semibold text-emerald-300",
-  SOAP: "font-semibold text-slate-200",
+  Webhooks: "font-semibold text-fuchsia-300",
+  SOAP: "font-semibold text-orange-300",
 };
 
 const paradigmChipClass: Record<string, string> = {
   REST:
-    "inline-flex items-center rounded-full border border-emerald-700/50 bg-emerald-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200",
+    "inline-flex items-center rounded-full border border-red-700/50 bg-red-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-red-200",
   GraphQL:
-    "inline-flex items-center rounded-full border border-teal-700/50 bg-teal-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-teal-200",
+    "inline-flex items-center rounded-full border border-amber-700/50 bg-amber-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-200",
   gRPC:
     "inline-flex items-center rounded-full border border-cyan-700/50 bg-cyan-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200",
   "gRPC streaming":
@@ -43,9 +43,9 @@ const paradigmChipClass: Record<string, string> = {
   tRPC:
     "inline-flex items-center rounded-full border border-violet-700/50 bg-violet-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-violet-200",
   Webhooks:
-    "inline-flex items-center rounded-full border border-emerald-700/50 bg-emerald-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200",
+    "inline-flex items-center rounded-full border border-fuchsia-700/50 bg-fuchsia-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-fuchsia-200",
   SOAP:
-    "inline-flex items-center rounded-full border border-slate-700/60 bg-slate-950/70 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-200",
+    "inline-flex items-center rounded-full border border-orange-700/50 bg-orange-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-orange-200",
 };
 
 function paradigmLabel(name: string) {
@@ -82,12 +82,12 @@ export const apiParadigmsComparisonTopic: Topic = {
     </p>,
     <Grid key="grid-paradigms" cols={2} gap={6} className="mb-10 items-stretch">
       <FeatureCard icon={Globe} title="REST" subtitle="Representational State Transfer" theme="emerald">
-        <p className="text-sm text-emerald-200/80 leading-relaxed mb-4">
+        <p className="text-sm text-red-100/80 leading-relaxed mb-4">
           Resources exposed via HTTP verbs (<code>GET</code>, <code>POST</code>, <code>PUT</code>,{" "}
           <code>DELETE</code>) on predictable URLs. Stateless — every request carries all context. The
           universal language of the public web.
         </p>
-        <ul className="text-sm text-emerald-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-sm text-red-100/70 list-disc pl-4 space-y-1">
           <li>Public-facing APIs consumed by third parties</li>
           <li>CRUD-heavy services (users, products, orders)</li>
           <li>Where HTTP caching and CDN edge caching matter</li>
@@ -95,13 +95,13 @@ export const apiParadigmsComparisonTopic: Topic = {
         </ul>
       </FeatureCard>
 
-      <FeatureCard icon={Layers} title="GraphQL" subtitle="Query Language for APIs" theme="teal">
-        <p className="text-sm text-teal-200/80 leading-relaxed mb-4">
+      <FeatureCard icon={Layers} title="GraphQL" subtitle="Query Language for APIs" theme="amber">
+        <p className="text-sm text-amber-100/80 leading-relaxed mb-4">
           One endpoint, client-driven queries. The frontend specifies exactly which fields it needs.
           Solves over-fetching and under-fetching — but shifts complexity from the server to the
           query layer and kills standard HTTP caching.
         </p>
-        <ul className="text-sm text-teal-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-sm text-amber-100/70 list-disc pl-4 space-y-1">
           <li>Complex frontends with many aggregated data views</li>
           <li>Mobile apps where bandwidth is precious</li>
           <li>BFF (Backend-for-Frontend) translation layers</li>
@@ -165,13 +165,13 @@ export const apiParadigmsComparisonTopic: Topic = {
         </ul>
       </FeatureCard>
 
-      <FeatureCard icon={Webhook} title="Webhooks" subtitle="Push-Based HTTP Callbacks" theme="emerald">
-        <p className="text-sm text-emerald-200/80 leading-relaxed mb-4">
+      <FeatureCard icon={Webhook} title="Webhooks" subtitle="Push-Based HTTP Callbacks" theme="fuchsia">
+        <p className="text-sm text-fuchsia-100/80 leading-relaxed mb-4">
           Your system registers a URL. When an event occurs on the provider's side (payment
           succeeds, PR merged), they <code>POST</code> a JSON payload to your URL. You react to
           events instead of polling. The entire third-party integration ecosystem runs on this.
         </p>
-        <ul className="text-sm text-emerald-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-sm text-fuchsia-100/70 list-disc pl-4 space-y-1">
           <li>Payment confirmations (Stripe, PayPal)</li>
           <li>CI/CD triggers (GitHub push → deploy pipeline)</li>
           <li>SaaS event notifications (Slack, Shopify)</li>
@@ -179,13 +179,13 @@ export const apiParadigmsComparisonTopic: Topic = {
         </ul>
       </FeatureCard>
 
-      <FeatureCard icon={Cable} title="SOAP" subtitle="Simple Object Access Protocol" theme="slate">
-        <p className="text-sm text-slate-200 leading-relaxed mb-4">
+      <FeatureCard icon={Cable} title="SOAP" subtitle="Simple Object Access Protocol" theme="orange">
+        <p className="text-sm text-orange-100/80 leading-relaxed mb-4">
           XML-based RPC with strict WSDL contracts. Verbose, heavy, but enterprise-grade — built-in
           WS-Security, transactions, and ACID guarantees over HTTP. Legacy dominant in banking,
           healthcare (HL7/FHIR), and government systems.
         </p>
-        <ul className="text-sm text-slate-300 list-disc pl-4 space-y-1">
+        <ul className="text-sm text-orange-100/70 list-disc pl-4 space-y-1">
           <li>Banking and financial transaction APIs</li>
           <li>Government and healthcare integrations</li>
           <li>Enterprise B2B systems requiring formal contracts</li>
@@ -281,7 +281,7 @@ export const apiParadigmsComparisonTopic: Topic = {
     </h3>,
     <Grid key="grid-tradeoffs" cols={2} gap={6} className="mb-8 items-stretch">
       <FeatureCard icon={Globe} title="REST" subtitle="Strengths" theme="emerald">
-        <ul className="text-sm text-emerald-100/75 list-disc pl-4 space-y-2">
+        <ul className="text-sm text-red-100/75 list-disc pl-4 space-y-2">
           <li>Universal adoption — every HTTP client works</li>
           <li>Native CDN and browser caching via <code>GET</code> URLs</li>
           <li>Stateless — trivially horizontally scalable</li>
@@ -290,7 +290,7 @@ export const apiParadigmsComparisonTopic: Topic = {
         </ul>
       </FeatureCard>
       <FeatureCard icon={Globe} title="REST" subtitle="Weaknesses" theme="emerald">
-        <ul className="text-sm text-emerald-100/75 list-disc pl-4 space-y-2">
+        <ul className="text-sm text-red-100/75 list-disc pl-4 space-y-2">
           <li>Over-fetching: returns far more fields than the client needs</li>
           <li>Under-fetching: complex views require multiple sequential calls</li>
           <li>No versioning standard — <code>/v1</code> vs <code>/v2</code> is convention, not spec</li>
@@ -298,8 +298,8 @@ export const apiParadigmsComparisonTopic: Topic = {
           <li>Loose contracts unless OpenAPI is strictly enforced</li>
         </ul>
       </FeatureCard>
-      <FeatureCard icon={Layers} title="GraphQL" subtitle="Strengths" theme="teal">
-        <ul className="text-sm text-teal-100/75 list-disc pl-4 space-y-2">
+      <FeatureCard icon={Layers} title="GraphQL" subtitle="Strengths" theme="amber">
+        <ul className="text-sm text-amber-100/75 list-disc pl-4 space-y-2">
           <li>Client dictates exact data shape — zero bandwidth waste</li>
           <li>Single endpoint reduces API surface area</li>
           <li>Schema is self-documenting via introspection</li>
@@ -307,8 +307,8 @@ export const apiParadigmsComparisonTopic: Topic = {
           <li>Ideal for aggregating multiple backend services into one layer</li>
         </ul>
       </FeatureCard>
-      <FeatureCard icon={Layers} title="GraphQL" subtitle="Weaknesses" theme="teal">
-        <ul className="text-sm text-teal-100/75 list-disc pl-4 space-y-2">
+      <FeatureCard icon={Layers} title="GraphQL" subtitle="Weaknesses" theme="amber">
+        <ul className="text-sm text-amber-100/75 list-disc pl-4 space-y-2">
           <li>HTTP caching breaks — all queries go to one POST endpoint</li>
           <li>N+1 problem re-emerges at the resolver level (requires DataLoader)</li>
           <li>File uploads are awkward — requires multipart extensions</li>
@@ -389,9 +389,9 @@ Authorization: Bearer <token>
 }`}
         />
       </FeatureCard>
-      <FeatureCard icon={Layers} title="GraphQL" subtitle="Client-Shaped Query" theme="teal">
+      <FeatureCard icon={Layers} title="GraphQL" subtitle="Client-Shaped Query" theme="amber">
         <CodeBlock
-          theme="teal"
+          theme="amber"
           language="graphql"
           code={`# Client asks for EXACTLY what it needs
 query {
@@ -480,14 +480,14 @@ const user = await trpc.user.getUser.query({ id: 42 });
           <strong className="text-sky-300">Used by:</strong> Slack, Figma, Linear
         </p>
       </FeatureCard>
-      <FeatureCard icon={ArrowLeftRight} title="Pattern 3" subtitle="GraphQL BFF + REST Backends" theme="teal">
-        <p className="text-sm text-teal-100/80 leading-relaxed mb-3">
+      <FeatureCard icon={ArrowLeftRight} title="Pattern 3" subtitle="GraphQL BFF + REST Backends" theme="amber">
+        <p className="text-sm text-amber-100/80 leading-relaxed mb-3">
           A GraphQL "Backend for Frontend" layer aggregates data from multiple REST and gRPC
           microservices. Each downstream service keeps its simple REST contract; the BFF composes
           them for the specific client.
         </p>
-        <p className="text-sm text-teal-200/70">
-          <strong className="text-teal-300">Used by:</strong> Airbnb, GitHub
+        <p className="text-sm text-amber-200/70">
+          <strong className="text-amber-300">Used by:</strong> Airbnb, GitHub
         </p>
       </FeatureCard>
       <FeatureCard icon={ArrowLeftRight} title="Pattern 4" subtitle="REST + SSE for AI Streaming" theme="indigo">

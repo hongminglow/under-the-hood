@@ -3,7 +3,7 @@ import type { ElementType } from "react";
 import { Card } from "./Card";
 import { cn } from "../../utils/utils";
 
-export type FeatureTheme = "emerald" | "teal" | "cyan" | "sky" | "indigo" | "violet" | "purple" | "fuchsia" | "amber" | "rose" | "slate";
+export type FeatureTheme = "emerald" | "teal" | "cyan" | "sky" | "indigo" | "violet" | "purple" | "fuchsia" | "orange" | "amber" | "rose" | "slate";
 
 interface FeatureCardProps {
 	icon: ElementType;
@@ -87,6 +87,14 @@ const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 		title: "text-fuchsia-50",
 		subtitle: "text-fuchsia-400/80",
 		content: "text-fuchsia-100/70",
+	},
+	orange: {
+		border: "border-orange-900/50 hover:border-orange-500/50 transition-colors duration-300",
+		bgGradient: "from-orange-900/20",
+		iconWrapper: "bg-orange-500/10 border-orange-500/20 text-orange-400",
+		title: "text-orange-50",
+		subtitle: "text-orange-400/80",
+		content: "text-orange-100/70",
 	},
 	amber: {
 		border: "border-amber-900/50 hover:border-amber-500/50 transition-colors duration-300",

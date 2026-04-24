@@ -12,6 +12,7 @@ type TableTheme =
   | "violet"
   | "purple"
   | "fuchsia"
+  | "orange"
   | "rose";
 
 interface TableProps {
@@ -143,6 +144,16 @@ const themeStyles: Record<
     highlightedRow: "bg-fuchsia-900/30 hover:bg-fuchsia-900/40",
     cell: "text-fuchsia-100/75",
     highlightedCell: "text-fuchsia-200 italic font-bold",
+  },
+  orange: {
+    container: "border-orange-900/50 bg-orange-950/20",
+    headRow: "bg-orange-900/20 border-orange-900/50",
+    headCell: "text-orange-300/80",
+    body: "divide-orange-900/35",
+    row: "hover:bg-orange-900/15",
+    highlightedRow: "bg-orange-900/30 hover:bg-orange-900/40",
+    cell: "text-orange-100/75",
+    highlightedCell: "text-orange-200 italic font-bold",
   },
   rose: {
     container: "border-rose-900/50 bg-rose-950/20",

@@ -95,29 +95,29 @@ export const dnsTopic: Topic = {
 			<FeatureCard icon={Network} title="Recursive Resolver" subtitle="Run By: ISP / Public DNS" theme="emerald">
 				<p className="mb-5">
 					This is the server your computer actually{" "}
-					<em className="not-italic font-medium text-emerald-300">talks to</em>. You configure it in your Network
+					<em className="not-italic font-medium text-red-300">talks to</em>. You configure it in your Network
 					Settings (DHCP usually assigns your ISP's resolver automatically).
 				</p>
 				<div className="bg-black/30 rounded-lg p-4 border border-white/10 mb-5">
 					<p className="text-xs uppercase tracking-wider mb-3 font-semibold opacity-80">Popular Alternatives</p>
 					<ul className="space-y-3">
 						<li className="flex items-center gap-3">
-							<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-							<code className="bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800/50">
+							<span className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
+							<code className="bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800/50">
 								1.1.1.1
 							</code>{" "}
 							Cloudflare (Fastest)
 						</li>
 						<li className="flex items-center gap-3">
-							<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-							<code className="bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800/50">
+							<span className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
+							<code className="bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800/50">
 								8.8.8.8
 							</code>{" "}
 							Google Public DNS
 						</li>
 						<li className="flex items-center gap-3">
-							<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-							<code className="bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800/50">
+							<span className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
+							<code className="bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800/50">
 								9.9.9.9
 							</code>{" "}
 							Quad9 (Privacy)

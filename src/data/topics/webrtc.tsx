@@ -39,13 +39,13 @@ export const webRtcTopic: Topic = {
     </h3>,
     <Grid key="grid-who" cols={2} gap={6} className="mb-10 items-stretch">
       <FeatureCard icon={Video} title="Google Meet" subtitle="Full browser P2P + SFU hybrid" theme="emerald">
-        <p className="text-sm text-emerald-100/80 leading-relaxed mb-3">
+        <p className="text-sm text-red-100/80 leading-relaxed mb-3">
           Meet uses WebRTC natively in Chrome (Google wrote the spec). For small calls it uses direct
           P2P connections. For group calls it routes through Google's global{" "}
-          <strong className="text-emerald-300">SFU fleet</strong>, which allows participants to send
+          <strong className="text-red-300">SFU fleet</strong>, which allows participants to send
           one stream and receive individually quality-adapted streams per recipient.
         </p>
-        <p className="text-sm text-emerald-100/70">
+        <p className="text-sm text-red-100/70">
           Key tech: VP9/AV1 video codec, QUIC transport, per-region TURN servers.
         </p>
       </FeatureCard>
@@ -178,14 +178,14 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
     </p>,
     <Grid key="grid-nat" cols={2} gap={6} className="mb-8 items-stretch">
       <FeatureCard icon={Wifi} title="STUN" subtitle="Session Traversal Utilities for NAT" theme="emerald">
-        <p className="text-sm text-emerald-100/80 leading-relaxed mb-4">
+        <p className="text-sm text-red-100/80 leading-relaxed mb-4">
           A lightweight server that reflects your public IP back to you. Your browser sends a UDP
           packet; the STUN server replies: "I received it from{" "}
-          <strong className="text-emerald-300">203.0.113.42:54321</strong>." That's your ICE
+          <strong className="text-red-300">203.0.113.42:54321</strong>." That's your ICE
           candidate — the address the other peer can try to reach you at.
         </p>
-        <div className="bg-black/30 rounded-lg p-3 border border-emerald-900/30">
-          <ul className="text-sm text-emerald-100/70 space-y-1 list-disc pl-4">
+        <div className="bg-black/30 rounded-lg p-3 border border-red-900/30">
+          <ul className="text-sm text-red-100/70 space-y-1 list-disc pl-4">
             <li>Free to run (Google's is <code>stun.l.google.com:19302</code>)</li>
             <li>Works for ~80% of home/mobile NATs</li>
             <li>Fails on Symmetric NAT (strict corporate firewalls)</li>
@@ -309,32 +309,32 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
         </div>
       </FeatureCard>
 
-      <FeatureCard icon={AlertTriangle} title="CPU / Encoder Lag" subtitle="Consistent delay, not choppy" theme="amber">
-        <p className="text-sm text-amber-100/80 leading-relaxed mb-3">
+      <FeatureCard icon={AlertTriangle} title="CPU / Encoder Lag" subtitle="Consistent delay, not choppy" theme="violet">
+        <p className="text-sm text-violet-100/80 leading-relaxed mb-3">
           The encoder cannot keep up with the frame rate. This happens when using{" "}
-          <strong className="text-amber-300">software encoding</strong> (no hardware GPU available) or
+          <strong className="text-violet-300">software encoding</strong> (no hardware GPU available) or
           when the CPU is overloaded by other tasks. Frames queue up and the call feels "behind" —
           everything said appears a second or two late.
         </p>
-        <div className="bg-black/30 rounded-lg p-3 border border-amber-900/30">
-          <p className="text-xs text-amber-400 font-semibold uppercase tracking-wider mb-1">Diagnosis</p>
-          <p className="text-sm text-amber-100/70">
+        <div className="bg-black/30 rounded-lg p-3 border border-violet-900/30">
+          <p className="text-xs text-violet-400 font-semibold uppercase tracking-wider mb-1">Diagnosis</p>
+          <p className="text-sm text-violet-100/70">
             Check <code>qualityLimitationReason: cpu</code>. High CPU% on task manager
             during call = software encoding bottleneck.
           </p>
         </div>
       </FeatureCard>
 
-      <FeatureCard icon={AlertTriangle} title="TURN Relay Lag" subtitle="High latency, not packet loss" theme="rose">
-        <p className="text-sm text-rose-100/80 leading-relaxed mb-3">
+      <FeatureCard icon={AlertTriangle} title="TURN Relay Lag" subtitle="High latency, not packet loss" theme="sky">
+        <p className="text-sm text-sky-100/80 leading-relaxed mb-3">
           When direct P2P failed and TURN is being used, all media is routed through a relay server.
           If that TURN server is in the wrong region (e.g., you're in KL but TURN is in Virginia),
           every packet makes a transatlantic round trip. Latency spikes to 200–400ms and the call
           feels like a satellite phone.
         </p>
-        <div className="bg-black/30 rounded-lg p-3 border border-rose-900/30">
-          <p className="text-xs text-rose-400 font-semibold uppercase tracking-wider mb-1">Diagnosis</p>
-          <p className="text-sm text-rose-100/70">
+        <div className="bg-black/30 rounded-lg p-3 border border-sky-900/30">
+          <p className="text-xs text-sky-400 font-semibold uppercase tracking-wider mb-1">Diagnosis</p>
+          <p className="text-sm text-sky-100/70">
             Check ICE candidate type in WebRTC internals. If{" "}
             <code>candidateType: relay</code> — you're on TURN. Check RTT; if &gt;150ms,
             the TURN server is too far away.
@@ -466,14 +466,14 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
     /* ─── QUICK REFERENCE ─── */
     <Callout key="callout-terms" type="info" title="WebRTC Protocol Stack Quick Reference">
       <ul className="space-y-2 mt-2 text-sm">
-        <li><strong className="text-emerald-300">SDP</strong>&nbsp;— Session Description Protocol. The negotiation text. Not a protocol, just a format.</li>
-        <li><strong className="text-emerald-300">ICE</strong>&nbsp;— Interactive Connectivity Establishment. The framework that finds the best network path.</li>
-        <li><strong className="text-emerald-300">STUN</strong>&nbsp;— Discovers your public IP through NAT. Free, lightweight.</li>
-        <li><strong className="text-emerald-300">TURN</strong>&nbsp;— Relays media when direct P2P fails. Expensive but essential.</li>
-        <li><strong className="text-emerald-300">DTLS</strong>&nbsp;— Datagram TLS. Encrypts the connection before media flows.</li>
-        <li><strong className="text-emerald-300">SRTP</strong>&nbsp;— Secure RTP. The encrypted audio/video stream itself.</li>
-        <li><strong className="text-emerald-300">SFU</strong>&nbsp;— Selective Forwarding Unit. The server that routes streams in group calls.</li>
-        <li><strong className="text-emerald-300">RTCDataChannel</strong>&nbsp;— Binary/text data pipe over WebRTC (SCTP). Used for file transfer, gaming, cursors.</li>
+        <li><strong className="text-sky-300">SDP</strong>&nbsp;— Session Description Protocol. The negotiation text. Not a protocol, just a format.</li>
+        <li><strong className="text-sky-300">ICE</strong>&nbsp;— Interactive Connectivity Establishment. The framework that finds the best network path.</li>
+        <li><strong className="text-sky-300">STUN</strong>&nbsp;— Discovers your public IP through NAT. Free, lightweight.</li>
+        <li><strong className="text-sky-300">TURN</strong>&nbsp;— Relays media when direct P2P fails. Expensive but essential.</li>
+        <li><strong className="text-sky-300">DTLS</strong>&nbsp;— Datagram TLS. Encrypts the connection before media flows.</li>
+        <li><strong className="text-sky-300">SRTP</strong>&nbsp;— Secure RTP. The encrypted audio/video stream itself.</li>
+        <li><strong className="text-sky-300">SFU</strong>&nbsp;— Selective Forwarding Unit. The server that routes streams in group calls.</li>
+        <li><strong className="text-sky-300">RTCDataChannel</strong>&nbsp;— Binary/text data pipe over WebRTC (SCTP). Used for file transfer, gaming, cursors.</li>
       </ul>
     </Callout>,
   ],

@@ -31,17 +31,17 @@ export const webVitalsTopic: Topic = {
 			headers={["Metric", "Definition", "The Target Score"]}
 			rows={[
 				[
-					"<span class='text-amber-300 font-black'>LCP</span> (Largest Contentful Paint)",
+					"<span class='text-amber-200/85 font-black'>LCP (Largest Contentful Paint)</span>",
 					"How long it takes the largest image or text block to become fully visible.",
 					"< 2.5 seconds",
 				],
 				[
-					"<span class='text-cyan-300 font-black'>INP</span> (Interaction to Next Paint)",
+					"<span class='text-cyan-200/85 font-black'>INP (Interaction to Next Paint)</span>",
 					"The latency of the UI responding to a physical user input (like a click).",
 					"< 200 milliseconds",
 				],
 				[
-					"<span class='text-violet-300 font-black'>CLS</span> (Cumulative Layout Shift)",
+					"<span class='text-violet-200/85 font-black'>CLS (Cumulative Layout Shift)</span>",
 					"The visual stability metric measuring unexpected layout movements.",
 					"< 0.1 score",
 				],

@@ -26,7 +26,11 @@ export const tcpVsUdpTopic: Topic = {
 		</h3>,
 		<Table
 			key="3"
-			headers={["Property", "<span class='text-cyan-300'>TCP</span> (The Reliable Courier)", "<span class='text-amber-300'>UDP</span> (The Firehose)"]}
+			headers={[
+				"Property",
+				"<span class='text-cyan-300'>TCP (The Reliable Courier)</span>",
+				"<span class='text-amber-300'>UDP (The Firehose)</span>",
+			]}
 			rows={[
 				["Connection", "Connection-oriented (Handshake required).", "Connectionless (Just send it)."],
 				[
@@ -184,7 +188,11 @@ Result: 100ms delay for packets that were already there.`}
 		</p>,
 		<Table
 			key="23"
-			headers={["Feature", "<span class='text-cyan-300'>TCP</span> (HTTP/2)", "<span class='text-amber-300'>QUIC</span> (HTTP/3 over UDP)"]}
+			headers={[
+				"Feature",
+				"<span class='text-cyan-300'>TCP (HTTP/2)</span>",
+				"<span class='text-amber-300'>QUIC (HTTP/3 over UDP)</span>",
+			]}
 			rows={[
 				["Handshake", "3-way (1 RTT) + TLS (1-2 RTT) = 2-3 RTT", "0-RTT or 1-RTT combined"],
 				["HOL Blocking", "Yes (single stream blocks all)", "No (independent streams)"],
@@ -261,7 +269,12 @@ udpServer.bind(8081);`}
 		</h3>,
 		<Table
 			key="30"
-			headers={["Metric", "<span class='text-cyan-300'>TCP</span>", "<span class='text-amber-300'>UDP</span>", "<span class='text-teal-300'>QUIC</span>"]}
+			headers={[
+				"Metric",
+				"<span class='text-cyan-300'>TCP</span>",
+				"<span class='text-amber-300'>UDP</span>",
+				"<span class='text-teal-300'>QUIC</span>",
+			]}
 			rows={[
 				["Connection Setup", "50-150ms (3-way + TLS)", "0ms (connectionless)", "0-50ms (0-RTT or 1-RTT)"],
 				["Throughput (1Gbps link)", "~850 Mbps (overhead)", "~980 Mbps (minimal overhead)", "~900 Mbps"],

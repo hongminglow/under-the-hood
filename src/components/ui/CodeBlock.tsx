@@ -17,6 +17,7 @@ interface CodeBlockProps {
 		| "violet"
 		| "purple"
 		| "fuchsia"
+		| "orange"
 		| "rose";
 }
 
@@ -97,6 +98,13 @@ const themeStyles = {
 		lang: "text-fuchsia-500/70",
 		title: "text-fuchsia-200/90",
 		body: "text-fuchsia-100/90 selection:bg-fuchsia-700/40 scrollbar-thumb-fuchsia-900/50",
+	},
+	orange: {
+		container: "bg-orange-950/30 border-orange-900/50",
+		header: "bg-orange-900/20 border-orange-900/50",
+		lang: "text-orange-500/70",
+		title: "text-orange-200/90",
+		body: "text-orange-100/90 selection:bg-orange-700/40 scrollbar-thumb-orange-900/50",
 	},
 	rose: {
 		container: "bg-rose-950/30 border-rose-900/50",

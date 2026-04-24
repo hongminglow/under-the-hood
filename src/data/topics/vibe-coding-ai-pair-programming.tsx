@@ -59,8 +59,8 @@ export const vibeCodingAiPairProgrammingTopic: Topic = {
 			The Best Prompt Shape for Coding Agents
 		</h3>,
 		<Grid key="6" cols={2} gap={6}>
-			<FeatureCard icon={CheckCircle2} title="Include These" subtitle="High-signal prompt ingredients" theme="emerald">
-				<ul className="list-disc pl-5 space-y-2 text-emerald-100/80">
+			<FeatureCard icon={CheckCircle2} title="Include These" subtitle="High-signal prompt ingredients" theme="teal">
+				<ul className="list-disc pl-5 space-y-2 text-teal-100/80">
 					<li>The exact goal: bugfix, refactor, feature, explanation, review.</li>
 					<li>The relevant files or subsystem names.</li>
 					<li>Constraints: preserve API, keep styling, avoid new deps, no schema change.</li>
@@ -68,8 +68,8 @@ export const vibeCodingAiPairProgrammingTopic: Topic = {
 					<li>Decision boundaries: ask before changing architecture, DB schema, or public API.</li>
 				</ul>
 			</FeatureCard>
-			<FeatureCard icon={ShieldAlert} title="Avoid These" subtitle="Low-signal prompt habits" theme="rose">
-				<ul className="list-disc pl-5 space-y-2 text-rose-100/80">
+			<FeatureCard icon={ShieldAlert} title="Avoid These" subtitle="Low-signal prompt habits" theme="emerald">
+				<ul className="list-disc pl-5 space-y-2 text-red-100/80">
 					<li>
 						<code>Fix this</code> with no error or failing behavior attached.
 					</li>
@@ -115,27 +115,27 @@ If you discover this needs a broader refactor, pause and say why before changing
 		</h3>,
 		<Table
 			key="10"
-			headers={["Bad Prompt", "Why It Fails", "Better Prompt"]}
+			headers={["<span class='text-red-300'>Bad Prompt</span>", "Why It Fails", "<span class='text-emerald-300'>Better Prompt</span>"]}
 			rows={[
 				[
-					"`make this page better`",
+					"<span class='text-red-300 font-semibold'>`make this page better`</span>",
 					"No scope, no metric, no constraint, no target.",
-					"`Improve the mobile layout of the pricing page without changing copy or desktop layout. Focus on spacing, hierarchy, and CTA visibility.`",
+					"<span class='text-emerald-300 font-semibold'>`Improve the mobile layout of the pricing page without changing copy or desktop layout. Focus on spacing, hierarchy, and CTA visibility.`</span>",
 				],
 				[
-					"`fix the bug in auth`",
+					"<span class='text-red-300 font-semibold'>`fix the bug in auth`</span>",
 					"Auth is too broad. The agent will guess.",
-					"`Investigate why refresh token rotation fails after 30 minutes. Start by checking the token expiry logic in auth middleware and session refresh service.`",
+					"<span class='text-emerald-300 font-semibold'>`Investigate why refresh token rotation fails after 30 minutes. Start by checking the token expiry logic in auth middleware and session refresh service.`</span>",
 				],
 				[
-					"`refactor this mess`",
+					"<span class='text-red-300 font-semibold'>`refactor this mess`</span>",
 					"The agent does not know whether you want readability, performance, architecture, or naming cleanup.",
-					"`Refactor this component for readability only. Keep behavior identical and do not extract new hooks unless duplication is obvious.`",
+					"<span class='text-emerald-300 font-semibold'>`Refactor this component for readability only. Keep behavior identical and do not extract new hooks unless duplication is obvious.`</span>",
 				],
 				[
-					"`use best practices`",
+					"<span class='text-red-300 font-semibold'>`use best practices`</span>",
 					"Best practices are contextual and often conflict.",
-					"`Modernize this form using the project's existing React patterns. Do not introduce new libraries or move validation to the backend.`",
+					"<span class='text-emerald-300 font-semibold'>`Modernize this form using the project's existing React patterns. Do not introduce new libraries or move validation to the backend.`</span>",
 				],
 			]}
 		/>,
@@ -207,8 +207,8 @@ If you discover this needs a broader refactor, pause and say why before changing
 					architecture, or tests.
 				</p>
 			</FeatureCard>
-			<FeatureCard icon={ShieldCheck} title="Good Correction" subtitle="Points to the real delta" theme="emerald">
-				<p className="leading-relaxed text-emerald-100/80">
+			<FeatureCard icon={ShieldCheck} title="Good Correction" subtitle="Points to the real delta" theme="teal">
+				<p className="leading-relaxed text-teal-100/80">
 					"Keep your pagination fix, but revert the UI restyle. I only wanted the data bug fixed. Do not change markup
 					or class names." This narrows the correction to the exact dimension that drifted.
 				</p>

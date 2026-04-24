@@ -27,8 +27,8 @@ export const twelveFacorAppTopic: Topic = {
         </p>
       </FeatureCard>
       <FeatureCard icon={Server} title="VI. Processes" subtitle="Stateless by default" theme="emerald">
-        <p className="text-emerald-100/80">
-          <strong className="text-emerald-300">The most critical factor:</strong> processes must be stateless. Anything that
+        <p className="text-red-100/80">
+          <strong className="text-red-300">The most critical factor:</strong> processes must be stateless. Anything that
           needs to survive a restart belongs in a backing service like Postgres, Redis, or S3.
         </p>
       </FeatureCard>
