@@ -93,6 +93,7 @@ For rich, dense cards that explain actors, roles, or deep-dive concepts. Instead
    - Secure / Pros / Success: `theme="emerald"`
    - Warnings / High Load / Tradeoffs: `theme="amber"`
 2. **Neutral Progressions (Lists, Actors):** When displaying a neutral list of concepts (like DNS Actors) in a `<Grid>`, ALWAYS alternate the `theme` prop in a cool progression (e.g., `"emerald"`, `"teal"`, `"cyan"`, `"sky"`, `"indigo"`, `"violet"`) to break monotony and create depth without breaking the dark theme.
+3. **Inner Text Consistency:** When assigning a `theme` to a `FeatureCard`, ensure all inner text content (paragraphs, inline code, strong tags) matches the chosen theme palette. For example, if `theme="amber"`, use `text-amber-200/80` for body text, `text-amber-400` for `<strong>` tags, and `border-amber-700/50` for nested elements. Do not suddenly mix in mismatched colors like slate or green that break the card's visual cohesion.
 
 ```tsx
 <Grid cols={2} gap={6}>

@@ -438,6 +438,7 @@ app.myshop.com.   300   IN   A   152.42.189.33
 					<CodeBlock
 						title="dig output — Proxied"
 						language="bash"
+						theme="amber"
 						code={`$ dig app.myshop.com
 ;; ANSWER SECTION:
 app.myshop.com.   300   IN   A   104.21.55.12
