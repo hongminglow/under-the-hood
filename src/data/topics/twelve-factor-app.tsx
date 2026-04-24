@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Server, SlidersHorizontal } from "lucide-react";
 
 export const twelveFacorAppTopic: Topic = {
   id: "twelve-factor-app",
@@ -19,16 +20,18 @@ export const twelveFacorAppTopic: Topic = {
       The Core Tenets of Scalability
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="III. Config (Environment Vars)">
-        <p className="text-sm text-muted-foreground mb-2">
-          Store configuration in <strong>Environment Variables</strong>, not code. The same build artifact should run in Dev, Staging, and Prod without recompilation.
+      <FeatureCard icon={SlidersHorizontal} title="III. Config" subtitle="Runtime changes without rebuilding" theme="cyan">
+        <p className="text-cyan-100/80">
+          Store configuration in <strong className="text-cyan-300">environment variables</strong>, not code. The same build
+          artifact should move from Dev to Staging to Prod without recompilation.
         </p>
-      </Card>
-      <Card title="VI. Processes (Statelessness)">
-        <p className="text-sm text-muted-foreground mb-2">
-          <strong>The Most Critical Factor:</strong> Processes must be stateless. Any data that needs to persist must be stored in a <strong>Backing Service</strong> (DB, Redis, S3).
+      </FeatureCard>
+      <FeatureCard icon={Server} title="VI. Processes" subtitle="Stateless by default" theme="emerald">
+        <p className="text-emerald-100/80">
+          <strong className="text-emerald-300">The most critical factor:</strong> processes must be stateless. Anything that
+          needs to survive a restart belongs in a backing service like Postgres, Redis, or S3.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Table
       key="4"

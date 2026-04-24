@@ -1,6 +1,4 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 
@@ -30,24 +28,27 @@ export const webComponentsShadowDomTopic: Topic = {
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">
       Lifecycle Callbacks: The 'Under the Hood' Hooks
     </h3>,
-    <Grid key="5" cols={2} gap={6} className="my-8">
-      <Card title="connectedCallback">
-        <p className="text-sm text-muted-foreground mb-2">
-          Invoked when the element is first <strong>appended</strong> to the DOM.
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          This is where you perform data fetching, setup event listeners, and render the initial Shadow DOM tree.
-        </p>
-      </Card>
-      <Card title="attributeChangedCallback">
-        <p className="text-sm text-muted-foreground mb-2">
-          Invoked when an <strong>observed attribute</strong> is updated.
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          The native version of <code>componentDidUpdate</code>. It allows you to synchronize the component's internal state with its HTML attributes.
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="5"
+      headers={["Callback", "When It Fires", "What It Is For"]}
+      rows={[
+        [
+          "connectedCallback",
+          "Invoked when the element is first <strong>appended</strong> to the DOM.",
+          "Perform data fetching, attach event listeners, and render the initial Shadow DOM tree.",
+        ],
+        [
+          "disconnectedCallback",
+          "Invoked when the element is removed from the DOM.",
+          "Clean up timers, observers, subscriptions, and listeners so detached custom elements do not leak memory.",
+        ],
+        [
+          "attributeChangedCallback",
+          "Invoked when an <strong>observed attribute</strong> is updated.",
+          "Synchronize the component's internal state with its HTML attributes, similar to a native <code>componentDidUpdate</code> hook.",
+        ],
+      ]}
+    />,
     <h3 key="6" className="text-xl font-bold mt-8 mb-4">
       Declarative Shadow DOM (DSD)
     </h3>,

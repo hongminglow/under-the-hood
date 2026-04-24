@@ -2,9 +2,11 @@ import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Card } from "@/components/ui/Card";
+import { FeatureCard } from "@/components/ui/FeatureCard";
 import { Grid } from "@/components/ui/Grid";
 import { Highlight } from "@/components/ui/Highlight";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Database, Layers } from "lucide-react";
 
 export const stackVsHeapTopic: Topic = {
   id: "stack-vs-heap",
@@ -36,11 +38,12 @@ export const stackVsHeapTopic: Topic = {
     </h3>,
 
     <Grid key="5" cols={2} gap={6} className="mb-8">
-      <Card title="The Stack (Primitives & Functions)">
-        <p className="text-sm text-foreground mb-4">
+      <FeatureCard icon={Layers} title="The Stack" subtitle="primitives and function frames" theme="cyan">
+        <p className="text-sm text-cyan-100/75 mb-4">
           Every time you explicitly call a normal function, a "Frame" is securely pushed onto the Stack. Primitives are stored directly inside that exact frame. When the function returns, the Stack automatically deletes the frame natively.
         </p>
         <CodeBlock
+          theme="cyan"
           title="stack.js"
           language="javascript"
           code={`function calculateAge() {
@@ -52,13 +55,14 @@ export const stackVsHeapTopic: Topic = {
 }
 // Once finished, currentYear physically vanishes.`}
         />
-      </Card>
+      </FeatureCard>
 
-      <Card title="The Heap (Dynamic Objects)">
-        <p className="text-sm text-foreground mb-4">
-          Objects and Arrays can grow to 50 Megabytes. They cannot strictly fit inside the tiny, rigid Stack frames. Instead, they live in the Heap. The Stack simply holds a tiny <Highlight variant="primary">Pointer</Highlight> (an address like <code>0x1F4A</code>) linking to the Heap object.
+      <FeatureCard icon={Database} title="The Heap" subtitle="dynamic objects and long-lived graphs" theme="violet">
+        <p className="text-sm text-violet-100/75 mb-4">
+          Objects and Arrays can grow to 50 Megabytes. They cannot strictly fit inside the tiny, rigid Stack frames. Instead, they live in the Heap. The Stack simply holds a tiny <strong className="text-violet-300">pointer</strong> (an address like <code>0x1F4A</code>) linking to the Heap object.
         </p>
         <CodeBlock
+          theme="violet"
           title="heap.js"
           language="javascript"
           code={`function createUser() {
@@ -69,7 +73,7 @@ export const stackVsHeapTopic: Topic = {
   return user;
 }`}
         />
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <h3 key="6" className="text-xl font-bold mt-8 mb-4">
@@ -82,7 +86,7 @@ export const stackVsHeapTopic: Topic = {
 
     <Grid key="7" cols={2} gap={6} className="mb-8">
       <Card title="Bad: Mutating the Heap (No Render)">
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-slate-300 mb-4 leading-relaxed">
           Modifying an object property changes the Heap, but the Stack's pointer address (e.g., <code>0x1F4A</code>) stays completely identical. React falsely assumes nothing mathematically changed.
         </p>
         <CodeBlock
@@ -101,7 +105,7 @@ function badUpdate() {
       </Card>
 
       <Card title="Good: Creating a New Pointer">
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-slate-300 mb-4 leading-relaxed">
           By spreading properties into a brand new object, you explicitly force JavaScript to allocate a completely new slot in the Heap. The Stack natively receives a new pointer (e.g., <code>0x9B2C</code>).
         </p>
         <CodeBlock

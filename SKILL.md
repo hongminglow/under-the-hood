@@ -96,10 +96,18 @@ For rich, dense cards that explain actors, roles, or deep-dive concepts. Instead
 **Important Rules for Theming `FeatureCard`:**
 1. **Semantic Contrasts (Yes/No, Pros/Cons):** When comparing opposing concepts (e.g., "With vs Without", "Good vs Bad"), use semantic themes to visually convey meaning:
    - Vulnerable / Cons / Errors: `theme="rose"` or `theme="slate"`
-   - Secure / Pros / Success: `theme="emerald"`
+   - Secure / Pros / Success: prefer `theme="teal"` or `theme="cyan"` for FeatureCards, or use a `type="success"` Callout when the green success treatment is desired. Avoid `theme="emerald"` for success semantics because this legacy token now renders as a high-contrast red component skin.
    - Warnings / High Load / Tradeoffs: `theme="amber"`
-2. **Neutral Progressions (Lists, Actors):** When displaying a neutral list of concepts (like DNS Actors) in a `<Grid>`, ALWAYS alternate the `theme` prop in a cool progression (e.g., `"emerald"`, `"teal"`, `"cyan"`, `"sky"`, `"indigo"`, `"violet"`) to break monotony and create depth without breaking the dark theme.
-3. **Recurring Actor Identity:** If the topic introduces a stable set of named "main characters" or paradigms early on (for example REST, GraphQL, gRPC, WebSockets), keep those same theme identities throughout the rest of the topic. Lower sections like code examples, strengths/weaknesses, hybrid patterns, comparison labels, and recommendation tables should reuse the same paradigm color instead of reverting to generic slate or default green. Once a concept earns a theme, treat that color as part of its identity across the page.
+2. **Neutral Progressions (Lists, Actors):** When displaying a neutral list of concepts (like DNS Actors) in a `<Grid>`, alternate the `theme` prop with clearly separated identities (e.g., `"emerald"`, `"amber"`, `"cyan"`, `"sky"`, `"indigo"`, `"violet"`) to break monotony and create depth without breaking the dark theme.
+   - Light green is still allowed for tags, default surfaces, and content where it already reads well. The restriction applies to reusable component `theme` skins that appear beside the primary green house style.
+   - Do not place visually adjacent actors on near-identical green/cyan/teal tones when the reader must compare them. Prefer stronger contrast pairs such as red vs amber, red vs cyan, cyan vs violet, or sky vs amber.
+3. **Recurring Actor Identity (Mandatory Theme Propagation):** If the topic introduces a stable set of named "main characters" or paradigms early on (for example REST, GraphQL, gRPC, WebSockets, Waterfall/Scrum/Kanban/XP/SAFe), create a clear theme map and keep those same theme identities throughout the rest of the topic. Once a concept earns a theme, treat that color as part of its identity across the entire page.
+   - Before editing lower sections, write down the actor → theme mapping mentally and audit every later section for those actor names.
+   - Actor-specific sections, strengths/weaknesses, tradeoff cards, example cards, and recommendation cards should use `<FeatureCard theme="actorTheme">`, not a generic `<Card>`, when the actor is the subject of the surface.
+   - Do not switch actor-owned cards to semantic green/rose just because they describe pros/cons. The actor theme wins; communicate positive/negative meaning with copy, labels, and structure inside that same theme.
+   - Standalone comparison tables should usually keep the default table theme, but their actor headers/cells must carry actor identity via colored labels, inline spans, or selective accents. Do not leave recurring actor names visually generic in later tables.
+   - If a callout is primarily about one themed actor and the available `<Callout>` types would fight that actor color, prefer a themed `<FeatureCard>` instead of a generic callout.
+   - Only skip actor theme propagation when the mention is incidental prose, not a dedicated surface, label, row, heading, or comparison axis.
 4. **Inner Text Consistency:** When assigning a `theme` to a `FeatureCard`, ensure all inner text content (paragraphs, inline code, strong tags) matches the chosen theme palette. For example, if `theme="amber"`, use `text-amber-200/80` for body text, `text-amber-400` for `<strong>` tags, and `border-amber-700/50` for nested elements. Do not suddenly mix in mismatched colors like slate or green that break the card's visual cohesion.
 5. **Nested Surface Consistency:** If a card contains nested technical surfaces like `<CodeBlock>` or `<Table>`, those surfaces must inherit the card's visual context. For every themed `FeatureCard` — including `theme="slate"` — pass the same theme into those children (`<CodeBlock theme="slate" ... />`, `<CodeBlock theme="cyan" ... />`, `<Table theme="violet" ... />`). For plain cards and standalone article examples, keep `CodeBlock` unthemed so it uses the default green house style. Do not let mismatched gray code blocks or default green table headers overpower a specifically themed parent card.
 6. **No Theme Islands Inside FeatureCards:** Avoid placing unrelated semantic color islands inside a themed `FeatureCard`. For example, inside a `theme="cyan"` card, do not use rose and emerald inner cards just to show bad vs good. Keep the nested comparison cyan, and use copy, labels, border weight, or layout to communicate contrast. Use rose/emerald only when they are the top-level comparison card themes themselves.
@@ -116,7 +124,7 @@ For rich, dense cards that explain actors, roles, or deep-dive concepts. Instead
 </Grid>
 ```
 
-#### **4. Callout**
+#### **5. Callout**
 
 For important notes, warnings, or tips. Higher visual priority than a Card.
 
@@ -132,11 +140,11 @@ _Types:_ `info`, `warning`, `success`, `tip`
 - Treat the callout itself as the parent theme surface.
 - Inside `type="info"` callouts, use blue-toned emphasis.
 - Inside `type="warning"` callouts, use amber-toned emphasis.
-- Inside `type="success"` callouts, use emerald-toned emphasis.
+- Inside `type="success"` callouts, use green-toned emphasis that matches the success banner.
 - Inside `type="danger"` callouts, use red-toned emphasis.
 - Avoid default green chips inside non-green callouts.
 
-#### **5. Step**
+#### **6. Step**
 
 For describing linear processes or sequences.
 
@@ -144,7 +152,7 @@ For describing linear processes or sequences.
 <Step index={1}>**Step Name:** Description...</Step>
 ```
 
-#### **6. CodeBlock**
+#### **7. CodeBlock**
 
 For all technical code. **Do NOT use plain triple backticks.**
 
@@ -170,7 +178,7 @@ For all technical code. **Do NOT use plain triple backticks.**
 3. Outside any card in normal article flow? Leave `CodeBlock` unthemed so it uses the default green house style.
 4. Never use `theme="slate"` just because the surrounding prose is slate. Use `theme="slate"` only when the parent card itself is `theme="slate"`.
 
-#### **7. Highlight**
+#### **8. Highlight**
 
 For inline terminology or status emphasis.
 
@@ -180,10 +188,10 @@ For inline terminology or status emphasis.
 
 **Highlight Usage Rule:**
 - `variant="primary"` is the default green house style for neutral article flow.
-- Do not use `variant="primary"` inside a themed parent surface unless that parent is also green/emerald.
+- Do not use `variant="primary"` inside a themed parent surface unless that parent is the default green house surface. For new explicit inner classes inside `theme="emerald"` components, match the component's red theme instead of adding green chips.
 - When a parent surface already has a strong color identity, prefer a matching `Highlight` variant or matching inline text styling instead of introducing a conflicting chip color.
 
-#### **8. Flow (New)**
+#### **9. Flow (New)**
 
 For visualizing sequential architectural logic, pipelines, or step-by-step processes (e.g. Call Stack -> Task Queue -> Event Loop). This renders a visually connected sequence with arrows.
 
@@ -195,6 +203,62 @@ For visualizing sequential architectural logic, pipelines, or step-by-step proce
 	]}
 />
 ```
+
+## Topic Polishing Decision Framework
+
+Use this section before polishing any existing topic. It is the high-level styling audit that prevents inconsistent component choices.
+
+### 1. Identify The Page Shape First
+
+Before editing content, classify the topic:
+
+- **Actor-driven page:** The article has recurring named paradigms, tools, frameworks, or "main characters" that appear across multiple sections. Examples: REST/GraphQL/gRPC/WebSockets, Waterfall/Scrum/Kanban/XP/SAFe, React/Vue/Angular.
+- **Mechanism-driven page:** The article explains one system or lifecycle with stages. Examples: rendering pipeline, TLS handshake, event loop, Saga flow.
+- **Diagnostic page:** The article is mostly mistakes, symptoms, causes, fixes, or tradeoffs.
+- **Reference/comparison page:** The article compares repeated dimensions across many rows.
+
+### 2. Actor-Driven Pages Must Have A Theme Map
+
+If a page is actor-driven, create a theme map early and propagate it everywhere meaningful.
+
+Required workflow:
+
+1. Introduce the actors with themed `<FeatureCard>` components.
+2. Reuse the same actor theme for that actor's dedicated sections, pros/cons, examples, tradeoffs, recommendation cards, and callout-like surfaces.
+3. Color actor names in standalone table headers/cells using inline spans while keeping the table itself on the default table theme unless the table is nested inside a themed parent.
+4. Do not use generic green/slate cards for actor-owned surfaces after the actor has an assigned theme.
+5. Do not override actor identity with semantic pros/cons colors. If Scrum is cyan, both "Scrum Strengths" and "Scrum Failure Modes" stay cyan.
+
+### 3. Choose Table vs Card By Information Shape
+
+- Use `<Table>` when items share the same repeated dimensions: "concept / mechanic / tradeoff", "pitfall / actual behavior / fix", "tool / best use / failure mode".
+- Use themed `<FeatureCard>` when a concept is a main actor, role, paradigm, or deserves identity and narrative weight.
+- Use plain `<Card>` for low-priority summaries, short checklists, or dense read sections that should stay visually calm.
+- Use `<Flow>` for lifecycle, pipeline, request path, scheduler loop, handshake, retry path, or anything that moves through ordered phases.
+- Use `<MistakeCard>` when each mistake needs a mini story with a clear problem and solution. Use `<Table>` when the mistakes are compact corrections with repeated dimensions.
+
+### 4. Reduce Reading Pressure Before Adding Decoration
+
+When a section feels too long, do not immediately add louder colors. First choose the right structure:
+
+- Repeated dimensions -> table.
+- Ordered process -> flow.
+- Dense mini-articles -> stacked `<Grid cols={1}>` cards with slate body text.
+- Actor-owned dense sections -> themed `<FeatureCard>` with matching inner text colors.
+- Short checklist cards -> green scan text.
+
+### 5. Pre-Delivery Styling Audit
+
+Before marking a topic polished:
+
+- Every imported component is used, and every used component is imported.
+- Every top-level content item has a unique `key`.
+- No emoji icons are used as UI decoration; use Lucide icons for `FeatureCard` surfaces.
+- Recurring actors keep the same theme across intro cards, lower sections, and table labels.
+- Themed `FeatureCard` inner text, nested `CodeBlock`, and nested `Table` surfaces match the parent theme.
+- Standalone tables use the default green house style unless nested inside a themed parent.
+- Dense explanatory prose uses slate; scannable checklist content uses green.
+- `pnpm run build` or the project-equivalent verification passes before final response.
 
 ## Data Entry Workflow
 
@@ -292,8 +356,10 @@ import { MistakeCard } from "@/components/ui/MistakeCard";
 
 ### 3. Component Hierarchy & Choice
 
-- **Prefer Tables**: For protocol comparisons, bit flags, or feature lists, **always** use `<Table />` instead of a linear list of `<Step />`.
-- **Grid vs. Cards**: Use `<Grid cols={2} gap={6}>` for lateral comparisons (Pros/Cons, Before/After).
+- **Tables for repeated dimensions**: Use `<Table />` for protocol comparisons, bit flags, feature matrices, compact pitfalls, or any section where every item answers the same columns.
+- **FeatureCards for recurring actors**: Use themed `<FeatureCard />` for named paradigms, frameworks, roles, and actor-owned strengths/weaknesses once a theme identity has been assigned.
+- **Cards for calm summaries**: Use plain `<Card />` for short low-priority summaries or dense explanatory cards that should reduce visual noise.
+- **Grid vs. stacking**: Use `<Grid cols={2}>` for true lateral comparisons. Use `<Grid cols={1}>` when each card reads like a mini-article.
 - **Flow sequences**: Always use `<Flow>` for visualizing the lifecycle of requests or connected architectural pipelines instead of bullet points.
 
 ### 4. Build Configuration (TSConfig)

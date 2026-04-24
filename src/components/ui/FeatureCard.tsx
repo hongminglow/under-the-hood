@@ -25,12 +25,12 @@ interface ThemeClasses {
 
 const themeClasses: Record<FeatureTheme, ThemeClasses> = {
 	emerald: {
-		border: "border-emerald-900/50 hover:border-emerald-500/50 transition-colors duration-300",
-		bgGradient: "from-emerald-900/20",
-		iconWrapper: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
-		title: "text-emerald-50",
-		subtitle: "text-emerald-400/80",
-		content: "text-emerald-100/70",
+		border: "border-red-900/50 hover:border-red-500/50 transition-colors duration-300",
+		bgGradient: "from-red-900/20",
+		iconWrapper: "bg-red-500/10 border-red-500/20 text-red-400",
+		title: "text-red-50",
+		subtitle: "text-red-400/80",
+		content: "text-red-100/70",
 	},
 	teal: {
 		border: "border-teal-900/50 hover:border-teal-500/50 transition-colors duration-300",

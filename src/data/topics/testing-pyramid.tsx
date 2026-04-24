@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Pyramid, Trophy } from "lucide-react";
 
 export const testingPyramidTopic: Topic = {
   id: "testing-pyramid",
@@ -19,35 +20,37 @@ export const testingPyramidTopic: Topic = {
       Pyramid vs. Trophy: Finding the Sweet Spot
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="The Traditional Pyramid">
-        <p className="text-sm text-muted-foreground mb-2">
-          Focuses on <strong>Unit Tests</strong>. Great for complex logic and algorithms, but can suffer from "tests pass, app broken" if the pieces don't fit together.
+      <FeatureCard icon={Pyramid} title="The Traditional Pyramid" subtitle="Theme: speed and isolation" theme="amber">
+        <p className="mb-3 text-amber-100/80">
+          Focuses on <strong className="text-amber-300">Unit Tests</strong>. Great for complex logic and algorithms, but it
+          can produce the classic failure mode: "tests pass, app broken" because the pieces were never verified together.
         </p>
-        <p className="text-xs font-mono text-blue-500">Fast CI / Low Dev Confidence</p>
-      </Card>
-      <Card title="The Testing Trophy">
-        <p className="text-sm text-muted-foreground mb-2">
-          Focuses on <strong>Integration Tests</strong> (Testing Library). Tests how components interact as a user would, without the overhead of a full browser.
+        <p className="font-mono text-xs uppercase tracking-wider text-amber-300/80">Fast CI / Lower product confidence</p>
+      </FeatureCard>
+      <FeatureCard icon={Trophy} title="The Testing Trophy" subtitle="Theme: behavior confidence" theme="emerald">
+        <p className="mb-3 text-emerald-100/80">
+          Focuses on <strong className="text-emerald-300">Integration Tests</strong>. Components, hooks, and user events are
+          exercised together, without paying the full cost of driving a real browser for every scenario.
         </p>
-        <p className="text-xs font-mono text-green-500">Medium Speed / High Confidence</p>
-      </Card>
+        <p className="font-mono text-xs uppercase tracking-wider text-emerald-300/80">Medium speed / High user confidence</p>
+      </FeatureCard>
     </Grid>,
     <Table
       key="4"
       headers={["Level", "Technical Purpose", "Trade-offs"]}
       rows={[
         [
-          "Unit",
+          "<span class='text-amber-300 font-black'>Unit</span>",
           "Verify pure functions and isolated logic (e.g., a regex or a math util).",
           "Executes in milliseconds; completely stable; zero network overhead."
         ],
         [
-          "Integration",
+          "<span class='text-emerald-300 font-black'>Integration</span>",
           "Verify that a component and its children render and fire events correctly.",
           "Highest ROI; mocks the network but uses real React state/hooks."
         ],
         [
-          "E2E (End-to-End)",
+          "<span class='text-sky-300 font-black'>E2E (End-to-End)</span>",
           "Audit the full user flow (Login -> Dashboard) in a real browser.",
           "<strong>High Flakiness:</strong> Non-deterministic results due to timing, latency, or stale data."
         ]

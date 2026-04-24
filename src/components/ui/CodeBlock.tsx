@@ -43,11 +43,11 @@ const themeStyles = {
 		body: "text-amber-100/90 selection:bg-amber-700/40 scrollbar-thumb-amber-900/50",
 	},
 	emerald: {
-		container: "bg-emerald-950/30 border-emerald-900/50",
-		header: "bg-emerald-900/20 border-emerald-900/50",
-		lang: "text-emerald-500/70",
-		title: "text-emerald-200/90",
-		body: "text-emerald-100/90 selection:bg-emerald-700/40 scrollbar-thumb-emerald-900/50",
+		container: "bg-red-950/30 border-red-900/50",
+		header: "bg-red-900/20 border-red-900/50",
+		lang: "text-red-500/70",
+		title: "text-red-200/90",
+		body: "text-red-100/90 selection:bg-red-700/40 scrollbar-thumb-red-900/50",
 	},
 	teal: {
 		container: "bg-teal-950/30 border-teal-900/50",

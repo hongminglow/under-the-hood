@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Highlight } from "@/components/ui/Highlight";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Image, Layout, MousePointerClick } from "lucide-react";
 
 export const webVitalsTopic: Topic = {
 	id: "web-vitals",
@@ -30,17 +31,17 @@ export const webVitalsTopic: Topic = {
 			headers={["Metric", "Definition", "The Target Score"]}
 			rows={[
 				[
-					"LCP (Largest Contentful Paint)",
+					"<span class='text-amber-300 font-black'>LCP</span> (Largest Contentful Paint)",
 					"How long it takes the largest image or text block to become fully visible.",
 					"< 2.5 seconds",
 				],
 				[
-					"INP (Interaction to Next Paint)",
+					"<span class='text-cyan-300 font-black'>INP</span> (Interaction to Next Paint)",
 					"The latency of the UI responding to a physical user input (like a click).",
 					"< 200 milliseconds",
 				],
 				[
-					"CLS (Cumulative Layout Shift)",
+					"<span class='text-violet-300 font-black'>CLS</span> (Cumulative Layout Shift)",
 					"The visual stability metric measuring unexpected layout movements.",
 					"< 0.1 score",
 				],
@@ -52,14 +53,14 @@ export const webVitalsTopic: Topic = {
 		</h3>,
 
 		<Grid key="5" cols={1} gap={6} className="mb-8">
-			<Card title="Fixing LCP (Loading Constraints)">
-				<p className="text-sm text-muted-foreground mb-4">
-					<strong>The Problem:</strong> LCP is almost always bottlenecked by either slow server response times (TTFB) or
+			<FeatureCard icon={Image} title="Fixing LCP" subtitle="Loading constraints" theme="amber">
+				<p className="mb-4 text-amber-100/80">
+					<strong className="text-amber-300">The problem:</strong> LCP is almost always bottlenecked by either slow server response times (TTFB) or
 					client-side rendering architecture where a huge JavaScript bundle must be downloaded and parsed before an
 					image even begins downloading.
 				</p>
-				<p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+				<p className="font-semibold mb-2 text-amber-300">Architectural Solutions:</p>
+				<ul className="text-amber-100/75 list-disc pl-5 space-y-2">
 					<li>
 						<strong>Server-Side Rendering (SSR):</strong> Use frameworks like Next.js or Astro to return fully
 						constructed HTML instantly, sending the LCP element immediately to the browser without a Javascript wall.
@@ -74,16 +75,16 @@ export const webVitalsTopic: Topic = {
 						cache them heavily behind a global Edge CDN.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 
-			<Card title="Fixing INP (Responsiveness)">
-				<p className="text-sm text-muted-foreground mb-4">
-					<strong>The Problem:</strong> INP fails when the browser's Main Thread is heavily blocked by synchronous
+			<FeatureCard icon={MousePointerClick} title="Fixing INP" subtitle="Responsiveness" theme="cyan">
+				<p className="mb-4 text-cyan-100/80">
+					<strong className="text-cyan-300">The problem:</strong> INP fails when the browser's Main Thread is heavily blocked by synchronous
 					JavaScript execution. If the user clicks a button but React is busy computing a massive 500-item state array,
 					the visual click effect is delayed.
 				</p>
-				<p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+				<p className="font-semibold mb-2 text-cyan-300">Architectural Solutions:</p>
+				<ul className="text-cyan-100/75 list-disc pl-5 space-y-2">
 					<li>
 						<strong>Yielding to the Main Thread:</strong> Break massive, long-running mathematical or fetching tasks
 						into smaller chunks utilizing <code>setTimeout</code> or <code>requestIdleCallback</code> so the browser has
@@ -98,15 +99,15 @@ export const webVitalsTopic: Topic = {
 						aggressively to prevent unnecessary re-rendering storms.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 
-			<Card title="Fixing CLS (Visual Stability)">
-				<p className="text-sm text-muted-foreground mb-4">
-					<strong>The Problem:</strong> CLS happens when asynchronous visual elements suddenly arrive over the network
+			<FeatureCard icon={Layout} title="Fixing CLS" subtitle="Visual stability" theme="violet">
+				<p className="mb-4 text-violet-100/80">
+					<strong className="text-violet-300">The problem:</strong> CLS happens when asynchronous visual elements suddenly arrive over the network
 					and forcefully push existing DOM nodes downward, causing text jumps and frustrating mis-clicks.
 				</p>
-				<p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+				<p className="font-semibold mb-2 text-violet-300">Architectural Solutions:</p>
+				<ul className="text-violet-100/75 list-disc pl-5 space-y-2">
 					<li>
 						<strong>Explicit Dimensions:</strong> Always declare strict <code>width</code> and <code>height</code>{" "}
 						attributes (or <code>aspect-ratio</code> in CSS) precisely on all images or iframes so the browser naturally
@@ -121,7 +122,7 @@ export const webVitalsTopic: Topic = {
 						Unstyled Text" (FOUT) jumping layout bug when custom fonts replace default fonts.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<Callout key="6" type="warning" title="The React useEffect Trap">

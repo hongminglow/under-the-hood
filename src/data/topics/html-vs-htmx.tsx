@@ -21,8 +21,8 @@ export const htmlVsHtmxTopic: Topic = {
 			UI updates using attributes like <code>hx-get</code>, <code>hx-post</code>, and <code>hx-target</code>.
 		</p>,
 		<Callout key="2" type="info" title="Short Answer">
-			<strong className="text-blue-300">HTML</strong> describes page structure and content.{" "}
-			<strong className="text-blue-300">HTMX</strong> keeps HTML as the main authoring model, but adds browser-side
+			<strong className="text-emerald-300">HTML</strong> describes page structure and content.{" "}
+			<strong className="text-emerald-300">HTMX</strong> keeps HTML as the main authoring model, but adds browser-side
 			behavior so the server can return <strong>HTML fragments</strong> instead of a full new page or a JSON API
 			response.
 		</Callout>,

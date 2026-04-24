@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Activity, KeyRound, ScanEye, ShieldCheck } from "lucide-react";
 
 export const zeroTrustTopic: Topic = {
 	id: "zero-trust-architecture",
@@ -27,34 +28,34 @@ export const zeroTrustTopic: Topic = {
 			Core Principles
 		</h4>,
 		<Grid key="4" cols={2} gap={6} className="mb-8">
-			<Card title="Never Trust, Always Verify">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={ShieldCheck} title="Never Trust, Always Verify" subtitle="Per-request identity proof" theme="emerald">
+				<p className="text-emerald-100/80">
 					Every request is treated as if it originates from an open, untrusted network. Identity verification happens on{" "}
-					<strong>every single request</strong>, not just at login.
+					<strong className="text-emerald-300">every single request</strong>, not just at login.
 				</p>
-			</Card>
-			<Card title="Least Privilege Access">
-				<p className="text-sm text-muted-foreground">
-					Users and services get the <strong>minimum permissions</strong> needed to do their job. An engineer accessing
+			</FeatureCard>
+			<FeatureCard icon={KeyRound} title="Least Privilege Access" subtitle="Smallest useful permission set" theme="cyan">
+				<p className="text-cyan-100/80">
+					Users and services get the <strong className="text-cyan-300">minimum permissions</strong> needed to do their job. An engineer accessing
 					production logs doesn't need write access to the database.
 				</p>
-			</Card>
-			<Card title="Micro-Segmentation">
-				<p className="text-sm text-muted-foreground">
-					The network is divided into <strong>tiny security zones</strong>. Each workload, database, and API has its own
+			</FeatureCard>
+			<FeatureCard icon={ScanEye} title="Micro-Segmentation" subtitle="One breach should not unlock the network" theme="sky">
+				<p className="text-sky-100/80">
+					The network is divided into <strong className="text-sky-300">tiny security zones</strong>. Each workload, database, and API has its own
 					access policy. Breaching one zone doesn't grant access to others.
 				</p>
-			</Card>
-			<Card title="Assume Breach">
-				<p className="text-sm text-muted-foreground">
-					The system is designed with the assumption that attackers are <strong>already inside</strong>. Continuous
+			</FeatureCard>
+			<FeatureCard icon={Activity} title="Assume Breach" subtitle="Detection and response are part of the design" theme="amber">
+				<p className="text-amber-100/80">
+					The system is designed with the assumption that attackers are <strong className="text-amber-300">already inside</strong>. Continuous
 					monitoring, anomaly detection, and automated response are built in.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<Table
 			key="5"
-			headers={["Aspect", "Traditional (Perimeter)", "Zero Trust"]}
+			headers={["Aspect", "<span class='text-amber-300'>Traditional (Perimeter)</span>", "<span class='text-emerald-300'>Zero Trust</span>"]}
 			rows={[
 				["Trust Model", "Trust internal, block external", "Trust nothing, verify everything"],
 				["Access Control", "VPN + firewall", "Identity-based, per-request"],

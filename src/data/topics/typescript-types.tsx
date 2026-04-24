@@ -2,10 +2,11 @@ import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Grid } from "@/components/ui/Grid";
-import { Card } from "@/components/ui/Card";
 import { Highlight } from "@/components/ui/Highlight";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Flow } from "@/components/ui/Flow";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Braces, ShieldCheck } from "lucide-react";
 
 export const typescriptTypesTopic: Topic = {
   id: "typescript-types",
@@ -25,7 +26,11 @@ export const typescriptTypesTopic: Topic = {
     
     <Table
       key="3"
-      headers={["Concept", "JavaScript (Dynamic)", "TypeScript (Static)"]}
+      headers={[
+        "Concept",
+        "<span class='text-amber-300'>JavaScript (Dynamic)</span>",
+        "<span class='text-cyan-300'>TypeScript (Static)</span>",
+      ]}
       rows={[
         ["Type Discovery", "Interpreter blindly guesses types at the exact moment the code executes.", "Types are structurally enforced in real-time while you write code in the IDE."],
         ["Error Catching", "Fails in Production (users see the 500 error or broken UI).", "Fails in Development (compiler physically refuses to build the app)."],
@@ -71,12 +76,13 @@ export const typescriptTypesTopic: Topic = {
     </h3>,
 
     <Grid key="7" cols={1} gap={6} className="mb-8">
-      <Card title="Structural Autocompletion (Self-Documenting Code)">
-        <p className="text-sm text-foreground mb-4">
+      <FeatureCard icon={Braces} title="Structural Autocompletion" subtitle="Self-documenting code" theme="cyan">
+        <p className="mb-4 text-cyan-100/80">
           In large teams, passing a mysterious <code>user</code> object into a JavaScript function requires tracking down 5 different files to guess what properties exist inside it. In TypeScript, pressing <code>CMD + click</code> or typing a period instantly reveals the exact structural shape natively.
         </p>
         <Grid cols={2} gap={4}>
           <CodeBlock
+            theme="cyan"
             title="Vanilla JS (Dangerous)"
             language="javascript"
             code={`// Is total a string or number? 
@@ -86,6 +92,7 @@ function checkout(cart) {
 }`}
           />
           <CodeBlock
+            theme="cyan"
             title="TypeScript (Safe)"
             language="typescript"
             code={`interface Cart {
@@ -97,17 +104,17 @@ function checkout(cart: Cart) {
 }`}
           />
         </Grid>
-      </Card>
+      </FeatureCard>
 
-      <Card title="Painless Enterprise Refactoring">
-        <p className="text-sm text-foreground mb-4">
-          <strong>The Scenario:</strong> Your backend team decides to rename the API property <code>user_id</code> to <code>userId</code>.
+      <FeatureCard icon={ShieldCheck} title="Painless Enterprise Refactoring" subtitle="Compiler-guided change safety" theme="emerald">
+        <p className="mb-4 text-emerald-100/80">
+          <strong className="text-emerald-300">The Scenario:</strong> Your backend team decides to rename the API property <code>user_id</code> to <code>userId</code>.
         </p>
-        <p className="text-sm text-muted-foreground space-y-2">
+        <p className="text-emerald-100/75">
           In <strong>JavaScript</strong>, this is an absolute nightmare. You run a global "Find and Replace", pray you didn't accidentally overwrite a completely unrelated variable, push to production, and inevitably crash the checkout page.<br/><br/>
           In <strong>TypeScript</strong>, you simply update the base <code>User</code> interface definition. Instantly, the compiler throws up 45 red squiggly lines explicitly pinpointing the exact components and files that are now mathematically broken. You fix them, and deploy with complete algorithmic confidence.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <Callout key="8" type="warning" title="The Runtime Validation Trap">

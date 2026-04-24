@@ -1,11 +1,13 @@
 import { Callout } from "@/components/ui/Callout";
 import { Card } from "@/components/ui/Card";
+import { FeatureCard } from "@/components/ui/FeatureCard";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import type { Topic } from "@/data/types";
 import { Flow } from "@/components/ui/Flow";
 import { MistakeCard } from "@/components/ui/MistakeCard";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Braces, Database } from "lucide-react";
 
 export const sqlVsNosqlTopic: Topic = {
 	id: "sql-vs-nosql",
@@ -24,30 +26,30 @@ export const sqlVsNosqlTopic: Topic = {
 			The Core Architectural Difference
 		</h3>,
 		<Grid key="3" cols={2} gap={6} className="my-8">
-			<Card title="SQL (PostgreSQL / MySQL)">
-				<p className="text-sm text-muted-foreground mb-2">
+			<FeatureCard icon={Database} title="SQL" subtitle="relational structure and ACID safety" theme="amber">
+				<p className="text-sm text-amber-100/75 mb-2">
 					Data is aggressively broken apart (Normalized) into dozens of strict tables to prevent duplication. To load a
 					User's profile, you must dynamically <code>JOIN</code> the User table with the Comments table and the Address
 					table.
 				</p>
-				<p className="text-sm font-semibold mt-3">Best for:</p>
-				<ul className="list-disc pl-5 text-sm text-muted-foreground mt-1 space-y-1">
+				<p className="text-sm font-semibold mt-3 text-amber-300">Best for:</p>
+				<ul className="list-disc pl-5 text-sm text-amber-100/75 mt-1 space-y-1">
 					<li>Financial systems requiring extreme ACID safety.</li>
 					<li>Highly interconnected data (Social Networks).</li>
 				</ul>
-			</Card>
-			<Card title="NoSQL (MongoDB / DynamoDB)">
-				<p className="text-sm text-muted-foreground mb-2">
+			</FeatureCard>
+			<FeatureCard icon={Braces} title="NoSQL" subtitle="document shape and horizontal scale" theme="cyan">
+				<p className="text-sm text-cyan-100/75 mb-2">
 					Data is clumped together (Denormalized) into massive, flexible JSON blobs. To load a User's profile, you pull
 					exactly 1 massive JSON document holding their Address and Comments naturally inside of it. Zero `JOIN`ing
 					required.
 				</p>
-				<p className="text-sm font-semibold mt-3">Best for:</p>
-				<ul className="list-disc pl-5 text-sm text-muted-foreground mt-1 space-y-1">
+				<p className="text-sm font-semibold mt-3 text-cyan-300">Best for:</p>
+				<ul className="list-disc pl-5 text-sm text-cyan-100/75 mt-1 space-y-1">
 					<li>Rapidly changing schemas (Startups).</li>
 					<li>Catalog systems (Amazon Products) where every item has entirely different JSON specs.</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<Callout key="4" type="tip" title="The Scaling Myth (Horizontal vs Vertical)">
 			It is a known physics fact that joining 5 tables together is terribly slow, causing SQL databases to hit physical
@@ -81,76 +83,76 @@ export const sqlVsNosqlTopic: Topic = {
 			When to Use SQL: The Decision Framework
 		</h3>,
 		<Grid key="9" cols={2} gap={6} className="my-8">
-			<Card title="Complex Relationships">
-				<p className="text-sm text-muted-foreground mb-2">Many-to-many relationships, deep JOINs.</p>
-				<p className="text-xs italic text-muted-foreground">
+			<FeatureCard icon={Database} title="Complex Relationships" subtitle="SQL strength" theme="amber">
+				<p className="text-sm text-amber-300 mb-2">Many-to-many relationships, deep JOINs.</p>
+				<p className="text-sm text-amber-100/75">
 					Social networks (users, friends, posts, comments, likes), e-commerce (products, categories, orders, reviews),
 					ERP systems. SQL's <code>JOIN</code>&nbsp;operations are optimized for relational queries. NoSQL would require
 					multiple round-trips or massive data duplication.
 				</p>
-			</Card>
-			<Card title="ACID Transactions">
-				<p className="text-sm text-muted-foreground mb-2">Financial operations, inventory management.</p>
-				<p className="text-xs italic text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Database} title="ACID Transactions" subtitle="SQL strength" theme="amber">
+				<p className="text-sm text-amber-300 mb-2">Financial operations, inventory management.</p>
+				<p className="text-sm text-amber-100/75">
 					Banking (transfer $100 from A to B atomically), payment processing, stock trading. SQL guarantees{" "}
-					<strong>atomicity</strong>: either all operations succeed or all fail. NoSQL historically sacrificed this for
+					<strong className="text-amber-300">atomicity</strong>: either all operations succeed or all fail. NoSQL historically sacrificed this for
 					scale (though modern NoSQL added limited transaction support).
 				</p>
-			</Card>
-			<Card title="Structured, Stable Data">
-				<p className="text-sm text-muted-foreground mb-2">Schema rarely changes, data integrity critical.</p>
-				<p className="text-xs italic text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Database} title="Structured, Stable Data" subtitle="SQL strength" theme="amber">
+				<p className="text-sm text-amber-300 mb-2">Schema rarely changes, data integrity critical.</p>
+				<p className="text-sm text-amber-100/75">
 					Healthcare records (strict HIPAA compliance), government systems, legacy enterprise apps. SQL enforces
 					constraints (<code>NOT NULL</code>, <code>FOREIGN KEY</code>, <code>CHECK</code>) at the database level. Bad
 					data physically cannot enter.
 				</p>
-			</Card>
-			<Card title="Complex Queries & Analytics">
-				<p className="text-sm text-muted-foreground mb-2">Aggregations, window functions, CTEs.</p>
-				<p className="text-xs italic text-muted-foreground">
-					Business intelligence dashboards, reporting systems. SQL's query language is <strong>50 years mature</strong>
+			</FeatureCard>
+			<FeatureCard icon={Database} title="Complex Queries & Analytics" subtitle="SQL strength" theme="amber">
+				<p className="text-sm text-amber-300 mb-2">Aggregations, window functions, CTEs.</p>
+				<p className="text-sm text-amber-100/75">
+					Business intelligence dashboards, reporting systems. SQL's query language is <strong className="text-amber-300">50 years mature</strong>
 					&nbsp;with advanced features (recursive CTEs, window functions, materialized views). NoSQL query languages are
 					primitive in comparison.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="10" className="text-xl font-bold mt-8 mb-4">
 			When to Use NoSQL: The Decision Framework
 		</h3>,
 		<Grid key="11" cols={2} gap={6} className="my-8">
-			<Card title="Massive Scale (Horizontal)">
-				<p className="text-sm text-muted-foreground mb-2">Billions of records, petabytes of data.</p>
-				<p className="text-xs italic text-muted-foreground">
+			<FeatureCard icon={Braces} title="Massive Scale (Horizontal)" subtitle="NoSQL strength" theme="cyan">
+				<p className="text-sm text-cyan-300 mb-2">Billions of records, petabytes of data.</p>
+				<p className="text-sm text-cyan-100/75">
 					IoT sensor data (millions of writes/sec), social media feeds (Facebook's 2.9B users), log aggregation. NoSQL
-					databases like Cassandra can scale to <strong>1000+ nodes</strong>&nbsp;linearly. SQL databases hit scaling
+					databases like Cassandra can scale to <strong className="text-cyan-300">1000+ nodes</strong>&nbsp;linearly. SQL databases hit scaling
 					limits around 10-50 nodes due to JOIN complexity.
 				</p>
-			</Card>
-			<Card title="Flexible/Evolving Schema">
-				<p className="text-sm text-muted-foreground mb-2">Rapid prototyping, frequent schema changes.</p>
-				<p className="text-xs italic text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Braces} title="Flexible/Evolving Schema" subtitle="NoSQL strength" theme="cyan">
+				<p className="text-sm text-cyan-300 mb-2">Rapid prototyping, frequent schema changes.</p>
+				<p className="text-sm text-cyan-100/75">
 					Startups iterating on product-market fit, content management systems (every article has different fields),
 					product catalogs (phones have "screen_size", books have "author"). Adding a field in MongoDB = just insert it.
 					No migrations needed.
 				</p>
-			</Card>
-			<Card title="Document-Centric Data">
-				<p className="text-sm text-muted-foreground mb-2">Self-contained entities, minimal relationships.</p>
-				<p className="text-xs italic text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Braces} title="Document-Centric Data" subtitle="NoSQL strength" theme="cyan">
+				<p className="text-sm text-cyan-300 mb-2">Self-contained entities, minimal relationships.</p>
+				<p className="text-sm text-cyan-100/75">
 					User profiles (all data in one document), blog posts (content + metadata + comments embedded), product
 					listings. If your data naturally maps to JSON and you rarely need to JOIN across collections, NoSQL is simpler
 					and faster.
 				</p>
-			</Card>
-			<Card title="High Write Throughput">
-				<p className="text-sm text-muted-foreground mb-2">Write-heavy workloads, append-only logs.</p>
-				<p className="text-xs italic text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Braces} title="High Write Throughput" subtitle="NoSQL strength" theme="cyan">
+				<p className="text-sm text-cyan-300 mb-2">Write-heavy workloads, append-only logs.</p>
+				<p className="text-sm text-cyan-100/75">
 					Time-series data (metrics, logs, events), real-time analytics, clickstream tracking. Cassandra and DynamoDB
-					are optimized for <strong>write amplification</strong>. SQL databases struggle with millions of inserts/sec
+					are optimized for <strong className="text-cyan-300">write amplification</strong>. SQL databases struggle with millions of inserts/sec
 					due to index maintenance overhead.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="12" className="text-xl font-bold mt-8 mb-4">

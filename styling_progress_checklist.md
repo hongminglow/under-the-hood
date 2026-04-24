@@ -113,41 +113,41 @@
 - [x] realtime-counters.tsx
 - [x] recursion-call-stack.tsx
 - [x] redis-in-memory.tsx
-- [ ] rendering-pipeline.tsx
-- [ ] rest-api-design.tsx
-- [ ] rsa-cryptography.tsx
-- [ ] rust-systems.tsx
-- [ ] saga-pattern.tsx
-- [ ] sdlc-methodologies.tsx
-- [ ] serverless-computing.tsx
-- [ ] service-workers-pwa.tsx
-- [ ] setinterval-vs-requestanimationframe.tsx
-- [ ] skills-vs-mcp.tsx
-- [ ] software-testing-strategies.tsx
-- [ ] solid-principles.tsx
-- [ ] sql-query-optimization.tsx
-- [ ] sql-vs-nosql.tsx
-- [ ] ssr-vs-csr.tsx
-- [ ] stack-vs-heap.tsx
-- [ ] state-management.tsx
-- [ ] tauri-under-the-hood.tsx
-- [ ] tcp-ip.tsx
-- [ ] tcp-vs-udp.tsx
-- [ ] terminals-shells-kernel.tsx
-- [ ] testing-pyramid.tsx
-- [ ] twelve-factor-app.tsx
-- [ ] typescript-types.tsx
-- [ ] vector-databases-embeddings.tsx
-- [ ] vibe-coding-ai-pair-programming.tsx
-- [ ] virtual-dom-vs-signals.tsx
-- [ ] vite-vs-webpack.tsx
-- [ ] web-accessibility.tsx
-- [ ] web-components-shadow-dom.tsx
-- [ ] web-request-lifecycle.tsx
-- [ ] web-security.tsx
-- [ ] web-vitals.tsx
-- [ ] webassembly.tsx
-- [ ] webhooks-vs-polling.tsx
-- [ ] webrtc.tsx
-- [ ] websockets.tsx
-- [ ] zero-trust-architecture.tsx
+- [x] rendering-pipeline.tsx
+- [x] rest-api-design.tsx
+- [x] rsa-cryptography.tsx
+- [x] rust-systems.tsx
+- [x] saga-pattern.tsx
+- [x] sdlc-methodologies.tsx
+- [x] serverless-computing.tsx
+- [x] service-workers-pwa.tsx
+- [x] setinterval-vs-requestanimationframe.tsx
+- [x] skills-vs-mcp.tsx
+- [x] software-testing-strategies.tsx
+- [x] solid-principles.tsx
+- [x] sql-query-optimization.tsx
+- [x] sql-vs-nosql.tsx
+- [x] ssr-vs-csr.tsx
+- [x] stack-vs-heap.tsx
+- [x] state-management.tsx
+- [x] tauri-under-the-hood.tsx
+- [x] tcp-ip.tsx
+- [x] tcp-vs-udp.tsx
+- [x] terminals-shells-kernel.tsx
+- [x] testing-pyramid.tsx
+- [x] twelve-factor-app.tsx
+- [x] typescript-types.tsx
+- [x] vector-databases-embeddings.tsx
+- [x] vibe-coding-ai-pair-programming.tsx
+- [x] virtual-dom-vs-signals.tsx
+- [x] vite-vs-webpack.tsx
+- [x] web-accessibility.tsx
+- [x] web-components-shadow-dom.tsx
+- [x] web-request-lifecycle.tsx
+- [x] web-security.tsx
+- [x] web-vitals.tsx
+- [x] webassembly.tsx
+- [x] webhooks-vs-polling.tsx
+- [x] webrtc.tsx
+- [x] websockets.tsx
+- [x] zero-trust-architecture.tsx

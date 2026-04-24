@@ -1,10 +1,11 @@
 import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Highlight } from "@/components/ui/Highlight";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Gauge, Package, Settings, Zap } from "lucide-react";
 
 export const viteVsWebpackTopic: Topic = {
 	id: "vite-vs-webpack",
@@ -27,28 +28,28 @@ export const viteVsWebpackTopic: Topic = {
 		</h3>,
 
 		<Grid key="3" cols={2} gap={6} className="mb-8">
-			<Card title="Webpack (Bundle-Based)">
-				<p className="text-sm text-slate-300 mb-4">
+			<FeatureCard icon={Package} title="Webpack" subtitle="Bundle-based development server" theme="amber">
+				<p className="mb-4 text-amber-100/80">
 					Webpack crawls your entire application. It parses every single JavaScript file, CSS file, and asset, builds a
 					massive dependency graph, and then mathematically mashes them all together into big bundle files{" "}
 					<strong>before</strong> the development server can even turn on.
 				</p>
-				<p className="text-sm text-slate-400">
+				<p className="text-amber-100/70">
 					Result: The server startup time scales exponentially as the project grows. A legacy enterprise app might take
 					two minutes just to boot locally.
 				</p>
-			</Card>
-			<Card title="Vite (Native ESM Server)">
-				<p className="text-sm text-slate-300 mb-4">
+			</FeatureCard>
+			<FeatureCard icon={Zap} title="Vite" subtitle="Native ESM development server" theme="emerald">
+				<p className="mb-4 text-emerald-100/80">
 					Vite skips bundling entirely during development. It leverages modern browsers' native support for{" "}
 					<code>&lt;script type="module"&gt;</code>. Vite instantly turns on the server and only compiles exact files
 					natively when the browser actively HTTP requests them.
 				</p>
-				<p className="text-sm text-slate-400">
+				<p className="text-emerald-100/70">
 					Result: Server startup time is completely decoupled from project size. It boots in ~100ms whether you have 10
 					files or 10,000.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="4" className="text-xl font-bold mt-8 mb-4">
@@ -56,17 +57,17 @@ export const viteVsWebpackTopic: Topic = {
 		</h3>,
 
 		<Grid key="5" cols={1} gap={6} className="mb-8">
-			<Card title="1. esbuild (The Unfair Speed Advantage)">
-				<p className="text-sm text-slate-300 mb-4">
+			<FeatureCard icon={Gauge} title="1. esbuild" subtitle="Vite's unfair speed advantage" theme="emerald">
+				<p className="mb-4 text-emerald-100/80">
 					Webpack relies on transpilers written in JavaScript (like Babel or tsc), which are tightly bottlenecked by JS
-					engine parse speeds. Vite completely sidesteps this by using <Highlight variant="primary">esbuild</Highlight>,
+					engine parse speeds. Vite completely sidesteps this by using <strong className="text-emerald-300">esbuild</strong>,
 					a bundler written in heavily optimized <strong>Go</strong>. esbuild pre-bundles dependencies and parses code
 					roughly 10-100x faster than JavaScript-based tools at the physical CPU level.
 				</p>
-			</Card>
+			</FeatureCard>
 
-			<Card title="2. Zero-Config Environment">
-				<p className="text-sm text-slate-300 mb-4">
+			<FeatureCard icon={Settings} title="2. Zero-Config Environment" subtitle="Vite absorbs the loader maze" theme="emerald">
+				<p className="mb-4 text-emerald-100/80">
 					To get Webpack working with modern standards (React, TypeScript, CSS modules), you must manually install and
 					orchestrate complex chains of loaders (<code>babel-loader</code>, <code>ts-loader</code>,{" "}
 					<code>css-loader</code>). Vite supports TypeScript, JSX, CSS processors, and JSON automatically
@@ -74,6 +75,7 @@ export const viteVsWebpackTopic: Topic = {
 				</p>
 				<Grid cols={2} gap={4}>
 					<CodeBlock
+						theme="emerald"
 						title="webpack.config.js"
 						language="javascript"
 						code={`module.exports = {
@@ -86,6 +88,7 @@ export const viteVsWebpackTopic: Topic = {
 };`}
 					/>
 					<CodeBlock
+						theme="emerald"
 						title="vite.config.ts"
 						language="javascript"
 						code={`import { defineConfig } from 'vite'
@@ -97,16 +100,16 @@ export default defineConfig({
 })`}
 					/>
 				</Grid>
-			</Card>
+			</FeatureCard>
 
-			<Card title="3. Constant-Time Hot Module Replacement (HMR)">
-				<p className="text-sm text-slate-300">
+			<FeatureCard icon={Zap} title="3. Constant-Time HMR" subtitle="Vite updates the requested module, not the world" theme="emerald">
+				<p className="text-emerald-100/80">
 					When you edit a file, Webpack has to rebuild part of the bundle to inject the new code, meaning HMR gets
 					linearly slower over time as it processes heavy graphs. With Vite, because it uses native ESM routing, saving
 					a file simply causes the browser to request that single module again. HMR takes the same ~50ms in a tiny app
 					as it does in a massive monolithic application.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="6" className="text-xl font-bold mt-8 mb-4">
@@ -115,7 +118,7 @@ export default defineConfig({
 
 		<Table
 			key="7"
-			headers={["Metric", "Webpack", "Vite"]}
+			headers={["Metric", "<span class='text-amber-300'>Webpack</span>", "<span class='text-emerald-300'>Vite</span>"]}
 			rows={[
 				["Paradigm", "Bundle-based dev server", "Native ESM-based dev server"],
 				["Dev Startup Time", "O(N) - Slows down as codebase grows", "O(1) - ~100ms regardless of size"],
@@ -129,7 +132,7 @@ export default defineConfig({
 		<Callout key="8" type="warning" title="What About Production?">
 			It is a common misconception that Vite doesn't bundle code at all.{" "}
 			<strong>Vite strictly bundles code for Production.</strong> However, instead of building its own complex
-			production bundler, it intelligently delegates this task to <Highlight variant="primary">Rollup</Highlight>{" "}
+			production bundler, it intelligently delegates this task to <strong className="text-amber-300">Rollup</strong>{" "}
 			beneath the hood. Rollup is famous for producing highly optimized, heavily tree-shaken static production assets,
 			guaranteeing your users get the smallest possible payload.
 		</Callout>,

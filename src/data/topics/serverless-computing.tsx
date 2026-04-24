@@ -17,9 +17,9 @@ export const serverlessTopic: Topic = {
 			is <strong>Serverless</strong> (AWS Lambda, Cloudflare Workers). You write a pure function, upload it to the cloud
 			provider, and they handle everything else.
 		</p>,
-		<h4 key="2" className="text-xl font-bold mt-8 mb-4">
+		<h3 key="2" className="text-xl font-bold mt-8 mb-4">
 			The Execution Model
-		</h4>,
+		</h3>,
 		<Grid key="3" cols={2} gap={6} className="mb-8">
 			<Card title="Traditional Servers">
 				<ul className="text-sm space-y-2 list-disc pl-4 mt-2 text-muted-foreground">
@@ -54,9 +54,9 @@ export const serverlessTopic: Topic = {
 				</ul>
 			</Card>
 		</Grid>,
-		<h4 key="4" className="text-xl font-bold mt-8 mb-4">
+		<h3 key="4" className="text-xl font-bold mt-8 mb-4">
 			The Cold Start Problem
-		</h4>,
+		</h3>,
 		<p key="5">
 			Because serverless functions don't run 24/7, when a request hits an <em>idle</em>
 			function, the cloud provider must allocate hardware, copy your code, boot a micro-VM (like Firecracker), and load
@@ -69,26 +69,33 @@ export const serverlessTopic: Topic = {
 			without booting a full Node.js or OS environment. They run at the network edge, incredibly close to the user, with
 			0ms cold starts.
 		</Callout>,
-		<h4 key="7" className="text-xl font-bold mt-8 mb-4">
+		<h3 key="7" className="text-xl font-bold mt-8 mb-4">
 			Serverless Limitations
-		</h4>,
-		<Grid key="8" cols={2} gap={6} className="mb-8">
-			<Card title="Execution Time Limits">
-				<p className="text-sm text-muted-foreground">
-					AWS Lambda has a 15-minute maximum execution time. Long-running tasks (video encoding, ML training) must use
-					traditional servers or Step Functions to orchestrate multiple Lambda invocations.
-				</p>
-			</Card>
-			<Card title="Statelessness">
-				<p className="text-sm text-muted-foreground">
-					Functions are ephemeral. You cannot store data in memory between invocations. Use external storage (S3,
-					DynamoDB, Redis) for state. WebSocket connections require special handling (API Gateway WebSocket APIs).
-				</p>
-			</Card>
-		</Grid>,
-		<h4 key="9" className="text-xl font-bold mt-8 mb-4">
+		</h3>,
+		<Table
+			key="8"
+			headers={["Constraint", "What it means", "Architectural response"]}
+			rows={[
+				[
+					"Execution time limits",
+					"AWS Lambda has a 15-minute maximum execution time; edge runtimes are often much shorter.",
+					"Move long jobs to queues, workers, Step Functions, or dedicated compute.",
+				],
+				[
+					"Statelessness",
+					"Functions are ephemeral; memory can disappear between invocations.",
+					"Store state in S3, DynamoDB, Redis, Postgres, or another backing service.",
+				],
+				[
+					"Persistent connections",
+					"Plain functions are not designed to hold WebSocket sessions forever.",
+					"Use API Gateway WebSocket APIs, managed realtime platforms, or stateful gateways.",
+				],
+			]}
+		/>,
+		<h3 key="9" className="text-xl font-bold mt-8 mb-4">
 			Cost Comparison
-		</h4>,
+		</h3>,
 		<Table
 			key="10"
 			headers={["Scenario", "Traditional Server (EC2)", "Serverless (Lambda)"]}

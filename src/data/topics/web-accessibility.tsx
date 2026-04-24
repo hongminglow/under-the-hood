@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Grid } from "@/components/ui/Grid";
-import { Card } from "@/components/ui/Card";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Focus, Tags } from "lucide-react";
 
 export const webAccessibilityTopic: Topic = {
   id: "web-accessibility",
@@ -22,16 +23,18 @@ export const webAccessibilityTopic: Topic = {
       Browsers maintain a secondary structure called the <strong>Accessibility Tree</strong>. While the DOM is for rendering, the Accessibility Tree is for Assistive Technologies (AT). If you use a <code>&lt;div&gt;</code> instead of a <code>&lt;button&gt;</code>, the node exists in the DOM but lacks the "Actionable" role in the Accessibility Tree.
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
-      <Card title="WAI-ARIA Roles">
-        <p className="text-sm text-muted-foreground mb-2">
-          When native HTML isn't enough (e.g., a complex <strong>Combobox</strong>), use <code>role="combobox"</code> and <code>aria-expanded</code> to manually update the Accessibility Tree.
+      <FeatureCard icon={Tags} title="WAI-ARIA Roles" subtitle="Patch the tree only when native HTML cannot" theme="cyan">
+        <p className="text-cyan-100/80">
+          When native HTML is not enough, such as a complex <strong className="text-cyan-300">combobox</strong>, use
+          <code>role="combobox"</code> and <code>aria-expanded</code> to manually update the Accessibility Tree.
         </p>
-      </Card>
-      <Card title="Focus Management">
-        <p className="text-sm text-muted-foreground mb-2">
-          When a Modal opens, you must <strong>Trap Focus</strong> inside it. If the user hits 'Tab', they shouldn't accidentally click a button in the background.
+      </FeatureCard>
+      <FeatureCard icon={Focus} title="Focus Management" subtitle="Keyboard users need a controlled route" theme="emerald">
+        <p className="text-emerald-100/80">
+          When a modal opens, you must <strong className="text-emerald-300">trap focus</strong> inside it. If the user hits
+          <code>Tab</code>, they should not accidentally reach a hidden button in the background.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">
       WCAG Guidelines: Color & Contrast

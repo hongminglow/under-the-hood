@@ -1,6 +1,4 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Step } from "@/components/ui/Step";
@@ -73,32 +71,15 @@ export const terminalsShellsKernelTopic: Topic = {
     <h3 key="11" className="text-xl font-bold mt-8 mb-4">
       Terminal Emulators by Platform
     </h3>,
-    <Grid key="12" cols={3} gap={6} className="my-8">
-      <Card title="macOS">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
-          <li><strong>Terminal.app</strong> — Built-in, basic</li>
-          <li><strong>iTerm2</strong> — Community favorite; split panes, rich profiles</li>
-          <li><strong>Warp</strong> — AI-powered, blocks output</li>
-          <li><strong>Hyper</strong> — Electron-based, JS extensible</li>
-        </ul>
-      </Card>
-      <Card title="Windows">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
-          <li><strong>Windows Terminal</strong> — Microsoft's modern multi-tab emulator</li>
-          <li><strong>cmd.exe</strong> — Classic, legacy</li>
-          <li><strong>ConEmu / Cmder</strong> — Popular third-party emulators</li>
-          <li><strong>VS Code Terminal</strong> — Integrated, runs any shell</li>
-        </ul>
-      </Card>
-      <Card title="Linux">
-        <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
-          <li><strong>GNOME Terminal</strong> — Default on Ubuntu/GNOME</li>
-          <li><strong>Konsole</strong> — Default on KDE Plasma</li>
-          <li><strong>Alacritty</strong> — GPU-accelerated, minimal</li>
-          <li><strong>Kitty</strong> — Feature-rich, GPU-rendered</li>
-        </ul>
-      </Card>
-    </Grid>,
+    <Table
+      key="12"
+      headers={["Platform", "Built-In / Common", "Power User Picks", "Practical Notes"]}
+      rows={[
+        ["macOS", "Terminal.app", "iTerm2, Warp, Hyper", "Terminal.app is enough for basics; iTerm2 adds split panes and rich profiles; Warp changes output into command blocks."],
+        ["Windows", "Windows Terminal, cmd.exe", "ConEmu, Cmder, VS Code Terminal", "Windows Terminal is the modern default because it can host PowerShell, cmd.exe, Git Bash, and WSL profiles in one app."],
+        ["Linux", "GNOME Terminal, Konsole", "Alacritty, Kitty", "Most desktop environments ship a terminal emulator; GPU-rendered options optimize latency, font rendering, and pane workflows."],
+      ]}
+    />,
 
     <h3 key="13" className="text-xl font-bold mt-8 mb-4">
       Bash vs. Zsh: The Most Common Confusion
@@ -138,18 +119,14 @@ zsh --version       # Check Zsh version`}
     <p key="18" className="mb-4">
       Windows does not natively run POSIX-compliant shells. Historically, developers used Git Bash (a Bash port via MinGW) or Cygwin (a POSIX emulation layer). The modern answer is <strong>WSL2 (Windows Subsystem for Linux 2)</strong>.
     </p>,
-    <Grid key="19" cols={2} gap={6} className="my-8">
-      <Card title="WSL1 (Legacy)">
-        <p className="text-sm text-muted-foreground">
-          Translated Linux syscalls into Windows NT syscalls. Fast file I/O on the Windows filesystem, but incomplete Linux compatibility — some syscalls were missing or broken.
-        </p>
-      </Card>
-      <Card title="WSL2 (Current Standard)">
-        <p className="text-sm text-muted-foreground">
-          Runs a <strong>real Linux Kernel</strong> in a lightweight Hyper-V VM. Near-100% Linux compatibility. You get a genuine Ubuntu/Debian/Kali instance running alongside Windows. The trade-off is slightly slower cross-filesystem I/O (Linux ↔ Windows drives).
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="19"
+      headers={["Version", "How It Works", "Best Trait", "Hidden Cost"]}
+      rows={[
+        ["WSL1 (Legacy)", "Translates Linux syscalls into Windows NT syscalls.", "Fast file I/O when working directly on the Windows filesystem.", "Incomplete Linux compatibility because some syscalls are missing or behave differently."],
+        ["WSL2 (Current Standard)", "Runs a real Linux kernel inside a lightweight Hyper-V VM.", "Near-native Linux compatibility for Ubuntu, Debian, Kali, Docker, and dev tooling.", "Cross-filesystem I/O is slower when Linux tools constantly read files from Windows drives."],
+      ]}
+    />,
     <CodeBlock
       key="20"
       title="Setting up WSL2 & Ubuntu on Windows"

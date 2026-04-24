@@ -10,7 +10,7 @@ export const restApiDesignTopic: Topic = {
   tags: ["backend", "api-design", "http"],
   icon: "Terminal",
   content: [
-    <p key="1">
+    <p key="1" className="mb-4">
       You are not forced to follow REST. You could name all your backend functions `POST /fetchUser` or `POST /doAction`. But REST (Representational State Transfer) is a strict architectural philosophy that centers around manipulating strict <strong>Nouns (Resources)</strong> using strictly mapped HTTP verbs.
     </p>,
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
@@ -33,12 +33,12 @@ export const restApiDesignTopic: Topic = {
         [
           "PUT",
           "/users/5",
-          "Violently overwrites User 5 entirely. If you send `{email: 'test@a.com'}`, their First Name might suddenly get mathematically wiped out if they had one."
+          "Replaces User 5 as a complete resource. If the payload omits existing fields, the server may treat those fields as intentionally removed."
         ],
         [
           "PATCH",
           "/users/5",
-          "Gently updates User 5. You simply send `{email: 'test@a.com'}` and only the email changes. Everything else stays mathematically intact."
+          "Partially updates User 5. Send `{email: 'test@a.com'}` and only that field changes."
         ],
         [
           "DELETE",

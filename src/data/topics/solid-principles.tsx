@@ -14,7 +14,7 @@ export const solidPrinciplesTopic: Topic = {
       Coined by "Uncle Bob" Martin in 2000, SOLID is a checklist for writing code that is aggressively easy to maintain, scale, and test without breaking existing functionality.
     </p>,
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
-      The 5 Commandments
+      The 5 Design Pressures
     </h3>,
     <Table
       key="3"
@@ -23,32 +23,32 @@ export const solidPrinciplesTopic: Topic = {
         [
           "S",
           "Single Responsibility",
-          "Your `Billing` class should charge credit cards. It should absolutely NEVER also be connecting to AWS to send receipt emails. Split it out!"
+          "A Billing service should charge cards. Receipt email delivery belongs in a separate collaborator."
         ],
         [
           "O",
           "Open/Closed",
-          "You should be able to add a new 'PayPal' feature without physically modifying the existing 'Stripe' code. (Open for extension, Closed for modification)."
+          "Add PayPal by extending a payment interface, not by rewriting the existing Stripe path."
         ],
         [
           "L",
           "Liskov Substitution",
-          "If you have an array of `Birds`, and you call `.fly()` on all of them, the app shouldn't crash because one of them is a `Penguin`. Sub-classes must behave predictably!"
+          "A subtype must honor the expectations of its parent type. A Penguin should not pretend it can fly."
         ],
         [
           "I",
           "Interface Segregation",
-          "Don't build a massive `IUser` interface forcing every class to implement `updateProfile` and `banUser`. An admin class should use an `IAdmin` interface, and a guest should use an `IGuest` interface."
+          "Do not force classes to implement methods they never use. Split large interfaces into role-specific contracts."
         ],
         [
           "D",
           "Dependency Inversion",
-          "High-level business logic should never directly import low-level SQL database drivers. Both should strictly rely on an abstract `DatabaseInterface` so you can effortlessly swap MySQL for MongoDB later."
+          "Business logic should depend on abstractions, not directly on SQL drivers, HTTP clients, or vendor SDKs."
         ]
       ]}
     />,
     <Callout key="4" type="info" title="Do not over-engineer!">
-      Applying all 5 SOLID principles strictly to a 100-line startup MVP is a massive mistake that results in 40 useless files. Apply them reactively only when updating a specific file physically starts to hurt.
+      SOLID is a pressure-release system, not a ceremony checklist. Apply it when a file becomes hard to change, hard to test, or easy to break — not just because the acronym exists.
     </Callout>,
   ],
 };

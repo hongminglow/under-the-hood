@@ -45,18 +45,18 @@ export const websocketsTopic: Topic = {
     </ul>,
     <Grid key="8" cols={2} gap={6} className="my-8">
       <Card title="Heartbeats: Ping & Pong">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-300 mb-2">
           TCP connections can "silently" die if no data moves.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs text-slate-400">
           WebSockets use <strong>Ping</strong> frames from the server and <strong>Pong</strong> replies from the client to ensure the "pipe" is still physically open. If a Pong is missed, the server closes the socket to save RAM.
         </p>
       </Card>
       <Card title="Scaling: The Redis Factor">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-300 mb-2">
           WebSocket servers are <strong>Stateful</strong>.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs text-slate-400">
           If User A is on Server 1 and User B is on Server 2, they can't chat! Solution: Use <strong>Redis Pub/Sub</strong> as a backbone. Server 1 publishes the message to Redis; all other servers listen and push it to their locally connected users.
         </p>
       </Card>
@@ -134,7 +134,7 @@ wss.on('connection', (ws) => {
     </h3>,
     <Table
       key="comparison-table"
-      headers={["Feature", "WebSockets", "Server-Sent Events (SSE)", "Long Polling"]}
+      headers={["Feature", "<span class='text-emerald-300'>WebSockets</span>", "<span class='text-cyan-300'>Server-Sent Events (SSE)</span>", "<span class='text-amber-300'>Long Polling</span>"]}
       rows={[
         ["Direction", "Bi-directional (client ↔ server)", "Uni-directional (server → client)", "Uni-directional (server → client)"],
         ["Protocol", "ws:// or wss://", "HTTP/HTTPS (HTTP/2 recommended)", "HTTP/HTTPS"],

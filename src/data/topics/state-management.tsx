@@ -1,10 +1,10 @@
 import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
-import { Callout } from "@/components/ui/Callout";
-import { Card } from "@/components/ui/Card";
+import { FeatureCard } from "@/components/ui/FeatureCard";
 import { Grid } from "@/components/ui/Grid";
 import { Highlight } from "@/components/ui/Highlight";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Database, Monitor, Network, Server } from "lucide-react";
 
 export const stateManagementTopic: Topic = {
 	id: "state-management",
@@ -44,25 +44,25 @@ export const stateManagementTopic: Topic = {
 			headers={["Architecture", "How it Works", "Performance Risk", "Best Used For"]}
 			rows={[
 				[
-					"React Context",
+					"<span class='text-amber-300 font-black'>React Context</span>",
 					"Built-in API that injects a value directly down the tree.",
 					"High. Any state change forcefully re-renders ALL consuming components.",
 					"Static configurations, Theme (Dark/Light), User Auth Session.",
 				],
 				[
-					"Redux (Toolkit)",
+					"<span class='text-violet-300 font-black'>Redux (Toolkit)</span>",
 					"A strict, single immutable store updated via dispatched Actions.",
 					"Medium. Requires explicit useSelector hooks to avoid over-rendering.",
 					"Massive enterprise apps needing strict state history / time-travel debugging.",
 				],
 				[
-					"Zustand",
+					"<span class='text-emerald-300 font-black'>Zustand</span>",
 					"A lightweight, flexible hook-based external store.",
 					"Low. Built-in atomic selectors ensure components only render when their exact slice changes.",
 					"Most modern startups, dashboards, and complex UI states.",
 				],
 				[
-					"React Query (TanStack)",
+					"<span class='text-sky-300 font-black'>React Query (TanStack)</span>",
 					"A specialized caching layer exclusively for Server Data.",
 					"Low. Automatically batches updates and handles background fetching.",
 					"HTTP API caching, pagination, caching database queries.",
@@ -75,13 +75,14 @@ export const stateManagementTopic: Topic = {
 		</h3>,
 
 		<Grid key="6" cols={2} gap={6} className="mb-8">
-			<Card title="React Context (The Render Trap)">
-				<p className="text-sm text-slate-300 mb-4">
-					<strong>The Problem:</strong> Context lacks "selector" capabilities. If <code>user</code> updates, components
+			<FeatureCard icon={Network} title="React Context" subtitle="the render trap" theme="amber">
+				<p className="text-sm text-amber-100/75 mb-4">
+					<strong className="text-amber-300">The problem:</strong> Context lacks "selector" capabilities. If <code>user</code> updates, components
 					only needing <code>theme</code> will wrongly re-render because they share the same provider.
 				</p>
-				<p className="text-sm font-semibold mb-2">Architectural Reality:</p>
+				<p className="text-sm font-semibold mb-2 text-amber-300">Architectural Reality:</p>
 				<CodeBlock
+					theme="amber"
 					title="ContextApp.jsx"
 					language="javascript"
 					code={`const AppContext = createContext();
@@ -96,15 +97,16 @@ function App() {
   );
 }`}
 				/>
-			</Card>
+			</FeatureCard>
 
-			<Card title="Zustand (Atomic Reactivity)">
-				<p className="text-sm text-slate-300 mb-4">
-					<strong>The Solution:</strong> Zustand lives <em>outside</em> the React tree. Use a selector (
+			<FeatureCard icon={Database} title="Zustand" subtitle="atomic reactivity" theme="emerald">
+				<p className="text-sm text-emerald-100/75 mb-4">
+					<strong className="text-emerald-300">The solution:</strong> Zustand lives <em>outside</em> the React tree. Use a selector (
 					<code>state.theme</code>) so the component physically ignores any updates to other unrelated state changes.
 				</p>
-				<p className="text-sm font-semibold mb-2">Architectural Solution:</p>
+				<p className="text-sm font-semibold mb-2 text-emerald-300">Architectural Solution:</p>
 				<CodeBlock
+					theme="emerald"
 					title="ZustandApp.jsx"
 					language="javascript"
 					code={`import { create } from 'zustand';
@@ -120,15 +122,35 @@ function Header() {
   return <div className={theme}>Header</div>;
 }`}
 				/>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
-		<Callout key="7" type="warning" title="Solution: Separate Server vs. Client State">
-			The biggest mistake junior developers make is stuffing raw API data into Redux or Zustand.{" "}
-			<Highlight variant="primary">Server State</Highlight> (users, posts) should be managed entirely by{" "}
-			<strong>React Query (TanStack)</strong> which handles caching and loading states automatically. Your global store
-			(Zustand/Context) should ONLY be used for <Highlight variant="primary">Client State</Highlight> (sidebar
-			open/closed, dark mode, multi-step form progress).
-		</Callout>,
+		<h3 key="7" className="text-xl font-bold mt-8 mb-4">
+			Solution: Separate Server vs. Client State
+		</h3>,
+
+		<Grid key="8" cols={2} gap={6} className="mb-8">
+			<FeatureCard icon={Server} title="Server State" subtitle="remote, cached, eventually stale" theme="sky">
+				<p className="text-sm text-sky-100/80 mb-3">
+					Raw API data such as users, posts, permissions, invoices, and paginated results should live in{" "}
+					<strong className="text-sky-300">React Query / TanStack Query</strong>, not Redux or Zustand.
+				</p>
+				<p className="text-sm text-sky-100/70">
+					The source of truth is the server, so the client needs caching, loading states, retries, invalidation,
+					background refetching, and stale-data control.
+				</p>
+			</FeatureCard>
+
+			<FeatureCard icon={Monitor} title="Client State" subtitle="local UI intent and workflow memory" theme="emerald">
+				<p className="text-sm text-emerald-100/80 mb-3">
+					UI-only state such as sidebar open/closed, dark mode, selected tabs, modal visibility, and multi-step form
+					progress belongs in <strong className="text-emerald-300">Zustand, Context, or local React state</strong>.
+				</p>
+				<p className="text-sm text-emerald-100/70">
+					The source of truth is the browser session, so the store should stay small, fast, and focused on interface
+					behavior instead of duplicating backend data.
+				</p>
+			</FeatureCard>
+		</Grid>,
 	],
 };

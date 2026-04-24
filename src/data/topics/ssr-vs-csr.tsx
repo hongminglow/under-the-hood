@@ -33,25 +33,25 @@ export const ssrVsCsrTopic: Topic = {
       headers={["Acronym", "Name", "How it renders HTML", "Best For"]}
       rows={[
         [
-          "CSR",
+          "<span class='text-amber-300'>CSR</span>",
           "Client-Side Rendering",
           "Traditional React. Sends empty HTML. The user's browser burns CPU building the entire UI from scratch via JavaScript.",
           "Internal SaaS dashboards hidden behind auth. SEO explicitly does not matter here.",
         ],
         [
-          "SSR",
+          "<span class='text-cyan-300'>SSR</span>",
           "Server-Side Rendering",
           "A real Node server builds the full HTML string on every single request on-the-fly, then sends it. Great for SEO, but every request costs compute.",
           "Dynamic content that changes every second — Twitter feed, live stock prices, user-specific dashboards.",
         ],
         [
-          "SSG",
+          "<span class='text-emerald-300'>SSG</span>",
           "Static-Site Generation",
           "During the CI/CD build phase, every page is pre-rendered into physical HTML files. Insanely fast (CDN-served), but requires a full re-deploy to update any content.",
           "Marketing sites, blogs, documentation pages where content changes infrequently.",
         ],
         [
-          "ISR",
+          "<span class='text-teal-300'>ISR</span>",
           "Incremental Static Regeneration",
           "SSG with a background refresh timer. 'Regenerate this specific page at most once every 60 seconds.' Old cache is served instantly while the new one is built silently.",
           "E-commerce product pages where prices update periodically but don't need millisecond accuracy.",
@@ -77,41 +77,47 @@ export const ssrVsCsrTopic: Topic = {
     </h3>,
     <Table
       key="perf-table"
-      headers={["Metric", "CSR", "SSR", "SSG / ISR", "What it measures"]}
+      headers={[
+        "Metric",
+        "<span class='text-amber-300'>CSR</span>",
+        "<span class='text-cyan-300'>SSR</span>",
+        "<span class='text-emerald-300'>SSG</span> / <span class='text-teal-300'>ISR</span>",
+        "What it measures",
+      ]}
       rows={[
         [
           "TTFB",
-          "🟢 Fast",
-          "🔴 Slow",
-          "🟢 Instant",
+          "Fast",
+          "Slower",
+          "Instant",
           "Time until browser receives first byte from server.",
         ],
         [
           "FCP",
-          "🔴 Slow (2–3s blank screen)",
-          "🟢 Fast (~200ms)",
-          "🟢 Instant (~50ms CDN)",
+          "Slow (2-3s blank screen)",
+          "Fast (~200ms)",
+          "Instant (~50ms CDN)",
           "Time until first visible content appears on screen.",
         ],
         [
           "TTI",
-          "🟡 Varies",
-          "🟡 Varies",
-          "🟡 Varies",
+          "Varies",
+          "Varies",
+          "Varies",
           "Time until page is fully interactive. ALL strategies wait for JS to hydrate.",
         ],
         [
           "LCP",
-          "🔴 Penalized by Google",
-          "🟢 Strong",
-          "🟢 Strongest",
+          "Penalized by Google",
+          "Strong",
+          "Strongest",
           "Largest Contentful Paint. Directly impacts Google ranking.",
         ],
         [
           "CLS",
-          "🔴 High risk",
-          "🟡 Medium risk",
-          "🟢 Low risk",
+          "High risk",
+          "Medium risk",
+          "Low risk",
           "Cumulative Layout Shift — SSR/SSG HTMLs prevent jarring layout jumps.",
         ],
       ]}

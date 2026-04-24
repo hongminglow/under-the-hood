@@ -1,7 +1,7 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
-import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Cpu, Layers, Zap } from "lucide-react";
 
 export const virtualDomVsSignalsTopic: Topic = {
   id: "virtual-dom-vs-signals",
@@ -18,25 +18,30 @@ export const virtualDomVsSignalsTopic: Topic = {
       The Next Paradigm
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="The VDOM Tax (React)">
-        <p className="text-sm text-muted-foreground mb-2">
-          When a parent component updates state, React natively re-runs the entire function for practically every single child component down the tree automatically. 
+      <FeatureCard icon={Layers} title="The VDOM Tax" subtitle="React: top-down reconciliation" theme="amber">
+        <p className="mb-3 text-amber-100/80">
+          When a parent component updates state, React natively re-runs the entire function for practically every single child component down the tree automatically.
         </p>
-        <p className="text-sm text-muted-foreground">
-          You are entirely forced to manually write `React.memo` or `useMemo` specifically everywhere to stop this top-down execution logic cascade. It shifts extreme architectural burden to the developer.
+        <p className="text-amber-100/75">
+          You are forced to strategically use <code>React.memo</code> or <code>useMemo</code> to stop this top-down execution
+          cascade. The framework keeps the mental model simple, but the optimization burden moves to the developer.
         </p>
-      </Card>
-      <Card title="Signals (Solid, Preact)">
-        <p className="text-sm text-muted-foreground mb-2">
-          Signals are mathematically reactive nodes. When <code>count</code> updates, only the exact <code>{"<span>count</span>"}</code> string physically updates directly. 
+      </FeatureCard>
+      <FeatureCard icon={Zap} title="Signals" subtitle="Solid / Preact: fine-grained reactivity" theme="emerald">
+        <p className="mb-3 text-emerald-100/80">
+          Signals are mathematically reactive nodes. When <code>count</code> updates, only the exact <code>{"<span>count</span>"}</code> text binding physically updates directly.
         </p>
-        <p className="text-sm text-muted-foreground">
-          There is absolutely zero VDOM overhead. It skips the parent component. It skips the children components. It targets the physical DOM pixel surgically. It operates exactly like an Excel spreadsheet cell.
+        <p className="text-emerald-100/75">
+          There is no VDOM diff for that change. It skips the parent component, skips unrelated children, and targets the
+          physical DOM binding surgically, closer to how an Excel cell updates its dependents.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
-    <Callout key="4" type="tip" title="The Inevitable Convergence">
-      React is fully aware of its intense CPU tax. They are officially building a 'React Compiler' that analyzes component trees deeply and artificially inserts `useMemo` perfectly across the entire architecture automatically, aiming to achieve the exact performance profile inherently provided by Signals without the developer rewriting their codebase.
-    </Callout>,
+    <FeatureCard key="4" icon={Cpu} title="The Inevitable Convergence" subtitle="React tries to recover signal-like precision" theme="amber">
+      <p className="text-amber-100/80">
+        React is fully aware of its CPU tax. The React Compiler analyzes component trees and inserts memoization automatically,
+        aiming for a signal-like performance profile without forcing teams to rewrite an entire React codebase.
+      </p>
+    </FeatureCard>,
   ],
 };

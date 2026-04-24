@@ -38,27 +38,29 @@ export const reactTransitionsDeferredTopic: Topic = {
       The Root Problem: Synchronous, Uninterruptible Renders
     </h3>,
 
-    <Grid key="grid-problem" cols={2} gap={6}>
+    <Grid key="grid-problem" cols={1} gap={6} className="my-8">
       <Card title="Before Concurrent Mode (React ≤ 17)" description="The blocking render model.">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-300 mb-3 leading-relaxed">
           In React's legacy mode, a state update triggered a completely
           synchronous render. React would walk the entire Fiber tree, compute
           every diff, and commit all DOM mutations before yielding back to the
           browser — even if that took 400ms.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400 leading-relaxed">
+          <strong className="text-muted-foreground">Why it matters:</strong>{" "}
           During those 400ms the browser's main thread was fully blocked.
           Keystrokes were queued. Animations froze. The page felt dead.
         </p>
       </Card>
       <Card title="The Browser's Frame Budget" description="Why 16ms matters.">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-300 mb-3 leading-relaxed">
           A 60fps display gives the browser exactly{" "}
           <Highlight variant="warning">16.6ms</Highlight> per frame to run all
           JS, handle events, run layout, and paint. Any JS task longer than
           ~5ms starts to push frames over budget and creates visible jank.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-400 leading-relaxed">
+          <strong className="text-muted-foreground">React's move:</strong>{" "}
           React's answer: break work into small chunks (
           <strong>time-slicing</strong>) and yield back to the browser between
           chunks so it can handle paint and input events.
@@ -137,36 +139,48 @@ export const reactTransitionsDeferredTopic: Topic = {
       instead.
     </p>,
 
-    <Grid key="grid-yield" cols={2} gap={6}>
-      <Card title="Why not setTimeout(fn, 0)?" description="The 4ms floor problem.">
-        <p className="text-sm text-muted-foreground mb-2">
-          The HTML spec mandates a minimum delay of{" "}
-          <Highlight variant="warning">4ms</Highlight> for nested{" "}
-          <code>setTimeout</code> calls, and browsers throttle it further to{" "}
-          <Highlight variant="warning">1000ms</Highlight> in background tabs.
-          This would make React's scheduler too slow for smooth 60fps renders.
-        </p>
-        <p className="text-sm text-muted-foreground">
-          Also, <code>setTimeout</code> fires as a macrotask — but at a
-          lower-fidelity scheduling priority than the browser needs for
-          frame-perfect yielding.
-        </p>
-      </Card>
-      <Card title="MessageChannel — the real mechanism" description="Zero-delay macrotask scheduling.">
-        <p className="text-sm text-muted-foreground mb-2">
-          React's scheduler creates a{" "}
-          <Highlight variant="primary">MessageChannel</Highlight> pair. When it
-          needs to yield, it fires <code>port.postMessage(null)</code>. The{" "}
-          <code>onmessage</code> handler fires as a macrotask — immediately
-          after the browser processes pending events and paint — with no
-          artificial delay.
-        </p>
-        <p className="text-sm text-muted-foreground">
-          This lets the browser squeeze in a paint frame and process queued
-          input events before React resumes its interrupted render.
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="table-yield-mechanism"
+      headers={["Mechanism", "What actually happens", "Why React cares"]}
+      rows={[
+        [
+          "setTimeout(fn, 0)",
+          "Nested timers hit a browser-enforced 4ms floor, and background tabs can be throttled much harder.",
+          "Too coarse for smooth concurrent rendering; React would waste frame budget waiting for timer callbacks.",
+        ],
+        [
+          "MessageChannel",
+          "React posts a message through a paired port. The handler runs as a macrotask after the browser gets a chance to process input and paint.",
+          "React can resume work quickly without starving the browser, so long renders become interruptible chunks instead of one frozen task.",
+        ],
+      ]}
+    />,
+
+    <Flow
+      key="flow-yield-loop"
+      steps={[
+        {
+          title: "1. Render work starts",
+          description:
+            "React processes Fiber units inside a concurrent work loop and tracks how much of the current time slice has been used.",
+        },
+        {
+          title: "2. Deadline expires",
+          description:
+            "After roughly 5ms, `shouldYield()` flips true. React pauses instead of continuing to monopolize the main thread.",
+        },
+        {
+          title: "3. Browser gets a turn",
+          description:
+            "React posts a MessageChannel ping, exits the task, and lets the browser handle pending input, layout, and paint.",
+        },
+        {
+          title: "4. React resumes",
+          description:
+            "The MessageChannel callback schedules the next work slice. If urgent input arrived, that higher-priority lane runs first.",
+        },
+      ]}
+    />,
 
     <CodeBlock
       key="code-msgchan"
@@ -478,46 +492,32 @@ function SearchPage() {
       Common Pitfalls
     </h3>,
 
-    <Grid key="grid-traps" cols={2} gap={6}>
-      <Card title="startTransition is NOT setTimeout" description="">
-        <p className="text-sm text-muted-foreground">
-          A common misconception: <code>startTransition</code> does NOT delay
-          when your callback runs. It runs <strong>immediately</strong> and
-          synchronously. What changes is the <em>priority lane</em> of the
-          resulting state update — not its timing. Thinking of it as a delay
-          leads to wrong usage patterns.
-        </p>
-      </Card>
-      <Card title="useDeferredValue is NOT debounce" description="">
-        <p className="text-sm text-muted-foreground">
-          Debounce adds a fixed time delay. <code>useDeferredValue</code> delays
-          by <em>CPU availability</em>. On an idle CPU, the deferred render can
-          complete in the very next frame ({"<"}16ms). On a busy CPU, it might
-          take several frames. It adapts to the actual workload — debounce does
-          not.
-        </p>
-      </Card>
-      <Card title="No async in startTransition (React 18)" description="">
-        <p className="text-sm text-muted-foreground">
-          In React 18, the callback passed to <code>startTransition</code> must
-          be synchronous. If you <code>await</code> something inside it, the
-          state update triggered after the <code>await</code> will NOT be tagged
-          as a transition — it will use DefaultLane instead. This is fixed in
-          React 19.
-        </p>
-      </Card>
-      <Card title="External stores need special handling" description="">
-        <p className="text-sm text-muted-foreground">
-          Transition renders can be interrupted and restarted. If your component
-          reads from an external mutable store (Zustand, Redux without{" "}
-          <code>useSyncExternalStore</code>), the interrupted render may have
-          read a stale snapshot while the completed render reads a newer one —
-          causing <Highlight variant="warning">tearing</Highlight>. Always use{" "}
-          <code>useSyncExternalStore</code> for external state in concurrent
-          components.
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="table-traps"
+      headers={["Pitfall", "Actual mechanic", "Safer mental model"]}
+      rows={[
+        [
+          "startTransition is a timer",
+          "The callback runs immediately and synchronously. Only the resulting state update is tagged with a lower-priority TransitionLane.",
+          "It changes scheduling priority, not callback timing.",
+        ],
+        [
+          "useDeferredValue is debounce",
+          "Debounce waits for a fixed time. useDeferredValue waits for CPU availability and can catch up in the next frame when the main thread is idle.",
+          "It is workload-sensitive lag, not clock-based delay.",
+        ],
+        [
+          "React 18 keeps async updates inside transitions",
+          "After an await in React 18, later state updates lose the transition context and fall back to DefaultLane. React 19 fixes this for async Actions.",
+          "In React 18, wrap post-await updates in another transition.",
+        ],
+        [
+          "External stores are automatically safe",
+          "Interrupted renders can observe different mutable snapshots unless the store integrates through useSyncExternalStore.",
+          "Concurrent rendering needs snapshot consistency to avoid tearing.",
+        ],
+      ]}
+    />,
 
     <Callout key="callout-final" type="tip" title="The Mental Model">
       Think of React's scheduler as an airline gate agent. SyncLane passengers

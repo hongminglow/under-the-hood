@@ -1,6 +1,4 @@
 import type { Topic } from "@/data/types";
-import { Grid } from "@/components/ui/Grid";
-import { Card } from "@/components/ui/Card";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 
@@ -34,24 +32,27 @@ export const setintervalVsRequestanimationframeTopic: Topic = {
     <p key="5" className="mb-4">
       If you set <code>setInterval(1000)</code>, it does NOT mean it will run every 1000.00ms. If the Main Thread is busy calculating a heavy <code>for</code> loop, the timer is delayed. Over time, these delays accumulate, causing <strong>Clock Drift</strong>.
     </p>,
-    <Grid key="6" cols={2} gap={6} className="my-8">
-      <Card title="Gaming Mice & Input">
-        <p className="text-sm text-muted-foreground mb-2">
-          High-frequency polling (1,000Hz).
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          Using <code>mousemove</code> with <code>setInterval</code> causes "Input Overload". <code>rAF</code> naturally "buffers" these inputs, executing your logic only when a frame is actually ready to be painted.
-        </p>
-      </Card>
-      <Card title="Layout Thrashing">
-        <p className="text-sm text-muted-foreground mb-2">
-          Read/Write cycles in the loop.
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          <code>rAF</code> helps prevent "Layout Thrashing" because the browser batches your DOM changes right before the <strong>Layout & Paint</strong> stage of the rendering pipeline.
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="6"
+      headers={["Problem", "Why setInterval struggles", "Why rAF fits better"]}
+      rows={[
+        [
+          "Gaming mice and high-frequency input",
+          "A 1,000Hz mouse can generate far more events than the screen can display, so timer-driven logic can overprocess stale input.",
+          "rAF naturally samples the latest input once per paintable frame.",
+        ],
+        [
+          "Layout thrashing",
+          "Timer callbacks can interleave DOM reads and writes at awkward points in the event loop.",
+          "rAF runs before paint, giving the browser a cleaner chance to batch layout and visual updates.",
+        ],
+        [
+          "High refresh-rate displays",
+          "Hardcoded 16ms intervals assume 60Hz and under-drive 120Hz, 144Hz, or 240Hz screens.",
+          "rAF follows the display refresh cadence automatically.",
+        ],
+      ]}
+    />,
     <Callout key="7" type="tip" title="Use setTimeout for Logic, rAF for UI">
       A good rule of thumb: If you are calculating game state (physics, logic), use a fixed-step <code>setTimeout</code> or <code>Web Worker</code>. If you are <strong>moving pixels on the screen</strong>, always use <code>requestAnimationFrame</code>.
     </Callout>,

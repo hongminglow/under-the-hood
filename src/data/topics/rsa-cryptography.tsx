@@ -39,7 +39,7 @@ export const rsaCryptographyTopic: Topic = {
 			can undo. The owner of the pair decides what to share and what to keep secret.
 		</p>,
 		<Grid key="5" cols={2} gap={6} className="my-6">
-			<Card title="🔓 Public Key">
+			<Card title="Public Key">
 				<p className="text-sm text-muted-foreground mb-2">
 					Published openly. Posted on your website, your TLS certificate, your SSH profile.{" "}
 					<strong>Everyone gets a copy.</strong>
@@ -55,7 +55,7 @@ export const rsaCryptographyTopic: Topic = {
 					<li>Cannot forge a signature</li>
 				</ul>
 			</Card>
-			<Card title="🔐 Private Key">
+			<Card title="Private Key">
 				<p className="text-sm text-muted-foreground mb-2">
 					Never shared. Hidden on the server's disk, in a hardware security module (HSM), or in a smart card.{" "}
 					<strong>Only the owner holds this.</strong>
@@ -210,7 +210,7 @@ Decrypt ciphertext C = 2790:
 The magic: knowing n alone cannot give you d. 
 You'd have to factor n back into p and q — impossible for 2048-bit numbers.`}
 		/>,
-		<Callout key="18a" type="success" title="The Mathematical Link: Why They Arena't Random">
+		<Callout key="18a" type="success" title="The Mathematical Link: Why They Aren't Random">
 			This is the exact reason why a message encrypted with the private key can be decrypted with the public key (and
 			vice-versa). The two keys are **mathematically locked together** because they share the exact same Modulus (`n`).
 			They are not just two random strings of characters; they are inverse mathematical operations operating on the
@@ -303,7 +303,7 @@ You'd have to factor n back into p and q — impossible for 2048-bit numbers.`}
 		</h3>,
 		<Grid key="26" cols={2} gap={6} className="my-6">
 			<Card title="Known Vulnerabilities">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
+				<ul className="text-sm text-slate-400 space-y-2 list-disc list-inside">
 					<li>
 						<strong className="text-muted-foreground">Small key sizes:</strong> 512-bit RSA was broken in 1999. 1024-bit
 						is now considered weak. The standard minimum is <strong>2048-bit</strong>, with 4096-bit recommended for
@@ -326,7 +326,7 @@ You'd have to factor n back into p and q — impossible for 2048-bit numbers.`}
 				</ul>
 			</Card>
 			<Card title="Modern Mitigations">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
+				<ul className="text-sm text-slate-400 space-y-2 list-disc list-inside">
 					<li>
 						<strong className="text-muted-foreground">OAEP padding:</strong> Replaces vulnerable PKCS#1 v1.5 with
 						Optimal Asymmetric Encryption Padding — prevents padding oracle attacks.

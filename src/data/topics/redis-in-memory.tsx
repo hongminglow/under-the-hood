@@ -1,6 +1,4 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
 import { CodeBlock } from "@/components/ui/CodeBlock";
@@ -66,40 +64,36 @@ export const redisInMemoryTopic: Topic = {
     <p key="p-ds" className="mb-4">
       Beginners only use <code>GET</code> / <code>SET</code>. The real power is in Redis's native data types — each one is an optimised C implementation that's faster than you can build in application code.
     </p>,
-    <Grid key="g-ds" cols={2} gap={6} className="my-8">
-      <Card title="Sorted Sets (ZSET)" description="Leaderboards & Rankings">
-        <p className="text-sm text-muted-foreground mb-2">
-          Store members with a float <strong>score</strong>. Redis keeps them sorted automatically in O(log N).
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          Use case: Global game leaderboard — <code>ZADD leaderboard 50234 "player:99"</code> then <code>ZRANGE leaderboard 0 9 REV WITHSCORES</code> returns the top 10 instantly. No <code>ORDER BY</code> SQL scan needed.
-        </p>
-      </Card>
-      <Card title="Pub/Sub + Streams" description="Real-time Events">
-        <p className="text-sm text-muted-foreground mb-2">
-          Channels where publishers push messages and all subscribers receive them instantly.
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          Use case: WebSocket chat backend. User sends a message → your Node server publishes to <code>PUBLISH room:42 message</code> → all other subscribers (Node instances) receive it and push to their connected clients. Zero polling.
-        </p>
-      </Card>
-      <Card title="Hashes" description="Object Storage">
-        <p className="text-sm text-muted-foreground mb-2">
-          A key maps to a sub-dictionary of field/value pairs — like a row in a table.
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          Use case: <code>HSET user:42 name "Alice" plan "pro" credits 500</code>. Fetch one field: <code>HGET user:42 credits</code>. Avoids deserialising a full JSON blob to read one property.
-        </p>
-      </Card>
-      <Card title="Lists" description="Queues & Activity Feeds">
-        <p className="text-sm text-muted-foreground mb-2">
-          A doubly-linked list. Push/pop from either end in O(1).
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          Use case: Job queue — workers <code>BRPOP jobs 0</code> (blocking pop) and wait for the next task. Also perfect for "last 100 activity feed items" with <code>LPUSH</code> + <code>LTRIM</code>.
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="t-ds"
+      headers={["Data type", "Mental model", "Fast path", "Where it shines"]}
+      rows={[
+        [
+          "Sorted Sets (ZSET)",
+          "Members ordered by a floating-point score.",
+          "ZADD + ZRANGE keep rankings sorted in O(log N), avoiding SQL ORDER BY scans.",
+          "Leaderboards, priority queues, trending feeds, auction rankings.",
+        ],
+        [
+          "Pub/Sub + Streams",
+          "Redis as an event bus: fire-and-forget channels or durable append-only streams.",
+          "PUBLISH fans out instantly; XADD stores ordered events that consumers can replay.",
+          "WebSocket fan-out, worker pipelines, audit trails, async integrations.",
+        ],
+        [
+          "Hashes",
+          "A key that contains field/value pairs, like a compact object row.",
+          "HGET reads one field without deserialising a full JSON blob.",
+          "User profiles, counters grouped by entity, session metadata, feature flags.",
+        ],
+        [
+          "Lists",
+          "A doubly-linked list with O(1) push/pop from both ends.",
+          "LPUSH + LTRIM keeps rolling windows cheap; BRPOP turns a list into a blocking queue.",
+          "Job queues, recent activity feeds, logs, last-N event buffers.",
+        ],
+      ]}
+    />,
 
     <h3 key="h-ttl" className="text-xl font-bold mt-8 mb-4">
       TTL: The Self-Cleaning Cache

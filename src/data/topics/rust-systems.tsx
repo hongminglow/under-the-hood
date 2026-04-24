@@ -35,16 +35,16 @@ export const rustSystemsTopic: Topic = {
         title="Fearless Concurrency"
         description="Engine-grade multi-threading"
       >
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
           Writing parallel engines is notoriously difficult. Rust's strict type
           system ensures thread safety, allowing engineers to write highly
           concurrent code without fear of deadlocks or race conditions.
         </p>
       </Card>
     </Grid>,
-    <h4 key="3" className="text-xl font-bold mt-8 mb-4">
+    <h3 key="3" className="text-xl font-bold mt-8 mb-4">
       Performance & Compile Complexity Hierarchy
-    </h4>,
+    </h3>,
     <p key="4">
       The architectural trade-off in modern languages is typically between{" "}
       <strong>Developer Velocity</strong> (fast compilation, slower runtime) and{" "}
@@ -61,34 +61,34 @@ export const rustSystemsTopic: Topic = {
       rows={[
         [
           "C / C++",
-          "⚡⚡⚡ Highest",
+          "Highest",
           "High (Manual AST/Linking)",
           "AOT (Ahead-of-Time) Compiled",
         ],
         [
           "Rust",
-          "⚡⚡⚡ Highest",
+          "Highest",
           "Very High (Borrow Checker, LLVM)",
           "AOT Compiled",
         ],
-        ["Go", "⚡⚡ High", "Very Low (Fast Compilation)", "AOT Compiled + GC"],
+        ["Go", "High", "Very Low (Fast Compilation)", "AOT Compiled + GC"],
         [
           "Java / C#",
-          "⚡ High",
+          "High",
           "Medium (Bytecode via JIT)",
           "JIT (Just-in-Time) Compiled + GC",
         ],
         [
           "JavaScript / Python",
-          "🐌 Lowest",
+          "Lowest",
           "None (Interpreted)",
           "Interpreted / JIT Runtime",
         ],
       ]}
     />,
-    <h4 key="6" className="text-xl font-bold mt-8 mb-4">
+    <h3 key="6" className="text-xl font-bold mt-8 mb-4">
       Why does a slow compile equal a fast runtime?
-    </h4>,
+    </h3>,
     <p key="7">
       Rust compilation is notoriously slow comparing to Go or JavaScript
       iteration, but this is an intentional structural design to maximize

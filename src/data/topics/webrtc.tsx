@@ -5,7 +5,6 @@ import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Flow } from "@/components/ui/Flow";
 import { CodeBlock } from "@/components/ui/CodeBlock";
-import { Highlight } from "@/components/ui/Highlight";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { MistakeCard } from "@/components/ui/MistakeCard";
 import {
@@ -40,49 +39,49 @@ export const webRtcTopic: Topic = {
     </h3>,
     <Grid key="grid-who" cols={2} gap={6} className="mb-10 items-stretch">
       <FeatureCard icon={Video} title="Google Meet" subtitle="Full browser P2P + SFU hybrid" theme="emerald">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+        <p className="text-sm text-emerald-100/80 leading-relaxed mb-3">
           Meet uses WebRTC natively in Chrome (Google wrote the spec). For small calls it uses direct
           P2P connections. For group calls it routes through Google's global{" "}
           <strong className="text-emerald-300">SFU fleet</strong>, which allows participants to send
           one stream and receive individually quality-adapted streams per recipient.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-emerald-100/70">
           Key tech: VP9/AV1 video codec, QUIC transport, per-region TURN servers.
         </p>
       </FeatureCard>
 
       <FeatureCard icon={Users} title="Discord" subtitle="SFU architecture, GoLive streams" theme="violet">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+        <p className="text-sm text-violet-100/80 leading-relaxed mb-3">
           Discord Voice uses WebRTC for the media layer but replaces the signaling with their own
           custom UDP-based protocol. Their servers act as <strong className="text-violet-300">SFUs</strong>{" "}
           — participants upload once, and Discord forwards selectively. GoLive (screen share) uses
           higher bitrate video streams.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-violet-100/70">
           Key tech: Opus audio codec, custom signaling, Elixir backend for presence.
         </p>
       </FeatureCard>
 
       <FeatureCard icon={Globe} title="Zoom (Browser)" subtitle="WebRTC fallback path" theme="teal">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+        <p className="text-sm text-teal-100/80 leading-relaxed mb-3">
           Zoom's native app uses their own proprietary UDP stack optimised for packet recovery.
           Their browser client falls back to <strong className="text-teal-300">WebRTC</strong>, which
           is why browser Zoom is noticeably lower quality than the native app — they lose their custom
           forward error correction (FEC) layer.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-teal-100/70">
           Key tech: H.264 video, custom FEC in native, Opus audio in both.
         </p>
       </FeatureCard>
 
       <FeatureCard icon={Zap} title="Figma / Miro Live Cursors" subtitle="RTCDataChannel for data" theme="cyan">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+        <p className="text-sm text-cyan-100/80 leading-relaxed mb-3">
           Not all WebRTC is video. Figma's multiplayer cursor sync and real-time collaborative tools
           use <strong className="text-cyan-300">RTCDataChannel</strong> — the arbitrary data pipe in
           WebRTC. It gives them sub-50ms cursor position sync over a direct P2P UDP channel, bypassing
           WebSocket latency.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-cyan-100/70">
           Key tech: SCTP over DTLS, ordered + unreliable channel mode for cursor drops.
         </p>
       </FeatureCard>
@@ -179,14 +178,14 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
     </p>,
     <Grid key="grid-nat" cols={2} gap={6} className="mb-8 items-stretch">
       <FeatureCard icon={Wifi} title="STUN" subtitle="Session Traversal Utilities for NAT" theme="emerald">
-        <p className="text-sm text-slate-300 leading-relaxed mb-4">
+        <p className="text-sm text-emerald-100/80 leading-relaxed mb-4">
           A lightweight server that reflects your public IP back to you. Your browser sends a UDP
           packet; the STUN server replies: "I received it from{" "}
           <strong className="text-emerald-300">203.0.113.42:54321</strong>." That's your ICE
           candidate — the address the other peer can try to reach you at.
         </p>
         <div className="bg-black/30 rounded-lg p-3 border border-emerald-900/30">
-          <ul className="text-sm text-muted-foreground space-y-1 list-disc pl-4">
+          <ul className="text-sm text-emerald-100/70 space-y-1 list-disc pl-4">
             <li>Free to run (Google's is <code>stun.l.google.com:19302</code>)</li>
             <li>Works for ~80% of home/mobile NATs</li>
             <li>Fails on Symmetric NAT (strict corporate firewalls)</li>
@@ -195,13 +194,13 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
       </FeatureCard>
 
       <FeatureCard icon={Server} title="TURN" subtitle="Traversal Using Relays around NAT" theme="amber">
-        <p className="text-sm text-slate-300 leading-relaxed mb-4">
+        <p className="text-sm text-amber-100/80 leading-relaxed mb-4">
           When STUN fails (Symmetric NAT, double NAT, strict firewalls), all traffic is relayed
           through a TURN server. Both peers connect to TURN, and TURN proxies the media between them.
           The P2P dream is over — this is now a client-server architecture.
         </p>
         <div className="bg-black/30 rounded-lg p-3 border border-amber-900/30">
-          <ul className="text-sm text-muted-foreground space-y-1 list-disc pl-4">
+          <ul className="text-sm text-amber-100/70 space-y-1 list-disc pl-4">
             <li>Expensive — all media bandwidth goes through YOUR server</li>
             <li>Needed for ~15–20% of connections (corporate networks)</li>
             <li>Must be provisioned per-region to avoid latency spikes</li>
@@ -280,14 +279,14 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
     </p>,
     <Grid key="grid-lag" cols={2} gap={6} className="mb-8 items-stretch">
       <FeatureCard icon={AlertTriangle} title="Packet Loss Lag" subtitle="Choppy / frozen frames" theme="rose">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+        <p className="text-sm text-rose-100/80 leading-relaxed mb-3">
           UDP packets are dropped in transit. The decoder receives frames with missing data and has
           to either request a keyframe (causing a freeze) or use error concealment (causing blocky
           artifacts). This is the most common lag type on mobile or congested networks.
         </p>
         <div className="bg-black/30 rounded-lg p-3 border border-rose-900/30">
           <p className="text-xs text-rose-400 font-semibold uppercase tracking-wider mb-1">Diagnosis</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-rose-100/70">
             Chrome: <code>chrome://webrtc-internals</code> → check{" "}
             <code>packetsLost</code> counter. &gt;2% loss = noticeable quality drop.
           </p>
@@ -295,7 +294,7 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
       </FeatureCard>
 
       <FeatureCard icon={AlertTriangle} title="Sender Bandwidth Lag" subtitle="Pixelated / low resolution" theme="amber">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+        <p className="text-sm text-amber-100/80 leading-relaxed mb-3">
           The <strong className="text-amber-300">sender's upload bandwidth</strong> is the bottleneck.
           WebRTC's congestion control (REMB / Transport-CC) detects the congestion and
           automatically drops the video bitrate and resolution. You see the other person become
@@ -303,7 +302,7 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
         </p>
         <div className="bg-black/30 rounded-lg p-3 border border-amber-900/30">
           <p className="text-xs text-amber-400 font-semibold uppercase tracking-wider mb-1">Diagnosis</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-amber-100/70">
             Check <code>qualityLimitationReason: bandwidth</code> in WebRTC internals on
             the sender's side. The receiver's stats will show a resolution drop.
           </p>
@@ -311,7 +310,7 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
       </FeatureCard>
 
       <FeatureCard icon={AlertTriangle} title="CPU / Encoder Lag" subtitle="Consistent delay, not choppy" theme="amber">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+        <p className="text-sm text-amber-100/80 leading-relaxed mb-3">
           The encoder cannot keep up with the frame rate. This happens when using{" "}
           <strong className="text-amber-300">software encoding</strong> (no hardware GPU available) or
           when the CPU is overloaded by other tasks. Frames queue up and the call feels "behind" —
@@ -319,7 +318,7 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
         </p>
         <div className="bg-black/30 rounded-lg p-3 border border-amber-900/30">
           <p className="text-xs text-amber-400 font-semibold uppercase tracking-wider mb-1">Diagnosis</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-amber-100/70">
             Check <code>qualityLimitationReason: cpu</code>. High CPU% on task manager
             during call = software encoding bottleneck.
           </p>
@@ -327,7 +326,7 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
       </FeatureCard>
 
       <FeatureCard icon={AlertTriangle} title="TURN Relay Lag" subtitle="High latency, not packet loss" theme="rose">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+        <p className="text-sm text-rose-100/80 leading-relaxed mb-3">
           When direct P2P failed and TURN is being used, all media is routed through a relay server.
           If that TURN server is in the wrong region (e.g., you're in KL but TURN is in Virginia),
           every packet makes a transatlantic round trip. Latency spikes to 200–400ms and the call
@@ -335,7 +334,7 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
         </p>
         <div className="bg-black/30 rounded-lg p-3 border border-rose-900/30">
           <p className="text-xs text-rose-400 font-semibold uppercase tracking-wider mb-1">Diagnosis</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-rose-100/70">
             Check ICE candidate type in WebRTC internals. If{" "}
             <code>candidateType: relay</code> — you're on TURN. Check RTT; if &gt;150ms,
             the TURN server is too far away.
@@ -467,14 +466,14 @@ a=fingerprint:sha-256 D2:FA:0E:C3:22...`}
     /* ─── QUICK REFERENCE ─── */
     <Callout key="callout-terms" type="info" title="WebRTC Protocol Stack Quick Reference">
       <ul className="space-y-2 mt-2 text-sm">
-        <li><Highlight variant="primary">SDP</Highlight>&nbsp;— Session Description Protocol. The negotiation text. Not a protocol, just a format.</li>
-        <li><Highlight variant="primary">ICE</Highlight>&nbsp;— Interactive Connectivity Establishment. The framework that finds the best network path.</li>
-        <li><Highlight variant="primary">STUN</Highlight>&nbsp;— Discovers your public IP through NAT. Free, lightweight.</li>
-        <li><Highlight variant="primary">TURN</Highlight>&nbsp;— Relays media when direct P2P fails. Expensive but essential.</li>
-        <li><Highlight variant="primary">DTLS</Highlight>&nbsp;— Datagram TLS. Encrypts the connection before media flows.</li>
-        <li><Highlight variant="primary">SRTP</Highlight>&nbsp;— Secure RTP. The encrypted audio/video stream itself.</li>
-        <li><Highlight variant="primary">SFU</Highlight>&nbsp;— Selective Forwarding Unit. The server that routes streams in group calls.</li>
-        <li><Highlight variant="primary">RTCDataChannel</Highlight>&nbsp;— Binary/text data pipe over WebRTC (SCTP). Used for file transfer, gaming, cursors.</li>
+        <li><strong className="text-emerald-300">SDP</strong>&nbsp;— Session Description Protocol. The negotiation text. Not a protocol, just a format.</li>
+        <li><strong className="text-emerald-300">ICE</strong>&nbsp;— Interactive Connectivity Establishment. The framework that finds the best network path.</li>
+        <li><strong className="text-emerald-300">STUN</strong>&nbsp;— Discovers your public IP through NAT. Free, lightweight.</li>
+        <li><strong className="text-emerald-300">TURN</strong>&nbsp;— Relays media when direct P2P fails. Expensive but essential.</li>
+        <li><strong className="text-emerald-300">DTLS</strong>&nbsp;— Datagram TLS. Encrypts the connection before media flows.</li>
+        <li><strong className="text-emerald-300">SRTP</strong>&nbsp;— Secure RTP. The encrypted audio/video stream itself.</li>
+        <li><strong className="text-emerald-300">SFU</strong>&nbsp;— Selective Forwarding Unit. The server that routes streams in group calls.</li>
+        <li><strong className="text-emerald-300">RTCDataChannel</strong>&nbsp;— Binary/text data pipe over WebRTC (SCTP). Used for file transfer, gaming, cursors.</li>
       </ul>
     </Callout>,
   ],

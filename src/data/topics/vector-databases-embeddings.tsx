@@ -1,7 +1,5 @@
 import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
-import { Grid } from "@/components/ui/Grid";
-import { Card } from "@/components/ui/Card";
 import { Callout } from "@/components/ui/Callout";
 
 export const vectorDatabasesEmbeddingsTopic: Topic = {
@@ -36,24 +34,27 @@ export const vectorDatabasesEmbeddingsTopic: Topic = {
     <p key="6" className="mb-4">
       Vector search is 'fuzzy' and can't find exact SKUs or acronyms. <strong>Hybrid Search</strong> combines Vector Similarity (Semantic) with <strong>BM25</strong> (Keyword) to produce a unified relevance score.
     </p>,
-    <Grid key="7" cols={2} gap={6} className="my-8">
-      <Card title="Metadata Filtering">
-        <p className="text-sm text-muted-foreground mb-2">
-          "Find docs similar to X, but ONLY for <code>user_id=42</code>."
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          <strong>Pre-filtering</strong> is superior; it limits the search space <em>before</em> the vector calculation, ensuring 100% accuracy for the filter.
-        </p>
-      </Card>
-      <Card title="Product Quantization (PQ)">
-        <p className="text-sm text-muted-foreground mb-2">
-          Compressing 1536-dim vectors.
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          PQ divides vectors into sub-spaces and replaces them with 'centroid' codes. This reduces memory by 90% while maintaining ~95% search accuracy.
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="7"
+      headers={["Technique", "What It Adds", "Why It Matters"]}
+      rows={[
+        [
+          "Metadata Filtering",
+          "\"Find docs similar to X, but only where <code>user_id=42</code>.\"",
+          "<strong>Pre-filtering</strong> limits the search space before vector math runs, keeping access control and tenant isolation accurate.",
+        ],
+        [
+          "Product Quantization (PQ)",
+          "Compresses large 1536-dimension vectors into compact centroid codes.",
+          "Reduces memory by roughly 90% while preserving most retrieval quality, which is why very large vector indexes can stay affordable.",
+        ],
+        [
+          "BM25 + Vector Fusion",
+          "Merges exact keyword ranking with fuzzy semantic ranking.",
+          "Catches SKUs, acronyms, and proper nouns that pure embeddings often blur into approximate meaning.",
+        ],
+      ]}
+    />,
     <Callout key="8" type="info" title="Cosine Similarity">
       Most vector DBs use <strong>Cosine Similarity</strong>—measuring the cosine of the angle between two vectors. This focuses on <strong>Direction</strong> (meaning) rather than <strong>Magnitude</strong> (line length), which is critical for text embeddings where document length can vary.
     </Callout>,

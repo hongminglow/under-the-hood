@@ -1,6 +1,4 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 
@@ -34,29 +32,27 @@ export const tauriUnderTheHoodTopic: Topic = {
     <p key="5" className="mb-4">
       Tauri doesn't build a window from scratch. It uses two key Rust libraries:
     </p>,
-    <Grid key="6" cols={2} gap={6} className="my-8">
-      <Card title="TAO (Window Manager)">
-        <p className="text-sm text-muted-foreground mb-2">
-          Handles the <strong>Windowing</strong> logic across Windows, macOS, Linux, and now Mobile.
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          It creates the physical OS window, manages menus, and handles native system events (resize, minimize).
-        </p>
-      </Card>
-      <Card title="WRY (WebView Render)">
-        <p className="text-sm text-muted-foreground mb-2">
-          Hooks into the <strong>System WebView</strong> (WebView2, WebKit).
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          It creates the 'Frame' where your React/JS lives. Because it use the OS's engine, security updates are handled by the OS, not the app.
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="6"
+      headers={["Rust layer", "Responsibility", "Why it matters"]}
+      rows={[
+        [
+          "TAO",
+          "Creates the physical OS window and handles menus, tray behavior, resize events, and native window lifecycle.",
+          "Tauri can feel native on Windows, macOS, Linux, iOS, and Android without shipping a custom windowing stack.",
+        ],
+        [
+          "WRY",
+          "Embeds the system WebView: WebView2 on Windows, WebKit on macOS/iOS/Linux, and Android WebView.",
+          "Your app reuses the operating system's browser engine, so the binary stays small and engine security updates come from the OS.",
+        ],
+      ]}
+    />,
     <h3 key="7" className="text-xl font-bold mt-8 mb-4">
       The Isolation Pattern
     </h3>,
     <p key="8" className="mb-4 text-sm text-muted-foreground">
-      Tauri v2 introduces the <strong>Isolation Pattern</strong>. Instead of the frontend calling Rust directly, all messages pass through an 'Isolation Layer' (an iframe) that injects a secure bridge. This prevents <strong>XSS attacks</strong> in your frontend from ever reaching your privileged Rust code.
+      Tauri v2 introduces the <strong>Isolation Pattern</strong>. Instead of the frontend calling Rust directly, all messages pass through an isolation layer that injects a secure bridge. This limits how much damage an XSS bug in the WebView can do before it reaches privileged Rust commands.
     </p>,
     <Callout key="9" type="info" title="Mobile Support (Tauri v2)">
       Tauri v2 is no longer just for Desktop. It now targets <strong>iOS (Swift/UIKit)</strong> and <strong>Android (Kotlin/WebView)</strong> using the same Rust core logic. Your business logic stays in Rust, while your UI can remain in React/Vite.

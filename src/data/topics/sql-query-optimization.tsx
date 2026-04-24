@@ -1,7 +1,5 @@
 import { Callout } from "@/components/ui/Callout";
-import { Card } from "@/components/ui/Card";
 import { CodeBlock } from "@/components/ui/CodeBlock";
-import { Grid } from "@/components/ui/Grid";
 import { Step } from "@/components/ui/Step";
 import { Table } from "@/components/ui/Table";
 import type { Topic } from "@/data/types";
@@ -130,29 +128,22 @@ LIMIT 50;
         ],
       ]}
     />,
-    <Grid key="8" cols={2} gap={6} className="my-8">
-      <Card title="Seq Scan vs Index Scan" description="Use the right mental model">
-        <p className="text-sm text-muted-foreground mb-2">
-          A <strong>Seq Scan</strong> is not automatically bad. If you need 40%
-          of a table, hopping through an index can be slower than reading the
-          pages sequentially.
-        </p>
-        <p className="text-sm text-muted-foreground">
-          An <strong>Index Scan</strong> wins when the predicate is selective
-          enough that jumping directly to a few rows avoids massive IO.
-        </p>
-      </Card>
-      <Card title="Hash Join vs Nested Loop" description="The classic trade-off">
-        <p className="text-sm text-muted-foreground mb-2">
-          <strong>Nested Loop</strong> is amazing when you already reduced the
-          outer rows to a tiny set and the inner side is indexed.
-        </p>
-        <p className="text-sm text-muted-foreground">
-          <strong>Hash Join</strong> usually wins when joining larger sets on an
-          equality key, especially after light filtering.
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="8"
+      headers={["Planner choice", "Common misconception", "Better mental model"]}
+      rows={[
+        [
+          "Seq Scan vs Index Scan",
+          "A sequential scan is always bad.",
+          "If the query needs a large fraction of the table, sequential reads can beat random index hops.",
+        ],
+        [
+          "Hash Join vs Nested Loop",
+          "Nested loops are simple, so they are safer.",
+          "Nested loops are excellent for tiny outer sets and indexed inner lookups; hash joins usually win for larger equality joins.",
+        ],
+      ]}
+    />,
     <h3 key="9" className="text-xl font-bold mt-8 mb-4">
       Optimization Strategy Matrix: When To Use Which
     </h3>,

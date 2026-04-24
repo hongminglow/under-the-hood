@@ -43,29 +43,24 @@ export const sagaPatternTopic: Topic = {
     <h3 key="7" className="text-xl font-bold mt-8 mb-4">
       ACID vs BASE
     </h3>,
-    <Grid key="8" cols={2} gap={6} className="my-8">
-      <Card title="ACID (Monoliths)">
-        <p className="text-sm text-muted-foreground mb-2">
-          <strong>Atomicity</strong>: All or nothing<br/>
-          <strong>Consistency</strong>: Always valid state<br/>
-          <strong>Isolation</strong>: Transactions don't interfere<br/>
-          <strong>Durability</strong>: Committed = permanent
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          Perfect consistency, but doesn't scale across services.
-        </p>
-      </Card>
-      <Card title="BASE (Distributed Sagas)">
-        <p className="text-sm text-muted-foreground mb-2">
-          <strong>Basically Available</strong>: System works most of the time<br/>
-          <strong>Soft state</strong>: State may change without input<br/>
-          <strong>Eventual consistency</strong>: Becomes consistent eventually
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          Trades immediate consistency for scalability and availability.
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="8"
+      headers={["Model", "Guarantee", "System shape", "Tradeoff"]}
+      rows={[
+        [
+          "ACID (Monoliths)",
+          "Atomicity, Consistency, Isolation, Durability.",
+          "One database controls the whole transaction boundary.",
+          "Perfect local consistency, but poor fit for independently owned services.",
+        ],
+        [
+          "BASE (Distributed Sagas)",
+          "Basically Available, Soft state, Eventual consistency.",
+          "Each service commits locally and compensates when later steps fail.",
+          "Higher availability and service autonomy, but users may observe temporary states.",
+        ],
+      ]}
+    />,
 
     <h3 key="9" className="text-xl font-bold mt-8 mb-4">
       Saga Implementation: Choreography vs Orchestration
@@ -207,42 +202,48 @@ SELECT * FROM outbox WHERE published = false ORDER BY created_at;`}
       Sagas do not have <strong>Isolation</strong>&nbsp;(the 'I' in ACID). Other users might see intermediate "soft state" while the Saga is running.
     </p>,
     <Card key="22" title="Example: Dirty Reads">
-      <p className="text-sm text-muted-foreground mb-2">
+      <p className="text-sm text-slate-300 leading-relaxed mb-2">
         User A starts a Saga to buy the last iPhone. Inventory is reserved (stock = 0). User B tries to buy the same iPhone and sees "Out of Stock". But then User A's payment fails, and the Saga compensates by releasing the inventory. User B missed their chance due to a temporary state.
       </p>
     </Card>,
-    <Grid key="23" cols={2} gap={6} className="my-8">
-      <Card title="Solution 1: Semantic Locks">
-        <p className="text-sm text-muted-foreground">
-          Add a <code>reserved_by</code> field to items. Other users see "Reserved" instead of "Out of Stock". If the Saga fails, the reservation expires after a timeout.
-        </p>
-      </Card>
-      <Card title="Solution 2: Versioning">
-        <p className="text-sm text-muted-foreground">
-          Use optimistic locking with version numbers. If two Sagas try to modify the same resource, the second one fails and retries.
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="23"
+      headers={["Mitigation", "How it works", "Best when"]}
+      rows={[
+        [
+          "Semantic locks",
+          "Add a reserved_by or pending state so other users see Reserved instead of a misleading final state.",
+          "The resource has a human-visible reservation window.",
+        ],
+        [
+          "Versioning",
+          "Use optimistic locking with version numbers; if two Sagas modify the same resource, one fails and retries.",
+          "Conflicts are rare but correctness still matters.",
+        ],
+      ]}
+    />,
 
     <h3 key="24" className="text-xl font-bold mt-8 mb-4">
       Real-World Examples
     </h3>,
-    <Card key="25" title="Uber: Ride Booking Saga">
-      <p className="text-sm text-muted-foreground mb-2">
-        <strong>Steps</strong>: Create ride → Find driver → Reserve driver → Charge rider → Confirm ride
-      </p>
-      <p className="text-xs text-muted-foreground">
-        If payment fails, the Saga releases the driver and cancels the ride. Uses orchestration with a central Saga coordinator.
-      </p>
-    </Card>,
-    <Card key="26" title="Amazon: Order Fulfillment Saga">
-      <p className="text-sm text-muted-foreground mb-2">
-        <strong>Steps</strong>: Validate order → Reserve inventory → Process payment → Create shipment → Update order status
-      </p>
-      <p className="text-xs text-muted-foreground">
-        Uses choreography with event-driven microservices. Each service listens to domain events and reacts independently.
-      </p>
-    </Card>,
+    <Table
+      key="25"
+      headers={["System", "Saga path", "Failure response", "Coordination style"]}
+      rows={[
+        [
+          "Uber ride booking",
+          "Create ride -> find driver -> reserve driver -> charge rider -> confirm ride.",
+          "If payment fails, release the driver and cancel the ride.",
+          "Orchestration with a central Saga coordinator.",
+        ],
+        [
+          "Amazon order fulfillment",
+          "Validate order -> reserve inventory -> process payment -> create shipment -> update order status.",
+          "If a later step fails, previous services publish compensating events.",
+          "Choreography with event-driven microservices.",
+        ],
+      ]}
+    />,
 
     <h3 key="27" className="text-xl font-bold mt-8 mb-4">
       When NOT to Use Sagas

@@ -1,10 +1,11 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Step } from "@/components/ui/Step";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { CheckCircle2, RefreshCcw, ShieldAlert, ShieldCheck } from "lucide-react";
 
 export const vibeCodingAiPairProgrammingTopic: Topic = {
 	id: "vibe-coding-ai-pair-programming",
@@ -58,17 +59,17 @@ export const vibeCodingAiPairProgrammingTopic: Topic = {
 			The Best Prompt Shape for Coding Agents
 		</h3>,
 		<Grid key="6" cols={2} gap={6}>
-			<Card title="Include These" description="High-signal prompt ingredients">
-				<ul className="list-disc pl-5 text-sm space-y-2 text-muted-foreground">
+			<FeatureCard icon={CheckCircle2} title="Include These" subtitle="High-signal prompt ingredients" theme="emerald">
+				<ul className="list-disc pl-5 space-y-2 text-emerald-100/80">
 					<li>The exact goal: bugfix, refactor, feature, explanation, review.</li>
 					<li>The relevant files or subsystem names.</li>
 					<li>Constraints: preserve API, keep styling, avoid new deps, no schema change.</li>
 					<li>Definition of done: tests pass, route renders, typecheck clean, edge cases covered.</li>
 					<li>Decision boundaries: ask before changing architecture, DB schema, or public API.</li>
 				</ul>
-			</Card>
-			<Card title="Avoid These" description="Low-signal prompt habits">
-				<ul className="list-disc pl-5 text-sm space-y-2 text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={ShieldAlert} title="Avoid These" subtitle="Low-signal prompt habits" theme="rose">
+				<ul className="list-disc pl-5 space-y-2 text-rose-100/80">
 					<li>
 						<code>Fix this</code> with no error or failing behavior attached.
 					</li>
@@ -79,7 +80,7 @@ export const vibeCodingAiPairProgrammingTopic: Topic = {
 					<li>Hidden assumptions like "same as before" when the agent lacks that context.</li>
 					<li>Pasting massive logs without saying what matters in them.</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<h3 key="7" className="text-xl font-bold mt-8 mb-4">
 			Prompting Formula That Usually Works
@@ -200,18 +201,18 @@ If you discover this needs a broader refactor, pause and say why before changing
 			How To Correct an Agent Without Misleading It
 		</h3>,
 		<Grid key="21" cols={2} gap={6}>
-			<Card title="Bad Correction" description="Creates more confusion">
-				<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+			<FeatureCard icon={RefreshCcw} title="Bad Correction" subtitle="Creates more confusion" theme="rose">
+				<p className="leading-relaxed text-rose-100/80">
 					"No not like that, do it better." This does not tell the model what was wrong: logic, style, performance, UX,
 					architecture, or tests.
 				</p>
-			</Card>
-			<Card title="Good Correction" description="Points to the real delta">
-				<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={ShieldCheck} title="Good Correction" subtitle="Points to the real delta" theme="emerald">
+				<p className="leading-relaxed text-emerald-100/80">
 					"Keep your pagination fix, but revert the UI restyle. I only wanted the data bug fixed. Do not change markup
 					or class names." This narrows the correction to the exact dimension that drifted.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<CodeBlock
 			key="22"

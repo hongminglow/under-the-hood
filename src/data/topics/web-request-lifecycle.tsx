@@ -1,8 +1,7 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { Flow } from "@/components/ui/Flow";
 
 export const webRequestLifecycleTopic: Topic = {
   id: "web-request-lifecycle",
@@ -30,36 +29,29 @@ export const webRequestLifecycleTopic: Topic = {
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">
       Phase 2: The Application Protocol
     </h3>,
-    <Grid key="5" cols={2} gap={6} className="my-8">
-      <Card title="The HTTP Request">
-        <p className="text-sm text-muted-foreground mb-2">
-          The browser sends the <strong>HTTP GET/POST</strong> header.
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          Include Cookies, User-Agent, and Accept-Encoding. If it's a cross-origin API call, the browser first sends an <strong>OPTIONS (CORS Pre-flight)</strong> request.
-        </p>
-      </Card>
-      <Card title="Server Processing (TTFB)">
-        <p className="text-sm text-muted-foreground mb-2">
-          The backend wakes up. Load Balancer → Nginx → Application Code.
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          <strong>Time to First Byte (TTFB)</strong> measures how long the server took to query the DB and start streaming the response back.
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="5"
+      headers={["Stage", "What Moves", "Latency Signal"]}
+      rows={[
+        ["HTTP Request", "The browser sends method, path, headers, cookies, user-agent, and accepted encodings.", "Cross-origin API calls may first pay an <strong>OPTIONS</strong> preflight round trip."],
+        ["Server Processing", "Load balancer routes to Nginx, app code runs, DB/cache calls execute, and the first response bytes are prepared.", "<strong>TTFB</strong> reveals how long the server path took before the browser received the first byte."],
+      ]}
+    />,
     <h3 key="6" className="text-xl font-bold mt-8 mb-4">
       Phase 3: The Browser Engine Pipeline
     </h3>,
     <p key="7" className="mb-4">
       The server sends <code>200 OK</code> and the HTML stream. The browser engine (Blink/WebKit) begins:
     </p>,
-    <ul key="8" className="list-disc pl-5 text-sm text-muted-foreground space-y-2">
-      <li><strong>Tokenization:</strong> Converting HTML strings into DOM Nodes.</li>
-      <li><strong>CSSOM:</strong> Parsing CSS to calculate styles for every element.</li>
-      <li><strong>Layout (Reflow):</strong> Calculating the geometry (x, y, width, height) of every box on the screen.</li>
-      <li><strong>Paint:</strong> Converting the layout tree into actual pixels on the GPU.</li>
-    </ul>,
+    <Flow
+      key="8"
+      steps={[
+        { title: "1. Tokenization", description: "HTML strings are converted into DOM nodes." },
+        { title: "2. CSSOM", description: "CSS is parsed so the browser can calculate styles for every element." },
+        { title: "3. Layout", description: "The engine computes each box's x, y, width, and height." },
+        { title: "4. Paint", description: "The layout tree becomes pixels and layers that the GPU can composite." },
+      ]}
+    />,
     <Callout key="9" type="info" title="The Critical Request Chain">
       If your HTML has a <code>&lt;script src="..."&gt;</code> in the <code>&lt;head&gt;</code>, the browser <strong>stops everything</strong>, downloads that script, executes it, and only <em>then</em> resumes painting. Use <code>async</code> or <code>defer</code> to unblock the lifecycle!
     </Callout>,

@@ -1,9 +1,11 @@
 import type { Topic } from "@/data/types";
 import { Card } from "@/components/ui/Card";
+import { FeatureCard } from "@/components/ui/FeatureCard";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { MistakeCard } from "@/components/ui/MistakeCard";
+import { Building2, FileCode2, FileText, GitBranch, Repeat2, Rows3 } from "lucide-react";
 
 export const sdlcMethodologiesTopic: Topic = {
 	id: "sdlc-methodologies",
@@ -67,8 +69,54 @@ export const sdlcMethodologiesTopic: Topic = {
 			</Card>
 		</Grid>,
 
+		<h3 key="h3-actors" className="text-xl font-bold mt-12 mb-4">
+			The Main Characters
+		</h3>,
+		<p key="actors-sub" className="mb-6">
+			These methodologies come back throughout the article, so it helps to treat each one as a distinct operating
+			model rather than a generic process label.
+		</p>,
+		<Grid key="actors-grid" cols={3} gap={6} className="mb-8">
+			<FeatureCard icon={FileText} title="Waterfall" subtitle="phase-gate certainty" theme="amber">
+				<p>
+					Optimizes for upfront scope, formal sign-off, and auditability. Strong when the domain is stable; painful
+					when learning arrives late.
+				</p>
+			</FeatureCard>
+			<FeatureCard icon={Repeat2} title="Scrum" subtitle="time-boxed feedback" theme="cyan">
+				<p>
+					Optimizes for sprint rhythm, stakeholder review, and team commitment. Strong for product delivery; noisy
+					when work is mostly interrupts.
+				</p>
+			</FeatureCard>
+			<FeatureCard icon={Rows3} title="Kanban" subtitle="flow and WIP limits" theme="teal">
+				<p>
+					Optimizes for continuous delivery, visible bottlenecks, and operational responsiveness. Strong when work
+					arrives unpredictably.
+				</p>
+			</FeatureCard>
+			<FeatureCard icon={FileCode2} title="XP" subtitle="engineering discipline" theme="emerald">
+				<p>
+					Optimizes for technical quality through TDD, CI, pairing, and refactoring. Strong when speed must not
+					decay into fragile code.
+				</p>
+			</FeatureCard>
+			<FeatureCard icon={Building2} title="SAFe" subtitle="enterprise coordination" theme="violet">
+				<p>
+					Optimizes for dependency visibility across many teams. Strong in large organizations; risky when ceremony
+					becomes a substitute for autonomy.
+				</p>
+			</FeatureCard>
+			<FeatureCard icon={GitBranch} title="Agile" subtitle="the philosophy layer" theme="sky">
+				<p>
+					Not a framework by itself. Agile is the value system underneath Scrum, Kanban, XP, and many hybrid team
+					operating models.
+				</p>
+			</FeatureCard>
+		</Grid>,
+
 		/* ── SECTION 2: Waterfall ────────────────────────────────────────────── */
-		<h3 key="h3-waterfall" className="text-xl font-bold mt-12 mb-4">
+		<h3 key="h3-waterfall" className="text-xl font-bold mt-12 mb-4 text-amber-100">
 			Waterfall — The Phase-Gate Classic
 		</h3>,
 		<p key="waterfall-sub" className="mb-6">
@@ -76,56 +124,64 @@ export const sdlcMethodologiesTopic: Topic = {
 			before the next begins. Requirements → Design → Implementation → Testing → Deployment → Maintenance.
 		</p>,
 		<Grid key="waterfall-grid" cols={2} gap={6} className="mb-6">
-			<Card title="Pros">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			<FeatureCard icon={FileText} title="Waterfall Strengths" subtitle="where phase gates help" theme="amber">
+				<ul className="text-sm text-amber-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-muted-foreground">Highly predictable cost & timeline.</strong> The entire scope is
+						<strong className="text-amber-300">Highly predictable cost & timeline.</strong> The entire scope is
 						defined upfront, so budgeting is straightforward.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Clear documentation.</strong> Every phase produces formal
+						<strong className="text-amber-300">Clear documentation.</strong> Every phase produces formal
 						artefacts — specs, design docs, test plans. Critical for regulated industries.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Easy to manage.</strong> Sequential stages are simple to track.
+						<strong className="text-amber-300">Easy to manage.</strong> Sequential stages are simple to track.
 						Non-technical stakeholders understand Gantt charts.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Good for fixed-price contracts.</strong> When a client signs a
+						<strong className="text-amber-300">Good for fixed-price contracts.</strong> When a client signs a
 						contract demanding a specific deliverable, Waterfall's change-resistant structure protects the vendor.
 					</li>
 				</ul>
-			</Card>
-			<Card title="Cons">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={FileText} title="Waterfall Failure Modes" subtitle="where phase gates hurt" theme="amber">
+				<ul className="text-sm text-amber-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-muted-foreground">Catastrophically late feedback.</strong> Users see the product for
+						<strong className="text-amber-300">Catastrophically late feedback.</strong> Users see the product for
 						the first time <em>after</em> it's built. Discovering "this isn't what we wanted" at deployment costs
 						10–100× more to fix than at requirements.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Change is lethal.</strong> A scope change in phase 3 means
+						<strong className="text-amber-300">Change is lethal.</strong> A scope change in phase 3 means
 						re-doing phases 1 & 2 artefacts. Change orders are expensive and contentious.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Testing is too late.</strong> Bugs found during testing (the
+						<strong className="text-amber-300">Testing is too late.</strong> Bugs found during testing (the
 						penultimate phase) have already had enormous design and implementation work built on top of them.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">High risk of delivering the wrong thing.</strong> Markets move. A
+						<strong className="text-amber-300">High risk of delivering the wrong thing.</strong> Markets move. A
 						24-month Waterfall project delivers to a world that has changed.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
-		<Callout key="waterfall-callout" type="tip" title="When Waterfall Still Makes Sense">
-			Government procurement, aerospace firmware, nuclear plant control software, and medical device development often{" "}
-			<em>require</em> Waterfall-like phase gates due to regulatory mandate (FDA, DO-178C, IEC 62304). The compliance
-			documentation Waterfall produces is a legal necessity, not an engineering choice.
-		</Callout>,
+		<FeatureCard
+			key="waterfall-callout"
+			icon={FileText}
+			title="When Waterfall Still Makes Sense"
+			subtitle="compliance is the product requirement"
+			theme="amber"
+		>
+			<p>
+				Government procurement, aerospace firmware, nuclear plant control software, and medical device development often{" "}
+				<em>require</em> Waterfall-like phase gates due to regulatory mandate (FDA, DO-178C, IEC 62304). The compliance
+				documentation Waterfall produces is a legal necessity, not an engineering choice.
+			</p>
+		</FeatureCard>,
 
 		/* ── SECTION 3: Agile ───────────────────────────────────────────────── */
-		<h3 key="h3-agile" className="text-xl font-bold mt-12 mb-4">
+		<h3 key="h3-agile" className="text-xl font-bold mt-12 mb-4 text-sky-100">
 			Agile — The Philosophy, Not the Framework
 		</h3>,
 		<p key="agile-sub" className="mb-4">
@@ -135,46 +191,46 @@ export const sdlcMethodologiesTopic: Topic = {
 			framework often do neither.
 		</p>,
 		<Grid key="agile-values-grid" cols={2} gap={6} className="mb-8">
-			<Card title="The 4 Agile Values">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			<FeatureCard icon={GitBranch} title="The 4 Agile Values" subtitle="the philosophy layer" theme="sky">
+				<ul className="text-sm text-sky-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong>Individuals & interactions</strong> over processes & tools
+						<strong className="text-sky-300">Individuals & interactions</strong> over processes & tools
 					</li>
 					<li>
-						<strong>Working software</strong> over comprehensive documentation
+						<strong className="text-sky-300">Working software</strong> over comprehensive documentation
 					</li>
 					<li>
-						<strong>Customer collaboration</strong> over contract negotiation
+						<strong className="text-sky-300">Customer collaboration</strong> over contract negotiation
 					</li>
 					<li>
-						<strong>Responding to change</strong> over following a plan
+						<strong className="text-sky-300">Responding to change</strong> over following a plan
 					</li>
 				</ul>
-			</Card>
-			<Card title="What Agile Actually Means in Practice">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={GitBranch} title="Agile in Practice" subtitle="feedback before certainty" theme="sky">
+				<ul className="text-sm text-sky-100/75 space-y-2 list-disc pl-4">
 					<li>
-						Deliver working software <strong>frequently</strong> (weeks, not months) so you get real feedback while
+						Deliver working software <strong className="text-sky-300">frequently</strong> (weeks, not months) so you get real feedback while
 						change is still cheap.
 					</li>
 					<li>
-						Embrace late requirements changes — even near the end — as a <strong>competitive advantage</strong>, not a
+						Embrace late requirements changes — even near the end — as a <strong className="text-sky-300">competitive advantage</strong>, not a
 						failure.
 					</li>
 					<li>
-						Build projects around <strong>motivated individuals</strong>. Trust the team. Stop excessive oversight and
+						Build projects around <strong className="text-sky-300">motivated individuals</strong>. Trust the team. Stop excessive oversight and
 						reporting.
 					</li>
 					<li>
-						At regular intervals, the team <strong>reflects</strong> on how to become more effective and adjusts its
+						At regular intervals, the team <strong className="text-sky-300">reflects</strong> on how to become more effective and adjusts its
 						behaviour.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		/* ── SECTION 4: Scrum ───────────────────────────────────────────────── */
-		<h3 key="h3-scrum" className="text-xl font-bold mt-12 mb-4">
+		<h3 key="h3-scrum" className="text-xl font-bold mt-12 mb-4 text-cyan-100">
 			Scrum — Time-Boxed Sprints & Ceremonies
 		</h3>,
 		<p key="scrum-sub" className="mb-6">
@@ -182,56 +238,56 @@ export const sdlcMethodologiesTopic: Topic = {
 			(1–4 weeks), with a defined set of roles, artefacts, and ceremonies.
 		</p>,
 		<Grid key="scrum-grid" cols={2} gap={6} className="mb-6">
-			<Card title="Scrum Roles">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			<FeatureCard icon={Repeat2} title="Scrum Roles" subtitle="ownership boundaries" theme="cyan">
+				<ul className="text-sm text-cyan-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-muted-foreground">Product Owner (PO):</strong> Owns the Product Backlog. Prioritizes
+						<strong className="text-cyan-300">Product Owner (PO):</strong> Owns the Product Backlog. Prioritizes
 						features by business value. The single voice of the customer/stakeholder to the team.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Scrum Master:</strong> A servant-leader. Facilitates ceremonies,
+						<strong className="text-cyan-300">Scrum Master:</strong> A servant-leader. Facilitates ceremonies,
 						removes blockers, coaches the team on Scrum theory. NOT a project manager.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Development Team:</strong> Self-organizing, cross-functional
+						<strong className="text-cyan-300">Development Team:</strong> Self-organizing, cross-functional
 						(design, dev, QA). Collectively responsible for sprint delivery. Ideally 3–9 people.
 					</li>
 				</ul>
-			</Card>
-			<Card title="Scrum Ceremonies">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={Repeat2} title="Scrum Ceremonies" subtitle="the sprint operating system" theme="cyan">
+				<ul className="text-sm text-cyan-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-muted-foreground">Sprint Planning:</strong> Team selects items from the backlog and
+						<strong className="text-cyan-300">Sprint Planning:</strong> Team selects items from the backlog and
 						commits to what they will deliver this sprint.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Daily Standup (15 min max):</strong> What did I do yesterday? What
+						<strong className="text-cyan-300">Daily Standup (15 min max):</strong> What did I do yesterday? What
 						am I doing today? Any blockers?
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Sprint Review:</strong> Demo the working software to stakeholders.
+						<strong className="text-cyan-300">Sprint Review:</strong> Demo the working software to stakeholders.
 						Collect feedback. Update the backlog.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Sprint Retrospective:</strong> What went well? What should we
+						<strong className="text-cyan-300">Sprint Retrospective:</strong> What went well? What should we
 						improve? How do we change our process?
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<Grid key="scrum-pros-cons" cols={2} gap={6} className="mb-8">
-			<Card title="Pros">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			<FeatureCard icon={Repeat2} title="Scrum Strengths" subtitle="rhythm and feedback" theme="cyan">
+				<ul className="text-sm text-cyan-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-muted-foreground">Regular delivery creates a rhythm and momentum.</strong> The
+						<strong className="text-cyan-300">Regular delivery creates a rhythm and momentum.</strong> The
 						entire company can plan around it.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Velocity metrics create a data-driven forecast.</strong> Story
+						<strong className="text-cyan-300">Velocity metrics create a data-driven forecast.</strong> Story
 						points per sprint give a rough view of future delivery pace.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Sprint Reviews create a stakeholder feedback loop.</strong> The
+						<strong className="text-cyan-300">Sprint Reviews create a stakeholder feedback loop.</strong> The
 						team gets structured input every 2–4 weeks.
 					</li>
 					<li>
@@ -239,31 +295,31 @@ export const sdlcMethodologiesTopic: Topic = {
 						builds.
 					</li>
 				</ul>
-			</Card>
-			<Card title="Cons">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={Repeat2} title="Scrum Failure Modes" subtitle="when ceremony outruns value" theme="cyan">
+				<ul className="text-sm text-cyan-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-muted-foreground">Ceremony overhead.</strong> Small teams burn non-trivial time in
+						<strong className="text-cyan-300">Ceremony overhead.</strong> Small teams burn non-trivial time in
 						standups, planning, reviews, and retros. At 2-week sprints, that's 6–8 hours of meetings per cycle.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">The "Sprint" becomes a hard ceiling.</strong> A story that doesn't
+						<strong className="text-cyan-300">The "Sprint" becomes a hard ceiling.</strong> A story that doesn't
 						fit in the sprint gets split artificially or deferred, sometimes creating technical debt.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Story points are often cargo-culted.</strong> Teams argue about
+						<strong className="text-cyan-300">Story points are often cargo-culted.</strong> Teams argue about
 						estimates more than they build. The numbers frequently don't correlate to real time.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Doesn't suit pure operational/support work.</strong> It clashes
+						<strong className="text-cyan-300">Doesn't suit pure operational/support work.</strong> It clashes
 						with unpredictable interrupt-driven tasks. (Kanban is better there.)
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		/* ── SECTION 5: Kanban ───────────────────────────────────────────────── */
-		<h3 key="h3-kanban" className="text-xl font-bold mt-12 mb-4">
+		<h3 key="h3-kanban" className="text-xl font-bold mt-12 mb-4 text-teal-100">
 			Kanban — Flow Over Time-Boxes
 		</h3>,
 		<p key="kanban-sub" className="mb-6">
@@ -272,55 +328,63 @@ export const sdlcMethodologiesTopic: Topic = {
 			<strong>limiting Work In Progress (WIP)</strong> to keep flow smooth and expose bottlenecks.
 		</p>,
 		<Grid key="kanban-principles-grid" cols={2} gap={6} className="mb-6">
-			<Card title="The 4 Core Kanban Principles">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			<FeatureCard icon={Rows3} title="The 4 Core Kanban Principles" subtitle="flow control" theme="teal">
+				<ul className="text-sm text-teal-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-muted-foreground">Visualise the Workflow:</strong> Every task on a board. Every
+						<strong className="text-teal-300">Visualise the Workflow:</strong> Every task on a board. Every
 						column is a stage (Backlog → In Progress → Review → Done).
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Limit WIP:</strong> Each column has a maximum capacity (e.g. "In
+						<strong className="text-teal-300">Limit WIP:</strong> Each column has a maximum capacity (e.g. "In
 						Progress: max 3"). When a column is full, the team pulls from earlier instead of starting new work.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Manage Flow:</strong> Track cycle time (time from start to done).
+						<strong className="text-teal-300">Manage Flow:</strong> Track cycle time (time from start to done).
 						Focus on making individual items flow through quickly, not on keeping everyone busy.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Improve Collaboratively:</strong> Use metrics (lead time,
+						<strong className="text-teal-300">Improve Collaboratively:</strong> Use metrics (lead time,
 						throughput) to drive process improvements. No prescribed cadence.
 					</li>
 				</ul>
-			</Card>
-			<Card title="Kanban vs Scrum — Key Differences">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={Rows3} title="Kanban vs Scrum" subtitle="continuous pull versus sprint batch" theme="teal">
+				<ul className="text-sm text-teal-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-muted-foreground">No Sprints.</strong> Work is delivered continuously, item by item,
+						<strong className="text-teal-300">No sprints.</strong> Work is delivered continuously, item by item,
 						not in batched sprint increments.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">No Story Points.</strong> Cycle time (how long does an item take?)
+						<strong className="text-teal-300">No story points.</strong> Cycle time (how long does an item take?)
 						replaces velocity as the planning metric.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">No prescribed roles.</strong> No Scrum Master or Product Owner
+						<strong className="text-teal-300">No prescribed roles.</strong> No Scrum Master or Product Owner
 						requirement. Works with existing team structure.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Change is welcome anytime.</strong> Since there's no sprint
+						<strong className="text-teal-300">Change is welcome anytime.</strong> Since there's no sprint
 						commitment to protect, priorities can shift day-to-day without "breaking" a sprint.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
-		<Callout key="kanban-callout" type="tip" title="Kanban Shines in Operations & Support">
-			Kanban is the natural fit for DevOps teams, platform engineering, SRE (Site Reliability Engineering), and
-			technical support — where work is interrupt-driven and unpredictable. Sprints create artificial resistance to
-			unplanned incoming bugs and incidents. Kanban's pull system absorbs them naturally.
-		</Callout>,
+		<FeatureCard
+			key="kanban-callout"
+			icon={Rows3}
+			title="Kanban Shines in Operations & Support"
+			subtitle="interrupt-driven work needs pull flow"
+			theme="teal"
+		>
+			<p>
+				Kanban is the natural fit for DevOps teams, platform engineering, SRE (Site Reliability Engineering), and
+				technical support — where work is interrupt-driven and unpredictable. Sprints create artificial resistance to
+				unplanned incoming bugs and incidents. Kanban's pull system absorbs them naturally.
+			</p>
+		</FeatureCard>,
 
 		/* ── SECTION 6: XP ───────────────────────────────────────────────────── */
-		<h3 key="h3-xp" className="text-xl font-bold mt-12 mb-4">
+		<h3 key="h3-xp" className="text-xl font-bold mt-12 mb-4 text-emerald-100">
 			Extreme Programming (XP) — Engineering Discipline First
 		</h3>,
 		<p key="xp-sub" className="mb-6">
@@ -328,56 +392,56 @@ export const sdlcMethodologiesTopic: Topic = {
 			<strong>specific technical practices</strong> that keep code quality high under rapid iteration pressure.
 		</p>,
 		<Grid key="xp-grid" cols={2} gap={6} className="mb-6">
-			<Card title="Core XP Practices">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			<FeatureCard icon={FileCode2} title="Core XP Practices" subtitle="quality as daily discipline" theme="emerald">
+				<ul className="text-sm text-emerald-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-muted-foreground">Test-Driven Development (TDD):</strong> Write the failing test
+						<strong className="text-emerald-300">Test-Driven Development (TDD):</strong> Write the failing test
 						first. Write the minimal code to make it pass. Refactor. No production code without a test.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Pair Programming:</strong> Two developers, one keyboard. One types
+						<strong className="text-emerald-300">Pair Programming:</strong> Two developers, one keyboard. One types
 						(driver), one reviews and thinks ahead (navigator). Rotate frequently.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Continuous Integration:</strong> Merge and build code multiple
+						<strong className="text-emerald-300">Continuous Integration:</strong> Merge and build code multiple
 						times per day. Never let branches diverge for more than a few hours.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Refactoring:</strong> Continuously improve design without changing
+						<strong className="text-emerald-300">Refactoring:</strong> Continuously improve design without changing
 						external behaviour. The test suite makes this safe.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Simple Design:</strong> Build the simplest thing that works.
+						<strong className="text-emerald-300">Simple Design:</strong> Build the simplest thing that works.
 						Resist speculative over-engineering. YAGNI (You Aren't Gonna Need It).
 					</li>
 				</ul>
-			</Card>
-			<Card title="Trade-Offs">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={FileCode2} title="XP Trade-Offs" subtitle="discipline is not free" theme="emerald">
+				<ul className="text-sm text-emerald-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-muted-foreground">Higher upfront investment:</strong> Pair programming effectively
+						<strong className="text-emerald-300">Higher upfront investment:</strong> Pair programming effectively
 						doubles engineer hours per story. But it halves defect rates and knowledge silos.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">TDD discipline is hard to maintain:</strong> Under deadline
+						<strong className="text-emerald-300">TDD discipline is hard to maintain:</strong> Under deadline
 						pressure, teams skip tests. Without them, XP collapses into cowboy coding.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Not prescriptive about management process:</strong> XP tells you{" "}
+						<strong className="text-emerald-300">Not prescriptive about management process:</strong> XP tells you{" "}
 						<em>how</em> to write code, not how to plan sprints or interface with stakeholders. Often combined with
 						Scrum.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">The safety net it creates is massive:</strong> A codebase built
+						<strong className="text-emerald-300">The safety net it creates is massive:</strong> A codebase built
 						with TDD + CI can be refactored aggressively. Velocity typically <em>increases</em> over time rather than
 						decaying.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		/* ── SECTION 7: SAFe ─────────────────────────────────────────────────── */
-		<h3 key="h3-safe" className="text-xl font-bold mt-12 mb-4">
+		<h3 key="h3-safe" className="text-xl font-bold mt-12 mb-4 text-violet-100">
 			SAFe — Scaling Agile Across the Enterprise
 		</h3>,
 		<p key="safe-sub" className="mb-4">
@@ -387,42 +451,42 @@ export const sdlcMethodologiesTopic: Topic = {
 			planning.
 		</p>,
 		<Grid key="safe-grid" cols={2} gap={6} className="mb-8">
-			<Card title="Who SAFe Is For">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			<FeatureCard icon={Building2} title="Who SAFe Is For" subtitle="coordination at enterprise scale" theme="violet">
+				<ul className="text-sm text-violet-100/75 space-y-2 list-disc pl-4">
 					<li>
 						Large enterprises where multiple Scrum teams share infrastructure, APIs, or databases and need to{" "}
-						<strong>coordinate releases</strong>.
+						<strong className="text-violet-300">coordinate releases</strong>.
 					</li>
 					<li>
 						Organisations transitioning from Waterfall at scale — SAFe provides familiar planning horizons (Quarterly PI
 						plans ≈ Waterfall quarters) while introducing iteration.
 					</li>
 					<li>
-						Environments with significant <strong>regulatory reporting</strong> requirements — SAFe provides Lean
+						Environments with significant <strong className="text-violet-300">regulatory reporting</strong> requirements — SAFe provides Lean
 						Portfolio Management to satisfy governance.
 					</li>
 				</ul>
-			</Card>
-			<Card title="Common Criticisms">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={Building2} title="SAFe Criticisms" subtitle="coordination can become bureaucracy" theme="violet">
+				<ul className="text-sm text-violet-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-muted-foreground">"Wagile":</strong> SAFe critics argue it re-introduces Waterfall
+						<strong className="text-violet-300">"Wagile":</strong> SAFe critics argue it re-introduces Waterfall
 						at the programme level (quarterly PI plans are essentially mini-Waterfalls) while calling it Agile.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Certification-heavy & expensive:</strong> The SAFe consulting
+						<strong className="text-violet-300">Certification-heavy & expensive:</strong> The SAFe consulting
 						industry and certification ecosystem is a significant budget overhead.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Bureaucracy creep:</strong> The number of roles, artefacts, and
+						<strong className="text-violet-300">Bureaucracy creep:</strong> The number of roles, artefacts, and
 						meetings SAFe prescribes can overwhelm small-to-medium teams.
 					</li>
 					<li>
-						<strong className="text-muted-foreground">Team autonomy suffers:</strong> Top-down PI planning reduces
+						<strong className="text-violet-300">Team autonomy suffers:</strong> Top-down PI planning reduces
 						individual team's ability to self-organize around emerging priorities.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		/* ── SECTION 8: The Big Comparison ──────────────────────────────────── */
@@ -431,7 +495,14 @@ export const sdlcMethodologiesTopic: Topic = {
 		</h3>,
 		<Table
 			key="compare-table"
-			headers={["Dimension", "Waterfall", "Scrum", "Kanban", "XP", "SAFe"]}
+			headers={[
+				"Dimension",
+				"<span class='text-amber-300'>Waterfall</span>",
+				"<span class='text-cyan-300'>Scrum</span>",
+				"<span class='text-teal-300'>Kanban</span>",
+				"<span class='text-emerald-300'>XP</span>",
+				"<span class='text-violet-300'>SAFe</span>",
+			]}
 			rows={[
 				[
 					"Planning Horizon",
@@ -441,7 +512,7 @@ export const sdlcMethodologiesTopic: Topic = {
 					"Short iterations (1–2 weeks)",
 					"Quarter (PI = 8–12 weeks)",
 				],
-				["Change Tolerance", "❌ Very Low", "🟡 Per Sprint boundary", "✅ Anytime", "✅ Anytime", "🟡 Per PI boundary"],
+				["Change Tolerance", "Very low", "Per sprint boundary", "Anytime", "Anytime", "Per PI boundary"],
 				["Team Size", "Any", "3–9 per team", "Any", "2–12", "50–10,000+"],
 				[
 					"Delivery Frequency",
@@ -461,18 +532,18 @@ export const sdlcMethodologiesTopic: Topic = {
 				],
 				[
 					"Cost Predictability",
-					"✅ High (fixed scope)",
-					"🟡 Medium",
-					"🟡 Medium (cycle time based)",
-					"🟡 Medium",
-					"✅ High (quarterly budget)",
+					"High (fixed scope)",
+					"Medium",
+					"Medium (cycle time based)",
+					"Medium",
+					"High (quarterly budget)",
 				],
 				[
 					"Technical Quality Focus",
 					"Low (testing is last phase)",
 					"Medium (Definition of Done)",
 					"Low (process agnostic)",
-					"✅ Very High (TDD, CI, Pairing)",
+					"Very high (TDD, CI, Pairing)",
 					"Medium",
 				],
 				[
@@ -490,79 +561,41 @@ export const sdlcMethodologiesTopic: Topic = {
 		<h3 key="h3-impact" className="text-xl font-bold mt-12 mb-4">
 			How Methodology Choice Affects Speed, Cost & Quality
 		</h3>,
-		<Grid key="impact-grid" cols={2} gap={6} className="mb-8">
-			<Card title="Speed to Market">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
-					<li>
-						<strong className="text-muted-foreground">Waterfall:</strong> Slow. All features ship together at the end.
-						First usable version arrives after the full project duration.
-					</li>
-					<li>
-						<strong className="text-muted-foreground">Scrum / Kanban / XP:</strong> Fast. A shippable increment exists
-						after each sprint or each item. You can monetize before the full feature set is complete.
-					</li>
-					<li>
-						<strong className="text-muted-foreground">SAFe:</strong> Medium. Releases are tied to PI cadence
-						(~quarterly). Faster than Waterfall at scale, but slower than independent Scrum teams.
-					</li>
-				</ul>
-			</Card>
-			<Card title="Cost Dynamics">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
-					<li>
-						<strong className="text-muted-foreground">Waterfall is cheapest… if requirements don't change.</strong> No
-						rework. But the moment scope changes, costs spike dramatically (change order rates, re-architecture).
-					</li>
-					<li>
-						<strong className="text-muted-foreground">Agile (Scrum/Kanban) has predictable ongoing costs</strong> but
-						surfaces rework earlier and more cheaply — a bug found in sprint 1 costs a fraction of what it costs found
-						in production.
-					</li>
-					<li>
-						<strong className="text-muted-foreground">SAFe has the highest overhead cost</strong> (certifications, RTE
-						roles, PI planning events, tooling like Jira Align) but reduces coordination cost between many teams.
-					</li>
-				</ul>
-			</Card>
-			<Card title="Code Quality Over Time">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
-					<li>
-						<strong className="text-muted-foreground">Waterfall:</strong> Quality front-loaded in design but frequently
-						degraded at implementation under schedule pressure. Testing is the last line of defence.
-					</li>
-					<li>
-						<strong className="text-muted-foreground">Scrum without XP practices:</strong> Quality degrades naturally
-						over time. Sprint pressure creates technical debt. Without TDD or CI, the codebase becomes harder to change
-						each sprint.
-					</li>
-					<li>
-						<strong className="text-muted-foreground">XP:</strong> The only methodology where code quality statistically{" "}
-						<em>improves</em> over time. The TDD + CI safety net enables continuous refactoring.
-					</li>
-				</ul>
-			</Card>
-			<Card title="Team & Organisational Health">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
-					<li>
-						<strong className="text-muted-foreground">Waterfall:</strong> Low autonomy, high documentation burden. "Just
-						follow the spec" is demotivating for senior engineers.
-					</li>
-					<li>
-						<strong className="text-muted-foreground">Scrum overloaded with ceremonies:</strong> Meeting fatigue is
-						real. When retros produce no action items and stories are estimated in isolation of technical context, teams
-						disengage.
-					</li>
-					<li>
-						<strong className="text-muted-foreground">Kanban:</strong> Very low ceremony overhead. But without
-						retrospective cadence, teams miss systemic process improvements.
-					</li>
-					<li>
-						<strong className="text-muted-foreground">XP / Scrum + XP:</strong> High collaboration, fast learning,
-						strong shared code ownership. Best for long-term team morale when done correctly.
-					</li>
-				</ul>
-			</Card>
-		</Grid>,
+		<Table
+			key="impact-grid"
+			headers={[
+				"Dimension",
+				"<span class='text-amber-300'>Waterfall</span>",
+				"<span class='text-cyan-300'>Scrum</span> / <span class='text-teal-300'>Kanban</span> / <span class='text-emerald-300'>XP</span>",
+				"<span class='text-violet-300'>SAFe</span>",
+			]}
+			rows={[
+				[
+					"Speed to market",
+					"Slow: all features ship together at the end, so the first usable version arrives late.",
+					"Fast: a shippable increment exists after each sprint or each completed item.",
+					"Medium: faster than Waterfall at scale, but often tied to quarterly PI cadence.",
+				],
+				[
+					"Cost dynamics",
+					"Cheap only when requirements stay fixed; change orders and re-architecture make late changes expensive.",
+					"Predictable ongoing cost; rework surfaces earlier while it is still cheaper to fix.",
+					"Highest overhead from coordination roles, ceremonies, certifications, and enterprise tooling.",
+				],
+				[
+					"Code quality over time",
+					"Quality is front-loaded in design, then often degrades under late implementation pressure.",
+					"Strong when paired with XP practices like TDD and CI; weaker when sprint pressure creates unchecked debt.",
+					"Depends heavily on engineering discipline inside each team; process alignment alone does not create quality.",
+				],
+				[
+					"Team health",
+					"Low autonomy and heavy documentation can demotivate senior engineers.",
+					"Kanban keeps ceremony low; Scrum works when retros produce real action; XP improves shared ownership.",
+					"Useful for dependency visibility, but autonomy suffers when planning becomes too top-down.",
+				],
+			]}
+		/>,
 
 		/* ── SECTION 10: Common Mistakes ─────────────────────────────────────── */
 		<h3 key="h3-mistakes" className="text-xl font-bold mt-12 mb-4">

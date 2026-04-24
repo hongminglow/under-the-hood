@@ -1,6 +1,5 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
+import { Flow } from "@/components/ui/Flow";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 
@@ -73,33 +72,27 @@ export const tcpIpTopic: Topic = {
 		<p key="5" className="mb-4 text-sm text-muted-foreground">
 			Every TCP connection starts with a "Hello" phase. This explains why first-time DB connections feel slow.
 		</p>,
-		<Grid key="6" cols={3} gap={4} className="my-8">
-			<Card title="1. SYN">
-				<p className="text-xs text-muted-foreground">Client → Server</p>
-				<p className="text-xs italic mt-2 text-muted-foreground">"Is anyone there? Let's sync sequence numbers."</p>
-			</Card>
-			<Card title="2. SYN-ACK">
-				<p className="text-xs text-muted-foreground">Server → Client</p>
-				<p className="text-xs italic mt-2 text-muted-foreground">"I hear you. Synchronizing back. Acknowledged!"</p>
-			</Card>
-			<Card title="3. ACK">
-				<p className="text-xs text-muted-foreground">Client → Server</p>
-				<p className="text-xs italic mt-2 text-muted-foreground">"Copy that. I'm connected. Sending data now!"</p>
-			</Card>
-		</Grid>,
+		<Flow
+			key="6"
+			steps={[
+				{ title: "1. SYN", description: "Client -> server: proposes a connection and initial sequence number." },
+				{ title: "2. SYN-ACK", description: "Server -> client: acknowledges the proposal and sends its own sequence number." },
+				{ title: "3. ACK", description: "Client -> server: confirms both sides are synchronized. Application data can now flow." },
+			]}
+		/>,
 		<h3 key="7" className="text-xl font-bold mt-8 mb-4">
 			Under the Hood: Flow & Congestion Control
 		</h3>,
 		<p key="8" className="mb-4">
 			TCP isn't just about sending data; it's about <strong>protecting the network</strong>.
 		</p>,
-		<ul key="9" className="list-disc pl-5 text-sm text-muted-foreground space-y-2">
+		<ul key="9" className="list-disc pl-5 text-sm text-slate-400 space-y-2">
 			<li>
-				<strong>Sliding Window (Flow Control):</strong> The receiver tells the sender exactly how much data it can
+				<strong className="text-muted-foreground">Sliding Window (Flow Control):</strong> The receiver tells the sender exactly how much data it can
 				buffer. If the client is slow, the server physically slows down its transmission.
 			</li>
 			<li>
-				<strong>Slow Start (Congestion Control):</strong> TCP starts by sending a tiny bit of data, then doubles the
+				<strong className="text-muted-foreground">Slow Start (Congestion Control):</strong> TCP starts by sending a tiny bit of data, then doubles the
 				speed every successful trip. It "probes" the network until a packet is dropped, then immediately cuts its speed
 				in half.
 			</li>

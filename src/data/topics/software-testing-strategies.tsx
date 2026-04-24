@@ -1,6 +1,4 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
-import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
 
@@ -32,24 +30,24 @@ export const softwareTestingStrategiesTopic: Topic = {
         ["Chaos Testing", "The system's ability to withstand turbulent and unexpected conditions.", "In complex distributed systems (e.g., microservices).", "Resilience; failover and recovery mechanisms."],
       ]}
     />,
-    <Grid key="4" cols={2} gap={6} className="my-8">
-      <Card title="Smoke vs. Sanity Testing">
-        <p className="text-sm text-muted-foreground mb-2">
-          Often confused, but serve different purposes in the release cycle.
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          <strong>Smoke Testing</strong> checks if the build is stable enough to test at all (e.g., "Does the app crash on startup?"). <strong>Sanity Testing</strong> checks if a specific recent change or bug fix actually works.
-        </p>
-      </Card>
-      <Card title="TDD vs. BDD">
-        <p className="text-sm text-muted-foreground mb-2">
-          Methodologies driving how tests are written.
-        </p>
-        <p className="text-xs italic text-muted-foreground">
-          <strong>Test-Driven Development (TDD)</strong> tests the implementation details (developer-focused). <strong>Behavior-Driven Development (BDD)</strong> tests the user behavior often using plain English syntax like Gherkin (product-focused).
-        </p>
-      </Card>
-    </Grid>,
+    <Table
+      key="4"
+      headers={["Pair", "First concept", "Second concept", "Best mental model"]}
+      rows={[
+        [
+          "Smoke vs. Sanity",
+          "Smoke testing asks whether the build is stable enough to test at all.",
+          "Sanity testing asks whether one recent change or bug fix behaves correctly.",
+          "Smoke protects the release gate; sanity protects the changed area.",
+        ],
+        [
+          "TDD vs. BDD",
+          "TDD drives implementation through developer-focused tests.",
+          "BDD describes product behavior in business-readable scenarios.",
+          "TDD shapes code design; BDD aligns engineering with product intent.",
+        ],
+      ]}
+    />,
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">
       Advanced: Mutation Testing
     </h3>,
