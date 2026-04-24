@@ -57,7 +57,6 @@ export const messageQueuesTopic: Topic = {
 		</h3>,
 		<Table
 			key="7"
-			theme="slate"
 			headers={["Guarantee", "Behavior", "Risk"]}
 			rows={[
 				[
@@ -140,7 +139,6 @@ export const messageQueuesTopic: Topic = {
 		</h3>,
 		<Table
 			key="14"
-			theme="slate"
 			headers={["Feature", "RabbitMQ", "Apache Kafka", "AWS SQS", "MQTT"]}
 			rows={[
 				["Architecture", "Message Broker (queue)", "Distributed Log (stream)", "Managed Queue (AWS)", "Pub/Sub (IoT)"],

@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Step } from "@/components/ui/Step";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { KeyRound, ShieldCheck } from "lucide-react";
 
 export const passkeysWebauthnTopic: Topic = {
   id: "passkeys-webauthn",
@@ -31,16 +32,16 @@ export const passkeysWebauthnTopic: Topic = {
       <strong>The Login Challenge:</strong> Next time they log in, the backend sends a random string (a "Challenge"). The user scans their face (FaceID), which physically unlocks the Private Key for a millisecond to mathematically sign the challenge and send it back. The backend verifies the signature using the Public Key.
     </Step>,
     <Grid key="7" cols={2} gap={6} className="my-8">
-      <Card title="Immune to Data Breaches">
-        <p className="text-sm text-muted-foreground">
+      <FeatureCard icon={ShieldCheck} title="Immune to Data Breaches" subtitle="Leaked public keys are useless" theme="emerald">
+        <p className="text-sm text-emerald-100/75">
           If a hacker steals your entire SQL database, they only get Public Keys. Unlike stolen password hashes (which can be brute-forced), a Public Key is mathematically useless for logging in.
         </p>
-      </Card>
-      <Card title="Immune to Phishing">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={KeyRound} title="Immune to Phishing" subtitle="Bound to the real domain" theme="cyan">
+        <p className="text-sm text-cyan-100/75">
           WebAuthn inherently ties the cryptographic signature to the exact URL domain (`google.com`). If a user is tricked into visiting a fake clone `g00gle.com` and scans their face, the signature generated will strictly be for `g00gle.com`, and the real Google backend will instantly reject it.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Callout key="8" type="info" title="What is a 'Passkey'?">
       WebAuthn requires physical devices (like a YubiKey). A "Passkey" is simply Apple/Google realizing that forcing users to carry USB sticks is terrible UX. A Passkey takes the WebAuthn Private Key and securely syncs it across your iCloud/Google Cloud, so if you lose your phone, you don't lose your accounts.

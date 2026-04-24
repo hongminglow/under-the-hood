@@ -3,7 +3,6 @@ import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
 import { CodeBlock } from "@/components/ui/CodeBlock";
-import { Highlight } from "@/components/ui/Highlight";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { FileCode2, Zap } from "lucide-react";
 
@@ -22,14 +21,13 @@ export const htmlVsHtmxTopic: Topic = {
 			UI updates using attributes like <code>hx-get</code>, <code>hx-post</code>, and <code>hx-target</code>.
 		</p>,
 		<Callout key="2" type="info" title="Short Answer">
-			<Highlight variant="primary">HTML</Highlight> describes page structure and content.{" "}
-			<Highlight variant="primary">HTMX</Highlight> keeps HTML as the main authoring model, but adds browser-side
+			<strong className="text-blue-300">HTML</strong> describes page structure and content.{" "}
+			<strong className="text-blue-300">HTMX</strong> keeps HTML as the main authoring model, but adds browser-side
 			behavior so the server can return <strong>HTML fragments</strong> instead of a full new page or a JSON API
 			response.
 		</Callout>,
 		<Table
 			key="3"
-			theme="slate"
 			headers={["Dimension", "HTML", "HTMX"]}
 			rows={[
 				["What it is", "The core markup language of the web", "A JavaScript library that augments HTML"],

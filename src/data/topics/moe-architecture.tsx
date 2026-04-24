@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Flow } from "@/components/ui/Flow";
 import { Table } from "@/components/ui/Table";
 import { MistakeCard } from "@/components/ui/MistakeCard";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { SquareStack, GitMerge } from "lucide-react";
 
 export const moeArchitectureTopic: Topic = {
 	id: "moe-architecture",
@@ -40,8 +41,8 @@ export const moeArchitectureTopic: Topic = {
 			The MoE vs Dense Paradigm
 		</h3>,
 		<Grid key="grid" cols={2} gap={6}>
-			<Card title="Dense Model (e.g., Llama 3)">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4 mb-4">
+			<FeatureCard icon={SquareStack} title="Dense Model (e.g., Llama 3)" subtitle="Every parameter fires every token" theme="amber">
+				<ul className="text-sm text-amber-100/75 space-y-2 list-disc pl-4 mb-4">
 					<li>Every parameter is active for every token.</li>
 					<li>Linear compute scaling with parameter count.</li>
 					<li>
@@ -51,9 +52,9 @@ export const moeArchitectureTopic: Topic = {
 						<strong>Example:</strong> A 70B dense model uses 70B parameters for every word.
 					</li>
 				</ul>
-			</Card>
-			<Card title="MoE Model (e.g., Mixtral 8x7B)">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4 mb-4">
+			</FeatureCard>
+			<FeatureCard icon={GitMerge} title="MoE Model (e.g., Mixtral 8x7B)" subtitle="Sparse experts per token" theme="emerald">
+				<ul className="text-sm text-emerald-100/75 space-y-2 list-disc pl-4 mb-4">
 					<li>Sparse activation (e.g., only 2 experts per token).</li>
 					<li>Only 13B active parameters out of 47B total per token.</li>
 					<li>
@@ -64,7 +65,7 @@ export const moeArchitectureTopic: Topic = {
 						a ~13B model.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<h3 key="h3-2" className="text-xl font-bold mt-8 mb-4">
 			The State of Modern Large Models
@@ -127,8 +128,8 @@ export const moeArchitectureTopic: Topic = {
 			Pros and Cons of MoE Architecture
 		</h3>,
 		<Grid key="pros-cons-grid" cols={2} gap={6} className="my-8">
-			<Card title="Pros">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			<FeatureCard icon={GitMerge} title="Pros" subtitle="Why providers love MoE" theme="emerald">
+				<ul className="text-sm text-emerald-100/75 space-y-2 list-disc pl-4">
 					<li>
 						<strong>Blistering Inference Speed:</strong> Active parameter count remains low, meaning less compute time
 						per token.
@@ -146,9 +147,9 @@ export const moeArchitectureTopic: Topic = {
 						that fires mainly for Python syntax, another for French translation).
 					</li>
 				</ul>
-			</Card>
-			<Card title="Cons">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={SquareStack} title="Cons" subtitle="What MoE still pays for" theme="amber">
+				<ul className="text-sm text-amber-100/75 space-y-2 list-disc pl-4">
 					<li>
 						<strong>VRAM Hungry:</strong> Every single parameter must be kept in memory. You cannot page experts in and
 						out of GPU memory fast enough during generation.
@@ -166,7 +167,7 @@ export const moeArchitectureTopic: Topic = {
 						between GPUs to find their required expert limits scaling efficiency.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 	],
 };

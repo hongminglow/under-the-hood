@@ -1,7 +1,10 @@
 import type { Topic } from "@/data/types";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Grid } from "@/components/ui/Grid";
 import { Step } from "@/components/ui/Step";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { TimerReset, Radio } from "lucide-react";
 
 export const promisesVsObservablesTopic: Topic = {
   id: "promises-vs-observables",
@@ -17,6 +20,20 @@ export const promisesVsObservablesTopic: Topic = {
     <h3 key="2" className="text-xl font-bold mt-8 mb-6">
       The Execution Lifecycle
     </h3>,
+    <Grid key="2a" cols={2} gap={6} className="mb-8">
+      <FeatureCard icon={TimerReset} title="Promise" subtitle="One future result" theme="cyan">
+        <p className="text-sm text-cyan-100/75">
+          Promises represent exactly one eventual success or failure. They are perfect for one-off async work like fetching
+          a single HTTP response.
+        </p>
+      </FeatureCard>
+      <FeatureCard icon={Radio} title="Observable" subtitle="A stream of values over time" theme="violet">
+        <p className="text-sm text-violet-100/75">
+          Observables model streams that may emit many values, complete later, or be torn down entirely. They shine for
+          events, sockets, and reactive UI flows.
+        </p>
+      </FeatureCard>
+    </Grid>,
     <div key="3" className="mb-8">
       <Step index={1}>
         <strong>The Promise (One and Done)</strong>: You ask for data. 
@@ -33,6 +50,7 @@ export const promisesVsObservablesTopic: Topic = {
     </div>,
     <CodeBlock 
       key="4"
+      theme="violet"
       title="The RxJS Observable Pipe"
       language="typescript"
       code={`

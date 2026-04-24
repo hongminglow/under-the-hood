@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Grid } from "@/components/ui/Grid";
-import { Card } from "@/components/ui/Card";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Scissors, WandSparkles } from "lucide-react";
 
 export const ragRetrievalAugmentedTopic: Topic = {
   id: "rag-retrieval-augmented",
@@ -32,22 +33,22 @@ export const ragRetrievalAugmentedTopic: Topic = {
       Advanced Retrieval Techniques
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
-      <Card title="Semantic Chunking">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={Scissors} title="Semantic Chunking" subtitle="Split where meaning changes" theme="cyan">
+        <p className="text-sm text-cyan-100/75 mb-2">
           Don't just split text every 500 characters.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-cyan-200/70">
           Use the embedding model to find where the <strong>meaning</strong> changes. This ensures that a paragraph isn't cut in half, preserving context for the LLM.
         </p>
-      </Card>
-      <Card title="HyDE (Hypothetical Doc)">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={WandSparkles} title="HyDE (Hypothetical Doc)" subtitle="Search by generating a fake answer first" theme="violet">
+        <p className="text-sm text-violet-100/75 mb-2">
           Improve search by 'Hallucinating' first.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-violet-200/70">
           The LLM generates a <strong>fake answer</strong> to the user's question, then we embed that fake answer to search for similar REAL documents. This bridges the 'Question vs. Answer' embedding gap.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="6" className="text-xl font-bold mt-8 mb-4">
       The Precision Layer: Re-ranking

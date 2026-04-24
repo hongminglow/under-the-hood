@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { FolderTree, GitBranch } from "lucide-react";
 
 export const monorepoVsPolyrepoTopic: Topic = {
 	id: "monorepo-vs-polyrepo",
@@ -19,18 +20,18 @@ export const monorepoVsPolyrepoTopic: Topic = {
 			<em>which tradeoffs you're willing to accept</em>.
 		</p>,
 		<Grid key="2" cols={2} gap={6} className="my-8">
-			<Card title="Monorepo">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={FolderTree} title="Monorepo" subtitle="One repo for everything" theme="cyan">
+				<p className="text-sm text-cyan-100/75">
 					<strong>All</strong> projects, services, and shared libraries live in a single Git repository. Tools like{" "}
 					<strong>Nx, Turborepo, Bazel</strong> handle selective builds so only changed packages are rebuilt.
 				</p>
-			</Card>
-			<Card title="Polyrepo">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={GitBranch} title="Polyrepo" subtitle="Independent repos per boundary" theme="violet">
+				<p className="text-sm text-violet-100/75">
 					Each service or library has its <strong>own Git repository</strong> with independent CI/CD pipelines,
 					versioning, and access control. Dependencies are consumed via package registries (npm, Maven).
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<Table
 			key="3"

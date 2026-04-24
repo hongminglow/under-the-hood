@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { AppWindow, Split, Waves } from "lucide-react";
 
 export const processVsThreadTopic: Topic = {
 	id: "process-vs-thread-vs-coroutine",
@@ -37,27 +38,27 @@ export const processVsThreadTopic: Topic = {
 			]}
 		/>,
 		<Grid key="3" cols={3} gap={6} className="my-8">
-			<Card title="Process">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={AppWindow} title="Process" subtitle="Full OS-isolated program" theme="amber">
+				<p className="text-sm text-amber-100/75">
 					<strong>Chrome tabs</strong>, <strong>Docker containers</strong>, and <strong>microservices</strong> each run
 					as separate processes. Maximum isolation — one crashing process can't take down others. Communication requires
 					IPC overhead.
 				</p>
-			</Card>
-			<Card title="Thread">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Split} title="Thread" subtitle="Shared-memory execution lane" theme="cyan">
+				<p className="text-sm text-cyan-100/75">
 					<strong>Java, C++, Python</strong> use OS threads. They share heap memory but each has its own stack. Requires
 					explicit <strong>locking</strong> (mutexes, semaphores) to prevent data races. Python's <strong>GIL</strong>{" "}
 					limits threads to one core.
 				</p>
-			</Card>
-			<Card title="Coroutine">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Waves} title="Coroutine" subtitle="User-space cooperative task" theme="emerald">
+				<p className="text-sm text-emerald-100/75">
 					<strong>Go goroutines</strong>, <strong>Kotlin coroutines</strong>, <strong>JS async/await</strong>.
 					Multiplexed onto a small pool of OS threads by a user-space scheduler. Go routinely runs{" "}
 					<strong>millions</strong> of goroutines on 4 OS threads.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<Callout key="4" type="info" title="Why Go Chose Goroutines">
 			A typical web server needs 10,000+ concurrent connections. Creating 10,000 OS threads ={" "}

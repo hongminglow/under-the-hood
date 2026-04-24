@@ -99,7 +99,6 @@ export const iacTopic: Topic = {
 		</h4>,
 		<Table
 			key="11"
-			theme="slate"
 			headers={["Tool", "Purpose", "Best For"]}
 			rows={[
 				["Terraform", "Provisioning infrastructure (VMs, networks, databases).", "Creating the servers themselves."],

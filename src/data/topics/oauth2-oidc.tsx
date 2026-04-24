@@ -7,6 +7,8 @@ import { Highlight } from "@/components/ui/Highlight";
 import { MistakeCard } from "@/components/ui/MistakeCard";
 import { Table } from "@/components/ui/Table";
 import type { Topic } from "@/data/types";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { KeyRound, BadgeCheck, KeySquare, RefreshCw } from "lucide-react";
 
 export const oauth2OidcTopic: Topic = {
 	id: "oauth2-oidc",
@@ -35,19 +37,19 @@ export const oauth2OidcTopic: Topic = {
 			<em>who</em>&nbsp;the person actually is (<strong>Authentication</strong>).
 		</p>,
 		<Grid key="5" cols={2} gap={6} className="my-8">
-			<Card title="The OAuth 2.0 Access Token">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={KeyRound} title="The OAuth 2.0 Access Token" subtitle="Authorization only" theme="amber">
+				<p className="text-sm text-amber-100/75">
 					A purely opaque string designed only to unlock specific API doors (like an Arcade Token). It doesn't contain
 					the user's name or email. It simply says "This token holder can read calendars."
 				</p>
-			</Card>
-			<Card title="OIDC (OpenID Connect)">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={BadgeCheck} title="OIDC (OpenID Connect)" subtitle="Authentication layer on top" theme="emerald">
+				<p className="text-sm text-emerald-100/75">
 					An extension bolted directly on top of OAuth. It provides an <strong>ID Token</strong>&nbsp;(always a JWT)
 					alongside the Access Token. The ID Token definitively answers "Who is this person? What is their email?" and
 					allows true "Login with Google" systems to exist securely.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="6" className="text-xl font-bold mt-8 mb-4">
@@ -206,39 +208,39 @@ const { access_token } = await response.json();
 			Access Token vs ID Token vs Refresh Token
 		</h3>,
 		<Grid key="25" cols={3} gap={4} className="my-8">
-			<Card title="Access Token">
-				<p className="text-sm text-muted-foreground mb-2">
+			<FeatureCard icon={KeySquare} title="Access Token" subtitle="Access protected APIs" theme="amber">
+				<p className="text-sm text-amber-100/75 mb-2">
 					<strong>Purpose</strong>: Access protected resources (APIs)
 				</p>
-				<p className="text-xs text-muted-foreground">
+				<p className="text-xs text-amber-100/75">
 					• Opaque or JWT
 					<br />
 					• Short-lived (15 min - 1 hour)
 					<br />• Sent with every API request
 				</p>
-			</Card>
-			<Card title="ID Token (OIDC)">
-				<p className="text-sm text-muted-foreground mb-2">
+			</FeatureCard>
+			<FeatureCard icon={BadgeCheck} title="ID Token (OIDC)" subtitle="Proves who the user is" theme="emerald">
+				<p className="text-sm text-emerald-100/75 mb-2">
 					<strong>Purpose</strong>: Prove user identity
 				</p>
-				<p className="text-xs text-muted-foreground">
+				<p className="text-xs text-emerald-100/75">
 					• Always JWT
 					<br />
 					• Contains user info (email, name)
 					<br />• Used once at login
 				</p>
-			</Card>
-			<Card title="Refresh Token">
-				<p className="text-sm text-muted-foreground mb-2">
+			</FeatureCard>
+			<FeatureCard icon={RefreshCw} title="Refresh Token" subtitle="Renews access without re-login" theme="violet">
+				<p className="text-sm text-violet-100/75 mb-2">
 					<strong>Purpose</strong>: Get new access tokens
 				</p>
-				<p className="text-xs text-muted-foreground">
+				<p className="text-xs text-violet-100/75">
 					• Opaque string
 					<br />
 					• Long-lived (days/months)
 					<br />• Stored securely, never sent to APIs
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="26" className="text-xl font-bold mt-8 mb-4">

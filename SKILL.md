@@ -68,6 +68,12 @@ For comparing protocols, flags, or data structures.
 />
 ```
 
+**Table Theme Rule:**
+- Standalone article tables should use the default table theme (green house style).
+- Only pass a `theme` prop to `<Table>` when the table is visually inside a themed parent surface and should inherit that parent identity.
+- Do **not** switch a standalone table to `slate` just because the surrounding prose is neutral or because you want it to feel calmer.
+- If a comparison topic has recurring main characters, keep the table itself on the default theme unless it is nested in a themed card; use colored header labels or selective label accents to carry the actor identity instead of changing the whole table by default.
+
 #### **3. Grid**
 
 For side-by-side comparisons or multi-column layouts.
@@ -97,6 +103,10 @@ For rich, dense cards that explain actors, roles, or deep-dive concepts. Instead
 4. **Inner Text Consistency:** When assigning a `theme` to a `FeatureCard`, ensure all inner text content (paragraphs, inline code, strong tags) matches the chosen theme palette. For example, if `theme="amber"`, use `text-amber-200/80` for body text, `text-amber-400` for `<strong>` tags, and `border-amber-700/50` for nested elements. Do not suddenly mix in mismatched colors like slate or green that break the card's visual cohesion.
 5. **Nested Surface Consistency:** If a card contains nested technical surfaces like `<CodeBlock>` or `<Table>`, those surfaces must inherit the card's visual context. For every themed `FeatureCard` — including `theme="slate"` — pass the same theme into those children (`<CodeBlock theme="slate" ... />`, `<CodeBlock theme="cyan" ... />`, `<Table theme="violet" ... />`). For plain cards and standalone article examples, keep `CodeBlock` unthemed so it uses the default green house style. Do not let mismatched gray code blocks or default green table headers overpower a specifically themed parent card.
 6. **No Theme Islands Inside FeatureCards:** Avoid placing unrelated semantic color islands inside a themed `FeatureCard`. For example, inside a `theme="cyan"` card, do not use rose and emerald inner cards just to show bad vs good. Keep the nested comparison cyan, and use copy, labels, border weight, or layout to communicate contrast. Use rose/emerald only when they are the top-level comparison card themes themselves.
+7. **Banner Surface Consistency:** When using banner-like surfaces such as `<Callout>` or any other already-themed message container, all emphasized inline treatment inside that surface must follow the same component theme. Do not drop in a default green `<Highlight variant="primary">` chip inside a blue info banner, amber warning banner, or emerald success banner. If you need emphasis inside a themed banner, either:
+   - use a matching highlight color (`info` inside blue/info surfaces, `warning` inside amber/warning surfaces), or
+   - skip `<Highlight>` entirely and use inline text classes / strong tags that match the banner color.
+   The rule is simple: emphasized inline elements inside a banner must visually belong to that banner, not fight it.
 
 ```tsx
 <Grid cols={2} gap={6}>
@@ -117,6 +127,14 @@ For important notes, warnings, or tips. Higher visual priority than a Card.
 ```
 
 _Types:_ `info`, `warning`, `success`, `tip`
+
+**Callout Inline Emphasis Rule:**
+- Treat the callout itself as the parent theme surface.
+- Inside `type="info"` callouts, use blue-toned emphasis.
+- Inside `type="warning"` callouts, use amber-toned emphasis.
+- Inside `type="success"` callouts, use emerald-toned emphasis.
+- Inside `type="danger"` callouts, use red-toned emphasis.
+- Avoid default green chips inside non-green callouts.
 
 #### **5. Step**
 
@@ -159,6 +177,11 @@ For inline terminology or status emphasis.
 ```tsx
 -(<Highlight variant="primary">ESTABLISHED</Highlight>) - <Highlight variant="warning">DEPRECATED</Highlight>;
 ```
+
+**Highlight Usage Rule:**
+- `variant="primary"` is the default green house style for neutral article flow.
+- Do not use `variant="primary"` inside a themed parent surface unless that parent is also green/emerald.
+- When a parent surface already has a strong color identity, prefer a matching `Highlight` variant or matching inline text styling instead of introducing a conflicting chip color.
 
 #### **8. Flow (New)**
 

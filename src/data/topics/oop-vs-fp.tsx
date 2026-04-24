@@ -3,6 +3,9 @@ import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Highlight } from "@/components/ui/Highlight";
+import { Grid } from "@/components/ui/Grid";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Boxes, FunctionSquare } from "lucide-react";
 
 export const oopVsFpTopic: Topic = {
   id: "oop-vs-fp",
@@ -18,6 +21,20 @@ export const oopVsFpTopic: Topic = {
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
       The Core Philosophies
     </h3>,
+    <Grid key="2a" cols={2} gap={6} className="my-8">
+      <FeatureCard icon={Boxes} title="Object-Oriented Programming" subtitle="Mutable state inside long-lived objects" theme="amber">
+        <p className="text-sm text-amber-100/75">
+          OOP organizes behavior around entities that carry their own state. That feels intuitive for domains like cars,
+          users, or services, but once mutation spreads across a large system, debugging who changed what becomes painful.
+        </p>
+      </FeatureCard>
+      <FeatureCard icon={FunctionSquare} title="Functional Programming" subtitle="Pure functions over immutable data" theme="emerald">
+        <p className="text-sm text-emerald-100/75">
+          FP treats data as immutable values and pushes change through isolated functions. That makes flows more predictable,
+          but can introduce its own tradeoffs in verbosity, cloning, and conceptual overhead.
+        </p>
+      </FeatureCard>
+    </Grid>,
     <Table
       key="3"
       headers={["Concept", "OOP (Java, C++)", "FP (Haskell, React)"]}
@@ -41,6 +58,7 @@ export const oopVsFpTopic: Topic = {
     />,
     <CodeBlock 
       key="4"
+      theme="emerald"
       title="The React Perspective"
       language="typescript"
       code={`

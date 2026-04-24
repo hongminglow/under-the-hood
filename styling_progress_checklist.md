@@ -83,36 +83,36 @@
 - [x] llm-web-vs-ide-vs-cli.tsx
 - [x] load-balancing.tsx
 - [x] message-queues.tsx
-- [ ] micro-frontends.tsx
-- [ ] microservices.tsx
-- [ ] moe-architecture.tsx
-- [ ] monorepo-vs-polyrepo.tsx
-- [ ] multithreading-database-access.tsx
-- [ ] n-plus-one-problem.tsx
-- [ ] nat-addressing.tsx
-- [ ] network-payload-vulnerabilities.tsx
-- [ ] nginx-under-the-hood.tsx
-- [ ] oauth2-oidc.tsx
-- [ ] observability-monitoring.tsx
-- [ ] online-multiplayer-architecture.tsx
-- [ ] oop-vs-fp.tsx
-- [ ] pagination-strategies.tsx
-- [ ] passkeys-webauthn.tsx
-- [ ] payment-gateway-internals.tsx
-- [ ] polyfills-deep-dive.tsx
-- [ ] process-vs-thread-vs-coroutine.tsx
-- [ ] promises-vs-observables.tsx
-- [ ] prompt-engineering.tsx
-- [ ] prototypal-inheritance.tsx
-- [ ] proxy-vs-reverse-proxy.tsx
-- [ ] race-conditions-distributed-locks.tsx
-- [ ] rag-retrieval-augmented.tsx
-- [ ] react-fiber-reconciliation.tsx
-- [ ] react-server-components.tsx
-- [ ] react-transitions-deferred.tsx
-- [ ] realtime-counters.tsx
-- [ ] recursion-call-stack.tsx
-- [ ] redis-in-memory.tsx
+- [x] micro-frontends.tsx
+- [x] microservices.tsx
+- [x] moe-architecture.tsx
+- [x] monorepo-vs-polyrepo.tsx
+- [x] multithreading-database-access.tsx
+- [x] n-plus-one-problem.tsx
+- [x] nat-addressing.tsx
+- [x] network-payload-vulnerabilities.tsx
+- [x] nginx-under-the-hood.tsx
+- [x] oauth2-oidc.tsx
+- [x] observability-monitoring.tsx
+- [x] online-multiplayer-architecture.tsx
+- [x] oop-vs-fp.tsx
+- [x] pagination-strategies.tsx
+- [x] passkeys-webauthn.tsx
+- [x] payment-gateway-internals.tsx
+- [x] polyfills-deep-dive.tsx
+- [x] process-vs-thread-vs-coroutine.tsx
+- [x] promises-vs-observables.tsx
+- [x] prompt-engineering.tsx
+- [x] prototypal-inheritance.tsx
+- [x] proxy-vs-reverse-proxy.tsx
+- [x] race-conditions-distributed-locks.tsx
+- [x] rag-retrieval-augmented.tsx
+- [x] react-fiber-reconciliation.tsx
+- [x] react-server-components.tsx
+- [x] react-transitions-deferred.tsx
+- [x] realtime-counters.tsx
+- [x] recursion-call-stack.tsx
+- [x] redis-in-memory.tsx
 - [ ] rendering-pipeline.tsx
 - [ ] rest-api-design.tsx
 - [ ] rsa-cryptography.tsx

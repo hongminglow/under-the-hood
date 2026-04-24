@@ -42,7 +42,6 @@ export const httpsTlsHandshakeTopic: Topic = {
     </h3>,
     <Table
       key="5"
-      theme="slate"
       headers={["Message", "Who Sends", "What's Inside?"]}
       rows={[
         ["Client Hello", "Browser", "Supported Ciphers + <strong>Key Share</strong> (ECDHE)."],

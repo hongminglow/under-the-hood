@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { ArrowUpRight, ArrowDownLeft } from "lucide-react";
 
 export const natAddressingTopic: Topic = {
   id: "nat-addressing",
@@ -33,22 +34,22 @@ export const natAddressingTopic: Topic = {
       Types of NAT
     </h3>,
     <Grid key="6" cols={2} gap={6} className="my-8">
-      <Card title="SNAT (Source NAT)">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={ArrowUpRight} title="SNAT (Source NAT)" subtitle="Private traffic going out" theme="cyan">
+        <p className="text-sm text-cyan-100/75 mb-2">
           Used when internal devices go <strong>Out</strong> to the internet.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-cyan-200/70">
           Your home router changing your phone's IP to the ISP's public IP.
         </p>
-      </Card>
-      <Card title="DNAT (Destination NAT)">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={ArrowDownLeft} title="DNAT (Destination NAT)" subtitle="Public traffic coming in" theme="emerald">
+        <p className="text-sm text-emerald-100/75 mb-2">
           Used to allow external traffic <strong>In</strong> to a specific server.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-emerald-200/70">
           Commonly known as <strong>Port Forwarding</strong>. Maps Public Port 80 → Internal Server Port 80.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="7" className="text-xl font-bold mt-8 mb-4">
       The P2P Nightmare: NAT Traversal

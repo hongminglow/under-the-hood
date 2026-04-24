@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Highlight } from "@/components/ui/Highlight";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Package2, SplitSquareVertical } from "lucide-react";
 
 export const microFrontendsTopic: Topic = {
 	id: "micro-frontends",
@@ -74,13 +75,13 @@ export const microFrontendsTopic: Topic = {
 		</h3>,
 
 		<Grid key="6" cols={1} gap={6} className="mb-8">
-			<Card title="The Power of Shared Dependencies">
-				<p className="text-sm text-muted-foreground mb-4">
+			<FeatureCard icon={Package2} title="The Power of Shared Dependencies" subtitle="Why shared singletons matter" theme="cyan">
+				<p className="text-sm text-cyan-100/75 mb-4">
 					<strong>The Problem:</strong> Previously, if Team A's Cart App and Team B's Product App both used React, the
 					final user physically downloaded React twice.
 				</p>
-				<p className="text-sm font-semibold mb-2">Architectural Solution:</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+				<p className="text-sm font-semibold mb-2 text-cyan-300">Architectural Solution:</p>
+				<ul className="text-sm text-cyan-100/75 list-disc pl-5 space-y-2">
 					<li>
 						Module Federation solves this natively via <code>shared</code> singletons.
 					</li>
@@ -93,15 +94,20 @@ export const microFrontendsTopic: Topic = {
 						maintaining entirely isolated Git repositories for each team.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 
-			<Card title="Horizontal vs Vertical Composition">
-				<p className="text-sm text-muted-foreground mb-4">
+			<FeatureCard
+				icon={SplitSquareVertical}
+				title="Horizontal vs Vertical Composition"
+				subtitle="How teams divide ownership"
+				theme="violet"
+			>
+				<p className="text-sm text-violet-100/75 mb-4">
 					<strong>The Problem:</strong> How do you structurally divide the screen real estate between different
 					enterprise teams?
 				</p>
-				<p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+				<p className="text-sm font-semibold mb-2 text-violet-300">Architectural Solutions:</p>
+				<ul className="text-sm text-violet-100/75 list-disc pl-5 space-y-2">
 					<li>
 						<strong>Vertical Split (Recommended):</strong> Team A owns <code>/checkout</code> entirely. When navigated
 						there, the Shell mounts Team A's comprehensive app. Cleanest separation of concerns.
@@ -112,7 +118,7 @@ export const microFrontendsTopic: Topic = {
 						to talk to each other.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<Callout key="7" type="warning" title="The High-Risk Micro-Frontend Trap">

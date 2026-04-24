@@ -1,10 +1,11 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Flow } from "@/components/ui/Flow";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Turtle, OctagonAlert, Database, ServerCog } from "lucide-react";
 
 export const multithreadingDatabaseAccessTopic: Topic = {
   id: "multithreading-database-access",
@@ -96,16 +97,16 @@ app.get('/api/product/:id', async (req, res) => {
       Performance Impact: Pool Size vs Throughput
     </h3>,
     <Grid key="12" cols={2} gap={6}>
-      <Card title="Too Few Connections (Pool Size = 5)">
-        <p className="text-sm text-muted-foreground">
+      <FeatureCard icon={Turtle} title="Too Few Connections (Pool Size = 5)" subtitle="Queueing kills latency" theme="amber">
+        <p className="text-sm text-amber-100/75">
           If you have 100 concurrent requests but only 5 connections, 95 requests are waiting in the pool queue. Your API becomes slow even though the database is idle. <strong>Symptom:</strong>&nbsp;High request latency, low database CPU.
         </p>
-      </Card>
-      <Card title="Too Many Connections (Pool Size = 500)">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={OctagonAlert} title="Too Many Connections (Pool Size = 500)" subtitle="Context switching crushes the DB" theme="rose">
+        <p className="text-sm text-rose-100/75">
           PostgreSQL has a hard limit (default 100 connections). If 10 app servers each open 500 connections, you hit 5,000 connections. The database spends all its time context-switching between connections instead of executing queries. <strong>Symptom:</strong>&nbsp;Database CPU at 100%, queries timeout.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Callout key="13" type="tip" title="The Golden Rule">
       <strong>Pool Size = (Number of CPU Cores × 2) + Disk Spindles</strong><br/><br/>
@@ -173,16 +174,16 @@ def book_seat_safe(seat_id):
       If you have 50 app servers, each with a pool of 20 connections, that's 1,000 connections to the database. Most databases can't handle this. <strong>Solutions:</strong>
     </p>,
     <Grid key="20" cols={2} gap={6}>
-      <Card title="PgBouncer (Connection Pooler)">
-        <p className="text-sm text-muted-foreground">
+      <FeatureCard icon={Database} title="PgBouncer (Connection Pooler)" subtitle="Multiplex connections before Postgres" theme="cyan">
+        <p className="text-sm text-cyan-100/75">
           A lightweight proxy that sits between your app and PostgreSQL. Your 50 app servers connect to PgBouncer (1,000 connections), but PgBouncer only opens 100 connections to the actual database. It multiplexes queries.
         </p>
-      </Card>
-      <Card title="Read Replicas">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={ServerCog} title="Read Replicas" subtitle="Scale reads horizontally" theme="emerald">
+        <p className="text-sm text-emerald-100/75">
           Route read queries to replica databases. Your primary handles writes (100 connections), while 5 replicas handle reads (500 connections total). This horizontally scales read throughput.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Callout key="21" type="info" title="The Mental Model">
       Your application threads are <strong>not</strong> directly talking to the database. They're talking to a connection pool, which is talking to the database. The pool is the bottleneck, not the threads. Optimize the pool size, not the thread count.

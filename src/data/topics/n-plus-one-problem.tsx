@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { FileSearch, Wifi } from "lucide-react";
 
 export const nPlusOneProblemTopic: Topic = {
   id: "n-plus-one-problem",
@@ -19,16 +20,16 @@ export const nPlusOneProblemTopic: Topic = {
       The Anatomy of the Failure
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="The Naive Code">
-        <p className="text-sm font-mono text-muted-foreground/80 border-l border-border pl-3 mt-2 whitespace-pre-wrap">
+      <FeatureCard icon={FileSearch} title="The Naive Code" subtitle="One query becomes N more" theme="rose">
+        <p className="text-sm font-mono text-rose-100/80 border-l border-rose-800/50 pl-3 mt-2 whitespace-pre-wrap">
 {"// Query 1\nconst users = await db.user.findMany();\n\n// N Queries (Loop)\nusers.map(u => u.getOrders());"}
         </p>
-      </Card>
-      <Card title="The Network Cost">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Wifi} title="The Network Cost" subtitle="RTT dominates the slowdown" theme="amber">
+        <p className="text-sm text-amber-100/75">
           Even if each query takes 1ms, doing 100 queries means 100ms of <strong>Network Round-Trip Time (RTT)</strong>. Your app spends more time waiting for the wire than the database spends searching.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">
       Three Levels of Defense

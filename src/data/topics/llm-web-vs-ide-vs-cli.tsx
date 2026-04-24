@@ -28,7 +28,6 @@ export const llmWebVsIdeVsCliTopic: Topic = {
     </h3>,
     <Table
       key="3"
-      theme="slate"
       headers={["Surface", "What It Usually Sees", "What It Can Do", "Best For"]}
       rows={[
         [

@@ -21,7 +21,6 @@ export const grpcVsRestTopic: Topic = {
     </h3>,
     <Table
       key="3"
-      theme="slate"
       headers={["Feature", "REST (Representational State Transfer)", "gRPC (Google Remote Procedure Call)"]}
       rows={[
         ["Payload", "<strong>JSON</strong> (Text-based, Heavy).", "<strong>Protobuf</strong> (Binary, Lightweight)."],

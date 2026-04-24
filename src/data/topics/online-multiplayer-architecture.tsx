@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Flow } from "@/components/ui/Flow";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Globe, Joystick, Database, Clock3 } from "lucide-react";
 
 export const onlineMultiplayerArchitectureTopic: Topic = {
 	id: "online-multiplayer-architecture",
@@ -26,8 +27,8 @@ export const onlineMultiplayerArchitectureTopic: Topic = {
 		</h3>,
 
 		<Grid key="3" cols={2} gap={6}>
-			<Card title="Web / HTTP Server" description="Stateless, Request/Response">
-				<ul className="list-disc pl-5 mt-2 text-sm text-muted-foreground space-y-1">
+			<FeatureCard icon={Globe} title="Web / HTTP Server" subtitle="Stateless, Request/Response" theme="cyan">
+				<ul className="list-disc pl-5 mt-2 text-sm text-cyan-100/75 space-y-1">
 					<li>
 						<strong>Protocol:</strong> TCP / HTTP (Reliable, ordered, slow connection handshakes)
 					</li>
@@ -41,9 +42,9 @@ export const onlineMultiplayerArchitectureTopic: Topic = {
 						<strong>Scale:</strong> Horizontally scalable. Put a Load Balancer in front of 100 identical clones.
 					</li>
 				</ul>
-			</Card>
-			<Card title="Dedicated Game Server" description="Stateful, Continuous Simulation">
-				<ul className="list-disc pl-5 mt-2 text-sm text-muted-foreground space-y-1">
+			</FeatureCard>
+			<FeatureCard icon={Joystick} title="Dedicated Game Server" subtitle="Stateful, Continuous Simulation" theme="violet">
+				<ul className="list-disc pl-5 mt-2 text-sm text-violet-100/75 space-y-1">
 					<li>
 						<strong>Protocol:</strong> Custom UDP (Unreliable, unordered, but blazingly fast)
 					</li>
@@ -58,7 +59,7 @@ export const onlineMultiplayerArchitectureTopic: Topic = {
 						physical server instance.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<Callout key="4" type="info" title="Why UDP instead of TCP?">
@@ -177,20 +178,20 @@ export const onlineMultiplayerArchitectureTopic: Topic = {
 		</p>,
 
 		<Grid key="16" cols={2} gap={6}>
-			<Card title="The 'Hot Path' (In-Memory)" description="Zero IO allowed">
-				<p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+			<FeatureCard icon={Clock3} title="The 'Hot Path' (In-Memory)" subtitle="Zero IO allowed" theme="emerald">
+				<p className="mt-2 text-sm text-emerald-100/75 leading-relaxed">
 					Player movement, HP pooling, ammo count, and spells are never written to disk during a match. They live
 					entirely in C++/C#/Rust memory structs on the Dedicated Server instance. This ensures single-digit nanosecond
 					access times.
 				</p>
-			</Card>
-			<Card title="The 'Cold Path' (Asynchronous)" description="Account Persistence">
-				<p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+			</FeatureCard>
+			<FeatureCard icon={Database} title="The 'Cold Path' (Asynchronous)" subtitle="Account Persistence" theme="amber">
+				<p className="mt-2 text-sm text-amber-100/75 leading-relaxed">
 					At the very end of a match, the server serializes the final state (e.g., 'Player A got 10 kills, gained 20
 					XP'). It drops this message into an asynchronous queue (like Kafka or RabbitMQ). A separate backend worker
 					slowly writes this to a persistent database (PostgreSQL / DynamoDB).
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<Callout key="17" type="warning" title="What happens when a game server crashes?">

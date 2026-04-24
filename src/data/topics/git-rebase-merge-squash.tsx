@@ -267,7 +267,6 @@ git cherry-pick hotfix-commit-sha   # apply same fix to v2.2`}
 
     <Table
       key="20"
-      theme="slate"
       headers={[
         "Property",
         '<span class="text-cyan-300">Merge</span>',
@@ -328,7 +327,6 @@ git cherry-pick hotfix-commit-sha   # apply same fix to v2.2`}
 
     <Table
       key="24"
-      theme="slate"
       headers={["Team Pattern", "GitHub PR Strategy", "Local Dev Habit", "Main Branch Log"]}
       rows={[
         [

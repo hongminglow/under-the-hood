@@ -22,7 +22,6 @@ export const graphqlVsRestTopic: Topic = {
     </h3>,
     <Table
       key="3"
-      theme="slate"
       headers={["Problem", "REST Reality", "The GraphQL Fix"]}
       rows={[
         [

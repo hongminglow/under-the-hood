@@ -22,7 +22,6 @@ export const loadBalancingTopic: Topic = {
     </h3>,
     <Table
       key="3"
-      theme="slate"
       headers={["Feature", "L4 (Network Load Balancer)", "L7 (Application Load Balancer)"]}
       rows={[
         ["Data Awareness", "Only sees IP & Port. Fast, blind routing.", "Sees URL, Headers, Cookies, JSON. Smart routing."],

@@ -2,6 +2,8 @@ import { CodeBlock, Flow, MistakeCard, Table } from "@/components/ui";
 import { Callout } from "@/components/ui/Callout";
 import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { WifiOff, DatabaseZap, Landmark, GitBranch } from "lucide-react";
 import type { Topic } from "@/data/types";
 
 export const microservicesTopic: Topic = {
@@ -22,16 +24,16 @@ export const microservicesTopic: Topic = {
       The Microservice Fallacy
     </h3>,
     <Grid key="4" cols={2} gap={6} className="my-8">
-      <Card title="Network Unreliability">
-        <p className="text-sm text-muted-foreground">
+      <FeatureCard icon={WifiOff} title="Network Unreliability" subtitle="Function calls become wire hops" theme="rose">
+        <p className="text-sm text-rose-100/75">
           In a monolith, calling `auth.getUser()` is a sub-millisecond RAM memory operation. In a Microservice, `Auth Service` must send an HTTP request across a physical datacenter wire to `User Service`. That wire can snap, lag, or timeout. What used to be a simple function call is now a fragile distributed system requiring retries and Circuit Breakers.
         </p>
-      </Card>
-      <Card title="Data Isolation Hell">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={DatabaseZap} title="Data Isolation Hell" subtitle="No more easy joins across services" theme="amber">
+        <p className="text-sm text-amber-100/75">
           Microservices mandate that EVERY service must have its very own independent SQL database. You can no longer write a beautiful `JOIN` query between the Users table and the Orders table, because they literally live on completely separate physical hard drives handled by different teams.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Callout key="5" type="warning" title="Do not start with Microservices!">
       Startups building MVPs with Kubernetes and 10 microservices inevitably fail. Microservices are not a technical upgrade; they are an organizational scaling tactic for companies with 50+ engineers. Build the majestic monolith first.
@@ -44,16 +46,16 @@ export const microservicesTopic: Topic = {
       In microservices, the Order Service and Inventory Service have separate databases. If the Order Service succeeds but the Inventory Service crashes, you've sold a product you don't have. <strong>Solutions:</strong>
     </p>,
     <Grid key="8" cols={2} gap={6} className="my-8">
-      <Card title="Saga Pattern">
-        <p className="text-sm text-muted-foreground">
+      <FeatureCard icon={GitBranch} title="Saga Pattern" subtitle="Compensating local transactions" theme="emerald">
+        <p className="text-sm text-emerald-100/75">
           Break the transaction into a series of local transactions. If one fails, execute compensating transactions to undo previous steps (e.g., "Cancel Order" if inventory update fails).
         </p>
-      </Card>
-      <Card title="Two-Phase Commit (2PC)">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Landmark} title="Two-Phase Commit (2PC)" subtitle="Coordinator-driven distributed commit" theme="violet">
+        <p className="text-sm text-violet-100/75">
           A coordinator asks all services to "prepare" the transaction. If all agree, it sends "commit". If any fail, it sends "rollback". Slow and fragile (coordinator is a single point of failure).
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="9" className="text-xl font-bold mt-8 mb-4">
       Service Discovery & Load Balancing

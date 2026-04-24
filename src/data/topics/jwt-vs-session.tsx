@@ -23,7 +23,6 @@ export const jwtVsSessionTopic: Topic = {
 		</h3>,
 		<Table
 			key="3"
-			theme="slate"
 			headers={["Feature", "Sessions (Stateful)", "JWTs (Stateless)"]}
 			rows={[
 				[

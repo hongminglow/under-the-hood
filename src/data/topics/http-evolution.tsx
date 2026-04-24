@@ -21,7 +21,6 @@ export const httpEvolutionTopic: Topic = {
     </h3>,
     <Table
       key="3"
-      theme="slate"
       headers={["Feature", "HTTP/1.1 (The Original)", "HTTP/2 (The Multiplex)", "HTTP/3 (The Modern)"]}
       rows={[
         ["Transport", "TCP", "TCP", "<strong>UDP (QUIC)</strong>"],
