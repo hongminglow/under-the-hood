@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { PlugZap, Unplug } from "lucide-react";
 
 export const dependencyInjectionTopic: Topic = {
   id: "dependency-injection",
@@ -22,18 +23,18 @@ export const dependencyInjectionTopic: Topic = {
       <em>"Don't call us, we'll call you."</em> In a DI architecture, your low-level components (Database, Logger) don't decide when they are used. A high-level <strong>IoC Container</strong> (like NestJS or Awilix) manages their lifecycle and wiring.
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
-      <Card title="Tight Coupling (Fragile)">
-        <p className="text-sm text-muted-foreground mb-4">
+      <FeatureCard icon={Unplug} title="Tight Coupling" subtitle="Fragile, concrete dependencies" theme="rose">
+        <p className="text-sm text-rose-200/80 mb-4">
           A class uses <code>new Database()</code>. If you change the database name or credentials, you must search and replace every file in your app.
         </p>
-        <p className="text-sm text-red-500 font-bold">Un-testable without a real DB.</p>
-      </Card>
-      <Card title="Loose Coupling (Flexible)">
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-rose-300 font-bold">Un-testable without a real DB.</p>
+      </FeatureCard>
+      <FeatureCard icon={PlugZap} title="Loose Coupling" subtitle="Flexible, injected contracts" theme="emerald">
+        <p className="text-sm text-emerald-200/80 mb-4">
           A class accepts <code>IDatabase</code>. It doesn't care if it's Postgres, MongoDB, or a Mock.
         </p>
-        <p className="text-sm text-green-500 font-bold">Swap implementations in 1 line of config.</p>
-      </Card>
+        <p className="text-sm text-emerald-300 font-bold">Swap implementations in 1 line of config.</p>
+      </FeatureCard>
     </Grid>,
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">
       The Benefits of DI

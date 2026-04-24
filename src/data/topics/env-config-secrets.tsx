@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { AlertTriangle, ShieldCheck } from "lucide-react";
 
 export const envConfigTopic: Topic = {
   id: "env-config-secrets",
@@ -22,18 +23,18 @@ export const envConfigTopic: Topic = {
       Mixing these up is a common source of production bugs.
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
-      <Card title="Build-time Variables">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={AlertTriangle} title="Build-time Variables" subtitle="Baked into the artifact" theme="rose">
+        <p className="text-sm text-rose-100/75 mb-2">
           Injected during <code>docker build</code> or <code>npm run build</code>.
         </p>
-        <p className="text-xs italic text-red-500 font-bold underline">Warning: Hardcoded in the final JS bundle / Image layer.</p>
-      </Card>
-      <Card title="Runtime Variables">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-xs italic text-rose-300 font-bold underline">Warning: Hardcoded in the final JS bundle / image layer.</p>
+      </FeatureCard>
+      <FeatureCard icon={ShieldCheck} title="Runtime Variables" subtitle="Injected when the process starts" theme="emerald">
+        <p className="text-sm text-emerald-100/75 mb-2">
           Injected when the container starts (<code>process.env</code>). 
         </p>
-        <p className="text-xs italic text-green-500 font-bold underline">Success: Secure and hot-swappable without rebuilding.</p>
-      </Card>
+        <p className="text-xs italic text-emerald-300 font-bold underline">Success: Secure and hot-swappable without rebuilding.</p>
+      </FeatureCard>
     </Grid>,
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">
       Industrial Secret Management (Vault)

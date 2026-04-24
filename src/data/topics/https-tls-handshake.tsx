@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { KeyRound, Lock } from "lucide-react";
 
 export const httpsTlsHandshakeTopic: Topic = {
   id: "https-tls-handshake",
@@ -19,28 +20,29 @@ export const httpsTlsHandshakeTopic: Topic = {
       The Hybrid Encryption Model
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="Asymmetric: The Handshake">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={KeyRound} title="Asymmetric: The Handshake" subtitle="Public/private keys for the hello phase" theme="violet">
+        <p className="text-sm text-violet-100/75 mb-2">
           Using <strong>Public/Private Keys</strong> (RSA/ECC) for the initial "Hello".
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-violet-200/70">
           Slower but secure. It allows two strangers to exchange a secret "Symmetric Key" without anyone else seeing it.
         </p>
-      </Card>
-      <Card title="Symmetric: The Session">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={Lock} title="Symmetric: The Session" subtitle="Fast shared-key encryption for the real traffic" theme="emerald">
+        <p className="text-sm text-emerald-100/75 mb-2">
           Using a <strong>Shared Secret</strong> (AES-256) for the actual data.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-emerald-200/70">
           Blazing fast and hardware-accelerated. Once the secret is exchanged, the public/private keys are no longer used for the rest of the session.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">
       The TLS 1.3 "Single Round Trip" Handshake
     </h3>,
     <Table
       key="5"
+      theme="slate"
       headers={["Message", "Who Sends", "What's Inside?"]}
       rows={[
         ["Client Hello", "Browser", "Supported Ciphers + <strong>Key Share</strong> (ECDHE)."],

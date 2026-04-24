@@ -6,6 +6,8 @@ import { Highlight as HighlightText } from "@/components/ui/Highlight";
 import { MistakeCard } from "@/components/ui/MistakeCard";
 import { Table } from "@/components/ui/Table";
 import type { Topic } from "@/data/types";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Send, Boxes, Rabbit, Radio } from "lucide-react";
 
 export const messageQueuesTopic: Topic = {
 	id: "message-queues",
@@ -29,19 +31,19 @@ export const messageQueuesTopic: Topic = {
 			the user in 100 milliseconds.
 		</p>,
 		<Grid key="4" cols={2} gap={6} className="my-8">
-			<Card title="The Producer (Your API)" description="Fast and Forgetful">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={Send} title="The Producer (Your API)" subtitle="Fast and forgetful" theme="cyan">
+				<p className="text-sm text-cyan-100/75">
 					It blindly drops messages onto the conveyor belt and walks away. It never cares who processes the email or how
 					long it takes.
 				</p>
-			</Card>
-			<Card title="The Workers (Consumers)" description="Slow and Steady">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Boxes} title="The Workers (Consumers)" subtitle="Slow and steady" theme="emerald">
+				<p className="text-sm text-emerald-100/75">
 					Five separate background servers blindly pull tasks off the conveyor belt to send emails. If Black Friday
 					happens and 10,000 orders drop on the belt, the API never crashes. The Workers just peacefully spend the next
 					hour chewing through the backlog line.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<Callout key="5" type="tip" title="RabbitMQ vs Kafka">
 			<strong>RabbitMQ</strong> is a traditional active queue: Once the Email server reads the message, it is
@@ -55,6 +57,7 @@ export const messageQueuesTopic: Topic = {
 		</h3>,
 		<Table
 			key="7"
+			theme="slate"
 			headers={["Guarantee", "Behavior", "Risk"]}
 			rows={[
 				[
@@ -137,6 +140,7 @@ export const messageQueuesTopic: Topic = {
 		</h3>,
 		<Table
 			key="14"
+			theme="slate"
 			headers={["Feature", "RabbitMQ", "Apache Kafka", "AWS SQS", "MQTT"]}
 			rows={[
 				["Architecture", "Message Broker (queue)", "Distributed Log (stream)", "Managed Queue (AWS)", "Pub/Sub (IoT)"],
@@ -161,8 +165,8 @@ export const messageQueuesTopic: Topic = {
 			When to Use Each Technology
 		</h3>,
 		<Grid key="16" cols={2} gap={6} className="my-8">
-			<Card title="Use RabbitMQ When...">
-				<ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+			<FeatureCard icon={Rabbit} title="Use RabbitMQ When..." subtitle="Broker-style task queue" theme="amber">
+				<ul className="text-xs text-amber-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>Task queues:</strong>&nbsp;Background jobs (email, image processing)
 					</li>
@@ -179,9 +183,9 @@ export const messageQueuesTopic: Topic = {
 						<strong>Small-medium scale:</strong>&nbsp;10k-50k messages/sec
 					</li>
 				</ul>
-			</Card>
-			<Card title="Use Kafka When...">
-				<ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={Radio} title="Use Kafka When..." subtitle="Replayable distributed log" theme="violet">
+				<ul className="text-xs text-violet-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>Event streaming:</strong>&nbsp;Audit logs, user activity, CDC
 					</li>
@@ -198,9 +202,9 @@ export const messageQueuesTopic: Topic = {
 						<strong>Event sourcing:</strong>&nbsp;Rebuild state from event log
 					</li>
 				</ul>
-			</Card>
-			<Card title="Use AWS SQS When...">
-				<ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={Boxes} title="Use AWS SQS When..." subtitle="Managed queue for AWS-native stacks" theme="cyan">
+				<ul className="text-xs text-cyan-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>AWS-native:</strong>&nbsp;Lambda triggers, S3 events
 					</li>
@@ -217,9 +221,9 @@ export const messageQueuesTopic: Topic = {
 						<strong>FIFO guarantees:</strong>&nbsp;SQS FIFO queues (300 msg/sec limit)
 					</li>
 				</ul>
-			</Card>
-			<Card title="Use MQTT When...">
-				<ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
+			</FeatureCard>
+			<FeatureCard icon={Send} title="Use MQTT When..." subtitle="Lightweight pub/sub for devices" theme="emerald">
+				<ul className="text-xs text-emerald-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>IoT devices:</strong>&nbsp;Sensors, smart home, wearables
 					</li>
@@ -236,7 +240,7 @@ export const messageQueuesTopic: Topic = {
 						<strong>QoS levels:</strong>&nbsp;Fire-and-forget, at-least-once, exactly-once
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="17" className="text-xl font-bold mt-8 mb-4">

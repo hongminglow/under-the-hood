@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Table } from "@/components/ui/Table";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Activity, ShieldCheck, FlaskConical } from "lucide-react";
 
 export const deploymentStrategiesTopic: Topic = {
 	id: "deployment-strategies",
@@ -46,18 +47,18 @@ export const deploymentStrategiesTopic: Topic = {
 			#2.
 		</p>,
 		<Grid key="grid-rolling" cols={2} gap={6}>
-			<Card title="Scenario to Use">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={Activity} title="Scenario to Use" subtitle="Rolling deployment" theme="amber">
+				<p className="text-sm text-amber-100/75">
 					Standard web applications where budget is a constraint, and you cannot afford to spin up duplicate
 					environments. Commonly the default in Kubernetes (`RollingUpdate`).
 				</p>
-			</Card>
-			<Card title="Key Consideration">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Activity} title="Key Consideration" subtitle="Rolling deployment" theme="amber">
+				<p className="text-sm text-amber-100/75">
 					<strong>Version Skew:</strong> Old and new versions will run simultaneously during the rollout. Database
 					schemas and APIs <i>must</i> be backward compatible.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="h-bluegreen" className="text-xl font-bold mt-10 mb-4">
@@ -69,18 +70,18 @@ export const deploymentStrategiesTopic: Topic = {
 			instantly switches 100% of user traffic from Blue to Green.
 		</p>,
 		<Grid key="grid-bluegreen" cols={2} gap={6}>
-			<Card title="Scenario to Use">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={ShieldCheck} title="Scenario to Use" subtitle="Blue-Green deployment" theme="emerald">
+				<p className="text-sm text-emerald-100/75">
 					Mission-critical monoliths or enterprise applications where downtime is extremely costly and you need an
 					instant "kill switch" to abort.
 				</p>
-			</Card>
-			<Card title="Key Consideration">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={ShieldCheck} title="Key Consideration" subtitle="Blue-Green deployment" theme="emerald">
+				<p className="text-sm text-emerald-100/75">
 					<strong>Infrastructure Cost:</strong> You temporarily pay for double the compute power. State management (like
 					active user sessions) must be stored externally (e.g., Redis).
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="h-canary" className="text-xl font-bold mt-10 mb-4">
@@ -92,18 +93,18 @@ export const deploymentStrategiesTopic: Topic = {
 			spike, the canary is killed; if successful, the traffic percentage is slowly ramped up to 100%.
 		</p>,
 		<Grid key="grid-canary" cols={2} gap={6}>
-			<Card title="Scenario to Use">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={FlaskConical} title="Scenario to Use" subtitle="Canary deployment" theme="cyan">
+				<p className="text-sm text-cyan-100/75">
 					High-traffic consumer apps (like Netflix, Facebook) where you need to "test in production" with real,
 					unpredictable user behavior before a full rollout.
 				</p>
-			</Card>
-			<Card title="Key Consideration">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={FlaskConical} title="Key Consideration" subtitle="Canary deployment" theme="cyan">
+				<p className="text-sm text-cyan-100/75">
 					<strong>Complexity:</strong> Requires advanced traffic routing (e.g., Istio, Envoy) and highly tuned
 					observability pipelines for automated metric evaluation.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<div key="callout-conclusion" className="mt-10">

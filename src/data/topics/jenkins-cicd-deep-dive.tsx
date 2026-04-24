@@ -5,6 +5,8 @@ import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Flow } from "@/components/ui/Flow";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { GitBranchPlus, Rocket } from "lucide-react";
 
 export const jenkinsCicdDeepDiveTopic: Topic = {
   id: "jenkins-cicd-deep-dive",
@@ -32,21 +34,21 @@ export const jenkinsCicdDeepDiveTopic: Topic = {
       by making every commit a potential release candidate.
     </p>,
     <Grid key="4" cols={2} gap={6}>
-      <Card title="Continuous Integration" description="The 'CI' part">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      <FeatureCard icon={GitBranchPlus} title="Continuous Integration" subtitle="The 'CI' part" theme="cyan">
+        <p className="mt-2 text-sm leading-relaxed text-cyan-100/75">
           Every push triggers a build and test run automatically. The goal is to
           detect integration failures immediately — within minutes of the commit —
           while the context is still fresh in the developer's mind.
         </p>
-      </Card>
-      <Card title="Continuous Delivery / Deployment" description="The 'CD' part">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Rocket} title="Continuous Delivery / Deployment" subtitle="The 'CD' part" theme="emerald">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
           After tests pass, the pipeline packages the artifact and either{" "}
           <strong>gates it for a manual release button</strong> (Continuous
           Delivery) or <strong>ships it to production automatically</strong>{" "}
           (Continuous Deployment). The distinction often depends on risk tolerance.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">
       Jenkins Architecture: How It Is Structured

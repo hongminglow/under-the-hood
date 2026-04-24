@@ -7,6 +7,8 @@ import { Flow } from "@/components/ui/Flow";
 import { Step } from "@/components/ui/Step";
 import { MistakeCard } from "@/components/ui/MistakeCard";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Gauge, Layers, ListFilter, Repeat2, Rows3, ScrollText, SearchCheck } from "lucide-react";
 
 export const agGridRenderingInternalsTopic: Topic = {
 	id: "ag-grid-rendering-internals",
@@ -82,94 +84,117 @@ export const agGridRenderingInternalsTopic: Topic = {
 		</p>,
 
 		/* Layer 1: Custom Scroll Interception */
-		<Card key="layer1" title="Layer 1 — Synthetic Scroll Infrastructure (The Fake Scrollbar)" className="mb-4">
-			<p className="text-sm text-slate-300 mb-4">
+		<FeatureCard
+			key="layer1"
+			icon={ScrollText}
+			title="Layer 1 — Synthetic Scroll Infrastructure"
+			subtitle="The fake scrollbar"
+			theme="emerald"
+			className="mb-4"
+		>
+			<p className="text-sm text-emerald-200/80 mb-4">
 				AG Grid does <strong>not</strong> use the browser's native scroll event on the actual row container. Instead, it
 				builds its own scroll infrastructure consisting of two separate elements:
 			</p>
-			<ul className="text-sm text-slate-400 space-y-4 list-disc pl-4 mb-4">
+			<ul className="text-sm text-emerald-200/70 space-y-4 list-disc pl-4 mb-4">
 				<li>
-					<strong className="text-muted-foreground">The Spacer:</strong> A tall, empty <code>div</code> whose height is
+					<strong className="text-emerald-300">The Spacer:</strong> A tall, empty <code>div</code> whose height is
 					exactly <code>totalRows × rowHeight</code>. If you have 10,000 rows at 40px each, this div is{" "}
 					<code>400,000px</code> tall. It lives inside the scroll container, forcing the browser to display a native
 					scrollbar with the correct proportional thumb size — as if all 400,000px of content actually existed.
 				</li>
 				<li>
-					<strong className="text-muted-foreground">The Row Viewport:</strong> A separate fixed-height container
+					<strong className="text-emerald-300">The Row Viewport:</strong> A separate fixed-height container
 					positioned on top, which only ever holds ~30–50 row DOM nodes. Rows here are never scrolled natively — they
 					are moved via <strong>CSS transforms</strong>.
 				</li>
 				<li>
-					<strong className="text-muted-foreground">Scroll Interception:</strong> AG Grid listens to the{" "}
+					<strong className="text-emerald-300">Scroll Interception:</strong> AG Grid listens to the{" "}
 					<code>scroll</code> event on the outer container, reads the <code>scrollTop</code> value, and then manually
 					calculates which rows to show and what <code>translateY</code> offset to apply — all without moving the row
 					viewport container at all.
 				</li>
 			</ul>
-			<p className="text-xs text-slate-400 border-t border-border pt-3">
+			<p className="text-xs text-emerald-200/60 border-t border-emerald-700/50 pt-3">
 				If you open DevTools on an AG Grid and inspect the DOM, you will literally find elements annotated{" "}
 				<code>ag-fake-vertical-scroll</code> and <code>ag-fake-horizontal-scroll</code>. This is not an accident — it is
 				the core of the architecture.
 			</p>
-		</Card>,
+		</FeatureCard>,
 
 		/* Layer 2: CSS Transform vs top/left */
-		<Card key="layer2" title="Layer 2 — GPU-Composited Positioning (transform vs top)" className="mb-4">
-			<p className="text-sm text-slate-300 mb-4">
+		<FeatureCard
+			key="layer2"
+			icon={Gauge}
+			title="Layer 2 — GPU-Composited Positioning"
+			subtitle="transform vs top"
+			theme="cyan"
+			className="mb-4"
+		>
+			<p className="text-sm text-cyan-200/80 mb-4">
 				This is the single biggest difference between AG Grid and a naive implementation. When a row needs to move
 				position, there are two ways to do it in CSS:
 			</p>
 			<Grid cols={2} gap={4}>
-				<div className="rounded-xl border border-border bg-muted/20 p-4">
-					<p className="text-sm font-semibold text-foreground mb-3">
-						❌ Naive: <code>position: absolute + top</code>
+				<div className="rounded-xl border border-cyan-800/50 bg-cyan-950/20 p-4">
+					<p className="text-sm font-semibold text-cyan-200 mb-3">
+						Naive: <code>position: absolute + top</code>
 					</p>
 					<CodeBlock
 						title="Slow positioning"
 						language="css"
+						theme="cyan"
 						code={`.row {
   position: absolute;
   top: 4800px; /* Row 120 × 40px */
 }`}
 					/>
-					<p className="text-xs mt-3 leading-relaxed">
+					<p className="text-xs mt-3 leading-relaxed text-cyan-200/70">
 						Setting <code>top</code> triggers <strong>Layout Reflow</strong>. The browser must recalculate the position
 						of every element in the document subtree — extremely expensive at 60fps.
 					</p>
 				</div>
-				<div className="rounded-xl border border-border bg-muted/20 p-4">
-					<p className="text-sm font-semibold text-foreground mb-3">
-						✅ AG Grid: <code>transform: translateY</code>
+				<div className="rounded-xl border border-cyan-700/60 bg-cyan-900/20 p-4 shadow-[0_0_24px_rgba(8,145,178,0.08)]">
+					<p className="text-sm font-semibold text-cyan-100 mb-3">
+						AG Grid: <code>transform: translateY</code>
 					</p>
 					<CodeBlock
 						title="GPU positioning"
 						language="css"
+						theme="cyan"
 						code={`.row {
   position: absolute;
   top: 0;
   transform: translateY(4800px);
 }`}
 					/>
-					<p className="text-xs mt-3 leading-relaxed">
+					<p className="text-xs mt-3 leading-relaxed text-cyan-100/75">
 						<code>transform</code> skips Layout and Paint entirely. The browser hands this off to the{" "}
 						<strong>GPU compositor thread</strong> — zero reflow cost, handled completely off the main thread.
 					</p>
 				</div>
 			</Grid>
-			<p className="text-sm text-slate-300 mt-4">
+			<p className="text-sm text-cyan-200/80 mt-4">
 				When AG Grid repositions a recycled row, it only updates <code>transform: translateY(Xpx)</code>. The GPU
 				compositor reads this property on its own thread and moves the layer, completely independent of JavaScript
 				execution or main thread layout. This is why rows appear in the right position instantly, even mid-scroll.
 			</p>
-		</Card>,
+		</FeatureCard>,
 
 		/* Layer 3: Row Buffer */
-		<Card key="layer3" title="Layer 3 — The Row Buffer (Pre-rendered Invisible Rows)" className="mb-4">
-			<p className="text-sm text-slate-300 mb-4">
+		<FeatureCard
+			key="layer3"
+			icon={Rows3}
+			title="Layer 3 — The Row Buffer"
+			subtitle="Pre-rendered invisible rows"
+			theme="sky"
+			className="mb-4"
+		>
+			<p className="text-sm text-sky-200/80 mb-4">
 				Every virtual scroller has an <code>overscan</code> or buffer concept. AG Grid calls it <code>rowBuffer</code>.
 				By default it is <strong>10 rows above and 10 rows below</strong> the visible viewport at all times.
 			</p>
-			<p className="text-sm text-slate-300 mb-4">
+			<p className="text-sm text-sky-200/80 mb-4">
 				If your viewport shows rows 50–70, AG Grid is actually maintaining rows 40–80 in the DOM — fully rendered,
 				data-bound, and GPU-composited. They are just translated off-screen. When you scroll down to reveal row 71, AG
 				Grid doesn't need to create any new DOM nodes. Row 71 is already in the DOM; AG Grid simply updates its{" "}
@@ -178,6 +203,7 @@ export const agGridRenderingInternalsTopic: Topic = {
 			<CodeBlock
 				title="AG Grid rowBuffer configuration"
 				language="typescript"
+				theme="sky"
 				code={`// Default: 10 rows above/below viewport
 // Increase for faster machines or smoother fast-drag experience
 // Decrease for initial load performance on slow devices
@@ -188,20 +214,27 @@ const gridOptions: GridOptions = {
   // <AgGridReact rowBuffer={20} ... />
 };`}
 			/>
-			<p className="text-xs text-slate-400 mt-3 border-t border-border pt-3">
+			<p className="text-xs text-sky-200/60 mt-3 border-t border-sky-700/50 pt-3">
 				Increasing <code>rowBuffer</code> makes fast scrolling smoother (more pre-rendered rows available) at the cost
 				of slightly slower initial render and more memory. It is a tunable trade-off based on your hardware target.
 			</p>
-		</Card>,
+		</FeatureCard>,
 
 		/* Layer 4: requestAnimationFrame sync */
-		<Card key="layer4" title="Layer 4 — requestAnimationFrame Synchronization" className="mb-4">
-			<p className="text-sm text-slate-300 mb-4">
+		<FeatureCard
+			key="layer4"
+			icon={Layers}
+			title="Layer 4 — requestAnimationFrame Sync"
+			subtitle="One batch per paint frame"
+			theme="indigo"
+			className="mb-4"
+		>
+			<p className="text-sm text-indigo-200/80 mb-4">
 				The <code>scroll</code> event can fire 100+ times per second. If AG Grid processed every single event
 				synchronously — recalculating rows, recycling nodes, updating transforms — it would flood the main thread and{" "}
 				<em>cause</em> the jank it's trying to prevent.
 			</p>
-			<p className="text-sm text-slate-300 mb-4">
+			<p className="text-sm text-indigo-200/80 mb-4">
 				Instead, AG Grid wraps all DOM update logic in <code>requestAnimationFrame()</code>. This means that no matter
 				how many scroll events fire in a given millisecond, AG Grid will only perform one batch of DOM work per browser
 				paint frame (≈16ms at 60fps). The browser gets to process scroll, paint, and composite at its own pace — AG Grid
@@ -210,6 +243,7 @@ const gridOptions: GridOptions = {
 			<CodeBlock
 				title="Conceptual model — how AG Grid handles scroll internally"
 				language="typescript"
+				theme="indigo"
 				code={`// Simplified conceptual version of AG Grid's scroll handler
 let pendingScrollUpdate = false;
 
@@ -228,22 +262,30 @@ scrollContainer.addEventListener('scroll', () => {
   });
 });`}
 			/>
-		</Card>,
+		</FeatureCard>,
 
 		/* Layer 5: Row Recycling vs Destroy/Create */
-		<Card key="layer5" title="Layer 5 — Row Recycling (Not Destroy/Create)" className="mb-4">
-			<p className="text-sm text-slate-300 mb-4">
+		<FeatureCard
+			key="layer5"
+			icon={Repeat2}
+			title="Layer 5 — Row Recycling"
+			subtitle="Not destroy/create"
+			theme="violet"
+			className="mb-4"
+		>
+			<p className="text-sm text-violet-200/80 mb-4">
 				A naive virtual scroller typically <strong>destroys</strong> the DOM node for a row that scrolls out of view and{" "}
 				<strong>creates</strong> a new DOM node for the row entering the view. DOM creation is expensive — the browser
 				must parse, create, style, lay out, and paint a new element.
 			</p>
-			<p className="text-sm text-slate-300 mb-4">
+			<p className="text-sm text-violet-200/80 mb-4">
 				AG Grid instead <strong>recycles</strong> row containers. When row 40 scrolls off the top of the viewport, AG
 				Grid does not destroy that DOM node. It takes it, updates its data binding to point to row 81 (the next row
 				entering the bottom), and sets a new <code>translateY</code> to position it at the bottom of the visible area.
 				The DOM node itself is reused.
 			</p>
 			<Table
+				theme="violet"
 				headers={["Operation", "Naive: Destroy + Create", "AG Grid: Recycle"]}
 				rows={[
 					[
@@ -264,7 +306,7 @@ scrollContainer.addEventListener('scroll', () => {
 					["Time cost (per row)", "~2–5ms", "~0.1ms"],
 				]}
 			/>
-		</Card>,
+		</FeatureCard>,
 
 		/* ─── SECTION 3: The Full Scroll Cycle Explained ────────────────────── */
 		<h3 key="cycle-title" className="text-xl font-bold mt-12 mb-6">
@@ -325,15 +367,21 @@ scrollContainer.addEventListener('scroll', () => {
 			browser search bar ever could:
 		</p>,
 		<Grid key="search-grid" cols={2} gap={6} className="mb-4">
-			<Card title="Quick Filter — The Ctrl+F replacement" description="Searches all 10,000 rows, not just visible DOM">
-				<p className="text-sm text-slate-300 mb-3">
-					Quick Filter operates on AG Grid's <strong>internal data model</strong>, not the DOM. When the user types, AG
-					Grid runs the search across all 10,000 JavaScript row objects in memory and filters the visible set. Zero DOM
-					limitation.
+			<FeatureCard
+				icon={ListFilter}
+				title="Quick Filter"
+				subtitle="Ctrl+F replacement across all loaded rows"
+				theme="teal"
+			>
+				<p className="text-sm text-teal-200/80 mb-3">
+					Quick Filter operates on AG Grid's <strong className="text-teal-300">internal data model</strong>, not the
+					DOM. When the user types, AG Grid runs the search across all 10,000 JavaScript row objects in memory and
+					filters the visible set. Zero DOM limitation.
 				</p>
 				<CodeBlock
 					title="Quick Filter implementation"
 					language="typescript"
+					theme="teal"
 					code={`// Wire up a search input to AG Grid's Quick Filter
 const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
   gridRef.current!.api.setGridOption(
@@ -350,19 +398,23 @@ return (
   </>
 );`}
 				/>
-			</Card>
-			<Card
-				title="AG Grid Find API — Highlight & navigate matches"
-				description="Exact Ctrl+F UX, works across full dataset"
+			</FeatureCard>
+			<FeatureCard
+				icon={SearchCheck}
+				title="AG Grid Find API"
+				subtitle="Highlight and navigate matches"
+				theme="cyan"
 			>
-				<p className="text-sm text-slate-300 mb-3">
-					AG Grid's built-in <strong>Find</strong> feature provides the exact UX of Ctrl+F — highlight matched cells,
-					navigate with "next/previous" — but it operates on the data model. When you navigate to a match in row 8,432,
-					AG Grid scrolls the virtualizer to that row and recycles necessary DOM nodes to bring it into view.
+				<p className="text-sm text-cyan-200/80 mb-3">
+					AG Grid's built-in <strong className="text-cyan-300">Find</strong> feature provides the exact UX of Ctrl+F —
+					highlight matched cells, navigate with "next/previous" — but it operates on the data model. When you
+					navigate to a match in row 8,432, AG Grid scrolls the virtualizer to that row and recycles necessary DOM
+					nodes to bring it into view.
 				</p>
 				<CodeBlock
 					title="AG Grid Find API"
 					language="typescript"
+					theme="cyan"
 					code={`// Set the search term
 gridRef.current!.api.setGridOption('findSearchValue', 'apple');
 
@@ -373,11 +425,11 @@ gridRef.current!.api.findPrevious();
 // Jump to a specific match index
 gridRef.current!.api.findGoTo(42);`}
 				/>
-				<p className="text-xs mt-3 border-t border-border pt-2">
+				<p className="text-xs text-cyan-200/60 mt-3 border-t border-cyan-700/50 pt-2">
 					Note: The Find API is available in AG Grid Community and Enterprise. It is compatible with the{" "}
-					<strong>Client-Side Row Model</strong> (all data loaded in memory).
+					<strong className="text-cyan-300">Client-Side Row Model</strong> (all data loaded in memory).
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<Callout key="suppress-callout" type="info" title="suppressRowVirtualisation — The Nuclear Option">
 			AG Grid does offer <code>suppressRowVirtualisation: true</code>, which forces ALL rows into the DOM simultaneously
@@ -413,17 +465,17 @@ gridRef.current!.api.findGoTo(42);`}
 			key="compare-table"
 			headers={["Feature", "@tanstack/react-virtual", "AG Grid Client-Side Model"]}
 			rows={[
-				["DOM virtualization", "✅ Yes", "✅ Yes"],
-				["Row buffer / overscan", "✅ Yes (configurable)", "✅ Yes (rowBuffer, default 10)"],
-				["CSS transform positioning", "✅ Yes", "✅ Yes (+ GPU compositing)"],
-				["rAF-based scroll sync", "⚠️ Depends on implementation", "✅ Built-in, automatic"],
-				["Row recycling (node reuse)", "❌ Creates/destroys nodes", "✅ Full node pool recycling"],
-				["Synthetic scroll container", "❌ Uses native scroll directly", "✅ Custom fake scroll + spacer"],
-				["Column virtualization", "❌ Not included", "✅ Built-in, horizontal too"],
-				["Native browser Ctrl+F", "❌ Only visible rows", "❌ Only visible rows"],
-				["Built-in search (data model)", "❌ Not included", "✅ Quick Filter + Find API"],
-				["Bundle size", "🟢 ~12KB", "🔴 ~300KB+ (Community)"],
-				["Customization effort", "🟢 Full control", "🔴 Configuration-based"],
+				["DOM virtualization", "Yes", "Yes"],
+				["Row buffer / overscan", "Yes (configurable)", "Yes (rowBuffer, default 10)"],
+				["CSS transform positioning", "Yes", "Yes, with GPU compositing"],
+				["rAF-based scroll sync", "Depends on implementation", "Built-in, automatic"],
+				["Row recycling (node reuse)", "Creates/destroys nodes", "Full node pool recycling"],
+				["Synthetic scroll container", "Uses native scroll directly", "Custom fake scroll + spacer"],
+				["Column virtualization", "Not included", "Built-in, horizontal too"],
+				["Native browser Ctrl+F", "Only visible rows", "Only visible rows"],
+				["Built-in search (data model)", "Not included", "Quick Filter + Find API"],
+				["Bundle size", "~12KB", "~300KB+ (Community)"],
+				["Customization effort", "Full control", "Configuration-based"],
 			]}
 		/>,
 		<Callout key="conclude-callout" type="tip" title="When to reach for AG Grid vs a lightweight virtualizer">

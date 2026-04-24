@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Table } from "@/components/ui/Table";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Terminal, Blocks } from "lucide-react";
 
 export const iacTopic: Topic = {
 	id: "iac-terraform",
@@ -22,24 +23,30 @@ export const iacTopic: Topic = {
 			Imperative vs Declarative
 		</h4>,
 		<Grid key="3" cols={2} gap={6} className="mb-8">
-			<Card title="Imperative (Bash / Ansible)">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={Terminal} title="Imperative (Bash / Ansible)" subtitle="You specify the steps" theme="amber">
+				<p className="text-sm text-amber-100/75">
 					You write the exact step-by-step commands to achieve the desired state.
 				</p>
-				<ul className="text-sm mt-3 space-y-1 text-muted-foreground">
+				<ul className="text-sm mt-3 space-y-1 text-amber-100/75">
 					<li>1. Create an EC2 instance.</li>
 					<li>2. SSH into it.</li>
 					<li>3. Install PostgreSQL via apt-get.</li>
 					<li>4. Start the service.</li>
 				</ul>
-				<p className="text-xs mt-3 opacity-60">Highly dependent on current system state.</p>
-			</Card>
-			<Card title="Declarative (Terraform / CloudFormation)">
-				<p className="text-sm text-slate-300">
+				<p className="text-xs mt-3 text-amber-200/60">Highly dependent on current system state.</p>
+			</FeatureCard>
+			<FeatureCard
+				icon={Blocks}
+				title="Declarative (Terraform / CloudFormation)"
+				subtitle="You declare the end state"
+				theme="emerald"
+			>
+				<p className="text-sm text-emerald-100/75">
 					You declare the <em>final desired end-state</em>, and the tool determines what API calls are necessary to
 					achieve it.
 				</p>
 				<CodeBlock
+					theme="emerald"
 					language="hcl"
 					code={`resource "aws_db_instance" "prod_db" {
   engine = "postgres"
@@ -47,8 +54,8 @@ export const iacTopic: Topic = {
   allocated_storage = 20
 }`}
 				/>
-				<p className="text-xs mt-3 opacity-60">Idempotent and easily version-controlled.</p>
-			</Card>
+				<p className="text-xs mt-3 text-emerald-200/60">Idempotent and easily version-controlled.</p>
+			</FeatureCard>
 		</Grid>,
 		<h4 key="4" className="text-xl font-bold mt-8 mb-4">
 			Terraform's State File
@@ -92,6 +99,7 @@ export const iacTopic: Topic = {
 		</h4>,
 		<Table
 			key="11"
+			theme="slate"
 			headers={["Tool", "Purpose", "Best For"]}
 			rows={[
 				["Terraform", "Provisioning infrastructure (VMs, networks, databases).", "Creating the servers themselves."],

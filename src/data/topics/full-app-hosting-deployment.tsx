@@ -1,10 +1,11 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Step } from "@/components/ui/Step";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Shield, Server } from "lucide-react";
 
 export const fullAppHostingDeploymentTopic: Topic = {
   id: "full-app-hosting-deployment",
@@ -174,20 +175,20 @@ monorepo/
       Why HTTPS May Need More Than One Certificate
     </h3>,
     <Grid key="23" cols={2} gap={6}>
-      <Card title="Edge Certificate" description="Browser -> Cloudflare">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      <FeatureCard icon={Shield} title="Edge Certificate" subtitle="Browser -> Cloudflare" theme="sky">
+        <p className="mt-2 text-sm leading-relaxed text-sky-100/75">
           This certificate is presented to the user's browser. It proves the
           browser is securely talking to the hostname it requested, such as{" "}
           <code>app.example.com</code>.
         </p>
-      </Card>
-      <Card title="Origin Certificate" description="Cloudflare -> Your server">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Server} title="Origin Certificate" subtitle="Cloudflare -> Your server" theme="emerald">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
           If Cloudflare connects to your backend over HTTPS, the origin may also
           need a certificate. In <strong>Full (Strict)</strong>, Cloudflare
           validates that origin certificate instead of blindly trusting it.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Table
       key="24"

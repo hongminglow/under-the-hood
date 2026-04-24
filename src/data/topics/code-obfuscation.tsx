@@ -6,6 +6,8 @@ import { Card } from "@/components/ui/Card";
 import { Highlight } from "@/components/ui/Highlight";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Flow } from "@/components/ui/Flow";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Lock, ShieldCheck } from "lucide-react";
 
 export const codeObfuscationTopic: Topic = {
   id: "code-obfuscation",
@@ -269,30 +271,24 @@ function a(_0x3f4e) {
     </Callout>,
 
     <Grid key="13" cols={2} gap={6} className="mb-8 mt-6">
-      <Card title="✅ Obfuscation Protects Against">
-        <p className="text-sm text-muted-foreground">
-          - Casual competitor bundle inspection
-          <br />
-          - Automated scraping of proprietary algorithms
-          <br />
-          - Script-kiddie tampering
-          <br />
-          - Leaking business logic encoded in client JS
-          <br />- Reverse engineering of non-critical licence checks
-        </p>
-      </Card>
-      <Card title="❌ Obfuscation Does NOT Protect Against">
-        <p className="text-sm text-muted-foreground">
-          - A determined security researcher with a deobfuscator tool
-          <br />
-          - Runtime inspection via breakpoints on a live execution
-          <br />
-          - Network-level traffic analysis (use TLS for that)
-          <br />
-          - Hardcoded API keys (they will eventually be found)
-          <br />- Server-side data breaches (wrong threat model entirely)
-        </p>
-      </Card>
+      <FeatureCard icon={ShieldCheck} title="Obfuscation Protects Against" subtitle="Raises attacker cost" theme="emerald">
+        <ul className="text-sm text-emerald-200/80 list-disc pl-4 space-y-2">
+          <li>Casual competitor bundle inspection</li>
+          <li>Automated scraping of proprietary algorithms</li>
+          <li>Script-kiddie tampering</li>
+          <li>Leaking business logic encoded in client JS</li>
+          <li>Reverse engineering of non-critical licence checks</li>
+        </ul>
+      </FeatureCard>
+      <FeatureCard icon={Lock} title="Obfuscation Does Not Protect Against" subtitle="Still not a boundary" theme="rose">
+        <ul className="text-sm text-rose-200/80 list-disc pl-4 space-y-2">
+          <li>A determined security researcher with a deobfuscator tool</li>
+          <li>Runtime inspection via breakpoints on a live execution</li>
+          <li>Network-level traffic analysis (use TLS for that)</li>
+          <li>Hardcoded API keys (they will eventually be found)</li>
+          <li>Server-side data breaches (wrong threat model entirely)</li>
+        </ul>
+      </FeatureCard>
     </Grid>,
 
     <h3 key="14" className="text-xl font-bold mt-8 mb-4">

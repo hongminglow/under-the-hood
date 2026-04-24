@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Flow } from "@/components/ui/Flow";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Blocks, Network } from "lucide-react";
 
 export const consensusRaftPaxosTopic: Topic = {
   id: "consensus-raft-paxos",
@@ -59,16 +60,16 @@ export const consensusRaftPaxosTopic: Topic = {
       Where You See Consensus Every Day
     </h3>,
     <Grid key="8" cols={2} gap={6} className="my-8">
-      <Card title="Kubernetes (etcd)">
-        <p className="text-sm text-muted-foreground">
+      <FeatureCard icon={Blocks} title="Kubernetes (etcd)" subtitle="Raft-backed control plane" theme="cyan">
+        <p className="text-sm text-cyan-100/75">
           Every <code>kubectl apply</code> writes to <strong>etcd</strong>, a Raft-based key-value store. The entire cluster state (pods, services, secrets) is consensus-replicated across 3-5 etcd nodes. If etcd loses quorum, <strong>your entire Kubernetes cluster freezes</strong>.
         </p>
-      </Card>
-      <Card title="Kafka (Leader Election)">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Network} title="Kafka (Leader Election)" subtitle="Consensus selects the writer" theme="indigo">
+        <p className="text-sm text-indigo-100/75">
           Each Kafka partition has a <strong>Leader Replica</strong>. When a broker crashes, the controller uses a consensus mechanism (now KRaft, replacing ZooKeeper) to elect a new partition leader. During election, that partition is temporarily unavailable for writes.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <Callout key="9" type="warning" title="Consensus ≠ Broadcast">

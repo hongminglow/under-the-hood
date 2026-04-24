@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Step } from "@/components/ui/Step";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Globe, MonitorSmartphone, Terminal } from "lucide-react";
 
 export const llmWebVsIdeVsCliTopic: Topic = {
   id: "llm-web-vs-ide-vs-cli",
@@ -27,6 +28,7 @@ export const llmWebVsIdeVsCliTopic: Topic = {
     </h3>,
     <Table
       key="3"
+      theme="slate"
       headers={["Surface", "What It Usually Sees", "What It Can Do", "Best For"]}
       rows={[
         [
@@ -50,28 +52,32 @@ export const llmWebVsIdeVsCliTopic: Topic = {
       ]}
     />,
     <Grid key="4" cols={2} gap={6}>
-      <Card
+      <FeatureCard
+        icon={Globe}
         title="Web Apps Feel Smarter in Conversation"
-        description="Less local noise, more general reasoning"
+        subtitle="Less local noise, more general reasoning"
+        theme="violet"
       >
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-violet-100/75">
           A chat product can spend more of its token budget on conversation,
           explanation quality, writing style, and broad reasoning because it is
           not busy indexing your repo, formatting patches, or managing shell
           permissions.
         </p>
-      </Card>
-      <Card
+      </FeatureCard>
+      <FeatureCard
+        icon={Terminal}
         title="CLI Agents Feel Stronger at Shipping"
-        description="They can verify reality"
+        subtitle="They can verify reality"
+        theme="emerald"
       >
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
           A coding CLI may feel more capable because it can{" "}
           <strong>read the files, run the build, see the failure, patch the
           code, and retry</strong>. Even if its raw model is not "smarter" in
           the abstract, the harness gives it a much stronger execution loop.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">
       What Actually Makes One Perform Better?
@@ -161,21 +167,21 @@ export const llmWebVsIdeVsCliTopic: Topic = {
       Why IDE Assistants Feel Different From CLIs
     </h3>,
     <Grid key="16" cols={2} gap={6}>
-      <Card title="IDE Extension" description="Optimized for typing flow">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      <FeatureCard icon={MonitorSmartphone} title="IDE Extension" subtitle="Optimized for typing flow" theme="cyan">
+        <p className="mt-2 text-sm leading-relaxed text-cyan-100/75">
           IDE tools often use prefix/suffix context around your cursor, linter
           diagnostics, AST symbols, and open tabs. Their job is to stay
           low-latency and unobtrusive while you are coding live.
         </p>
-      </Card>
-      <Card title="CLI Agent" description="Optimized for task completion">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Terminal} title="CLI Agent" subtitle="Optimized for task completion" theme="emerald">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
           CLI agents are less about tiny completions and more about{" "}
           <strong>end-to-end execution</strong>: search the repo, edit multiple
           files, run commands, inspect failures, and converge toward a working
           result.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="17" className="text-xl font-bold mt-8 mb-4">
       When To Use Which

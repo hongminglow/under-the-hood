@@ -1,10 +1,11 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Highlight } from "@/components/ui/Highlight";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { FileCode2, Zap } from "lucide-react";
 
 export const htmlVsHtmxTopic: Topic = {
 	id: "html-vs-htmx",
@@ -28,6 +29,7 @@ export const htmlVsHtmxTopic: Topic = {
 		</Callout>,
 		<Table
 			key="3"
+			theme="slate"
 			headers={["Dimension", "HTML", "HTMX"]}
 			rows={[
 				["What it is", "The core markup language of the web", "A JavaScript library that augments HTML"],
@@ -47,15 +49,15 @@ export const htmlVsHtmxTopic: Topic = {
 			]}
 		/>,
 		<Grid key="4" cols={2} gap={6} className="my-8">
-			<Card title="When Plain HTML Is Enough">
-				<ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
+			<FeatureCard icon={FileCode2} title="When Plain HTML Is Enough" subtitle="Static-first, browser-native flow" theme="cyan">
+				<ul className="list-disc pl-5 space-y-2 text-sm text-cyan-100/75">
 					<li>Content pages, docs, landing pages, and simple forms.</li>
 					<li>Cases where full-page reloads are acceptable and complexity should stay low.</li>
 					<li>Projects leaning on native browser behavior instead of custom client interactions.</li>
 				</ul>
-			</Card>
-			<Card title="When HTMX Helps">
-				<ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Zap} title="When HTMX Helps" subtitle="Server-driven interactivity without an SPA" theme="emerald">
+				<ul className="list-disc pl-5 space-y-2 text-sm text-emerald-100/75">
 					<li>
 						You want <strong>small dynamic interactions</strong> without moving to a full SPA framework.
 					</li>
@@ -66,7 +68,7 @@ export const htmlVsHtmxTopic: Topic = {
 						You want simpler frontend code for tables, search, filters, modals, inline forms, and partial refreshes.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<Callout key="5" type="warning" title="HTMX Is Not Magic">
 			HTMX reduces the amount of custom JavaScript you write, but it does not remove complexity from the system. You
@@ -86,6 +88,7 @@ export const htmlVsHtmxTopic: Topic = {
 		/>,
 		<CodeBlock
 			key="7"
+			theme="emerald"
 			title="HTMX Form"
 			language="html"
 			code={`<form hx-get="/search" hx-target="#results" hx-swap="innerHTML">
@@ -97,8 +100,8 @@ export const htmlVsHtmxTopic: Topic = {
 
 <!-- Browser submits in the background, server returns only the results HTML -->`}
 		/>,
-		<Card key="8" title="What Changes Behind The Scenes?" description="The transport model is the real difference">
-			<ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
+		<FeatureCard key="8" icon={Zap} title="What Changes Behind The Scenes?" subtitle="The transport model is the real difference" theme="emerald">
+			<ul className="list-disc pl-5 space-y-2 text-sm text-emerald-100/75">
 				<li>
 					With <strong>plain HTML</strong>, clicking links and submitting forms usually means loading a{" "}
 					<strong>new full document</strong>.
@@ -112,7 +115,7 @@ export const htmlVsHtmxTopic: Topic = {
 					<strong>server-driven UI</strong>.
 				</li>
 			</ul>
-		</Card>,
+		</FeatureCard>,
 		<Table
 			key="9"
 			headers={["If You Need...", "Usually Choose..."]}

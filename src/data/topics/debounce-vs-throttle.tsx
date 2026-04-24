@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Play, Pause } from "lucide-react";
 
 export const debounceVsThrottleTopic: Topic = {
   id: "debounce-vs-throttle",
@@ -31,22 +32,22 @@ export const debounceVsThrottleTopic: Topic = {
       Leading vs. Trailing Edge
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
-      <Card title="Leading (Immediate)">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={Play} title="Leading" subtitle="Immediate execution" theme="amber">
+        <p className="text-sm text-amber-200/80 mb-2">
           Executes the function <strong>immediately</strong> on the first click, then ignores all subsequent clicks for the duration.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-amber-100/70">
           Perfect for "Submit" buttons to prevent double-charging a credit card.
         </p>
-      </Card>
-      <Card title="Trailing (Delayed)">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={Pause} title="Trailing" subtitle="Wait, then fire once" theme="teal">
+        <p className="text-sm text-teal-200/80 mb-2">
           Waits for the events to stop, then executes the function <strong>once</strong> at the very end.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-teal-100/70">
           Standard for Search bars to ensure you only fetch once the user is done typing.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="6" className="text-xl font-bold mt-8 mb-4">
       The React 'Closure' Trap

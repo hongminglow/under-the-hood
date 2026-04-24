@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { DoorOpen, Layers, Route, Split } from "lucide-react";
 
 export const apiGatewayPatternTopic: Topic = {
   id: "api-gateway-pattern",
@@ -20,16 +21,16 @@ export const apiGatewayPatternTopic: Topic = {
       The Gateway's Multi-Role Architecture
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="Reverse Proxy & Routing">
-        <p className="text-sm text-muted-foreground mb-2">
-          The Gateway maps external URLs (<code>/orders</code>) to internal private IPs (<code>10.0.1.4</code>). It supports <strong>Canary Releases</strong> by routing 5% of traffic to a new version.
+      <FeatureCard icon={Route} title="Reverse Proxy & Routing" subtitle="One public path, many private services" theme="emerald">
+        <p className="text-sm text-emerald-200/80 mb-2">
+          The Gateway maps external URLs (<code>/orders</code>) to internal private IPs (<code>10.0.1.4</code>). It supports <strong className="text-emerald-300">Canary Releases</strong> by routing 5% of traffic to a new version.
         </p>
-      </Card>
-      <Card title="BFF (Backend for Frontend)">
-        <p className="text-sm text-muted-foreground mb-2">
-          A mobile app needs a different JSON structure than a desktop app. The Gateway can <strong>Transform payloads</strong> on the fly, tailoring the response to the specific device.
+      </FeatureCard>
+      <FeatureCard icon={Layers} title="BFF" subtitle="Backend for frontend" theme="teal">
+        <p className="text-sm text-teal-200/80 mb-2">
+          A mobile app needs a different JSON structure than a desktop app. The Gateway can <strong className="text-teal-300">transform payloads</strong> on the fly, tailoring the response to the specific device.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <h3 key="3a" className="text-xl font-bold mt-8 mb-4">
@@ -39,16 +40,16 @@ export const apiGatewayPatternTopic: Topic = {
       A single frontend page often needs data from 5 different microservices (User, Orders, Inventory, Reviews, Recommendations). Without a gateway, the client makes 5 separate HTTP round trips. With <strong>Request Aggregation</strong>, the gateway fans out those 5 calls internally in parallel, merges the responses, and returns a single unified JSON payload to the client.
     </p>,
     <Grid key="3c" cols={2} gap={6} className="my-8">
-      <Card title="Without Aggregation">
-        <p className="text-sm text-muted-foreground">
-          Client makes 5 sequential HTTP requests. Each incurs DNS, TCP handshake, and TLS overhead. Total latency: <strong>sum of all 5 calls</strong>. Mobile users on 3G suffer enormously.
+      <FeatureCard icon={Split} title="Without Aggregation" subtitle="Client owns fan-out" theme="rose">
+        <p className="text-sm text-rose-200/80">
+          Client makes 5 sequential HTTP requests. Each incurs DNS, TCP handshake, and TLS overhead. Total latency: <strong className="text-rose-300">sum of all 5 calls</strong>. Mobile users on 3G suffer enormously.
         </p>
-      </Card>
-      <Card title="With Aggregation">
-        <p className="text-sm text-muted-foreground">
-          Client makes 1 request. Gateway fans out 5 internal calls <strong>in parallel</strong> over the private network (no TLS overhead). Total latency: <strong>max of the 5 calls</strong>. Dramatic improvement.
+      </FeatureCard>
+      <FeatureCard icon={DoorOpen} title="With Aggregation" subtitle="Gateway owns fan-out" theme="emerald">
+        <p className="text-sm text-emerald-200/80">
+          Client makes 1 request. Gateway fans out 5 internal calls <strong className="text-emerald-300">in parallel</strong> over the private network (no TLS overhead). Total latency: <strong className="text-emerald-300">max of the 5 calls</strong>. Dramatic improvement.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">

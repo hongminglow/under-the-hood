@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Table } from "@/components/ui/Table";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Database, Globe, HardDrive, ServerCog } from "lucide-react";
 
 export const cachingStrategiesTopic: Topic = {
 	id: "caching-strategies",
@@ -21,30 +22,30 @@ export const cachingStrategiesTopic: Topic = {
 			The Caching Layers
 		</h4>,
 		<Grid key="3" cols={2} gap={6} className="mb-8">
-			<Card title="Browser Cache">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={Globe} title="Browser Cache" subtitle="Closest to the user" theme="emerald">
+				<p className="text-sm text-emerald-200/80">
 					The nearest cache to the user. Controlled via HTTP headers like <code>Cache-Control: max-age=3600</code> and{" "}
 					<code>ETag</code>. Prevents re-downloading assets that haven't changed.
 				</p>
-			</Card>
-			<Card title="CDN (Edge Cache)">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={ServerCog} title="CDN" subtitle="Edge cache" theme="teal">
+				<p className="text-sm text-teal-200/80">
 					A globally distributed network of servers (Cloudflare, Akamai). Static assets are cached at the edge node
 					closest to the user, slashing latency from 200ms to 20ms.
 				</p>
-			</Card>
-			<Card title="Application Cache (Redis)">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={HardDrive} title="Application Cache" subtitle="Redis hot path" theme="cyan">
+				<p className="text-sm text-cyan-200/80">
 					An in-memory key-value store sitting between the app and the database. Frequently queried results (like user
 					profiles) are cached here to avoid expensive DB joins.
 				</p>
-			</Card>
-			<Card title="Database Query Cache">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Database} title="Database Query Cache" subtitle="Execution-plan and result reuse" theme="sky">
+				<p className="text-sm text-sky-200/80">
 					The database itself can cache the parsed execution plan and result set of repeated queries. MySQL's query
 					cache was eventually removed due to contention issues at scale.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<h4 key="4" className="text-xl font-bold mt-8 mb-4">
 			Cache Invalidation Patterns

@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Database, Timer } from "lucide-react";
 
 export const apiRateLimitingTopic: Topic = {
   id: "api-rate-limiting",
@@ -40,21 +41,21 @@ export const apiRateLimitingTopic: Topic = {
       ]}
     />,
     <Grid key="4" cols={2} gap={6} className="my-8">
-      <Card title="Architectural Placement">
-        <p className="text-sm text-muted-foreground">
-          Never write an API Rate Limiter locally in Node.js memory! If you have 5 load-balanced servers, a hacker will just hit all 5 servers independently. Rate limits must be stored rapidly into a centralized lightning-fast cache like <strong>Redis</strong> or pushed up entirely into an API Gateway like AWS API Gateway, keeping the malicious traffic extremely far away from your precious codebase.
+      <FeatureCard icon={Database} title="Architectural Placement" subtitle="Centralized state, not local memory" theme="emerald">
+        <p className="text-sm text-emerald-200/80">
+          Never write an API Rate Limiter locally in Node.js memory. If you have 5 load-balanced servers, a hacker will just hit all 5 servers independently. Rate limits must be stored rapidly into a centralized lightning-fast cache like <strong className="text-emerald-300">Redis</strong> or pushed up entirely into an API Gateway like AWS API Gateway, keeping the malicious traffic far away from your codebase.
         </p>
-      </Card>
-      <Card title="The Client Headers">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Timer} title="The Client Headers" subtitle="Expose remaining budget" theme="teal">
+        <p className="text-sm text-teal-200/80">
           Good APIs strictly tell the frontend exactly how many tokens they have left so they do not blindly guess.
         </p>
-        <ul className="text-xs mt-2 border-l border-border pl-3 text-muted-foreground/80 font-mono space-y-1">
+        <ul className="text-xs mt-3 border-l border-teal-700/50 pl-3 text-teal-200/70 font-mono space-y-1">
           <li>X-RateLimit-Limit: 100</li>
           <li>X-RateLimit-Remaining: 32</li>
           <li>X-RateLimit-Reset: 1726058400</li>
         </ul>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Callout key="5" type="warning" title="Limiting IP vs User IDs">
       Rate limiting by IP Address is a bad crutch. A single IP address might represent an entire university campus of 10,000 legitimate students sharing the same NAT IP router! Always strongly verify an authenticated `User-ID` from a JWT to accurately rate limit individuals.

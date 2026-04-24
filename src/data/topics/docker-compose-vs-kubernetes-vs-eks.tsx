@@ -1,11 +1,13 @@
 import { Callout } from "@/components/ui/Callout";
 import { Card } from "@/components/ui/Card";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
 import { Grid } from "@/components/ui/Grid";
 import { Highlight } from "@/components/ui/Highlight";
 import { Step } from "@/components/ui/Step";
 import { Table } from "@/components/ui/Table";
 import type { Topic } from "@/data/types";
+import { Boxes, Network, Cloud } from "lucide-react";
 
 export const dockerComposeVsKubernetesVsEksTopic: Topic = {
 	id: "docker-compose-vs-kubernetes-vs-eks",
@@ -28,24 +30,24 @@ export const dockerComposeVsKubernetesVsEksTopic: Topic = {
 			are committed to AWS, EKS is simply one way to operate it with less control-plane burden.
 		</Callout>,
 		<Grid key="3" cols={3} gap={6} className="my-8">
-			<Card title="Docker Compose" description="Single-host coordination">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={Boxes} title="Docker Compose" subtitle="Single-host coordination" theme="emerald">
+				<p className="text-sm text-emerald-100/75">
 					Best for local development, demos, CI test stacks, and small production systems running on one VM where you
 					want low operational overhead.
 				</p>
-			</Card>
-			<Card title="Kubernetes" description="Cluster orchestration">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Network} title="Kubernetes" subtitle="Cluster orchestration" theme="cyan">
+				<p className="text-sm text-cyan-100/75">
 					Best when you need multi-node scheduling, self-healing, rolling deployments, autoscaling, service discovery,
 					and stronger workload isolation at platform scale.
 				</p>
-			</Card>
-			<Card title="Amazon EKS" description="Managed Kubernetes on AWS">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Cloud} title="Amazon EKS" subtitle="Managed Kubernetes on AWS" theme="violet">
+				<p className="text-sm text-violet-100/75">
 					Best when you already want Kubernetes and also want AWS-managed control plane operations plus integration with
 					IAM, ECR, ALB/NLB, CloudWatch, and the broader AWS platform.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<Table
 			key="4"
@@ -80,8 +82,14 @@ export const dockerComposeVsKubernetesVsEksTopic: Topic = {
 				],
 			]}
 		/>,
-		<Card key="5" title="When Docker Compose Is The Right Answer" description="Usually earlier than people think">
-			<ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
+		<FeatureCard
+			key="5"
+			icon={Boxes}
+			title="When Docker Compose Is The Right Answer"
+			subtitle="Usually earlier than people think"
+			theme="emerald"
+		>
+			<ul className="list-disc pl-5 space-y-2 text-sm text-emerald-100/75">
 				<li>
 					You run <strong>a few services</strong> together on one machine: app, database, Redis, worker, reverse proxy.
 				</li>
@@ -97,13 +105,15 @@ export const dockerComposeVsKubernetesVsEksTopic: Topic = {
 					observability.
 				</li>
 			</ul>
-		</Card>,
-		<Card
+		</FeatureCard>,
+		<FeatureCard
 			key="6"
+			icon={Network}
 			title="When Kubernetes Is Worth The Complexity"
-			description="Use it when orchestration pain becomes real"
+			subtitle="Use it when orchestration pain becomes real"
+			theme="cyan"
 		>
-			<ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
+			<ul className="list-disc pl-5 space-y-2 text-sm text-cyan-100/75">
 				<li>
 					You need <strong>multi-node resilience</strong>: if one node dies, workloads should be rescheduled elsewhere
 					automatically.
@@ -120,13 +130,15 @@ export const dockerComposeVsKubernetesVsEksTopic: Topic = {
 					response around it.
 				</li>
 			</ul>
-		</Card>,
-		<Card
+		</FeatureCard>,
+		<FeatureCard
 			key="7"
+			icon={Cloud}
 			title="When EKS Is Better Than Rolling Your Own Kubernetes"
-			description="Choose it only after deciding you need Kubernetes"
+			subtitle="Choose it only after deciding you need Kubernetes"
+			theme="violet"
 		>
-			<ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
+			<ul className="list-disc pl-5 space-y-2 text-sm text-violet-100/75">
 				<li>
 					Your infrastructure already lives in <strong>AWS</strong> and you want tight integration with IAM roles, VPC
 					networking, ECR, and AWS load balancers.
@@ -140,7 +152,7 @@ export const dockerComposeVsKubernetesVsEksTopic: Topic = {
 					<strong>still your problem</strong>.
 				</li>
 			</ul>
-		</Card>,
+		</FeatureCard>,
 		<Callout key="8" type="info" title="What You Pay For Kubernetes">
 			The cost is not just cloud spend. Kubernetes adds <strong>people cost</strong>, <strong>debugging cost</strong>,
 			and <strong>cognitive load</strong>. You now think in Deployments, Services, Ingress, ConfigMaps, Secrets, probes,

@@ -1,10 +1,11 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Flow } from "@/components/ui/Flow";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Globe, Route, ShieldCheck, Zap } from "lucide-react";
 
 export const cdnUnderTheHoodTopic: Topic = {
   id: "cdn-under-the-hood",
@@ -90,22 +91,22 @@ export const cdnUnderTheHoodTopic: Topic = {
       <strong>anycast</strong>.
     </p>,
     <Grid key="7" cols={2} gap={6}>
-      <Card title="Same IP, Many Places" description="Anycast">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      <FeatureCard icon={Globe} title="Same IP, Many Places" subtitle="Anycast" theme="emerald">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-200/80">
           Multiple Cloudflare edge locations advertise the same public IP
           prefixes. Internet routers use BGP to send your packets toward the
           best topological path, which is often the nearest or best-connected
           Cloudflare point of presence.
         </p>
-      </Card>
-      <Card title="Not DNS Magic Alone" description="Routing still matters">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          DNS gives the browser an IP, but <strong>BGP path selection</strong>
+      </FeatureCard>
+      <FeatureCard icon={Route} title="Not DNS Magic Alone" subtitle="Routing still matters" theme="teal">
+        <p className="mt-2 text-sm leading-relaxed text-teal-200/80">
+          DNS gives the browser an IP, but <strong className="text-teal-300">BGP path selection</strong>
           &nbsp;is what steers packets to a nearby edge server sharing that same
           IP. So “nearest CDN node” is a networking result, not just a DNS
           trick.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="8" className="text-xl font-bold mt-8 mb-4">
       What Happens When A User Opens Your Site Through Cloudflare
@@ -229,22 +230,24 @@ user browser
       What Actually Gets Cached
     </h3>,
     <Grid key="17" cols={2} gap={6}>
-      <Card title="Commonly Cached" description="Easy wins">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      <FeatureCard icon={Zap} title="Commonly Cached" subtitle="Easy wins" theme="emerald">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-200/80">
           Images, CSS, JS bundles, fonts, public static files, video segments,
           and versioned assets with long cache headers are the classic CDN wins.
         </p>
-      </Card>
-      <Card
+      </FeatureCard>
+      <FeatureCard
+        icon={ShieldCheck}
         title="More Dangerous To Cache"
-        description="Needs deliberate rules"
+        subtitle="Needs deliberate rules"
+        theme="amber"
       >
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-amber-200/80">
           Personalized HTML, authenticated dashboards, cart state, and many API
           responses can go wrong if cached blindly because the response may be
           user-specific or short-lived.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Table
       key="18"
@@ -311,20 +314,20 @@ user browser
       Beyond Caching
     </h3>,
     <Grid key="23" cols={2} gap={6}>
-      <Card title="Security & Filtering" description="Edge before origin">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      <FeatureCard icon={ShieldCheck} title="Security & Filtering" subtitle="Edge before origin" theme="cyan">
+        <p className="mt-2 text-sm leading-relaxed text-cyan-200/80">
           Cloudflare can enforce WAF rules, block bad bots, rate-limit abusive
           clients, inspect paths, and sometimes stop attacks before they ever
           touch your EC2 box.
         </p>
-      </Card>
-      <Card title="Edge Logic" description="Not just static caching">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Zap} title="Edge Logic" subtitle="Not just static caching" theme="sky">
+        <p className="mt-2 text-sm leading-relaxed text-sky-200/80">
           Modern CDNs can rewrite headers, redirect traffic, verify tokens,
           resize images, personalize simple logic, or run edge code without
           waking your main origin for every request.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Callout key="24" type="tip" title="The Real Picture">
       A CDN does not merely “return cache.” It is often a global programmable

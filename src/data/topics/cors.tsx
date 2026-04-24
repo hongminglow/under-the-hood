@@ -6,7 +6,9 @@ import { Grid } from "@/components/ui/Grid";
 import { Highlight } from "@/components/ui/Highlight";
 import { MistakeCard } from "@/components/ui/MistakeCard";
 import { Table } from "@/components/ui/Table";
+import { FeatureCard } from "@/components/ui/FeatureCard";
 import type { Topic } from "@/data/types";
+import { AlertTriangle, CheckCircle2, MonitorSmartphone, Server, ShieldAlert } from "lucide-react";
 
 export const corsTopic: Topic = {
 	id: "cors",
@@ -32,8 +34,8 @@ export const corsTopic: Topic = {
 		<p key="4" className="mb-4">
 			Without CORS, the web would be a security nightmare. Imagine this attack scenario:
 		</p>,
-		<Card key="5" title="The Attack Without CORS Protection">
-			<ol className="text-sm text-muted-foreground space-y-2">
+		<FeatureCard key="5" icon={ShieldAlert} title="The Attack Without CORS Protection" subtitle="Why the browser intervenes" theme="rose">
+			<ol className="text-sm text-rose-100/75 space-y-2">
 				<li>
 					1. You log into <code>bank.com</code> and get an authentication cookie.
 				</li>
@@ -56,7 +58,7 @@ export const corsTopic: Topic = {
 					<code>evil-site.com</code>.
 				</li>
 			</ol>
-		</Card>,
+		</FeatureCard>,
 		<Callout key="6" type="warning" title="This is Called CSRF (Cross-Site Request Forgery)">
 			CORS is the browser's <strong>first line of defense</strong>&nbsp;against CSRF attacks. It prevents malicious
 			sites from making authenticated requests on your behalf. This is why CORS errors are frustrating but absolutely
@@ -102,20 +104,20 @@ export const corsTopic: Topic = {
 			]}
 		/>,
 		<Grid key="13" cols={2} gap={6} className="my-8">
-			<Card title="The Browser's Paranoia">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={MonitorSmartphone} title="The Browser's Check" subtitle="Preflight gatekeeper" theme="amber">
+				<p className="text-sm text-amber-100/75">
 					Before sending your actual POST request, the browser halts completely. It sends a tiny, invisible{" "}
 					<code>OPTIONS</code> request to your backend asking, "Hey Backend, my user is on <code>localhost</code>, are
 					they mathematically allowed to send you this POST?"
 				</p>
-			</Card>
-			<Card title="The Backend's Permission">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Server} title="The Backend's Permission" subtitle="Explicit allow-list response" theme="emerald">
+				<p className="text-sm text-emerald-100/75">
 					If your API server replies with the header <code>Access-Control-Allow-Origin: localhost:3000</code>, the
 					browser sighs in relief and instantly fires the actual POST request. If the backend doesn't reply with that
 					exact header, the browser instantly throws an error and destroys your request.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="14" className="text-xl font-bold mt-8 mb-4">
@@ -215,8 +217,9 @@ app.post('/api/transfer', (req, res) => {
 			prevent credential leakage.
 		</Callout>,
 		<Grid key="25" cols={2} gap={6} className="my-8">
-			<Card title="Frontend (React)">
+			<FeatureCard icon={MonitorSmartphone} title="Frontend (React)" subtitle="Request must opt into credentials" theme="sky">
 				<CodeBlock
+					theme="sky"
 					language="javascript"
 					code={`fetch('https://api.example.com/data', {
   method: 'POST',
@@ -227,16 +230,17 @@ app.post('/api/transfer', (req, res) => {
   body: JSON.stringify({ data: 'value' })
 });`}
 				/>
-			</Card>
-			<Card title="Backend (Express)">
+			</FeatureCard>
+			<FeatureCard icon={Server} title="Backend (Express)" subtitle="Response must allow exact origin" theme="emerald">
 				<CodeBlock
+					theme="emerald"
 					language="javascript"
 					code={`app.use(cors({
   origin: 'https://app.example.com',
   credentials: true // Must be exact origin
 }));`}
 				/>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="26" className="text-xl font-bold mt-8 mb-4">
@@ -377,8 +381,8 @@ No CORS needed - same origin!`}
 			Security Best Practices
 		</h3>,
 		<Grid key="41" cols={2} gap={6} className="my-8">
-			<Card title="✅ DO">
-				<ul className="text-sm text-muted-foreground space-y-2">
+			<FeatureCard icon={CheckCircle2} title="DO" subtitle="Safe CORS defaults" theme="emerald">
+				<ul className="text-sm text-emerald-100/75 space-y-2">
 					<li>
 						• Whitelist specific origins (never use <code>*</code> with credentials)
 					</li>
@@ -389,9 +393,9 @@ No CORS needed - same origin!`}
 					<li>• Use HTTPS for all cross-origin requests</li>
 					<li>• Implement CSRF tokens for state-changing operations</li>
 				</ul>
-			</Card>
-			<Card title="❌ DON'T">
-				<ul className="text-sm text-muted-foreground space-y-2">
+			</FeatureCard>
+			<FeatureCard icon={AlertTriangle} title="DON'T" subtitle="Common ways to weaken it" theme="rose">
+				<ul className="text-sm text-rose-100/75 space-y-2">
 					<li>
 						• Use <code>Access-Control-Allow-Origin: *</code> with authentication
 					</li>
@@ -404,7 +408,7 @@ No CORS needed - same origin!`}
 					</li>
 					<li>• Expose sensitive headers unnecessarily</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<Callout key="42" type="info" title="The Simple Backend Fix">

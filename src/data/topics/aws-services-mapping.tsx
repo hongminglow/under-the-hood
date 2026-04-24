@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Flow } from "@/components/ui/Flow";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Cloud, Database, ServerCog, ShieldCheck } from "lucide-react";
 
 export const awsServicesMappingTopic: Topic = {
 	id: "aws-services-mapping",
@@ -27,34 +28,34 @@ export const awsServicesMappingTopic: Topic = {
 			Redis? The short answer is: <strong>to offload operational burden (undifferentiated heavy lifting).</strong>
 		</p>,
 		<Grid key="4" cols={2} gap={6} className="mt-4">
-			<Card title="High Availability (Multi-AZ)" description="Automatic Failover">
-				<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+			<FeatureCard icon={ServerCog} title="High Availability" subtitle="Multi-AZ automatic failover" theme="emerald">
+				<p className="mt-2 text-sm leading-relaxed text-emerald-200/80">
 					Setting up a Postgres primary-replica failover cluster takes significant expertise. In AWS RDS, making a
 					database highly available across multiple datacenters (Availability Zones) is a single checkbox. If a
 					datacenter burns down, AWS fails over automatically.
 				</p>
-			</Card>
-			<Card title="Automated Backups & Patching" description="Sleep safely">
-				<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Database} title="Automated Backups" subtitle="Patching and point-in-time restore" theme="teal">
+				<p className="mt-2 text-sm leading-relaxed text-teal-200/80">
 					Managed services automatically take daily snapshots, retain them for 35 days, and allow Point-In-Time recovery
 					(restore to 2:15 PM yesterday). They also automatically apply minor version security patches during a
 					maintenance window you specify.
 				</p>
-			</Card>
-			<Card title="Elastic Scalability" description="Scale without downtime">
-				<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Cloud} title="Elastic Scalability" subtitle="Scale without downtime" theme="cyan">
+				<p className="mt-2 text-sm leading-relaxed text-cyan-200/80">
 					If your NGINX load balancer runs out of CPU, you have to manually provision a bigger box and migrate traffic.
 					An AWS Application Load Balancer (ALB) automatically scales its own underlying nodes to handle sudden traffic
 					spikes from 100 to 100,000 requests per second.
 				</p>
-			</Card>
-			<Card title="Security & Compliance" description="IAM & VPC integration">
-				<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={ShieldCheck} title="Security & Compliance" subtitle="IAM and VPC integration" theme="sky">
+				<p className="mt-2 text-sm leading-relaxed text-sky-200/80">
 					Managed services integrate natively with AWS IAM (Identity and Access Management) and VPCs (Virtual Private
 					Clouds). You can use cryptographic roles rather than hardcoding passwords, and isolate databases on private
 					networks with strict security groups.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<h3 key="5" className="text-xl font-bold mt-8 mb-4">
 			Mapping Open-Source Tools to AWS Equivalents
@@ -158,8 +159,8 @@ export const awsServicesMappingTopic: Topic = {
 		</h3>,
 		<p key="12">Database administration is incredibly high-risk. Losing database state means losing the business.</p>,
 		<Grid key="13" cols={2} gap={6}>
-			<Card title="The Hard Way: Self-Hosted Postgres" description="On EC2">
-				<ul className="list-disc pl-5 mt-2 text-sm text-muted-foreground space-y-1">
+			<FeatureCard icon={ServerCog} title="The Hard Way" subtitle="Self-hosted Postgres on EC2" theme="rose">
+				<ul className="list-disc pl-5 mt-2 text-sm text-rose-200/80 space-y-1">
 					<li>Provision primary and replica EC2 instances.</li>
 					<li>Configure `pg_hba.conf` and streaming replication.</li>
 					<li>Write custom bash scripts for daily `pg_dump` to S3.</li>
@@ -168,9 +169,9 @@ export const awsServicesMappingTopic: Topic = {
 					</li>
 					<li>Update application connection strings to point to the new leader.</li>
 				</ul>
-			</Card>
-			<Card title="The AWS Way: Amazon RDS" description="Managed Service">
-				<ul className="list-disc pl-5 mt-2 text-sm text-muted-foreground space-y-1">
+			</FeatureCard>
+			<FeatureCard icon={Database} title="The AWS Way" subtitle="Amazon RDS managed service" theme="emerald">
+				<ul className="list-disc pl-5 mt-2 text-sm text-emerald-200/80 space-y-1">
 					<li>Click 'Create Database'. Check the 'Multi-AZ' box.</li>
 					<li>AWS provisions a primary and a synchronous standby replica in a different datacenter.</li>
 					<li>AWS writes continuous WAL logs to S3. Point-in-time recovery to any second is possible.</li>
@@ -179,7 +180,7 @@ export const awsServicesMappingTopic: Topic = {
 						sleep through it.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<h3 key="14" className="text-xl font-bold mt-8 mb-4">
 			The "Serverless" Paradigm

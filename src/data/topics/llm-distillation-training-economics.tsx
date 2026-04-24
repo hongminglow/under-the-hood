@@ -4,6 +4,8 @@ import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Step } from "@/components/ui/Step";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { GraduationCap, Rabbit } from "lucide-react";
 
 export const llmDistillationTrainingEconomicsTopic: Topic = {
   id: "llm-distillation-training-economics",
@@ -22,20 +24,20 @@ export const llmDistillationTrainingEconomicsTopic: Topic = {
       to imitate that behavior.
     </p>,
     <Grid key="2" cols={2} gap={6}>
-      <Card title="Teacher Model" description="Expensive but powerful">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      <FeatureCard icon={GraduationCap} title="Teacher Model" subtitle="Expensive but powerful" theme="violet">
+        <p className="mt-2 text-sm leading-relaxed text-violet-100/75">
           Usually large, slow, and expensive to train or serve. It has a higher
           capability ceiling and can produce richer reasoning traces or better
           answers.
         </p>
-      </Card>
-      <Card title="Student Model" description="Cheaper to run at scale">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Rabbit} title="Student Model" subtitle="Cheaper to run at scale" theme="emerald">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
           Trained to imitate useful behavior from the teacher. It usually loses
           some top-end ability, but gains lower latency, lower serving cost, and
           easier deployment.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="3" className="text-xl font-bold mt-8 mb-4">
       The Full Training Stack

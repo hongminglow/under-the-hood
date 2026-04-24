@@ -1,10 +1,11 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { MistakeCard } from "@/components/ui/MistakeCard";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Boxes, Box, Leaf, Globe } from "lucide-react";
 
 export const gameEnginesComparisonTopic: Topic = {
 	id: "game-engines-comparison",
@@ -30,50 +31,63 @@ export const gameEnginesComparisonTopic: Topic = {
 			these two giants.
 		</p>,
 		<Grid key="3d-grid" cols={2} gap={6} className="mb-8">
-			<Card title="Unreal Engine 5 (UE5)" description="The king of AAA, hyper-realism, and massive scale.">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4 mb-4">
+			<FeatureCard
+				icon={Boxes}
+				title="Unreal Engine 5 (UE5)"
+				subtitle="The king of AAA, hyper-realism, and massive scale"
+				theme="violet"
+			>
+				<ul className="text-sm text-violet-100/75 space-y-2 list-disc pl-4 mb-4">
 					<li>
-						<strong>Languages:</strong> C++ and Blueprints (Visual Scripting).
+						<strong className="text-violet-300">Languages:</strong> C++ and Blueprints (Visual Scripting).
 					</li>
 					<li>
-						<strong>Nanite:</strong> Virtualized micropolygon geometry. It eliminates the need for LODs (Level of
-						Detail) and normal maps. You can literally drop movie-quality 10-million polygon assets directly into the
-						scene.
+						<strong className="text-violet-300">Nanite:</strong> Virtualized micropolygon geometry. It eliminates the
+						need for LODs (Level of Detail) and normal maps. You can literally drop movie-quality 10-million polygon
+						assets directly into the scene.
 					</li>
 					<li>
-						<strong>Lumen:</strong> Fully dynamic global illumination and reflections in real-time. No more baking
-						lighting or lightmaps.
+						<strong className="text-violet-300">Lumen:</strong> Fully dynamic global illumination and reflections in
+						real-time. No more baking lighting or lightmaps.
 					</li>
 					<li>
-						<strong>Architecture:</strong> Heavy, monolithic, and deeply structured (Actors, Pawns, GameModes). Highly
-						opinionated out of the box.
+						<strong className="text-violet-300">Architecture:</strong> Heavy, monolithic, and deeply structured
+						(Actors, Pawns, GameModes). Highly opinionated out of the box.
 					</li>
 					<li>
-						<strong>Best For:</strong> AAA studios, hyper-realistic 3D, open-world games, and film/virtual production.
-					</li>
-				</ul>
-			</Card>
-			<Card title="Unity" description="The versatile titan of mobile, XR, and AA development.">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4 mb-4">
-					<li>
-						<strong>Languages:</strong> C# (via Mono/IL2CPP).
-					</li>
-					<li>
-						<strong>Ecosystem:</strong> Unrivaled Asset Store. Finding pre-built systems, integrations, or plugins is
-						vastly easier than in Unreal.
-					</li>
-					<li>
-						<strong>Architecture (ECS):</strong> Transitioning to DOTS (Data-Oriented Technology Stack) for
-						ultra-performant, data-driven CPU architectures allowing tens of thousands of entities.
-					</li>
-					<li>
-						<strong>Platform Reach:</strong> The absolute gold standard for Mobile (iOS/Android) and XR (VR/AR).
-					</li>
-					<li>
-						<strong>Best For:</strong> Mobile games, VR/AR, stylized 3D, rich 2D games, and teams relying heavily on C#.
+						<strong className="text-violet-300">Best For:</strong> AAA studios, hyper-realistic 3D, open-world games,
+						and film/virtual production.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
+			<FeatureCard
+				icon={Box}
+				title="Unity"
+				subtitle="The versatile titan of mobile, XR, and AA development"
+				theme="cyan"
+			>
+				<ul className="text-sm text-cyan-100/75 space-y-2 list-disc pl-4 mb-4">
+					<li>
+						<strong className="text-cyan-300">Languages:</strong> C# (via Mono/IL2CPP).
+					</li>
+					<li>
+						<strong className="text-cyan-300">Ecosystem:</strong> Unrivaled Asset Store. Finding pre-built systems,
+						integrations, or plugins is vastly easier than in Unreal.
+					</li>
+					<li>
+						<strong className="text-cyan-300">Architecture (ECS):</strong> Transitioning to DOTS (Data-Oriented
+						Technology Stack) for ultra-performant, data-driven CPU architectures allowing tens of thousands of entities.
+					</li>
+					<li>
+						<strong className="text-cyan-300">Platform Reach:</strong> The absolute gold standard for Mobile
+						(iOS/Android) and XR (VR/AR).
+					</li>
+					<li>
+						<strong className="text-cyan-300">Best For:</strong> Mobile games, VR/AR, stylized 3D, rich 2D games, and
+						teams relying heavily on C#.
+					</li>
+				</ul>
+			</FeatureCard>
 		</Grid>,
 
 		/* ─── SECTION 2: The 2D & Web Specialists ────────────────────────────── */
@@ -85,53 +99,65 @@ export const gameEnginesComparisonTopic: Topic = {
 			payloads for an empty scene). Godot and Cocos approach lightweight rendering entirely differently.
 		</p>,
 		<Grid key="2d-grid" cols={2} gap={6} className="mb-8">
-			<Card title="Godot" description="The open-source darling with an elegant node paradigm.">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4 mb-4">
+			<FeatureCard
+				icon={Leaf}
+				title="Godot"
+				subtitle="The open-source darling with an elegant node paradigm"
+				theme="emerald"
+			>
+				<ul className="text-sm text-emerald-100/75 space-y-2 list-disc pl-4 mb-4">
 					<li>
-						<strong>Languages:</strong> GDScript (Python-like), C#, C++.
+						<strong className="text-emerald-300">Languages:</strong> GDScript (Python-like), C#, C++.
 					</li>
 					<li>
-						<strong>Node Architecture:</strong> Everything is a Node. Nodes are organized in trees and can be saved as
-						editable "Scenes". A Scene can be instantiated inside another Scene. It is incredibly logical for UI and 2D.
+						<strong className="text-emerald-300">Node Architecture:</strong> Everything is a Node. Nodes are organized
+						in trees and can be saved as editable "Scenes". A Scene can be instantiated inside another Scene. It is
+						incredibly logical for UI and 2D.
 					</li>
 					<li>
-						<strong>Licensing:</strong> 100% Free and Open Source (MIT). No royalties, ever.
+						<strong className="text-emerald-300">Licensing:</strong> 100% Free and Open Source (MIT). No royalties, ever.
 					</li>
 					<li>
-						<strong>Web Export Caveat:</strong> Godot is technically desktop-first. Its web export relies on running the
-						engine via WebAssembly. Godot 4 heavily relies on SharedArrayBuffer, making mobile HTML5 deployments
-						notoriously unstable compared to Cocos.
+						<strong className="text-emerald-300">Web Export Caveat:</strong> Godot is technically desktop-first. Its web
+						export relies on running the engine via WebAssembly. Godot 4 heavily relies on SharedArrayBuffer, making
+						mobile HTML5 deployments notoriously unstable compared to Cocos.
 					</li>
 					<li>
-						<strong>Best For:</strong> Indie 2D/3D games, developers who hate corporate royalty fees, and fast
-						prototyping.
-					</li>
-				</ul>
-			</Card>
-			<Card title="Cocos Creator" description="The ultra-optimized web-first heavyweight.">
-				<ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4 mb-4">
-					<li>
-						<strong>Languages:</strong> TypeScript / JavaScript.
-					</li>
-					<li>
-						<strong>Web-First Architecture:</strong> Built natively on web technologies. It doesn't emulate a desktop
-						engine in WASM; its runtime is designed specifically for extreme HTML5/Canvas optimization.
-					</li>
-					<li>
-						<strong>Payload & Performance:</strong> Drastically smaller bundle sizes. It features robust auto-batching
-						to reduce draw calls, making it the dominant engine for WeChat Mini-Games, Facebook Instant Games, and
-						playable ads.
-					</li>
-					<li>
-						<strong>Workflow:</strong> Highly component-based, drawing heavy inspiration from Unity's editor UI, but
-						strictly targeting web and mobile WebViews.
-					</li>
-					<li>
-						<strong>Best For:</strong> Playable ads, HTML5 web games, crypto/Web3 games, and extreme low-end mobile
-						targeting.
+						<strong className="text-emerald-300">Best For:</strong> Indie 2D/3D games, developers who hate corporate
+						royalty fees, and fast prototyping.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
+			<FeatureCard
+				icon={Globe}
+				title="Cocos Creator"
+				subtitle="The ultra-optimized web-first heavyweight"
+				theme="amber"
+			>
+				<ul className="text-sm text-amber-100/75 space-y-2 list-disc pl-4 mb-4">
+					<li>
+						<strong className="text-amber-300">Languages:</strong> TypeScript / JavaScript.
+					</li>
+					<li>
+						<strong className="text-amber-300">Web-First Architecture:</strong> Built natively on web technologies. It
+						doesn't emulate a desktop engine in WASM; its runtime is designed specifically for extreme HTML5/Canvas
+						optimization.
+					</li>
+					<li>
+						<strong className="text-amber-300">Payload & Performance:</strong> Drastically smaller bundle sizes. It
+						features robust auto-batching to reduce draw calls, making it the dominant engine for WeChat Mini-Games,
+						Facebook Instant Games, and playable ads.
+					</li>
+					<li>
+						<strong className="text-amber-300">Workflow:</strong> Highly component-based, drawing heavy inspiration from
+						Unity's editor UI, but strictly targeting web and mobile WebViews.
+					</li>
+					<li>
+						<strong className="text-amber-300">Best For:</strong> Playable ads, HTML5 web games, crypto/Web3 games, and
+						extreme low-end mobile targeting.
+					</li>
+				</ul>
+			</FeatureCard>
 		</Grid>,
 
 		<Callout key="web-callout" type="warning" title="The WebAssembly Overhead Trap">
@@ -195,6 +221,7 @@ export const gameEnginesComparisonTopic: Topic = {
 		<Grid key="code-grid" cols={2} gap={4} className="mb-8">
 			<CodeBlock
 				title="Godot (GDScript)"
+				theme="emerald"
 				language="python"
 				code={`extends CharacterBody2D
 
@@ -211,6 +238,7 @@ func _physics_process(delta):
 			/>
 			<CodeBlock
 				title="Unity (C#)"
+				theme="cyan"
 				language="csharp"
 				code={`using UnityEngine;
 

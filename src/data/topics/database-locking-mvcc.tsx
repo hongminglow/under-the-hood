@@ -1,10 +1,11 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Step } from "@/components/ui/Step";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Lock, Eye, Gauge, ShieldCheck } from "lucide-react";
 
 export const databaseLockingMvccTopic: Topic = {
   id: "database-locking-mvcc",
@@ -22,30 +23,34 @@ export const databaseLockingMvccTopic: Topic = {
       letting other readers and unrelated writers keep moving.
     </p>,
     <Grid key="2" cols={2} gap={6}>
-      <Card
+      <FeatureCard
+        icon={Lock}
         title="What Actually Gets Locked?"
-        description="The scope depends on the operation"
+        subtitle="The scope depends on the operation"
+        theme="amber"
       >
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-amber-100/75">
           A plain <code>UPDATE users SET ... WHERE id = 42</code> typically
           takes a <strong>row-level lock</strong>. A dangerous schema change
           like <code>ALTER TABLE</code> may take a <strong>table</strong> or
           <strong> metadata lock</strong>. The lock scope depends on the engine,
           the query shape, and the isolation level.
         </p>
-      </Card>
-      <Card
+      </FeatureCard>
+      <FeatureCard
+        icon={Eye}
         title="Why Reads Still Work"
-        description="MVCC is the secret weapon"
+        subtitle="MVCC is the secret weapon"
+        theme="cyan"
       >
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-cyan-100/75">
           PostgreSQL, InnoDB, and other modern engines use{" "}
           <strong>MVCC</strong> (Multi-Version Concurrency Control). Instead of
           forcing readers to wait on every writer, the database lets readers see
           an <strong>older committed snapshot</strong> while the new version is
           still being written.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="3" className="text-xl font-bold mt-8 mb-4">
       The Locking Reality Matrix
@@ -166,35 +171,35 @@ WHERE cardinality(pg_blocking_pids(pid)) > 0;
       How Teams Handle This in Production
     </h3>,
     <Grid key="16" cols={2} gap={6}>
-      <Card title="Keep Transactions Short" description="The golden rule">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      <FeatureCard icon={Gauge} title="Keep Transactions Short" subtitle="The golden rule" theme="emerald">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
           Open transaction, do the minimum work, commit fast. Never hold a DB
           transaction open while calling an external API, waiting on a queue, or
           doing slow business logic.
         </p>
-      </Card>
-      <Card title="Index Your Predicates" description="Avoid accidental lock explosions">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={ShieldCheck} title="Index Your Predicates" subtitle="Avoid accidental lock explosions" theme="teal">
+        <p className="mt-2 text-sm leading-relaxed text-teal-100/75">
           If your `UPDATE ... WHERE status = 'pending'` scans 2 million rows,
           the database may touch and lock far more data than you expected.
           Proper indexes shrink both scan cost and contention windows.
         </p>
-      </Card>
-      <Card title="Use Explicit Locking Carefully" description="Only when business rules demand it">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Lock} title="Use Explicit Locking Carefully" subtitle="Only when business rules demand it" theme="amber">
+        <p className="mt-2 text-sm leading-relaxed text-amber-100/75">
           For inventory, payments, or job queues, teams may use{" "}
           <code>SELECT ... FOR UPDATE</code>, <code>NOWAIT</code>, or{" "}
           <code>SKIP LOCKED</code> to coordinate competing workers safely.
         </p>
-      </Card>
-      <Card title="Retry Deadlocks" description="Deadlocks are normal, not mythical">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Lock} title="Retry Deadlocks" subtitle="Deadlocks are normal, not mythical" theme="rose">
+        <p className="mt-2 text-sm leading-relaxed text-rose-100/75">
           If Transaction A locks row 1 then row 2, while Transaction B locks row
           2 then row 1, the database detects a <strong>deadlock</strong> and
           kills one transaction. The application should catch that error and
           retry.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <CodeBlock
       key="17"

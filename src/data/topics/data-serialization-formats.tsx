@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Binary, FileJson2, ScrollText, Waypoints } from "lucide-react";
 
 export const dataSerializationFormatsTopic: Topic = {
   id: "data-serialization-formats",
@@ -38,22 +39,22 @@ export const dataSerializationFormatsTopic: Topic = {
       Consider a <code>User</code> object with fields <code>id</code>, <code>name</code>, <code>email</code>. In JSON, the field names are repeated in every single message. When you're sending 100,000 messages per second between microservices, you're paying bandwidth and CPU to serialize, transmit, and parse the string <code>"email"</code> hundreds of thousands of times. Binary formats encode fields as numeric tags (e.g., field 3 = email), eliminating this overhead entirely.
     </p>,
     <Grid key="5" cols={2} gap={6} className="my-8">
-      <Card title="Protocol Buffers (Google)">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={Binary} title="Protocol Buffers" subtitle="Google's tag-based binary format" theme="cyan">
+        <p className="text-sm text-cyan-200/80 mb-2">
           Define schemas in <code>.proto</code> files. Code generators produce type-safe classes in any language. Fields are identified by numeric tags, not names. Adding new fields is backward-compatible as long as you never reuse tag numbers.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-cyan-100/70">
           Used by: gRPC, Google internal services, Envoy, Kubernetes API extensions.
         </p>
-      </Card>
-      <Card title="Apache Avro (Confluent/Kafka)">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={Waypoints} title="Apache Avro" subtitle="Registry-backed event schemas" theme="violet">
+        <p className="text-sm text-violet-200/80 mb-2">
           Schema is defined in JSON but stored in a <strong>Schema Registry</strong>, not embedded in the payload. The producer and consumer negotiate schemas at connection time. Supports full schema evolution (add, remove, rename fields).
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-violet-100/70">
           Used by: Kafka (with Confluent Schema Registry), Apache Spark, Hadoop ecosystem.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <h3 key="6" className="text-xl font-bold mt-8 mb-4">
@@ -77,22 +78,22 @@ export const dataSerializationFormatsTopic: Topic = {
       When to Use What
     </h3>,
     <Grid key="9" cols={2} gap={6} className="my-8">
-      <Card title="Use JSON When...">
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
+      <FeatureCard icon={FileJson2} title="Use JSON" subtitle="Human-readable and low-overhead teams" theme="emerald">
+        <ul className="text-sm text-emerald-100/75 list-disc pl-4 space-y-1">
           <li>Building public APIs consumed by external developers</li>
           <li>Low traffic volume where bandwidth isn't a concern</li>
           <li>Debugging and quick prototyping (human readable)</li>
           <li>Config files and REST APIs for web frontends</li>
         </ul>
-      </Card>
-      <Card title="Use Binary When...">
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
+      </FeatureCard>
+      <FeatureCard icon={ScrollText} title="Use Binary" subtitle="Throughput and schema discipline matter" theme="cyan">
+        <ul className="text-sm text-cyan-100/75 list-disc pl-4 space-y-1">
           <li>Internal service-to-service communication (gRPC + Protobuf)</li>
           <li>High-throughput event streaming (Kafka + Avro)</li>
           <li>Mobile apps where bandwidth is limited and expensive</li>
           <li>Any system doing 10K+ messages/second</li>
         </ul>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <Callout key="10" type="info" title="The Schema Registry Pattern">

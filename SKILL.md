@@ -93,7 +93,10 @@ For rich, dense cards that explain actors, roles, or deep-dive concepts. Instead
    - Secure / Pros / Success: `theme="emerald"`
    - Warnings / High Load / Tradeoffs: `theme="amber"`
 2. **Neutral Progressions (Lists, Actors):** When displaying a neutral list of concepts (like DNS Actors) in a `<Grid>`, ALWAYS alternate the `theme` prop in a cool progression (e.g., `"emerald"`, `"teal"`, `"cyan"`, `"sky"`, `"indigo"`, `"violet"`) to break monotony and create depth without breaking the dark theme.
-3. **Inner Text Consistency:** When assigning a `theme` to a `FeatureCard`, ensure all inner text content (paragraphs, inline code, strong tags) matches the chosen theme palette. For example, if `theme="amber"`, use `text-amber-200/80` for body text, `text-amber-400` for `<strong>` tags, and `border-amber-700/50` for nested elements. Do not suddenly mix in mismatched colors like slate or green that break the card's visual cohesion.
+3. **Recurring Actor Identity:** If the topic introduces a stable set of named "main characters" or paradigms early on (for example REST, GraphQL, gRPC, WebSockets), keep those same theme identities throughout the rest of the topic. Lower sections like code examples, strengths/weaknesses, hybrid patterns, comparison labels, and recommendation tables should reuse the same paradigm color instead of reverting to generic slate or default green. Once a concept earns a theme, treat that color as part of its identity across the page.
+4. **Inner Text Consistency:** When assigning a `theme` to a `FeatureCard`, ensure all inner text content (paragraphs, inline code, strong tags) matches the chosen theme palette. For example, if `theme="amber"`, use `text-amber-200/80` for body text, `text-amber-400` for `<strong>` tags, and `border-amber-700/50` for nested elements. Do not suddenly mix in mismatched colors like slate or green that break the card's visual cohesion.
+5. **Nested Surface Consistency:** If a card contains nested technical surfaces like `<CodeBlock>` or `<Table>`, those surfaces must inherit the card's visual context. For every themed `FeatureCard` — including `theme="slate"` — pass the same theme into those children (`<CodeBlock theme="slate" ... />`, `<CodeBlock theme="cyan" ... />`, `<Table theme="violet" ... />`). For plain cards and standalone article examples, keep `CodeBlock` unthemed so it uses the default green house style. Do not let mismatched gray code blocks or default green table headers overpower a specifically themed parent card.
+6. **No Theme Islands Inside FeatureCards:** Avoid placing unrelated semantic color islands inside a themed `FeatureCard`. For example, inside a `theme="cyan"` card, do not use rose and emerald inner cards just to show bad vs good. Keep the nested comparison cyan, and use copy, labels, border weight, or layout to communicate contrast. Use rose/emerald only when they are the top-level comparison card themes themselves.
 
 ```tsx
 <Grid cols={2} gap={6}>
@@ -130,6 +133,24 @@ For all technical code. **Do NOT use plain triple backticks.**
 ```tsx
 <CodeBlock title="filename.ts" language="typescript" code={`const example = "value";`} />
 ```
+
+`CodeBlock` defaults to the green house style. When it appears inside a themed `FeatureCard`, pass the exact same parent theme. When it appears in a plain `Card` or normal article flow, leave it unthemed:
+
+```tsx
+<FeatureCard icon={Layers} title="Frame Scheduler" theme="indigo">
+	<CodeBlock theme="indigo" title="scheduler.ts" language="typescript" code={`requestAnimationFrame(tick);`} />
+</FeatureCard>
+
+<Card title="Dense Runtime Notes">
+	<CodeBlock title="runtime.ts" language="typescript" code={`queueMicrotask(flush);`} />
+</Card>
+```
+
+**CodeBlock Theme Decision Checklist:**
+1. Inside `<FeatureCard theme="x">`? Add `theme="x"` to the `CodeBlock`. This includes `theme="slate"`.
+2. Inside a plain `<Card>` with no `theme` prop? Leave `CodeBlock` unthemed so it uses the default green house style.
+3. Outside any card in normal article flow? Leave `CodeBlock` unthemed so it uses the default green house style.
+4. Never use `theme="slate"` just because the surrounding prose is slate. Use `theme="slate"` only when the parent card itself is `theme="slate"`.
 
 #### **7. Highlight**
 
@@ -297,7 +318,7 @@ That means simple cards will accidentally stay gray unless you explicitly opt th
 
 Ask where the content lives first.
 
-- **Inside a Card**: decide between green-scan vs slate-read.
+- **Inside a Card**: decide between green-scan vs slate-read for prose/list text only. `CodeBlock` follows the CodeBlock Theme Decision Checklist above.
 - **Outside a Card**: default to slate for article prose, ordered process lists, and explanatory body content.
 
 Non-card article content is usually not where the bright green treatment belongs.
@@ -318,11 +339,11 @@ If the bullets read like one idea per line, the whole list should almost always 
 
 #### Rule 3: Long explanation cards stay slate
 
-Use slate when the card contains any of these:
+Use slate for surrounding prose/list text when the card contains any of these:
 
 - long paragraph-style explanation
 - multi-sentence reasoning in each bullet
-- `<CodeBlock>`
+- `<CodeBlock>` (but leave the `CodeBlock` itself unthemed unless the parent is a themed `FeatureCard`)
 - `<Highlight>` used inline inside dense explanatory prose
 - a paragraph + dense explanatory list combo
 
@@ -330,6 +351,46 @@ Use:
 
 - `text-slate-300` for the main body paragraph
 - `text-slate-400` for dense supporting lists or secondary detail
+
+#### Rule 3A: Dense explanation cards should reduce reading pressure
+
+If a section contains multiple long-reading cards, do **not** force them into a wide side-by-side comparison just because they conceptually belong together.
+
+Preferred fix:
+
+- keep them as plain `<Card>` components, not themed `FeatureCard`s
+- keep the prose slate (`text-slate-300` / `text-slate-400`), not green
+- stack them vertically (`<Grid cols={1}>`) when each card contains 2+ dense paragraphs or dense explanatory prose
+- split each card into a **main explanation** paragraph plus a short **"Why it matters:"** or similar secondary line
+- use color hierarchy sparingly: main body = `text-slate-300`, supporting takeaway = `text-slate-400`, optional leading label = `strong className="text-muted-foreground"`
+
+This pattern is preferred when the current layout feels visually "too loud", "too dense", or "too much reading trapped in equal-width cards". In those cases, reduce horizontal competition before adding more theme.
+
+Good use cases:
+
+- side-by-side cards that read like mini articles
+- concept-definition cards with 2 long paragraphs each
+- "origins / layers / actors" sections where each item needs explanation, not quick scanning
+- any comparison where green or themed treatment makes the section feel overwhelming instead of clearer
+
+Avoid:
+
+- three narrow long-read cards in one row
+- turning dense explanatory cards into `FeatureCard`s just to make them feel more interesting
+- coloring long prose green when the real problem is layout density
+
+Preferred pattern:
+
+```tsx
+<Grid cols={1} gap={6} className="my-8">
+	<Card title="User-Agent Styles" description="The browser's built-in defaults">
+		<p className="text-sm text-slate-300 mb-3 leading-relaxed">Main explanation...</p>
+		<p className="text-sm text-slate-400 leading-relaxed">
+			<strong className="text-muted-foreground">Why it matters:</strong> Secondary takeaway...
+		</p>
+	</Card>
+</Grid>
+```
 
 #### Rule 4: Dense lists may use green keywords only
 
@@ -481,6 +542,7 @@ Ask these in order:
 | Long explanatory card paragraph                | `text-slate-300`                           |
 | Dense explanatory card list                    | `text-slate-400`                           |
 | Leading keyword in dense slate list            | `strong className="text-muted-foreground"` |
-| Card with CodeBlock / heavy prose              | surrounding text → slate                   |
+| Plain card with CodeBlock / heavy prose        | surrounding text → slate; `CodeBlock` stays unthemed green |
+| Themed FeatureCard with CodeBlock / Table      | nested surface gets the exact same `theme` as parent |
 | Ordered article-body list outside cards        | usually `text-slate-300`                   |
 | Outside-card dense spec/explanation bullets    | `text-slate-400` + green keyword accents   |

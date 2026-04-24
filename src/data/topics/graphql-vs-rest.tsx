@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Database, Network } from "lucide-react";
 
 export const graphqlVsRestTopic: Topic = {
   id: "graphql-vs-rest",
@@ -21,6 +22,7 @@ export const graphqlVsRestTopic: Topic = {
     </h3>,
     <Table
       key="3"
+      theme="slate"
       headers={["Problem", "REST Reality", "The GraphQL Fix"]}
       rows={[
         [
@@ -36,16 +38,16 @@ export const graphqlVsRestTopic: Topic = {
       ]}
     />,
     <Grid key="4" cols={2} gap={6} className="my-8">
-      <Card title="The Frontend Utopia">
-        <p className="text-sm text-muted-foreground">
+      <FeatureCard icon={Database} title="The Frontend Utopia" subtitle="Why app teams love GraphQL" theme="violet">
+        <p className="text-sm text-violet-100/75">
           Frontend engineers dictate the entire data shape using declarative queries. They no longer have to beg backend teams to "please build a custom endpoint for my specific mobile screen."
         </p>
-      </Card>
-      <Card title="The Backend Nightmare">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Network} title="The Backend Nightmare" subtitle="Why infra teams stay cautious" theme="amber">
+        <p className="text-sm text-amber-100/75">
           Caching completely dies. REST caches perfectly on standard CDNs because `GET /users/5` is an immutable URL string. GraphQL sends everything wildly as unique POST bodies, destroying edge caches and forcing backend devs to build insanely complex 'DataLoader' systems to prevent their SQL database from catching fire.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Callout key="5" type="tip" title="BFF Pattern (Backend for Frontend)">
       Modern companies often stick to pure REST/gRPC for their core microservices, but build a tiny GraphQL translation layer purely to serve their React apps securely.
@@ -59,6 +61,7 @@ export const graphqlVsRestTopic: Topic = {
     </p>,
     <CodeBlock
       key="8"
+      theme="violet"
       language="graphql"
       title="GraphQL Query"
       code={`query {

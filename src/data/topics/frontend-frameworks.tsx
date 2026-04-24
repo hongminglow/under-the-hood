@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
-import { Card } from "@/components/ui/Card";
+import { FeatureCard } from "@/components/ui/FeatureCard";
 import { Grid } from "@/components/ui/Grid";
 import { Highlight } from "@/components/ui/Highlight";
+import { Atom, Sparkles, Building2 } from "lucide-react";
 
 export const frontendFrameworksTopic: Topic = {
 	id: "frontend-frameworks",
@@ -42,70 +43,70 @@ export const frontendFrameworksTopic: Topic = {
 		</h3>,
 
 		<Grid key="5" cols={1} gap={6} className="mb-8">
-			<Card title="React: The Startup Default">
-				<p className="text-sm text-muted-foreground mb-4">
+			<FeatureCard icon={Atom} title="React" subtitle="The startup default" theme="cyan">
+				<p className="text-sm text-cyan-100/80 mb-4">
 					React is a library, not a framework. It handles UI rendering but leaves routing, state management, and
 					architecture entirely up to you.
 				</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+				<ul className="text-sm text-cyan-100/75 list-disc pl-5 space-y-2">
 					<li>
-						<strong>Scenario:</strong> Startups, highly custom interfaces, SaaS dashboards, and teams needing to move
+						<strong className="text-cyan-300">Scenario:</strong> Startups, highly custom interfaces, SaaS dashboards, and teams needing to move
 						fast with a massive talent pool.
 					</li>
 					<li>
-						<strong>The Why:</strong> The React ecosystem is unparalleled. If you need a complex 3D globe or a specific
+						<strong className="text-cyan-300">The Why:</strong> The React ecosystem is unparalleled. If you need a complex 3D globe or a specific
 						drag-and-drop interaction, someone has likely already built an open-source React wrapper for it.
 					</li>
 					<li>
-						<strong>The Catch:</strong> "Decision Fatigue." You have to research and maintain compatibility between 15
+						<strong className="text-cyan-300">The Catch:</strong> "Decision Fatigue." You have to research and maintain compatibility between 15
 						different 3rd-party libraries just to build a standard application.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 
-			<Card title="Vue: The Elegant Bridge">
-				<p className="text-sm text-muted-foreground mb-4">
+			<FeatureCard icon={Sparkles} title="Vue" subtitle="The elegant bridge" theme="emerald">
+				<p className="text-sm text-emerald-100/80 mb-4">
 					Vue strikes a perfect middle ground. It is highly approachable like plain HTML/JS but includes official,
 					core-team-supported tools for state and routing.
 				</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+				<ul className="text-sm text-emerald-100/75 list-disc pl-5 space-y-2">
 					<li>
-						<strong>Scenario:</strong> Standard web apps, legacy migrations, rapid prototyping, and teams transitioning
+						<strong className="text-emerald-300">Scenario:</strong> Standard web apps, legacy migrations, rapid prototyping, and teams transitioning
 						from backend to frontend.
 					</li>
 					<li>
-						<strong>The Why:</strong> Vue has the lowest barrier to entry. Features like Single-File Components make
+						<strong className="text-emerald-300">The Why:</strong> Vue has the lowest barrier to entry. Features like Single-File Components make
 						code highly readable. You avoid React's ecosystem fatigue because Vue officially maintains its own router
 						and state management (Pinia).
 					</li>
 					<li>
-						<strong>The Catch:</strong> A smaller enterprise job market and relatively fewer out-of-the-box UI component
+						<strong className="text-emerald-300">The Catch:</strong> A smaller enterprise job market and relatively fewer out-of-the-box UI component
 						frameworks compared to the massive React ecosystem.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 
-			<Card title="Angular: The Enterprise Fortress">
-				<p className="text-sm text-muted-foreground mb-4">
+			<FeatureCard icon={Building2} title="Angular" subtitle="The enterprise fortress" theme="rose">
+				<p className="text-sm text-rose-100/80 mb-4">
 					Angular is a massive, batteries-included framework built by Google. It mandates strict architectural patterns
 					and relies heavily on TypeScript and RxJS.
 				</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+				<ul className="text-sm text-rose-100/75 list-disc pl-5 space-y-2">
 					<li>
-						<strong>Scenario:</strong> Huge enterprise-level banking, insurance, or corporate software maintained by
+						<strong className="text-rose-300">Scenario:</strong> Huge enterprise-level banking, insurance, or corporate software maintained by
 						thousands of developers over many years.
 					</li>
 					<li>
-						<strong>The Why:</strong> Strictness guarantees consistency. If a developer joins an Angular project in
+						<strong className="text-rose-300">The Why:</strong> Strictness guarantees consistency. If a developer joins an Angular project in
 						Berlin, it looks identical to an Angular project in New York. You get routing, state, forms, and HTTP tools
 						right out of the box.
 					</li>
 					<li>
-						<strong>The Catch:</strong> An incredibly steep vertical learning curve and lots of boilerplate, requiring
+						<strong className="text-rose-300">The Catch:</strong> An incredibly steep vertical learning curve and lots of boilerplate, requiring
 						deep knowledge of concepts like Observables and Dependency Injection.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<Callout key="6" type="warning" title="The True Deciding Factor">

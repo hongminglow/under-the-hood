@@ -1,7 +1,8 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Search, TriangleAlert } from "lucide-react";
 
 export const databaseIndexingTopic: Topic = {
   id: "database-indexing",
@@ -21,16 +22,16 @@ export const databaseIndexingTopic: Topic = {
       When you forcefully type <code>CREATE INDEX idx_email ON users(email);</code>, the database spends 30 minutes reading the massive table and silently builds a completely separate, heavily optimized mathematical data structure entirely inside RAM (The B-Tree Index).
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
-      <Card title="O(log N) Searching" description="Sub-millisecond Jumps">
-        <p className="text-sm text-muted-foreground">
+      <FeatureCard icon={Search} title="O(log N) Searching" subtitle="Sub-millisecond jumps" theme="emerald">
+        <p className="text-sm text-emerald-100/75">
           Instead of reading 10,000,000 rows sequentially like a mindless zombie, the database checks the root node of the Tree. "Is 'john' alphabetically before or after 'm'?" It strictly cuts half the database perfectly in half 20 times (Log N algorithms), instantly discovering John's exact hard-drive pointer in less than 24 physical jumps.
         </p>
-      </Card>
-      <Card title="The Hidden Tax" description="Slowing down Writes">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={TriangleAlert} title="The Hidden Tax" subtitle="Every index slows writes" theme="amber">
+        <p className="text-sm text-amber-100/75">
           If Indexes are utterly magical, why don't you natively index all 50 columns? Because <strong>every single `INSERT` or `UPDATE`</strong> you commit suddenly forces Postgres to dynamically restructure almost all 50 mathematical B-Trees mathematically before returning `200 OK` to the API. It permanently slows down writes strictly for the benefit of blazing fast reads.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Callout key="5" type="tip" title="Use Partial or Composite Indexes!">
       Stop creating random solitary indexes blindly! If your dashboard ALWAYS filters by `country` and sorts by `created_at`, explicitly drop the lonely indexes and write one extremely powerful <strong>Composite Index</strong>: <code>CREATE INDEX ON users(country, created_at)</code> to instantly cover that exact query flawlessly.

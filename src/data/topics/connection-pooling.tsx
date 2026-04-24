@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { DatabaseZap, Gauge } from "lucide-react";
 
 export const connectionPoolingTopic: Topic = {
   id: "connection-pooling",
@@ -22,18 +23,18 @@ export const connectionPoolingTopic: Topic = {
       Every time a client connects to Postgres, the database must <code>fork()</code> a brand new OS process. This consumes ~10MB of RAM immediately and requires a heavy TLS 1.3 handshake. Doing this 1,000 times per second will melt your CPU.
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
-      <Card title="Without Pooling">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={Gauge} title="Without Pooling" subtitle="Cold connection per query" theme="rose">
+        <p className="text-sm text-rose-200/80 mb-2">
           Your app opens and closes a TCP socket for every single <code>SELECT</code>.
         </p>
-        <p className="text-sm text-red-500 font-bold">Latency: High (+50ms per query)</p>
-      </Card>
-      <Card title="With PgBouncer">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-rose-300 font-bold">Latency: High (+50ms per query)</p>
+      </FeatureCard>
+      <FeatureCard icon={DatabaseZap} title="With PgBouncer" subtitle="Warm shared connection pool" theme="emerald">
+        <p className="text-sm text-emerald-200/80 mb-2">
           A tiny C daemon maintains a "warm" pool of connections. Your app talks to PgBouncer instantly.
         </p>
-        <p className="text-sm text-green-500 font-bold">Latency: Ultra-Low (&lt;1ms per query)</p>
-      </Card>
+        <p className="text-sm text-emerald-300 font-bold">Latency: Ultra-Low (&lt;1ms per query)</p>
+      </FeatureCard>
     </Grid>,
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">
       Pooling Modes (PgBouncer)

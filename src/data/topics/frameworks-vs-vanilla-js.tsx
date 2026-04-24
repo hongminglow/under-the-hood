@@ -1,10 +1,11 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Highlight } from "@/components/ui/Highlight";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Wrench, Atom } from "lucide-react";
 
 export const frameworksVsVanillaJsTopic: Topic = {
   id: "frameworks-vs-vanilla-js",
@@ -23,11 +24,12 @@ export const frameworksVsVanillaJsTopic: Topic = {
     </h3>,
     
     <Grid key="3" cols={2} gap={6} className="mb-8">
-      <Card title="Vanilla JS (Imperative)">
-        <p className="text-sm text-muted-foreground mb-4">
+      <FeatureCard icon={Wrench} title="Vanilla JS" subtitle="Imperative" theme="amber">
+        <p className="text-sm text-amber-100/75 mb-4">
           You explicitly describe <strong>how</strong> to update the UI step-by-step. It interacts directly with the browser's Real DOM, making it blazingly fast but difficult to scale as state complexity grows.
         </p>
         <CodeBlock
+          theme="amber"
           title="vanilla.js"
           language="javascript"
           code={`const btn = document.getElementById('btn');
@@ -36,12 +38,13 @@ btn.addEventListener('click', () => {
   btn.innerText = count;
 });`}
         />
-      </Card>
-      <Card title="React (Declarative)">
-        <p className="text-sm text-muted-foreground mb-4">
+      </FeatureCard>
+      <FeatureCard icon={Atom} title="React" subtitle="Declarative" theme="cyan">
+        <p className="text-sm text-cyan-100/75 mb-4">
           You describe <strong>what</strong> the UI should look like for a given state. React handles the underlying details of updating the DOM efficiently via its Virtual DOM and reconciliation algorithm.
         </p>
         <CodeBlock
+          theme="cyan"
           title="ReactComponent.jsx"
           language="javascript"
           code={`function Counter() {
@@ -53,7 +56,7 @@ btn.addEventListener('click', () => {
   );
 }`}
         />
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">

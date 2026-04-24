@@ -4,6 +4,8 @@ import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Database, Film, ShoppingCart, Users } from "lucide-react";
 
 export const databaseChoicesAtScaleTopic: Topic = {
 	id: "database-choices-at-scale",
@@ -91,17 +93,17 @@ export const databaseChoicesAtScaleTopic: Topic = {
 			<strong>read replicas</strong>.
 		</p>,
 		<Grid key="7" cols={2} gap={6} className="my-6">
-			<Card title="Why PostgreSQL?">
-				<ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+			<FeatureCard icon={Database} title="Why PostgreSQL?" subtitle="Why relational depth won" theme="emerald">
+				<ul className="text-sm text-emerald-100/75 space-y-1 list-disc list-inside">
 					<li>ACID guarantees — critical for financial transactions and consistency</li>
 					<li>Rich query language: JOINs, window functions, CTEs</li>
 					<li>PostGIS extension for geospatial queries</li>
 					<li>Battle-tested ecosystem and operational tooling</li>
 					<li>pgBouncer for connection pooling at scale</li>
 				</ul>
-			</Card>
-			<Card title="How They Scaled It">
-				<ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+			</FeatureCard>
+			<FeatureCard icon={Database} title="How They Scaled It" subtitle="Stay SQL, scale around it" theme="teal">
+				<ul className="text-sm text-teal-100/75 space-y-1 list-disc list-inside">
 					<li>
 						Horizontal sharding by <code>user_id</code>
 					</li>
@@ -109,7 +111,7 @@ export const databaseChoicesAtScaleTopic: Topic = {
 					<li>Django ORM with custom shard routing logic</li>
 					<li>Cassandra added separately for feed/activity data</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h4 key="8" className="text-lg font-semibold mt-6 mb-3 text-primary">
@@ -121,23 +123,23 @@ export const databaseChoicesAtScaleTopic: Topic = {
 			workloads with billions of rows and astronomical write rates.
 		</p>,
 		<Grid key="10" cols={2} gap={6} className="my-6">
-			<Card title="Why Cassandra?">
-				<ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+			<FeatureCard icon={Film} title="Why Cassandra?" subtitle="Why Netflix optimized for writes" theme="cyan">
+				<ul className="text-sm text-cyan-100/75 space-y-1 list-disc list-inside">
 					<li>Linear horizontal scalability — add nodes, get proportional throughput</li>
 					<li>Masterless architecture: no single point of failure</li>
 					<li>Multi-datacenter replication built-in (global availability)</li>
 					<li>Optimized for write-heavy workloads (LSM tree storage)</li>
 					<li>Tunable consistency: choose between AP/CP per query</li>
 				</ul>
-			</Card>
-			<Card title="The Trade-offs">
-				<ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+			</FeatureCard>
+			<FeatureCard icon={Film} title="The Trade-offs" subtitle="What you give up for that throughput" theme="rose">
+				<ul className="text-sm text-rose-100/75 space-y-1 list-disc list-inside">
 					<li>No JOINs — data must be denormalized by access pattern</li>
 					<li>Queries must match a partition key — no arbitrary WHERE clauses</li>
 					<li>Eventual consistency by default — "last write wins"</li>
 					<li>Schema must be designed around queries, not entities</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<CodeBlock
 			key="11"
@@ -192,24 +194,24 @@ SELECT * FROM viewing_history WHERE show_id = ?;
 			sitting on top of MySQL.
 		</p>,
 		<Grid key="18" cols={3} gap={6} className="my-6">
-			<Card title="MySQL + MyRocks">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={Users} title="MySQL + MyRocks" subtitle="Compress the write engine" theme="amber">
+				<p className="text-sm text-amber-100/75">
 					Facebook's custom storage engine reduces disk space by 50% vs InnoDB using LSM trees — critical at petabyte
 					scale. They contribute the most patches back to MySQL and MariaDB of any single company.
 				</p>
-			</Card>
-			<Card title="TAO (The Associations & Objects)">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Users} title="TAO" subtitle="Graph traversal on top of MySQL" theme="sky">
+				<p className="text-sm text-sky-100/75">
 					Facebook's social graph (who follows whom, who liked what) lives in TAO — a distributed caching and
 					persistence layer on top of MySQL designed for graph traversal. It handles trillions of edges.
 				</p>
-			</Card>
-			<Card title="Cassandra for Inbox">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Users} title="Cassandra for Inbox" subtitle="Messenger needed write scaling" theme="cyan">
+				<p className="text-sm text-cyan-100/75">
 					Facebook Messenger moved to Cassandra (HBase, specifically) for message storage due to its linear write
 					scalability — the exact same reason as Netflix.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h4 key="19" className="text-lg font-semibold mt-6 mb-3 text-primary">
@@ -241,22 +243,22 @@ SELECT * FROM viewing_history WHERE show_id = ?;
 			millisecond SLA at any scale.
 		</p>,
 		<Grid key="25" cols={2} gap={6} className="my-6">
-			<Card title="Why DynamoDB?">
-				<ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+			<FeatureCard icon={ShoppingCart} title="Why DynamoDB?" subtitle="Managed scale and latency" theme="emerald">
+				<ul className="text-sm text-emerald-100/75 space-y-1 list-disc list-inside">
 					<li>Guaranteed single-digit millisecond latency at any scale</li>
 					<li>No operational overhead — fully serverless, auto-scaling</li>
 					<li>Multi-region Active-Active replication with Global Tables</li>
 					<li>Pay-per-request pricing for variable traffic (huge for Black Friday spikes)</li>
 				</ul>
-			</Card>
-			<Card title="The DynamoDB Tax">
-				<ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+			</FeatureCard>
+			<FeatureCard icon={ShoppingCart} title="The DynamoDB Tax" subtitle="Managed convenience has sharp edges" theme="rose">
+				<ul className="text-sm text-rose-100/75 space-y-1 list-disc list-inside">
 					<li>No JOINs, limited query patterns (must use GSI for secondary access)</li>
 					<li>Expensive at high sustained throughput vs self-hosted alternatives</li>
 					<li>AWS vendor lock-in — no clean migration path</li>
 					<li>Complex data modeling requires up-front design discipline</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h3 key="26" className="text-xl font-bold mt-8 mb-4">

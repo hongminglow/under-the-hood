@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Globe, Zap } from "lucide-react";
 
 export const grpcVsRestTopic: Topic = {
   id: "grpc-vs-rest",
@@ -20,6 +21,7 @@ export const grpcVsRestTopic: Topic = {
     </h3>,
     <Table
       key="3"
+      theme="slate"
       headers={["Feature", "REST (Representational State Transfer)", "gRPC (Google Remote Procedure Call)"]}
       rows={[
         ["Payload", "<strong>JSON</strong> (Text-based, Heavy).", "<strong>Protobuf</strong> (Binary, Lightweight)."],
@@ -36,22 +38,22 @@ export const grpcVsRestTopic: Topic = {
       JSON is <strong>Self-Describing</strong>; it sends both the key and value (e.g., <code>"userId": 123</code>). gRPC uses Protobuf, which strips away the keys and sends raw binary bytes based on a shared schema.
     </p>,
     <Grid key="6" cols={2} gap={6} className="my-8">
-      <Card title="Code Generation">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={Zap} title="Code Generation" subtitle="gRPC's contract-first leverage" theme="violet">
+        <p className="text-sm text-violet-100/75 mb-2">
           gRPC generates the <strong>Client & Server Stubs</strong>.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-violet-200/70">
           You write a <code>service.proto</code> file. gRPC automatically compiles it into TypeScript, Go, or Python. You call <code>client.getUser()</code> as if it were a local function.
         </p>
-      </Card>
-      <Card title="Streaming Capabilities">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={Globe} title="Streaming Capabilities" subtitle="What HTTP/2 unlocks" theme="cyan">
+        <p className="text-sm text-cyan-100/75 mb-2">
           Harnessing the power of HTTP/2.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-cyan-200/70">
           Supports <strong>Bidirectional Streaming</strong>: The server can push data elements one-by-one as they are processed, rather than waiting for a giant batch to finish.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="7" className="text-xl font-bold mt-8 mb-4">
       Why not for the Browser? (gRPC-Web)

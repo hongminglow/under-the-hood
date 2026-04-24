@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Box, Diamond, Layers, Bell, XCircle, CheckCircle2 } from "lucide-react";
 
 export const domainDrivenDesignTopic: Topic = {
   id: "domain-driven-design",
@@ -34,42 +35,42 @@ export const domainDrivenDesignTopic: Topic = {
       Tactical DDD: Building Inside the Boundary
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
-      <Card title="Entity">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={Box} title="Entity" subtitle="Identity persists over time" theme="teal">
+        <p className="text-sm text-teal-100/75 mb-2">
           An object with a <strong>unique identity</strong> that persists over time. Two <code>User</code> objects with different IDs are different users, even if they share the same name and email.
         </p>
-      </Card>
-      <Card title="Value Object">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={Diamond} title="Value Object" subtitle="Defined entirely by attributes" theme="cyan">
+        <p className="text-sm text-cyan-100/75 mb-2">
           An object defined entirely by its <strong>attributes</strong>, with no identity. A <code>Money(100, "USD")</code> is equal to another <code>Money(100, "USD")</code> regardless of which instance you hold.
         </p>
-      </Card>
-      <Card title="Aggregate">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={Layers} title="Aggregate" subtitle="One transactional boundary" theme="amber">
+        <p className="text-sm text-amber-100/75 mb-2">
           A cluster of Entities and Value Objects treated as a <strong>single transactional unit</strong>. The <strong>Aggregate Root</strong> (e.g., <code>Order</code>) is the only entry point. You never modify an <code>OrderItem</code> directly — you always go through the <code>Order</code>.
         </p>
-      </Card>
-      <Card title="Domain Event">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={Bell} title="Domain Event" subtitle="Something meaningful happened" theme="violet">
+        <p className="text-sm text-violet-100/75 mb-2">
           A record that <strong>something meaningful happened</strong> in the domain: <code>OrderPlaced</code>, <code>PaymentFailed</code>, <code>InventoryReserved</code>. These are the glue between Bounded Contexts.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <h3 key="6" className="text-xl font-bold mt-8 mb-4">
       The Wrong Way vs. The DDD Way
     </h3>,
     <Grid key="7" cols={2} gap={6} className="my-8">
-      <Card title="❌ Split by Technical Layer">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={XCircle} title="Split by Technical Layer" subtitle="The distributed monolith trap" theme="rose">
+        <p className="text-sm text-rose-100/75 mb-2">
           "API Service," "Database Service," "Auth Service." Every feature change touches all three services. Deployments are coupled. You got a Distributed Monolith.
         </p>
-      </Card>
-      <Card title="✅ Split by Business Domain">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={CheckCircle2} title="Split by Business Domain" subtitle="The DDD way" theme="emerald">
+        <p className="text-sm text-emerald-100/75 mb-2">
           "Order Service," "Shipping Service," "Billing Service." Each owns its own API, database, and business logic. Teams can deploy independently. This is the DDD way.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <h3 key="8" className="text-xl font-bold mt-8 mb-4">

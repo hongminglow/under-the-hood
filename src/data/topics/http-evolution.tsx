@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Split, Rocket } from "lucide-react";
 
 export const httpEvolutionTopic: Topic = {
   id: "http-evolution",
@@ -20,6 +21,7 @@ export const httpEvolutionTopic: Topic = {
     </h3>,
     <Table
       key="3"
+      theme="slate"
       headers={["Feature", "HTTP/1.1 (The Original)", "HTTP/2 (The Multiplex)", "HTTP/3 (The Modern)"]}
       rows={[
         ["Transport", "TCP", "TCP", "<strong>UDP (QUIC)</strong>"],
@@ -36,22 +38,22 @@ export const httpEvolutionTopic: Topic = {
       HTTP/2 moved away from text (<code>GET /index.html</code>) to a <strong>Binary Framing Layer</strong>. This allows the browser to interleave multiple requests over a single TCP connection.
     </p>,
     <Grid key="6" cols={2} gap={6} className="my-8">
-      <Card title="Multiplexing vs. Pipelining">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={Split} title="Multiplexing vs. Pipelining" subtitle="HTTP/2's big shift" theme="cyan">
+        <p className="text-sm text-cyan-100/75 mb-2">
           HTTP/1.1 used "Pipelining" (sending multiple requests without waiting for responses), but it was buggy and suffered from <strong>Head-of-Line Blocking</strong> (if request #1 is slow, #2 is stuck).
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-cyan-200/70">
           HTTP/2 Multiplexing allows the server to send pieces of Image A and JavaScript B simultaneously, reassembling them at the destination perfectly.
         </p>
-      </Card>
-      <Card title="Server Push">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={Rocket} title="Server Push" subtitle="An HTTP/2-era optimization" theme="violet">
+        <p className="text-sm text-violet-100/75 mb-2">
           The server can send assets <strong>before the browser asks</strong>.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-violet-200/70">
           If a user asks for <code>index.html</code>, the server knows they'll need <code>styles.css</code>, so it "pushes" the CSS immediately, saving a full round-trip.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="7" className="text-xl font-bold mt-8 mb-4">
       Solving TCP's Flaws: HTTP/3 (QUIC)

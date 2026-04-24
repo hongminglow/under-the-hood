@@ -1,10 +1,11 @@
 import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Grid } from "@/components/ui/Grid";
-import { Card } from "@/components/ui/Card";
 import { Callout } from "@/components/ui/Callout";
 import { Flow } from "@/components/ui/Flow";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { GitMerge, ArrowUpToLine, Combine, Copy } from "lucide-react";
 
 export const gitRebaseMergeSquashTopic: Topic = {
   id: "git-rebase-merge-squash",
@@ -26,33 +27,33 @@ export const gitRebaseMergeSquashTopic: Topic = {
     </h3>,
 
     <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="git merge" description="Preserves all history, adds a merge commit">
-        <p className="text-sm text-muted-foreground">
+      <FeatureCard icon={GitMerge} title="git merge" subtitle="Preserves all history, adds a merge commit" theme="cyan">
+        <p className="text-sm text-cyan-100/75">
           Takes two branch tips and creates a new <strong>merge commit</strong> that has two parents.
           Every original commit stays intact with its original SHA and timestamp.
           History is a <em>non-linear DAG</em> (directed acyclic graph), not a straight line.
         </p>
-      </Card>
-      <Card title="git rebase" description="Rewrites commits onto a new base">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={ArrowUpToLine} title="git rebase" subtitle="Rewrites commits onto a new base" theme="amber">
+        <p className="text-sm text-amber-100/75">
           Lifts your branch's commits off their original base and replays them one-by-one on top of the target.
           Each commit gets a <strong>new SHA</strong>. History stays a perfectly straight line — as if the branch
           was always started from the new base.
         </p>
-      </Card>
-      <Card title="Squash merge / git rebase --squash" description="Collapses N commits into 1">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Combine} title="Squash merge / git rebase --squash" subtitle="Collapses N commits into 1" theme="emerald">
+        <p className="text-sm text-emerald-100/75">
           All commits from a feature branch are <strong>combined into a single new commit</strong> on the target branch.
           Individual commit history from the branch is completely discarded after the merge.
           Produces the cleanest main branch log.
         </p>
-      </Card>
-      <Card title="git cherry-pick" description="Copy a specific commit anywhere">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={Copy} title="git cherry-pick" subtitle="Copy a specific commit anywhere" theme="violet">
+        <p className="text-sm text-violet-100/75">
           Takes any commit by its SHA from any branch and <strong>replays it as a new commit</strong> on the current branch.
           The original commit is unchanged. You end up with two commits that contain the same change but with different SHAs.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">
@@ -61,6 +62,7 @@ export const gitRebaseMergeSquashTopic: Topic = {
 
     <CodeBlock
       key="5"
+      theme="slate"
       title="git-history-comparison.txt"
       language="bash"
       code={`# Starting state: feature branch diverged from main at commit C
@@ -106,6 +108,7 @@ main:    A ─── B ─── C ─── E'
 
     <CodeBlock
       key="8"
+      theme="cyan"
       title="git-merge.sh"
       language="bash"
       code={`# Standard merge — always creates a merge commit
@@ -136,6 +139,7 @@ git log --oneline --graph --all`}
 
     <CodeBlock
       key="11"
+      theme="amber"
       title="git-rebase.sh"
       language="bash"
       code={`# Sync your feature branch with the latest main
@@ -188,6 +192,7 @@ git push --force-with-lease origin feature/login`}
 
     <CodeBlock
       key="15"
+      theme="emerald"
       title="git-squash.sh"
       language="bash"
       code={`# Method 1: Squash via git merge --squash
@@ -224,6 +229,7 @@ git commit -m "feat: add login feature"
 
     <CodeBlock
       key="18"
+      theme="violet"
       title="git-cherry-pick.sh"
       language="bash"
       code={`# Copy a single commit from another branch
@@ -261,7 +267,14 @@ git cherry-pick hotfix-commit-sha   # apply same fix to v2.2`}
 
     <Table
       key="20"
-      headers={["Property", "Merge", "Rebase", "Squash Merge", "Cherry-Pick"]}
+      theme="slate"
+      headers={[
+        "Property",
+        '<span class="text-cyan-300">Merge</span>',
+        '<span class="text-amber-300">Rebase</span>',
+        '<span class="text-emerald-300">Squash Merge</span>',
+        '<span class="text-violet-300">Cherry-Pick</span>',
+      ]}
       rows={[
         ["History shape", "Non-linear (DAG)", "Linear", "Linear", "Linear"],
         ["Original SHAs preserved?", "✅ Yes", "❌ No (new SHAs)", "❌ No", "❌ No (new SHA)"],
@@ -315,6 +328,7 @@ git cherry-pick hotfix-commit-sha   # apply same fix to v2.2`}
 
     <Table
       key="24"
+      theme="slate"
       headers={["Team Pattern", "GitHub PR Strategy", "Local Dev Habit", "Main Branch Log"]}
       rows={[
         [

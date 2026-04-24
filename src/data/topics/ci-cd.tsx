@@ -3,8 +3,9 @@ import { Step } from "@/components/ui/Step";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
 import { Grid } from "@/components/ui/Grid";
-import { Card } from "@/components/ui/Card";
 import { Flow } from "@/components/ui/Flow";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { GitBranch, ShieldCheck } from "lucide-react";
 
 export const ciCdTopic: Topic = {
 	id: "ci-cd-pipelines",
@@ -89,20 +90,20 @@ export const ciCdTopic: Topic = {
 			code. This means the pipeline itself is peer-reviewed, auditable, and reproducible.
 		</p>,
 		<Grid key="12" cols={2} gap={6} className="my-8">
-			<Card title="Why YAML?">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={GitBranch} title="Why YAML?" subtitle="Pipeline as versioned code" theme="emerald">
+				<p className="text-sm text-emerald-200/80">
 					YAML pipelines (<code>.github/workflows/</code>, <code>.gitlab-ci.yml</code>, <code>Jenkinsfile</code>) are
 					declarative, human-readable, and diffable in pull requests. Infrastructure teams can review pipeline changes
 					with the same rigor as application code.
 				</p>
-			</Card>
-			<Card title="Artifact Immutability">
-				<p className="text-sm text-muted-foreground">
-					A core principle: <strong>build once, deploy everywhere</strong>. The Docker image promoted to production is
+			</FeatureCard>
+			<FeatureCard icon={ShieldCheck} title="Artifact Immutability" subtitle="Build once, deploy everywhere" theme="teal">
+				<p className="text-sm text-teal-200/80">
+					A core principle: <strong className="text-teal-300">build once, deploy everywhere</strong>. The Docker image promoted to production is
 					byte-for-byte identical to what ran in staging. Environment differences are injected via environment
 					variables, never baked into the image.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<Callout key="13" type="info" title="Popular CI/CD Platforms">

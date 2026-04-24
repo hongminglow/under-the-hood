@@ -1,10 +1,11 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Step } from "@/components/ui/Step";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { TriangleAlert, Zap } from "lucide-react";
 
 export const dynamoDbDeepDiveTopic: Topic = {
 	id: "dynamodb-deep-dive",
@@ -73,8 +74,8 @@ export const dynamoDbDeepDiveTopic: Topic = {
 			seeks), LSM trees convert all writes into <strong>sequential appends</strong>.
 		</p>,
 		<Grid key="11" cols={2} gap={6} className="my-6">
-			<Card title="How LSM Tree Writes Work">
-				<ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
+			<FeatureCard icon={Zap} title="How LSM Tree Writes Work" subtitle="Sequential append pipeline" theme="emerald">
+				<ol className="text-sm text-emerald-100/75 space-y-1 list-decimal list-inside">
 					<li>
 						Write lands in an in-memory buffer (<strong>MemTable</strong>)
 					</li>
@@ -84,15 +85,15 @@ export const dynamoDbDeepDiveTopic: Topic = {
 					</li>
 					<li>Background compaction merges SSTables, removing old versions</li>
 				</ol>
-			</Card>
-			<Card title="Why This Beats B-Trees at Scale">
-				<ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+			</FeatureCard>
+			<FeatureCard icon={TriangleAlert} title="Why This Beats B-Trees at Scale" subtitle="Write-first trade-off profile" theme="cyan">
+				<ul className="text-sm text-cyan-100/75 space-y-1 list-disc list-inside">
 					<li>Every write is a sequential append — disk I/O is maximally efficient</li>
 					<li>No lock contention on a shared B-Tree root structure</li>
 					<li>Writes are acknowledged after MemTable + WAL — microseconds, not disk seeks</li>
 					<li>Trade-off: reads may need to check multiple SSTables (partially mitigated by Bloom filters)</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<h4 key="12" className="text-lg font-semibold mt-6 mb-3 text-primary">
@@ -274,8 +275,8 @@ const recent = await dynamo.query({
 			When DynamoDB is the Wrong Choice
 		</h3>,
 		<Grid key="31" cols={2} gap={6} className="my-6">
-			<Card title="❌ Avoid DynamoDB When...">
-				<ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+			<FeatureCard icon={TriangleAlert} title="Avoid DynamoDB When..." subtitle="Relational or exploratory workloads" theme="rose">
+				<ul className="text-sm text-rose-100/75 space-y-1 list-disc list-inside">
 					<li>You need complex multi-table JOINs or ad-hoc analytics queries</li>
 					<li>Your access patterns are not known at design time (exploratory data)</li>
 					<li>You have relational integrity requirements (foreign keys, cascades)</li>
@@ -283,16 +284,16 @@ const recent = await dynamo.query({
 					<li>You need full-text search (use Elasticsearch alongside DynamoDB)</li>
 					<li>Your team already operates PostgreSQL well — don't change what works</li>
 				</ul>
-			</Card>
-			<Card title="✅ DynamoDB Shines When...">
-				<ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+			</FeatureCard>
+			<FeatureCard icon={Zap} title="DynamoDB Shines When..." subtitle="Predictable access patterns at huge scale" theme="emerald">
+				<ul className="text-sm text-emerald-100/75 space-y-1 list-disc list-inside">
 					<li>You need guaranteed single-digit ms SLA at unpredictable scale</li>
 					<li>You want zero operational overhead (no patches, backups, replication setup)</li>
 					<li>Traffic is spiky and unpredictable — Black Friday, viral moments</li>
 					<li>You are 100% on AWS and want native IAM, CloudWatch, Lambda integration</li>
 					<li>You can design your data model around known access patterns up front</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 
 		<Callout key="32" type="tip" title="The Single-Table Design Pattern">

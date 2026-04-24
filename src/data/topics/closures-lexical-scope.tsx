@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Lock, ShieldCheck } from "lucide-react";
 
 export const closuresLexicalScopeTopic: Topic = {
   id: "closures-lexical-scope",
@@ -53,10 +54,11 @@ counter(); // → 3  (count persists across calls!)`}
       The Classic Interview Trap
     </h4>,
     <Grid key="6" cols={2} gap={6} className="mb-8">
-      <Card title="❌ The Bug">
+      <FeatureCard icon={Lock} title="The Bug" subtitle="var shares one function-scoped binding" theme="rose">
         <CodeBlock
           language="javascript"
           title="var + loop"
+          theme="rose"
           code={`for (var i = 0; i < 3; i++) {
   setTimeout(() => console.log(i), 100);
 }
@@ -65,11 +67,12 @@ counter(); // → 3  (count persists across calls!)`}
 // All 3 closures share the SAME i.
 // By the time setTimeout fires, i = 3.`}
         />
-      </Card>
-      <Card title="✅ The Fix">
+      </FeatureCard>
+      <FeatureCard icon={ShieldCheck} title="The Fix" subtitle="let creates one binding per iteration" theme="emerald">
         <CodeBlock
           language="javascript"
           title="let + loop"
+          theme="emerald"
           code={`for (let i = 0; i < 3; i++) {
   setTimeout(() => console.log(i), 100);
 }
@@ -78,7 +81,7 @@ counter(); // → 3  (count persists across calls!)`}
 // Each iteration creates a NEW i.
 // Each closure captures its OWN copy.`}
         />
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Callout key="7" type="tip" title="Real-World Uses of Closures">
       Closures power <strong>data privacy</strong> (module pattern),{" "}

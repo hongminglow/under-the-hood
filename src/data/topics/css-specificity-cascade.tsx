@@ -30,39 +30,41 @@ export const cssSpecificityCascadeTopic: Topic = {
       As a developer, <strong>every line of CSS you write is Author style</strong> — the middle tier.
     </p>,
 
-    <Grid key="2c" cols={3} gap={6} className="my-8">
+    <Grid key="2c" cols={1} gap={6} className="my-8">
       <Card title="1. User-Agent (Browser) Styles" description="The browser's built-in defaults">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-300 mb-3 leading-relaxed">
           Every browser ships with a hidden built-in stylesheet called the <strong>User-Agent (UA) stylesheet</strong>.
           It is the reason an unstyled HTML page still looks readable — headings are bold, links are blue and underlined,
           lists have bullets, and <code>&lt;h1&gt;</code> is larger than <code>&lt;h2&gt;</code>.
         </p>
-        <p className="text-sm text-muted-foreground">
-          You never write this. It is baked into Chrome, Firefox, and Safari. Each browser has a slightly different
-          UA stylesheet, which is why a totally blank CSS page can look marginally different across browsers.
-          This is the <strong>lowest priority</strong> origin — anything you write overrides it automatically.
+        <p className="text-sm text-slate-400 leading-relaxed">
+          <strong className="text-muted-foreground">Why it matters:</strong> You never write this layer yourself. It is
+          baked into Chrome, Firefox, and Safari, and it sits at the <strong>lowest priority</strong> origin — anything
+          you author overrides it automatically.
         </p>
       </Card>
       <Card title="2. User Styles" description="The end-user's personal overrides">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-300 mb-3 leading-relaxed">
           These are CSS rules the <strong>person visiting your website</strong> has applied themselves — not you the developer.
           This origin exists primarily for <strong>accessibility</strong>: a user with low vision might install a browser extension
           or OS setting that forces all text to be at least 20px, or overrides all colors to a high-contrast theme.
         </p>
-        <p className="text-sm text-muted-foreground">
-          In practice, most users never set these. But when they do, their <code>!important</code> user styles outrank your
-          <code>!important</code> author styles — the cascade deliberately protects the user's accessibility needs above your design choices.
+        <p className="text-sm text-slate-400 leading-relaxed">
+          <strong className="text-muted-foreground">Why it matters:</strong> Most users never configure this layer, but
+          when they do, their <code>!important</code> user styles can outrank your <code>!important</code> author
+          styles. The cascade is deliberately biased toward accessibility needs.
         </p>
       </Card>
       <Card title="3. Author Styles" description="Everything YOU write as a developer">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-slate-300 mb-3 leading-relaxed">
           This is <strong>every single CSS file you write</strong>. Your <code>index.css</code>, your Tailwind utilities,
           your CSS Modules, styled-components, SCSS, inline <code>style</code> attributes — all of it is Author style.
           It outranks UA styles automatically, which is why writing <code>a {"{"} color: black {"}"}</code> removes the browser's default blue link color.
         </p>
-        <p className="text-sm text-muted-foreground">
-          The <code>@layer</code> feature only operates <em>within</em> the Author origin — it lets you order your own
-          stylesheets predictably (e.g., third-party library layers vs your own utility layers).
+        <p className="text-sm text-slate-400 leading-relaxed">
+          <strong className="text-muted-foreground">Why it matters:</strong> <code>@layer</code> only operates
+          <em> within</em> the Author origin. It does not change the browser-vs-user-vs-author ranking — it only helps
+          you order your own stylesheets predictably.
         </p>
       </Card>
     </Grid>,

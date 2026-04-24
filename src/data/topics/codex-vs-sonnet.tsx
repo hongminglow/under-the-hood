@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
 import { Table } from "@/components/ui/Table";
 import { Grid } from "@/components/ui/Grid";
-import { Card } from "@/components/ui/Card";
 import { Callout } from "@/components/ui/Callout";
 import { Flow } from "@/components/ui/Flow";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Cpu, Brain } from "lucide-react";
 
 export const codexVsSonnetTopic: Topic = {
 	id: "codex-vs-sonnet",
@@ -23,37 +24,37 @@ export const codexVsSonnetTopic: Topic = {
 			Core Architectural Philosophies
 		</h3>,
 		<Grid key="3" cols={2} gap={6} className="my-8">
-			<Card title="Codex Architecture">
-				<p className="text-sm text-muted-foreground mb-4">
+			<FeatureCard icon={Cpu} title="Codex Architecture" subtitle="Specialized agentic executor" theme="emerald">
+				<p className="text-sm text-emerald-200/80 mb-4">
 					Built strictly as an expert developer-in-the-loop. It focuses on taking immediate, executable actions inside a
 					sandbox.
 				</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+				<ul className="text-sm text-emerald-100/75 list-disc pl-4 space-y-2">
 					<li>
-						<strong>Training:</strong> Heavily biased toward vast amounts of GitHub repositories, commit histories, and
+						<strong className="text-emerald-300">Training:</strong> Heavily biased toward vast amounts of GitHub repositories, commit histories, and
 						terminal outputs.
 					</li>
 					<li>
-						<strong>Decision Logic:</strong> Iterative trial-and-error—it prefers to write code, execute a test, read
+						<strong className="text-emerald-300">Decision Logic:</strong> Iterative trial-and-error-it prefers to write code, execute a test, read
 						the stack trace, and fix the bug in a rapid loop.
 					</li>
 				</ul>
-			</Card>
-			<Card title="Sonnet / Opus Architecture">
-				<p className="text-sm text-muted-foreground mb-4">
+			</FeatureCard>
+			<FeatureCard icon={Brain} title="Sonnet / Opus Architecture" subtitle="Frontier reasoning model" theme="violet">
+				<p className="text-sm text-violet-200/80 mb-4">
 					Massive frontier models (utilizing Mixture of Experts) tuned heavily by Constitutional AI to excel at deep,
 					generalized reasoning.
 				</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+				<ul className="text-sm text-violet-100/75 list-disc pl-4 space-y-2">
 					<li>
-						<strong>Training:</strong> Broad world knowledge combined with complex instruction-following datasets.
+						<strong className="text-violet-300">Training:</strong> Broad world knowledge combined with complex instruction-following datasets.
 					</li>
 					<li>
-						<strong>Decision Logic:</strong> Holistic architectural planning—it analyzes system trade-offs and generates
+						<strong className="text-violet-300">Decision Logic:</strong> Holistic architectural planning-it analyzes system trade-offs and generates
 						comprehensive mental models before touching code.
 					</li>
 				</ul>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<h3 key="4" className="text-xl font-bold mt-8 mb-4">
 			How They Approach Problem Solving

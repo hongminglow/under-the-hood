@@ -98,32 +98,36 @@ export const garbageCollectionTopic: Topic = {
 
 		<Grid key="7" cols={1} gap={6} className="mb-8">
 			<Card title="The Hot-Loop Allocation Spike">
-				<p className="text-sm text-muted-foreground mb-4">
-					<strong>The Problem:</strong> If you rapidly create millions of temporary objects inside a hot loop (like a
-					`map` function rendering a huge 3D canvas or chart), the V8 engine is forced to repeatedly trigger massive GC
-					pauses to clean them up, violently dropping your overall framerate.
+				<p className="text-sm text-slate-300 mb-3">
+					<strong className="text-red-400">The Problem:</strong> If you rapidly create millions of temporary objects
+					inside a hot loop, like rendering a huge 3D canvas or chart, V8 is forced to trigger repeated GC pauses just
+					to clean up the churn. That is when framerate suddenly falls apart.
 				</p>
-				<p className="text-sm font-semibold mb-2">Architectural Solutions:</p>
-				<ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
+				<p className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">What to do instead</p>
+				<ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
 					<li>
-						<strong>Object Pooling:</strong> Instead of creating new objects and throwing them away, architect a stable
-						array of pre-allocated reusable objects. Update their properties instead of continually instantiating brand
-						new ones.
+						<strong className="text-emerald-300">Object Pooling:</strong> Pre-allocate reusable objects and update their
+						properties instead of constantly creating and discarding brand new ones.
 					</li>
 					<li>
-						<strong>Mutating vs Spreading:</strong> In extremely performance-critical hot paths, using the modern array
-						spread operator <code>[...arr, newItem]</code> is dangerous because it rapidly generates brand new arrays
-						every single tick. Use direct mutation <code>arr.push()</code> when the isolated logic safely allows it.
+						<strong className="text-emerald-300">Mutating vs Spreading:</strong> In very hot paths, operations like
+						<code>[...arr, newItem]</code> create brand new arrays every tick. Prefer direct mutation such as
+						<code>arr.push()</code> when the local logic safely allows it.
 					</li>
 				</ul>
+				<p className="mt-4 text-xs text-slate-500">
+					Why it works: the less temporary allocation you generate per frame, the less often the runtime has to freeze
+					and clean up after you.
+				</p>
 			</Card>
 
 			<Card title="The Closure Memory Leak">
-				<p className="text-sm text-foreground mb-4">
-					<strong>The Problem:</strong> If a closure perfectly references a giant array, that array mathematically stays
-					"Alive". If an event listener captures this closure and you unmount the component without explicitly removing
-					the listener, the GC physically cannot delete it.
+				<p className="text-sm text-slate-300 mb-3">
+					<strong className="text-red-400">The Problem:</strong> If a closure keeps a reference to a huge array, that
+					array stays alive. If an event listener captures that closure and the component unmounts without cleanup, the
+					GC still cannot reclaim the memory.
 				</p>
+				<p className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-3">What to do instead</p>
 				<CodeBlock
 					title="Memory Leak Prevention"
 					language="javascript"
@@ -137,6 +141,10 @@ export const garbageCollectionTopic: Topic = {
   return () => window.removeEventListener('resize', handler);
 }, []);`}
 				/>
+				<p className="mt-4 text-xs text-slate-500">
+					Why it works: once the listener is removed, the closure chain breaks and the large captured data becomes
+					eligible for collection again.
+				</p>
 			</Card>
 		</Grid>,
 

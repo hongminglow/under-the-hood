@@ -1,11 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Flow } from "@/components/ui/Flow";
 import { CodeBlock } from "@/components/ui/CodeBlock";
-import { Highlight } from "@/components/ui/Highlight";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import {
   Globe,
@@ -17,6 +15,46 @@ import {
   ArrowLeftRight,
   Workflow,
 } from "lucide-react";
+
+const paradigmLabelClass: Record<string, string> = {
+  REST: "font-semibold text-emerald-300",
+  GraphQL: "font-semibold text-teal-300",
+  gRPC: "font-semibold text-cyan-300",
+  "gRPC streaming": "font-semibold text-cyan-300",
+  WebSockets: "font-semibold text-sky-300",
+  SSE: "font-semibold text-indigo-300",
+  tRPC: "font-semibold text-violet-300",
+  Webhooks: "font-semibold text-emerald-300",
+  SOAP: "font-semibold text-slate-200",
+};
+
+const paradigmChipClass: Record<string, string> = {
+  REST:
+    "inline-flex items-center rounded-full border border-emerald-700/50 bg-emerald-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200",
+  GraphQL:
+    "inline-flex items-center rounded-full border border-teal-700/50 bg-teal-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-teal-200",
+  gRPC:
+    "inline-flex items-center rounded-full border border-cyan-700/50 bg-cyan-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200",
+  "gRPC streaming":
+    "inline-flex items-center rounded-full border border-cyan-700/50 bg-cyan-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200",
+  WebSockets:
+    "inline-flex items-center rounded-full border border-sky-700/50 bg-sky-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-200",
+  SSE: "inline-flex items-center rounded-full border border-indigo-700/50 bg-indigo-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-200",
+  tRPC:
+    "inline-flex items-center rounded-full border border-violet-700/50 bg-violet-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-violet-200",
+  Webhooks:
+    "inline-flex items-center rounded-full border border-emerald-700/50 bg-emerald-950/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200",
+  SOAP:
+    "inline-flex items-center rounded-full border border-slate-700/60 bg-slate-950/70 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-200",
+};
+
+function paradigmLabel(name: string) {
+  return <span className={paradigmLabelClass[name] ?? paradigmLabelClass.REST}>{name}</span>;
+}
+
+function paradigmChip(name: string) {
+  return <span className={paradigmChipClass[name] ?? paradigmChipClass.REST}>{name}</span>;
+}
 
 export const apiParadigmsComparisonTopic: Topic = {
   id: "api-paradigms-comparison",
@@ -44,12 +82,12 @@ export const apiParadigmsComparisonTopic: Topic = {
     </p>,
     <Grid key="grid-paradigms" cols={2} gap={6} className="mb-10 items-stretch">
       <FeatureCard icon={Globe} title="REST" subtitle="Representational State Transfer" theme="emerald">
-        <p className="text-sm text-slate-300 leading-relaxed mb-4">
+        <p className="text-sm text-emerald-200/80 leading-relaxed mb-4">
           Resources exposed via HTTP verbs (<code>GET</code>, <code>POST</code>, <code>PUT</code>,{" "}
           <code>DELETE</code>) on predictable URLs. Stateless — every request carries all context. The
           universal language of the public web.
         </p>
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
+        <ul className="text-sm text-emerald-200/70 list-disc pl-4 space-y-1">
           <li>Public-facing APIs consumed by third parties</li>
           <li>CRUD-heavy services (users, products, orders)</li>
           <li>Where HTTP caching and CDN edge caching matter</li>
@@ -58,12 +96,12 @@ export const apiParadigmsComparisonTopic: Topic = {
       </FeatureCard>
 
       <FeatureCard icon={Layers} title="GraphQL" subtitle="Query Language for APIs" theme="teal">
-        <p className="text-sm text-slate-300 leading-relaxed mb-4">
+        <p className="text-sm text-teal-200/80 leading-relaxed mb-4">
           One endpoint, client-driven queries. The frontend specifies exactly which fields it needs.
           Solves over-fetching and under-fetching — but shifts complexity from the server to the
           query layer and kills standard HTTP caching.
         </p>
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
+        <ul className="text-sm text-teal-200/70 list-disc pl-4 space-y-1">
           <li>Complex frontends with many aggregated data views</li>
           <li>Mobile apps where bandwidth is precious</li>
           <li>BFF (Backend-for-Frontend) translation layers</li>
@@ -72,13 +110,13 @@ export const apiParadigmsComparisonTopic: Topic = {
       </FeatureCard>
 
       <FeatureCard icon={Zap} title="gRPC" subtitle="Google Remote Procedure Call" theme="cyan">
-        <p className="text-sm text-slate-300 leading-relaxed mb-4">
+        <p className="text-sm text-cyan-200/80 leading-relaxed mb-4">
           Binary protocol (Protobuf) over HTTP/2. Strict contracts via{" "}
           <code>.proto</code> files. Generates typed client/server stubs in any language. Up to{" "}
           <strong className="text-cyan-300">10x smaller payloads</strong> than JSON. Supports
           bidirectional streaming natively.
         </p>
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
+        <ul className="text-sm text-cyan-200/70 list-disc pl-4 space-y-1">
           <li>Internal microservice-to-microservice calls</li>
           <li>High-throughput, latency-sensitive pipelines</li>
           <li>Polyglot teams (Go ↔ Python ↔ Java)</li>
@@ -87,11 +125,11 @@ export const apiParadigmsComparisonTopic: Topic = {
       </FeatureCard>
 
       <FeatureCard icon={Radio} title="WebSockets" subtitle="Full-Duplex TCP Channel" theme="sky">
-        <p className="text-sm text-slate-300 leading-relaxed mb-4">
+        <p className="text-sm text-sky-200/80 leading-relaxed mb-4">
           An HTTP Upgrade handshake opens a persistent, bidirectional TCP tunnel. Both sides can push
           data at any time. Stateful by nature — each open socket is memory on your server.
         </p>
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
+        <ul className="text-sm text-sky-200/70 list-disc pl-4 space-y-1">
           <li>Live chat and collaborative editing (Figma, Notion)</li>
           <li>Multiplayer games requiring &lt;50ms latency</li>
           <li>Live trading terminals and order books</li>
@@ -100,12 +138,12 @@ export const apiParadigmsComparisonTopic: Topic = {
       </FeatureCard>
 
       <FeatureCard icon={ArrowLeftRight} title="SSE" subtitle="Server-Sent Events" theme="indigo">
-        <p className="text-sm text-slate-300 leading-relaxed mb-4">
+        <p className="text-sm text-indigo-200/80 leading-relaxed mb-4">
           A persistent HTTP connection where the <em>server pushes</em> a stream of events to the
           client. Uni-directional only. Built-in auto-reconnect. Works over plain HTTP/2 — no special
           infrastructure needed. The quiet winner for many "real-time" use cases.
         </p>
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
+        <ul className="text-sm text-indigo-200/70 list-disc pl-4 space-y-1">
           <li>AI response streaming (ChatGPT-style word-by-word)</li>
           <li>Live dashboards and notification feeds</li>
           <li>Stock tickers, live sports scores</li>
@@ -114,12 +152,12 @@ export const apiParadigmsComparisonTopic: Topic = {
       </FeatureCard>
 
       <FeatureCard icon={Workflow} title="tRPC" subtitle="TypeScript RPC" theme="violet">
-        <p className="text-sm text-slate-300 leading-relaxed mb-4">
+        <p className="text-sm text-violet-200/80 leading-relaxed mb-4">
           End-to-end type safety between a TypeScript server and client — zero code generation, zero
           schema files. Router procedures are inferred types. The client call is indistinguishable
           from calling a local function. Only works in TypeScript monorepos.
         </p>
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
+        <ul className="text-sm text-violet-200/70 list-disc pl-4 space-y-1">
           <li>Full-stack TypeScript apps (Next.js, Remix)</li>
           <li>Internal tools where teams own both ends</li>
           <li>Rapid prototyping with zero API boilerplate</li>
@@ -128,12 +166,12 @@ export const apiParadigmsComparisonTopic: Topic = {
       </FeatureCard>
 
       <FeatureCard icon={Webhook} title="Webhooks" subtitle="Push-Based HTTP Callbacks" theme="emerald">
-        <p className="text-sm text-slate-300 leading-relaxed mb-4">
+        <p className="text-sm text-emerald-200/80 leading-relaxed mb-4">
           Your system registers a URL. When an event occurs on the provider's side (payment
           succeeds, PR merged), they <code>POST</code> a JSON payload to your URL. You react to
           events instead of polling. The entire third-party integration ecosystem runs on this.
         </p>
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
+        <ul className="text-sm text-emerald-200/70 list-disc pl-4 space-y-1">
           <li>Payment confirmations (Stripe, PayPal)</li>
           <li>CI/CD triggers (GitHub push → deploy pipeline)</li>
           <li>SaaS event notifications (Slack, Shopify)</li>
@@ -142,12 +180,12 @@ export const apiParadigmsComparisonTopic: Topic = {
       </FeatureCard>
 
       <FeatureCard icon={Cable} title="SOAP" subtitle="Simple Object Access Protocol" theme="slate">
-        <p className="text-sm text-slate-300 leading-relaxed mb-4">
+        <p className="text-sm text-slate-200 leading-relaxed mb-4">
           XML-based RPC with strict WSDL contracts. Verbose, heavy, but enterprise-grade — built-in
           WS-Security, transactions, and ACID guarantees over HTTP. Legacy dominant in banking,
           healthcare (HL7/FHIR), and government systems.
         </p>
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-1">
+        <ul className="text-sm text-slate-300 list-disc pl-4 space-y-1">
           <li>Banking and financial transaction APIs</li>
           <li>Government and healthcare integrations</li>
           <li>Enterprise B2B systems requiring formal contracts</li>
@@ -164,14 +202,14 @@ export const apiParadigmsComparisonTopic: Topic = {
       key="table-comparison"
       headers={["Paradigm", "Transport", "Payload", "Direction", "Contract", "Browser Native"]}
       rows={[
-        ["REST", "HTTP/1.1–3", "JSON / XML", "Request-Response", "OpenAPI (optional)", "✅ Yes"],
-        ["GraphQL", "HTTP (POST)", "JSON", "Request-Response", "SDL Schema (required)", "✅ Yes"],
-        ["gRPC", "HTTP/2", "Protobuf (binary)", "Streaming + R/R", ".proto (required)", "❌ Needs proxy"],
-        ["WebSockets", "TCP (ws://)", "Any (text/binary)", "Full-Duplex", "None", "✅ Yes"],
-        ["SSE", "HTTP", "text/event-stream", "Server → Client", "None", "✅ Yes"],
-        ["tRPC", "HTTP / WS", "JSON", "Request-Response", "TypeScript types", "✅ Yes (TS only)"],
-        ["Webhooks", "HTTP (POST)", "JSON", "Provider → Consumer", "Provider docs", "✅ Yes"],
-        ["SOAP", "HTTP / SMTP", "XML", "Request-Response", "WSDL (required)", "⚠️ Complex"],
+        [paradigmLabel("REST"), "HTTP/1.1-3", "JSON / XML", "Request-Response", "OpenAPI (optional)", "Yes"],
+        [paradigmLabel("GraphQL"), "HTTP (POST)", "JSON", "Request-Response", "SDL Schema (required)", "Yes"],
+        [paradigmLabel("gRPC"), "HTTP/2", "Protobuf (binary)", "Streaming + R/R", ".proto (required)", "Needs proxy"],
+        [paradigmLabel("WebSockets"), "TCP (ws://)", "Any (text/binary)", "Full-Duplex", "None", "Yes"],
+        [paradigmLabel("SSE"), "HTTP", "text/event-stream", "Server -> Client", "None", "Yes"],
+        [paradigmLabel("tRPC"), "HTTP / WS", "JSON", "Request-Response", "TypeScript types", "Yes (TS only)"],
+        [paradigmLabel("Webhooks"), "HTTP (POST)", "JSON", "Provider -> Consumer", "Provider docs", "Yes"],
+        [paradigmLabel("SOAP"), "HTTP / SMTP", "XML", "Request-Response", "WSDL (required)", "Complex"],
       ]}
     />,
 
@@ -217,15 +255,23 @@ export const apiParadigmsComparisonTopic: Topic = {
       key="table-decision"
       headers={["Scenario", "Recommended Paradigm", "Why"]}
       rows={[
-        ["Public API for third-party developers", "REST", "Universally understood, great tooling, CDN-cacheable"],
-        ["Complex SPA with many data views", "GraphQL", "Eliminates N+1 round-trips, client-driven shape"],
-        ["Internal microservice mesh", "gRPC", "Binary speed, strict contracts, streaming, polyglot"],
-        ["Live chat / collaborative editing", "WebSockets", "True bidirectional, sub-50ms latency"],
-        ["AI token streaming / live feeds", "SSE", "Simpler than WS, auto-reconnect, scales on HTTP/2"],
-        ["Full-stack TypeScript monorepo", "tRPC", "Zero boilerplate, end-to-end types, DX velocity"],
-        ["Payment / CI-CD event notifications", "Webhooks", "Push model, no polling, 3rd-party standard"],
-        ["Enterprise banking / healthcare B2B", "SOAP", "Formal contracts, WS-Security, legacy compliance"],
-        ["High-throughput ML inference pipeline", "gRPC streaming", "Binary + bidirectional stream, low serialisation cost"],
+        [
+          "Public API for third-party developers",
+          paradigmLabel("REST"),
+          "Universally understood, great tooling, CDN-cacheable",
+        ],
+        ["Complex SPA with many data views", paradigmLabel("GraphQL"), "Eliminates N+1 round-trips, client-driven shape"],
+        ["Internal microservice mesh", paradigmLabel("gRPC"), "Binary speed, strict contracts, streaming, polyglot"],
+        ["Live chat / collaborative editing", paradigmLabel("WebSockets"), "True bidirectional, sub-50ms latency"],
+        ["AI token streaming / live feeds", paradigmLabel("SSE"), "Simpler than WS, auto-reconnect, scales on HTTP/2"],
+        ["Full-stack TypeScript monorepo", paradigmLabel("tRPC"), "Zero boilerplate, end-to-end types, DX velocity"],
+        ["Payment / CI-CD event notifications", paradigmLabel("Webhooks"), "Push model, no polling, 3rd-party standard"],
+        ["Enterprise banking / healthcare B2B", paradigmLabel("SOAP"), "Formal contracts, WS-Security, legacy compliance"],
+        [
+          "High-throughput ML inference pipeline",
+          paradigmLabel("gRPC streaming"),
+          "Binary + bidirectional stream, low serialisation cost",
+        ],
       ]}
     />,
 
@@ -234,77 +280,77 @@ export const apiParadigmsComparisonTopic: Topic = {
       Architectural Tradeoffs — The Honest List
     </h3>,
     <Grid key="grid-tradeoffs" cols={2} gap={6} className="mb-8 items-stretch">
-      <Card title="✅ REST — Strengths">
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+      <FeatureCard icon={Globe} title="REST" subtitle="Strengths" theme="emerald">
+        <ul className="text-sm text-emerald-100/75 list-disc pl-4 space-y-2">
           <li>Universal adoption — every HTTP client works</li>
           <li>Native CDN and browser caching via <code>GET</code> URLs</li>
           <li>Stateless — trivially horizontally scalable</li>
           <li>Enormous tooling ecosystem (Swagger, Postman, etc.)</li>
           <li>Easy to monitor per-endpoint latency and error rates</li>
         </ul>
-      </Card>
-      <Card title="❌ REST — Weaknesses">
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+      </FeatureCard>
+      <FeatureCard icon={Globe} title="REST" subtitle="Weaknesses" theme="emerald">
+        <ul className="text-sm text-emerald-100/75 list-disc pl-4 space-y-2">
           <li>Over-fetching: returns far more fields than the client needs</li>
           <li>Under-fetching: complex views require multiple sequential calls</li>
           <li>No versioning standard — <code>/v1</code> vs <code>/v2</code> is convention, not spec</li>
           <li>No built-in streaming or push model</li>
           <li>Loose contracts unless OpenAPI is strictly enforced</li>
         </ul>
-      </Card>
-      <Card title="✅ GraphQL — Strengths">
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+      </FeatureCard>
+      <FeatureCard icon={Layers} title="GraphQL" subtitle="Strengths" theme="teal">
+        <ul className="text-sm text-teal-100/75 list-disc pl-4 space-y-2">
           <li>Client dictates exact data shape — zero bandwidth waste</li>
           <li>Single endpoint reduces API surface area</li>
           <li>Schema is self-documenting via introspection</li>
           <li>Subscriptions enable real-time data over WebSockets</li>
           <li>Ideal for aggregating multiple backend services into one layer</li>
         </ul>
-      </Card>
-      <Card title="❌ GraphQL — Weaknesses">
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+      </FeatureCard>
+      <FeatureCard icon={Layers} title="GraphQL" subtitle="Weaknesses" theme="teal">
+        <ul className="text-sm text-teal-100/75 list-disc pl-4 space-y-2">
           <li>HTTP caching breaks — all queries go to one POST endpoint</li>
           <li>N+1 problem re-emerges at the resolver level (requires DataLoader)</li>
           <li>File uploads are awkward — requires multipart extensions</li>
           <li>Complex queries can cause accidental DoS (unbounded depth)</li>
           <li>High learning curve for backend teams used to REST</li>
         </ul>
-      </Card>
-      <Card title="✅ gRPC — Strengths">
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+      </FeatureCard>
+      <FeatureCard icon={Zap} title="gRPC" subtitle="Strengths" theme="cyan">
+        <ul className="text-sm text-cyan-100/75 list-disc pl-4 space-y-2">
           <li>Protobuf payloads up to 10x smaller than JSON</li>
           <li>Strong typed contracts across every language</li>
           <li>Native bidirectional streaming over HTTP/2</li>
           <li>Auto-generated client/server stubs — no manual SDK work</li>
           <li>Built-in deadline propagation and cancellation</li>
         </ul>
-      </Card>
-      <Card title="❌ gRPC — Weaknesses">
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+      </FeatureCard>
+      <FeatureCard icon={Zap} title="gRPC" subtitle="Weaknesses" theme="cyan">
+        <ul className="text-sm text-cyan-100/75 list-disc pl-4 space-y-2">
           <li>Not browser-native — requires gRPC-Web + Envoy proxy</li>
           <li>Binary payload not human-readable — debugging is harder</li>
           <li>Strict schema evolution — field changes require care</li>
           <li>Steeper learning curve than REST for most teams</li>
           <li>Overkill for simple public-facing CRUD endpoints</li>
         </ul>
-      </Card>
-      <Card title="✅ WebSockets — Strengths">
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+      </FeatureCard>
+      <FeatureCard icon={Radio} title="WebSockets" subtitle="Strengths" theme="sky">
+        <ul className="text-sm text-sky-100/75 list-disc pl-4 space-y-2">
           <li>True full-duplex — lowest latency for bidirectional messages</li>
           <li>No HTTP overhead after the initial handshake</li>
           <li>Browser native — no special setup needed client-side</li>
           <li>Sub-frame binary messaging possible</li>
         </ul>
-      </Card>
-      <Card title="❌ WebSockets — Weaknesses">
-        <ul className="text-sm text-muted-foreground list-disc pl-4 space-y-2">
+      </FeatureCard>
+      <FeatureCard icon={Radio} title="WebSockets" subtitle="Weaknesses" theme="sky">
+        <ul className="text-sm text-sky-100/75 list-disc pl-4 space-y-2">
           <li>Stateful — each open socket holds memory on the server</li>
           <li>Load balancers need sticky sessions (breaks standard L4 LBs)</li>
           <li>No built-in reconnection — must implement exponential backoff</li>
           <li>Difficult to scale horizontally without Redis Pub/Sub backbone</li>
           <li>Overkill for one-way data pushes (SSE is simpler)</li>
         </ul>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     /* ─── SECTION 6: SSE vs WebSocket Detail ─────────────────────────── */
@@ -324,8 +370,9 @@ export const apiParadigmsComparisonTopic: Topic = {
       Fetching a user's profile. See how each paradigm shapes the wire format and client contract.
     </p>,
     <Grid key="grid-code" cols={2} gap={6} className="mb-8">
-      <Card title="REST">
+      <FeatureCard icon={Globe} title="REST" subtitle="Request / Response Shape" theme="emerald">
         <CodeBlock
+          theme="emerald"
           language="bash"
           code={`GET /users/42
 Authorization: Bearer <token>
@@ -341,9 +388,10 @@ Authorization: Bearer <token>
   // ... 20 more fields you didn't ask for
 }`}
         />
-      </Card>
-      <Card title="GraphQL">
+      </FeatureCard>
+      <FeatureCard icon={Layers} title="GraphQL" subtitle="Client-Shaped Query" theme="teal">
         <CodeBlock
+          theme="teal"
           language="graphql"
           code={`# Client asks for EXACTLY what it needs
 query {
@@ -363,9 +411,10 @@ query {
   }
 }`}
         />
-      </Card>
-      <Card title="gRPC (.proto definition)">
+      </FeatureCard>
+      <FeatureCard icon={Zap} title="gRPC" subtitle=".proto Contract" theme="cyan">
         <CodeBlock
+          theme="cyan"
           language="protobuf"
           code={`syntax = "proto3";
 
@@ -383,9 +432,10 @@ message UserResponse {
 // Client call (TypeScript, auto-generated stub)
 const user = await client.getUser({ id: 42 });`}
         />
-      </Card>
-      <Card title="tRPC (TypeScript)">
+      </FeatureCard>
+      <FeatureCard icon={Workflow} title="tRPC" subtitle="Type-Inferred Procedure" theme="violet">
         <CodeBlock
+          theme="violet"
           language="typescript"
           code={`// Server router (Next.js API)
 export const userRouter = router({
@@ -400,7 +450,7 @@ export const userRouter = router({
 const user = await trpc.user.getUser.query({ id: 42 });
 // user.name ← autocompleted. Compile-time safe.`}
         />
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     /* ─── SECTION 8: The "Use Both" Pattern ────────────────────────────── */
@@ -412,44 +462,44 @@ const user = await trpc.user.getUser.query({ id: 42 });
       combination.
     </p>,
     <Grid key="grid-hybrid" cols={2} gap={6} className="mb-8">
-      <Card title="Pattern 1: REST External, gRPC Internal">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+      <FeatureCard icon={ArrowLeftRight} title="Pattern 1" subtitle="REST External, gRPC Internal" theme="cyan">
+        <p className="text-sm text-cyan-100/80 leading-relaxed mb-3">
           Public-facing API consumers get a clean REST interface. Internally, microservices
           communicate via gRPC for speed and strong typing. An API Gateway translates REST → gRPC.
         </p>
-        <p className="text-sm text-muted-foreground">
-          <strong className="text-muted-foreground">Used by:</strong> Google, Netflix, Uber
+        <p className="text-sm text-cyan-200/70">
+          <strong className="text-cyan-300">Used by:</strong> Google, Netflix, Uber
         </p>
-      </Card>
-      <Card title="Pattern 2: REST + WebSocket Hybrid">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+      </FeatureCard>
+      <FeatureCard icon={ArrowLeftRight} title="Pattern 2" subtitle="REST + WebSocket Hybrid" theme="sky">
+        <p className="text-sm text-sky-100/80 leading-relaxed mb-3">
           REST handles all CRUD operations. WebSockets handle only real-time events. The client fetches
           initial data via REST on load, then subscribes to a WebSocket channel for live delta updates.
         </p>
-        <p className="text-sm text-muted-foreground">
-          <strong className="text-muted-foreground">Used by:</strong> Slack, Figma, Linear
+        <p className="text-sm text-sky-200/70">
+          <strong className="text-sky-300">Used by:</strong> Slack, Figma, Linear
         </p>
-      </Card>
-      <Card title="Pattern 3: GraphQL BFF + REST Backends">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+      </FeatureCard>
+      <FeatureCard icon={ArrowLeftRight} title="Pattern 3" subtitle="GraphQL BFF + REST Backends" theme="teal">
+        <p className="text-sm text-teal-100/80 leading-relaxed mb-3">
           A GraphQL "Backend for Frontend" layer aggregates data from multiple REST and gRPC
           microservices. Each downstream service keeps its simple REST contract; the BFF composes
           them for the specific client.
         </p>
-        <p className="text-sm text-muted-foreground">
-          <strong className="text-muted-foreground">Used by:</strong> Airbnb, GitHub
+        <p className="text-sm text-teal-200/70">
+          <strong className="text-teal-300">Used by:</strong> Airbnb, GitHub
         </p>
-      </Card>
-      <Card title="Pattern 4: REST + SSE for AI Streaming">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+      </FeatureCard>
+      <FeatureCard icon={ArrowLeftRight} title="Pattern 4" subtitle="REST + SSE for AI Streaming" theme="indigo">
+        <p className="text-sm text-indigo-100/80 leading-relaxed mb-3">
           A <code>POST /chat</code> REST request initiates a conversation. The response is streamed
           back as an SSE text stream, word by word. The client renders tokens as they arrive.
           WebSockets are not needed — the client never pushes mid-stream.
         </p>
-        <p className="text-sm text-muted-foreground">
-          <strong className="text-muted-foreground">Used by:</strong> OpenAI, Anthropic, Vercel AI SDK
+        <p className="text-sm text-indigo-200/70">
+          <strong className="text-indigo-300">Used by:</strong> OpenAI, Anthropic, Vercel AI SDK
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     /* ─── SECTION 9: Common Mistakes ───────────────────────────────────── */
@@ -492,35 +542,35 @@ const user = await trpc.user.getUser.query({ id: 42 });
     <Callout key="callout-mental-model" type="info" title="The One-Line Mental Models">
       <ul className="space-y-2 mt-2">
         <li>
-          <Highlight variant="primary">REST</Highlight>&nbsp;— Standard HTTP CRUD. Universal, cacheable,
+          {paradigmChip("REST")}&nbsp;— Standard HTTP CRUD. Universal, cacheable,
           everyone knows it.
         </li>
         <li>
-          <Highlight variant="primary">GraphQL</Highlight>&nbsp;— Client-shaped queries. One endpoint.
+          {paradigmChip("GraphQL")}&nbsp;— Client-shaped queries. One endpoint.
           Kills bandwidth waste.
         </li>
         <li>
-          <Highlight variant="primary">gRPC</Highlight>&nbsp;— Binary RPC over HTTP/2. Internal
+          {paradigmChip("gRPC")}&nbsp;— Binary RPC over HTTP/2. Internal
           microservices. Fastest.
         </li>
         <li>
-          <Highlight variant="primary">WebSockets</Highlight>&nbsp;— Persistent pipe. Both sides push.
+          {paradigmChip("WebSockets")}&nbsp;— Persistent pipe. Both sides push.
           Chat, gaming.
         </li>
         <li>
-          <Highlight variant="primary">SSE</Highlight>&nbsp;— Server pushes only. AI streaming,
+          {paradigmChip("SSE")}&nbsp;— Server pushes only. AI streaming,
           notifications. Simpler than WS.
         </li>
         <li>
-          <Highlight variant="primary">tRPC</Highlight>&nbsp;— TypeScript-only RPC. Zero schema files.
+          {paradigmChip("tRPC")}&nbsp;— TypeScript-only RPC. Zero schema files.
           Monorepo DX.
         </li>
         <li>
-          <Highlight variant="primary">Webhooks</Highlight>&nbsp;— Event callbacks. Third-party
+          {paradigmChip("Webhooks")}&nbsp;— Event callbacks. Third-party
           integrations. No polling.
         </li>
         <li>
-          <Highlight variant="primary">SOAP</Highlight>&nbsp;— XML contracts. Enterprise legacy.
+          {paradigmChip("SOAP")}&nbsp;— XML contracts. Enterprise legacy.
           Use when forced.
         </li>
       </ul>

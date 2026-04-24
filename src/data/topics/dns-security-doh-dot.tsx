@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { EyeOff, ShieldAlert } from "lucide-react";
 
 export const dnsOverHttpsTopic: Topic = {
 	id: "dns-security-doh-dot",
@@ -30,20 +31,20 @@ export const dnsOverHttpsTopic: Topic = {
 			]}
 		/>,
 		<Grid key="3" cols={2} gap={6} className="my-8">
-			<Card title="The Privacy Argument (Pro DoH)">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={EyeOff} title="The Privacy Argument" subtitle="Pro DoH" theme="emerald">
+				<p className="text-sm text-emerald-100/75">
 					DoH hides DNS queries inside regular HTTPS traffic, making it{" "}
 					<strong>impossible for ISPs to snoop or censor</strong>. Firefox and Chrome enable DoH by default. Users get
 					privacy without changing any settings.
 				</p>
-			</Card>
-			<Card title="The Control Argument (Anti DoH)">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={ShieldAlert} title="The Control Argument" subtitle="Anti DoH" theme="rose">
+				<p className="text-sm text-rose-100/75">
 					DoH <strong>centralizes DNS</strong> to a few providers (Cloudflare, Google). Enterprises lose visibility into
 					DNS traffic for security monitoring. Network admins can't block malicious domains. It{" "}
 					<strong>bypasses corporate DNS policies</strong>.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<Callout key="4" type="info" title="The Enterprise Compromise">
 			Most enterprises deploy <strong>DoT internally</strong> (encrypted but on a dedicated port they control) and block

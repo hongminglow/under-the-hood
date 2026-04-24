@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Repeat2, ShieldCheck } from "lucide-react";
 
 export const idempotencyTopic: Topic = {
 	id: "api-idempotency",
@@ -23,11 +24,11 @@ export const idempotencyTopic: Topic = {
 			key="2"
 			headers={["HTTP Method", "Idempotent?", "Why"]}
 			rows={[
-				["GET", "✅ Yes", "Reading data never changes state."],
-				["PUT", "✅ Yes", "Replacing with the same payload produces same result."],
-				["DELETE", "✅ Yes", "Deleting an already-deleted resource = same outcome."],
-				["POST", "❌ No", "Each call creates a NEW resource (unless you add idempotency)."],
-				["PATCH", "⚠️ Depends", "If patch increments (x + 1), it's not idempotent."],
+				["GET", "Yes", "Reading data never changes state."],
+				["PUT", "Yes", "Replacing with the same payload produces same result."],
+				["DELETE", "Yes", "Deleting an already-deleted resource = same outcome."],
+				["POST", "No", "Each call creates a NEW resource (unless you add idempotency)."],
+				["PATCH", "Depends", "If patch increments (x + 1), it's not idempotent."],
 			]}
 		/>,
 		<h4 key="3" className="text-xl font-bold mt-8 mb-4">
@@ -53,19 +54,19 @@ const response = await fetch('/api/charges', {
 // 3. If no → process the charge, store the response with the key`}
 		/>,
 		<Grid key="5" cols={2} gap={6} className="my-8">
-			<Card title="Without Idempotency">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={Repeat2} title="Without Idempotency" subtitle="Retry becomes a duplicate mutation" theme="rose">
+				<p className="text-sm text-rose-200/80">
 					Client sends POST /charge. Server processes it. Response lost in transit. Client retries. Server processes it{" "}
-					<strong>again</strong>. User is charged <strong>$200 instead of $100</strong>.
+					<strong className="text-rose-300">again</strong>. User is charged <strong className="text-rose-300">$200 instead of $100</strong>.
 				</p>
-			</Card>
-			<Card title="With Idempotency Key">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={ShieldCheck} title="With Idempotency Key" subtitle="Retry returns the cached result" theme="emerald">
+				<p className="text-sm text-emerald-200/80">
 					Client sends POST /charge with key <code>abc123</code>. Server processes it, stores result keyed by{" "}
 					<code>abc123</code>. Response lost. Client retries with same <code>abc123</code>. Server returns{" "}
-					<strong>cached result</strong>. User charged exactly <strong>$100</strong>.
+					<strong className="text-emerald-300">cached result</strong>. User charged exactly <strong className="text-emerald-300">$100</strong>.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<Callout key="6" type="warning" title="The Database Insert Trap">
 			<code>INSERT INTO orders ...</code> is <strong>never idempotent</strong> — retrying creates duplicate rows. Fix:

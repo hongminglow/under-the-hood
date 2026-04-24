@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Crown, CopyPlus } from "lucide-react";
 
 export const databaseReplicationTopic: Topic = {
   id: "database-replication",
@@ -22,16 +23,16 @@ export const databaseReplicationTopic: Topic = {
       Instead of `Sharding` (cutting data apart), we use <strong>Replication</strong> (copying the identical data to other servers).
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
-      <Card title="The Primary (The Boss)">
-        <p className="text-sm text-muted-foreground">
+      <FeatureCard icon={Crown} title="The Primary" subtitle="The single write authority" theme="amber">
+        <p className="text-sm text-amber-100/75">
           ALL `INSERT`, `UPDATE`, and `DELETE` queries strictly hit the Primary Database. The moment the query finishes, the Primary writes it to a WAL (Write-Ahead Log).
         </p>
-      </Card>
-      <Card title="The Replicas (The Workers)">
-        <p className="text-sm text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={CopyPlus} title="The Replicas" subtitle="Read scale via copied state" theme="cyan">
+        <p className="text-sm text-cyan-100/75">
           You spin up multiple "Read-Replica" databases globally. They ping the Primary to check for changes and copy the logs. Read queries (`SELECT`) hit the Replicas, offloading work from the Primary.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Callout key="5" type="warning" title="The Eventual Consistency Latency">
       Replication is inherently Asynchronous. If a user updates their profile picture (Hitting Primary) and instantly refreshes the page (Hitting Replica 3), they might see their old picture for a few seconds. The data takes a few milliseconds to securely propagate globally!

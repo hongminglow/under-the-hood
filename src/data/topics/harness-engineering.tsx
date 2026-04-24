@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
 import { Flow } from "@/components/ui/Flow";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { TriangleAlert, ShieldCheck } from "lucide-react";
 
 export const harnessEngineeringTopic: Topic = {
   id: "harness-engineering",
@@ -95,27 +96,31 @@ export const harnessEngineeringTopic: Topic = {
       ]}
     />,
     <Grid key="7" cols={2} gap={6}>
-      <Card
+      <FeatureCard
+        icon={TriangleAlert}
         title="Weak Harness"
-        description="High intelligence, low grounding"
+        subtitle="High intelligence, low grounding"
+        theme="amber"
       >
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-amber-100/75">
           The agent may sound smart, but it guesses APIs, misses repo
           conventions, over-edits files, or repeats the same broken command
           because nothing in the environment teaches it faster than trial and
           error.
         </p>
-      </Card>
-      <Card
+      </FeatureCard>
+      <FeatureCard
+        icon={ShieldCheck}
         title="Strong Harness"
-        description="Moderate intelligence, high leverage"
+        subtitle="Moderate intelligence, high leverage"
+        theme="emerald"
       >
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
           Even a less impressive model can perform surprisingly well when the
           repository is legible, the tasks are structured, and fast feedback
           tells it exactly what failed and how to recover.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="8" className="text-xl font-bold mt-8 mb-4">
       Feedforward vs Feedback
@@ -156,28 +161,32 @@ export const harnessEngineeringTopic: Topic = {
       Is This “Training” The Agent?
     </h3>,
     <Grid key="12" cols={2} gap={6}>
-      <Card
+      <FeatureCard
+        icon={ShieldCheck}
         title="What It Usually Is"
-        description="Behavior shaping without changing model weights"
+        subtitle="Behavior shaping without changing model weights"
+        theme="cyan"
       >
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-cyan-100/75">
           Most harness engineering does <strong>not</strong> retrain the base
           model. It improves outcomes by changing the agent’s operating
           conditions: what it sees, what it can do, how it is checked, and how
           quickly it can recover from errors.
         </p>
-      </Card>
-      <Card
+      </FeatureCard>
+      <FeatureCard
+        icon={TriangleAlert}
         title="Where It Can Touch Training"
-        description="Great harnesses can produce great training data"
+        subtitle="Great harnesses can produce great training data"
+        theme="violet"
       >
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-sm leading-relaxed text-violet-100/75">
           Accepted patches, tool traces, review loops, and high-quality failure
           corrections can later become synthetic data for SFT, preference
           tuning, or distillation. The harness is often what makes those traces
           clean enough to reuse.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Table
       key="13"
@@ -248,20 +257,20 @@ export const harnessEngineeringTopic: Topic = {
       detect.
     </p>,
     <Grid key="18" cols={2} gap={6}>
-      <Card title="Harness Inputs" description="What the agent receives">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      <FeatureCard icon={ShieldCheck} title="Harness Inputs" subtitle="What the agent receives" theme="cyan">
+        <p className="mt-2 text-sm leading-relaxed text-cyan-100/75">
           Topic conventions, section taxonomy, component recipes, README counter
           rules, and examples from existing topic files all act as
           feedforward controls.
         </p>
-      </Card>
-      <Card title="Harness Feedback" description="What keeps quality stable">
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      </FeatureCard>
+      <FeatureCard icon={TriangleAlert} title="Harness Feedback" subtitle="What keeps quality stable" theme="emerald">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
           TypeScript, the build step, import validation, and visible rendering
           errors act as sensors. When a mistake appears, the repo instructions
           can be tightened so the same failure becomes less likely next time.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <Callout key="19" type="warning" title="Common Misread">
       Harness engineering is <strong>not</strong> proof that models no longer

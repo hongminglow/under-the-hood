@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { KeyRound, Lock } from "lucide-react";
 
 export const backendEncryptionMethodsTopic: Topic = {
   id: "backend-encryption-comparison",
@@ -19,16 +20,16 @@ export const backendEncryptionMethodsTopic: Topic = {
       The Hierarchy of Secrets
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
-      <Card title="Encryption in Transit">
-        <p className="text-sm text-muted-foreground mb-2">
-          Handled by <strong>TLS 1.3</strong>. Once the packet reaches your Load Balancer, it is typically decrypted (TLS Termination).
+      <FeatureCard icon={Lock} title="Encryption in Transit" subtitle="TLS protects the wire" theme="emerald">
+        <p className="text-sm text-emerald-200/80 mb-2">
+          Handled by <strong className="text-emerald-300">TLS 1.3</strong>. Once the packet reaches your Load Balancer, it is typically decrypted (TLS Termination).
         </p>
-      </Card>
-      <Card title="Encryption at Rest">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={KeyRound} title="Encryption at Rest" subtitle="Storage-layer protection" theme="teal">
+        <p className="text-sm text-teal-200/80 mb-2">
           Handled by the Cloud Provider (AWS EBS/RDS). Protects against someone physically walking away with a hard drive.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">
       The Enterprise Standard: KMS & Envelope Encryption

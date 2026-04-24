@@ -1,8 +1,9 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Table } from "@/components/ui/Table";
 import { Callout } from "@/components/ui/Callout";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { BrainCircuit, RefreshCcw, Users, Wrench } from "lucide-react";
 
 export const aiAgentsToolUseTopic: Topic = {
   id: "ai-agents-tool-use",
@@ -40,22 +41,24 @@ export const aiAgentsToolUseTopic: Topic = {
       Modern LLM APIs (OpenAI, Anthropic, Google) support <strong>structured tool definitions</strong>. You describe your available tools as JSON schemas in the system prompt. The model doesn't execute anything itself — it emits a structured JSON blob requesting a specific function call, and your application code decides whether to actually execute it.
     </p>,
     <Grid key="4b" cols={2} gap={6} className="my-8">
-      <Card title="Tool Definition (You Provide)">
-        <p className="text-sm text-muted-foreground mb-2">
-          You register available tools with <strong>name</strong>, <strong>description</strong>, and a strict <strong>JSON Schema</strong> for parameters. The model uses the description to decide when to invoke it.
+      <FeatureCard icon={Wrench} title="Tool Definition" subtitle="You provide the contract" theme="emerald">
+        <p className="text-sm text-emerald-200/80 mb-2">
+          You register available tools with <strong className="text-emerald-300">name</strong>,{" "}
+          <strong className="text-emerald-300">description</strong>, and a strict{" "}
+          <strong className="text-emerald-300">JSON Schema</strong> for parameters. The model uses the description to decide when to invoke it.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-emerald-200/60">
           A vague description like "does stuff" will cause the model to misuse the tool. Treat tool descriptions like API documentation.
         </p>
-      </Card>
-      <Card title="Tool Call (Model Emits)">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={BrainCircuit} title="Tool Call" subtitle="Model emits structured intent" theme="teal">
+        <p className="text-sm text-teal-200/80 mb-2">
           The model returns a <code>tool_use</code> block with the function name and arguments. Your code validates, executes, and feeds the result back as a <code>tool_result</code> message.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-teal-200/60">
           The model never touches your database directly. It only <em>requests</em> actions. Your code is the gatekeeper.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">
@@ -82,22 +85,22 @@ export const aiAgentsToolUseTopic: Topic = {
       Complex tasks (like software engineering) are often too big for one agent. <strong>Multi-Agent Systems</strong> (e.g., LangGraph, CrewAI) assign specialized roles to separate agents that communicate through a shared message bus or orchestrator.
     </p>,
     <Grid key="7" cols={2} gap={6} className="my-8">
-      <Card title="The 'Manager' Agent">
-        <p className="text-sm text-muted-foreground mb-2">
+      <FeatureCard icon={Users} title="The Manager Agent" subtitle="Orchestration role" theme="cyan">
+        <p className="text-sm text-cyan-200/80 mb-2">
           Orchestrates sub-tasks and delegates to specialized workers.
         </p>
-        <p className="text-xs italic text-muted-foreground">
+        <p className="text-xs italic text-cyan-200/60">
           "Agent A, write the code. Agent B, review it. Agent C, fix the bugs."
         </p>
-      </Card>
-      <Card title="Self-Correction">
-        <p className="text-sm text-muted-foreground mb-2">
+      </FeatureCard>
+      <FeatureCard icon={RefreshCcw} title="Self-Correction" subtitle="Feedback loop" theme="sky">
+        <p className="text-sm text-sky-200/80 mb-2">
           Agents can 'Self-Reflect' on their own mistakes.
         </p>
-        <p className="text-xs italic text-muted-foreground">
-          By feeding the <strong>Error Trace</strong> back into the prompt, the agent sees exactly why its previous tool call failed and corrects its syntax.
+        <p className="text-xs italic text-sky-200/60">
+          By feeding the <strong className="text-sky-300">Error Trace</strong> back into the prompt, the agent sees exactly why its previous tool call failed and corrects its syntax.
         </p>
-      </Card>
+      </FeatureCard>
     </Grid>,
 
     <h3 key="8" className="text-xl font-bold mt-8 mb-4">

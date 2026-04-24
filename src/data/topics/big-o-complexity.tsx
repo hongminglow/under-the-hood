@@ -1,9 +1,10 @@
 import type { Topic } from "@/data/types";
-import { Card } from "@/components/ui/Card";
 import { Grid } from "@/components/ui/Grid";
 import { Callout } from "@/components/ui/Callout";
 import { Table } from "@/components/ui/Table";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Clock, Database } from "lucide-react";
 
 export const bigOComplexityTopic: Topic = {
 	id: "big-o-complexity",
@@ -36,19 +37,19 @@ export const bigOComplexityTopic: Topic = {
 			]}
 		/>,
 		<Grid key="4" cols={2} gap={6} className="my-8">
-			<Card title="Best / Average / Worst Case">
-				<p className="text-sm text-muted-foreground">
+			<FeatureCard icon={Clock} title="Best / Average / Worst Case" subtitle="Runtime depends on input shape" theme="emerald">
+				<p className="text-sm text-emerald-200/80">
 					Quicksort is <code>O(n log n)</code> on average but <code>O(n²)</code> worst case (already sorted input).
-					Interviewers want you to know <strong>all three</strong> and explain <em>when</em> each occurs.
+					Interviewers want you to know <strong className="text-emerald-300">all three</strong> and explain <em>when</em> each occurs.
 				</p>
-			</Card>
-			<Card title="Space Complexity">
-				<p className="text-sm text-muted-foreground">
+			</FeatureCard>
+			<FeatureCard icon={Database} title="Space Complexity" subtitle="Memory is part of the cost" theme="teal">
+				<p className="text-sm text-teal-200/80">
 					Don't forget memory! Merge sort is <code>O(n log n)</code> time but requires <code>O(n)</code> extra space.
 					In-place quicksort uses <code>O(log n)</code> stack space. Always mention{" "}
-					<strong>space-time tradeoffs</strong>.
+					<strong className="text-teal-300">space-time tradeoffs</strong>.
 				</p>
-			</Card>
+			</FeatureCard>
 		</Grid>,
 		<CodeBlock
 			key="5"
