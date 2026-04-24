@@ -73,6 +73,9 @@ For comparing protocols, flags, or data structures.
 - Only pass a `theme` prop to `<Table>` when the table is visually inside a themed parent surface and should inherit that parent identity.
 - Do **not** switch a standalone table to `slate` just because the surrounding prose is neutral or because you want it to feel calmer.
 - If a comparison topic has recurring main characters, keep the table itself on the default theme unless it is nested in a themed card; use colored header labels or selective label accents to carry the actor identity instead of changing the whole table by default.
+- Only use actor-colored table labels when the topic is mainly about multiple recurring main sections, areas, actors, or paradigms that stay important across the page. Do **not** theme every differing source, channel, keyword, or supporting category just because a table contains several kinds of rows.
+- If the article is mainly about one dominant system or company stack, keep most table labels neutral and let the cards or major sections carry the theme identity.
+- Any colored table label or header accent must be dimmer than card accents. Tune it so it supports the table instead of outshining it: prefer softer treatments such as `*-200/80`, `*-200/85`, or similarly restrained tones instead of sharp, high-contrast chips.
 
 #### **3. Grid**
 
@@ -111,6 +114,7 @@ For rich, dense cards that explain actors, roles, or deep-dive concepts. Instead
    - Actor-specific sections, strengths/weaknesses, tradeoff cards, example cards, and recommendation cards should use `<FeatureCard theme="actorTheme">`, not a generic `<Card>`, when the actor is the subject of the surface.
    - Do not switch actor-owned cards to semantic green/rose just because they describe pros/cons. The actor theme wins; communicate positive/negative meaning with copy, labels, and structure inside that same theme.
    - Standalone comparison tables should usually keep the default table theme, but their actor headers/cells must carry actor identity via colored labels, inline spans, or selective accents. Do not leave recurring actor names visually generic in later tables.
+   - This rule only applies when those actors are true recurring main characters of the article. Do not turn every table taxonomy into a color-coded actor system.
    - If a callout is primarily about one themed actor and the available `<Callout>` types would fight that actor color, prefer a themed `<FeatureCard>` instead of a generic callout.
    - Only skip actor theme propagation when the mention is incidental prose, not a dedicated surface, label, row, heading, or comparison axis.
 4. **Inner Text Consistency:** When assigning a `theme` to a `FeatureCard`, ensure all inner text content (paragraphs, inline code, strong tags) matches the chosen rendered palette. For example, if `theme="amber"`, use `text-amber-200/80` for body text, `text-amber-400` for `<strong>` tags, and `border-amber-700/50` for nested elements. If a legacy token maps to another rendered color (for example `theme="emerald"` rendering as red), the inner classes must follow the rendered color family, not the token name. Do not suddenly mix in mismatched colors like slate or green that break the card's visual cohesion.
