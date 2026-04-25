@@ -110,6 +110,7 @@ import { awsServicesMappingTopic } from "@/data/topics/aws-services-mapping";
 import { bTreeVsBPlusTreeTopic } from "@/data/topics/b-tree-vs-b-plus-tree";
 import { codexVsSonnetTopic } from "@/data/topics/codex-vs-sonnet";
 import { cssInJsVsUtilityTopic } from "@/data/topics/css-in-js-vs-utility";
+import { cssColorFormatsSpacesTopic } from "@/data/topics/css-color-formats-spaces";
 import { cssSpecificityCascadeTopic } from "@/data/topics/css-specificity-cascade";
 import { debounceVsThrottleTopic } from "@/data/topics/debounce-vs-throttle";
 import { deploymentStrategiesTopic } from "@/data/topics/deployment-strategies";
@@ -293,6 +294,7 @@ export const knowledgeBase: Section[] = [
       virtualDomVsSignalsTopic,
       stateManagementTopic,
       cssBoxModelTopic,
+      cssColorFormatsSpacesTopic,
       serviceWorkersPwaTopic,
       webAccessibilityTopic,
       reactServerComponentsTopic,
