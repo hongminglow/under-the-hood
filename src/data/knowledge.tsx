@@ -33,6 +33,7 @@ import { jwtVsSessionTopic } from "@/data/topics/jwt-vs-session";
 import { kubernetesTopic } from "@/data/topics/kubernetes-architecture";
 import { loadBalancingTopic } from "@/data/topics/load-balancing";
 import { messageQueuesTopic } from "@/data/topics/message-queues";
+import { memoryHierarchyStorageLatencyTopic } from "@/data/topics/memory-hierarchy-storage-latency";
 import { microservicesTopic } from "@/data/topics/microservices";
 import { natAddressingTopic } from "@/data/topics/nat-addressing";
 import { oauth2OidcTopic } from "@/data/topics/oauth2-oidc";
@@ -230,6 +231,7 @@ export const knowledgeBase: Section[] = [
       microservicesTopic,
       designPatternsTopic,
       messageQueuesTopic,
+      memoryHierarchyStorageLatencyTopic,
       cachingStrategiesTopic,
       serverlessTopic,
       sagaPatternTopic,
