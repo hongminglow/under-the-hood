@@ -164,6 +164,7 @@ import { cqrsPatternTopic } from "@/data/topics/cqrs-pattern";
 import { codeObfuscationTopic } from "@/data/topics/code-obfuscation";
 import { reactTransitionsDeferredTopic } from "@/data/topics/react-transitions-deferred";
 import { apiParadigmsComparisonTopic } from "@/data/topics/api-paradigms-comparison";
+import { recommendationAlgorithmsTopic } from "@/data/topics/recommendation-algorithms";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
@@ -380,6 +381,7 @@ export const knowledgeBase: Section[] = [
       llmDistillationTrainingEconomicsTopic,
       moeArchitectureTopic,
       llmQuantizationTopic,
+      recommendationAlgorithmsTopic,
     ],
   },
   {
