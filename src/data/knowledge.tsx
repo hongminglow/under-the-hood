@@ -167,6 +167,7 @@ import { reactTransitionsDeferredTopic } from "@/data/topics/react-transitions-d
 import { apiParadigmsComparisonTopic } from "@/data/topics/api-paradigms-comparison";
 import { recommendationAlgorithmsTopic } from "@/data/topics/recommendation-algorithms";
 import { webglThreejsGpuTopic } from "@/data/topics/webgl-threejs-gpu";
+import { expoReactNativeArchitectureTopic } from "@/data/topics/expo-react-native-architecture";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
@@ -398,6 +399,12 @@ export const knowledgeBase: Section[] = [
     title: "Game Engineering",
     icon: "Gamepad2",
     topics: [onlineMultiplayerArchitectureTopic, gameDatabaseArchitectureTopic, gameEnginesComparisonTopic],
+  },
+  {
+    id: "mobile",
+    title: "Mobile Development",
+    icon: "Smartphone",
+    topics: [expoReactNativeArchitectureTopic],
   },
 ];
 
