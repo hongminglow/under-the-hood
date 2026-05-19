@@ -168,6 +168,7 @@ import { apiParadigmsComparisonTopic } from "@/data/topics/api-paradigms-compari
 import { recommendationAlgorithmsTopic } from "@/data/topics/recommendation-algorithms";
 import { webglThreejsGpuTopic } from "@/data/topics/webgl-threejs-gpu";
 import { expoReactNativeArchitectureTopic } from "@/data/topics/expo-react-native-architecture";
+import { baasProvidersComparisonTopic } from "@/data/topics/baas-providers-comparison";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
@@ -257,6 +258,7 @@ export const knowledgeBase: Section[] = [
       dataSerializationFormatsTopic,
       cqrsPatternTopic,
       sdlcMethodologiesTopic,
+      baasProvidersComparisonTopic,
     ],
   },
   {
