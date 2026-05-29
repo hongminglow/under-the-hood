@@ -312,7 +312,7 @@ Every concrete spec, protocol, or version-sensitive claim MUST be one of:
 Concrete numbers without context get the same treatment ("p99 ~50ms on a standard cloud LB" beats "fast").
 
 **Floor 3 — Why-It-Matters Floor**
-Every major section MUST answer why a working engineer would care. No purely definitional sections. Every section must either end with a "what breaks if you ignore this" consequence, or contain a `<Callout>` that names the concrete consequence of ignoring the section — not just a generic tip.
+Every major section MUST answer why a working engineer would care. No purely definitional sections. Every section must either end with a "what breaks if you ignore this" consequence, or contain a `<Callout type="tip">` or `<Callout type="warning">` that names the concrete consequence of ignoring the section — not a generic informational note.
 
 **Floor 4 — War Story / Awareness Floor**
 Every actor-driven and mechanism-driven topic MUST include at least one concrete failure scenario — specific, not generic. "Be careful with X" does not satisfy this floor. The scenario must name a consequence: data loss, latency spike, security exposure, or cost blowout.
