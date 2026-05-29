@@ -10,3 +10,4 @@ export { MistakeCard } from "./MistakeCard";
 export { Step } from "./Step";
 export { Table } from "./Table";
 export { FeatureCard } from "./FeatureCard";
+export { SourceMarker } from "./SourceMarker";
