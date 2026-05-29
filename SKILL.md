@@ -268,6 +268,7 @@ Before marking a topic polished:
 - Standalone tables use the default green house style unless nested inside a themed parent.
 - Dense explanatory prose uses slate; scannable checklist content uses green.
 - `pnpm run build` or the project-equivalent verification passes before final response.
+- Run the Research Rigor Content Audit (§ Research Rigor Contract) in the same pass.
 
 ## Data Entry Workflow
 
@@ -412,6 +413,7 @@ To ensure the application remains stable and build-ready, always follow these ru
 <Callout>       → import { Callout } from "@/components/ui/Callout";
 <Step>          → import { Step } from "@/components/ui/Step";
 <FeatureCard>   → import { FeatureCard } from "@/components/ui/FeatureCard";
+<SourceMarker>  → import { SourceMarker } from "@/components/ui/SourceMarker";
 ```
 
 #### Example Workflow:
