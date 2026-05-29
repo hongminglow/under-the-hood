@@ -61,7 +61,7 @@ export const web3BlockchainTopic: Topic = {
       databases with extra steps.
     </Callout>,
 
-    <h2 key="h-problem" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-problem" className="text-xl font-bold mt-10 mb-4">
       The Core Problem: Double-Spend Without a Referee
     </h2>,
 
@@ -87,7 +87,7 @@ export const web3BlockchainTopic: Topic = {
       <strong>automatic</strong> and <strong>expensive to subvert</strong>.
     </Callout>,
 
-    <h2 key="h-block" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-block" className="text-xl font-bold mt-10 mb-4">
       Anatomy of a Block
     </h2>,
 
@@ -136,7 +136,7 @@ export const web3BlockchainTopic: Topic = {
       ]}
     />,
 
-    <h2 key="h-chain" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-chain" className="text-xl font-bold mt-10 mb-4">
       The Chain: Hash Pointers Make History Tamper-Evident
     </h2>,
 
@@ -180,7 +180,7 @@ block.hash = SHA256(SHA256(
       payment is cheap to reverse, a 100-block-deep one effectively isn't.
     </Callout>,
 
-    <h2 key="h-crypto" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-crypto" className="text-xl font-bold mt-10 mb-4">
       Cryptographic Foundations: Hashing, Keys & Signatures
     </h2>,
 
@@ -254,7 +254,7 @@ block.hash = SHA256(SHA256(
       net.
     </Callout>,
 
-    <h2 key="h-merkle" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-merkle" className="text-xl font-bold mt-10 mb-4">
       Merkle Trees: Verifying Without Downloading Everything
     </h2>,
 
@@ -275,7 +275,7 @@ block.hash = SHA256(SHA256(
       chain they could never store.
     </Callout>,
 
-    <h2 key="h-lifecycle" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-lifecycle" className="text-xl font-bold mt-10 mb-4">
       The Life of a Transaction
     </h2>,
 
@@ -320,7 +320,7 @@ block.hash = SHA256(SHA256(
       ]}
     />,
 
-    <h2 key="h-consensus" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-consensus" className="text-xl font-bold mt-10 mb-4">
       Consensus: How Strangers Agree on One History
     </h2>,
 
@@ -483,7 +483,7 @@ block.hash = SHA256(SHA256(
       }
     />,
 
-    <h2 key="h-contracts" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-contracts" className="text-xl font-bold mt-10 mb-4">
       Smart Contracts & the EVM: The "World Computer"
     </h2>,
 
@@ -582,7 +582,7 @@ while (true) { x++; } // ⛔ halts at the gas limit`}
       }
     />,
 
-    <h2 key="h-scaling" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-scaling" className="text-xl font-bold mt-10 mb-4">
       Scaling: The Trilemma & Layer 2
     </h2>,
 
@@ -686,7 +686,7 @@ while (true) { x++; } // ⛔ halts at the gas limit`}
       }
     />,
 
-    <h2 key="h-stack" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-stack" className="text-xl font-bold mt-10 mb-4">
       The Web3 Application Stack
     </h2>,
 
@@ -749,7 +749,7 @@ await tx.wait(); // block until it is confirmed on-chain`}
       error isn't a hotfix — it's a permanent, publicly exploitable liability.
     </Callout>,
 
-    <h2 key="h-decision" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-decision" className="text-xl font-bold mt-10 mb-4">
       Do You Actually Need a Blockchain?
     </h2>,
 
