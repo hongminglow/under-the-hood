@@ -169,6 +169,7 @@ import { recommendationAlgorithmsTopic } from "@/data/topics/recommendation-algo
 import { webglThreejsGpuTopic } from "@/data/topics/webgl-threejs-gpu";
 import { expoReactNativeArchitectureTopic } from "@/data/topics/expo-react-native-architecture";
 import { baasProvidersComparisonTopic } from "@/data/topics/baas-providers-comparison";
+import { web3BlockchainTopic } from "@/data/topics/web3-blockchain-deep-dive";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
@@ -395,6 +396,12 @@ export const knowledgeBase: Section[] = [
     title: "Fintech & Payments",
     icon: "CreditCard",
     topics: [paymentGatewayInternalsTopic],
+  },
+  {
+    id: "web3",
+    title: "Web3 & Blockchain",
+    icon: "Boxes",
+    topics: [web3BlockchainTopic],
   },
   {
     id: "game-engineering",
