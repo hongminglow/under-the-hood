@@ -300,7 +300,7 @@ This contract applies to **all new topics and active edits**. It runs alongside 
 ### The Five Hard Floors
 
 **Floor 1 — Comparison Axis Floor**
-Every actor-driven page with 3+ recurring named paradigms (REST/GraphQL/gRPC, Scrum/Kanban/Waterfall, React/Vue/Angular) MUST include a dedicated comparison-axes `<Table>` covering at minimum: when to pick this, how it fails, and latency/cost/operational characteristics. Quality bar: a senior engineer can defend a technology choice in a design review after skimming the page.
+Every actor-driven page with three or more recurring named paradigms (REST/GraphQL/gRPC, Scrum/Kanban/Waterfall, React/Vue/Angular) MUST include a dedicated comparison-axes `<Table>` covering at minimum: when to pick this, how it fails, and latency/cost/operational characteristics. Quality bar: a senior engineer can defend a technology choice in a design review after skimming the page.
 
 **Floor 2 — Source Grounding Floor**
 Every concrete spec, protocol, or version-sensitive claim MUST be one of:
@@ -311,7 +311,7 @@ Every concrete spec, protocol, or version-sensitive claim MUST be one of:
 Concrete numbers without context get the same treatment ("p99 ~50ms on a standard cloud LB" beats "fast").
 
 **Floor 3 — Why-It-Matters Floor**
-Every major section MUST answer why a working engineer would care. No purely definitional sections. Every section must either end with a "what breaks if you ignore this" consequence, or contain a `<Callout type="tip">` framing the practical impact.
+Every major section MUST answer why a working engineer would care. No purely definitional sections. Every section must either end with a "what breaks if you ignore this" consequence, or contain a `<Callout>` that names the concrete consequence of ignoring the section — not just a generic tip.
 
 **Floor 4 — War Story / Awareness Floor**
 Every actor-driven and mechanism-driven topic MUST include at least one concrete failure scenario — specific, not generic. "Be careful with X" does not satisfy this floor. The scenario must name a consequence: data loss, latency spike, security exposure, or cost blowout.
@@ -320,6 +320,8 @@ Every actor-driven and mechanism-driven topic MUST include at least one concrete
 
 **Floor 5 — Decision-Frame Floor**
 Every topic that compares ≥ 2 options MUST end with (or contain) a "How to pick" section translating the article into a concrete decision. Acceptable forms: `<FeatureCard>` set, `<MistakeCard>` pattern, or decision `<Table>`.
+
+**Diagnostic exemption:** Diagnostic pages that document a single correct fix path (e.g. N+1 Query Problem, MVCC Deadlocks) are exempt from Floor 5 — "broken vs fixed" is not a decision between options. If a diagnostic page does present multiple valid approaches (e.g. "fix at the ORM layer vs fix at the query layer"), Floor 5 applies.
 
 ---
 
@@ -341,7 +343,7 @@ Required depth: symptom before cause — readers recognise symptoms, not root ca
 
 **Reference / Comparison Page** (e.g. Database Choices at Scale, HTTP/1-3, Docker vs K8s)
 
-Required depth: purpose matrix Table upfront — not buried mid-article → "When to use each" block using decision-tree or `<FeatureCard>` set → known gotchas column in every comparison Table. Quality bar: a reader opening the page to settle a specific question finds the answer in under 30 seconds.
+Required depth: purpose matrix Table upfront — not buried mid-article → "When to use each" block using decision-tree or `<FeatureCard>` set → at least one "how it fails / known gotchas" column in every comparison Table (this satisfies the Floor 1 "how it fails" axis for reference pages). Quality bar: a reader opening the page to settle a specific question finds the answer in under 30 seconds.
 
 ---
 
@@ -355,7 +357,7 @@ For marking spec/RFC/version/year/vendor-grounded claims inline. Renders as a su
 |---|---|---|
 | `spec` | `string` | e.g. `"RFC 9114"` |
 | `version` | `string` | e.g. `"TLS 1.3"` |
-| `year` | `number` | e.g. `"as of 2024"` |
+| `year` | `number` | e.g. `as of 2024` |
 | `vendor` | `string` | e.g. `"Stripe Docs"` |
 
 **Usage rule (hard):** Use `<SourceMarker>` only for claims that can be fact-checked against a primary source — RFC numbers, version-sensitive behaviour, cited benchmarks, vendor-specific facts. Do NOT use for general architectural reasoning or prose.
