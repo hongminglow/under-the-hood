@@ -293,6 +293,93 @@ Before marking a topic polished:
 
 ---
 
+## 🔬 Research Rigor Contract
+
+This contract applies to **all new topics and active edits**. It runs alongside the visual audit. A topic is not done if any applicable floor is unmet — even if the build passes and components look correct.
+
+### The Five Hard Floors
+
+**Floor 1 — Comparison Axis Floor**
+Every actor-driven page with 3+ recurring named paradigms (REST/GraphQL/gRPC, Scrum/Kanban/Waterfall, React/Vue/Angular) MUST include a dedicated comparison-axes `<Table>` covering at minimum: when to pick this, how it fails, and latency/cost/operational characteristics. Quality bar: a senior engineer can defend a technology choice in a design review after skimming the page.
+
+**Floor 2 — Source Grounding Floor**
+Every concrete spec, protocol, or version-sensitive claim MUST be one of:
+- Marked with `<SourceMarker spec="RFC 9114" />`, `<SourceMarker version="TLS 1.3" />`, `<SourceMarker year={2024} />`, or `<SourceMarker vendor="Stripe Docs" />`
+- Carrying an inline freshness qualifier ("post-React 19", "as of HTTP/3")
+- Removed if it cannot be grounded
+
+Concrete numbers without context get the same treatment ("p99 ~50ms on a standard cloud LB" beats "fast").
+
+**Floor 3 — Why-It-Matters Floor**
+Every major section MUST answer why a working engineer would care. No purely definitional sections. Every section must either end with a "what breaks if you ignore this" consequence, or contain a `<Callout type="tip">` framing the practical impact.
+
+**Floor 4 — War Story / Awareness Floor**
+Every actor-driven and mechanism-driven topic MUST include at least one concrete failure scenario — specific, not generic. "Be careful with X" does not satisfy this floor. The scenario must name a consequence: data loss, latency spike, security exposure, or cost blowout.
+
+**Awareness-inherent exemption:** Topics whose primary purpose is raising awareness about attack vectors, vulnerability classes, or encoding/hashing pitfalls (XSS, CSRF, SQLi, bcrypt vs SHA-256, etc.) satisfy this floor through a concrete attack scenario with measurable consequence. No named production incident required. The gate question is: *"Does a reader leave with calibrated intuition about what failure looks like?"* If yes, the floor is satisfied.
+
+**Floor 5 — Decision-Frame Floor**
+Every topic that compares ≥ 2 options MUST end with (or contain) a "How to pick" section translating the article into a concrete decision. Acceptable forms: `<FeatureCard>` set, `<MistakeCard>` pattern, or decision `<Table>`.
+
+---
+
+### Page-Type Depth Contracts
+
+These extend the existing Page Shape classifier with required depth dimensions. They are quality bars with judgment, not mechanical checklists.
+
+**Actor-Driven Page** (e.g. REST/GraphQL/gRPC, Scrum/Kanban/Waterfall, React/Vue/Angular)
+
+Required depth: introduce actors with theme map → per-actor strengths and failure modes → cross-actor comparison axes Table (when-to-pick, how-it-fails, operational cost) → concrete failure scenario per Floor 4 → "How to pick" decision frame per Floor 5. Quality bar: a senior engineer can defend a technology choice in a design review after skimming.
+
+**Mechanism-Driven Page** (e.g. TLS handshake, Event Loop, Rendering Pipeline, Raft leader election)
+
+Required depth: the problem the mechanism solves — before the mechanism itself → phase-by-phase breakdown using `<Flow>` or `<Step>` → at least one "what actually breaks in production" section (concrete: latency spikes, connection drops, OOM — not abstract warnings) → performance/latency characteristics with `<SourceMarker>` where numbers are cited. Quality bar: reader understands what breaks first under load and why.
+
+**Diagnostic Page** (e.g. N+1 Query Problem, MVCC Deadlocks, Race Conditions)
+
+Required depth: symptom before cause — readers recognise symptoms, not root causes → `<MistakeCard>` pattern for each failure mode → measurable consequence for each failure (latency, cost, data loss) → fix with concrete before/after. Quality bar: the article is useful at 2am during an incident.
+
+**Reference / Comparison Page** (e.g. Database Choices at Scale, HTTP/1-3, Docker vs K8s)
+
+Required depth: purpose matrix Table upfront — not buried mid-article → "When to use each" block using decision-tree or `<FeatureCard>` set → known gotchas column in every comparison Table. Quality bar: a reader opening the page to settle a specific question finds the answer in under 30 seconds.
+
+---
+
+### `<SourceMarker>` Component
+
+For marking spec/RFC/version/year/vendor-grounded claims inline. Renders as a subtle monospace chip — metadata, not emphasis. Dimmer than `<Highlight>`.
+
+**Props:**
+
+| Prop | Type | Renders as |
+|---|---|---|
+| `spec` | `string` | e.g. `"RFC 9114"` |
+| `version` | `string` | e.g. `"TLS 1.3"` |
+| `year` | `number` | e.g. `"as of 2024"` |
+| `vendor` | `string` | e.g. `"Stripe Docs"` |
+
+**Usage rule (hard):** Use `<SourceMarker>` only for claims that can be fact-checked against a primary source — RFC numbers, version-sensitive behaviour, cited benchmarks, vendor-specific facts. Do NOT use for general architectural reasoning or prose.
+
+---
+
+### Pre-Delivery Content Audit
+
+Run in the same pass as the Pre-Delivery Styling Audit (see above). Six questions — fix inline, then proceed.
+
+1. **Floors met?** — For each of the five floors that applies to this page type, confirm it is satisfied. If a floor is exempt (e.g. war-story floor on a pure reference page), note the reason — do not skip silently.
+
+2. **Dead definitions?** — Any section that only defines what something *is* without explaining what breaks if you ignore it? Add a "why it matters" consequence line, or cut the section.
+
+3. **Naked numbers?** — Any concrete number (latency, throughput, limit, percentage, cost) without a `<SourceMarker>` or contextualising qualifier? Add the marker, soften to a relative comparison, or remove the number.
+
+4. **Generic warnings?** — Any "be careful with X" or "this can cause problems" without a concrete failure scenario? Make it concrete with a named consequence, or cut it.
+
+5. **Decision frame present?** — Does the topic end with (or contain) a section translating knowledge into a decision the reader can make? If no, add one before marking done.
+
+6. **Component-content alignment?** — Every themed `<FeatureCard>` actually contains that actor's content (not generic prose coloured to match). Every comparison `<Table>` has at least one "failure mode" or "when not to use" column or row. *(This bridges into the Pre-Delivery Styling Audit — both audits end at the same point.)*
+
+---
+
 ## 🚨 Common Technical Pitfalls & Reminders
 
 To ensure the application remains stable and build-ready, always follow these rules:
