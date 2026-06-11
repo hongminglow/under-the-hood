@@ -170,6 +170,7 @@ import { webglThreejsGpuTopic } from "@/data/topics/webgl-threejs-gpu";
 import { expoReactNativeArchitectureTopic } from "@/data/topics/expo-react-native-architecture";
 import { baasProvidersComparisonTopic } from "@/data/topics/baas-providers-comparison";
 import { web3BlockchainTopic } from "@/data/topics/web3-blockchain-deep-dive";
+import { videoStreamingUnderTheHoodTopic } from "@/data/topics/video-streaming-under-the-hood";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
@@ -196,6 +197,7 @@ export const knowledgeBase: Section[] = [
       cdnUnderTheHoodTopic,
       httpsTlsHandshakeTopic,
       realtimeCountersTopic,
+      videoStreamingUnderTheHoodTopic,
     ],
   },
   {
