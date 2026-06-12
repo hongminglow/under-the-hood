@@ -171,6 +171,7 @@ import { expoReactNativeArchitectureTopic } from "@/data/topics/expo-react-nativ
 import { baasProvidersComparisonTopic } from "@/data/topics/baas-providers-comparison";
 import { web3BlockchainTopic } from "@/data/topics/web3-blockchain-deep-dive";
 import { videoStreamingUnderTheHoodTopic } from "@/data/topics/video-streaming-under-the-hood";
+import { llmTrainingPipelineTopic } from "@/data/topics/llm-training-pipeline";
 
 // Re-export types so we don't break existing imports relying on knowledge.tsx
 
@@ -379,6 +380,7 @@ export const knowledgeBase: Section[] = [
     topics: [
       howLlmsWorkTopic,
       ragRetrievalAugmentedTopic,
+      llmTrainingPipelineTopic,
       aiAgentsToolUseTopic,
       promptEngineeringTopic,
       vectorDatabasesEmbeddingsTopic,
