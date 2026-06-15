@@ -177,11 +177,11 @@ export const llmTrainingPipelineTopic: Topic = {
         The key insight that makes LLMs possible:{" "}
         <strong>you don't need human labels</strong>. Every sentence on the
         internet is its own training example. Given{" "}
-        <code className="text-cyan-300 bg-slate-800 px-1 rounded">
+        <code className="text-muted-foreground bg-slate-800 px-1 rounded">
           "The capital of France is"
         </code>
         , the label is simply{" "}
-        <code className="text-cyan-300 bg-slate-800 px-1 rounded">
+        <code className="text-muted-foreground bg-slate-800 px-1 rounded">
           "Paris"
         </code>
         . The model trains by predicting the next token across trillions of
@@ -210,7 +210,7 @@ export const llmTrainingPipelineTopic: Topic = {
     <Grid key="grid-sft" cols={2} gap={6} className="mb-8">
       <Card title="What SFT Data Looks Like">
         <CodeBlock
-          theme="cyan"
+          theme="slate"
           title="SFT Training Pair Example"
           language="json"
           code={`{
@@ -232,24 +232,24 @@ export const llmTrainingPipelineTopic: Topic = {
       <Card title="What SFT Actually Teaches">
         <ul className="text-sm text-slate-300 space-y-2 list-disc pl-4">
           <li>
-            <strong className="text-cyan-400">Follow instructions</strong> —
+            <strong className="text-muted-foreground">Follow instructions</strong> —
             stop completing text, start answering questions.
           </li>
           <li>
-            <strong className="text-cyan-400">Format responses</strong> — use
+            <strong className="text-muted-foreground">Format responses</strong> — use
             markdown, bullet points, code blocks appropriately.
           </li>
           <li>
-            <strong className="text-cyan-400">Adopt a persona</strong> — "I am
+            <strong className="text-muted-foreground">Adopt a persona</strong> — "I am
             a helpful assistant" vs. continuing arbitrary web text.
           </li>
           <li>
-            <strong className="text-cyan-400">Refuse harmful requests</strong>{" "}
+            <strong className="text-muted-foreground">Refuse harmful requests</strong>{" "}
             — red-teamers write adversarial prompts; responses are crafted to
             refuse safely.
           </li>
           <li>
-            <strong className="text-cyan-400">Admit uncertainty</strong> —
+            <strong className="text-muted-foreground">Admit uncertainty</strong> —
             "I'm not sure" instead of hallucinating confidently.
           </li>
         </ul>
@@ -493,7 +493,7 @@ export const llmTrainingPipelineTopic: Topic = {
     </h3>,
     <p key="p-chatgpt-web" className="text-slate-300 mb-6 leading-relaxed">
       ChatGPT at{" "}
-      <code className="text-cyan-300 bg-slate-800 px-1 rounded">
+      <code className="text-muted-foreground bg-slate-800 px-1 rounded">
         chat.openai.com
       </code>{" "}
       is a product built on top of the GPT API. Understanding what happens when
