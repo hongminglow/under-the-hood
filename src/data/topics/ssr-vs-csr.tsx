@@ -11,7 +11,7 @@ export const ssrVsCsrTopic: Topic = {
   id: "ssr-vs-csr",
   title: "SSR vs CSR vs SSG vs ISR",
   description:
-    "How to theoretically deliver your React logic across the globe so Google SEO doesn't viciously penalize you — and how Next.js 15 caching flips the entire model on its head.",
+    "How React rendering strategies trade off SEO, speed, and server cost — and how React Server Components and Suspense streaming reshape the model.",
   tags: ["frontend", "architecture", "react", "nextjs"],
   icon: "Globe",
   content: [
@@ -283,306 +283,52 @@ export default function Page() {
 }`}
     />,
 
-    /* ─── SECTION 5: Next.js Caching Layers ────────────────────────────── */
-    <h3 key="cache-title" className="text-xl font-bold mt-12 mb-2">
-      The Next.js 15 Caching Model — 4 Layers Deep
+    /* ─── SECTION 5: How Next.js Maps Strategies to Caching ─────────────── */
+    <h3 key="cache-title" className="text-xl font-bold mt-12 mb-4">
+      How Next.js Maps These Strategies to Caching
     </h3>,
     <p key="cache-sub" className="text-muted-foreground mb-6">
-      Next.js has an aggressive, multi-layered caching system that most
-      developers don't fully understand. Missing any one layer means either
-      stale data or performance regressions. Here's the full stack:
+      In the App Router you don't flip a global "SSR" or "SSG" switch — you pick
+      a <strong>caching behaviour per data fetch</strong>, and Next.js derives
+      the rendering strategy from it. The mental model is four cache layers
+      stacked from request to browser:
     </p>,
     <Table
       key="cache-table"
-      headers={["Cache Layer", "What it caches", "Storage", "Duration"]}
+      headers={["Cache Layer", "What it caches", "Lifetime"]}
       rows={[
         [
           "Request Memoization",
-          "Deduplicated fetch() calls within a single render pass",
-          "In-memory (per request)",
-          "Single render cycle only — cleared after each request",
+          "Duplicate fetch() calls within one render pass",
+          "Single render only",
         ],
         [
           "Data Cache",
-          "fetch() responses tagged with cache config",
-          "Server-side persistent cache (filesystem / Redis)",
-          "Persistent until revalidated (revalidate: 3600 or revalidateTag)",
+          "fetch() responses, keyed by time or tag",
+          "Until revalidated",
         ],
         [
           "Full Route Cache",
-          "The entire rendered HTML + RSC payload of a route",
-          "Server filesystem",
-          "Persistent until revalidation or re-deploy",
+          "Rendered HTML + RSC payload of a route",
+          "Until revalidation / redeploy",
         ],
         [
           "Router Cache",
-          "RSC payloads prefetched for routes the user may navigate to",
-          "Browser memory (client-side)",
-          "30s for dynamic, 5 min for static — auto-invalidates",
+          "Prefetched RSC payloads for likely navigations",
+          "Seconds–minutes (client memory)",
         ],
       ]}
     />,
-
-    /* ─── SECTION 6: fetch() Caching & Revalidation ────────────────────── */
-    <h3 key="fetch-title" className="text-xl font-bold mt-12 mb-4">
-      Controlling the Data Cache: <code>fetch()</code> Options
-    </h3>,
-    <p key="fetch-sub" className="text-muted-foreground mb-6">
-      In Next.js App Router, the native <code>fetch()</code> API is extended
-      with caching controls. This is the primary way you tune how aggressively
-      your server caches external API or database responses:
-    </p>,
-    <Grid key="fetch-grid" cols={2} gap={6} className="mb-4">
-      <Card
-        title="force-cache — Static (SSG behaviour)"
-        description="Cache forever until manually revalidated"
-      >
-        <CodeBlock
-          title="fetch with force-cache"
-          language="typescript"
-          code={`// Cached on disk. Behaves like SSG.
-// Re-fetched only on deploy OR revalidateTag()
-const data = await fetch("https://api.shop.com/products", {
-  cache: "force-cache",           // default in Next 13/14
-  next: { tags: ["products"] },  // tag it for targeted invalidation
-});`}
-        />
-        <p className="text-xs text-muted-foreground mt-3">
-          Use for: product catalogs, blog posts, CMS content — anything that
-          doesn't change per-request.
-        </p>
-      </Card>
-      <Card
-        title="no-store — Dynamic (SSR behaviour)"
-        description="Never cache — fresh fetch on every request"
-      >
-        <CodeBlock
-          title="fetch with no-store"
-          language="typescript"
-          code={`// Never cached. Runs fresh on every single request.
-// Behaves like classic SSR. Opts the entire route into dynamic rendering.
-const data = await fetch("https://api.shop.com/cart", {
-  cache: "no-store",
-});`}
-        />
-        <p className="text-xs text-muted-foreground mt-3">
-          Use for: shopping cart, user-specific data, live prices, anything with
-          auth headers.
-        </p>
-      </Card>
-      <Card
-        title="revalidate — Time-Based ISR"
-        description="Cache for N seconds, then background refresh"
-      >
-        <CodeBlock
-          title="fetch with revalidate"
-          language="typescript"
-          code={`// Cached for 3600 seconds (1 hour).
-// After 1 hour, next request gets stale data while
-// Next.js regenerates fresh data silently in the background.
-const data = await fetch("https://api.shop.com/featured", {
-  next: { revalidate: 3600 },
-});`}
-        />
-        <p className="text-xs text-muted-foreground mt-3">
-          Use for: featured products, news headlines, anything acceptable to be
-          slightly stale.
-        </p>
-      </Card>
-      <Card
-        title="tags — On-Demand Invalidation"
-        description="Tag the cache, then surgically invalidate it from a Server Action"
-      >
-        <CodeBlock
-          title="fetch with tags + revalidateTag"
-          language="typescript"
-          code={`// Tag the fetch in your component:
-const data = await fetch("https://api.shop.com/product/42", {
-  next: { tags: ["product-42", "products"] },
-});
-
-// Then in a Server Action (e.g., after a CMS webhook):
-import { revalidateTag } from "next/cache";
-
-export async function onProductUpdate() {
-  revalidateTag("product-42"); // Surgically busts only this product's cache
-}`}
-        />
-        <p className="text-xs text-muted-foreground mt-3">
-          Use for: CMS webhooks, admin panel updates — invalidating exactly what
-          changed, nothing more.
-        </p>
-      </Card>
-    </Grid>,
-
-    /* ─── SECTION 7: cache() function ──────────────────────────────────── */
-    <h3 key="cache-fn-title" className="text-xl font-bold mt-12 mb-4">
-      React's <code>cache()</code> — Server-Side Request Deduplication
-    </h3>,
-    <p key="cache-fn-sub" className="text-muted-foreground mb-6">
-      React 18 shipped a native <code>cache()</code> function for use with
-      Server Components. It memoizes a function's return value{" "}
-      <em>within a single server render pass</em>. If five different Server
-      Components on the same page all call <code>getUser(userId)</code>, the
-      actual database query only runs <strong>once</strong> — the result is
-      shared across the render tree.
-    </p>,
-    <Grid key="cache-fn-grid" cols={2} gap={6} className="mb-4">
-      <Card title="Without cache() — N database queries">
-        <CodeBlock
-          title="lib/data.ts — No deduplication"
-          language="typescript"
-          code={`// Called in Header, Sidebar, and ProfileCard on same page =
-// 3 separate database queries for the same user!
-export async function getUser(id: string) {
-  return await db.users.findUnique({ where: { id } });
-}`}
-        />
-      </Card>
-      <Card title="With cache() — 1 database query, shared result">
-        <CodeBlock
-          title="lib/data.ts — React cache()"
-          language="typescript"
-          code={`import { cache } from "react";
-
-// Wrap in cache(). Now ALL components calling getUser("123")
-// in the same render share one single DB result.
-export const getUser = cache(async (id: string) => {
-  return await db.users.findUnique({ where: { id } });
-});`}
-        />
-      </Card>
-    </Grid>,
-    <Callout
-      key="cache-fn-note"
-      type="info"
-      title="cache() vs fetch() deduplication"
-    >
-      Next.js already deduplicates <code>fetch()</code> calls automatically
-      within a single render pass. But <code>cache()</code> is for{" "}
-      <strong>non-fetch operations</strong> — ORM queries (Prisma, Drizzle), SDK
-      calls (Stripe, Twilio), or any async utility function that doesn't use{" "}
-      <code>fetch</code> internally.
+    <Callout key="cache-knobs" type="tip" title="The knobs that pick your strategy">
+      You tune the Data Cache with three <code>fetch()</code> options:{" "}
+      <code>cache: "force-cache"</code> (static, SSG-like),{" "}
+      <code>cache: "no-store"</code> (dynamic, SSR-like), and{" "}
+      <code>next: {"{"} revalidate: N {"}"}</code> (time-based ISR). Tag a fetch with{" "}
+      <code>next: {"{"} tags: [...] {"}"}</code> and you can bust it on demand from a
+      Server Action via <code>revalidateTag()</code> — the surgical alternative
+      to waiting for a timer. That per-fetch decision is what "SSR vs SSG vs ISR"
+      actually becomes in modern Next.js.
     </Callout>,
-
-    /* ─── SECTION 8: Route Segment Config ──────────────────────────────── */
-    <h3 key="segment-title" className="text-xl font-bold mt-12 mb-4">
-      Route Segment Config — Page-Level Cache Overrides
-    </h3>,
-    <p key="segment-sub" className="text-muted-foreground mb-6">
-      Beyond individual <code>fetch()</code> calls, you can control the entire
-      route's rendering and caching strategy from the top of any{" "}
-      <code>page.tsx</code> or <code>layout.tsx</code> using exported constants:
-    </p>,
-    <CodeBlock
-      key="segment-code"
-      title="app/shop/page.tsx — Route Segment Config"
-      language="typescript"
-      code={`// Force the ENTIRE route to be statically rendered at build time
-export const dynamic = "force-static";
-
-// OR: Force every visit to be dynamic (SSR, no cache)
-export const dynamic = "force-dynamic";
-
-// Time-based ISR at the route level (no need to set on every fetch)
-export const revalidate = 3600; // 1 hour
-
-// Control the runtime environment this route runs in
-export const runtime = "edge"; // Deploy to Vercel Edge Network globally
-// export const runtime = "nodejs"; // default — full Node.js capabilities`}
-    />,
-    <Table
-      key="dynamic-table"
-      headers={["dynamic value", "Behaviour", "Equivalent to"]}
-      rows={[
-        [
-          "'auto' (default)",
-          "Next.js decides based on fetch() options and APIs used",
-          "Smart default — varies per component",
-        ],
-        [
-          "'force-static'",
-          "Force SSG. Dynamic functions (cookies, headers) return empty values",
-          "SSG — cached at build time",
-        ],
-        [
-          "'force-dynamic'",
-          "Force SSR. Every request runs fresh. Cache is bypassed entirely",
-          "SSR — no cache at all",
-        ],
-        [
-          "'error'",
-          "Force static but throw a build error if dynamic functions are used",
-          "Strict SSG — catches mistakes at build time",
-        ],
-      ]}
-    />,
-
-    /* ─── SECTION 9: revalidatePath & revalidateTag ─────────────────────  */
-    <h3 key="revalidate-title" className="text-xl font-bold mt-12 mb-4">
-      On-Demand Revalidation: <code>revalidatePath</code> vs{" "}
-      <code>revalidateTag</code>
-    </h3>,
-    <p key="revalidate-sub" className="text-muted-foreground mb-6">
-      Time-based <code>revalidate</code> waits for the timer. But when a CMS
-      editor publishes an article, you want the cache busted <em>right now</em>.
-      Next.js provides two surgical tools for this via Server Actions or Route
-      Handlers:
-    </p>,
-    <Grid key="revalidate-grid" cols={2} gap={6} className="mb-4">
-      <Card
-        title="revalidatePath()"
-        description="Invalidates the Full Route Cache for a specific URL path"
-      >
-        <CodeBlock
-          title="Route Handler — CMS webhook"
-          language="typescript"
-          code={`import { revalidatePath } from "next/cache";
-import { NextRequest } from "next/server";
-
-export async function POST(req: NextRequest) {
-  const { slug } = await req.json();
-
-  // Bust the cache for one specific blog post page
-  revalidatePath(\`/blog/\${slug}\`);
-
-  // Or bust the entire /blog section
-  revalidatePath("/blog", "layout");
-
-  return Response.json({ revalidated: true });
-}`}
-        />
-        <p className="text-xs text-muted-foreground mt-3">
-          ⚠️ Busts the <em>entire route's HTML cache</em>. Broader, but simpler.
-          Good for simple CMS setups.
-        </p>
-      </Card>
-      <Card
-        title="revalidateTag()"
-        description="Surgically invalidates the Data Cache for a specific tag"
-      >
-        <CodeBlock
-          title="Server Action — After admin edit"
-          language="typescript"
-          code={`"use server";
-import { revalidateTag } from "next/cache";
-
-export async function updateProduct(id: string, data: FormData) {
-  // 1. Update in database
-  await db.products.update({ where: { id }, data: ... });
-
-  // 2. Surgically bust only the cache entries tagged "products"
-  // Any fetch() with next: { tags: ["products"] } is now stale
-  revalidateTag("products");
-  revalidateTag(\`product-\${id}\`); // even more targeted
-}`}
-        />
-        <p className="text-xs text-muted-foreground mt-3">
-          ✅ More surgical — only re-fetches data, not full HTML. Perfect with
-          fine-grained cache tags.
-        </p>
-      </Card>
-    </Grid>,
 
     /* ─── SECTION 10: The SEO Reality ──────────────────────────────────── */
     <h3 key="seo-title" className="text-xl font-bold mt-12 mb-4">
