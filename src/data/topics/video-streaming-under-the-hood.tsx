@@ -825,20 +825,6 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
       problem="Buffering means the streaming platform's servers are down."
       solution="Server-side outages affect all users globally and show error pages, not spinners. A spinner on your end almost always means the next segment could not arrive before your buffer emptied — a local network or ISP issue. Check: can you stream fine on the same network from your phone? If yes, the issue is your device or its Wi-Fi connection, not the platform."
     />,
-    <MistakeCard
-      key="mistake-3"
-      number={3}
-      title="VPN Benefits for Streaming"
-      problem="Using a VPN should improve streaming quality."
-      solution="VPNs add latency and encryption overhead, reducing effective throughput. They can help only in one specific case: if your ISP is actively throttling streaming traffic (detectable via DPI). In that case, the VPN hides the traffic type. In all other cases, a VPN makes streaming worse."
-    />,
-    <MistakeCard
-      key="mistake-4"
-      number={4}
-      title="Bandwidth Requirements for 4K"
-      problem="4K streaming requires 100+ Mbps internet."
-      solution="4K with AV1 needs ~12–15 Mbps. 4K with HEVC needs ~15–25 Mbps. 4K with H.264 needs ~25–40 Mbps. Most 25 Mbps connections handle 4K fine with modern codecs — the bottleneck is usually Wi-Fi stability, not raw speed."
-    />,
 
     /* ──────────────────────────────────────────────────────────────────── */
     /*  SECTION 12 — WAR STORY                                             */
@@ -879,44 +865,6 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
     <h3 key="h-perf" className="text-xl font-bold mt-8 mb-4">
       How to Improve Streaming Performance
     </h3>,
-    <Grid key="grid-perf-viewer" cols={1} gap={6}>
-      <Card
-        title="For Viewers (Consumer-Side Fixes)"
-        description="Things you can control right now"
-      >
-        <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-4">
-          <li>
-            <strong>Use 5 GHz Wi-Fi or Ethernet</strong> — 2.4 GHz suffers from
-            interference from microwaves, Bluetooth, and neighbors
-          </li>
-          <li>
-            <strong>Reduce concurrent devices</strong> — four simultaneous 4K
-            streams need 60–100 Mbps sustained
-          </li>
-          <li>
-            <strong>Enable router QoS</strong> — prioritize streaming traffic
-            over bulk downloads
-          </li>
-          <li>
-            <strong>Use the native app, not the browser</strong> — apps get
-            hardware DRM (= higher quality) and optimized decoders
-          </li>
-          <li>
-            <strong>Update GPU drivers</strong> — hardware decode for AV1/HEVC
-            requires recent drivers
-          </li>
-          <li>
-            <strong>Lower quality manually</strong> — if your connection is
-            marginal, locking to 720p prevents ABR oscillation and delivers
-            smoother playback than constantly chasing 1080p
-          </li>
-          <li>
-            <strong>Switch DNS</strong> — slow DNS resolution delays initial
-            segment fetches; use Cloudflare 1.1.1.1 or Google 8.8.8.8
-          </li>
-        </ul>
-      </Card>
-    </Grid>,
     <Grid key="grid-perf-eng" cols={1} gap={6}>
       <Card
         title="For Engineers (Platform-Side Optimizations)"
