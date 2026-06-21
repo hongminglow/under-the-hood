@@ -39,21 +39,21 @@ export const processVsThreadTopic: Topic = {
 		/>,
 		<Grid key="3" cols={3} gap={6} className="my-8">
 			<FeatureCard icon={AppWindow} title="Process" subtitle="Full OS-isolated program" theme="amber">
-				<p className="text-sm text-amber-100/75">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75">
 					<strong>Chrome tabs</strong>, <strong>Docker containers</strong>, and <strong>microservices</strong> each run
 					as separate processes. Maximum isolation — one crashing process can't take down others. Communication requires
 					IPC overhead.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Split} title="Thread" subtitle="Shared-memory execution lane" theme="cyan">
-				<p className="text-sm text-cyan-100/75">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75">
 					<strong>Java, C++, Python</strong> use OS threads. They share heap memory but each has its own stack. Requires
 					explicit <strong>locking</strong> (mutexes, semaphores) to prevent data races. Python's <strong>GIL</strong>{" "}
 					limits threads to one core.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Waves} title="Coroutine" subtitle="User-space cooperative task" theme="emerald">
-				<p className="text-sm text-emerald-100/75">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75">
 					<strong>Go goroutines</strong>, <strong>Kotlin coroutines</strong>, <strong>JS async/await</strong>.
 					Multiplexed onto a small pool of OS threads by a user-space scheduler. Go routinely runs{" "}
 					<strong>millions</strong> of goroutines on 4 OS threads.

@@ -24,16 +24,16 @@ export const dependencyInjectionTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Unplug} title="Tight Coupling" subtitle="Fragile, concrete dependencies" theme="rose">
-        <p className="text-sm text-rose-200/80 mb-4">
+        <p className="text-sm text-rose-700 dark:text-rose-300/80 mb-4">
           A class uses <code>new Database()</code>. If you change the database name or credentials, you must search and replace every file in your app.
         </p>
-        <p className="text-sm text-rose-300 font-bold">Un-testable without a real DB.</p>
+        <p className="text-sm text-rose-700 dark:text-rose-400 font-bold">Un-testable without a real DB.</p>
       </FeatureCard>
       <FeatureCard icon={PlugZap} title="Loose Coupling" subtitle="Flexible, injected contracts" theme="emerald">
-        <p className="text-sm text-emerald-200/80 mb-4">
+        <p className="text-sm text-emerald-700 dark:text-emerald-300/80 mb-4">
           A class accepts <code>IDatabase</code>. It doesn't care if it's Postgres, MongoDB, or a Mock.
         </p>
-        <p className="text-sm text-emerald-300 font-bold">Swap implementations in 1 line of config.</p>
+        <p className="text-sm text-emerald-700 dark:text-emerald-400 font-bold">Swap implementations in 1 line of config.</p>
       </FeatureCard>
     </Grid>,
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">

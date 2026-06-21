@@ -39,7 +39,7 @@ export const web3BlockchainTopic: Topic = {
     "distributed-systems",
   ],
   content: [
-    <p key="intro" className="text-slate-300 leading-relaxed">
+    <p key="intro" className="text-slate-700 dark:text-slate-400 leading-relaxed">
       Strip away the hype and a blockchain is a deceptively simple idea: a{" "}
       <strong>shared, append-only ledger that thousands of mutually distrusting
       computers keep in sync without any central authority</strong>. No bank, no
@@ -65,7 +65,7 @@ export const web3BlockchainTopic: Topic = {
       The Core Problem: Double-Spend Without a Referee
     </h2>,
 
-    <p key="problem-1" className="text-slate-300 leading-relaxed mb-4">
+    <p key="problem-1" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       Digital money has one fatal flaw a paper bill doesn't: a file can be copied
       perfectly. If your "coin" is just a number in a database, what stops you
       from spending it twice — sending the same coin to two people before anyone
@@ -91,7 +91,7 @@ export const web3BlockchainTopic: Topic = {
       Anatomy of a Block
     </h2>,
 
-    <p key="block-1" className="text-slate-300 leading-relaxed mb-4">
+    <p key="block-1" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       A block is two parts: a small <strong>header</strong> (the fields below)
       and a <strong>body</strong> (the list of transactions). Nodes hash only the
       header to identify a block — but the header commits to every transaction
@@ -140,7 +140,7 @@ export const web3BlockchainTopic: Topic = {
       The Chain: Hash Pointers Make History Tamper-Evident
     </h2>,
 
-    <p key="chain-1" className="text-slate-300 leading-relaxed mb-4">
+    <p key="chain-1" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       The "chain" is not a metaphor. Each block header embeds the cryptographic
       hash of the previous header. A hash function like{" "}
       <Highlight variant="primary">SHA-256</Highlight> (Bitcoin) or{" "}
@@ -184,7 +184,7 @@ block.hash = SHA256(SHA256(
       Cryptographic Foundations: Hashing, Keys & Signatures
     </h2>,
 
-    <p key="crypto-1" className="text-slate-300 leading-relaxed mb-4">
+    <p key="crypto-1" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       A blockchain has no usernames and no passwords. "Ownership" is purely
       cryptographic: whoever holds the private key controls the funds. Three
       primitives do all the work.
@@ -197,13 +197,13 @@ block.hash = SHA256(SHA256(
         subtitle="One-way fingerprint"
         theme="sky"
       >
-        <p className="text-sky-200/80 leading-relaxed mb-3">
+        <p className="text-sky-700 dark:text-sky-300/80 leading-relaxed mb-3">
           Maps any input to a fixed-size, practically irreversible digest.{" "}
-          <strong className="text-sky-400">SHA-256</strong> and{" "}
-          <strong className="text-sky-400">Keccak-256</strong> link blocks, build
+          <strong className="text-sky-700 dark:text-sky-400">SHA-256</strong> and{" "}
+          <strong className="text-sky-700 dark:text-sky-400">Keccak-256</strong> link blocks, build
           Merkle trees, and power Proof of Work.
         </p>
-        <p className="text-sky-200/80 leading-relaxed">
+        <p className="text-sky-700 dark:text-sky-300/80 leading-relaxed">
           You cannot run a hash backward — only guess inputs and check. That
           asymmetry is the whole security model.
         </p>
@@ -215,14 +215,14 @@ block.hash = SHA256(SHA256(
         subtitle="Public address, private secret"
         theme="teal"
       >
-        <p className="text-teal-200/80 leading-relaxed mb-3">
+        <p className="text-teal-700 dark:text-teal-300/80 leading-relaxed mb-3">
           Elliptic-curve cryptography over{" "}
-          <strong className="text-teal-400">secp256k1</strong> generates a
+          <strong className="text-teal-700 dark:text-teal-400">secp256k1</strong> generates a
           private key (the secret) and a public key. Your{" "}
-          <strong className="text-teal-400">address</strong> is a hash of the
+          <strong className="text-teal-700 dark:text-teal-400">address</strong> is a hash of the
           public key.
         </p>
-        <p className="text-teal-200/80 leading-relaxed">
+        <p className="text-teal-700 dark:text-teal-300/80 leading-relaxed">
           The public key can be shared freely; deriving the private key from it
           is computationally infeasible.
         </p>
@@ -234,12 +234,12 @@ block.hash = SHA256(SHA256(
         subtitle="Prove it without revealing it"
         theme="amber"
       >
-        <p className="text-amber-200/80 leading-relaxed mb-3">
+        <p className="text-amber-700 dark:text-amber-300/80 leading-relaxed mb-3">
           To spend, you sign the transaction with your private key using{" "}
-          <strong className="text-amber-400">ECDSA</strong>. Anyone can verify
+          <strong className="text-amber-700 dark:text-amber-400">ECDSA</strong>. Anyone can verify
           the signature against your public key.
         </p>
-        <p className="text-amber-200/80 leading-relaxed">
+        <p className="text-amber-700 dark:text-amber-300/80 leading-relaxed">
           This proves you authorized the transfer without ever exposing the
           secret that controls the funds.
         </p>
@@ -258,7 +258,7 @@ block.hash = SHA256(SHA256(
       Merkle Trees: Verifying Without Downloading Everything
     </h2>,
 
-    <p key="merkle-1" className="text-slate-300 leading-relaxed mb-4">
+    <p key="merkle-1" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       Transactions in a block are hashed in pairs, then those hashes are hashed
       in pairs, repeatedly, up to a single <strong>Merkle root</strong> in the
       header. The payoff is practical: a phone wallet doesn't store the
@@ -279,7 +279,7 @@ block.hash = SHA256(SHA256(
       The Life of a Transaction
     </h2>,
 
-    <p key="lifecycle-1" className="text-slate-300 leading-relaxed mb-4">
+    <p key="lifecycle-1" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       From "tap send" to "irreversible," a transaction crosses the whole system.
       Each stage is a place where it can stall, get reordered, or be dropped.
     </p>,
@@ -324,7 +324,7 @@ block.hash = SHA256(SHA256(
       Consensus: How Strangers Agree on One History
     </h2>,
 
-    <p key="consensus-1" className="text-slate-300 leading-relaxed mb-4">
+    <p key="consensus-1" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       Consensus is the heart of the system: the rule that decides{" "}
       <em>whose</em> block becomes the next link, and how the network converges
       on one chain when two valid blocks appear at once (it follows the{" "}
@@ -340,20 +340,20 @@ block.hash = SHA256(SHA256(
         subtitle="Security bought with energy"
         theme="orange"
       >
-        <p className="text-orange-200/80 leading-relaxed mb-3">
-          Miners race to find a <strong className="text-orange-400">nonce</strong>{" "}
+        <p className="text-orange-700 dark:text-orange-300/80 leading-relaxed mb-3">
+          Miners race to find a <strong className="text-orange-700 dark:text-orange-400">nonce</strong>{" "}
           that makes the block hash fall below the difficulty target — pure
           brute-force guessing, billions of hashes per second. The first to
           succeed wins the block reward.
         </p>
-        <p className="text-orange-200/80 leading-relaxed mb-3">
+        <p className="text-orange-700 dark:text-orange-300/80 leading-relaxed mb-3">
           Difficulty auto-retargets (every 2016 blocks on Bitcoin){" "}
           <SourceMarker year={2009} /> to hold block time near{" "}
-          <strong className="text-orange-400">~10 minutes</strong> regardless of
+          <strong className="text-orange-700 dark:text-orange-400">~10 minutes</strong> regardless of
           how much hash power joins.
         </p>
-        <p className="text-orange-200/80 leading-relaxed">
-          <strong className="text-orange-400">Failure mode:</strong> mining
+        <p className="text-orange-700 dark:text-orange-300/80 leading-relaxed">
+          <strong className="text-orange-700 dark:text-orange-400">Failure mode:</strong> mining
           centralizes wherever electricity is cheapest, and small PoW chains with
           little total hash power are affordable to 51%-attack.
         </p>
@@ -365,28 +365,28 @@ block.hash = SHA256(SHA256(
         subtitle="Security bought with capital"
         theme="indigo"
       >
-        <p className="text-indigo-200/80 leading-relaxed mb-3">
+        <p className="text-indigo-700 dark:text-indigo-300/80 leading-relaxed mb-3">
           Validators lock up capital as a{" "}
-          <strong className="text-indigo-400">stake</strong> (32 ETH on
+          <strong className="text-indigo-700 dark:text-indigo-400">stake</strong> (32 ETH on
           Ethereum). The protocol pseudo-randomly chooses one to propose each
           block; others attest. Ethereum switched to PoS at{" "}
-          <strong className="text-indigo-400">The Merge</strong>{" "}
+          <strong className="text-indigo-700 dark:text-indigo-400">The Merge</strong>{" "}
           <SourceMarker year={2022} />.
         </p>
-        <p className="text-indigo-200/80 leading-relaxed mb-3">
-          Cheating is punished by <strong className="text-indigo-400">slashing</strong>{" "}
+        <p className="text-indigo-700 dark:text-indigo-300/80 leading-relaxed mb-3">
+          Cheating is punished by <strong className="text-indigo-700 dark:text-indigo-400">slashing</strong>{" "}
           — the protocol destroys part of the offender's stake. This is what kills
           the old "nothing-at-stake" objection.
         </p>
-        <p className="text-indigo-200/80 leading-relaxed">
-          <strong className="text-indigo-400">Failure mode:</strong> stake (and
+        <p className="text-indigo-700 dark:text-indigo-300/80 leading-relaxed">
+          <strong className="text-indigo-700 dark:text-indigo-400">Failure mode:</strong> stake (and
           thus influence) concentrates in large staking pools, reintroducing a
           softer form of centralization.
         </p>
       </FeatureCard>
     </Grid>,
 
-    <p key="consensus-table-intro" className="text-slate-400 text-sm mt-2 mb-2">
+    <p key="consensus-table-intro" className="text-slate-700 dark:text-slate-400 text-sm mt-2 mb-2">
       The axes that actually decide which one a chain should use:
     </p>,
 
@@ -446,7 +446,7 @@ block.hash = SHA256(SHA256(
       ]}
     />,
 
-    <p key="reorg-intro" className="text-slate-300 leading-relaxed mb-2">
+    <p key="reorg-intro" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-2">
       <strong>Forks and reorgs</strong> are the normal exhaust of consensus. When
       two valid blocks appear nearly simultaneously, the chain temporarily
       branches; nodes converge on whichever branch the next block extends, and
@@ -487,7 +487,7 @@ block.hash = SHA256(SHA256(
       Smart Contracts & the EVM: The "World Computer"
     </h2>,
 
-    <p key="contracts-1" className="text-slate-300 leading-relaxed mb-4">
+    <p key="contracts-1" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       Bitcoin tracks balances. Ethereum's leap was to put a small, deterministic
       virtual machine — the <strong>EVM</strong> — at every node, so the chain
       stores not just data but <em>programs</em>. A{" "}
@@ -504,14 +504,14 @@ block.hash = SHA256(SHA256(
         subtitle="Why every operation has a price"
         theme="violet"
       >
-        <p className="text-violet-200/80 leading-relaxed mb-3">
-          Every EVM operation costs <strong className="text-violet-400">gas</strong>.
+        <p className="text-violet-700 dark:text-violet-300/80 leading-relaxed mb-3">
+          Every EVM operation costs <strong className="text-violet-700 dark:text-violet-400">gas</strong>.
           Senders pay for the compute and storage they consume, and each block
           has a gas limit. This is the defense against the obvious attack: an
           infinite loop would otherwise freeze every node on Earth.
         </p>
-        <p className="text-violet-200/80 leading-relaxed">
-          <strong className="text-violet-400">EIP-1559</strong>{" "}
+        <p className="text-violet-700 dark:text-violet-300/80 leading-relaxed">
+          <strong className="text-violet-700 dark:text-violet-400">EIP-1559</strong>{" "}
           <SourceMarker spec="EIP-1559" /> split fees into a protocol-set{" "}
           <em>base fee</em> (burned) plus a <em>priority tip</em> to the
           proposer — making fees more predictable and making ETH deflationary
@@ -534,19 +534,19 @@ while (true) { x++; } // ⛔ halts at the gas limit`}
         subtitle="Interfaces, not new chains"
         theme="indigo"
       >
-        <p className="text-indigo-200/80 leading-relaxed mb-3">
+        <p className="text-indigo-700 dark:text-indigo-300/80 leading-relaxed mb-3">
           Most "coins" are not their own blockchains — they are contracts on
           Ethereum that follow a shared interface so wallets and exchanges can
           treat them uniformly.
         </p>
-        <p className="text-indigo-200/80 leading-relaxed mb-3">
-          <strong className="text-indigo-400">ERC-20</strong>{" "}
+        <p className="text-indigo-700 dark:text-indigo-300/80 leading-relaxed mb-3">
+          <strong className="text-indigo-700 dark:text-indigo-400">ERC-20</strong>{" "}
           <SourceMarker spec="ERC-20" /> standardizes fungible tokens
-          (interchangeable units). <strong className="text-indigo-400">ERC-721</strong>{" "}
+          (interchangeable units). <strong className="text-indigo-700 dark:text-indigo-400">ERC-721</strong>{" "}
           <SourceMarker spec="ERC-721" /> standardizes non-fungible tokens —
           each one unique (NFTs).
         </p>
-        <p className="text-indigo-200/80 leading-relaxed">
+        <p className="text-indigo-700 dark:text-indigo-300/80 leading-relaxed">
           Because they're just contract methods, a single wallet can hold
           thousands of token types without the chain knowing anything special
           about them.
@@ -586,7 +586,7 @@ while (true) { x++; } // ⛔ halts at the gas limit`}
       Scaling: The Trilemma & Layer 2
     </h2>,
 
-    <p key="scaling-1" className="text-slate-300 leading-relaxed mb-4">
+    <p key="scaling-1" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       Every node re-executing every transaction is what makes a chain trustless —
       and also what makes it slow. Bitcoin handles on the order of{" "}
       <strong>~7 transactions per second</strong> and Ethereum L1 roughly{" "}
@@ -597,7 +597,7 @@ while (true) { x++; } // ⛔ halts at the gas limit`}
       <em>scalability</em>, but hard to get all three at once.
     </p>,
 
-    <p key="scaling-2" className="text-slate-300 leading-relaxed mb-4">
+    <p key="scaling-2" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       The dominant answer is <strong>Layer 2 (L2)</strong>: execute transactions
       off the main chain in bulk, then post a compressed summary plus a proof
       back to Layer 1, which still provides the security guarantees. Two families
@@ -611,12 +611,12 @@ while (true) { x++; } // ⛔ halts at the gas limit`}
       subtitle="Compute off-chain, settle on-chain"
       theme="cyan"
     >
-      <p className="text-cyan-200/80 leading-relaxed">
+      <p className="text-cyan-700 dark:text-cyan-300/80 leading-relaxed">
         A rollup batches thousands of transactions, executes them on a cheaper
         L2, and writes the result to Ethereum. Users get L2 speed and fees while
         disputes ultimately settle on L1 — so they don't have to trust the L2
         operator's honesty, only L1's. The difference between the two families is{" "}
-        <strong className="text-cyan-400">how they convince L1 the batch is
+        <strong className="text-cyan-700 dark:text-cyan-400">how they convince L1 the batch is
         valid</strong>.
       </p>
     </FeatureCard>,
@@ -690,7 +690,7 @@ while (true) { x++; } // ⛔ halts at the gas limit`}
       The Web3 Application Stack
     </h2>,
 
-    <p key="stack-1" className="text-slate-300 leading-relaxed mb-4">
+    <p key="stack-1" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       A "dApp" still has a normal frontend — the difference is where state and
       logic live. Instead of calling your own API and database, the app talks to
       the chain through a standard <strong>JSON-RPC</strong> interface, with the
@@ -753,7 +753,7 @@ await tx.wait(); // block until it is confirmed on-chain`}
       Do You Actually Need a Blockchain?
     </h2>,
 
-    <p key="decision-1" className="text-slate-300 leading-relaxed mb-4">
+    <p key="decision-1" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
       This is the question that separates engineering from hype. A blockchain buys
       you exactly one thing that a database can't: <strong>shared, tamper-evident
       state among parties who don't trust each other and refuse a central
@@ -803,7 +803,7 @@ await tx.wait(); // block until it is confirmed on-chain`}
       ]}
     />,
 
-    <p key="decision-checklist-intro" className="text-slate-300 leading-relaxed mb-2">
+    <p key="decision-checklist-intro" className="text-slate-700 dark:text-slate-400 leading-relaxed mb-2">
       A useful gate: reach for a blockchain only when{" "}
       <strong>all</strong> of these hold simultaneously —
     </p>,

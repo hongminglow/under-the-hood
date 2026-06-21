@@ -21,8 +21,8 @@ export const htmlVsHtmxTopic: Topic = {
 			UI updates using attributes like <code>hx-get</code>, <code>hx-post</code>, and <code>hx-target</code>.
 		</p>,
 		<Callout key="2" type="info" title="Short Answer">
-			<strong className="text-emerald-300">HTML</strong> describes page structure and content.{" "}
-			<strong className="text-emerald-300">HTMX</strong> keeps HTML as the main authoring model, but adds browser-side
+			<strong className="text-emerald-700 dark:text-emerald-400">HTML</strong> describes page structure and content.{" "}
+			<strong className="text-emerald-700 dark:text-emerald-400">HTMX</strong> keeps HTML as the main authoring model, but adds browser-side
 			behavior so the server can return <strong>HTML fragments</strong> instead of a full new page or a JSON API
 			response.
 		</Callout>,
@@ -48,14 +48,14 @@ export const htmlVsHtmxTopic: Topic = {
 		/>,
 		<Grid key="4" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={FileCode2} title="When Plain HTML Is Enough" subtitle="Static-first, browser-native flow" theme="cyan">
-				<ul className="list-disc pl-5 space-y-2 text-sm text-cyan-100/75">
+				<ul className="list-disc pl-5 space-y-2 text-sm text-cyan-700 dark:text-cyan-100/75">
 					<li>Content pages, docs, landing pages, and simple forms.</li>
 					<li>Cases where full-page reloads are acceptable and complexity should stay low.</li>
 					<li>Projects leaning on native browser behavior instead of custom client interactions.</li>
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Zap} title="When HTMX Helps" subtitle="Server-driven interactivity without an SPA" theme="emerald">
-				<ul className="list-disc pl-5 space-y-2 text-sm text-emerald-100/75">
+				<ul className="list-disc pl-5 space-y-2 text-sm text-emerald-700 dark:text-emerald-100/75">
 					<li>
 						You want <strong>small dynamic interactions</strong> without moving to a full SPA framework.
 					</li>
@@ -99,7 +99,7 @@ export const htmlVsHtmxTopic: Topic = {
 <!-- Browser submits in the background, server returns only the results HTML -->`}
 		/>,
 		<FeatureCard key="8" icon={Zap} title="What Changes Behind The Scenes?" subtitle="The transport model is the real difference" theme="emerald">
-			<ul className="list-disc pl-5 space-y-2 text-sm text-emerald-100/75">
+			<ul className="list-disc pl-5 space-y-2 text-sm text-emerald-700 dark:text-emerald-100/75">
 				<li>
 					With <strong>plain HTML</strong>, clicking links and submitting forms usually means loading a{" "}
 					<strong>new full document</strong>.

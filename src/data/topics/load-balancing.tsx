@@ -35,16 +35,16 @@ export const loadBalancingTopic: Topic = {
     </h3>,
     <Grid key="5" cols={3} gap={4} className="my-8">
       <FeatureCard icon={RotateCw} title="Round Robin" subtitle="The simple rotation strategy" theme="cyan">
-        <p className="text-xs text-cyan-100/75 mb-2">Each server gets one request in a circular queue.</p>
-        <p className="text-xs italic text-cyan-200/70">Best for identical, stateless server hardware.</p>
+        <p className="text-xs text-cyan-700 dark:text-cyan-100/75 mb-2">Each server gets one request in a circular queue.</p>
+        <p className="text-xs italic text-cyan-700 dark:text-cyan-300/70">Best for identical, stateless server hardware.</p>
       </FeatureCard>
       <FeatureCard icon={Waves} title="Least Connections" subtitle="Favor the least-busy node" theme="emerald">
-        <p className="text-xs text-emerald-100/75 mb-2">Sends traffic to the server with the fewest active sessions.</p>
-        <p className="text-xs italic text-emerald-200/70">Best for long-lived tasks (WebSocket, Streaming).</p>
+        <p className="text-xs text-emerald-700 dark:text-emerald-100/75 mb-2">Sends traffic to the server with the fewest active sessions.</p>
+        <p className="text-xs italic text-emerald-700 dark:text-emerald-300/70">Best for long-lived tasks (WebSocket, Streaming).</p>
       </FeatureCard>
       <FeatureCard icon={Hash} title="Consistent Hashing" subtitle="Keep related traffic sticky" theme="violet">
-        <p className="text-xs text-violet-100/75 mb-2">Ensures a specific user (by IP) always hits the same server.</p>
-        <p className="text-xs italic text-violet-200/70">Essential for stateful apps using local caching.</p>
+        <p className="text-xs text-violet-700 dark:text-violet-100/75 mb-2">Ensures a specific user (by IP) always hits the same server.</p>
+        <p className="text-xs italic text-violet-700 dark:text-violet-300/70">Essential for stateful apps using local caching.</p>
       </FeatureCard>
     </Grid>,
     <h3 key="6" className="text-xl font-bold mt-8 mb-4">
@@ -106,13 +106,13 @@ app.get('/ping', (req, res) => {
       Real-World Failure Story: The AWS ELB Outage (2017)
     </h3>,
     <FeatureCard key="story-card" icon={ShieldAlert} title="What Happened" subtitle="A cascading health-check failure" theme="rose">
-      <p className="text-sm text-rose-100/75 mb-2">
+      <p className="text-sm text-rose-700 dark:text-rose-100/75 mb-2">
         On February 28, 2017, AWS S3 went down in us-east-1, taking down half the internet. But the root cause wasn't S3 itself — it was the <strong>Elastic Load Balancer (ELB) health checks</strong>.
       </p>
-      <p className="text-sm text-rose-100/75 mb-2">
+      <p className="text-sm text-rose-700 dark:text-rose-100/75 mb-2">
         <strong>The Chain Reaction:</strong>
       </p>
-      <ol className="text-sm text-rose-100/75 space-y-2 pl-5">
+      <ol className="text-sm text-rose-700 dark:text-rose-100/75 space-y-2 pl-5">
         <li>1. An engineer ran a debugging command to remove a few S3 servers</li>
         <li>2. A typo removed <em>way more servers</em> than intended</li>
         <li>3. ELB health checks started failing because S3 was overloaded</li>
@@ -120,8 +120,8 @@ app.get('/ping', (req, res) => {
         <li>5. This created a <strong>cascading failure</strong> — fewer servers = more load = more failures</li>
         <li>6. The entire S3 region went down for 4 hours</li>
       </ol>
-      <p className="text-sm text-rose-100/85 mt-4">
-        <strong className="text-rose-300">Lesson:</strong>&nbsp;Health checks can cause cascading failures if they're too aggressive. Always implement <strong>circuit breakers</strong>&nbsp;and <strong>graceful degradation</strong>.
+      <p className="text-sm text-rose-700 dark:text-rose-100/85 mt-4">
+        <strong className="text-rose-700 dark:text-rose-400">Lesson:</strong>&nbsp;Health checks can cause cascading failures if they're too aggressive. Always implement <strong>circuit breakers</strong>&nbsp;and <strong>graceful degradation</strong>.
       </p>
     </FeatureCard>,
 
@@ -133,12 +133,12 @@ app.get('/ping', (req, res) => {
     </p>,
     <Grid key="affinity-grid" cols={2} gap={6} className="my-8">
       <FeatureCard icon={ShieldAlert} title="The Problem" subtitle="Why sticky affinity breaks badly" theme="rose">
-        <p className="text-sm text-rose-100/75 mb-2">
+        <p className="text-sm text-rose-700 dark:text-rose-100/75 mb-2">
           User A is "stuck" to Server 1. Server 1 crashes. Load balancer detects failure and removes it. User A's next request goes to Server 2, but Server 2 has no idea who User A is. Session lost.
         </p>
       </FeatureCard>
       <FeatureCard icon={ShieldCheck} title="The Solution" subtitle="Centralize the state" theme="emerald">
-        <p className="text-sm text-emerald-100/75 mb-2">
+        <p className="text-sm text-emerald-700 dark:text-emerald-100/75 mb-2">
           <strong>Never store session state in memory</strong>. Use Redis or a database for session storage. Any server can handle any request because session data is centralized.
         </p>
       </FeatureCard>

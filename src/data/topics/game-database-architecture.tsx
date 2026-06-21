@@ -40,7 +40,7 @@ export const gameDatabaseArchitectureTopic: Topic = {
 
 		<Grid key="4" cols={2} gap={6}>
 			<FeatureCard icon={Zap} title="Runtime State (Hot Path)" subtitle="Volatile, nanosecond access" theme="emerald">
-				<ul className="list-disc pl-5 mt-2 text-sm text-emerald-100/75 space-y-1">
+				<ul className="list-disc pl-5 mt-2 text-sm text-emerald-700 dark:text-emerald-100/75 space-y-1">
 					<li>
 						<strong>Location:</strong> Game server RAM (C++ structs, Rust enums)
 					</li>
@@ -59,7 +59,7 @@ export const gameDatabaseArchitectureTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Database} title="Persistent State (Cold Path)" subtitle="Durable, millisecond access" theme="cyan">
-				<ul className="list-disc pl-5 mt-2 text-sm text-cyan-100/75 space-y-1">
+				<ul className="list-disc pl-5 mt-2 text-sm text-cyan-700 dark:text-cyan-100/75 space-y-1">
 					<li>
 						<strong>Location:</strong> Distributed databases (PostgreSQL, DynamoDB, ScyllaDB)
 					</li>
@@ -161,14 +161,14 @@ export const gameDatabaseArchitectureTopic: Topic = {
 
 		<Grid key="11" cols={2} gap={6}>
 			<FeatureCard icon={Server} title="Pre-Load at Login" subtitle="The hydration pattern" theme="amber">
-				<p className="mt-2 text-sm text-amber-100/75 leading-relaxed">
+				<p className="mt-2 text-sm text-amber-700 dark:text-amber-100/75 leading-relaxed">
 					When a player connects, the game server issues <strong>one bulk read</strong> from the persistent database:
 					character stats, inventory, quest progress, and friend lists. This data is deserialized into native C++
 					structs and placed in a contiguous memory arena. For the next 2 hours, the server never queries the DB again.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Zap} title="In-Memory Mutations" subtitle="Zero I/O during gameplay" theme="emerald">
-				<p className="mt-2 text-sm text-emerald-100/75 leading-relaxed">
+				<p className="mt-2 text-sm text-emerald-700 dark:text-emerald-100/75 leading-relaxed">
 					Every action — equipping an artifact, using a potion, or defeating a monster — modifies only RAM. The server
 					maintains a <strong>delta buffer</strong>: a ring buffer of all state changes since the last snapshot. This
 					buffer lives entirely in L1/L2 cache and is flushed asynchronously.
@@ -228,7 +228,7 @@ export const gameDatabaseArchitectureTopic: Topic = {
 
 		<Grid key="17" cols={2} gap={6}>
 			<FeatureCard icon={Database} title="PostgreSQL / MySQL" subtitle="ACID for financial data" theme="indigo">
-				<ul className="list-disc pl-5 mt-2 text-sm text-indigo-100/75 space-y-1">
+				<ul className="list-disc pl-5 mt-2 text-sm text-indigo-700 dark:text-indigo-100/75 space-y-1">
 					<li>
 						<strong>Use:</strong> Currency balances, gacha transactions, IAP receipts
 					</li>
@@ -244,7 +244,7 @@ export const gameDatabaseArchitectureTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Layers} title="MongoDB / DynamoDB" subtitle="Flexible schema for inventory" theme="violet">
-				<ul className="list-disc pl-5 mt-2 text-sm text-violet-100/75 space-y-1">
+				<ul className="list-disc pl-5 mt-2 text-sm text-violet-700 dark:text-violet-100/75 space-y-1">
 					<li>
 						<strong>Use:</strong> Character builds, artifact collections, quest progress
 					</li>
@@ -260,7 +260,7 @@ export const gameDatabaseArchitectureTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Zap} title="Redis / KeyDB" subtitle="Sub-millisecond session cache" theme="amber">
-				<ul className="list-disc pl-5 mt-2 text-sm text-amber-100/75 space-y-1">
+				<ul className="list-disc pl-5 mt-2 text-sm text-amber-700 dark:text-amber-100/75 space-y-1">
 					<li>
 						<strong>Use:</strong> Session tokens, online status, temporary buffs, leaderboard cache
 					</li>
@@ -276,7 +276,7 @@ export const gameDatabaseArchitectureTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={MessageSquare} title="Kafka / NATS" subtitle="Event sourcing backbone" theme="sky">
-				<ul className="list-disc pl-5 mt-2 text-sm text-sky-100/75 space-y-1">
+				<ul className="list-disc pl-5 mt-2 text-sm text-sky-700 dark:text-sky-100/75 space-y-1">
 					<li>
 						<strong>Use:</strong> Gacha pull history, audit logs, cross-service state sync
 					</li>
@@ -338,14 +338,14 @@ db_pool.execute(
 
 		<Grid key="24" cols={2} gap={6}>
 			<FeatureCard icon={ShieldAlert} title="The Pity System" subtitle="Guaranteed rarity mechanics" theme="rose">
-				<p className="mt-2 text-sm text-rose-100/75 leading-relaxed">
+				<p className="mt-2 text-sm text-rose-700 dark:text-rose-100/75 leading-relaxed">
 					Gacha games track a <strong>pity counter</strong>: how many pulls since the last 5-star item. This counter must
 					be atomically incremented with every pull and reset on success. A race condition here would allow players to
 					exploit the guarantee. SQL row-level locks or Redis Lua scripts ensure atomicity.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={ShieldCheck} title="Idempotent Purchases" subtitle="Preventing double-charge" theme="teal">
-				<p className="mt-2 text-sm text-teal-100/75 leading-relaxed">
+				<p className="mt-2 text-sm text-teal-700 dark:text-teal-100/75 leading-relaxed">
 					Every IAP (In-App Purchase) is tagged with a unique <code>transaction_id</code> from Apple or Google. The
 					backend uses an idempotent upsert: <code>INSERT ... ON CONFLICT DO NOTHING</code>. If the client retries due
 					to network timeout, the duplicate request is silently discarded.
@@ -491,14 +491,14 @@ db_pool.execute(
 
 		<Grid key="37" cols={2} gap={6}>
 			<FeatureCard icon={ShieldAlert} title="Database Lag Spike" subtitle="Async queue backlog" theme="rose">
-				<p className="mt-2 text-sm text-rose-100/75 leading-relaxed">
+				<p className="mt-2 text-sm text-rose-700 dark:text-rose-100/75 leading-relaxed">
 					If the Kafka consumer fleet falls behind, snapshots accumulate in RAM. When RAM fills, the game server must
 					either <strong>backpressure</strong> (stop accepting new players) or <strong>drop snapshots</strong> (risk data
 					loss). Most games choose backpressure, showing a "Server Busy" error.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={ShieldCheck} title="Partial Write" subtitle="Inventory saved, currency not" theme="teal">
-				<p className="mt-2 text-sm text-teal-100/75 leading-relaxed">
+				<p className="mt-2 text-sm text-teal-700 dark:text-teal-100/75 leading-relaxed">
 					A crash between the inventory write and currency write creates an exploit: the player has the item but was
 					never charged. The fix is <strong>two-phase commit</strong> or <strong>Saga pattern</strong>: currency is
 					deducted first, then the item is granted. If the second step fails, the currency is refunded.

@@ -48,13 +48,13 @@ export const deploymentStrategiesTopic: Topic = {
 		</p>,
 		<Grid key="grid-rolling" cols={2} gap={6}>
 			<FeatureCard icon={Activity} title="Scenario to Use" subtitle="Rolling deployment" theme="amber">
-				<p className="text-sm text-amber-100/75">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75">
 					Standard web applications where budget is a constraint, and you cannot afford to spin up duplicate
 					environments. Commonly the default in Kubernetes (`RollingUpdate`).
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Activity} title="Key Consideration" subtitle="Rolling deployment" theme="amber">
-				<p className="text-sm text-amber-100/75">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75">
 					<strong>Version Skew:</strong> Old and new versions will run simultaneously during the rollout. Database
 					schemas and APIs <i>must</i> be backward compatible.
 				</p>
@@ -71,13 +71,13 @@ export const deploymentStrategiesTopic: Topic = {
 		</p>,
 		<Grid key="grid-bluegreen" cols={2} gap={6}>
 			<FeatureCard icon={ShieldCheck} title="Scenario to Use" subtitle="Blue-Green deployment" theme="emerald">
-				<p className="text-sm text-emerald-100/75">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75">
 					Mission-critical monoliths or enterprise applications where downtime is extremely costly and you need an
 					instant "kill switch" to abort.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={ShieldCheck} title="Key Consideration" subtitle="Blue-Green deployment" theme="emerald">
-				<p className="text-sm text-emerald-100/75">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75">
 					<strong>Infrastructure Cost:</strong> You temporarily pay for double the compute power. State management (like
 					active user sessions) must be stored externally (e.g., Redis).
 				</p>
@@ -94,13 +94,13 @@ export const deploymentStrategiesTopic: Topic = {
 		</p>,
 		<Grid key="grid-canary" cols={2} gap={6}>
 			<FeatureCard icon={FlaskConical} title="Scenario to Use" subtitle="Canary deployment" theme="cyan">
-				<p className="text-sm text-cyan-100/75">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75">
 					High-traffic consumer apps (like Netflix, Facebook) where you need to "test in production" with real,
 					unpredictable user behavior before a full rollout.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={FlaskConical} title="Key Consideration" subtitle="Canary deployment" theme="cyan">
-				<p className="text-sm text-cyan-100/75">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75">
 					<strong>Complexity:</strong> Requires advanced traffic routing (e.g., Istio, Envoy) and highly tuned
 					observability pipelines for automated metric evaluation.
 				</p>

@@ -98,12 +98,12 @@ app.get('/api/product/:id', async (req, res) => {
     </h3>,
     <Grid key="12" cols={2} gap={6}>
       <FeatureCard icon={Turtle} title="Too Few Connections (Pool Size = 5)" subtitle="Queueing kills latency" theme="amber">
-        <p className="text-sm text-amber-100/75">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75">
           If you have 100 concurrent requests but only 5 connections, 95 requests are waiting in the pool queue. Your API becomes slow even though the database is idle. <strong>Symptom:</strong>&nbsp;High request latency, low database CPU.
         </p>
       </FeatureCard>
       <FeatureCard icon={OctagonAlert} title="Too Many Connections (Pool Size = 500)" subtitle="Context switching crushes the DB" theme="rose">
-        <p className="text-sm text-rose-100/75">
+        <p className="text-sm text-rose-700 dark:text-rose-100/75">
           PostgreSQL has a hard limit (default 100 connections). If 10 app servers each open 500 connections, you hit 5,000 connections. The database spends all its time context-switching between connections instead of executing queries. <strong>Symptom:</strong>&nbsp;Database CPU at 100%, queries timeout.
         </p>
       </FeatureCard>
@@ -175,12 +175,12 @@ def book_seat_safe(seat_id):
     </p>,
     <Grid key="20" cols={2} gap={6}>
       <FeatureCard icon={Database} title="PgBouncer (Connection Pooler)" subtitle="Multiplex connections before Postgres" theme="cyan">
-        <p className="text-sm text-cyan-100/75">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75">
           A lightweight proxy that sits between your app and PostgreSQL. Your 50 app servers connect to PgBouncer (1,000 connections), but PgBouncer only opens 100 connections to the actual database. It multiplexes queries.
         </p>
       </FeatureCard>
       <FeatureCard icon={ServerCog} title="Read Replicas" subtitle="Scale reads horizontally" theme="emerald">
-        <p className="text-sm text-emerald-100/75">
+        <p className="text-sm text-emerald-700 dark:text-emerald-100/75">
           Route read queries to replica databases. Your primary handles writes (100 connections), while 5 replicas handle reads (500 connections total). This horizontally scales read throughput.
         </p>
       </FeatureCard>

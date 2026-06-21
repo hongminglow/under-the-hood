@@ -52,14 +52,14 @@ export const llmQuantizationTopic: Topic = {
 		/>,
 		<Grid key="grid" cols={2} gap={6}>
 			<Card title="The Precision Loss Issue">
-				<p className="text-sm text-slate-300">
+				<p className="text-sm text-slate-700 dark:text-slate-400">
 					When converting <Highlight variant="warning">0.3019842 (FP16)</Highlight> to a single integer grid of{" "}
 					<Highlight variant="info">[0, 1, 2, 3] (2-bit)</Highlight>, you lose nuance. At extreme quantization levels
 					(e.g. 2-bit), the model effectively becomes &quot;dumb&quot;, losing reasoning ability and hallucinating more.
 				</p>
 			</Card>
 			<Card title="The Sweet Spot">
-				<p className="text-sm text-slate-300">
+				<p className="text-sm text-slate-700 dark:text-slate-400">
 					Empirically, <strong>4-bit to 5-bit quantization</strong> is the undisputed sweet spot. It offers a 70-75%
 					reduction in size with only a ~2-5% degradation in benchmark performance compared to the original uncompressed
 					model.

@@ -23,25 +23,25 @@ export const kubernetesTopic: Topic = {
 		<p key="3">The master node that makes global decisions and reacts to cluster events.</p>,
 		<Grid key="4" cols={2} gap={6} className="my-4 mb-8">
 			<FeatureCard icon={Route} title="kube-apiserver" subtitle="Front door of the cluster" theme="cyan">
-				<p className="text-sm text-cyan-100/75">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75">
 					The front-end of the cluster. Every command (`kubectl`) interacts with this REST API. It is the only component
 					that talks to `etcd`.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Database} title="etcd" subtitle="Source of truth storage" theme="amber">
-				<p className="text-sm text-amber-100/75">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75">
 					A highly-available, distributed key-value store. It contains the absolute source of truth for the entire
 					cluster's state.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Activity} title="kube-scheduler" subtitle="Placement decision-maker" theme="violet">
-				<p className="text-sm text-violet-100/75">
+				<p className="text-sm text-violet-700 dark:text-violet-100/75">
 					Watches for newly created Pods that have no assigned node, and selects a worker node for them to run on based
 					on resource requirements.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={BrainCircuit} title="kube-controller-manager" subtitle="Reconciles desired vs actual state" theme="emerald">
-				<p className="text-sm text-emerald-100/75">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75">
 					Runs controller processes (e.g., Node controller, ReplicaSet controller). It constantly compares current state
 					to the desired state and attempts to reconcile them.
 				</p>
@@ -53,13 +53,13 @@ export const kubernetesTopic: Topic = {
 		<p key="6">The machines (VMs or bare metal) that actually run your application workloads.</p>,
 		<Grid key="7" cols={2} gap={6} className="my-4 mb-8">
 			<FeatureCard icon={Wrench} title="Kubelet" subtitle="Node-level workload agent" theme="cyan">
-				<p className="text-sm text-cyan-100/75">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75">
 					An agent that runs on every node. It ensures that containers are running and healthy exactly as described by
 					the Control Plane.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Network} title="Kube-proxy" subtitle="Node networking rule engine" theme="teal">
-				<p className="text-sm text-teal-100/75">
+				<p className="text-sm text-teal-700 dark:text-teal-100/75">
 					A network proxy running on each node establishing networking rules, enabling communication across pods and to
 					the outside world.
 				</p>

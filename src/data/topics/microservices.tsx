@@ -25,12 +25,12 @@ export const microservicesTopic: Topic = {
     </h3>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <FeatureCard icon={WifiOff} title="Network Unreliability" subtitle="Function calls become wire hops" theme="rose">
-        <p className="text-sm text-rose-100/75">
+        <p className="text-sm text-rose-700 dark:text-rose-100/75">
           In a monolith, calling `auth.getUser()` is a sub-millisecond RAM memory operation. In a Microservice, `Auth Service` must send an HTTP request across a physical datacenter wire to `User Service`. That wire can snap, lag, or timeout. What used to be a simple function call is now a fragile distributed system requiring retries and Circuit Breakers.
         </p>
       </FeatureCard>
       <FeatureCard icon={DatabaseZap} title="Data Isolation Hell" subtitle="No more easy joins across services" theme="amber">
-        <p className="text-sm text-amber-100/75">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75">
           Microservices mandate that EVERY service must have its very own independent SQL database. You can no longer write a beautiful `JOIN` query between the Users table and the Orders table, because they literally live on completely separate physical hard drives handled by different teams.
         </p>
       </FeatureCard>
@@ -47,12 +47,12 @@ export const microservicesTopic: Topic = {
     </p>,
     <Grid key="8" cols={2} gap={6} className="my-8">
       <FeatureCard icon={GitBranch} title="Saga Pattern" subtitle="Compensating local transactions" theme="emerald">
-        <p className="text-sm text-emerald-100/75">
+        <p className="text-sm text-emerald-700 dark:text-emerald-100/75">
           Break the transaction into a series of local transactions. If one fails, execute compensating transactions to undo previous steps (e.g., "Cancel Order" if inventory update fails).
         </p>
       </FeatureCard>
       <FeatureCard icon={Landmark} title="Two-Phase Commit (2PC)" subtitle="Coordinator-driven distributed commit" theme="violet">
-        <p className="text-sm text-violet-100/75">
+        <p className="text-sm text-violet-700 dark:text-violet-100/75">
           A coordinator asks all services to "prepare" the transaction. If all agree, it sends "commit". If any fail, it sends "rollback". Slow and fragile (coordinator is a single point of failure).
         </p>
       </FeatureCard>

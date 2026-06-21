@@ -22,13 +22,13 @@ export const apiGatewayPatternTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Route} title="Reverse Proxy & Routing" subtitle="One public path, many private services" theme="emerald">
-        <p className="text-sm text-emerald-200/80 mb-2">
-          The Gateway maps external URLs (<code>/orders</code>) to internal private IPs (<code>10.0.1.4</code>). It supports <strong className="text-emerald-300">Canary Releases</strong> by routing 5% of traffic to a new version.
+        <p className="text-sm text-emerald-700 dark:text-emerald-300/80 mb-2">
+          The Gateway maps external URLs (<code>/orders</code>) to internal private IPs (<code>10.0.1.4</code>). It supports <strong className="text-emerald-700 dark:text-emerald-400">Canary Releases</strong> by routing 5% of traffic to a new version.
         </p>
       </FeatureCard>
       <FeatureCard icon={Layers} title="BFF" subtitle="Backend for frontend" theme="teal">
-        <p className="text-sm text-teal-200/80 mb-2">
-          A mobile app needs a different JSON structure than a desktop app. The Gateway can <strong className="text-teal-300">transform payloads</strong> on the fly, tailoring the response to the specific device.
+        <p className="text-sm text-teal-700 dark:text-teal-300/80 mb-2">
+          A mobile app needs a different JSON structure than a desktop app. The Gateway can <strong className="text-teal-700 dark:text-teal-400">transform payloads</strong> on the fly, tailoring the response to the specific device.
         </p>
       </FeatureCard>
     </Grid>,
@@ -41,13 +41,13 @@ export const apiGatewayPatternTopic: Topic = {
     </p>,
     <Grid key="3c" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Split} title="Without Aggregation" subtitle="Client owns fan-out" theme="rose">
-        <p className="text-sm text-rose-200/80">
-          Client makes 5 sequential HTTP requests. Each incurs DNS, TCP handshake, and TLS overhead. Total latency: <strong className="text-rose-300">sum of all 5 calls</strong>. Mobile users on 3G suffer enormously.
+        <p className="text-sm text-rose-700 dark:text-rose-300/80">
+          Client makes 5 sequential HTTP requests. Each incurs DNS, TCP handshake, and TLS overhead. Total latency: <strong className="text-rose-700 dark:text-rose-400">sum of all 5 calls</strong>. Mobile users on 3G suffer enormously.
         </p>
       </FeatureCard>
       <FeatureCard icon={DoorOpen} title="With Aggregation" subtitle="Gateway owns fan-out" theme="emerald">
-        <p className="text-sm text-emerald-200/80">
-          Client makes 1 request. Gateway fans out 5 internal calls <strong className="text-emerald-300">in parallel</strong> over the private network (no TLS overhead). Total latency: <strong className="text-emerald-300">max of the 5 calls</strong>. Dramatic improvement.
+        <p className="text-sm text-emerald-700 dark:text-emerald-300/80">
+          Client makes 1 request. Gateway fans out 5 internal calls <strong className="text-emerald-700 dark:text-emerald-400">in parallel</strong> over the private network (no TLS overhead). Total latency: <strong className="text-emerald-700 dark:text-emerald-400">max of the 5 calls</strong>. Dramatic improvement.
         </p>
       </FeatureCard>
     </Grid>,

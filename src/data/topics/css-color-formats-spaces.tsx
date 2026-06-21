@@ -40,12 +40,12 @@ export const cssColorFormatsSpacesTopic: Topic = {
         subtitle="compact literal color tokens"
         theme="amber"
       >
-        <p className="text-sm text-amber-100/80 leading-relaxed mb-3">
-          Great for <strong className="text-amber-300">fixed values</strong>{" "}
+        <p className="text-sm text-amber-700 dark:text-amber-100/80 leading-relaxed mb-3">
+          Great for <strong className="text-amber-700 dark:text-amber-400">fixed values</strong>{" "}
           copied from design tools, brand constants, and simple tokens like{" "}
           <code>#0f172a</code> or <code>#38bdf8</code>.
         </p>
-        <p className="text-sm text-amber-100/70">
+        <p className="text-sm text-amber-700 dark:text-amber-100/70">
           Weakness: terrible for human reasoning. You cannot glance at hex and
           intuit hue, lightness, or how to generate a better hover state.
         </p>
@@ -57,12 +57,12 @@ export const cssColorFormatsSpacesTopic: Topic = {
         subtitle="direct channel control + alpha"
         theme="cyan"
       >
-        <p className="text-sm text-cyan-100/80 leading-relaxed mb-3">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/80 leading-relaxed mb-3">
           Best when you need explicit{" "}
-          <strong className="text-cyan-300">red / green / blue channels</strong>
+          <strong className="text-cyan-700 dark:text-cyan-400">red / green / blue channels</strong>
           , interop with canvas or JS APIs, or easy alpha overlays.
         </p>
-        <p className="text-sm text-cyan-100/70">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/70">
           Modern CSS usually writes alpha as <code>rgb(59 130 246 / 0.5)</code>.
           The older
           <code>rgba()</code> spelling still works, but it is mostly a legacy
@@ -76,15 +76,15 @@ export const cssColorFormatsSpacesTopic: Topic = {
         subtitle="human-friendly hue editing"
         theme="sky"
       >
-        <p className="text-sm text-sky-100/80 leading-relaxed mb-3">
+        <p className="text-sm text-sky-700 dark:text-sky-100/80 leading-relaxed mb-3">
           Great for quick theme work when you want to think in{" "}
-          <strong className="text-sky-300">
+          <strong className="text-sky-700 dark:text-sky-400">
             hue, saturation, and lightness
           </strong>
           . It is far easier to shift a blue toward teal or desaturate a warning
           color in HSL than in raw RGB.
         </p>
-        <p className="text-sm text-sky-100/70">
+        <p className="text-sm text-sky-700 dark:text-sky-100/70">
           Weakness: HSL lightness is not perceptual lightness. Equal-looking
           steps across hues often do not stay visually balanced.
         </p>
@@ -96,13 +96,13 @@ export const cssColorFormatsSpacesTopic: Topic = {
         subtitle="older perceptual color spaces"
         theme="fuchsia"
       >
-        <p className="text-sm text-fuchsia-100/80 leading-relaxed mb-3">
+        <p className="text-sm text-fuchsia-700 dark:text-fuchsia-100/80 leading-relaxed mb-3">
           These were designed to be more{" "}
-          <strong className="text-fuchsia-300">perceptually uniform</strong>
+          <strong className="text-fuchsia-700 dark:text-fuchsia-400">perceptually uniform</strong>
           &nbsp; than sRGB formats like hex or HSL. They are useful when color
           distance and more stable lightness matter.
         </p>
-        <p className="text-sm text-fuchsia-100/70">
+        <p className="text-sm text-fuchsia-700 dark:text-fuchsia-100/70">
           In modern frontend work they are valuable conceptually, but many teams
           now skip directly to OKLab/OKLCH because the newer model behaves
           better.
@@ -115,15 +115,15 @@ export const cssColorFormatsSpacesTopic: Topic = {
         subtitle="modern perceptual design tokens"
         theme="violet"
       >
-        <p className="text-sm text-violet-100/80 leading-relaxed mb-3">
+        <p className="text-sm text-violet-700 dark:text-violet-100/80 leading-relaxed mb-3">
           This is the current sweet spot for{" "}
-          <strong className="text-violet-300">
+          <strong className="text-violet-700 dark:text-violet-400">
             design systems, palette generation, and accessible scaling
           </strong>
           . You can change hue or lightness with more confidence that the
           perceived brightness stays stable.
         </p>
-        <p className="text-sm text-violet-100/70">
+        <p className="text-sm text-violet-700 dark:text-violet-100/70">
           That is why modern tooling has moved toward OKLCH for tokens: it is
           much better for making ramps that feel evenly spaced to human eyes.
         </p>
@@ -135,12 +135,12 @@ export const cssColorFormatsSpacesTopic: Topic = {
         subtitle="explicit color spaces and wide gamut"
         theme="orange"
       >
-        <p className="text-sm text-orange-100/80 leading-relaxed mb-3">
+        <p className="text-sm text-orange-700 dark:text-orange-100/80 leading-relaxed mb-3">
           Use <code>color()</code> when you need to specify the{" "}
-          <strong className="text-orange-300">actual color space</strong>, such
+          <strong className="text-orange-700 dark:text-orange-400">actual color space</strong>, such
           as <code>srgb</code> or <code>display-p3</code>.
         </p>
-        <p className="text-sm text-orange-100/70">
+        <p className="text-sm text-orange-700 dark:text-orange-100/70">
           It matters most for high-fidelity visual work and modern displays. For
           everyday app styling, it is usually more than you need.
         </p>
@@ -155,43 +155,43 @@ export const cssColorFormatsSpacesTopic: Topic = {
       headers={["Format", "Think In", "Best Use", "Main Caveat"]}
       rows={[
         [
-          "<span class='text-amber-200/85 font-semibold'>Hex</span>",
+          "<span class='text-amber-700 dark:text-amber-300/85 font-semibold'>Hex</span>",
           "Literal encoded value",
           "Fixed design tokens, quick copy/paste from design handoff",
           "Poor for human editing and programmatic color reasoning",
         ],
         [
-          "<span class='text-cyan-200/85 font-semibold'>rgb() / rgba()</span>",
+          "<span class='text-cyan-700 dark:text-cyan-300/85 font-semibold'>rgb() / rgba()</span>",
           "Red, green, blue channels + alpha",
           "JS/canvas interop, overlays, explicit channel math",
           "Not intuitive for hue-based tweaking",
         ],
         [
-          "<span class='text-sky-200/85 font-semibold'>hsl()</span>",
+          "<span class='text-sky-700 dark:text-sky-300/85 font-semibold'>hsl()</span>",
           "Hue, saturation, lightness",
           "Theme work, quick palette experiments, hue shifts",
           "Equal numeric changes do not produce equal perceived changes",
         ],
         [
-          "<span class='text-indigo-200/85 font-semibold'>hwb()</span>",
+          "<span class='text-indigo-700 dark:text-indigo-300/85 font-semibold'>hwb()</span>",
           "Hue + whiteness + blackness",
           "Niche quick tint/shade adjustments",
           "Less common in real-world design systems and team codebases",
         ],
         [
-          "<span class='text-fuchsia-200/85 font-semibold'>lab() / lch()</span>",
+          "<span class='text-fuchsia-700 dark:text-fuchsia-300/85 font-semibold'>lab() / lch()</span>",
           "Perceptual lightness and color distance",
           "More perceptual work than HSL, color math, advanced palettes",
           "Less ergonomic and often replaced by OKLCH today",
         ],
         [
-          "<span class='text-violet-200/85 font-semibold'>oklab() / oklch()</span>",
+          "<span class='text-violet-700 dark:text-violet-300/85 font-semibold'>oklab() / oklch()</span>",
           "Modern perceptual lightness, chroma, hue",
           "Design tokens, ramps, accessible palette systems, modern UI foundations",
           "Still more advanced than what many teams are used to",
         ],
         [
-          "<span class='text-orange-200/85 font-semibold'>color()</span>",
+          "<span class='text-orange-700 dark:text-orange-300/85 font-semibold'>color()</span>",
           "Explicit chosen color space",
           "Wide-gamut work, display-p3, precise color-space control",
           "Too low-level for everyday app theming unless you truly need it",
@@ -232,32 +232,32 @@ export const cssColorFormatsSpacesTopic: Topic = {
       rows={[
         [
           "You just need to paste a fixed brand color from a design file",
-          "<span class='text-amber-200/85 font-semibold'>Hex</span>",
+          "<span class='text-amber-700 dark:text-amber-300/85 font-semibold'>Hex</span>",
           "Compact, familiar, and perfectly fine when the value is not meant to be manipulated much.",
         ],
         [
           "You need translucency for overlays, shadows, or glass effects",
-          "<span class='text-cyan-200/85 font-semibold'>rgb() with alpha</span>",
+          "<span class='text-cyan-700 dark:text-cyan-300/85 font-semibold'>rgb() with alpha</span>",
           "Direct alpha control is ergonomic and widely understood in frontend code.",
         ],
         [
           "You want to spin hue, mute saturation, or quickly prototype theme variants",
-          "<span class='text-sky-200/85 font-semibold'>hsl()</span>",
+          "<span class='text-sky-700 dark:text-sky-300/85 font-semibold'>hsl()</span>",
           "The channels match how designers and developers often think about color tweaking.",
         ],
         [
           "You are building a reusable design system with stable ramps and accessible contrast work",
-          "<span class='text-violet-200/85 font-semibold'>oklch()</span>",
+          "<span class='text-violet-700 dark:text-violet-300/85 font-semibold'>oklch()</span>",
           "Perceptual lightness and chroma control make token systems much more predictable.",
         ],
         [
           "You need wide-gamut color on modern displays or explicit control over the color space",
-          "<span class='text-orange-200/85 font-semibold'>color()</span>",
+          "<span class='text-orange-700 dark:text-orange-300/85 font-semibold'>color()</span>",
           "It lets you intentionally work in spaces like display-p3 instead of assuming sRGB.",
         ],
         [
           "You are doing advanced color science or interpolation work",
-          "<span class='text-fuchsia-200/85 font-semibold'>lab() / lch() / oklab() / oklch()</span>",
+          "<span class='text-fuchsia-700 dark:text-fuchsia-300/85 font-semibold'>lab() / lch() / oklab() / oklch()</span>",
           "These spaces are built for perceptual reasoning rather than old RGB-era convenience.",
         ],
       ]}

@@ -3,6 +3,7 @@ import { Outlet, ScrollRestoration, useLocation } from "react-router";
 import { Search } from "lucide-react";
 import { Sidebar } from "./Sidebar";
 import { GlobalSearch } from "@/components/ui/GlobalSearch";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function AppLayout() {
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -41,7 +42,7 @@ export function AppLayout() {
 			<main className="flex-1 flex flex-col relative min-w-0 overflow-hidden transition-all duration-500">
 				{/* Header containing search trigger only (Sidebar toggle is now floating) */}
 				<header className="h-16 shrink-0 border-b border-border/40 flex items-center justify-between px-8 bg-card/20 backdrop-blur-3xl z-30">
-					<div className="flex-1 flex justify-end">
+					<div className="flex-1 flex justify-end items-center gap-3">
 						<button
 							onClick={() => setIsSearchOpen(true)}
 							className="group flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-secondary/20 text-muted-foreground/60 hover:text-foreground hover:bg-secondary/40 outline-none focus-visible:ring-2 focus-visible:ring-primary transition-all text-[13px] border border-border/60 hover:border-primary/20 cursor-pointer shadow-lg shadow-background/50 active:scale-95"
@@ -52,6 +53,7 @@ export function AppLayout() {
 								CTRL + K
 							</span>
 						</button>
+						<ThemeToggle />
 					</div>
 				</header>
 

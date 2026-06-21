@@ -55,16 +55,16 @@ const response = await fetch('/api/charges', {
 		/>,
 		<Grid key="5" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={Repeat2} title="Without Idempotency" subtitle="Retry becomes a duplicate mutation" theme="rose">
-				<p className="text-sm text-rose-200/80">
+				<p className="text-sm text-rose-700 dark:text-rose-300/80">
 					Client sends POST /charge. Server processes it. Response lost in transit. Client retries. Server processes it{" "}
-					<strong className="text-rose-300">again</strong>. User is charged <strong className="text-rose-300">$200 instead of $100</strong>.
+					<strong className="text-rose-700 dark:text-rose-400">again</strong>. User is charged <strong className="text-rose-700 dark:text-rose-400">$200 instead of $100</strong>.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={ShieldCheck} title="With Idempotency Key" subtitle="Retry returns the cached result" theme="emerald">
-				<p className="text-sm text-emerald-200/80">
+				<p className="text-sm text-emerald-700 dark:text-emerald-300/80">
 					Client sends POST /charge with key <code>abc123</code>. Server processes it, stores result keyed by{" "}
 					<code>abc123</code>. Response lost. Client retries with same <code>abc123</code>. Server returns{" "}
-					<strong className="text-emerald-300">cached result</strong>. User charged exactly <strong className="text-emerald-300">$100</strong>.
+					<strong className="text-emerald-700 dark:text-emerald-400">cached result</strong>. User charged exactly <strong className="text-emerald-700 dark:text-emerald-400">$100</strong>.
 				</p>
 			</FeatureCard>
 		</Grid>,

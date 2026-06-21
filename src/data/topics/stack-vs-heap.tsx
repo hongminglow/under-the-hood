@@ -39,7 +39,7 @@ export const stackVsHeapTopic: Topic = {
 
     <Grid key="5" cols={2} gap={6} className="mb-8">
       <FeatureCard icon={Layers} title="The Stack" subtitle="primitives and function frames" theme="cyan">
-        <p className="text-sm text-cyan-100/75 mb-4">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-4">
           Every time you explicitly call a normal function, a "Frame" is securely pushed onto the Stack. Primitives are stored directly inside that exact frame. When the function returns, the Stack automatically deletes the frame natively.
         </p>
         <CodeBlock
@@ -58,8 +58,8 @@ export const stackVsHeapTopic: Topic = {
       </FeatureCard>
 
       <FeatureCard icon={Database} title="The Heap" subtitle="dynamic objects and long-lived graphs" theme="violet">
-        <p className="text-sm text-violet-100/75 mb-4">
-          Objects and Arrays can grow to 50 Megabytes. They cannot strictly fit inside the tiny, rigid Stack frames. Instead, they live in the Heap. The Stack simply holds a tiny <strong className="text-violet-300">pointer</strong> (an address like <code>0x1F4A</code>) linking to the Heap object.
+        <p className="text-sm text-violet-700 dark:text-violet-100/75 mb-4">
+          Objects and Arrays can grow to 50 Megabytes. They cannot strictly fit inside the tiny, rigid Stack frames. Instead, they live in the Heap. The Stack simply holds a tiny <strong className="text-violet-700 dark:text-violet-400">pointer</strong> (an address like <code>0x1F4A</code>) linking to the Heap object.
         </p>
         <CodeBlock
           theme="violet"
@@ -86,7 +86,7 @@ export const stackVsHeapTopic: Topic = {
 
     <Grid key="7" cols={2} gap={6} className="mb-8">
       <Card title="Bad: Mutating the Heap (No Render)">
-        <p className="text-sm text-slate-300 mb-4 leading-relaxed">
+        <p className="text-sm text-slate-700 dark:text-slate-400 mb-4 leading-relaxed">
           Modifying an object property changes the Heap, but the Stack's pointer address (e.g., <code>0x1F4A</code>) stays completely identical. React falsely assumes nothing mathematically changed.
         </p>
         <CodeBlock
@@ -105,7 +105,7 @@ function badUpdate() {
       </Card>
 
       <Card title="Good: Creating a New Pointer">
-        <p className="text-sm text-slate-300 mb-4 leading-relaxed">
+        <p className="text-sm text-slate-700 dark:text-slate-400 mb-4 leading-relaxed">
           By spreading properties into a brand new object, you explicitly force JavaScript to allocate a completely new slot in the Heap. The Stack natively receives a new pointer (e.g., <code>0x9B2C</code>).
         </p>
         <CodeBlock

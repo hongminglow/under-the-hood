@@ -21,12 +21,12 @@ export const backendEncryptionMethodsTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Lock} title="Encryption in Transit" subtitle="TLS protects the wire" theme="emerald">
-        <p className="text-sm text-emerald-200/80 mb-2">
-          Handled by <strong className="text-emerald-300">TLS 1.3</strong>. Once the packet reaches your Load Balancer, it is typically decrypted (TLS Termination).
+        <p className="text-sm text-emerald-700 dark:text-emerald-300/80 mb-2">
+          Handled by <strong className="text-emerald-700 dark:text-emerald-400">TLS 1.3</strong>. Once the packet reaches your Load Balancer, it is typically decrypted (TLS Termination).
         </p>
       </FeatureCard>
       <FeatureCard icon={KeyRound} title="Encryption at Rest" subtitle="Storage-layer protection" theme="teal">
-        <p className="text-sm text-teal-200/80 mb-2">
+        <p className="text-sm text-teal-700 dark:text-teal-300/80 mb-2">
           Handled by the Cloud Provider (AWS EBS/RDS). Protects against someone physically walking away with a hard drive.
         </p>
       </FeatureCard>

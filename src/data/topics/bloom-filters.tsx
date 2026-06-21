@@ -24,17 +24,17 @@ export const bloomFiltersTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-6">
       <FeatureCard icon={Fingerprint} title="Inserting 'alice'" subtitle="Hash into bit positions" theme="emerald">
-        <p className="text-sm text-emerald-200/80 mb-2">Three hash functions produce three positions.</p>
-        <p className="text-xs italic text-emerald-200/60">
-          <strong className="text-emerald-300">hash₁("alice") → 3, hash₂("alice") → 7, hash₃("alice") → 14.</strong><br /><br />
+        <p className="text-sm text-emerald-700 dark:text-emerald-300/80 mb-2">Three hash functions produce three positions.</p>
+        <p className="text-xs italic text-emerald-700 dark:text-emerald-300/60">
+          <strong className="text-emerald-700 dark:text-emerald-400">hash₁("alice") → 3, hash₂("alice") → 7, hash₃("alice") → 14.</strong><br /><br />
           The filter sets bits 3, 7, and 14 to <code>1</code>. The string "alice" itself is never stored — only the flipped bits.
         </p>
       </FeatureCard>
       <FeatureCard icon={ShieldCheck} title="Querying 'alice'" subtitle="Cheap negative check" theme="teal">
-        <p className="text-sm text-teal-200/80 mb-2">Re-hash, check all positions.</p>
-        <p className="text-xs italic text-teal-200/60">
-          If bits 3, 7, and 14 are all <code>1</code> → <strong className="text-teal-300">"Possibly in set"</strong> (go hit the DB to confirm).<br /><br />
-          If any bit is <code>0</code> → <strong className="text-teal-300">"Definitely NOT in set"</strong> (skip the DB entirely). This is a guaranteed negative.
+        <p className="text-sm text-teal-700 dark:text-teal-300/80 mb-2">Re-hash, check all positions.</p>
+        <p className="text-xs italic text-teal-700 dark:text-teal-300/60">
+          If bits 3, 7, and 14 are all <code>1</code> → <strong className="text-teal-700 dark:text-teal-400">"Possibly in set"</strong> (go hit the DB to confirm).<br /><br />
+          If any bit is <code>0</code> → <strong className="text-teal-700 dark:text-teal-400">"Definitely NOT in set"</strong> (skip the DB entirely). This is a guaranteed negative.
         </p>
       </FeatureCard>
     </Grid>,
@@ -60,34 +60,34 @@ export const bloomFiltersTopic: Topic = {
     </h3>,
     <Grid key="9" cols={2} gap={6} className="my-6">
       <FeatureCard icon={Database} title="Databases" subtitle="Cassandra and RocksDB" theme="emerald">
-        <p className="text-sm text-emerald-200/80 mb-2">
+        <p className="text-sm text-emerald-700 dark:text-emerald-300/80 mb-2">
           Avoiding expensive disk lookups.
         </p>
-        <p className="text-xs italic text-emerald-200/60">
+        <p className="text-xs italic text-emerald-700 dark:text-emerald-300/60">
           Each SSTable on disk has an associated Bloom Filter in memory. Before a read query hits the disk, the filter checks all SSTables. Only the one(s) that say "possibly contains key" are actually read. This dramatically reduces I/O on read-heavy workloads.
         </p>
       </FeatureCard>
       <FeatureCard icon={Globe} title="Web" subtitle="CDN cache membership" theme="teal">
-        <p className="text-sm text-teal-200/80 mb-2">
+        <p className="text-sm text-teal-700 dark:text-teal-300/80 mb-2">
           Is this asset already cached on this edge node?
         </p>
-        <p className="text-xs italic text-teal-200/60">
+        <p className="text-xs italic text-teal-700 dark:text-teal-300/60">
           CDNs like Akamai and Cloudflare maintain Bloom Filters at each edge to determine whether a URL is cached locally before forwarding the request upstream. A false positive costs one unnecessary upstream request; a false negative never occurs.
         </p>
       </FeatureCard>
       <FeatureCard icon={ShieldCheck} title="Security" subtitle="Malicious URL detection" theme="cyan">
-        <p className="text-sm text-cyan-200/80 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-300/80 mb-2">
           Google Chrome's Safe Browsing feature.
         </p>
-        <p className="text-xs italic text-cyan-200/60">
+        <p className="text-xs italic text-cyan-700 dark:text-cyan-300/60">
           Chrome ships a local Bloom Filter containing millions of known-malicious URL hashes. On every navigation, it does a local O(1) filter check. Only potential "hits" trigger a real network lookup to Google's servers. The filter keeps billions of benign navigations completely private.
         </p>
       </FeatureCard>
       <FeatureCard icon={Fingerprint} title="Distributed Systems" subtitle="Deduplication" theme="sky">
-        <p className="text-sm text-sky-200/80 mb-2">
+        <p className="text-sm text-sky-700 dark:text-sky-300/80 mb-2">
           Has this event/message already been processed?
         </p>
-        <p className="text-xs italic text-sky-200/60">
+        <p className="text-xs italic text-sky-700 dark:text-sky-300/60">
           In Kafka consumers, Bloom Filters serve as ultra-fast idempotency checks for event IDs. Before processing a message, the consumer checks the filter. If "definitely not seen" → process it. If "possibly seen" → check the slower deduplication store.
         </p>
       </FeatureCard>

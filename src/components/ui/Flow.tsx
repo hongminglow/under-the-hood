@@ -12,46 +12,46 @@ export interface FlowProps {
 
 const flowThemeClasses = [
 	{
-		border: "border-emerald-900/50",
-		bg: "bg-gradient-to-b from-emerald-900/20 to-transparent",
-		badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
-		title: "text-emerald-50",
-		arrow: "text-emerald-500/50",
+		border: "border-emerald-300/70 dark:border-emerald-900/50",
+		bg: "bg-gradient-to-b from-emerald-100/60 to-transparent dark:from-emerald-900/20 dark:to-transparent",
+		badge: "bg-emerald-500/10 text-emerald-700 border-emerald-500/30 dark:text-emerald-400",
+		title: "text-emerald-950 dark:text-emerald-50",
+		arrow: "text-emerald-500/60 dark:text-emerald-500/50",
 	},
 	{
-		border: "border-teal-900/50",
-		bg: "bg-gradient-to-b from-teal-900/20 to-transparent",
-		badge: "bg-teal-500/10 text-teal-400 border-teal-500/30",
-		title: "text-teal-50",
-		arrow: "text-teal-500/50",
+		border: "border-teal-300/70 dark:border-teal-900/50",
+		bg: "bg-gradient-to-b from-teal-100/60 to-transparent dark:from-teal-900/20 dark:to-transparent",
+		badge: "bg-teal-500/10 text-teal-700 border-teal-500/30 dark:text-teal-400",
+		title: "text-teal-950 dark:text-teal-50",
+		arrow: "text-teal-500/60 dark:text-teal-500/50",
 	},
 	{
-		border: "border-cyan-900/50",
-		bg: "bg-gradient-to-b from-cyan-900/20 to-transparent",
-		badge: "bg-cyan-500/10 text-cyan-400 border-cyan-500/30",
-		title: "text-cyan-50",
-		arrow: "text-cyan-500/50",
+		border: "border-cyan-300/70 dark:border-cyan-900/50",
+		bg: "bg-gradient-to-b from-cyan-100/60 to-transparent dark:from-cyan-900/20 dark:to-transparent",
+		badge: "bg-cyan-500/10 text-cyan-700 border-cyan-500/30 dark:text-cyan-400",
+		title: "text-cyan-950 dark:text-cyan-50",
+		arrow: "text-cyan-500/60 dark:text-cyan-500/50",
 	},
 	{
-		border: "border-sky-900/50",
-		bg: "bg-gradient-to-b from-sky-900/20 to-transparent",
-		badge: "bg-sky-500/10 text-sky-400 border-sky-500/30",
-		title: "text-sky-50",
-		arrow: "text-sky-500/50",
+		border: "border-sky-300/70 dark:border-sky-900/50",
+		bg: "bg-gradient-to-b from-sky-100/60 to-transparent dark:from-sky-900/20 dark:to-transparent",
+		badge: "bg-sky-500/10 text-sky-700 border-sky-500/30 dark:text-sky-400",
+		title: "text-sky-950 dark:text-sky-50",
+		arrow: "text-sky-500/60 dark:text-sky-500/50",
 	},
 	{
-		border: "border-indigo-900/50",
-		bg: "bg-gradient-to-b from-indigo-900/20 to-transparent",
-		badge: "bg-indigo-500/10 text-indigo-400 border-indigo-500/30",
-		title: "text-indigo-50",
-		arrow: "text-indigo-500/50",
+		border: "border-indigo-300/70 dark:border-indigo-900/50",
+		bg: "bg-gradient-to-b from-indigo-100/60 to-transparent dark:from-indigo-900/20 dark:to-transparent",
+		badge: "bg-indigo-500/10 text-indigo-700 border-indigo-500/30 dark:text-indigo-400",
+		title: "text-indigo-950 dark:text-indigo-50",
+		arrow: "text-indigo-500/60 dark:text-indigo-500/50",
 	},
 	{
-		border: "border-violet-900/50",
-		bg: "bg-gradient-to-b from-violet-900/20 to-transparent",
-		badge: "bg-violet-500/10 text-violet-400 border-violet-500/30",
-		title: "text-violet-50",
-		arrow: "text-violet-500/50",
+		border: "border-violet-300/70 dark:border-violet-900/50",
+		bg: "bg-gradient-to-b from-violet-100/60 to-transparent dark:from-violet-900/20 dark:to-transparent",
+		badge: "bg-violet-500/10 text-violet-700 border-violet-500/30 dark:text-violet-400",
+		title: "text-violet-950 dark:text-violet-50",
+		arrow: "text-violet-500/60 dark:text-violet-500/50",
 	},
 ];
 
@@ -65,7 +65,7 @@ export function Flow({ steps }: FlowProps) {
 						<React.Fragment key={index}>
 							<div
 								className={cn(
-									"flex w-full flex-col rounded-xl border p-5 md:w-[260px] md:flex-none self-stretch overflow-hidden shadow-lg transition-all hover:bg-black/20",
+									"flex w-full flex-col rounded-xl border p-5 md:w-[260px] md:flex-none self-stretch overflow-hidden shadow-lg shadow-black/5 dark:shadow-black/20 transition-all hover:bg-foreground/[0.03] dark:hover:bg-black/20",
 									t.border,
 									t.bg,
 								)}
@@ -84,7 +84,7 @@ export function Flow({ steps }: FlowProps) {
 									</h4>
 								</div>
 								{step.description && (
-									<div className="text-sm text-slate-300 leading-relaxed overflow-hidden">{step.description}</div>
+									<div className="text-sm text-foreground/75 leading-relaxed overflow-hidden">{step.description}</div>
 								)}
 							</div>
 							{index < steps.length - 1 && (

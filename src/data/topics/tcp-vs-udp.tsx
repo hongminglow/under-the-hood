@@ -28,8 +28,8 @@ export const tcpVsUdpTopic: Topic = {
 			key="3"
 			headers={[
 				"Property",
-				"<span class='text-cyan-300'>TCP (The Reliable Courier)</span>",
-				"<span class='text-amber-300'>UDP (The Firehose)</span>",
+				"<span class='text-cyan-700 dark:text-cyan-400'>TCP (The Reliable Courier)</span>",
+				"<span class='text-amber-700 dark:text-amber-400'>UDP (The Firehose)</span>",
 			]}
 			rows={[
 				["Connection", "Connection-oriented (Handshake required).", "Connectionless (Just send it)."],
@@ -74,19 +74,19 @@ export const tcpVsUdpTopic: Topic = {
 		</h3>,
 		<Grid key="9" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={ShieldCheck} title="The TCP Wait State" subtitle="reliability blocks until repaired" theme="cyan">
-				<p className="text-sm text-cyan-100/75 mb-2">
-					TCP uses <strong className="text-cyan-300">Automatic Repeat Request (ARQ)</strong>.
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-2">
+					TCP uses <strong className="text-cyan-700 dark:text-cyan-400">Automatic Repeat Request (ARQ)</strong>.
 				</p>
-				<p className="text-sm text-cyan-100/75">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75">
 					If Packet #2 is missing, TCP stops the entire stream until the sender retransmits #2. This causes
 					"Micro-stuttering" in real-time apps.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Gauge} title="The UDP Forgive State" subtitle="freshness beats repair" theme="amber">
-				<p className="text-sm text-amber-100/75 mb-2">
-					UDP lets the <strong className="text-amber-300">Application</strong>&nbsp;handle errors.
+				<p className="text-sm text-amber-700 dark:text-amber-100/75 mb-2">
+					UDP lets the <strong className="text-amber-700 dark:text-amber-400">Application</strong>&nbsp;handle errors.
 				</p>
-				<p className="text-sm text-amber-100/75">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75">
 					If a video packet is lost, the player just shows a glitchy pixel for 1/60th of a second and moves on.
 					Performance is preserved.
 				</p>
@@ -131,20 +131,20 @@ Result: 100ms delay for packets that were already there.`}
 		</p>,
 		<Grid key="16" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={ShieldCheck} title="TCP Slow Start" subtitle="polite ramp-up" theme="cyan">
-				<p className="text-sm text-cyan-100/75 mb-2">
-					TCP starts by sending just <strong className="text-cyan-300">1-10 packets</strong>, then doubles the window size every RTT until loss
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-2">
+					TCP starts by sending just <strong className="text-cyan-700 dark:text-cyan-400">1-10 packets</strong>, then doubles the window size every RTT until loss
 					occurs.
 				</p>
-				<p className="text-sm text-cyan-100/75">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75">
 					On high-bandwidth networks, this means it takes several RTTs to "ramp up" to full speed. For short-lived
 					connections (like API requests), you never reach full throughput.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Gauge} title="UDP: No Brakes" subtitle="speed with responsibility pushed upward" theme="amber">
-				<p className="text-sm text-amber-100/75 mb-2">
-					UDP has <strong className="text-amber-300">zero congestion control</strong>. It will happily flood the network at line rate.
+				<p className="text-sm text-amber-700 dark:text-amber-100/75 mb-2">
+					UDP has <strong className="text-amber-700 dark:text-amber-400">zero congestion control</strong>. It will happily flood the network at line rate.
 				</p>
-				<p className="text-sm text-amber-100/75">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75">
 					This is why protocols like QUIC and WebRTC implement their own congestion control on top of UDP. Raw UDP can
 					be a "bad network citizen" if misused.
 				</p>
@@ -190,8 +190,8 @@ Result: 100ms delay for packets that were already there.`}
 			key="23"
 			headers={[
 				"Feature",
-				"<span class='text-cyan-300'>TCP (HTTP/2)</span>",
-				"<span class='text-amber-300'>QUIC (HTTP/3 over UDP)</span>",
+				"<span class='text-cyan-700 dark:text-cyan-400'>TCP (HTTP/2)</span>",
+				"<span class='text-amber-700 dark:text-amber-400'>QUIC (HTTP/3 over UDP)</span>",
 			]}
 			rows={[
 				["Handshake", "3-way (1 RTT) + TLS (1-2 RTT) = 2-3 RTT", "0-RTT or 1-RTT combined"],
@@ -210,27 +210,27 @@ Result: 100ms delay for packets that were already there.`}
 		</h3>,
 		<Grid key="26" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={ShieldCheck} title="When to Choose TCP" subtitle="completeness matters" theme="cyan">
-				<ul className="text-sm text-cyan-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-cyan-700 dark:text-cyan-100/75 space-y-2 list-disc pl-4">
 					<li>File transfers (FTP, SFTP)</li>
 					<li>Database queries (PostgreSQL, MySQL)</li>
 					<li>RESTful APIs (HTTP/1.1, HTTP/2)</li>
 					<li>Email (SMTP, IMAP)</li>
 					<li>SSH remote shells</li>
 				</ul>
-				<p className="text-sm text-cyan-100/75 mt-4">
-					Rule: If <strong className="text-cyan-300">every byte matters</strong>&nbsp;and latency is acceptable, use TCP.
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75 mt-4">
+					Rule: If <strong className="text-cyan-700 dark:text-cyan-400">every byte matters</strong>&nbsp;and latency is acceptable, use TCP.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Gauge} title="When to Choose UDP" subtitle="freshness matters" theme="amber">
-				<ul className="text-sm text-amber-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-amber-700 dark:text-amber-100/75 space-y-2 list-disc pl-4">
 					<li>VoIP (Zoom, Discord voice)</li>
 					<li>Live video streaming (Twitch, WebRTC)</li>
 					<li>Online gaming (player positions)</li>
 					<li>DNS lookups</li>
 					<li>IoT sensor data (temperature, GPS)</li>
 				</ul>
-				<p className="text-sm text-amber-100/75 mt-4">
-					Rule: If <strong className="text-amber-300">freshness &gt; completeness</strong>&nbsp;and you can tolerate loss, use UDP.
+				<p className="text-sm text-amber-700 dark:text-amber-100/75 mt-4">
+					Rule: If <strong className="text-amber-700 dark:text-amber-400">freshness &gt; completeness</strong>&nbsp;and you can tolerate loss, use UDP.
 				</p>
 			</FeatureCard>
 		</Grid>,
@@ -271,9 +271,9 @@ udpServer.bind(8081);`}
 			key="30"
 			headers={[
 				"Metric",
-				"<span class='text-cyan-300'>TCP</span>",
-				"<span class='text-amber-300'>UDP</span>",
-				"<span class='text-teal-300'>QUIC</span>",
+				"<span class='text-cyan-700 dark:text-cyan-400'>TCP</span>",
+				"<span class='text-amber-700 dark:text-amber-400'>UDP</span>",
+				"<span class='text-teal-700 dark:text-teal-400'>QUIC</span>",
 			]}
 			rows={[
 				["Connection Setup", "50-150ms (3-way + TLS)", "0ms (connectionless)", "0-50ms (0-RTT or 1-RTT)"],

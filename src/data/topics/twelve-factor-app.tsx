@@ -21,14 +21,14 @@ export const twelveFacorAppTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <FeatureCard icon={SlidersHorizontal} title="III. Config" subtitle="Runtime changes without rebuilding" theme="cyan">
-        <p className="text-cyan-100/80">
-          Store configuration in <strong className="text-cyan-300">environment variables</strong>, not code. The same build
+        <p className="text-cyan-700 dark:text-cyan-100/80">
+          Store configuration in <strong className="text-cyan-700 dark:text-cyan-400">environment variables</strong>, not code. The same build
           artifact should move from Dev to Staging to Prod without recompilation.
         </p>
       </FeatureCard>
       <FeatureCard icon={Server} title="VI. Processes" subtitle="Stateless by default" theme="emerald">
-        <p className="text-red-100/80">
-          <strong className="text-red-300">The most critical factor:</strong> processes must be stateless. Anything that
+        <p className="text-emerald-700 dark:text-emerald-100/80">
+          <strong className="text-emerald-700 dark:text-emerald-400">The most critical factor:</strong> processes must be stateless. Anything that
           needs to survive a restart belongs in a backing service like Postgres, Redis, or S3.
         </p>
       </FeatureCard>

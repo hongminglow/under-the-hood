@@ -57,7 +57,7 @@ export const llmWebVsIdeVsCliTopic: Topic = {
         subtitle="Less local noise, more general reasoning"
         theme="violet"
       >
-        <p className="mt-2 text-sm leading-relaxed text-violet-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-violet-700 dark:text-violet-100/75">
           A chat product can spend more of its token budget on conversation,
           explanation quality, writing style, and broad reasoning because it is
           not busy indexing your repo, formatting patches, or managing shell
@@ -70,7 +70,7 @@ export const llmWebVsIdeVsCliTopic: Topic = {
         subtitle="They can verify reality"
         theme="emerald"
       >
-        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-700 dark:text-emerald-100/75">
           A coding CLI may feel more capable because it can{" "}
           <strong>read the files, run the build, see the failure, patch the
           code, and retry</strong>. Even if its raw model is not "smarter" in
@@ -167,14 +167,14 @@ export const llmWebVsIdeVsCliTopic: Topic = {
     </h3>,
     <Grid key="16" cols={2} gap={6}>
       <FeatureCard icon={MonitorSmartphone} title="IDE Extension" subtitle="Optimized for typing flow" theme="cyan">
-        <p className="mt-2 text-sm leading-relaxed text-cyan-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-cyan-700 dark:text-cyan-100/75">
           IDE tools often use prefix/suffix context around your cursor, linter
           diagnostics, AST symbols, and open tabs. Their job is to stay
           low-latency and unobtrusive while you are coding live.
         </p>
       </FeatureCard>
       <FeatureCard icon={Terminal} title="CLI Agent" subtitle="Optimized for task completion" theme="emerald">
-        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-700 dark:text-emerald-100/75">
           CLI agents are less about tiny completions and more about{" "}
           <strong>end-to-end execution</strong>: search the repo, edit multiple
           files, run commands, inspect failures, and converge toward a working

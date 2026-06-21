@@ -43,10 +43,10 @@ export const tcpIpTopic: Topic = {
 		<h3 key="3a" className="text-xl font-bold mt-8 mb-4">
 			The Journey: Data Encapsulation
 		</h3>,
-		<p key="3b" className="mb-4 text-sm text-slate-300">
+		<p key="3b" className="mb-4 text-sm text-slate-700 dark:text-slate-400">
 			When you call `fetch()`:
 		</p>,
-		<ul key="3c" className="list-decimal pl-5 text-sm text-slate-300 space-y-2 mb-8">
+		<ul key="3c" className="list-decimal pl-5 text-sm text-slate-700 dark:text-slate-400 space-y-2 mb-8">
 			<li>
 				<strong>Data (Layer 7)</strong> is created (JSON).
 			</li>
@@ -86,7 +86,7 @@ export const tcpIpTopic: Topic = {
 		<p key="8" className="mb-4">
 			TCP isn't just about sending data; it's about <strong>protecting the network</strong>.
 		</p>,
-		<ul key="9" className="list-disc pl-5 text-sm text-slate-400 space-y-2">
+		<ul key="9" className="list-disc pl-5 text-sm text-slate-700 dark:text-slate-400 space-y-2">
 			<li>
 				<strong className="text-muted-foreground">Sliding Window (Flow Control):</strong> The receiver tells the sender exactly how much data it can
 				buffer. If the client is slow, the server physically slows down its transmission.

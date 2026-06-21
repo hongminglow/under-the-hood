@@ -29,22 +29,22 @@ export const circuitBreakerTopic: Topic = {
 		</h4>,
 		<Grid key="4" cols={3} gap={6} className="mb-8">
 			<FeatureCard icon={ShieldCheck} title="Closed" subtitle="Normal traffic" theme="emerald">
-				<p className="text-sm text-emerald-200/80">
-					Traffic passes through normally. The breaker monitors the <strong className="text-emerald-300">failure rate</strong>. If 5 out of the last
-					10 calls fail (50% threshold), the breaker <strong className="text-emerald-300">trips open</strong>.
+				<p className="text-sm text-emerald-700 dark:text-emerald-300/80">
+					Traffic passes through normally. The breaker monitors the <strong className="text-emerald-700 dark:text-emerald-400">failure rate</strong>. If 5 out of the last
+					10 calls fail (50% threshold), the breaker <strong className="text-emerald-700 dark:text-emerald-400">trips open</strong>.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Gauge} title="Open" subtitle="Tripped protection" theme="rose">
-				<p className="text-sm text-rose-200/80">
-					<strong className="text-rose-300">All requests fail immediately</strong> without even attempting to call the downstream service. Returns
-					a fallback response or cached data. Stays open for a configurable <strong className="text-rose-300">cool-down period</strong> (e.g., 30
+				<p className="text-sm text-rose-700 dark:text-rose-300/80">
+					<strong className="text-rose-700 dark:text-rose-400">All requests fail immediately</strong> without even attempting to call the downstream service. Returns
+					a fallback response or cached data. Stays open for a configurable <strong className="text-rose-700 dark:text-rose-400">cool-down period</strong> (e.g., 30
 					seconds).
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Timer} title="Half-Open" subtitle="Testing recovery" theme="amber">
-				<p className="text-sm text-amber-200/80">
-					After the cool-down, the breaker allows <strong className="text-amber-300">one probe request</strong> through. If it succeeds, the
-					breaker <strong className="text-amber-300">closes</strong> (back to normal). If it fails, it <strong className="text-amber-300">trips open again</strong> for
+				<p className="text-sm text-amber-700 dark:text-amber-300/80">
+					After the cool-down, the breaker allows <strong className="text-amber-700 dark:text-amber-400">one probe request</strong> through. If it succeeds, the
+					breaker <strong className="text-amber-700 dark:text-amber-400">closes</strong> (back to normal). If it fails, it <strong className="text-amber-700 dark:text-amber-400">trips open again</strong> for
 					another cool-down cycle.
 				</p>
 			</FeatureCard>

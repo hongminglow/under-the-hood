@@ -31,19 +31,19 @@ export const dockerComposeVsKubernetesVsEksTopic: Topic = {
 		</Callout>,
 		<Grid key="3" cols={3} gap={6} className="my-8">
 			<FeatureCard icon={Boxes} title="Docker Compose" subtitle="Single-host coordination" theme="emerald">
-				<p className="text-sm text-emerald-100/75">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75">
 					Best for local development, demos, CI test stacks, and small production systems running on one VM where you
 					want low operational overhead.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Network} title="Kubernetes" subtitle="Cluster orchestration" theme="cyan">
-				<p className="text-sm text-cyan-100/75">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75">
 					Best when you need multi-node scheduling, self-healing, rolling deployments, autoscaling, service discovery,
 					and stronger workload isolation at platform scale.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Cloud} title="Amazon EKS" subtitle="Managed Kubernetes on AWS" theme="violet">
-				<p className="text-sm text-violet-100/75">
+				<p className="text-sm text-violet-700 dark:text-violet-100/75">
 					Best when you already want Kubernetes and also want AWS-managed control plane operations plus integration with
 					IAM, ECR, ALB/NLB, CloudWatch, and the broader AWS platform.
 				</p>
@@ -89,7 +89,7 @@ export const dockerComposeVsKubernetesVsEksTopic: Topic = {
 			subtitle="Usually earlier than people think"
 			theme="emerald"
 		>
-			<ul className="list-disc pl-5 space-y-2 text-sm text-emerald-100/75">
+			<ul className="list-disc pl-5 space-y-2 text-sm text-emerald-700 dark:text-emerald-100/75">
 				<li>
 					You run <strong>a few services</strong> together on one machine: app, database, Redis, worker, reverse proxy.
 				</li>
@@ -113,7 +113,7 @@ export const dockerComposeVsKubernetesVsEksTopic: Topic = {
 			subtitle="Use it when orchestration pain becomes real"
 			theme="cyan"
 		>
-			<ul className="list-disc pl-5 space-y-2 text-sm text-cyan-100/75">
+			<ul className="list-disc pl-5 space-y-2 text-sm text-cyan-700 dark:text-cyan-100/75">
 				<li>
 					You need <strong>multi-node resilience</strong>: if one node dies, workloads should be rescheduled elsewhere
 					automatically.
@@ -138,7 +138,7 @@ export const dockerComposeVsKubernetesVsEksTopic: Topic = {
 			subtitle="Choose it only after deciding you need Kubernetes"
 			theme="violet"
 		>
-			<ul className="list-disc pl-5 space-y-2 text-sm text-violet-100/75">
+			<ul className="list-disc pl-5 space-y-2 text-sm text-violet-700 dark:text-violet-100/75">
 				<li>
 					Your infrastructure already lives in <strong>AWS</strong> and you want tight integration with IAM roles, VPC
 					networking, ECR, and AWS load balancers.

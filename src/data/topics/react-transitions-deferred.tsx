@@ -40,26 +40,26 @@ export const reactTransitionsDeferredTopic: Topic = {
 
     <Grid key="grid-problem" cols={1} gap={6} className="my-8">
       <Card title="Before Concurrent Mode (React ≤ 17)" description="The blocking render model.">
-        <p className="text-sm text-slate-300 mb-3 leading-relaxed">
+        <p className="text-sm text-slate-700 dark:text-slate-400 mb-3 leading-relaxed">
           In React's legacy mode, a state update triggered a completely
           synchronous render. React would walk the entire Fiber tree, compute
           every diff, and commit all DOM mutations before yielding back to the
           browser — even if that took 400ms.
         </p>
-        <p className="text-sm text-slate-400 leading-relaxed">
+        <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
           <strong className="text-muted-foreground">Why it matters:</strong>{" "}
           During those 400ms the browser's main thread was fully blocked.
           Keystrokes were queued. Animations froze. The page felt dead.
         </p>
       </Card>
       <Card title="The Browser's Frame Budget" description="Why 16ms matters.">
-        <p className="text-sm text-slate-300 mb-3 leading-relaxed">
+        <p className="text-sm text-slate-700 dark:text-slate-400 mb-3 leading-relaxed">
           A 60fps display gives the browser exactly{" "}
           <Highlight variant="warning">16.6ms</Highlight> per frame to run all
           JS, handle events, run layout, and paint. Any JS task longer than
           ~5ms starts to push frames over budget and creates visible jank.
         </p>
-        <p className="text-sm text-slate-400 leading-relaxed">
+        <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
           <strong className="text-muted-foreground">React's move:</strong>{" "}
           React's answer: break work into small chunks (
           <strong>time-slicing</strong>) and yield back to the browser between

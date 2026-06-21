@@ -1,63 +1,110 @@
 @import "tailwindcss";
 
-@theme {
-	--color-primary-50: #ecfdf3;
-	--color-primary-100: #d1fadf;
-	--color-primary-200: #a6f4c5;
-	--color-primary-300: #6ce9a6;
-	--color-primary-400: #32d583;
-	--color-primary-500: #12b76a;
-	--color-primary-600: #039855;
-	--color-primary-700: #027a48;
-	--color-primary-800: #05603a;
-	--color-primary-900: #054f31;
-	--color-primary-950: #012415;
+/* Class-based dark mode: `.dark` on <html> drives the dark theme (default on). */
+@custom-variant dark (&:where(.dark, .dark *));
 
-	/* Rich Dark Green Background Palette */
-	--color-background: #010804;
-	--color-foreground: #ecfdf5;
-	--color-card: #02120a;
-	--color-card-foreground: #ecfdf5;
-	--color-popover: #02120a;
-	--color-popover-foreground: #ecfdf5;
-	--color-primary: #10b981; /* Emerald 500 */
-	--color-primary-foreground: #010804;
-	--color-secondary: #064e3b; /* Emerald 900 */
-	--color-secondary-foreground: #ecfdf5;
-	--color-muted: #064e3b;
-	--color-muted-foreground: #6ee7b7;
-	--color-accent: #059669; /* Emerald 600 */
-	--color-accent-foreground: #ecfdf5;
-	--color-destructive: #991b1b;
-	--color-destructive-foreground: #fafafa;
-	--color-border: #065f46; /* Emerald 800 but deeper */
-	--color-input: #064e3b;
-	--color-ring: #34d399;
+/*
+ * ─── Theme tokens ──────────────────────────────────────────────────────────
+ * Semantic values live on plain CSS variables so they can flip at runtime.
+ * `:root` holds the LIGHT theme; `.dark` overrides for the DARK theme (default).
+ * `@theme inline` registers them with Tailwind so utilities like `bg-card`,
+ * `text-muted-foreground`, `border-border` resolve to the live variable.
+ */
+:root {
+	/* Light theme — soft warm off-white (not pure white) with a forest-ink foreground */
+	--background: #f3f6f3;
+	--foreground: #1a241e;
+	--card: #ffffff;
+	--card-foreground: #1a241e;
+	--popover: #ffffff;
+	--popover-foreground: #1a241e;
+	--primary: #2c7656; /* Deep forest green — AA contrast on white */
+	--primary-foreground: #ffffff;
+	--secondary: #e7eee9;
+	--secondary-foreground: #243029;
+	--muted: #e7eee9;
+	--muted-foreground: #586b61; /* calm green-gray secondary text */
+	--accent: #2c7656;
+	--accent-foreground: #ffffff;
+	--destructive: #d83a52;
+	--destructive-foreground: #ffffff;
+	--border: #dce5df;
+	--input: #dce5df;
+	--ring: #45a276;
+}
+
+.dark {
+	/*
+	 * Dark theme (default) — calm forest, tuned for long-form reading:
+	 *   · background lifted off pure black to cut harsh contrast/halation
+	 *   · foreground is a soft low-chroma off-white, NOT bright green
+	 *   · saturated green is reserved for the accent, used sparingly
+	 */
+	--background: #0e1411;
+	--foreground: #dde5df; /* soft green-tinted off-white — gentle to read */
+	--card: #141b17;
+	--card-foreground: #dde5df;
+	--popover: #141b17;
+	--popover-foreground: #dde5df;
+	--primary: #62b58c; /* muted sage — visible but not neon */
+	--primary-foreground: #07120c;
+	--secondary: #18211c;
+	--secondary-foreground: #dde5df;
+	--muted: #18211c;
+	--muted-foreground: #93a89d; /* calm sage-gray, replaces the harsh mint */
+	--accent: #4f9e78;
+	--accent-foreground: #f0f5f2;
+	--destructive: #fb7185;
+	--destructive-foreground: #07120c;
+	--border: #243029; /* low-contrast green border */
+	--input: #243029;
+	--ring: #62b58c;
+}
+
+@theme inline {
+	/* Forest/sage brand scale — desaturated vs. Tailwind emerald; static across themes */
+	--color-primary-50: #edf6f1;
+	--color-primary-100: #d3ebe0;
+	--color-primary-200: #a9d8c2;
+	--color-primary-300: #7cc1a1;
+	--color-primary-400: #62b58c;
+	--color-primary-500: #45a276;
+	--color-primary-600: #2c7656;
+	--color-primary-700: #265f47;
+	--color-primary-800: #224d3b;
+	--color-primary-900: #1d4031;
+	--color-primary-950: #0d2319;
+
+	/* Semantic tokens → live variables (flip per theme) */
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+
+	--radius: 0.75rem;
 }
 
 @layer base {
 	:root {
-		--background: var(--color-background);
-		--foreground: var(--color-foreground);
-		--card: var(--color-card);
-		--card-foreground: var(--color-card-foreground);
-		--popover: var(--color-popover);
-		--popover-foreground: var(--color-popover-foreground);
-		--primary: var(--color-primary);
-		--primary-foreground: var(--primary-foreground);
-		--secondary: var(--color-secondary);
-		--secondary-foreground: var(--color-secondary-foreground);
-		--muted: var(--color-muted);
-		--muted-foreground: var(--color-muted-foreground);
-		--accent: var(--color-accent);
-		--accent-foreground: var(--color-accent-foreground);
-		--destructive: var(--color-destructive);
-		--destructive-foreground: var(--color-destructive-foreground);
-		--border: var(--color-border);
-		--input: var(--color-input);
-		--ring: var(--color-ring);
-
-		--radius: 0.75rem;
+		color-scheme: light;
+	}
+	.dark {
+		color-scheme: dark;
 	}
 }
 
@@ -66,11 +113,14 @@
 		@apply border-border/40;
 	}
 	body {
-		@apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary-50;
-		color-scheme: dark;
+		@apply bg-background text-foreground antialiased selection:bg-primary/25 selection:text-primary-foreground;
+		transition:
+			background-color 0.4s ease,
+			color 0.4s ease;
 		background-image:
-			radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.05) 0px, transparent 50%),
-			radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.02) 0px, transparent 50%);
+			radial-gradient(at 0% 0%, color-mix(in oklch, var(--primary) 8%, transparent) 0px, transparent 50%),
+			radial-gradient(at 100% 0%, color-mix(in oklch, var(--primary) 4%, transparent) 0px, transparent 50%);
+		background-attachment: fixed;
 	}
 }
 
@@ -82,9 +132,9 @@
 	background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-	background: var(--color-border);
+	background: var(--border);
 	border-radius: 10px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-	background: var(--color-primary);
+	background: var(--primary);
 }

@@ -28,7 +28,7 @@ export const dnsTopic: Topic = {
 	title: "DNS: The Full Network Lifecycle",
 	description:
 		"Every hop from the moment a user types 'google.com' to the HTML landing in their browser — DNS resolver, root servers, registrar, CDN, TLS, hosting, and back.",
-	tags: ["networking", "dns", "backend", "devops"],
+	tags: ["dns", "networking", "backend", "devops"],
 	icon: "Search",
 	content: [
 		<p key="intro-1">
@@ -95,36 +95,36 @@ export const dnsTopic: Topic = {
 			<FeatureCard icon={Network} title="Recursive Resolver" subtitle="Run By: ISP / Public DNS" theme="emerald">
 				<p className="mb-5">
 					This is the server your computer actually{" "}
-					<em className="not-italic font-medium text-red-300">talks to</em>. You configure it in your Network
-					Settings (DHCP usually assigns your ISP's resolver automatically).
+					<em className="not-italic font-semibold text-emerald-700 dark:text-emerald-400">talks to</em>. You configure it
+					in your Network Settings (DHCP usually assigns your ISP's resolver automatically).
 				</p>
-				<div className="bg-black/30 rounded-lg p-4 border border-white/10 mb-5">
+				<div className="bg-black/5 dark:bg-black/30 rounded-lg p-4 border border-black/10 dark:border-white/10 mb-5">
 					<p className="text-xs uppercase tracking-wider mb-3 font-semibold opacity-80">Popular Alternatives</p>
 					<ul className="space-y-3">
 						<li className="flex items-center gap-3">
-							<span className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
-							<code className="bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800/50">
+							<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
+							<code className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30">
 								1.1.1.1
 							</code>{" "}
 							Cloudflare (Fastest)
 						</li>
 						<li className="flex items-center gap-3">
-							<span className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
-							<code className="bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800/50">
+							<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
+							<code className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30">
 								8.8.8.8
 							</code>{" "}
 							Google Public DNS
 						</li>
 						<li className="flex items-center gap-3">
-							<span className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
-							<code className="bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800/50">
+							<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
+							<code className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30">
 								9.9.9.9
 							</code>{" "}
 							Quad9 (Privacy)
 						</li>
 					</ul>
 				</div>
-				<p className="text-xs mt-auto pt-4 border-t border-white/10 opacity-70">
+				<p className="text-xs mt-auto pt-4 border-t border-black/10 dark:border-white/10 opacity-70">
 					Caches answers from Root/TLD/Authoritative servers based on TTL. Changing DNS records doesn't propagate
 					instantly due to this cache.
 				</p>
@@ -133,44 +133,49 @@ export const dnsTopic: Topic = {
 			<FeatureCard icon={Server} title="Authoritative Nameserver" subtitle="Run By: You (via Provider)" theme="teal">
 				<p className="mb-5">
 					The final source of truth.{" "}
-					<strong className="font-medium text-teal-300">This is where you set your A, CNAME, MX records.</strong> When
-					you buy a domain, you point it to this server.
+					<strong className="font-semibold text-teal-700 dark:text-teal-400">
+						This is where you set your A, CNAME, MX records.
+					</strong>{" "}
+					When you buy a domain, you point it to this server.
 				</p>
-				<div className="bg-black/30 rounded-lg p-4 border border-white/10 mb-5">
+				<div className="bg-black/5 dark:bg-black/30 rounded-lg p-4 border border-black/10 dark:border-white/10 mb-5">
 					<p className="text-xs uppercase tracking-wider mb-3 font-semibold opacity-80">Common Providers</p>
 					<ul className="space-y-3">
 						<li className="flex items-center gap-3">
-							<span className="w-1.5 h-1.5 rounded-full bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"></span>
-							<strong className="font-medium text-teal-200">AWS Route 53</strong> — Enterprise routing
+							<span className="w-1.5 h-1.5 rounded-full bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.7)]"></span>
+							<strong className="font-semibold text-teal-700 dark:text-teal-300">AWS Route 53</strong> — Enterprise routing
 						</li>
 						<li className="flex items-center gap-3">
-							<span className="w-1.5 h-1.5 rounded-full bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"></span>
-							<strong className="font-medium text-teal-200">Cloudflare DNS</strong> — Proxied CDN records
+							<span className="w-1.5 h-1.5 rounded-full bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.7)]"></span>
+							<strong className="font-semibold text-teal-700 dark:text-teal-300">Cloudflare DNS</strong> — Proxied CDN
+							records
 						</li>
 						<li className="flex items-center gap-3">
-							<span className="w-1.5 h-1.5 rounded-full bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"></span>
-							<strong className="font-medium text-teal-200">GoDaddy / Namecheap</strong> — Included DNS
+							<span className="w-1.5 h-1.5 rounded-full bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.7)]"></span>
+							<strong className="font-semibold text-teal-700 dark:text-teal-300">GoDaddy / Namecheap</strong> — Included DNS
 						</li>
 					</ul>
 				</div>
-				<p className="text-xs mt-auto pt-4 border-t border-white/10 opacity-70">
+				<p className="text-xs mt-auto pt-4 border-t border-black/10 dark:border-white/10 opacity-70">
 					The Registrar points the TLD server to your Authoritative Nameserver using NS records.
 				</p>
 			</FeatureCard>
 
 			<FeatureCard icon={ShieldCheck} title="Domain Registrar" subtitle="Run By: ICANN-Accredited" theme="cyan">
 				<p className="mb-5">
-					The company you <em className="not-italic font-medium text-cyan-300">rent</em> your domain from (e.g.
-					Namecheap, Google Domains). Their critical job is to update the TLD Registry's database.
+					The company you <em className="not-italic font-semibold text-cyan-700 dark:text-cyan-400">rent</em> your domain
+					from (e.g. Namecheap, Google Domains). Their critical job is to update the TLD Registry's database.
 				</p>
-				<div className="bg-black/30 rounded-lg p-5 border border-white/10 mb-5">
+				<div className="bg-black/5 dark:bg-black/30 rounded-lg p-5 border border-black/10 dark:border-white/10 mb-5">
 					<p>
 						They define your{" "}
-						<strong className="font-semibold px-1 bg-cyan-900/20 rounded text-cyan-300">NS (Nameserver) records</strong>
+						<strong className="font-semibold px-1 bg-cyan-500/15 rounded text-cyan-700 dark:text-cyan-400">
+							NS (Nameserver) records
+						</strong>
 						, telling the world which Authoritative DNS server is in charge of your domain.
 					</p>
 				</div>
-				<p className="text-xs mt-auto pt-4 border-t border-white/10 opacity-70">
+				<p className="text-xs mt-auto pt-4 border-t border-black/10 dark:border-white/10 opacity-70">
 					Registrar ≠ DNS Provider. You can buy from Namecheap but use Cloudflare as your DNS by updating custom
 					nameservers.
 				</p>
@@ -178,21 +183,24 @@ export const dnsTopic: Topic = {
 
 			<FeatureCard icon={Globe} title="Root Name Servers" subtitle="Run By: 12 Organisations" theme="sky">
 				<p className="mb-5">
-					There are only <strong className="font-medium text-sky-300">13 sets of Root Name Servers</strong> (A–M),
+					There are only{" "}
+					<strong className="font-semibold text-sky-700 dark:text-sky-400">13 sets of Root Name Servers</strong> (A–M),
 					operated by ICANN, NASA, RIPE NCC, etc.
 				</p>
-				<div className="bg-black/30 rounded-lg p-5 border border-white/10 mb-5">
+				<div className="bg-black/5 dark:bg-black/30 rounded-lg p-5 border border-black/10 dark:border-white/10 mb-5">
 					<p>
 						They are the top of the DNS tree. Responding to queries via{" "}
-						<strong className="font-medium text-sky-300">Anycast routing</strong> to hundreds of physical machines
-						worldwide.
+						<strong className="font-semibold text-sky-700 dark:text-sky-400">Anycast routing</strong> to hundreds of
+						physical machines worldwide.
 					</p>
 				</div>
-				<p className="text-xs mt-auto pt-4 border-t border-white/10 opacity-70">
+				<p className="text-xs mt-auto pt-4 border-t border-black/10 dark:border-white/10 opacity-70">
 					They do NOT hold domain records. They only know: "For{" "}
-					<code className="bg-sky-950 px-1.5 py-0.5 rounded border border-sky-800/50 text-sky-300">.com</code> TLD, go
-					ask Verisign's servers at{" "}
-					<code className="bg-sky-950 px-1.5 py-0.5 rounded border border-sky-800/50 text-sky-300">
+					<code className="bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/30 text-sky-700 dark:text-sky-400">
+						.com
+					</code>{" "}
+					TLD, go ask Verisign's servers at{" "}
+					<code className="bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/30 text-sky-700 dark:text-sky-400">
 						a.gtld-servers.net
 					</code>
 					."
@@ -358,13 +366,16 @@ export const dnsTopic: Topic = {
 		<Grid key="ttl-grid" cols={3} gap={6} className="mb-8 items-stretch">
 			<FeatureCard icon={Timer} title="Low TTL (60–300s)" subtitle="Use Before: Migrations" theme="amber">
 				<p className="mb-5">
-					Set TTL to 60s <strong className="font-medium text-amber-300">24–48 hours before a major migration</strong>.
-					When you flip the A record, resolvers worldwide will pick up the change within 60 seconds instead of days.
+					Set TTL to 60s{" "}
+					<strong className="font-semibold text-amber-700 dark:text-amber-400">
+						24–48 hours before a major migration
+					</strong>
+					. When you flip the A record, resolvers worldwide will pick up the change within 60 seconds instead of days.
 				</p>
-				<div className="bg-black/30 rounded-lg p-4 border border-white/5 mt-auto">
-					<p className="text-amber-200/90 text-sm leading-relaxed">
-						<span className="text-amber-500 font-bold mr-1">⚠️ Cost:</span> More DNS queries = more load on your
-						Authoritative server.
+				<div className="bg-black/5 dark:bg-black/30 rounded-lg p-4 border border-black/10 dark:border-white/5 mt-auto">
+					<p className="text-amber-800/90 dark:text-amber-300/90 text-sm leading-relaxed">
+						<span className="text-amber-600 dark:text-amber-500 font-bold mr-1">⚠️ Cost:</span> More DNS queries = more
+						load on your Authoritative server.
 					</p>
 				</div>
 			</FeatureCard>
@@ -372,13 +383,13 @@ export const dnsTopic: Topic = {
 			<FeatureCard icon={Hourglass} title="High TTL (3600–86400s)" subtitle="Use For: Stable Records" theme="emerald">
 				<p className="mb-5">
 					Stable records (MX, NS, CAA) can have very high TTLs. Resolvers cache aggressively,{" "}
-					<strong className="font-medium text-emerald-300">reducing your DNS query volume</strong> and improving
-					performance globally.
+					<strong className="font-semibold text-emerald-700 dark:text-emerald-400">reducing your DNS query volume</strong>{" "}
+					and improving performance globally.
 				</p>
-				<div className="bg-black/30 rounded-lg p-4 border border-white/5 mt-auto">
-					<p className="text-emerald-200/90 text-sm leading-relaxed">
-						<span className="text-emerald-500 font-bold mr-1">⚠️ Risk:</span> Slow rollback if something goes wrong —
-						you're stuck for up to 24 hours.
+				<div className="bg-black/5 dark:bg-black/30 rounded-lg p-4 border border-black/10 dark:border-white/5 mt-auto">
+					<p className="text-emerald-800/90 dark:text-emerald-300/90 text-sm leading-relaxed">
+						<span className="text-emerald-600 dark:text-emerald-500 font-bold mr-1">⚠️ Risk:</span> Slow rollback if
+						something goes wrong — you're stuck for up to 24 hours.
 					</p>
 				</div>
 			</FeatureCard>
@@ -386,13 +397,13 @@ export const dnsTopic: Topic = {
 			<FeatureCard icon={AlertTriangle} title="Negative TTL (SOA)" subtitle="The Forgotten Cache" theme="rose">
 				<p className="mb-5">
 					When a domain doesn't exist (NXDOMAIN), resolvers cache{" "}
-					<em className="not-italic font-medium text-rose-300">that failure</em> based on the SOA record's minimum TTL.
-					If you just registered a domain and it's "not found" — this is why.
+					<em className="not-italic font-semibold text-rose-700 dark:text-rose-400">that failure</em> based on the SOA
+					record's minimum TTL. If you just registered a domain and it's "not found" — this is why.
 				</p>
-				<div className="bg-black/30 rounded-lg p-4 border border-white/5 mt-auto">
-					<p className="text-rose-200/90 text-sm leading-relaxed">
-						<span className="text-rose-400 font-bold mr-1">💡 Fix:</span> Wait it out. You cannot force remote resolvers
-						to clear their negative cache.
+				<div className="bg-black/5 dark:bg-black/30 rounded-lg p-4 border border-black/10 dark:border-white/5 mt-auto">
+					<p className="text-rose-800/90 dark:text-rose-300/90 text-sm leading-relaxed">
+						<span className="text-rose-600 dark:text-rose-400 font-bold mr-1">💡 Fix:</span> Wait it out. You cannot force
+						remote resolvers to clear their negative cache.
 					</p>
 				</div>
 			</FeatureCard>
@@ -409,9 +420,12 @@ export const dnsTopic: Topic = {
 		</p>,
 		<Grid key="cdn-grid" cols={2} gap={6} className="mb-8 items-stretch">
 			<FeatureCard icon={CloudOff} title="DNS-Only Mode" subtitle="The Grey Cloud" theme="slate">
-				<p className="text-sm text-slate-200 leading-relaxed mb-5">
-					The A record exposes your <strong className="text-white">real server IP</strong> to the world. Any{" "}
-					<code className="bg-slate-800 px-1 py-0.5 rounded border border-slate-500/60 text-slate-100">dig</code>{" "}
+				<p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-5">
+					The A record exposes your <strong className="text-slate-900 dark:text-white">real server IP</strong> to the
+					world. Any{" "}
+					<code className="bg-slate-500/15 px-1 py-0.5 rounded border border-slate-400/50 dark:border-slate-500/60 text-slate-800 dark:text-slate-100">
+						dig
+					</code>{" "}
 					command returns your actual EC2/VPS IP. Your server handles TLS, DDoS, caching — everything.
 				</p>
 				<div className="mt-auto">
@@ -428,9 +442,10 @@ app.myshop.com.   300   IN   A   152.42.189.33
 			</FeatureCard>
 
 			<FeatureCard icon={Cloud} title="Proxied Mode" subtitle="The Orange Cloud" theme="amber">
-				<p className="text-sm text-amber-200/80 leading-relaxed mb-5">
+				<p className="text-sm text-amber-800/90 dark:text-amber-300/80 leading-relaxed mb-5">
 					Cloudflare's edge IP is returned. All traffic flows through Cloudflare's global PoPs first. Your origin IP is{" "}
-					<strong className="text-amber-400">hidden</strong>. You get free DDoS protection, CDN caching, and WAF.
+					<strong className="text-amber-700 dark:text-amber-400">hidden</strong>. You get free DDoS protection, CDN
+					caching, and WAF.
 				</p>
 				<div className="mt-auto">
 					<CodeBlock
@@ -465,27 +480,28 @@ app.myshop.com.   300   IN   A   104.21.55.12
 			<FeatureCard icon={ShieldAlert} title="Without DNSSEC" subtitle="Status: Vulnerable" theme="rose">
 				<ul className="space-y-4 mb-5">
 					<li className="flex items-start gap-3">
-						<span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(244,63,94,0.8)]"></span>
-						<span className="text-rose-100/80 leading-relaxed">
+						<span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(244,63,94,0.7)]"></span>
+						<span className="text-rose-800/90 dark:text-rose-100/80 leading-relaxed">
 							DNS responses are plain UDP packets with <strong>no authentication</strong>.
 						</span>
 					</li>
 					<li className="flex items-start gap-3">
-						<span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(244,63,94,0.8)]"></span>
-						<span className="text-rose-100/80 leading-relaxed">
+						<span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(244,63,94,0.7)]"></span>
+						<span className="text-rose-800/90 dark:text-rose-100/80 leading-relaxed">
 							Any resolver between you and the authoritative server can forge a response.
 						</span>
 					</li>
 				</ul>
-				<div className="bg-black/30 rounded-lg p-4 border border-white/5 mt-auto">
-					<p className="text-rose-200/90 text-sm leading-relaxed mb-2">
-						<strong className="text-rose-400 font-bold">Attack:</strong> Attacker stuffs resolver cache with{" "}
-						<code className="bg-rose-950 px-1 py-0.5 rounded text-rose-300 border border-rose-800/50 text-xs">
+				<div className="bg-black/5 dark:bg-black/30 rounded-lg p-4 border border-black/10 dark:border-white/5 mt-auto">
+					<p className="text-rose-800/90 dark:text-rose-300/90 text-sm leading-relaxed mb-2">
+						<strong className="text-rose-600 dark:text-rose-400 font-bold">Attack:</strong> Attacker stuffs resolver cache
+						with{" "}
+						<code className="bg-rose-500/10 px-1 py-0.5 rounded text-rose-700 dark:text-rose-400 border border-rose-500/30 text-xs">
 							bank.com → attacker-ip
 						</code>
 						.
 					</p>
-					<p className="text-rose-200/70 text-xs italic">
+					<p className="text-rose-700/80 dark:text-rose-300/70 text-xs italic">
 						Victims are silently redirected with zero indication of tampering.
 					</p>
 				</div>
@@ -494,24 +510,24 @@ app.myshop.com.   300   IN   A   104.21.55.12
 			<FeatureCard icon={ShieldCheck} title="With DNSSEC" subtitle="Status: Cryptographically Verified" theme="emerald">
 				<ul className="space-y-4 mb-5">
 					<li className="flex items-start gap-3">
-						<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-						<span className="text-emerald-100/80 leading-relaxed">
+						<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.7)]"></span>
+						<span className="text-emerald-800/90 dark:text-emerald-100/80 leading-relaxed">
 							Each DNS record is <strong>digitally signed</strong> with a private key held by the zone owner.
 						</span>
 					</li>
 					<li className="flex items-start gap-3">
-						<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-						<span className="text-emerald-100/80 leading-relaxed">
+						<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.7)]"></span>
+						<span className="text-emerald-800/90 dark:text-emerald-100/80 leading-relaxed">
 							The resolver can verify the signature against the public key published in the DNS zone (DNSKEY).
 						</span>
 					</li>
 				</ul>
-				<div className="bg-black/30 rounded-lg p-4 border border-white/5 mt-auto">
-					<p className="text-emerald-200/90 text-sm leading-relaxed mb-2">
-						<strong className="text-emerald-500 font-bold">Chain of trust:</strong> Root → TLD → Authoritative, each
-						layer signs the next.
+				<div className="bg-black/5 dark:bg-black/30 rounded-lg p-4 border border-black/10 dark:border-white/5 mt-auto">
+					<p className="text-emerald-800/90 dark:text-emerald-300/90 text-sm leading-relaxed mb-2">
+						<strong className="text-emerald-600 dark:text-emerald-400 font-bold">Chain of trust:</strong> Root → TLD →
+						Authoritative, each layer signs the next.
 					</p>
-					<p className="text-emerald-200/70 text-xs italic">
+					<p className="text-emerald-700/80 dark:text-emerald-300/70 text-xs italic">
 						Tampered records produce an invalid signature → resolver refuses them.
 					</p>
 				</div>

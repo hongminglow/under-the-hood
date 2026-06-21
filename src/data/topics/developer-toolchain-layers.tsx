@@ -24,7 +24,7 @@ export const developerToolchainLayersTopic: Topic = {
     "toolchain",
   ],
   content: [
-    <p key="intro" className="text-slate-300 leading-relaxed">
+    <p key="intro" className="text-slate-700 dark:text-slate-400 leading-relaxed">
       Every time you call <code>Array.map()</code>, <code>fetch()</code>,{" "}
       <code>fs.readFile()</code>, or <code>stripe.charges.create()</code>, you
       are reaching into a different <em>layer</em> of the developer toolchain.
@@ -33,7 +33,7 @@ export const developerToolchainLayersTopic: Topic = {
       This article builds the mental model that separates them clearly.
     </p>,
 
-    <h2 key="h-pyramid" className="text-xl font-bold text-white mt-8 mb-4">
+    <h2 key="h-pyramid" className="text-xl font-bold text-slate-900 dark:text-white mt-8 mb-4">
       The 6-Layer Hierarchy
     </h2>,
 
@@ -73,7 +73,7 @@ export const developerToolchainLayersTopic: Topic = {
       ]}
     />,
 
-    <h2 key="h-table" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-table" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
       Layer Comparison at a Glance
     </h2>,
 
@@ -90,7 +90,7 @@ export const developerToolchainLayersTopic: Topic = {
       ]}
     />,
 
-    <h2 key="h-deep" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-deep" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
       Deep Dive: Each Layer Explained
     </h2>,
 
@@ -99,13 +99,13 @@ export const developerToolchainLayersTopic: Topic = {
         title="Layer 1 — Language Built-ins"
         description="Zero-cost abstractions from the spec itself."
       >
-        <p className="text-slate-300 text-sm leading-relaxed mb-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed mb-3">
           Language built-ins are methods and constructors that are part of the
           ECMAScript (JavaScript) specification. The JS engine ships them. They
           require <strong>zero imports</strong> and are available in every
           environment — browser, Node, Deno, Cloudflare Workers, anywhere.
         </p>
-        <p className="text-slate-400 text-sm">
+        <p className="text-slate-700 dark:text-slate-400 text-sm">
           <Highlight variant="primary">Array.prototype.map</Highlight>{" "}
           <Highlight variant="primary">Object.keys</Highlight>{" "}
           <Highlight variant="primary">Promise</Highlight>{" "}
@@ -114,7 +114,7 @@ export const developerToolchainLayersTopic: Topic = {
           <Highlight variant="primary">Date</Highlight>{" "}
           <Highlight variant="primary">RegExp</Highlight>
         </p>
-        <p className="text-slate-400 text-sm mt-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm mt-3">
           The TC39 committee governs these via yearly ECMAScript specs (ES2015,
           ES2017, ES2025…). New proposals take years. Polyfills exist to
           backfill old engines.
@@ -125,18 +125,18 @@ export const developerToolchainLayersTopic: Topic = {
         title="Layer 2 — Runtime APIs (Std Library)"
         description="Zero-install, but only available in a specific runtime."
       >
-        <p className="text-slate-300 text-sm leading-relaxed mb-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed mb-3">
           Node.js, Deno, and Bun each ship their own standard library — extra
           APIs beyond the language spec that let you interact with the OS: file
           system, network, process, timers (the extended versions).
         </p>
-        <p className="text-slate-400 text-sm">
+        <p className="text-slate-700 dark:text-slate-400 text-sm">
           <Highlight variant="warning">Node.js only:</Highlight>{" "}
           <code>require('fs')</code>, <code>require('path')</code>,{" "}
           <code>require('http')</code>, <code>require('crypto')</code>,{" "}
           <code>process.env</code>
         </p>
-        <p className="text-slate-400 text-sm mt-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm mt-3">
           <strong>Key trap:</strong> <code>fetch()</code> used to be
           browser-only. Node 18+ ships it natively. Before that, you needed the
           npm <code>node-fetch</code> package — a classic example of a layer 5
@@ -148,13 +148,13 @@ export const developerToolchainLayersTopic: Topic = {
         title="Layer 3 — Browser / Platform APIs"
         description="Injected by the host environment at runtime."
       >
-        <p className="text-slate-300 text-sm leading-relaxed mb-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed mb-3">
           When your JavaScript runs inside Chrome, Firefox, or Safari, the
           browser injects a huge set of additional global APIs. These are{" "}
           <strong>not</strong> part of JavaScript — they're part of the{" "}
           <em>Web Platform</em>, specified by W3C and WHATWG.
         </p>
-        <p className="text-slate-400 text-sm">
+        <p className="text-slate-700 dark:text-slate-400 text-sm">
           <Highlight variant="primary">document</Highlight>{" "}
           <Highlight variant="primary">window</Highlight>{" "}
           <Highlight variant="primary">fetch</Highlight>{" "}
@@ -165,7 +165,7 @@ export const developerToolchainLayersTopic: Topic = {
           <Highlight variant="primary">Canvas</Highlight>{" "}
           <Highlight variant="primary">Intersection­Observer</Highlight>
         </p>
-        <p className="text-slate-400 text-sm mt-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm mt-3">
           No install needed — but they only exist in browser runtimes. Trying
           to call <code>document</code> in a plain Node.js script will crash
           with <code>ReferenceError: document is not defined</code>.
@@ -176,13 +176,13 @@ export const developerToolchainLayersTopic: Topic = {
         title="Layer 4 — Client SDKs"
         description="Official wrappers from service vendors — not just a library."
       >
-        <p className="text-slate-300 text-sm leading-relaxed mb-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed mb-3">
           An SDK (Software Development Kit) is a curated, opinionated package
           published by the maintainers of a service or platform. It wraps their
           HTTP/gRPC APIs with typed methods, built-in auth, automatic retries,
           and proper error objects.
         </p>
-        <p className="text-slate-400 text-sm">
+        <p className="text-slate-700 dark:text-slate-400 text-sm">
           <Highlight variant="info">stripe</Highlight> — Official Stripe
           Node SDK
           <br />
@@ -197,7 +197,7 @@ export const developerToolchainLayersTopic: Topic = {
           <br />
           <Highlight variant="info">openai</Highlight> — OpenAI official SDK
         </p>
-        <p className="text-slate-400 text-sm mt-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm mt-3">
           The key distinction: an SDK is <strong>provider-maintained</strong>.
           When Stripe updates their API, their SDK is updated to match. A
           community-built wrapper library would lag behind.
@@ -210,13 +210,13 @@ export const developerToolchainLayersTopic: Topic = {
         title="Layer 5 — npm Packages / Open-Source Libraries"
         description="Community-published. The broadest, most variable layer."
       >
-        <p className="text-slate-300 text-sm leading-relaxed mb-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed mb-3">
           This is the "anything goes" layer. Any developer can publish to npm
           (or JSR). These packages solve generic problems — HTTP clients,
           validation, date formatting, state management, testing utilities.
           They're not tied to any single service.
         </p>
-        <p className="text-slate-400 text-sm">
+        <p className="text-slate-700 dark:text-slate-400 text-sm">
           <Highlight variant="primary">axios</Highlight> — HTTP client
           <br />
           <Highlight variant="primary">zod</Highlight> — Schema validation
@@ -229,7 +229,7 @@ export const developerToolchainLayersTopic: Topic = {
           <br />
           <Highlight variant="primary">jest</Highlight> — Test runner
         </p>
-        <p className="text-slate-400 text-sm mt-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm mt-3">
           Quality varies enormously. Some packages have hundreds of millions of
           weekly downloads (lodash); others are abandoned after one commit.
           Supply chain attacks (e.g., event-stream) happen at this layer.
@@ -240,13 +240,13 @@ export const developerToolchainLayersTopic: Topic = {
         title="Layer 6 — Framework Abstractions"
         description="Opinionated APIs that sit on top of everything else."
       >
-        <p className="text-slate-300 text-sm leading-relaxed mb-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed mb-3">
           Frameworks like React, Next.js, Vue, or Express expose their own
           API surfaces. These are technically npm packages, but they're special
           because they <strong>control the execution model</strong> — they
           decide when your code runs, how state flows, how routing works.
         </p>
-        <p className="text-slate-400 text-sm">
+        <p className="text-slate-700 dark:text-slate-400 text-sm">
           <Highlight variant="warning">React:</Highlight>{" "}
           <code>useState</code>, <code>useEffect</code>,{" "}
           <code>useContext</code>
@@ -259,7 +259,7 @@ export const developerToolchainLayersTopic: Topic = {
           <code>app.get()</code>, <code>req</code>, <code>res</code>,{" "}
           <code>next()</code>
         </p>
-        <p className="text-slate-400 text-sm mt-3">
+        <p className="text-slate-700 dark:text-slate-400 text-sm mt-3">
           These are <em>not</em> language features you're calling — they're
           conventions enforced by the framework's runtime. They often abstract
           away Layers 2–5 underneath.
@@ -267,7 +267,7 @@ export const developerToolchainLayersTopic: Topic = {
       </Card>
     </Grid>,
 
-    <h2 key="h-sdk-vs-lib" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-sdk-vs-lib" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
       SDK vs. Library — The Most Common Confusion
     </h2>,
 
@@ -292,11 +292,11 @@ export const developerToolchainLayersTopic: Topic = {
       ]}
     />,
 
-    <h2 key="h-code-ex" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-code-ex" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
       The Same Task Across All Layers
     </h2>,
 
-    <p key="p-code-intro" className="text-slate-400 mb-4">
+    <p key="p-code-intro" className="text-slate-700 dark:text-slate-400 mb-4">
       Sending an HTTP POST request — solved at every layer:
     </p>,
 
@@ -357,7 +357,7 @@ const hash = createHash("sha256")
 // Not available in a browser without a polyfill or Web Crypto API fallback`}
     />,
 
-    <h2 key="h-runtime-env" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-runtime-env" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
       Runtime Environments & What Each Layer Has Access To
     </h2>,
 
@@ -374,18 +374,18 @@ const hash = createHash("sha256")
       ]}
     />,
 
-    <p key="p-env-note" className="text-slate-400 text-sm mt-2">
+    <p key="p-env-note" className="text-slate-700 dark:text-slate-400 text-sm mt-2">
       * Deno provides its own file system API (<code>Deno.readFile</code>). **
       Node 18+ added the global <code>fetch</code> and partial Web APIs.
     </p>,
 
-    <h2 key="h-traps" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-traps" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
       Common Traps & Misconceptions
     </h2>,
 
     <Grid key="grid-traps" cols={2} gap={6}>
       <Card title="🪤 Trap: 'fetch is a JS feature'" description="">
-        <p className="text-slate-300 text-sm leading-relaxed">
+        <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed">
           <code>fetch</code> is a <strong>Browser API</strong> (Layer 3), not
           part of JavaScript. It was later adopted into Node.js 18+. In Node
           17 and below, calling <code>fetch</code> throws{" "}
@@ -395,7 +395,7 @@ const hash = createHash("sha256")
       </Card>
 
       <Card title="🪤 Trap: 'axios is better than fetch'" description="">
-        <p className="text-slate-300 text-sm leading-relaxed">
+        <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed">
           This is a layer confusion. <code>fetch</code> is a platform primitive
           — lightweight but low-level. <code>axios</code> is a utility library
           that adds interceptors, auto JSON parsing, and cleaner error handling.
@@ -405,7 +405,7 @@ const hash = createHash("sha256")
       </Card>
 
       <Card title="🪤 Trap: 'The SDK is just a wrapper'" description="">
-        <p className="text-slate-300 text-sm leading-relaxed">
+        <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed">
           SDKs are much more than thin wrappers. The AWS SDK v3 uses a modular
           middleware stack, exponential backoff, credential chains, regional
           endpoint resolution, and presigned URL support. Replacing it with raw{" "}
@@ -414,7 +414,7 @@ const hash = createHash("sha256")
       </Card>
 
       <Card title="🪤 Trap: 'npm install fixes everything'" description="">
-        <p className="text-slate-300 text-sm leading-relaxed">
+        <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed">
           Reaching for npm first is a supply-chain risk. For built-in tasks
           (hashing, UUID generation, base64), prefer Layer 2 runtime APIs
           (Node <code>crypto</code>) or Layer 3 browser APIs (
@@ -424,7 +424,7 @@ const hash = createHash("sha256")
       </Card>
     </Grid>,
 
-    <h2 key="h-decision" className="text-xl font-bold text-white mt-10 mb-4">
+    <h2 key="h-decision" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
       Decision Framework: Which Layer Should I Reach For?
     </h2>,
 

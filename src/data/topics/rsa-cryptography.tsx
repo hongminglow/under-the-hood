@@ -303,7 +303,7 @@ You'd have to factor n back into p and q — impossible for 2048-bit numbers.`}
 		</h3>,
 		<Grid key="26" cols={2} gap={6} className="my-6">
 			<Card title="Known Vulnerabilities">
-				<ul className="text-sm text-slate-400 space-y-2 list-disc list-inside">
+				<ul className="text-sm text-slate-700 dark:text-slate-400 space-y-2 list-disc list-inside">
 					<li>
 						<strong className="text-muted-foreground">Small key sizes:</strong> 512-bit RSA was broken in 1999. 1024-bit
 						is now considered weak. The standard minimum is <strong>2048-bit</strong>, with 4096-bit recommended for
@@ -326,7 +326,7 @@ You'd have to factor n back into p and q — impossible for 2048-bit numbers.`}
 				</ul>
 			</Card>
 			<Card title="Modern Mitigations">
-				<ul className="text-sm text-slate-400 space-y-2 list-disc list-inside">
+				<ul className="text-sm text-slate-700 dark:text-slate-400 space-y-2 list-disc list-inside">
 					<li>
 						<strong className="text-muted-foreground">OAEP padding:</strong> Replaces vulnerable PKCS#1 v1.5 with
 						Optimal Asymmetric Encryption Padding — prevents padding oracle attacks.

@@ -32,13 +32,13 @@ export const messageQueuesTopic: Topic = {
 		</p>,
 		<Grid key="4" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={Send} title="The Producer (Your API)" subtitle="Fast and forgetful" theme="cyan">
-				<p className="text-sm text-cyan-100/75">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75">
 					It blindly drops messages onto the conveyor belt and walks away. It never cares who processes the email or how
 					long it takes.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Boxes} title="The Workers (Consumers)" subtitle="Slow and steady" theme="emerald">
-				<p className="text-sm text-emerald-100/75">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75">
 					Five separate background servers blindly pull tasks off the conveyor belt to send emails. If Black Friday
 					happens and 10,000 orders drop on the belt, the API never crashes. The Workers just peacefully spend the next
 					hour chewing through the backlog line.
@@ -164,7 +164,7 @@ export const messageQueuesTopic: Topic = {
 		</h3>,
 		<Grid key="16" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={Rabbit} title="Use RabbitMQ When..." subtitle="Broker-style task queue" theme="amber">
-				<ul className="text-xs text-amber-100/75 space-y-1 list-disc pl-4">
+				<ul className="text-xs text-amber-700 dark:text-amber-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>Task queues:</strong>&nbsp;Background jobs (email, image processing)
 					</li>
@@ -183,7 +183,7 @@ export const messageQueuesTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Radio} title="Use Kafka When..." subtitle="Replayable distributed log" theme="violet">
-				<ul className="text-xs text-violet-100/75 space-y-1 list-disc pl-4">
+				<ul className="text-xs text-violet-700 dark:text-violet-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>Event streaming:</strong>&nbsp;Audit logs, user activity, CDC
 					</li>
@@ -202,7 +202,7 @@ export const messageQueuesTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Boxes} title="Use AWS SQS When..." subtitle="Managed queue for AWS-native stacks" theme="cyan">
-				<ul className="text-xs text-cyan-100/75 space-y-1 list-disc pl-4">
+				<ul className="text-xs text-cyan-700 dark:text-cyan-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>AWS-native:</strong>&nbsp;Lambda triggers, S3 events
 					</li>
@@ -221,7 +221,7 @@ export const messageQueuesTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Send} title="Use MQTT When..." subtitle="Lightweight pub/sub for devices" theme="emerald">
-				<ul className="text-xs text-emerald-100/75 space-y-1 list-disc pl-4">
+				<ul className="text-xs text-emerald-700 dark:text-emerald-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>IoT devices:</strong>&nbsp;Sensors, smart home, wearables
 					</li>
@@ -372,7 +372,7 @@ async function handleOrder(message) {
 		</h3>,
 		<Grid key="28" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={Boxes} title="Pros" subtitle="Why queues help at scale" theme="emerald">
-				<ul className="text-xs text-emerald-100/75 space-y-1 list-disc pl-4">
+				<ul className="text-xs text-emerald-700 dark:text-emerald-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>Decoupling:</strong>&nbsp;Services don't need to know about each other
 					</li>
@@ -394,7 +394,7 @@ async function handleOrder(message) {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Send} title="Cons" subtitle="What queues make harder" theme="rose">
-				<ul className="text-xs text-rose-100/75 space-y-1 list-disc pl-4">
+				<ul className="text-xs text-rose-700 dark:text-rose-100/75 space-y-1 list-disc pl-4">
 					<li>
 						<strong>Complexity:</strong>&nbsp;Another system to monitor and debug
 					</li>

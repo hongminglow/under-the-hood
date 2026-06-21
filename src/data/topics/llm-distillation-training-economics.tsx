@@ -25,14 +25,14 @@ export const llmDistillationTrainingEconomicsTopic: Topic = {
     </p>,
     <Grid key="2" cols={2} gap={6}>
       <FeatureCard icon={GraduationCap} title="Teacher Model" subtitle="Expensive but powerful" theme="violet">
-        <p className="mt-2 text-sm leading-relaxed text-violet-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-violet-700 dark:text-violet-100/75">
           Usually large, slow, and expensive to train or serve. It has a higher
           capability ceiling and can produce richer reasoning traces or better
           answers.
         </p>
       </FeatureCard>
       <FeatureCard icon={Rabbit} title="Student Model" subtitle="Cheaper to run at scale" theme="emerald">
-        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-700 dark:text-emerald-100/75">
           Trained to imitate useful behavior from the teacher. It usually loses
           some top-end ability, but gains lower latency, lower serving cost, and
           easier deployment.

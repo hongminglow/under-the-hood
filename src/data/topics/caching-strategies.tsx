@@ -23,25 +23,25 @@ export const cachingStrategiesTopic: Topic = {
 		</h4>,
 		<Grid key="3" cols={2} gap={6} className="mb-8">
 			<FeatureCard icon={Globe} title="Browser Cache" subtitle="Closest to the user" theme="emerald">
-				<p className="text-sm text-emerald-200/80">
+				<p className="text-sm text-emerald-700 dark:text-emerald-300/80">
 					The nearest cache to the user. Controlled via HTTP headers like <code>Cache-Control: max-age=3600</code> and{" "}
 					<code>ETag</code>. Prevents re-downloading assets that haven't changed.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={ServerCog} title="CDN" subtitle="Edge cache" theme="teal">
-				<p className="text-sm text-teal-200/80">
+				<p className="text-sm text-teal-700 dark:text-teal-300/80">
 					A globally distributed network of servers (Cloudflare, Akamai). Static assets are cached at the edge node
 					closest to the user, slashing latency from 200ms to 20ms.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={HardDrive} title="Application Cache" subtitle="Redis hot path" theme="cyan">
-				<p className="text-sm text-cyan-200/80">
+				<p className="text-sm text-cyan-700 dark:text-cyan-300/80">
 					An in-memory key-value store sitting between the app and the database. Frequently queried results (like user
 					profiles) are cached here to avoid expensive DB joins.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Database} title="Database Query Cache" subtitle="Execution-plan and result reuse" theme="sky">
-				<p className="text-sm text-sky-200/80">
+				<p className="text-sm text-sky-700 dark:text-sky-300/80">
 					The database itself can cache the parsed execution plan and result set of repeated queries. MySQL's query
 					cache was eventually removed due to contention issues at scale.
 				</p>

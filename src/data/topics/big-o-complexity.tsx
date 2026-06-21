@@ -43,21 +43,21 @@ export const bigOComplexityTopic: Topic = {
 		/>,
 		<Grid key="4" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={Clock} title="O(1) to O(log n)" subtitle="Usually the premium tier" theme="cyan">
-				<p className="text-sm text-cyan-100/80 mb-3">
-					These are the complexities you want on <strong className="text-cyan-300">hot request paths</strong> and
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/80 mb-3">
+					These are the complexities you want on <strong className="text-cyan-700 dark:text-cyan-400">hot request paths</strong> and
 					high-frequency operations. They scale well and remain practical as systems grow.
 				</p>
-				<ul className="text-sm text-cyan-100/70 list-disc pl-5 space-y-2">
+				<ul className="text-sm text-cyan-700 dark:text-cyan-100/70 list-disc pl-5 space-y-2">
 					<li><strong>O(1):</strong> Great for direct access, caches, hash maps, and precomputed lookups.</li>
 					<li><strong>O(log n):</strong> Excellent when ordered structure matters, such as indexes and trees.</li>
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Database} title="O(n) to O(n log n)" subtitle="Usually acceptable in real systems" theme="amber">
-				<p className="text-sm text-amber-100/80 mb-3">
-					This is where a lot of normal engineering lives. <strong className="text-amber-300">Linear work</strong> is
+				<p className="text-sm text-amber-700 dark:text-amber-100/80 mb-3">
+					This is where a lot of normal engineering lives. <strong className="text-amber-700 dark:text-amber-400">Linear work</strong> is
 					not "bad" by itself. It becomes bad when the input is massive or when the operation runs too often.
 				</p>
-				<ul className="text-sm text-amber-100/70 list-disc pl-5 space-y-2">
+				<ul className="text-sm text-amber-700 dark:text-amber-100/70 list-disc pl-5 space-y-2">
 					<li><strong>O(n):</strong> Fine for scans, aggregations, validation passes, and one-off jobs.</li>
 					<li><strong>O(n log n):</strong> Strong default for sorting and many balanced-tree workflows.</li>
 				</ul>
@@ -65,22 +65,22 @@ export const bigOComplexityTopic: Topic = {
 		</Grid>,
 		<Grid key="4b" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={Database} title="O(n²) and Beyond" subtitle="Danger zone unless tightly bounded" theme="rose">
-				<p className="text-sm text-rose-100/80 mb-3">
+				<p className="text-sm text-rose-700 dark:text-rose-100/80 mb-3">
 					Quadratic and exponential algorithms are where systems start to feel broken. These are acceptable only when{" "}
-					<strong className="text-rose-300">n is provably small</strong>, the job is offline, or there is no simpler
+					<strong className="text-rose-700 dark:text-rose-400">n is provably small</strong>, the job is offline, or there is no simpler
 					approach.
 				</p>
-				<ul className="text-sm text-rose-100/70 list-disc pl-5 space-y-2">
+				<ul className="text-sm text-rose-700 dark:text-rose-100/70 list-disc pl-5 space-y-2">
 					<li><strong>O(n²):</strong> Common accidental bug from nested loops over large datasets.</li>
 					<li><strong>O(2ⁿ) / O(n!):</strong> Usually theoretical or brute-force fallback, not production request logic.</li>
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Clock} title="Space Complexity" subtitle="Time is not the only bill you pay" theme="violet">
-				<p className="text-sm text-violet-100/80 mb-3">
+				<p className="text-sm text-violet-700 dark:text-violet-100/80 mb-3">
 					Some algorithms are fast because they spend more memory. Others save memory but do more work. Always discuss{" "}
-					<strong className="text-violet-300">space-time tradeoffs</strong>, especially in backend and data workloads.
+					<strong className="text-violet-700 dark:text-violet-400">space-time tradeoffs</strong>, especially in backend and data workloads.
 				</p>
-				<ul className="text-sm text-violet-100/70 list-disc pl-5 space-y-2">
+				<ul className="text-sm text-violet-700 dark:text-violet-100/70 list-disc pl-5 space-y-2">
 					<li>Hash maps buy speed with extra memory.</li>
 					<li>Merge sort is fast but needs extra space.</li>
 					<li>Indexes accelerate reads but cost RAM, disk, and write overhead.</li>

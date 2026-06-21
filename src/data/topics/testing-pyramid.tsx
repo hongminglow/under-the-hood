@@ -21,18 +21,18 @@ export const testingPyramidTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Pyramid} title="The Traditional Pyramid" subtitle="Theme: speed and isolation" theme="amber">
-        <p className="mb-3 text-amber-100/80">
-          Focuses on <strong className="text-amber-300">Unit Tests</strong>. Great for complex logic and algorithms, but it
+        <p className="mb-3 text-amber-700 dark:text-amber-100/80">
+          Focuses on <strong className="text-amber-700 dark:text-amber-400">Unit Tests</strong>. Great for complex logic and algorithms, but it
           can produce the classic failure mode: "tests pass, app broken" because the pieces were never verified together.
         </p>
-        <p className="font-mono text-xs uppercase tracking-wider text-amber-300/80">Fast CI / Lower product confidence</p>
+        <p className="font-mono text-xs uppercase tracking-wider text-amber-700 dark:text-amber-400/80">Fast CI / Lower product confidence</p>
       </FeatureCard>
       <FeatureCard icon={Trophy} title="The Testing Trophy" subtitle="Theme: behavior confidence" theme="emerald">
-        <p className="mb-3 text-red-100/80">
-          Focuses on <strong className="text-red-300">Integration Tests</strong>. Components, hooks, and user events are
+        <p className="mb-3 text-emerald-700 dark:text-emerald-100/80">
+          Focuses on <strong className="text-emerald-700 dark:text-emerald-400">Integration Tests</strong>. Components, hooks, and user events are
           exercised together, without paying the full cost of driving a real browser for every scenario.
         </p>
-        <p className="font-mono text-xs uppercase tracking-wider text-red-300/80">Medium speed / High user confidence</p>
+        <p className="font-mono text-xs uppercase tracking-wider text-emerald-700 dark:text-emerald-400/80">Medium speed / High user confidence</p>
       </FeatureCard>
     </Grid>,
     <Table
@@ -40,17 +40,17 @@ export const testingPyramidTopic: Topic = {
       headers={["Level", "Technical Purpose", "Trade-offs"]}
       rows={[
         [
-          "<span class='text-amber-300 font-black'>Unit</span>",
+          "<span class='text-amber-700 dark:text-amber-400 font-black'>Unit</span>",
           "Verify pure functions and isolated logic (e.g., a regex or a math util).",
           "Executes in milliseconds; completely stable; zero network overhead."
         ],
         [
-          "<span class='text-emerald-300 font-black'>Integration</span>",
+          "<span class='text-emerald-700 dark:text-emerald-400 font-black'>Integration</span>",
           "Verify that a component and its children render and fire events correctly.",
           "Highest ROI; mocks the network but uses real React state/hooks."
         ],
         [
-          "<span class='text-sky-300 font-black'>E2E (End-to-End)</span>",
+          "<span class='text-sky-700 dark:text-sky-400 font-black'>E2E (End-to-End)</span>",
           "Audit the full user flow (Login -> Dashboard) in a real browser.",
           "<strong>High Flakiness:</strong> Non-deterministic results due to timing, latency, or stale data."
         ]

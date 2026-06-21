@@ -21,12 +21,12 @@ export const nPlusOneProblemTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <FeatureCard icon={FileSearch} title="The Naive Code" subtitle="One query becomes N more" theme="rose">
-        <p className="text-sm font-mono text-rose-100/80 border-l border-rose-800/50 pl-3 mt-2 whitespace-pre-wrap">
+        <p className="text-sm font-mono text-rose-700 dark:text-rose-100/80 border-l border-rose-800/50 pl-3 mt-2 whitespace-pre-wrap">
 {"// Query 1\nconst users = await db.user.findMany();\n\n// N Queries (Loop)\nusers.map(u => u.getOrders());"}
         </p>
       </FeatureCard>
       <FeatureCard icon={Wifi} title="The Network Cost" subtitle="RTT dominates the slowdown" theme="amber">
-        <p className="text-sm text-amber-100/75">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75">
           Even if each query takes 1ms, doing 100 queries means 100ms of <strong>Network Round-Trip Time (RTT)</strong>. Your app spends more time waiting for the wire than the database spends searching.
         </p>
       </FeatureCard>

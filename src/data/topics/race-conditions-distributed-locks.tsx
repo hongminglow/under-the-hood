@@ -42,34 +42,34 @@ export const raceConditionsDistributedLocksTopic: Topic = {
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Database} title="1. Database-Level Locking" subtitle="Row locks inside one database" theme="cyan">
-        <p className="text-sm text-cyan-100/75 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-2">
           <strong>SELECT ... FOR UPDATE</strong> locks the row until the transaction commits. Server B's read blocks until Server A finishes.
         </p>
-        <p className="text-xs italic text-cyan-200/70">
+        <p className="text-xs italic text-cyan-700 dark:text-cyan-300/70">
           Simple and correct for single-database architectures. But if you have multiple databases or microservices, the lock doesn't span across them.
         </p>
       </FeatureCard>
       <FeatureCard icon={RefreshCw} title="2. Optimistic Locking (Version Column)" subtitle="Retry when versions drift" theme="amber">
-        <p className="text-sm text-amber-100/75 mb-2">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75 mb-2">
           Add a <code>version</code> column. On update: <code>UPDATE ... WHERE id = 1 AND version = 3</code>. If another process already bumped the version to 4, the update affects 0 rows and you retry.
         </p>
-        <p className="text-xs italic text-amber-200/70">
+        <p className="text-xs italic text-amber-700 dark:text-amber-300/70">
           No physical locks held. Great for low-contention scenarios. Under heavy contention, retries can cascade and degrade performance.
         </p>
       </FeatureCard>
       <FeatureCard icon={Minus} title="3. Atomic Operations" subtitle="Do the whole mutation in one statement" theme="emerald">
-        <p className="text-sm text-emerald-100/75 mb-2">
+        <p className="text-sm text-emerald-700 dark:text-emerald-100/75 mb-2">
           <code>UPDATE products SET stock = stock - 1 WHERE id = 1 AND stock &gt; 0</code>. The database executes this as a single atomic operation — no read-then-write gap exists.
         </p>
-        <p className="text-xs italic text-emerald-200/70">
+        <p className="text-xs italic text-emerald-700 dark:text-emerald-300/70">
           The simplest and most effective solution for single-field decrements. Doesn't work when the logic is more complex than a simple arithmetic check.
         </p>
       </FeatureCard>
       <FeatureCard icon={LockKeyhole} title="4. Distributed Lock (Redis)" subtitle="Cross-system critical section control" theme="violet">
-        <p className="text-sm text-violet-100/75 mb-2">
+        <p className="text-sm text-violet-700 dark:text-violet-100/75 mb-2">
           Acquire a named lock in Redis (<code>SET lock:order:42 nx ex 10</code>) before processing. Only one server holds the lock. Others wait or fail fast.
         </p>
-        <p className="text-xs italic text-violet-200/70">
+        <p className="text-xs italic text-violet-700 dark:text-violet-300/70">
           Essential when the critical section spans multiple services or databases. The <strong>Redlock algorithm</strong> uses 5 independent Redis instances for stronger guarantees.
         </p>
       </FeatureCard>

@@ -21,18 +21,18 @@ export const cssBoxModelTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Box} title="Content, Padding, & Border" subtitle="The box itself" theme="teal">
-        <p className="text-sm text-teal-200/80 mb-2">
+        <p className="text-sm text-teal-700 dark:text-teal-300/80 mb-2">
           The <strong>Content</strong> is your text/image. <strong>Padding</strong> is the inner breathing room. The <strong>Border</strong> is the physical shell.
         </p>
-        <p className="text-sm text-teal-100/75">
+        <p className="text-sm text-teal-700 dark:text-teal-100/75">
           In the legacy <code>content-box</code> model, adding 20px of padding to a 100px div makes it 140px wide. This is why grids often break.
         </p>
       </FeatureCard>
       <FeatureCard icon={MoveDiagonal} title="The Margin" subtitle="Outer layout flow" theme="cyan">
-        <p className="text-sm text-cyan-200/80 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-300/80 mb-2">
           <strong>Margin</strong> is the outer space between boxes. It does not affect the box's own size, but it pushes neighbors away.
         </p>
-        <p className="text-sm text-cyan-100/75">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75">
           Note: Vertical margins often <strong>Collapse</strong>, meaning two 20px margins between elements results in a 20px gap, not 40px.
         </p>
       </FeatureCard>

@@ -42,20 +42,20 @@ export const aiAgentsToolUseTopic: Topic = {
     </p>,
     <Grid key="4b" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Wrench} title="Tool Definition" subtitle="You provide the contract" theme="emerald">
-        <p className="text-sm text-emerald-200/80 mb-2">
-          You register available tools with <strong className="text-emerald-300">name</strong>,{" "}
-          <strong className="text-emerald-300">description</strong>, and a strict{" "}
-          <strong className="text-emerald-300">JSON Schema</strong> for parameters. The model uses the description to decide when to invoke it.
+        <p className="text-sm text-emerald-700 dark:text-emerald-300/80 mb-2">
+          You register available tools with <strong className="text-emerald-700 dark:text-emerald-400">name</strong>,{" "}
+          <strong className="text-emerald-700 dark:text-emerald-400">description</strong>, and a strict{" "}
+          <strong className="text-emerald-700 dark:text-emerald-400">JSON Schema</strong> for parameters. The model uses the description to decide when to invoke it.
         </p>
-        <p className="text-xs italic text-emerald-200/60">
+        <p className="text-xs italic text-emerald-700 dark:text-emerald-300/60">
           A vague description like "does stuff" will cause the model to misuse the tool. Treat tool descriptions like API documentation.
         </p>
       </FeatureCard>
       <FeatureCard icon={BrainCircuit} title="Tool Call" subtitle="Model emits structured intent" theme="teal">
-        <p className="text-sm text-teal-200/80 mb-2">
+        <p className="text-sm text-teal-700 dark:text-teal-300/80 mb-2">
           The model returns a <code>tool_use</code> block with the function name and arguments. Your code validates, executes, and feeds the result back as a <code>tool_result</code> message.
         </p>
-        <p className="text-xs italic text-teal-200/60">
+        <p className="text-xs italic text-teal-700 dark:text-teal-300/60">
           The model never touches your database directly. It only <em>requests</em> actions. Your code is the gatekeeper.
         </p>
       </FeatureCard>
@@ -86,19 +86,19 @@ export const aiAgentsToolUseTopic: Topic = {
     </p>,
     <Grid key="7" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Users} title="The Manager Agent" subtitle="Orchestration role" theme="cyan">
-        <p className="text-sm text-cyan-200/80 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-300/80 mb-2">
           Orchestrates sub-tasks and delegates to specialized workers.
         </p>
-        <p className="text-xs italic text-cyan-200/60">
+        <p className="text-xs italic text-cyan-700 dark:text-cyan-300/60">
           "Agent A, write the code. Agent B, review it. Agent C, fix the bugs."
         </p>
       </FeatureCard>
       <FeatureCard icon={RefreshCcw} title="Self-Correction" subtitle="Feedback loop" theme="sky">
-        <p className="text-sm text-sky-200/80 mb-2">
+        <p className="text-sm text-sky-700 dark:text-sky-300/80 mb-2">
           Agents can 'Self-Reflect' on their own mistakes.
         </p>
-        <p className="text-xs italic text-sky-200/60">
-          By feeding the <strong className="text-sky-300">Error Trace</strong> back into the prompt, the agent sees exactly why its previous tool call failed and corrects its syntax.
+        <p className="text-xs italic text-sky-700 dark:text-sky-300/60">
+          By feeding the <strong className="text-sky-700 dark:text-sky-400">Error Trace</strong> back into the prompt, the agent sees exactly why its previous tool call failed and corrects its syntax.
         </p>
       </FeatureCard>
     </Grid>,

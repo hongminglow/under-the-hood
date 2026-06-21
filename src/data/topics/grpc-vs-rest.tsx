@@ -38,18 +38,18 @@ export const grpcVsRestTopic: Topic = {
     </p>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Zap} title="Code Generation" subtitle="gRPC's contract-first leverage" theme="violet">
-        <p className="text-sm text-violet-100/75 mb-2">
+        <p className="text-sm text-violet-700 dark:text-violet-100/75 mb-2">
           gRPC generates the <strong>Client & Server Stubs</strong>.
         </p>
-        <p className="text-xs italic text-violet-200/70">
+        <p className="text-xs italic text-violet-700 dark:text-violet-300/70">
           You write a <code>service.proto</code> file. gRPC automatically compiles it into TypeScript, Go, or Python. You call <code>client.getUser()</code> as if it were a local function.
         </p>
       </FeatureCard>
       <FeatureCard icon={Globe} title="Streaming Capabilities" subtitle="What HTTP/2 unlocks" theme="cyan">
-        <p className="text-sm text-cyan-100/75 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-2">
           Harnessing the power of HTTP/2.
         </p>
-        <p className="text-xs italic text-cyan-200/70">
+        <p className="text-xs italic text-cyan-700 dark:text-cyan-300/70">
           Supports <strong>Bidirectional Streaming</strong>: The server can push data elements one-by-one as they are processed, rather than waiting for a giant batch to finish.
         </p>
       </FeatureCard>

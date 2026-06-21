@@ -24,14 +24,14 @@ export const webAccessibilityTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Tags} title="WAI-ARIA Roles" subtitle="Patch the tree only when native HTML cannot" theme="cyan">
-        <p className="text-cyan-100/80">
-          When native HTML is not enough, such as a complex <strong className="text-cyan-300">combobox</strong>, use
+        <p className="text-cyan-700 dark:text-cyan-100/80">
+          When native HTML is not enough, such as a complex <strong className="text-cyan-700 dark:text-cyan-400">combobox</strong>, use
           <code>role="combobox"</code> and <code>aria-expanded</code> to manually update the Accessibility Tree.
         </p>
       </FeatureCard>
       <FeatureCard icon={Focus} title="Focus Management" subtitle="Keyboard users need a controlled route" theme="emerald">
-        <p className="text-red-100/80">
-          When a modal opens, you must <strong className="text-red-300">trap focus</strong> inside it. If the user hits
+        <p className="text-emerald-700 dark:text-emerald-100/80">
+          When a modal opens, you must <strong className="text-emerald-700 dark:text-emerald-400">trap focus</strong> inside it. If the user hits
           <code>Tab</code>, they should not accidentally reach a hidden button in the background.
         </p>
       </FeatureCard>

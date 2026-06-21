@@ -24,20 +24,20 @@ export const errorHandlingTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <FeatureCard icon={ShieldCheck} title="Operational" subtitle="Trusted, expected failures" theme="emerald">
-        <ul className="list-disc pl-5 text-sm text-emerald-100/75 space-y-1">
+        <ul className="list-disc pl-5 text-sm text-emerald-700 dark:text-emerald-100/75 space-y-1">
           <li>User input validation failed.</li>
           <li>External API timeout.</li>
           <li>Database connection loss.</li>
         </ul>
-        <p className="text-xs mt-4 text-emerald-300 font-bold">Strategy: Handle & Continue.</p>
+        <p className="text-xs mt-4 text-emerald-700 dark:text-emerald-400 font-bold">Strategy: Handle & Continue.</p>
       </FeatureCard>
       <FeatureCard icon={ShieldAlert} title="Programmer" subtitle="Untrusted, corrupted-state bugs" theme="rose">
-        <ul className="list-disc pl-5 text-sm text-rose-100/75 space-y-1">
+        <ul className="list-disc pl-5 text-sm text-rose-700 dark:text-rose-100/75 space-y-1">
           <li>Reading property of null.</li>
           <li>Passing wrong types to functions.</li>
           <li>Infinite loops.</li>
         </ul>
-        <p className="text-xs mt-4 text-rose-300 font-bold">Strategy: Restart the Process.</p>
+        <p className="text-xs mt-4 text-rose-700 dark:text-rose-400 font-bold">Strategy: Restart the Process.</p>
       </FeatureCard>
     </Grid>,
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">

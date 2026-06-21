@@ -56,72 +56,72 @@ export const memoryHierarchyStorageLatencyTopic: Topic = {
 		</h3>,
 		<Grid key="7" cols={2} gap={6} className="mb-10 items-stretch">
 			<FeatureCard icon={Cpu} title="Registers" subtitle="single-instruction working state" theme="emerald">
-				<p className="text-sm text-red-100/80 mb-3">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/80 mb-3">
 					The absolute fastest place the CPU can read from. This is where arithmetic actually happens.
 				</p>
-				<ul className="text-sm text-red-100/70 list-disc pl-5 space-y-2">
-					<li><strong className="text-red-300">Use case:</strong> temporary values while an instruction is executing.</li>
-					<li><strong className="text-red-300">Real-world example:</strong> loop counters, function arguments, arithmetic intermediates.</li>
-					<li><strong className="text-red-300">Drawback:</strong> microscopic capacity. You do not "store application state" here manually.</li>
+				<ul className="text-sm text-emerald-700 dark:text-emerald-100/70 list-disc pl-5 space-y-2">
+					<li><strong className="text-emerald-700 dark:text-emerald-400">Use case:</strong> temporary values while an instruction is executing.</li>
+					<li><strong className="text-emerald-700 dark:text-emerald-400">Real-world example:</strong> loop counters, function arguments, arithmetic intermediates.</li>
+					<li><strong className="text-emerald-700 dark:text-emerald-400">Drawback:</strong> microscopic capacity. You do not "store application state" here manually.</li>
 				</ul>
 			</FeatureCard>
 
 			<FeatureCard icon={Layers} title="L1 / L2 / L3 Cache" subtitle="keep the CPU fed" theme="amber">
-				<p className="text-sm text-amber-100/80 mb-3">
+				<p className="text-sm text-amber-700 dark:text-amber-100/80 mb-3">
 					These caches exist because RAM is too slow relative to modern CPUs. The processor guesses what data it will
 					need next and keeps it near the core.
 				</p>
-				<ul className="text-sm text-amber-100/70 list-disc pl-5 space-y-2">
-					<li><strong className="text-amber-300">Use case:</strong> hot code paths, tight loops, recently touched memory.</li>
-					<li><strong className="text-amber-300">Real-world example:</strong> a B-tree node or hot hash bucket reused repeatedly.</li>
-					<li><strong className="text-amber-300">Drawback:</strong> tiny capacity and cache misses are expensive.</li>
+				<ul className="text-sm text-amber-700 dark:text-amber-100/70 list-disc pl-5 space-y-2">
+					<li><strong className="text-amber-700 dark:text-amber-400">Use case:</strong> hot code paths, tight loops, recently touched memory.</li>
+					<li><strong className="text-amber-700 dark:text-amber-400">Real-world example:</strong> a B-tree node or hot hash bucket reused repeatedly.</li>
+					<li><strong className="text-amber-700 dark:text-amber-400">Drawback:</strong> tiny capacity and cache misses are expensive.</li>
 				</ul>
 			</FeatureCard>
 
 			<FeatureCard icon={MemoryStick} title="RAM" subtitle="the main active workspace" theme="cyan">
-				<p className="text-sm text-cyan-100/80 mb-3">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/80 mb-3">
 					RAM is where your running processes, heaps, stacks, buffers, and OS page cache live. It is the normal place
 					for active program state.
 				</p>
-				<ul className="text-sm text-cyan-100/70 list-disc pl-5 space-y-2">
-					<li><strong className="text-cyan-300">Use case:</strong> active requests, application memory, in-process caches.</li>
-					<li><strong className="text-cyan-300">Real-world example:</strong> Node.js heap, JVM heap, Postgres buffer cache.</li>
-					<li><strong className="text-cyan-300">Drawback:</strong> volatile. Power loss means the data disappears.</li>
+				<ul className="text-sm text-cyan-700 dark:text-cyan-100/70 list-disc pl-5 space-y-2">
+					<li><strong className="text-cyan-700 dark:text-cyan-400">Use case:</strong> active requests, application memory, in-process caches.</li>
+					<li><strong className="text-cyan-700 dark:text-cyan-400">Real-world example:</strong> Node.js heap, JVM heap, Postgres buffer cache.</li>
+					<li><strong className="text-cyan-700 dark:text-cyan-400">Drawback:</strong> volatile. Power loss means the data disappears.</li>
 				</ul>
 			</FeatureCard>
 
 			<FeatureCard icon={Database} title="Redis / Distributed Cache" subtitle="shared fast state across machines" theme="sky">
-				<p className="text-sm text-sky-100/80 mb-3">
+				<p className="text-sm text-sky-700 dark:text-sky-100/80 mb-3">
 					Redis exists when one machine's RAM is not enough because the state must be shared across many app servers.
 				</p>
-				<ul className="text-sm text-sky-100/70 list-disc pl-5 space-y-2">
-					<li><strong className="text-sky-300">Use case:</strong> sessions, rate limits, hot keys, counters, queues.</li>
-					<li><strong className="text-sky-300">Real-world example:</strong> login sessions, feature flags, caching product pages.</li>
-					<li><strong className="text-sky-300">Drawback:</strong> network hop, memory cost, and possible durability tradeoffs.</li>
+				<ul className="text-sm text-sky-700 dark:text-sky-100/70 list-disc pl-5 space-y-2">
+					<li><strong className="text-sky-700 dark:text-sky-400">Use case:</strong> sessions, rate limits, hot keys, counters, queues.</li>
+					<li><strong className="text-sky-700 dark:text-sky-400">Real-world example:</strong> login sessions, feature flags, caching product pages.</li>
+					<li><strong className="text-sky-700 dark:text-sky-400">Drawback:</strong> network hop, memory cost, and possible durability tradeoffs.</li>
 				</ul>
 			</FeatureCard>
 
 			<FeatureCard icon={HardDrive} title="SSD" subtitle="durable storage with acceptable latency" theme="violet">
-				<p className="text-sm text-violet-100/80 mb-3">
+				<p className="text-sm text-violet-700 dark:text-violet-100/80 mb-3">
 					SSDs are slow compared to memory but fast enough to make databases, indexes, WAL files, and general
 					persistent workloads practical.
 				</p>
-				<ul className="text-sm text-violet-100/70 list-disc pl-5 space-y-2">
-					<li><strong className="text-violet-300">Use case:</strong> primary database storage, indexes, logs, file systems.</li>
-					<li><strong className="text-violet-300">Real-world example:</strong> Postgres tables and indexes on NVMe.</li>
-					<li><strong className="text-violet-300">Drawback:</strong> still orders of magnitude slower than RAM.</li>
+				<ul className="text-sm text-violet-700 dark:text-violet-100/70 list-disc pl-5 space-y-2">
+					<li><strong className="text-violet-700 dark:text-violet-400">Use case:</strong> primary database storage, indexes, logs, file systems.</li>
+					<li><strong className="text-violet-700 dark:text-violet-400">Real-world example:</strong> Postgres tables and indexes on NVMe.</li>
+					<li><strong className="text-violet-700 dark:text-violet-400">Drawback:</strong> still orders of magnitude slower than RAM.</li>
 				</ul>
 			</FeatureCard>
 
 			<FeatureCard icon={Network} title="HDD / Remote Storage" subtitle="capacity and durability over speed" theme="orange">
-				<p className="text-sm text-orange-100/80 mb-3">
+				<p className="text-sm text-orange-700 dark:text-orange-100/80 mb-3">
 					These layers are used because they are cheap, large, durable, and operationally useful, not because they are
 					fast.
 				</p>
-				<ul className="text-sm text-orange-100/70 list-disc pl-5 space-y-2">
-					<li><strong className="text-orange-300">Use case:</strong> archives, backups, object storage, cold analytics data.</li>
-					<li><strong className="text-orange-300">Real-world example:</strong> S3 objects, HDD-based backup arrays, log archives.</li>
-					<li><strong className="text-orange-300">Drawback:</strong> latency is high enough that you design around it, not through it.</li>
+				<ul className="text-sm text-orange-700 dark:text-orange-100/70 list-disc pl-5 space-y-2">
+					<li><strong className="text-orange-700 dark:text-orange-400">Use case:</strong> archives, backups, object storage, cold analytics data.</li>
+					<li><strong className="text-orange-700 dark:text-orange-400">Real-world example:</strong> S3 objects, HDD-based backup arrays, log archives.</li>
+					<li><strong className="text-orange-700 dark:text-orange-400">Drawback:</strong> latency is high enough that you design around it, not through it.</li>
 				</ul>
 			</FeatureCard>
 		</Grid>,

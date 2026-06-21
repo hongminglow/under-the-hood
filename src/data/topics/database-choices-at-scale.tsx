@@ -94,7 +94,7 @@ export const databaseChoicesAtScaleTopic: Topic = {
 		</p>,
 		<Grid key="7" cols={2} gap={6} className="my-6">
 			<FeatureCard icon={Database} title="Why PostgreSQL?" subtitle="Why relational depth won" theme="emerald">
-				<ul className="text-sm text-emerald-100/75 space-y-1 list-disc list-inside">
+				<ul className="text-sm text-emerald-700 dark:text-emerald-100/75 space-y-1 list-disc list-inside">
 					<li>ACID guarantees — critical for financial transactions and consistency</li>
 					<li>Rich query language: JOINs, window functions, CTEs</li>
 					<li>PostGIS extension for geospatial queries</li>
@@ -103,7 +103,7 @@ export const databaseChoicesAtScaleTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Database} title="How They Scaled It" subtitle="Stay SQL, scale around it" theme="teal">
-				<ul className="text-sm text-teal-100/75 space-y-1 list-disc list-inside">
+				<ul className="text-sm text-teal-700 dark:text-teal-100/75 space-y-1 list-disc list-inside">
 					<li>
 						Horizontal sharding by <code>user_id</code>
 					</li>
@@ -124,7 +124,7 @@ export const databaseChoicesAtScaleTopic: Topic = {
 		</p>,
 		<Grid key="10" cols={2} gap={6} className="my-6">
 			<FeatureCard icon={Film} title="Why Cassandra?" subtitle="Why Netflix optimized for writes" theme="cyan">
-				<ul className="text-sm text-cyan-100/75 space-y-1 list-disc list-inside">
+				<ul className="text-sm text-cyan-700 dark:text-cyan-100/75 space-y-1 list-disc list-inside">
 					<li>Linear horizontal scalability — add nodes, get proportional throughput</li>
 					<li>Masterless architecture: no single point of failure</li>
 					<li>Multi-datacenter replication built-in (global availability)</li>
@@ -133,7 +133,7 @@ export const databaseChoicesAtScaleTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Film} title="The Trade-offs" subtitle="What you give up for that throughput" theme="rose">
-				<ul className="text-sm text-rose-100/75 space-y-1 list-disc list-inside">
+				<ul className="text-sm text-rose-700 dark:text-rose-100/75 space-y-1 list-disc list-inside">
 					<li>No JOINs — data must be denormalized by access pattern</li>
 					<li>Queries must match a partition key — no arbitrary WHERE clauses</li>
 					<li>Eventual consistency by default — "last write wins"</li>
@@ -195,19 +195,19 @@ SELECT * FROM viewing_history WHERE show_id = ?;
 		</p>,
 		<Grid key="18" cols={3} gap={6} className="my-6">
 			<FeatureCard icon={Users} title="MySQL + MyRocks" subtitle="Compress the write engine" theme="amber">
-				<p className="text-sm text-amber-100/75">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75">
 					Facebook's custom storage engine reduces disk space by 50% vs InnoDB using LSM trees — critical at petabyte
 					scale. They contribute the most patches back to MySQL and MariaDB of any single company.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Users} title="TAO" subtitle="Graph traversal on top of MySQL" theme="sky">
-				<p className="text-sm text-sky-100/75">
+				<p className="text-sm text-sky-700 dark:text-sky-100/75">
 					Facebook's social graph (who follows whom, who liked what) lives in TAO — a distributed caching and
 					persistence layer on top of MySQL designed for graph traversal. It handles trillions of edges.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Users} title="Cassandra for Inbox" subtitle="Messenger needed write scaling" theme="cyan">
-				<p className="text-sm text-cyan-100/75">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75">
 					Facebook Messenger moved to Cassandra (HBase, specifically) for message storage due to its linear write
 					scalability — the exact same reason as Netflix.
 				</p>
@@ -244,7 +244,7 @@ SELECT * FROM viewing_history WHERE show_id = ?;
 		</p>,
 		<Grid key="25" cols={2} gap={6} className="my-6">
 			<FeatureCard icon={ShoppingCart} title="Why DynamoDB?" subtitle="Managed scale and latency" theme="emerald">
-				<ul className="text-sm text-emerald-100/75 space-y-1 list-disc list-inside">
+				<ul className="text-sm text-emerald-700 dark:text-emerald-100/75 space-y-1 list-disc list-inside">
 					<li>Guaranteed single-digit millisecond latency at any scale</li>
 					<li>No operational overhead — fully serverless, auto-scaling</li>
 					<li>Multi-region Active-Active replication with Global Tables</li>
@@ -252,7 +252,7 @@ SELECT * FROM viewing_history WHERE show_id = ?;
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={ShoppingCart} title="The DynamoDB Tax" subtitle="Managed convenience has sharp edges" theme="rose">
-				<ul className="text-sm text-rose-100/75 space-y-1 list-disc list-inside">
+				<ul className="text-sm text-rose-700 dark:text-rose-100/75 space-y-1 list-disc list-inside">
 					<li>No JOINs, limited query patterns (must use GSI for secondary access)</li>
 					<li>Expensive at high sustained throughput vs self-hosted alternatives</li>
 					<li>AWS vendor lock-in — no clean migration path</li>

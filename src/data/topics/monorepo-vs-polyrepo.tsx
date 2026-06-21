@@ -21,13 +21,13 @@ export const monorepoVsPolyrepoTopic: Topic = {
 		</p>,
 		<Grid key="2" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={FolderTree} title="Monorepo" subtitle="One repo for everything" theme="cyan">
-				<p className="text-sm text-cyan-100/75">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75">
 					<strong>All</strong> projects, services, and shared libraries live in a single Git repository. Tools like{" "}
 					<strong>Nx, Turborepo, Bazel</strong> handle selective builds so only changed packages are rebuilt.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={GitBranch} title="Polyrepo" subtitle="Independent repos per boundary" theme="violet">
-				<p className="text-sm text-violet-100/75">
+				<p className="text-sm text-violet-700 dark:text-violet-100/75">
 					Each service or library has its <strong>own Git repository</strong> with independent CI/CD pipelines,
 					versioning, and access control. Dependencies are consumed via package registries (npm, Maven).
 				</p>

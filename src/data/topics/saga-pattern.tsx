@@ -202,7 +202,7 @@ SELECT * FROM outbox WHERE published = false ORDER BY created_at;`}
       Sagas do not have <strong>Isolation</strong>&nbsp;(the 'I' in ACID). Other users might see intermediate "soft state" while the Saga is running.
     </p>,
     <Card key="22" title="Example: Dirty Reads">
-      <p className="text-sm text-slate-300 leading-relaxed mb-2">
+      <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed mb-2">
         User A starts a Saga to buy the last iPhone. Inventory is reserved (stock = 0). User B tries to buy the same iPhone and sees "Out of Stock". But then User A's payment fails, and the Saga compensates by releasing the inventory. User B missed their chance due to a temporary state.
       </p>
     </Card>,

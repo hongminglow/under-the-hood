@@ -23,9 +23,9 @@ export const webhooksVsPollingTopic: Topic = {
       key="3"
       headers={["Method", "Logic", "Overhead", "Use Case"]}
       rows={[
-        ["<span class='text-amber-300 font-black'>Short Polling</span>", "Client asks 'Is it done?' at fixed intervals (e.g., 5s).", "Very High. Millions of empty requests.", "Simple, non-critical status updates."],
-        ["<span class='text-cyan-300 font-black'>Long Polling</span>", "Server holds the request open until data is ready or timeout.", "Moderate. Efficient but holds server threads.", "Basic chat apps without WebSockets."],
-        ["<span class='text-emerald-300 font-black'>Webhooks</span>", "Server pushes data to a Client URL via HTTP POST.", "Zero. Passive wait, active push.", "Payments (Stripe), CI/CD (GitHub), SMS (Twilio)."]
+        ["<span class='text-amber-700 dark:text-amber-400 font-black'>Short Polling</span>", "Client asks 'Is it done?' at fixed intervals (e.g., 5s).", "Very High. Millions of empty requests.", "Simple, non-critical status updates."],
+        ["<span class='text-cyan-700 dark:text-cyan-400 font-black'>Long Polling</span>", "Server holds the request open until data is ready or timeout.", "Moderate. Efficient but holds server threads.", "Basic chat apps without WebSockets."],
+        ["<span class='text-emerald-700 dark:text-emerald-400 font-black'>Webhooks</span>", "Server pushes data to a Client URL via HTTP POST.", "Zero. Passive wait, active push.", "Payments (Stripe), CI/CD (GitHub), SMS (Twilio)."]
       ]}
     />,
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">
@@ -33,18 +33,18 @@ export const webhooksVsPollingTopic: Topic = {
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Hourglass} title="Long Polling" subtitle="The middle ground" theme="cyan">
-        <p className="mb-3 text-cyan-100/80">
-          Between short polling and WebSockets lies <strong className="text-cyan-300">Long Polling</strong>.
+        <p className="mb-3 text-cyan-700 dark:text-cyan-100/80">
+          Between short polling and WebSockets lies <strong className="text-cyan-700 dark:text-cyan-400">Long Polling</strong>.
         </p>
-        <p className="text-cyan-100/70">
+        <p className="text-cyan-700 dark:text-cyan-100/70">
           The client sends a request. The server <strong>suspends</strong> it. If data arrives within 30s, it responds immediately. If not, it returns a 204 No Content, and the client loops back. It's the "stateless" way to fake real-time.
         </p>
       </FeatureCard>
       <FeatureCard icon={AlertTriangle} title="The Polling CPU Trap" subtitle="Short polling at scale" theme="amber">
-        <p className="mb-3 text-amber-100/80">
-          Short polling is <strong className="text-amber-300">resource exhaustion</strong> by design.
+        <p className="mb-3 text-amber-700 dark:text-amber-100/80">
+          Short polling is <strong className="text-amber-700 dark:text-amber-400">resource exhaustion</strong> by design.
         </p>
-        <p className="text-amber-100/70">
+        <p className="text-amber-700 dark:text-amber-100/70">
           Even if no data changes for 24 hours, your database will be queried 17,280 times (at 5s intervals). This creates "Thundering Herd" problems at scale.
         </p>
       </FeatureCard>

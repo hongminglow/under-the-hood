@@ -3,7 +3,61 @@ name: under-the-hood
 description: Instructions for AI models to act as a technical librarian for the Under The Hood knowledge base. Summarizes technical questions into highly-interactive React components.
 ---
 
-# Knowledge Entry Skill (v5.2)
+# Knowledge Entry Skill (v6.0)
+
+## 🎨 Theme System, Palette & Search (v6 — READ FIRST)
+
+The app now ships a **runtime dark/light theme** on a **calm forest-green identity**. This section overrides any older green/slate guidance below where they conflict.
+
+### A. How theming works (Tailwind v4)
+
+- Semantic tokens are CSS variables in `src/index.css`: `:root` = **light**, `.dark` = **dark (default)**, wired to Tailwind via `@theme inline`. Class-based dark via `@custom-variant dark (&:where(.dark, .dark *))`.
+- Default theme is **dark**. A pre-paint script in `index.html` sets `<html class="dark">` from `localStorage.theme` (no flash). `src/hooks/useTheme.ts` + `src/components/ui/ThemeToggle.tsx` (in the `AppLayout` header) toggle + persist it.
+- **The whole accent is one place:** the `--color-primary-*` scale + `--primary` semantic var in `index.css`. Retune the palette there; do not hardcode hexes in components.
+
+### B. The palette & the eye-strain rule (non-negotiable)
+
+The previous emerald (`#10b981`) + bright mint (`#6ee7b7`) body text on near-black caused eye strain over long reading. The calibrated rule:
+
+- **Body / reading text is a soft, low-chroma tone, NEVER saturated green.** Use `text-foreground` / `text-foreground/75` (read) and `text-muted-foreground` (calm sage-gray scan tone).
+- **Saturated green is reserved for the ACCENT only** — links, active states, chips, hover, headings-on-hover — used sparingly via `text-primary` / `bg-primary/…`.
+- Dark background is lifted off pure black (`#0e1411`) to cut halation. Light background is a soft off-white (`#f3f6f3`), not pure white.
+
+### C. Author with semantic tokens (they flip for free)
+
+Prefer these — they adapt to both themes automatically. **Do NOT** hardcode `bg-[#02120a]`, near-black, or bare `text-slate-300/400` for theme-critical surfaces (those are dark-only and break in light mode):
+
+| Need | Use |
+|---|---|
+| Page/card surface | `bg-background`, `bg-card`, `bg-card/70`, `bg-secondary/40` |
+| Primary read text | `text-foreground` / `text-foreground/75` |
+| Calm scan/secondary text | `text-muted-foreground` |
+| Accent (sparingly) | `text-primary`, `bg-primary/10`, `border-primary/30` |
+| Borders / dividers | `border-border`, `border-border/60` |
+
+### D. Any colored accent in topic content MUST be theme-aware
+
+A raw `text-amber-200` or `bg-black/30` is invisible/broken in light mode. Every hardcoded accent needs a **light base + `dark:` override**. Reusable recipes:
+
+| Element | Pattern |
+|---|---|
+| Accent emphasis text (`c` = emerald/teal/…) | `text-{c}-700 dark:text-{c}-400` |
+| Accent inline code chip | `bg-{c}-500/10 text-{c}-700 dark:text-{c}-300 border border-{c}-500/30` |
+| Inset panel inside a card | `bg-black/5 dark:bg-black/30 border border-black/10 dark:border-white/10` |
+| Footer rule inside a card | `border-t border-black/10 dark:border-white/10` |
+| Strong "good/bad" label | `text-emerald-600 dark:text-emerald-400` / `text-rose-600 dark:text-rose-400` |
+
+**Dark-mode emphasis brightness (eye comfort):** for bold/highlight accent text on dark, use `dark:text-{c}-400`, not `-300`/`-200`. The light hues (sky/cyan/teal/lime/yellow) at `-200`/`-300` are high-luminance and glare on the dark surface. `-400` keeps strong contrast without the glare. Card *body* text may stay lighter (`dark:text-{c}-100/70`), but anything bold should be `-400`.
+
+The shared components (`Card`, `Callout`, `Highlight`, `MistakeCard`, `Step`, `Table`, `CodeBlock`, `Flow`, `FeatureCard`) are already theme-aware — their accent maps carry light base + `dark:` per color, so just passing `theme="…"` is correct in both modes. When building a NEW component, follow the same light-base-then-`dark:` recipe. (`CodeBlock`/`Table` `theme="emerald"` previously rendered RED — fixed; emerald now renders emerald.)
+
+### E. Search & Tagging Convention (makes exact-name search rank #1)
+
+`GlobalSearch` weights **tags (2) > title (1.5) > description (0.5)**, uses `ignoreLocation`, and adds deterministic boosts so an exact tag/title/id always ranks first. For that to work, **tags must encode the topic's own identity**:
+
+- **Always include the topic's title keyword(s) as tags.** A DNS page must have `"dns"` as a tag; lead the array with it: `tags: ["dns", "networking", …]`.
+- **Comparison topics get each side as its own tag.** "gRPC vs REST" → `tags: ["grpc", "rest", …]` so either exact name ranks the page first.
+- Keep tags lowercase, specific, and identity-first; generic category tags (`backend`, `devops`) come after the identity tags.
 
 ## Context
 
@@ -475,31 +529,31 @@ import { MistakeCard } from "@/components/ui/MistakeCard";
 
 ## 🎨 Card Text Color Styling Guide (Global Standard)
 
+> ⚠️ **v6 update — read § Theme System first.** The "scan vs read" *concept* still holds, but the **colors are now theme-aware semantic tokens**, not hardcoded green/slate. In NEW content, use `text-muted-foreground` (calm scan tone) and `text-foreground/75` (read tone) — both flip between dark/light. The raw `text-slate-300/400` values below are **dark-only legacy**; avoid them on theme-critical surfaces because they break in light mode.
+
 ### Core principle
 
 Use this mental model everywhere in the app:
 
-- **Green (`text-muted-foreground`) = scan**
-- **Slate (`text-slate-300` / `text-slate-400`) = read**
+- **`text-muted-foreground` = scan** — calm, low-chroma secondary tone for short, skimmable, high-signal content.
+- **`text-foreground/75` (`text-foreground/60` for supporting) = read** — primary body tone for long explanations.
 
-If a reader should be able to skim the content quickly, it should usually be green.
-If the reader needs to slow down and read full explanations, it should usually be slate.
+If a reader should skim quickly, use the scan tone. If they must slow down and read, use the read tone. Both are semantic and adapt to the active theme. (The accent green, `text-primary`, is for emphasis only — never long-form body text.)
 
-The visual reference for "good gray usage" is the long-form, explanation-heavy style used in `developer-toolchain-layers.tsx`.
+The visual reference for "good long-form usage" is the explanation-heavy style in `developer-toolchain-layers.tsx`.
 
 ### Color meanings
 
-- **`text-muted-foreground`** = theme green. Use for short, scannable, high-signal content.
-- **`text-slate-300`** = primary gray body text. Use for long explanatory prose.
-- **`text-slate-400`** = secondary/supporting gray. Use for dense supporting bullets, footnotes, or explanation-heavy lists.
+- **`text-muted-foreground`** = calm scan tone (theme-aware). Short, scannable, high-signal content.
+- **`text-foreground/75`** = primary read body text (theme-aware). Long explanatory prose.
+- **`text-foreground/60`** = secondary/supporting tone (theme-aware). Dense supporting bullets, footnotes.
+- **`text-slate-300` / `text-slate-400`** = legacy dark-only equivalents. Only acceptable inside a dark-only `theme="slate"` surface; do not use as the default for new prose.
 
 ### Important default behavior
 
-The `Card` component's default children wrapper is `text-slate-300`.
+The `Card` component's default children wrapper is now `text-foreground/75` (theme-aware, was `text-slate-300`).
 
-That means simple cards will accidentally stay gray unless you explicitly opt them into green.
-
-**Practical rule:** if a card is meant to feel short, punchy, checklist-like, or easy to skim, add an explicit green class. Do not rely on the default wrapper.
+**Practical rule:** if a card is meant to feel short, punchy, checklist-like, or easy to skim, add an explicit `text-muted-foreground`. For long reading, the default `text-foreground/75` is correct. Never reach for bright `text-primary` (green) as body text.
 
 ### Decision order
 

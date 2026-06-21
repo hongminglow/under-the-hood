@@ -24,16 +24,16 @@ export const connectionPoolingTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Gauge} title="Without Pooling" subtitle="Cold connection per query" theme="rose">
-        <p className="text-sm text-rose-200/80 mb-2">
+        <p className="text-sm text-rose-700 dark:text-rose-300/80 mb-2">
           Your app opens and closes a TCP socket for every single <code>SELECT</code>.
         </p>
-        <p className="text-sm text-rose-300 font-bold">Latency: High (+50ms per query)</p>
+        <p className="text-sm text-rose-700 dark:text-rose-400 font-bold">Latency: High (+50ms per query)</p>
       </FeatureCard>
       <FeatureCard icon={DatabaseZap} title="With PgBouncer" subtitle="Warm shared connection pool" theme="emerald">
-        <p className="text-sm text-emerald-200/80 mb-2">
+        <p className="text-sm text-emerald-700 dark:text-emerald-300/80 mb-2">
           A tiny C daemon maintains a "warm" pool of connections. Your app talks to PgBouncer instantly.
         </p>
-        <p className="text-sm text-emerald-300 font-bold">Latency: Ultra-Low (&lt;1ms per query)</p>
+        <p className="text-sm text-emerald-700 dark:text-emerald-400 font-bold">Latency: Ultra-Low (&lt;1ms per query)</p>
       </FeatureCard>
     </Grid>,
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">

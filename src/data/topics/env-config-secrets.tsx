@@ -24,16 +24,16 @@ export const envConfigTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <FeatureCard icon={AlertTriangle} title="Build-time Variables" subtitle="Baked into the artifact" theme="rose">
-        <p className="text-sm text-rose-100/75 mb-2">
+        <p className="text-sm text-rose-700 dark:text-rose-100/75 mb-2">
           Injected during <code>docker build</code> or <code>npm run build</code>.
         </p>
-        <p className="text-xs italic text-rose-300 font-bold underline">Warning: Hardcoded in the final JS bundle / image layer.</p>
+        <p className="text-xs italic text-rose-700 dark:text-rose-400 font-bold underline">Warning: Hardcoded in the final JS bundle / image layer.</p>
       </FeatureCard>
       <FeatureCard icon={ShieldCheck} title="Runtime Variables" subtitle="Injected when the process starts" theme="emerald">
-        <p className="text-sm text-emerald-100/75 mb-2">
+        <p className="text-sm text-emerald-700 dark:text-emerald-100/75 mb-2">
           Injected when the container starts (<code>process.env</code>). 
         </p>
-        <p className="text-xs italic text-emerald-300 font-bold underline">Success: Secure and hot-swappable without rebuilding.</p>
+        <p className="text-xs italic text-emerald-700 dark:text-emerald-400 font-bold underline">Success: Secure and hot-swappable without rebuilding.</p>
       </FeatureCard>
     </Grid>,
     <h3 key="5" className="text-xl font-bold mt-8 mb-4">

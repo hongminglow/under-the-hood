@@ -61,7 +61,7 @@ export const renderingPipelineTopic: Topic = {
     <p key="7" className="mb-4">
       To achieve smooth 60fps, browsers use <strong>GPU Acceleration</strong>. By moving an element to its own "layer" (using <code>will-change: transform</code>), the browser can move, scale, or fade that layer using the graphics card without ever re-running a Reflow or Repaint.
     </p>,
-    <ul key="8" className="list-disc pl-5 text-sm text-slate-400 space-y-2">
+    <ul key="8" className="list-disc pl-5 text-sm text-slate-700 dark:text-slate-400 space-y-2">
       <li><strong className="text-muted-foreground">Render-blocking JS:</strong> By default, <code>&lt;script&gt;</code> tags block DOM construction. The browser halts everything to execute the JS, as the script might call <code>document.write()</code> and change the DOM.</li>
       <li><strong className="text-muted-foreground">CSS is render-blocking:</strong> The browser will <strong>not</strong> paint anything until the CSSOM is ready, preventing a "Flash of Unstyled Content" (FOUC).</li>
       <li><strong className="text-muted-foreground">Layout thrashing:</strong> Reading a geometric property (like <code>offsetTop</code>) immediately after setting one (like <code>style.top</code>) forces the browser to run a synchronous reflow, creating massive stuttering.</li>

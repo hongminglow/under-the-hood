@@ -25,7 +25,7 @@ export const webglThreejsGpuTopic: Topic = {
   tags: ["webgl", "threejs", "gpu", "graphics", "3D"],
   icon: "Monitor",
   content: [
-    <p key="1" className="text-slate-300 mb-6">
+    <p key="1" className="text-slate-700 dark:text-slate-400 mb-6">
       Every 3D scene rendered in a browser goes through a precisely ordered
       hardware pipeline. WebGL is not a 3D library — it is a low-level{" "}
       <strong>JavaScript API that speaks directly to the GPU</strong> via your
@@ -44,10 +44,10 @@ export const webglThreejsGpuTopic: Topic = {
         subtitle="Scene Graph API"
         theme="violet"
       >
-        <p className="text-sm text-violet-100/75 mb-2">
+        <p className="text-sm text-violet-700 dark:text-violet-100/75 mb-2">
           The developer-facing layer.
         </p>
-        <p className="text-xs text-violet-200/70">
+        <p className="text-xs text-violet-700 dark:text-violet-300/70">
           You define{" "}
           <strong>Scenes, Meshes, Materials, Cameras, and Lights</strong>.
           Three.js translates these into the exact WebGL calls needed every
@@ -60,10 +60,10 @@ export const webglThreejsGpuTopic: Topic = {
         subtitle="Browser-level GPU bridge"
         theme="cyan"
       >
-        <p className="text-sm text-cyan-100/75 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-2">
           The JavaScript-to-GPU contract.
         </p>
-        <p className="text-xs text-cyan-200/70">
+        <p className="text-xs text-cyan-700 dark:text-cyan-300/70">
           A stateful API (based on OpenGL ES 2.0/3.0). Manages GPU memory
           buffers, shader compilation, and draw calls. Runs on the browser's{" "}
           <strong>main thread</strong> or an OffscreenCanvas worker.
@@ -75,10 +75,10 @@ export const webglThreejsGpuTopic: Topic = {
         subtitle="Massively parallel execution"
         theme="amber"
       >
-        <p className="text-sm text-amber-100/75 mb-2">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75 mb-2">
           The actual compute unit.
         </p>
-        <p className="text-xs text-amber-200/70">
+        <p className="text-xs text-amber-700 dark:text-amber-300/70">
           Receives compiled shader bytecode and geometry data. Executes
           thousands of tiny{" "}
           <strong>vertex and fragment shader programs in parallel</strong>{" "}
@@ -90,9 +90,9 @@ export const webglThreejsGpuTopic: Topic = {
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">
       The GPU Rendering Pipeline (Per Frame)
     </h3>,
-    <p key="5" className="text-slate-300 mb-6">
+    <p key="5" className="text-slate-700 dark:text-slate-400 mb-6">
       Each call to{" "}
-      <code className="text-cyan-300 bg-slate-800 px-1 rounded">
+      <code className="text-cyan-700 dark:text-cyan-400 bg-slate-500/10 dark:bg-slate-800 px-1 rounded">
         renderer.render(scene, camera)
       </code>{" "}
       triggers a full pass through the following hardware pipeline.
@@ -137,7 +137,7 @@ export const webglThreejsGpuTopic: Topic = {
     <h3 key="7" className="text-xl font-bold mt-8 mb-4">
       Shaders: The Programs That Run on the GPU
     </h3>,
-    <p key="8" className="text-slate-300 mb-4">
+    <p key="8" className="text-slate-700 dark:text-slate-400 mb-4">
       Shaders are small programs written in <strong>GLSL</strong> (GL Shading
       Language) that compile and run directly on the GPU's shader cores. There
       are two mandatory types per draw call.
@@ -149,7 +149,7 @@ export const webglThreejsGpuTopic: Topic = {
         subtitle="Runs once per vertex"
         theme="sky"
       >
-        <p className="text-sm text-sky-100/75 mb-3">
+        <p className="text-sm text-sky-700 dark:text-sky-100/75 mb-3">
           Transforms geometry from 3D world → 2D screen.
         </p>
         <CodeBlock
@@ -178,7 +178,7 @@ void main() {
         subtitle="Runs once per pixel fragment"
         theme="fuchsia"
       >
-        <p className="text-sm text-fuchsia-100/75 mb-3">
+        <p className="text-sm text-fuchsia-700 dark:text-fuchsia-100/75 mb-3">
           Outputs the final pixel color.
         </p>
         <CodeBlock
@@ -323,12 +323,12 @@ void main() {
     <h3 key="14" className="text-xl font-bold mt-8 mb-4">
       The CPU–GPU Bottleneck
     </h3>,
-    <p key="15" className="text-slate-300 mb-6">
+    <p key="15" className="text-slate-700 dark:text-slate-400 mb-6">
       The single biggest performance trap in WebGL is the{" "}
       <strong>CPU–GPU synchronization bottleneck</strong>. The CPU submits draw
       calls; the GPU executes them asynchronously. Anything that forces the CPU
       to wait for the GPU to finish (like reading pixels back with{" "}
-      <code className="text-cyan-300 bg-slate-800 px-1 rounded">
+      <code className="text-cyan-700 dark:text-cyan-400 bg-slate-500/10 dark:bg-slate-800 px-1 rounded">
         gl.readPixels
       </code>
       ) causes a pipeline stall and destroys frame rate.
@@ -340,10 +340,10 @@ void main() {
         subtitle="The primary CPU metric"
         theme="amber"
       >
-        <p className="text-sm text-amber-100/75 mb-2">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75 mb-2">
           More objects ≠ more GPU work — it means more CPU overhead.
         </p>
-        <p className="text-xs text-amber-200/70">
+        <p className="text-xs text-amber-700 dark:text-amber-300/70">
           Every <code>gl.drawElements</code> call has a fixed CPU cost
           regardless of the geometry complexity. A scene with 1,000 simple cubes
           as separate meshes will have a <strong>higher CPU overhead</strong>{" "}
@@ -357,10 +357,10 @@ void main() {
         subtitle="The primary GPU metric"
         theme="indigo"
       >
-        <p className="text-sm text-indigo-100/75 mb-2">
+        <p className="text-sm text-indigo-700 dark:text-indigo-100/75 mb-2">
           The number of pixels the GPU can shade per second.
         </p>
-        <p className="text-xs text-indigo-200/70">
+        <p className="text-xs text-indigo-700 dark:text-indigo-300/70">
           Overdraw (drawing the same pixel multiple times due to transparent
           objects layering on top of each other) is the primary fill-rate
           killer. Use <strong>depth pre-pass</strong> or sort transparent

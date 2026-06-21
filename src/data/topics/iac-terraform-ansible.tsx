@@ -24,16 +24,16 @@ export const iacTopic: Topic = {
 		</h4>,
 		<Grid key="3" cols={2} gap={6} className="mb-8">
 			<FeatureCard icon={Terminal} title="Imperative (Bash / Ansible)" subtitle="You specify the steps" theme="amber">
-				<p className="text-sm text-amber-100/75">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75">
 					You write the exact step-by-step commands to achieve the desired state.
 				</p>
-				<ul className="text-sm mt-3 space-y-1 text-amber-100/75">
+				<ul className="text-sm mt-3 space-y-1 text-amber-700 dark:text-amber-100/75">
 					<li>1. Create an EC2 instance.</li>
 					<li>2. SSH into it.</li>
 					<li>3. Install PostgreSQL via apt-get.</li>
 					<li>4. Start the service.</li>
 				</ul>
-				<p className="text-xs mt-3 text-amber-200/60">Highly dependent on current system state.</p>
+				<p className="text-xs mt-3 text-amber-700 dark:text-amber-300/60">Highly dependent on current system state.</p>
 			</FeatureCard>
 			<FeatureCard
 				icon={Blocks}
@@ -41,7 +41,7 @@ export const iacTopic: Topic = {
 				subtitle="You declare the end state"
 				theme="emerald"
 			>
-				<p className="text-sm text-emerald-100/75">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75">
 					You declare the <em>final desired end-state</em>, and the tool determines what API calls are necessary to
 					achieve it.
 				</p>
@@ -54,7 +54,7 @@ export const iacTopic: Topic = {
   allocated_storage = 20
 }`}
 				/>
-				<p className="text-xs mt-3 text-emerald-200/60">Idempotent and easily version-controlled.</p>
+				<p className="text-xs mt-3 text-emerald-700 dark:text-emerald-300/60">Idempotent and easily version-controlled.</p>
 			</FeatureCard>
 		</Grid>,
 		<h4 key="4" className="text-xl font-bold mt-8 mb-4">

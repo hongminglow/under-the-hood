@@ -33,18 +33,18 @@ export const debounceVsThrottleTopic: Topic = {
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Play} title="Leading" subtitle="Immediate execution" theme="amber">
-        <p className="text-sm text-amber-200/80 mb-2">
+        <p className="text-sm text-amber-700 dark:text-amber-300/80 mb-2">
           Executes the function <strong>immediately</strong> on the first click, then ignores all subsequent clicks for the duration.
         </p>
-        <p className="text-xs italic text-amber-100/70">
+        <p className="text-xs italic text-amber-700 dark:text-amber-100/70">
           Perfect for "Submit" buttons to prevent double-charging a credit card.
         </p>
       </FeatureCard>
       <FeatureCard icon={Pause} title="Trailing" subtitle="Wait, then fire once" theme="teal">
-        <p className="text-sm text-teal-200/80 mb-2">
+        <p className="text-sm text-teal-700 dark:text-teal-300/80 mb-2">
           Waits for the events to stop, then executes the function <strong>once</strong> at the very end.
         </p>
-        <p className="text-xs italic text-teal-100/70">
+        <p className="text-xs italic text-teal-700 dark:text-teal-100/70">
           Standard for Search bars to ensure you only fetch once the user is done typing.
         </p>
       </FeatureCard>

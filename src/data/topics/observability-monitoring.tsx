@@ -20,20 +20,20 @@ export const observabilityTopic: Topic = {
 		</p>,
 		<Grid key="2" cols={3} gap={6} className="my-8">
 			<FeatureCard icon={FileText} title="Logs" subtitle="Rich discrete events" theme="amber">
-				<p className="text-sm text-amber-100/75">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75">
 					Discrete timestamped events: <code>[ERROR] Payment failed for user_42</code>. Provides rich context but{" "}
 					<strong>high volume</strong>. Tools: ELK Stack (Elasticsearch, Logstash, Kibana), Loki, Datadog.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={BarChart3} title="Metrics" subtitle="Cheap aggregate health signals" theme="emerald">
-				<p className="text-sm text-emerald-100/75">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75">
 					Numeric measurements over time: CPU usage, request latency (p99), error rate.{" "}
 					<strong>Aggregated and cheap</strong> to store. Enables dashboards and alerts. Tools: Prometheus, Grafana,
 					CloudWatch.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={GitBranch} title="Traces" subtitle="Request path across many services" theme="violet">
-				<p className="text-sm text-violet-100/75">
+				<p className="text-sm text-violet-700 dark:text-violet-100/75">
 					Follow a single request across <strong>multiple services</strong>. A trace shows: API Gateway → Auth Service
 					(12ms) → Order Service (45ms) → Database (200ms). Find the bottleneck. Tools: Jaeger, Zipkin, OpenTelemetry.
 				</p>

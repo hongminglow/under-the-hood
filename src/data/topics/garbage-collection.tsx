@@ -98,19 +98,19 @@ export const garbageCollectionTopic: Topic = {
 
 		<Grid key="7" cols={1} gap={6} className="mb-8">
 			<Card title="The Hot-Loop Allocation Spike">
-				<p className="text-sm text-slate-300 mb-3">
-					<strong className="text-red-400">The Problem:</strong> If you rapidly create millions of temporary objects
+				<p className="text-sm text-slate-700 dark:text-slate-400 mb-3">
+					<strong className="text-red-700 dark:text-red-400">The Problem:</strong> If you rapidly create millions of temporary objects
 					inside a hot loop, like rendering a huge 3D canvas or chart, V8 is forced to trigger repeated GC pauses just
 					to clean up the churn. That is when framerate suddenly falls apart.
 				</p>
 				<p className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">What to do instead</p>
-				<ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
+				<ul className="text-sm text-slate-700 dark:text-slate-400 list-disc pl-5 space-y-2">
 					<li>
-						<strong className="text-emerald-300">Object Pooling:</strong> Pre-allocate reusable objects and update their
+						<strong className="text-emerald-700 dark:text-emerald-400">Object Pooling:</strong> Pre-allocate reusable objects and update their
 						properties instead of constantly creating and discarding brand new ones.
 					</li>
 					<li>
-						<strong className="text-emerald-300">Mutating vs Spreading:</strong> In very hot paths, operations like
+						<strong className="text-emerald-700 dark:text-emerald-400">Mutating vs Spreading:</strong> In very hot paths, operations like
 						<code>[...arr, newItem]</code> create brand new arrays every tick. Prefer direct mutation such as
 						<code>arr.push()</code> when the local logic safely allows it.
 					</li>
@@ -122,8 +122,8 @@ export const garbageCollectionTopic: Topic = {
 			</Card>
 
 			<Card title="The Closure Memory Leak">
-				<p className="text-sm text-slate-300 mb-3">
-					<strong className="text-red-400">The Problem:</strong> If a closure keeps a reference to a huge array, that
+				<p className="text-sm text-slate-700 dark:text-slate-400 mb-3">
+					<strong className="text-red-700 dark:text-red-400">The Problem:</strong> If a closure keeps a reference to a huge array, that
 					array stays alive. If an event listener captures that closure and the component unmounts without cleanup, the
 					GC still cannot reclaim the memory.
 				</p>

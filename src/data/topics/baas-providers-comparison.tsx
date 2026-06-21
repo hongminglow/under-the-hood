@@ -30,7 +30,7 @@ export const baasProvidersComparisonTopic: Topic = {
   ],
   icon: "Cloud",
   content: [
-    <p key="1" className="text-slate-300 mb-6">
+    <p key="1" className="text-slate-700 dark:text-slate-400 mb-6">
       Backend-as-a-Service (BaaS) platforms bundle authentication, databases,
       file storage, serverless functions, and realtime subscriptions into a
       single managed product. They let small teams ship production apps without
@@ -41,7 +41,7 @@ export const baasProvidersComparisonTopic: Topic = {
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
       What a BaaS Actually Provides
     </h3>,
-    <p key="3" className="text-slate-300 mb-6">
+    <p key="3" className="text-slate-700 dark:text-slate-400 mb-6">
       A BaaS is not just a hosted database. It is an integrated stack of
       services that replaces what would traditionally be an entire backend team.
       Here is what the major providers bundle:
@@ -87,25 +87,25 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle="Google Cloud · Proprietary"
         theme="amber"
       >
-        <p className="text-xs text-amber-200/70 mb-2">
+        <p className="text-xs text-amber-700 dark:text-amber-300/70 mb-2">
           The original BaaS. Launched in 2012, acquired by Google in 2014.
           Deeply integrated with the Google Cloud ecosystem.
         </p>
-        <ul className="text-xs text-amber-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-amber-700 dark:text-amber-300/70 list-disc pl-4 space-y-1">
           <li>
-            <strong className="text-amber-400">Firestore:</strong> NoSQL
+            <strong className="text-amber-700 dark:text-amber-400">Firestore:</strong> NoSQL
             document database with realtime sync.
           </li>
           <li>
-            <strong className="text-amber-400">Auth:</strong> Mature auth
+            <strong className="text-amber-700 dark:text-amber-400">Auth:</strong> Mature auth
             system with 20+ providers.
           </li>
           <li>
-            <strong className="text-amber-400">Cloud Functions:</strong>{" "}
+            <strong className="text-amber-700 dark:text-amber-400">Cloud Functions:</strong>{" "}
             Node.js/Python serverless functions on Google Cloud.
           </li>
           <li>
-            <strong className="text-amber-400">Hosting:</strong> CDN-backed
+            <strong className="text-amber-700 dark:text-amber-400">Hosting:</strong> CDN-backed
             static hosting with preview channels.
           </li>
         </ul>
@@ -116,25 +116,25 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle="Open-Source · PostgreSQL"
         theme="cyan"
       >
-        <p className="text-xs text-cyan-200/70 mb-2">
+        <p className="text-xs text-cyan-700 dark:text-cyan-300/70 mb-2">
           The "open-source Firebase alternative." Built on PostgreSQL, PostgREST,
           GoTrue, and Realtime — all standard open-source tools.
         </p>
-        <ul className="text-xs text-cyan-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-cyan-700 dark:text-cyan-300/70 list-disc pl-4 space-y-1">
           <li>
-            <strong className="text-cyan-400">PostgreSQL:</strong> Full SQL
+            <strong className="text-cyan-700 dark:text-cyan-400">PostgreSQL:</strong> Full SQL
             database — joins, indexes, constraints, extensions.
           </li>
           <li>
-            <strong className="text-cyan-400">Row-Level Security:</strong>{" "}
+            <strong className="text-cyan-700 dark:text-cyan-400">Row-Level Security:</strong>{" "}
             PostgreSQL RLS policies replace custom API auth logic.
           </li>
           <li>
-            <strong className="text-cyan-400">Edge Functions:</strong> Deno
+            <strong className="text-cyan-700 dark:text-cyan-400">Edge Functions:</strong> Deno
             runtime for serverless logic at the edge.
           </li>
           <li>
-            <strong className="text-cyan-400">Realtime:</strong> WebSocket
+            <strong className="text-cyan-700 dark:text-cyan-400">Realtime:</strong> WebSocket
             subscriptions to Postgres changes via logical replication.
           </li>
         </ul>
@@ -145,25 +145,25 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle="Open-Source · Self-Hostable"
         theme="violet"
       >
-        <p className="text-xs text-violet-200/70 mb-2">
+        <p className="text-xs text-violet-700 dark:text-violet-300/70 mb-2">
           Self-hosted-first BaaS. Runs as Docker containers. Designed for teams
           that want BaaS convenience without cloud vendor dependency.
         </p>
-        <ul className="text-xs text-violet-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-violet-700 dark:text-violet-300/70 list-disc pl-4 space-y-1">
           <li>
-            <strong className="text-violet-400">MariaDB:</strong> Relational
+            <strong className="text-violet-700 dark:text-violet-400">MariaDB:</strong> Relational
             backend with a document-style API layer.
           </li>
           <li>
-            <strong className="text-violet-400">Functions:</strong> Supports
+            <strong className="text-violet-700 dark:text-violet-400">Functions:</strong> Supports
             30+ runtimes (Node, Python, Dart, Rust, etc.).
           </li>
           <li>
-            <strong className="text-violet-400">Self-hosting:</strong> Single{" "}
+            <strong className="text-violet-700 dark:text-violet-400">Self-hosting:</strong> Single{" "}
             <code>docker compose up</code> deployment on any VPS.
           </li>
           <li>
-            <strong className="text-violet-400">Privacy:</strong> Data stays
+            <strong className="text-violet-700 dark:text-violet-400">Privacy:</strong> Data stays
             on your infrastructure — ideal for regulated industries.
           </li>
         </ul>
@@ -173,7 +173,7 @@ export const baasProvidersComparisonTopic: Topic = {
     <h3 key="7" className="text-xl font-bold mt-8 mb-4">
       Architectural Deep Dive: How They Differ Under the Hood
     </h3>,
-    <p key="8" className="text-slate-300 mb-6">
+    <p key="8" className="text-slate-700 dark:text-slate-400 mb-6">
       Despite offering similar feature sets, these platforms are built on
       fundamentally different architectures. These differences determine your
       data model, query capabilities, migration path, and long-term flexibility.
@@ -189,13 +189,13 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle="NoSQL Document Model"
         theme="amber"
       >
-        <p className="text-xs text-amber-200/70 mb-2">
-          Firestore stores data as <strong className="text-amber-400">documents</strong> inside{" "}
-          <strong className="text-amber-400">collections</strong>. Each document is a JSON-like
+        <p className="text-xs text-amber-700 dark:text-amber-300/70 mb-2">
+          Firestore stores data as <strong className="text-amber-700 dark:text-amber-400">documents</strong> inside{" "}
+          <strong className="text-amber-700 dark:text-amber-400">collections</strong>. Each document is a JSON-like
           map of key-value pairs. There are no joins — data is denormalized by
           design.
         </p>
-        <ul className="text-xs text-amber-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-amber-700 dark:text-amber-300/70 list-disc pl-4 space-y-1">
           <li>Queries are fast because every query hits an index.</li>
           <li>
             Complex filtering (inequality on multiple fields) requires composite
@@ -217,13 +217,13 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle="Full Relational SQL"
         theme="cyan"
       >
-        <p className="text-xs text-cyan-200/70 mb-2">
+        <p className="text-xs text-cyan-700 dark:text-cyan-300/70 mb-2">
           Supabase gives you a real{" "}
-          <strong className="text-cyan-400">PostgreSQL</strong> instance. Full SQL, joins,
+          <strong className="text-cyan-700 dark:text-cyan-400">PostgreSQL</strong> instance. Full SQL, joins,
           constraints, transactions, triggers, views, stored procedures — everything
           you'd get from a self-managed Postgres.
         </p>
-        <ul className="text-xs text-cyan-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-cyan-700 dark:text-cyan-300/70 list-disc pl-4 space-y-1">
           <li>
             PostgREST auto-generates a RESTful API from your schema — no API
             code needed.
@@ -253,9 +253,9 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle="Custom DSL on the Server"
         theme="amber"
       >
-        <p className="text-xs text-amber-200/70">
+        <p className="text-xs text-amber-700 dark:text-amber-300/70">
           Firebase uses a{" "}
-          <strong className="text-amber-400">custom rules language</strong> (not
+          <strong className="text-amber-700 dark:text-amber-400">custom rules language</strong> (not
           JavaScript) to define who can read/write which documents. Rules are
           evaluated server-side before any operation executes. They can reference
           the auth token, the existing document, and the incoming write data.
@@ -269,9 +269,9 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle="Standard PostgreSQL Feature"
         theme="cyan"
       >
-        <p className="text-xs text-cyan-200/70">
+        <p className="text-xs text-cyan-700 dark:text-cyan-300/70">
           Supabase uses{" "}
-          <strong className="text-cyan-400">
+          <strong className="text-cyan-700 dark:text-cyan-400">
             PostgreSQL Row-Level Security
           </strong>{" "}
           — a standard database feature. Policies are written in SQL and
@@ -352,7 +352,7 @@ export const baasProvidersComparisonTopic: Topic = {
     <h3 key="15" className="text-xl font-bold mt-8 mb-4">
       BaaS vs Self-Hosted: The Real Tradeoff
     </h3>,
-    <p key="16" className="text-slate-300 mb-6">
+    <p key="16" className="text-slate-700 dark:text-slate-400 mb-6">
       The decision is not "which BaaS" — it's whether to use a BaaS at all.
       The tradeoff is between{" "}
       <strong>development velocity</strong> and{" "}
@@ -365,26 +365,26 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle="Speed over control"
         theme="emerald"
       >
-        <ul className="text-xs text-red-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-emerald-700 dark:text-emerald-300/70 list-disc pl-4 space-y-1">
           <li>
-            <strong className="text-red-400">Ship in hours, not weeks.</strong>{" "}
+            <strong className="text-emerald-700 dark:text-emerald-400">Ship in hours, not weeks.</strong>{" "}
             Auth, database, storage, and realtime are pre-built. Focus on
             product logic instead of infrastructure.
           </li>
           <li>
-            <strong className="text-red-400">Zero DevOps.</strong> No servers to
+            <strong className="text-emerald-700 dark:text-emerald-400">Zero DevOps.</strong> No servers to
             patch, no backups to configure, no SSL certificates to rotate.
           </li>
           <li>
-            <strong className="text-red-400">Built-in scaling.</strong> The
+            <strong className="text-emerald-700 dark:text-emerald-400">Built-in scaling.</strong> The
             provider handles traffic spikes, replication, and failover.
           </li>
           <li>
-            <strong className="text-red-400">Cost at scale.</strong> Per-operation
+            <strong className="text-emerald-700 dark:text-emerald-400">Cost at scale.</strong> Per-operation
             pricing can become expensive with high read/write volumes.
           </li>
           <li>
-            <strong className="text-red-400">Vendor coupling.</strong> Your data
+            <strong className="text-emerald-700 dark:text-emerald-400">Vendor coupling.</strong> Your data
             model, auth system, and business logic become entangled with the
             provider's APIs.
           </li>
@@ -396,28 +396,28 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle="Control over speed"
         theme="sky"
       >
-        <ul className="text-xs text-sky-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-sky-700 dark:text-sky-300/70 list-disc pl-4 space-y-1">
           <li>
-            <strong className="text-sky-400">Total flexibility.</strong> Choose
+            <strong className="text-sky-700 dark:text-sky-400">Total flexibility.</strong> Choose
             any database, any framework, any hosting provider. No artificial
             constraints on your architecture.
           </li>
           <li>
-            <strong className="text-sky-400">Predictable costs.</strong> Fixed
+            <strong className="text-sky-700 dark:text-sky-400">Predictable costs.</strong> Fixed
             VPS/cloud pricing. No surprise bills from read/write spikes.
           </li>
           <li>
-            <strong className="text-sky-400">Data sovereignty.</strong> Full
+            <strong className="text-sky-700 dark:text-sky-400">Data sovereignty.</strong> Full
             control over where data lives — critical for GDPR, HIPAA, or
             government contracts.
           </li>
           <li>
-            <strong className="text-sky-400">Operational burden.</strong> You own
+            <strong className="text-sky-700 dark:text-sky-400">Operational burden.</strong> You own
             uptime, backups, security patches, monitoring, scaling, and
             on-call rotations.
           </li>
           <li>
-            <strong className="text-sky-400">Slower iteration.</strong> Building
+            <strong className="text-sky-700 dark:text-sky-400">Slower iteration.</strong> Building
             auth, file upload, and realtime from scratch takes weeks of
             engineering time.
           </li>
@@ -444,7 +444,7 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle=""
         theme="amber"
       >
-        <ul className="text-xs text-amber-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-amber-700 dark:text-amber-300/70 list-disc pl-4 space-y-1">
           <li>You need rock-solid offline sync for mobile apps.</li>
           <li>Your data model is naturally document-oriented (no complex joins).</li>
           <li>You want deep GCP integration (BigQuery, Cloud Run, Vertex AI).</li>
@@ -458,7 +458,7 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle=""
         theme="cyan"
       >
-        <ul className="text-xs text-cyan-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-cyan-700 dark:text-cyan-300/70 list-disc pl-4 space-y-1">
           <li>Your data is relational and you need SQL (joins, aggregations, constraints).</li>
           <li>You want a portable backend you can migrate away from anytime.</li>
           <li>You need PostgreSQL extensions (pgvector, PostGIS, pg_cron).</li>
@@ -472,7 +472,7 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle=""
         theme="violet"
       >
-        <ul className="text-xs text-violet-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-violet-700 dark:text-violet-300/70 list-disc pl-4 space-y-1">
           <li>Self-hosting is a hard requirement (compliance, data residency).</li>
           <li>You want a single Docker Compose deployment for the full stack.</li>
           <li>Your functions need runtimes beyond Node/Python (Dart, Rust, Go, etc.).</li>
@@ -485,7 +485,7 @@ export const baasProvidersComparisonTopic: Topic = {
         subtitle=""
         theme="sky"
       >
-        <ul className="text-xs text-sky-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-sky-700 dark:text-sky-300/70 list-disc pl-4 space-y-1">
           <li>You need a custom architecture that no BaaS can accommodate.</li>
           <li>Your business logic is complex enough to justify a dedicated backend team.</li>
           <li>You're at scale where BaaS per-operation pricing becomes prohibitive.</li>
@@ -498,14 +498,14 @@ export const baasProvidersComparisonTopic: Topic = {
     <h3 key="21" className="text-xl font-bold mt-8 mb-4">
       How the Client SDK Pattern Works
     </h3>,
-    <p key="22" className="text-slate-300 mb-6">
+    <p key="22" className="text-slate-700 dark:text-slate-400 mb-6">
       The fundamental architectural shift of a BaaS is eliminating the
       traditional backend API layer. Instead of{" "}
-      <code className="text-cyan-300 bg-slate-800 px-1 rounded">
+      <code className="text-cyan-700 dark:text-cyan-400 bg-slate-500/10 dark:bg-slate-800 px-1 rounded">
         Frontend → Your API → Database
       </code>
       , the pattern becomes{" "}
-      <code className="text-cyan-300 bg-slate-800 px-1 rounded">
+      <code className="text-cyan-700 dark:text-cyan-400 bg-slate-500/10 dark:bg-slate-800 px-1 rounded">
         Frontend → BaaS SDK → Managed Database
       </code>
       . Here is how that changes the request lifecycle:

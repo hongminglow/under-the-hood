@@ -116,7 +116,7 @@ export const sdlcMethodologiesTopic: Topic = {
 		</Grid>,
 
 		/* ── SECTION 2: Waterfall ────────────────────────────────────────────── */
-		<h3 key="h3-waterfall" className="text-xl font-bold mt-12 mb-4 text-amber-100">
+		<h3 key="h3-waterfall" className="text-xl font-bold mt-12 mb-4 text-amber-700 dark:text-amber-100">
 			Waterfall — The Phase-Gate Classic
 		</h3>,
 		<p key="waterfall-sub" className="mb-6">
@@ -125,42 +125,42 @@ export const sdlcMethodologiesTopic: Topic = {
 		</p>,
 		<Grid key="waterfall-grid" cols={2} gap={6} className="mb-6">
 			<FeatureCard icon={FileText} title="Waterfall Strengths" subtitle="where phase gates help" theme="amber">
-				<ul className="text-sm text-amber-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-amber-700 dark:text-amber-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-amber-300">Highly predictable cost & timeline.</strong> The entire scope is
+						<strong className="text-amber-700 dark:text-amber-400">Highly predictable cost & timeline.</strong> The entire scope is
 						defined upfront, so budgeting is straightforward.
 					</li>
 					<li>
-						<strong className="text-amber-300">Clear documentation.</strong> Every phase produces formal
+						<strong className="text-amber-700 dark:text-amber-400">Clear documentation.</strong> Every phase produces formal
 						artefacts — specs, design docs, test plans. Critical for regulated industries.
 					</li>
 					<li>
-						<strong className="text-amber-300">Easy to manage.</strong> Sequential stages are simple to track.
+						<strong className="text-amber-700 dark:text-amber-400">Easy to manage.</strong> Sequential stages are simple to track.
 						Non-technical stakeholders understand Gantt charts.
 					</li>
 					<li>
-						<strong className="text-amber-300">Good for fixed-price contracts.</strong> When a client signs a
+						<strong className="text-amber-700 dark:text-amber-400">Good for fixed-price contracts.</strong> When a client signs a
 						contract demanding a specific deliverable, Waterfall's change-resistant structure protects the vendor.
 					</li>
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={FileText} title="Waterfall Failure Modes" subtitle="where phase gates hurt" theme="amber">
-				<ul className="text-sm text-amber-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-amber-700 dark:text-amber-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-amber-300">Catastrophically late feedback.</strong> Users see the product for
+						<strong className="text-amber-700 dark:text-amber-400">Catastrophically late feedback.</strong> Users see the product for
 						the first time <em>after</em> it's built. Discovering "this isn't what we wanted" at deployment costs
 						10–100× more to fix than at requirements.
 					</li>
 					<li>
-						<strong className="text-amber-300">Change is lethal.</strong> A scope change in phase 3 means
+						<strong className="text-amber-700 dark:text-amber-400">Change is lethal.</strong> A scope change in phase 3 means
 						re-doing phases 1 & 2 artefacts. Change orders are expensive and contentious.
 					</li>
 					<li>
-						<strong className="text-amber-300">Testing is too late.</strong> Bugs found during testing (the
+						<strong className="text-amber-700 dark:text-amber-400">Testing is too late.</strong> Bugs found during testing (the
 						penultimate phase) have already had enormous design and implementation work built on top of them.
 					</li>
 					<li>
-						<strong className="text-amber-300">High risk of delivering the wrong thing.</strong> Markets move. A
+						<strong className="text-amber-700 dark:text-amber-400">High risk of delivering the wrong thing.</strong> Markets move. A
 						24-month Waterfall project delivers to a world that has changed.
 					</li>
 				</ul>
@@ -181,7 +181,7 @@ export const sdlcMethodologiesTopic: Topic = {
 		</FeatureCard>,
 
 		/* ── SECTION 3: Agile ───────────────────────────────────────────────── */
-		<h3 key="h3-agile" className="text-xl font-bold mt-12 mb-4 text-sky-100">
+		<h3 key="h3-agile" className="text-xl font-bold mt-12 mb-4 text-sky-700 dark:text-sky-100">
 			Agile — The Philosophy, Not the Framework
 		</h3>,
 		<p key="agile-sub" className="mb-4">
@@ -192,37 +192,37 @@ export const sdlcMethodologiesTopic: Topic = {
 		</p>,
 		<Grid key="agile-values-grid" cols={2} gap={6} className="mb-8">
 			<FeatureCard icon={GitBranch} title="The 4 Agile Values" subtitle="the philosophy layer" theme="sky">
-				<ul className="text-sm text-sky-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-sky-700 dark:text-sky-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-sky-300">Individuals & interactions</strong> over processes & tools
+						<strong className="text-sky-700 dark:text-sky-400">Individuals & interactions</strong> over processes & tools
 					</li>
 					<li>
-						<strong className="text-sky-300">Working software</strong> over comprehensive documentation
+						<strong className="text-sky-700 dark:text-sky-400">Working software</strong> over comprehensive documentation
 					</li>
 					<li>
-						<strong className="text-sky-300">Customer collaboration</strong> over contract negotiation
+						<strong className="text-sky-700 dark:text-sky-400">Customer collaboration</strong> over contract negotiation
 					</li>
 					<li>
-						<strong className="text-sky-300">Responding to change</strong> over following a plan
+						<strong className="text-sky-700 dark:text-sky-400">Responding to change</strong> over following a plan
 					</li>
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={GitBranch} title="Agile in Practice" subtitle="feedback before certainty" theme="sky">
-				<ul className="text-sm text-sky-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-sky-700 dark:text-sky-100/75 space-y-2 list-disc pl-4">
 					<li>
-						Deliver working software <strong className="text-sky-300">frequently</strong> (weeks, not months) so you get real feedback while
+						Deliver working software <strong className="text-sky-700 dark:text-sky-400">frequently</strong> (weeks, not months) so you get real feedback while
 						change is still cheap.
 					</li>
 					<li>
-						Embrace late requirements changes — even near the end — as a <strong className="text-sky-300">competitive advantage</strong>, not a
+						Embrace late requirements changes — even near the end — as a <strong className="text-sky-700 dark:text-sky-400">competitive advantage</strong>, not a
 						failure.
 					</li>
 					<li>
-						Build projects around <strong className="text-sky-300">motivated individuals</strong>. Trust the team. Stop excessive oversight and
+						Build projects around <strong className="text-sky-700 dark:text-sky-400">motivated individuals</strong>. Trust the team. Stop excessive oversight and
 						reporting.
 					</li>
 					<li>
-						At regular intervals, the team <strong className="text-sky-300">reflects</strong> on how to become more effective and adjusts its
+						At regular intervals, the team <strong className="text-sky-700 dark:text-sky-400">reflects</strong> on how to become more effective and adjusts its
 						behaviour.
 					</li>
 				</ul>
@@ -230,7 +230,7 @@ export const sdlcMethodologiesTopic: Topic = {
 		</Grid>,
 
 		/* ── SECTION 4: Scrum ───────────────────────────────────────────────── */
-		<h3 key="h3-scrum" className="text-xl font-bold mt-12 mb-4 text-cyan-100">
+		<h3 key="h3-scrum" className="text-xl font-bold mt-12 mb-4 text-cyan-700 dark:text-cyan-100">
 			Scrum — Time-Boxed Sprints & Ceremonies
 		</h3>,
 		<p key="scrum-sub" className="mb-6">
@@ -239,37 +239,37 @@ export const sdlcMethodologiesTopic: Topic = {
 		</p>,
 		<Grid key="scrum-grid" cols={2} gap={6} className="mb-6">
 			<FeatureCard icon={Repeat2} title="Scrum Roles" subtitle="ownership boundaries" theme="cyan">
-				<ul className="text-sm text-cyan-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-cyan-700 dark:text-cyan-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-cyan-300">Product Owner (PO):</strong> Owns the Product Backlog. Prioritizes
+						<strong className="text-cyan-700 dark:text-cyan-400">Product Owner (PO):</strong> Owns the Product Backlog. Prioritizes
 						features by business value. The single voice of the customer/stakeholder to the team.
 					</li>
 					<li>
-						<strong className="text-cyan-300">Scrum Master:</strong> A servant-leader. Facilitates ceremonies,
+						<strong className="text-cyan-700 dark:text-cyan-400">Scrum Master:</strong> A servant-leader. Facilitates ceremonies,
 						removes blockers, coaches the team on Scrum theory. NOT a project manager.
 					</li>
 					<li>
-						<strong className="text-cyan-300">Development Team:</strong> Self-organizing, cross-functional
+						<strong className="text-cyan-700 dark:text-cyan-400">Development Team:</strong> Self-organizing, cross-functional
 						(design, dev, QA). Collectively responsible for sprint delivery. Ideally 3–9 people.
 					</li>
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Repeat2} title="Scrum Ceremonies" subtitle="the sprint operating system" theme="cyan">
-				<ul className="text-sm text-cyan-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-cyan-700 dark:text-cyan-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-cyan-300">Sprint Planning:</strong> Team selects items from the backlog and
+						<strong className="text-cyan-700 dark:text-cyan-400">Sprint Planning:</strong> Team selects items from the backlog and
 						commits to what they will deliver this sprint.
 					</li>
 					<li>
-						<strong className="text-cyan-300">Daily Standup (15 min max):</strong> What did I do yesterday? What
+						<strong className="text-cyan-700 dark:text-cyan-400">Daily Standup (15 min max):</strong> What did I do yesterday? What
 						am I doing today? Any blockers?
 					</li>
 					<li>
-						<strong className="text-cyan-300">Sprint Review:</strong> Demo the working software to stakeholders.
+						<strong className="text-cyan-700 dark:text-cyan-400">Sprint Review:</strong> Demo the working software to stakeholders.
 						Collect feedback. Update the backlog.
 					</li>
 					<li>
-						<strong className="text-cyan-300">Sprint Retrospective:</strong> What went well? What should we
+						<strong className="text-cyan-700 dark:text-cyan-400">Sprint Retrospective:</strong> What went well? What should we
 						improve? How do we change our process?
 					</li>
 				</ul>
@@ -277,17 +277,17 @@ export const sdlcMethodologiesTopic: Topic = {
 		</Grid>,
 		<Grid key="scrum-pros-cons" cols={2} gap={6} className="mb-8">
 			<FeatureCard icon={Repeat2} title="Scrum Strengths" subtitle="rhythm and feedback" theme="cyan">
-				<ul className="text-sm text-cyan-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-cyan-700 dark:text-cyan-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-cyan-300">Regular delivery creates a rhythm and momentum.</strong> The
+						<strong className="text-cyan-700 dark:text-cyan-400">Regular delivery creates a rhythm and momentum.</strong> The
 						entire company can plan around it.
 					</li>
 					<li>
-						<strong className="text-cyan-300">Velocity metrics create a data-driven forecast.</strong> Story
+						<strong className="text-cyan-700 dark:text-cyan-400">Velocity metrics create a data-driven forecast.</strong> Story
 						points per sprint give a rough view of future delivery pace.
 					</li>
 					<li>
-						<strong className="text-cyan-300">Sprint Reviews create a stakeholder feedback loop.</strong> The
+						<strong className="text-cyan-700 dark:text-cyan-400">Sprint Reviews create a stakeholder feedback loop.</strong> The
 						team gets structured input every 2–4 weeks.
 					</li>
 					<li>
@@ -297,21 +297,21 @@ export const sdlcMethodologiesTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Repeat2} title="Scrum Failure Modes" subtitle="when ceremony outruns value" theme="cyan">
-				<ul className="text-sm text-cyan-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-cyan-700 dark:text-cyan-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-cyan-300">Ceremony overhead.</strong> Small teams burn non-trivial time in
+						<strong className="text-cyan-700 dark:text-cyan-400">Ceremony overhead.</strong> Small teams burn non-trivial time in
 						standups, planning, reviews, and retros. At 2-week sprints, that's 6–8 hours of meetings per cycle.
 					</li>
 					<li>
-						<strong className="text-cyan-300">The "Sprint" becomes a hard ceiling.</strong> A story that doesn't
+						<strong className="text-cyan-700 dark:text-cyan-400">The "Sprint" becomes a hard ceiling.</strong> A story that doesn't
 						fit in the sprint gets split artificially or deferred, sometimes creating technical debt.
 					</li>
 					<li>
-						<strong className="text-cyan-300">Story points are often cargo-culted.</strong> Teams argue about
+						<strong className="text-cyan-700 dark:text-cyan-400">Story points are often cargo-culted.</strong> Teams argue about
 						estimates more than they build. The numbers frequently don't correlate to real time.
 					</li>
 					<li>
-						<strong className="text-cyan-300">Doesn't suit pure operational/support work.</strong> It clashes
+						<strong className="text-cyan-700 dark:text-cyan-400">Doesn't suit pure operational/support work.</strong> It clashes
 						with unpredictable interrupt-driven tasks. (Kanban is better there.)
 					</li>
 				</ul>
@@ -319,7 +319,7 @@ export const sdlcMethodologiesTopic: Topic = {
 		</Grid>,
 
 		/* ── SECTION 5: Kanban ───────────────────────────────────────────────── */
-		<h3 key="h3-kanban" className="text-xl font-bold mt-12 mb-4 text-teal-100">
+		<h3 key="h3-kanban" className="text-xl font-bold mt-12 mb-4 text-teal-700 dark:text-teal-100">
 			Kanban — Flow Over Time-Boxes
 		</h3>,
 		<p key="kanban-sub" className="mb-6">
@@ -329,41 +329,41 @@ export const sdlcMethodologiesTopic: Topic = {
 		</p>,
 		<Grid key="kanban-principles-grid" cols={2} gap={6} className="mb-6">
 			<FeatureCard icon={Rows3} title="The 4 Core Kanban Principles" subtitle="flow control" theme="teal">
-				<ul className="text-sm text-teal-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-teal-700 dark:text-teal-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-teal-300">Visualise the Workflow:</strong> Every task on a board. Every
+						<strong className="text-teal-700 dark:text-teal-400">Visualise the Workflow:</strong> Every task on a board. Every
 						column is a stage (Backlog → In Progress → Review → Done).
 					</li>
 					<li>
-						<strong className="text-teal-300">Limit WIP:</strong> Each column has a maximum capacity (e.g. "In
+						<strong className="text-teal-700 dark:text-teal-400">Limit WIP:</strong> Each column has a maximum capacity (e.g. "In
 						Progress: max 3"). When a column is full, the team pulls from earlier instead of starting new work.
 					</li>
 					<li>
-						<strong className="text-teal-300">Manage Flow:</strong> Track cycle time (time from start to done).
+						<strong className="text-teal-700 dark:text-teal-400">Manage Flow:</strong> Track cycle time (time from start to done).
 						Focus on making individual items flow through quickly, not on keeping everyone busy.
 					</li>
 					<li>
-						<strong className="text-teal-300">Improve Collaboratively:</strong> Use metrics (lead time,
+						<strong className="text-teal-700 dark:text-teal-400">Improve Collaboratively:</strong> Use metrics (lead time,
 						throughput) to drive process improvements. No prescribed cadence.
 					</li>
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Rows3} title="Kanban vs Scrum" subtitle="continuous pull versus sprint batch" theme="teal">
-				<ul className="text-sm text-teal-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-teal-700 dark:text-teal-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-teal-300">No sprints.</strong> Work is delivered continuously, item by item,
+						<strong className="text-teal-700 dark:text-teal-400">No sprints.</strong> Work is delivered continuously, item by item,
 						not in batched sprint increments.
 					</li>
 					<li>
-						<strong className="text-teal-300">No story points.</strong> Cycle time (how long does an item take?)
+						<strong className="text-teal-700 dark:text-teal-400">No story points.</strong> Cycle time (how long does an item take?)
 						replaces velocity as the planning metric.
 					</li>
 					<li>
-						<strong className="text-teal-300">No prescribed roles.</strong> No Scrum Master or Product Owner
+						<strong className="text-teal-700 dark:text-teal-400">No prescribed roles.</strong> No Scrum Master or Product Owner
 						requirement. Works with existing team structure.
 					</li>
 					<li>
-						<strong className="text-teal-300">Change is welcome anytime.</strong> Since there's no sprint
+						<strong className="text-teal-700 dark:text-teal-400">Change is welcome anytime.</strong> Since there's no sprint
 						commitment to protect, priorities can shift day-to-day without "breaking" a sprint.
 					</li>
 				</ul>
@@ -384,7 +384,7 @@ export const sdlcMethodologiesTopic: Topic = {
 		</FeatureCard>,
 
 		/* ── SECTION 6: XP ───────────────────────────────────────────────────── */
-		<h3 key="h3-xp" className="text-xl font-bold mt-12 mb-4 text-emerald-100">
+		<h3 key="h3-xp" className="text-xl font-bold mt-12 mb-4 text-emerald-700 dark:text-emerald-100">
 			Extreme Programming (XP) — Engineering Discipline First
 		</h3>,
 		<p key="xp-sub" className="mb-6">
@@ -393,46 +393,46 @@ export const sdlcMethodologiesTopic: Topic = {
 		</p>,
 		<Grid key="xp-grid" cols={2} gap={6} className="mb-6">
 			<FeatureCard icon={FileCode2} title="Core XP Practices" subtitle="quality as daily discipline" theme="emerald">
-				<ul className="text-sm text-emerald-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-emerald-700 dark:text-emerald-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-emerald-300">Test-Driven Development (TDD):</strong> Write the failing test
+						<strong className="text-emerald-700 dark:text-emerald-400">Test-Driven Development (TDD):</strong> Write the failing test
 						first. Write the minimal code to make it pass. Refactor. No production code without a test.
 					</li>
 					<li>
-						<strong className="text-emerald-300">Pair Programming:</strong> Two developers, one keyboard. One types
+						<strong className="text-emerald-700 dark:text-emerald-400">Pair Programming:</strong> Two developers, one keyboard. One types
 						(driver), one reviews and thinks ahead (navigator). Rotate frequently.
 					</li>
 					<li>
-						<strong className="text-emerald-300">Continuous Integration:</strong> Merge and build code multiple
+						<strong className="text-emerald-700 dark:text-emerald-400">Continuous Integration:</strong> Merge and build code multiple
 						times per day. Never let branches diverge for more than a few hours.
 					</li>
 					<li>
-						<strong className="text-emerald-300">Refactoring:</strong> Continuously improve design without changing
+						<strong className="text-emerald-700 dark:text-emerald-400">Refactoring:</strong> Continuously improve design without changing
 						external behaviour. The test suite makes this safe.
 					</li>
 					<li>
-						<strong className="text-emerald-300">Simple Design:</strong> Build the simplest thing that works.
+						<strong className="text-emerald-700 dark:text-emerald-400">Simple Design:</strong> Build the simplest thing that works.
 						Resist speculative over-engineering. YAGNI (You Aren't Gonna Need It).
 					</li>
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={FileCode2} title="XP Trade-Offs" subtitle="discipline is not free" theme="emerald">
-				<ul className="text-sm text-emerald-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-emerald-700 dark:text-emerald-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-emerald-300">Higher upfront investment:</strong> Pair programming effectively
+						<strong className="text-emerald-700 dark:text-emerald-400">Higher upfront investment:</strong> Pair programming effectively
 						doubles engineer hours per story. But it halves defect rates and knowledge silos.
 					</li>
 					<li>
-						<strong className="text-emerald-300">TDD discipline is hard to maintain:</strong> Under deadline
+						<strong className="text-emerald-700 dark:text-emerald-400">TDD discipline is hard to maintain:</strong> Under deadline
 						pressure, teams skip tests. Without them, XP collapses into cowboy coding.
 					</li>
 					<li>
-						<strong className="text-emerald-300">Not prescriptive about management process:</strong> XP tells you{" "}
+						<strong className="text-emerald-700 dark:text-emerald-400">Not prescriptive about management process:</strong> XP tells you{" "}
 						<em>how</em> to write code, not how to plan sprints or interface with stakeholders. Often combined with
 						Scrum.
 					</li>
 					<li>
-						<strong className="text-emerald-300">The safety net it creates is massive:</strong> A codebase built
+						<strong className="text-emerald-700 dark:text-emerald-400">The safety net it creates is massive:</strong> A codebase built
 						with TDD + CI can be refactored aggressively. Velocity typically <em>increases</em> over time rather than
 						decaying.
 					</li>
@@ -441,7 +441,7 @@ export const sdlcMethodologiesTopic: Topic = {
 		</Grid>,
 
 		/* ── SECTION 7: SAFe ─────────────────────────────────────────────────── */
-		<h3 key="h3-safe" className="text-xl font-bold mt-12 mb-4 text-violet-100">
+		<h3 key="h3-safe" className="text-xl font-bold mt-12 mb-4 text-violet-700 dark:text-violet-100">
 			SAFe — Scaling Agile Across the Enterprise
 		</h3>,
 		<p key="safe-sub" className="mb-4">
@@ -452,37 +452,37 @@ export const sdlcMethodologiesTopic: Topic = {
 		</p>,
 		<Grid key="safe-grid" cols={2} gap={6} className="mb-8">
 			<FeatureCard icon={Building2} title="Who SAFe Is For" subtitle="coordination at enterprise scale" theme="violet">
-				<ul className="text-sm text-violet-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-violet-700 dark:text-violet-100/75 space-y-2 list-disc pl-4">
 					<li>
 						Large enterprises where multiple Scrum teams share infrastructure, APIs, or databases and need to{" "}
-						<strong className="text-violet-300">coordinate releases</strong>.
+						<strong className="text-violet-700 dark:text-violet-400">coordinate releases</strong>.
 					</li>
 					<li>
 						Organisations transitioning from Waterfall at scale — SAFe provides familiar planning horizons (Quarterly PI
 						plans ≈ Waterfall quarters) while introducing iteration.
 					</li>
 					<li>
-						Environments with significant <strong className="text-violet-300">regulatory reporting</strong> requirements — SAFe provides Lean
+						Environments with significant <strong className="text-violet-700 dark:text-violet-400">regulatory reporting</strong> requirements — SAFe provides Lean
 						Portfolio Management to satisfy governance.
 					</li>
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Building2} title="SAFe Criticisms" subtitle="coordination can become bureaucracy" theme="violet">
-				<ul className="text-sm text-violet-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-violet-700 dark:text-violet-100/75 space-y-2 list-disc pl-4">
 					<li>
-						<strong className="text-violet-300">"Wagile":</strong> SAFe critics argue it re-introduces Waterfall
+						<strong className="text-violet-700 dark:text-violet-400">"Wagile":</strong> SAFe critics argue it re-introduces Waterfall
 						at the programme level (quarterly PI plans are essentially mini-Waterfalls) while calling it Agile.
 					</li>
 					<li>
-						<strong className="text-violet-300">Certification-heavy & expensive:</strong> The SAFe consulting
+						<strong className="text-violet-700 dark:text-violet-400">Certification-heavy & expensive:</strong> The SAFe consulting
 						industry and certification ecosystem is a significant budget overhead.
 					</li>
 					<li>
-						<strong className="text-violet-300">Bureaucracy creep:</strong> The number of roles, artefacts, and
+						<strong className="text-violet-700 dark:text-violet-400">Bureaucracy creep:</strong> The number of roles, artefacts, and
 						meetings SAFe prescribes can overwhelm small-to-medium teams.
 					</li>
 					<li>
-						<strong className="text-violet-300">Team autonomy suffers:</strong> Top-down PI planning reduces
+						<strong className="text-violet-700 dark:text-violet-400">Team autonomy suffers:</strong> Top-down PI planning reduces
 						individual team's ability to self-organize around emerging priorities.
 					</li>
 				</ul>
@@ -497,11 +497,11 @@ export const sdlcMethodologiesTopic: Topic = {
 			key="compare-table"
 			headers={[
 				"Dimension",
-				"<span class='text-amber-300'>Waterfall</span>",
-				"<span class='text-cyan-300'>Scrum</span>",
-				"<span class='text-teal-300'>Kanban</span>",
-				"<span class='text-emerald-300'>XP</span>",
-				"<span class='text-violet-300'>SAFe</span>",
+				"<span class='text-amber-700 dark:text-amber-400'>Waterfall</span>",
+				"<span class='text-cyan-700 dark:text-cyan-400'>Scrum</span>",
+				"<span class='text-teal-700 dark:text-teal-400'>Kanban</span>",
+				"<span class='text-emerald-700 dark:text-emerald-400'>XP</span>",
+				"<span class='text-violet-700 dark:text-violet-400'>SAFe</span>",
 			]}
 			rows={[
 				[
@@ -565,9 +565,9 @@ export const sdlcMethodologiesTopic: Topic = {
 			key="impact-grid"
 			headers={[
 				"Dimension",
-				"<span class='text-amber-300'>Waterfall</span>",
-				"<span class='text-cyan-300'>Scrum</span> / <span class='text-teal-300'>Kanban</span> / <span class='text-emerald-300'>XP</span>",
-				"<span class='text-violet-300'>SAFe</span>",
+				"<span class='text-amber-700 dark:text-amber-400'>Waterfall</span>",
+				"<span class='text-cyan-700 dark:text-cyan-400'>Scrum</span> / <span class='text-teal-700 dark:text-teal-400'>Kanban</span> / <span class='text-emerald-700 dark:text-emerald-400'>XP</span>",
+				"<span class='text-violet-700 dark:text-violet-400'>SAFe</span>",
 			]}
 			rows={[
 				[

@@ -44,25 +44,25 @@ export const stateManagementTopic: Topic = {
 			headers={["Architecture", "How it Works", "Performance Risk", "Best Used For"]}
 			rows={[
 				[
-					"<span class='text-amber-300 font-black'>React Context</span>",
+					"<span class='text-amber-700 dark:text-amber-400 font-black'>React Context</span>",
 					"Built-in API that injects a value directly down the tree.",
 					"High. Any state change forcefully re-renders ALL consuming components.",
 					"Static configurations, Theme (Dark/Light), User Auth Session.",
 				],
 				[
-					"<span class='text-violet-300 font-black'>Redux (Toolkit)</span>",
+					"<span class='text-violet-700 dark:text-violet-400 font-black'>Redux (Toolkit)</span>",
 					"A strict, single immutable store updated via dispatched Actions.",
 					"Medium. Requires explicit useSelector hooks to avoid over-rendering.",
 					"Massive enterprise apps needing strict state history / time-travel debugging.",
 				],
 				[
-					"<span class='text-emerald-300 font-black'>Zustand</span>",
+					"<span class='text-emerald-700 dark:text-emerald-400 font-black'>Zustand</span>",
 					"A lightweight, flexible hook-based external store.",
 					"Low. Built-in atomic selectors ensure components only render when their exact slice changes.",
 					"Most modern startups, dashboards, and complex UI states.",
 				],
 				[
-					"<span class='text-sky-300 font-black'>React Query (TanStack)</span>",
+					"<span class='text-sky-700 dark:text-sky-400 font-black'>React Query (TanStack)</span>",
 					"A specialized caching layer exclusively for Server Data.",
 					"Low. Automatically batches updates and handles background fetching.",
 					"HTTP API caching, pagination, caching database queries.",
@@ -76,11 +76,11 @@ export const stateManagementTopic: Topic = {
 
 		<Grid key="6" cols={2} gap={6} className="mb-8">
 			<FeatureCard icon={Network} title="React Context" subtitle="the render trap" theme="amber">
-				<p className="text-sm text-amber-100/75 mb-4">
-					<strong className="text-amber-300">The problem:</strong> Context lacks "selector" capabilities. If <code>user</code> updates, components
+				<p className="text-sm text-amber-700 dark:text-amber-100/75 mb-4">
+					<strong className="text-amber-700 dark:text-amber-400">The problem:</strong> Context lacks "selector" capabilities. If <code>user</code> updates, components
 					only needing <code>theme</code> will wrongly re-render because they share the same provider.
 				</p>
-				<p className="text-sm font-semibold mb-2 text-amber-300">Architectural Reality:</p>
+				<p className="text-sm font-semibold mb-2 text-amber-700 dark:text-amber-400">Architectural Reality:</p>
 				<CodeBlock
 					theme="amber"
 					title="ContextApp.jsx"
@@ -100,11 +100,11 @@ function App() {
 			</FeatureCard>
 
 			<FeatureCard icon={Database} title="Zustand" subtitle="atomic reactivity" theme="emerald">
-				<p className="text-sm text-emerald-100/75 mb-4">
-					<strong className="text-emerald-300">The solution:</strong> Zustand lives <em>outside</em> the React tree. Use a selector (
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75 mb-4">
+					<strong className="text-emerald-700 dark:text-emerald-400">The solution:</strong> Zustand lives <em>outside</em> the React tree. Use a selector (
 					<code>state.theme</code>) so the component physically ignores any updates to other unrelated state changes.
 				</p>
-				<p className="text-sm font-semibold mb-2 text-emerald-300">Architectural Solution:</p>
+				<p className="text-sm font-semibold mb-2 text-emerald-700 dark:text-emerald-400">Architectural Solution:</p>
 				<CodeBlock
 					theme="emerald"
 					title="ZustandApp.jsx"
@@ -131,22 +131,22 @@ function Header() {
 
 		<Grid key="8" cols={2} gap={6} className="mb-8">
 			<FeatureCard icon={Server} title="Server State" subtitle="remote, cached, eventually stale" theme="sky">
-				<p className="text-sm text-sky-100/80 mb-3">
+				<p className="text-sm text-sky-700 dark:text-sky-100/80 mb-3">
 					Raw API data such as users, posts, permissions, invoices, and paginated results should live in{" "}
-					<strong className="text-sky-300">React Query / TanStack Query</strong>, not Redux or Zustand.
+					<strong className="text-sky-700 dark:text-sky-400">React Query / TanStack Query</strong>, not Redux or Zustand.
 				</p>
-				<p className="text-sm text-sky-100/70">
+				<p className="text-sm text-sky-700 dark:text-sky-100/70">
 					The source of truth is the server, so the client needs caching, loading states, retries, invalidation,
 					background refetching, and stale-data control.
 				</p>
 			</FeatureCard>
 
 			<FeatureCard icon={Monitor} title="Client State" subtitle="local UI intent and workflow memory" theme="emerald">
-				<p className="text-sm text-emerald-100/80 mb-3">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/80 mb-3">
 					UI-only state such as sidebar open/closed, dark mode, selected tabs, modal visibility, and multi-step form
-					progress belongs in <strong className="text-emerald-300">Zustand, Context, or local React state</strong>.
+					progress belongs in <strong className="text-emerald-700 dark:text-emerald-400">Zustand, Context, or local React state</strong>.
 				</p>
-				<p className="text-sm text-emerald-100/70">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/70">
 					The source of truth is the browser session, so the store should stay small, fast, and focused on interface
 					behavior instead of duplicating backend data.
 				</p>

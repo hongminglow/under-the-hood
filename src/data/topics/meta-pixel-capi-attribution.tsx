@@ -27,25 +27,25 @@ export const metaPixelCapiAttributionTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="mb-8 items-stretch">
       <FeatureCard icon={History} title="Then" subtitle="pixel-first, browser-heavy era" theme="amber">
-        <p className="text-sm text-amber-100/80 leading-relaxed mb-3">
-          The older stack leaned heavily on the <strong className="text-amber-300">browser pixel</strong>,
+        <p className="text-sm text-amber-700 dark:text-amber-100/80 leading-relaxed mb-3">
+          The older stack leaned heavily on the <strong className="text-amber-700 dark:text-amber-400">browser pixel</strong>,
           cookies, and mobile ad IDs. A user viewed a product, added it to cart, or purchased, and
           the browser fired the event directly. Measurement was more deterministic when the browser
           cooperated, but the whole setup was fragile.
         </p>
-        <p className="text-sm text-amber-100/70">
+        <p className="text-sm text-amber-700 dark:text-amber-100/70">
           If the browser blocked scripts, dropped cookies, or the app ecosystem removed device-level
           identifiers, the signal simply disappeared.
         </p>
       </FeatureCard>
       <FeatureCard icon={Waypoints} title="Now" subtitle="hybrid, privacy-constrained measurement" theme="cyan">
-        <p className="text-sm text-cyan-100/80 leading-relaxed mb-3">
-          The modern stack is <strong className="text-cyan-300">hybrid</strong>: pixel in the
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/80 leading-relaxed mb-3">
+          The modern stack is <strong className="text-cyan-700 dark:text-cyan-400">hybrid</strong>: pixel in the
           browser, Conversions API from the server, app events, offline conversions, and messaging
           events. The goal is not just "track the click," but to rebuild enough clean signal for
           attribution, optimization, and audience modeling.
         </p>
-        <p className="text-sm text-cyan-100/70">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/70">
           It is more resilient than pixel-only tracking, but also more privacy-constrained, more
           first-party dependent, and more reliant on matching quality and modeling.
         </p>
@@ -54,7 +54,7 @@ export const metaPixelCapiAttributionTopic: Topic = {
 
     <Table
       key="4"
-      headers={["Dimension", "<span class='text-amber-200/85'>Then</span>", "<span class='text-cyan-200/85'>Now</span>"]}
+      headers={["Dimension", "<span class='text-amber-700 dark:text-amber-300/85'>Then</span>", "<span class='text-cyan-700 dark:text-cyan-300/85'>Now</span>"]}
       rows={[
         [
           "Main collection path",
@@ -89,50 +89,50 @@ export const metaPixelCapiAttributionTopic: Topic = {
     </h3>,
     <Grid key="6" cols={2} gap={6} className="mb-10 items-stretch">
       <FeatureCard icon={MousePointerClick} title="Meta Pixel" subtitle="browser-side event capture" theme="amber">
-        <p className="text-sm text-amber-100/80 leading-relaxed mb-3">
+        <p className="text-sm text-amber-700 dark:text-amber-100/80 leading-relaxed mb-3">
           The pixel sits on a website and fires events such as <code>PageView</code>,{" "}
           <code>ViewContent</code>, <code>Search</code>, <code>AddToCart</code>, and{" "}
           <code>Purchase</code>. It is excellent for capturing immediate page behavior and user-path
           context directly in the browser.
         </p>
-        <p className="text-sm text-amber-100/70">
+        <p className="text-sm text-amber-700 dark:text-amber-100/70">
           Weakness: browser-side collection is exposed to script failures, ad blockers, consent
           banners, and privacy restrictions.
         </p>
       </FeatureCard>
 
       <FeatureCard icon={Server} title="Conversions API" subtitle="server-side event delivery" theme="cyan">
-        <p className="text-sm text-cyan-100/80 leading-relaxed mb-3">
-          CAPI sends events from your <strong className="text-cyan-300">server, CRM, app backend,
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/80 leading-relaxed mb-3">
+          CAPI sends events from your <strong className="text-cyan-700 dark:text-cyan-400">server, CRM, app backend,
           or store system</strong> directly to Meta. That includes website events, app events,
           offline sales, customer scores, messaging outcomes, and post-purchase actions.
         </p>
-        <p className="text-sm text-cyan-100/70">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/70">
           It exists to improve reliability, event matching, measurement, and optimization when the
           browser alone is no longer enough.
         </p>
       </FeatureCard>
 
       <FeatureCard icon={Fingerprint} title="Identity Matching" subtitle="turn events into attributable people" theme="violet">
-        <p className="text-sm text-violet-100/80 leading-relaxed mb-3">
+        <p className="text-sm text-violet-700 dark:text-violet-100/80 leading-relaxed mb-3">
           An event is only useful if Meta can connect it to an account or user journey with enough
           confidence. Matching is strengthened by better first-party data quality, better event
           metadata, and consistent business instrumentation across the funnel.
         </p>
-        <p className="text-sm text-violet-100/70">
-          This is why marketers obsess over <strong className="text-violet-300">event match quality</strong>:
+        <p className="text-sm text-violet-700 dark:text-violet-100/70">
+          This is why marketers obsess over <strong className="text-violet-700 dark:text-violet-400">event match quality</strong>:
           weak matching means weaker attribution and weaker optimization.
         </p>
       </FeatureCard>
 
       <FeatureCard icon={Target} title="Ad Delivery & Attribution" subtitle="what the system does with the signal" theme="orange">
-        <p className="text-sm text-orange-100/80 leading-relaxed mb-3">
+        <p className="text-sm text-orange-700 dark:text-orange-100/80 leading-relaxed mb-3">
           Once events are matched and accepted, they feed two jobs:{" "}
-          <strong className="text-orange-300">measurement</strong> (which campaign likely influenced
-          this outcome?) and <strong className="text-orange-300">optimization</strong> (what kind of
+          <strong className="text-orange-700 dark:text-orange-400">measurement</strong> (which campaign likely influenced
+          this outcome?) and <strong className="text-orange-700 dark:text-orange-400">optimization</strong> (what kind of
           people should see more of this ad?).
         </p>
-        <p className="text-sm text-orange-100/70">
+        <p className="text-sm text-orange-700 dark:text-orange-100/70">
           This is the layer that makes ads feel personalized: the system is not only counting
           conversions, it is using them as future ranking feedback.
         </p>
@@ -147,32 +147,32 @@ export const metaPixelCapiAttributionTopic: Topic = {
       headers={["Source", "Examples of Events", "Why Meta Cares"]}
       rows={[
         [
-          "<span class='text-slate-200 font-semibold'>Website Pixel</span>",
+          "<span class='text-slate-700 dark:text-slate-300 font-semibold'>Website Pixel</span>",
           "Page view, content view, search, add to cart, checkout start, purchase",
           "High-intent web behavior helps retargeting, attribution, and purchase optimization.",
         ],
         [
-          "<span class='text-slate-200 font-semibold'>Server / CAPI</span>",
+          "<span class='text-slate-700 dark:text-slate-300 font-semibold'>Server / CAPI</span>",
           "Server-confirmed purchase, lead qualification, subscription activation, customer value score",
           "Richer and more durable signal, especially for later-funnel and post-purchase actions.",
         ],
         [
-          "<span class='text-slate-200 font-semibold'>App Events</span>",
+          "<span class='text-slate-700 dark:text-slate-300 font-semibold'>App Events</span>",
           "App open, registration, tutorial completion, in-app purchase, retention milestones",
           "Tells Meta which ads drive actual mobile app outcomes, not just installs.",
         ],
         [
-          "<span class='text-slate-200 font-semibold'>Offline / CRM</span>",
+          "<span class='text-slate-700 dark:text-slate-300 font-semibold'>Offline / CRM</span>",
           "In-store purchase, phone sale, qualified lead, closed deal",
           "Lets Meta optimize toward business value that happens after the click, outside the browser.",
         ],
         [
-          "<span class='text-slate-200 font-semibold'>Messaging</span>",
+          "<span class='text-slate-700 dark:text-slate-300 font-semibold'>Messaging</span>",
           "Business chat started, purchase through Messenger/Instagram/WhatsApp",
           "Extends optimization into conversational commerce and support flows.",
         ],
         [
-          "<span class='text-slate-200 font-semibold'>Meta First-Party Behavior</span>",
+          "<span class='text-slate-700 dark:text-slate-300 font-semibold'>Meta First-Party Behavior</span>",
           "What people watch, like, click, save, follow, or engage with on Meta's own apps",
           "This is Meta's native behavioral graph and remains important even without any external pixel.",
         ],
@@ -257,7 +257,7 @@ export const metaPixelCapiAttributionTopic: Topic = {
     </Callout>,
 
     <Callout key="14" type="info" title="What Changed After ATT and Browser Privacy Tightening">
-      Since <strong className="text-sky-300">April 26, 2021</strong>, iOS apps have needed ATT
+      Since <strong className="text-sky-700 dark:text-sky-400">April 26, 2021</strong>, iOS apps have needed ATT
       permission to track users or access the advertising identifier. That pushed the ecosystem away
       from assuming rich device-level tracking was always available. The modern Meta stack is
       therefore more hybrid, more consent-aware, and more dependent on clean first-party events than

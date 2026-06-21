@@ -35,7 +35,7 @@ export const corsTopic: Topic = {
 			Without CORS, the web would be a security nightmare. Imagine this attack scenario:
 		</p>,
 		<FeatureCard key="5" icon={ShieldAlert} title="The Attack Without CORS Protection" subtitle="Why the browser intervenes" theme="rose">
-			<ol className="text-sm text-rose-100/75 space-y-2">
+			<ol className="text-sm text-rose-700 dark:text-rose-100/75 space-y-2">
 				<li>
 					1. You log into <code>bank.com</code> and get an authentication cookie.
 				</li>
@@ -105,14 +105,14 @@ export const corsTopic: Topic = {
 		/>,
 		<Grid key="13" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={MonitorSmartphone} title="The Browser's Check" subtitle="Preflight gatekeeper" theme="amber">
-				<p className="text-sm text-amber-100/75">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75">
 					Before sending your actual POST request, the browser halts completely. It sends a tiny, invisible{" "}
 					<code>OPTIONS</code> request to your backend asking, "Hey Backend, my user is on <code>localhost</code>, are
 					they mathematically allowed to send you this POST?"
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Server} title="The Backend's Permission" subtitle="Explicit allow-list response" theme="emerald">
-				<p className="text-sm text-emerald-100/75">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75">
 					If your API server replies with the header <code>Access-Control-Allow-Origin: localhost:3000</code>, the
 					browser sighs in relief and instantly fires the actual POST request. If the backend doesn't reply with that
 					exact header, the browser instantly throws an error and destroys your request.
@@ -382,7 +382,7 @@ No CORS needed - same origin!`}
 		</h3>,
 		<Grid key="41" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={CheckCircle2} title="DO" subtitle="Safe CORS defaults" theme="emerald">
-				<ul className="text-sm text-emerald-100/75 space-y-2">
+				<ul className="text-sm text-emerald-700 dark:text-emerald-100/75 space-y-2">
 					<li>
 						• Whitelist specific origins (never use <code>*</code> with credentials)
 					</li>
@@ -395,7 +395,7 @@ No CORS needed - same origin!`}
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={AlertTriangle} title="DON'T" subtitle="Common ways to weaken it" theme="rose">
-				<ul className="text-sm text-rose-100/75 space-y-2">
+				<ul className="text-sm text-rose-700 dark:text-rose-100/75 space-y-2">
 					<li>
 						• Use <code>Access-Control-Allow-Origin: *</code> with authentication
 					</li>

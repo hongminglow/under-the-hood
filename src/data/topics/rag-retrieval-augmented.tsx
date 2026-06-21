@@ -15,7 +15,7 @@ export const ragRetrievalAugmentedTopic: Topic = {
   tags: ["rag", "ai", "architecture", "backend"],
   icon: "Database",
   content: [
-    <p key="1" className="text-slate-300 mb-6">
+    <p key="1" className="text-slate-700 dark:text-slate-400 mb-6">
       Retrieval-Augmented Generation (RAG) is the industry standard for
       grounding LLMs in factual, private, or real-time data. It treats the LLM
       as a <strong>Reasoning Engine</strong> rather than a Knowledge Store,
@@ -60,10 +60,10 @@ export const ragRetrievalAugmentedTopic: Topic = {
         subtitle="Split where meaning changes"
         theme="cyan"
       >
-        <p className="text-sm text-cyan-100/75 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-2">
           Don't just split text every 500 characters.
         </p>
-        <p className="text-xs italic text-cyan-200/70">
+        <p className="text-xs italic text-cyan-700 dark:text-cyan-300/70">
           Use the embedding model to find where the <strong>meaning</strong>{" "}
           changes. This ensures that a paragraph isn't cut in half, preserving
           context for the LLM.
@@ -75,10 +75,10 @@ export const ragRetrievalAugmentedTopic: Topic = {
         subtitle="Search by generating a fake answer first"
         theme="violet"
       >
-        <p className="text-sm text-violet-100/75 mb-2">
+        <p className="text-sm text-violet-700 dark:text-violet-100/75 mb-2">
           Improve search by 'Hallucinating' first.
         </p>
-        <p className="text-xs italic text-violet-200/70">
+        <p className="text-xs italic text-violet-700 dark:text-violet-300/70">
           The LLM generates a <strong>fake answer</strong> to the user's
           question, then we embed that fake answer to search for similar REAL
           documents. This bridges the 'Question vs. Answer' embedding gap.
@@ -90,10 +90,10 @@ export const ragRetrievalAugmentedTopic: Topic = {
         subtitle="Knowledge Graphs + Vector Search"
         theme="fuchsia"
       >
-        <p className="text-sm text-fuchsia-100/75 mb-2">
+        <p className="text-sm text-fuchsia-700 dark:text-fuchsia-100/75 mb-2">
           Understand relationships, not just text similarity.
         </p>
-        <p className="text-xs italic text-fuchsia-200/70">
+        <p className="text-xs italic text-fuchsia-700 dark:text-fuchsia-300/70">
           Instead of just fetching text chunks, GraphRAG extracts entities
           (Nodes) and relationships (Edges). This allows the LLM to answer
           complex multi-hop questions like{" "}
@@ -104,7 +104,7 @@ export const ragRetrievalAugmentedTopic: Topic = {
     <h3 key="6" className="text-xl font-bold mt-8 mb-4">
       The Precision Layer: Re-ranking
     </h3>,
-    <p key="7" className="text-slate-300 mb-4">
+    <p key="7" className="text-slate-700 dark:text-slate-400 mb-4">
       Vector search (Cosine Similarity) is fast but slightly 'fuzzy'. To ensure
       the LLM gets the <em>best</em> facts, we use a{" "}
       <strong>Cross-Encoder Re-ranker</strong> (like Cohere Rerank) to deeply
@@ -120,7 +120,7 @@ export const ragRetrievalAugmentedTopic: Topic = {
     <h3 key="9" className="text-xl font-bold mt-8 mb-4">
       Agentic RAG: From Pipeline to Tool
     </h3>,
-    <p key="10" className="text-slate-300 mb-6">
+    <p key="10" className="text-slate-700 dark:text-slate-400 mb-6">
       Traditional RAG is a linear pipeline (Embed &rarr; Search &rarr;
       Generate). <strong>Agentic RAG</strong> gives the LLM autonomy to use
       retrieval as a tool. The agent can decide if it needs external knowledge,

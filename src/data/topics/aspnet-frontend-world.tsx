@@ -15,20 +15,20 @@ export const aspNetFrontendWorldTopic: Topic = {
 	tags: ["frontend", "asp.net", "blazor", "razor", "csharp", "architecture"],
 	icon: "Layers",
 	content: [
-		<p key="intro-1" className="text-slate-300 leading-relaxed">
+		<p key="intro-1" className="text-slate-700 dark:text-slate-400 leading-relaxed">
 			When frontend engineers compare <Highlight variant="primary">React</Highlight>,{" "}
 			<Highlight variant="primary">Vue</Highlight>, and <Highlight variant="primary">Angular</Highlight>, ASP.NET often
 			feels strangely absent. That is not because ASP.NET is irrelevant. It is because <strong>ASP.NET historically was
 			not just a frontend framework</strong> at all. It was a full web application platform whose UI story was usually{" "}
 			<em>server-rendered HTML first</em>, with the frontend and backend living inside one .NET stack.
 		</p>,
-		<p key="intro-2" className="mt-4 text-slate-400 leading-relaxed">
+		<p key="intro-2" className="mt-4 text-slate-700 dark:text-slate-400 leading-relaxed">
 			So the real question is not "Why does nobody compare ASP.NET to React?" but rather:{" "}
 			<strong>which part of ASP.NET are we talking about?</strong>&nbsp;Classic Web Forms, MVC, Razor Pages, and
 			Blazor all sit under the broader ASP.NET umbrella, and each occupies a different position in the frontend world.
 		</p>,
 
-		<h2 key="what-title" className="text-xl font-bold text-white mt-10 mb-4">
+		<h2 key="what-title" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
 			What ASP.NET Actually Is
 		</h2>,
 		<Table
@@ -59,7 +59,7 @@ export const aspNetFrontendWorldTopic: Topic = {
 			powers a lot of real business software.
 		</Callout>,
 
-		<h2 key="history-title" className="text-xl font-bold text-white mt-10 mb-4">
+		<h2 key="history-title" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
 			The Evolution of ASP.NET's Frontend Story
 		</h2>,
 		<Flow
@@ -88,40 +88,40 @@ export const aspNetFrontendWorldTopic: Topic = {
 			]}
 		/>,
 
-		<h2 key="absence-title" className="text-xl font-bold text-white mt-10 mb-4">
+		<h2 key="absence-title" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
 			Why ASP.NET Is Usually Missing from the Big 3 Frontend Conversation
 		</h2>,
 		<Grid key="absence-grid" cols={2} gap={6} className="my-8">
 			<Card title="Different Historical Job" description="ASP.NET solved the full web app problem, not only the browser UI problem.">
-				<p className="text-sm text-slate-300 leading-relaxed">
+				<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 					Traditional ASP.NET pages were rendered on the server. That means routing, templates, auth, model binding,
 					and view generation often lived in one platform. React and Vue, by contrast, became famous as browser-side UI
 					engines for highly interactive apps.
 				</p>
 			</Card>
 			<Card title="Different Developer Culture" description="ASP.NET usually enters through enterprise .NET teams.">
-				<p className="text-sm text-slate-300 leading-relaxed">
+				<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 					React discourse is driven heavily by frontend specialists and startup ecosystems. ASP.NET discourse is often
 					owned by C# and enterprise full-stack teams concerned with identity, internal tooling, long-lived systems, and
 					organizational consistency.
 				</p>
 			</Card>
 			<Card title="Blazor Is Newer Than the ASP.NET Brand" description="People often judge the whole stack by its oldest eras.">
-				<p className="text-sm text-slate-300 leading-relaxed">
+				<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 					Some engineers still mentally map ASP.NET to old Web Forms or "old Microsoft stack" stereotypes. That makes
 					the conversation lag reality, because modern ASP.NET Core and Blazor are very different from the heavy
 					abstractions that gave the older stack its reputation.
 				</p>
 			</Card>
 			<Card title="JS Ecosystem Gravity" description="The browser world still revolves around JavaScript and TypeScript.">
-				<p className="text-sm text-slate-300 leading-relaxed">
+				<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 					Even if Blazor is technically capable, the center of gravity for frontend libraries, tutorials, talent, UI
 					component ecosystems, and browser experimentation still lives overwhelmingly in the JS/TS universe.
 				</p>
 			</Card>
 		</Grid>,
 
-		<h2 key="oldschool-title" className="text-xl font-bold text-white mt-10 mb-4">
+		<h2 key="oldschool-title" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
 			So Is ASP.NET Just Traditional and Old-School?
 		</h2>,
 		<Table
@@ -147,32 +147,32 @@ export const aspNetFrontendWorldTopic: Topic = {
 			]}
 		/>,
 
-		<h2 key="special-title" className="text-xl font-bold text-white mt-10 mb-4">
+		<h2 key="special-title" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
 			What Is Actually Special About ASP.NET on the UI Side?
 		</h2>,
 		<Grid key="special-grid" cols={2} gap={6}>
 			<Card title="1. C# Across the Stack" description="One language, one toolchain, one hiring story for many teams.">
-				<p className="text-sm text-slate-300 leading-relaxed">
+				<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 					This is the biggest differentiator. A company with strong C# talent can build backend services, business
 					logic, validation, identity flows, and interactive UI without switching organizationally into a separate
 					JavaScript-first world for every layer.
 				</p>
 			</Card>
 			<Card title="2. Server-First Architecture Feels Native" description="Razor Pages and MVC make SSR feel like the default, not the add-on.">
-				<p className="text-sm text-slate-300 leading-relaxed">
+				<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 					If your app is form-heavy, content-heavy, admin-heavy, or SEO-aware, a server-rendered architecture can be
 					simpler, cheaper, and more operationally predictable than shipping a large SPA for everything.
 				</p>
 			</Card>
 			<Card title="3. Blazor Offers a Non-JS Component Path" description="Interactive UI without making JavaScript the center of your codebase.">
-				<p className="text-sm text-slate-300 leading-relaxed">
+				<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 					Blazor is unusual because it says: <em>what if the component model, state management, and rendering logic are
 					primarily written in C#?</em> That is genuinely different in the frontend market, not because it beats React
 					at everything, but because it changes who can build UI comfortably.
 				</p>
 			</Card>
 			<Card title="4. Enterprise Integration Is Strong" description="Identity, Windows shops, Azure, and existing .NET assets line up naturally.">
-				<p className="text-sm text-slate-300 leading-relaxed">
+				<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 					In many companies the real cost is not "can the browser render this?" but "how cleanly does this fit our
 					platform, SSO, auditing, compliance, deployment model, and existing teams?" ASP.NET often scores very well on
 					that kind of organizational fit.
@@ -180,7 +180,7 @@ export const aspNetFrontendWorldTopic: Topic = {
 			</Card>
 		</Grid>,
 
-		<h2 key="modes-title" className="text-xl font-bold text-white mt-10 mb-4">
+		<h2 key="modes-title" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
 			The Three Main Ways ASP.NET Touches Frontend Work
 		</h2>,
 		<Table
@@ -231,15 +231,15 @@ export const aspNetFrontendWorldTopic: Topic = {
     }
 }`}
 		/>,
-		<p key="razor-desc" className="mt-4 text-slate-400 leading-relaxed">
+		<p key="razor-desc" className="mt-4 text-slate-700 dark:text-slate-400 leading-relaxed">
 			That is the key feel of Blazor: component UI, event handlers, and state written in C# instead of React hooks or
 			Vue composition code.
 		</p>,
 
-		<h2 key="hot-title" className="text-xl font-bold text-white mt-10 mb-4">
+		<h2 key="hot-title" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
 			Is It Still a Hot Company Choice?
 		</h2>,
-		<p key="hot-desc" className="text-slate-300 leading-relaxed">
+		<p key="hot-desc" className="text-slate-700 dark:text-slate-400 leading-relaxed">
 			As of <strong>April 22, 2026</strong>, the honest answer is: <strong>yes, but in a specific lane</strong>. ASP.NET
 			is not the loudest default in public frontend hype cycles, but it remains a serious choice in companies that are
 			already invested in .NET, Microsoft identity, Azure, internal tooling, regulated environments, or C#-centric
@@ -247,13 +247,13 @@ export const aspNetFrontendWorldTopic: Topic = {
 		</p>,
 		<Grid key="hot-grid" cols={2} gap={6} className="my-8">
 			<Card title="Where It Is Still Strong" description="Organizational fit matters more than hype here.">
-				<p className="text-sm text-slate-300 leading-relaxed">
+				<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 					Enterprise portals, internal dashboards, government systems, healthcare software, banking back offices, B2B
 					admin tools, and long-lived line-of-business applications are all places where ASP.NET stays very credible.
 				</p>
 			</Card>
 			<Card title="Where It Is Less Often the Default" description="The public internet frontend scene skews differently.">
-				<p className="text-sm text-slate-300 leading-relaxed">
+				<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 					Consumer startups, design-heavy marketing sites, bleeding-edge browser UI experiments, and teams hiring pure
 					frontend specialists usually lean toward the larger React or broader JS ecosystem.
 				</p>
@@ -264,55 +264,55 @@ export const aspNetFrontendWorldTopic: Topic = {
 			Those are two very different forms of relevance.
 		</Callout>,
 
-			<h2 key="choose-title" className="text-xl font-bold text-white mt-10 mb-4">
+			<h2 key="choose-title" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
 				When ASP.NET Is the Smart Frontend Choice
 			</h2>,
 			<Grid key="choose-grid" cols={2} gap={6} className="my-8">
 				<Card title="Choose It When..." description="The stack should amplify existing strengths.">
-					<p className="text-sm text-slate-300 leading-relaxed">
+					<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 						<strong className="text-muted-foreground">Strong .NET investment:</strong> The company already runs
 						heavily on C#, Azure, Microsoft identity, and existing .NET operational practices.
 					</p>
-					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+					<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed mt-3">
 						<strong className="text-muted-foreground">Business-heavy UI:</strong> The app is form-heavy, data-heavy,
 						internal, compliance-sensitive, or centered around admin workflows rather than consumer-grade frontend
 						novelty.
 					</p>
-					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+					<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed mt-3">
 						<strong className="text-muted-foreground">Simpler architecture:</strong> You want fewer moving parts than
 						a separate SPA, API, auth, and deployment choreography stitched together across multiple stacks.
 					</p>
-					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+					<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed mt-3">
 						<strong className="text-muted-foreground">Long-horizon maintainability:</strong> Organizational
 						consistency and full-stack coherence matter more than following the center of gravity of frontend trends.
 					</p>
 				</Card>
 				<Card title="Avoid It When..." description="The ecosystem mismatch becomes the real cost.">
-					<p className="text-sm text-slate-300 leading-relaxed">
+					<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
 						<strong className="text-muted-foreground">JS ecosystem dependence:</strong> Your frontend team is
 						strongly JavaScript or TypeScript-native and relies heavily on that ecosystem's patterns, tools, and
 						component libraries.
 					</p>
-					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+					<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed mt-3">
 						<strong className="text-muted-foreground">Browser-first leverage:</strong> You need maximum access to the
 						broadest set of browser-first libraries, design systems, community examples, and experimental UI tooling.
 					</p>
-					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+					<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed mt-3">
 						<strong className="text-muted-foreground">Public-facing product velocity:</strong> You are building a
 						highly design-led SPA where frontend iteration speed and ecosystem gravity matter more than full-stack
 						language unification.
 					</p>
-					<p className="text-sm text-slate-300 leading-relaxed mt-3">
+					<p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed mt-3">
 						<strong className="text-muted-foreground">Hiring breadth:</strong> You want the broadest possible hiring
 						pool of dedicated frontend specialists rather than a more backend-leaning full-stack team shape.
 					</p>
 				</Card>
 			</Grid>,
 
-		<h2 key="closing-title" className="text-xl font-bold text-white mt-10 mb-4">
+		<h2 key="closing-title" className="text-xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
 			The Real Position of ASP.NET in Frontend Architecture
 		</h2>,
-		<p key="closing" className="text-slate-300 leading-relaxed">
+		<p key="closing" className="text-slate-700 dark:text-slate-400 leading-relaxed">
 			ASP.NET is not absent from frontend because it has nothing to offer. It is absent from the usual comparisons
 			because it represents a <strong>different architectural philosophy</strong>: server-first roots, strong full-stack
 			integration, and now a C#-driven component model through Blazor. It is not the universal answer, and it is not the

@@ -21,18 +21,18 @@ export const httpsTlsHandshakeTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <FeatureCard icon={KeyRound} title="Asymmetric: The Handshake" subtitle="Public/private keys for the hello phase" theme="violet">
-        <p className="text-sm text-violet-100/75 mb-2">
+        <p className="text-sm text-violet-700 dark:text-violet-100/75 mb-2">
           Using <strong>Public/Private Keys</strong> (RSA/ECC) for the initial "Hello".
         </p>
-        <p className="text-xs italic text-violet-200/70">
+        <p className="text-xs italic text-violet-700 dark:text-violet-300/70">
           Slower but secure. It allows two strangers to exchange a secret "Symmetric Key" without anyone else seeing it.
         </p>
       </FeatureCard>
       <FeatureCard icon={Lock} title="Symmetric: The Session" subtitle="Fast shared-key encryption for the real traffic" theme="emerald">
-        <p className="text-sm text-emerald-100/75 mb-2">
+        <p className="text-sm text-emerald-700 dark:text-emerald-100/75 mb-2">
           Using a <strong>Shared Secret</strong> (AES-256) for the actual data.
         </p>
-        <p className="text-xs italic text-emerald-200/70">
+        <p className="text-xs italic text-emerald-700 dark:text-emerald-300/70">
           Blazing fast and hardware-accelerated. Once the secret is exchanged, the public/private keys are no longer used for the rest of the session.
         </p>
       </FeatureCard>

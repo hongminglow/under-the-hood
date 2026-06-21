@@ -95,21 +95,21 @@ export const jsEventLoopTopic: Topic = {
 
 		<Grid key="8" cols={1} gap={6} className="mb-8">
 			<Card title="The 'While(true)' Total Freeze">
-				<p className="text-sm text-slate-300 mb-3">
-					<strong className="text-red-400">The Problem:</strong> Junior developers often write heavy CPU intensive code (calculating prime
+				<p className="text-sm text-slate-700 dark:text-slate-400 mb-3">
+					<strong className="text-red-700 dark:text-red-400">The Problem:</strong> Junior developers often write heavy CPU intensive code (calculating prime
 					numbers, massive array sorting) inside a standard route handler. Because it is synchronous math, the Call
 					Stack sits occupied indefinitely. The Event Loop physically cannot push finished network responses from the
 					Queue up to the main thread. The server completely freezes and dies.
 				</p>
 				<p className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">What to do instead</p>
-				<ul className="text-sm text-slate-400 list-disc pl-5 space-y-2">
+				<ul className="text-sm text-slate-700 dark:text-slate-400 list-disc pl-5 space-y-2">
 					<li>
-						<strong className="text-emerald-300">Offload to Worker Threads:</strong> For Node.js, specifically spin up the{" "}
+						<strong className="text-emerald-700 dark:text-emerald-400">Offload to Worker Threads:</strong> For Node.js, specifically spin up the{" "}
 						<code>worker_threads</code> module to execute massive mathematical operations on entirely separate CPU
 						cores.
 					</li>
 					<li>
-						<strong className="text-emerald-300">Yielding via Timers:</strong> If processing a massive 10,000-item array synchronously, break it down
+						<strong className="text-emerald-700 dark:text-emerald-400">Yielding via Timers:</strong> If processing a massive 10,000-item array synchronously, break it down
 						using <code>setImmediate()</code> or <code>setTimeout(..., 0)</code> chunks so the Event Loop has a physical
 						opportunity to breathe and answer pending HTTP requests.
 					</li>
@@ -120,8 +120,8 @@ export const jsEventLoopTopic: Topic = {
 			</Card>
 
 			<Card title="The Promise Traps">
-				<p className="text-sm text-slate-300 mb-3">
-					<strong className="text-red-400">The Problem:</strong> Assuming <code>setTimeout(() =&gt; console.log("A"), 0)</code> runs immediately
+				<p className="text-sm text-slate-700 dark:text-slate-400 mb-3">
+					<strong className="text-red-700 dark:text-red-400">The Problem:</strong> Assuming <code>setTimeout(() =&gt; console.log("A"), 0)</code> runs immediately
 					instead of realizing it sits perfectly inside a lower-priority Macrotask Queue, causing bugs when state
 					doesn't sync accurately with Promises.
 				</p>

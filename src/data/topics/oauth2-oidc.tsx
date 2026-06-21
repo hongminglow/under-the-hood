@@ -38,13 +38,13 @@ export const oauth2OidcTopic: Topic = {
 		</p>,
 		<Grid key="5" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={KeyRound} title="The OAuth 2.0 Access Token" subtitle="Authorization only" theme="amber">
-				<p className="text-sm text-amber-100/75">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75">
 					A purely opaque string designed only to unlock specific API doors (like an Arcade Token). It doesn't contain
 					the user's name or email. It simply says "This token holder can read calendars."
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={BadgeCheck} title="OIDC (OpenID Connect)" subtitle="Authentication layer on top" theme="emerald">
-				<p className="text-sm text-emerald-100/75">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75">
 					An extension bolted directly on top of OAuth. It provides an <strong>ID Token</strong>&nbsp;(always a JWT)
 					alongside the Access Token. The ID Token definitively answers "Who is this person? What is their email?" and
 					allows true "Login with Google" systems to exist securely.
@@ -209,10 +209,10 @@ const { access_token } = await response.json();
 		</h3>,
 		<Grid key="25" cols={3} gap={4} className="my-8">
 			<FeatureCard icon={KeySquare} title="Access Token" subtitle="Access protected APIs" theme="amber">
-				<p className="text-sm text-amber-100/75 mb-2">
+				<p className="text-sm text-amber-700 dark:text-amber-100/75 mb-2">
 					<strong>Purpose</strong>: Access protected resources (APIs)
 				</p>
-				<p className="text-xs text-amber-100/75">
+				<p className="text-xs text-amber-700 dark:text-amber-100/75">
 					• Opaque or JWT
 					<br />
 					• Short-lived (15 min - 1 hour)
@@ -220,10 +220,10 @@ const { access_token } = await response.json();
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={BadgeCheck} title="ID Token (OIDC)" subtitle="Proves who the user is" theme="emerald">
-				<p className="text-sm text-emerald-100/75 mb-2">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75 mb-2">
 					<strong>Purpose</strong>: Prove user identity
 				</p>
-				<p className="text-xs text-emerald-100/75">
+				<p className="text-xs text-emerald-700 dark:text-emerald-100/75">
 					• Always JWT
 					<br />
 					• Contains user info (email, name)
@@ -231,10 +231,10 @@ const { access_token } = await response.json();
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={RefreshCw} title="Refresh Token" subtitle="Renews access without re-login" theme="violet">
-				<p className="text-sm text-violet-100/75 mb-2">
+				<p className="text-sm text-violet-700 dark:text-violet-100/75 mb-2">
 					<strong>Purpose</strong>: Get new access tokens
 				</p>
-				<p className="text-xs text-violet-100/75">
+				<p className="text-xs text-violet-700 dark:text-violet-100/75">
 					• Opaque string
 					<br />
 					• Long-lived (days/months)

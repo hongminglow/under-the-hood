@@ -58,7 +58,7 @@ export function TopicView() {
             {topic.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest bg-primary/5 text-primary-400 border border-primary/20 shadow-xl hover:bg-primary/20 transition-all cursor-default"
+                className="px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest bg-primary/5 text-primary border border-primary/20 shadow-xl hover:bg-primary/20 transition-all cursor-default"
               >
                 {tag}
               </span>

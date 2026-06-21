@@ -62,7 +62,7 @@ export const serviceWorkersPwaTopic: Topic = {
     <p key="8" className="mb-4">
       To make a PWA feel fast, developers separate the <strong>App Shell</strong> (the UI structure: header, sidebar, loading state) from the <strong>Dynamic Content</strong> (the data from the API).
     </p>,
-    <ul key="9" className="list-disc pl-5 text-sm text-slate-400 space-y-2">
+    <ul key="9" className="list-disc pl-5 text-sm text-slate-700 dark:text-slate-400 space-y-2">
       <li><strong className="text-muted-foreground">Manifest.json:</strong> A JSON file that defines the app's name, icons, and start URL. This allows the browser to show the "Add to Home Screen" prompt.</li>
       <li><strong className="text-muted-foreground">HTTPS mandatory:</strong> Service Workers have "God Mode" over your traffic. For security, they <strong>only</strong> work over encrypted HTTPS connections (except localhost).</li>
       <li><strong className="text-muted-foreground">IndexedDB:</strong> For large amounts of offline data, use <strong>IndexedDB</strong> rather than the Cache API.</li>

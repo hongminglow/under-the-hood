@@ -32,14 +32,14 @@ export const dnsOverHttpsTopic: Topic = {
 		/>,
 		<Grid key="3" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={EyeOff} title="The Privacy Argument" subtitle="Pro DoH" theme="emerald">
-				<p className="text-sm text-emerald-100/75">
+				<p className="text-sm text-emerald-700 dark:text-emerald-100/75">
 					DoH hides DNS queries inside regular HTTPS traffic, making it{" "}
 					<strong>impossible for ISPs to snoop or censor</strong>. Firefox and Chrome enable DoH by default. Users get
 					privacy without changing any settings.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={ShieldAlert} title="The Control Argument" subtitle="Anti DoH" theme="rose">
-				<p className="text-sm text-rose-100/75">
+				<p className="text-sm text-rose-700 dark:text-rose-100/75">
 					DoH <strong>centralizes DNS</strong> to a few providers (Cloudflare, Google). Enterprises lose visibility into
 					DNS traffic for security monitoring. Network admins can't block malicious domains. It{" "}
 					<strong>bypasses corporate DNS policies</strong>.

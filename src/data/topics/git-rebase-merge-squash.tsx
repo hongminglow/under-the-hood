@@ -28,28 +28,28 @@ export const gitRebaseMergeSquashTopic: Topic = {
 
     <Grid key="3" cols={2} gap={6} className="my-8">
       <FeatureCard icon={GitMerge} title="git merge" subtitle="Preserves all history, adds a merge commit" theme="cyan">
-        <p className="text-sm text-cyan-100/75">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75">
           Takes two branch tips and creates a new <strong>merge commit</strong> that has two parents.
           Every original commit stays intact with its original SHA and timestamp.
           History is a <em>non-linear DAG</em> (directed acyclic graph), not a straight line.
         </p>
       </FeatureCard>
       <FeatureCard icon={ArrowUpToLine} title="git rebase" subtitle="Rewrites commits onto a new base" theme="amber">
-        <p className="text-sm text-amber-100/75">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75">
           Lifts your branch's commits off their original base and replays them one-by-one on top of the target.
           Each commit gets a <strong>new SHA</strong>. History stays a perfectly straight line — as if the branch
           was always started from the new base.
         </p>
       </FeatureCard>
       <FeatureCard icon={Combine} title="Squash merge / git rebase --squash" subtitle="Collapses N commits into 1" theme="emerald">
-        <p className="text-sm text-emerald-100/75">
+        <p className="text-sm text-emerald-700 dark:text-emerald-100/75">
           All commits from a feature branch are <strong>combined into a single new commit</strong> on the target branch.
           Individual commit history from the branch is completely discarded after the merge.
           Produces the cleanest main branch log.
         </p>
       </FeatureCard>
       <FeatureCard icon={Copy} title="git cherry-pick" subtitle="Copy a specific commit anywhere" theme="violet">
-        <p className="text-sm text-violet-100/75">
+        <p className="text-sm text-violet-700 dark:text-violet-100/75">
           Takes any commit by its SHA from any branch and <strong>replays it as a new commit</strong> on the current branch.
           The original commit is unchanged. You end up with two commits that contain the same change but with different SHAs.
         </p>
@@ -269,10 +269,10 @@ git cherry-pick hotfix-commit-sha   # apply same fix to v2.2`}
       key="20"
       headers={[
         "Property",
-        '<span class="text-cyan-300">Merge</span>',
-        '<span class="text-amber-300">Rebase</span>',
-        '<span class="text-emerald-300">Squash Merge</span>',
-        '<span class="text-violet-300">Cherry-Pick</span>',
+        '<span class="text-cyan-700 dark:text-cyan-400">Merge</span>',
+        '<span class="text-amber-700 dark:text-amber-400">Rebase</span>',
+        '<span class="text-emerald-700 dark:text-emerald-400">Squash Merge</span>',
+        '<span class="text-violet-700 dark:text-violet-400">Cherry-Pick</span>',
       ]}
       rows={[
         ["History shape", "Non-linear (DAG)", "Linear", "Linear", "Linear"],

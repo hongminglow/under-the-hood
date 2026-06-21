@@ -31,17 +31,17 @@ export const webVitalsTopic: Topic = {
 			headers={["Metric", "Definition", "The Target Score"]}
 			rows={[
 				[
-					"<span class='text-amber-200/85 font-black'>LCP (Largest Contentful Paint)</span>",
+					"<span class='text-amber-700 dark:text-amber-300/85 font-black'>LCP (Largest Contentful Paint)</span>",
 					"How long it takes the largest image or text block to become fully visible.",
 					"< 2.5 seconds",
 				],
 				[
-					"<span class='text-cyan-200/85 font-black'>INP (Interaction to Next Paint)</span>",
+					"<span class='text-cyan-700 dark:text-cyan-300/85 font-black'>INP (Interaction to Next Paint)</span>",
 					"The latency of the UI responding to a physical user input (like a click).",
 					"< 200 milliseconds",
 				],
 				[
-					"<span class='text-violet-200/85 font-black'>CLS (Cumulative Layout Shift)</span>",
+					"<span class='text-violet-700 dark:text-violet-300/85 font-black'>CLS (Cumulative Layout Shift)</span>",
 					"The visual stability metric measuring unexpected layout movements.",
 					"< 0.1 score",
 				],
@@ -54,13 +54,13 @@ export const webVitalsTopic: Topic = {
 
 		<Grid key="5" cols={1} gap={6} className="mb-8">
 			<FeatureCard icon={Image} title="Fixing LCP" subtitle="Loading constraints" theme="amber">
-				<p className="mb-4 text-amber-100/80">
-					<strong className="text-amber-300">The problem:</strong> LCP is almost always bottlenecked by either slow server response times (TTFB) or
+				<p className="mb-4 text-amber-700 dark:text-amber-100/80">
+					<strong className="text-amber-700 dark:text-amber-400">The problem:</strong> LCP is almost always bottlenecked by either slow server response times (TTFB) or
 					client-side rendering architecture where a huge JavaScript bundle must be downloaded and parsed before an
 					image even begins downloading.
 				</p>
-				<p className="font-semibold mb-2 text-amber-300">Architectural Solutions:</p>
-				<ul className="text-amber-100/75 list-disc pl-5 space-y-2">
+				<p className="font-semibold mb-2 text-amber-700 dark:text-amber-400">Architectural Solutions:</p>
+				<ul className="text-amber-700 dark:text-amber-100/75 list-disc pl-5 space-y-2">
 					<li>
 						<strong>Server-Side Rendering (SSR):</strong> Use frameworks like Next.js or Astro to return fully
 						constructed HTML instantly, sending the LCP element immediately to the browser without a Javascript wall.
@@ -78,13 +78,13 @@ export const webVitalsTopic: Topic = {
 			</FeatureCard>
 
 			<FeatureCard icon={MousePointerClick} title="Fixing INP" subtitle="Responsiveness" theme="cyan">
-				<p className="mb-4 text-cyan-100/80">
-					<strong className="text-cyan-300">The problem:</strong> INP fails when the browser's Main Thread is heavily blocked by synchronous
+				<p className="mb-4 text-cyan-700 dark:text-cyan-100/80">
+					<strong className="text-cyan-700 dark:text-cyan-400">The problem:</strong> INP fails when the browser's Main Thread is heavily blocked by synchronous
 					JavaScript execution. If the user clicks a button but React is busy computing a massive 500-item state array,
 					the visual click effect is delayed.
 				</p>
-				<p className="font-semibold mb-2 text-cyan-300">Architectural Solutions:</p>
-				<ul className="text-cyan-100/75 list-disc pl-5 space-y-2">
+				<p className="font-semibold mb-2 text-cyan-700 dark:text-cyan-400">Architectural Solutions:</p>
+				<ul className="text-cyan-700 dark:text-cyan-100/75 list-disc pl-5 space-y-2">
 					<li>
 						<strong>Yielding to the Main Thread:</strong> Break massive, long-running mathematical or fetching tasks
 						into smaller chunks utilizing <code>setTimeout</code> or <code>requestIdleCallback</code> so the browser has
@@ -102,12 +102,12 @@ export const webVitalsTopic: Topic = {
 			</FeatureCard>
 
 			<FeatureCard icon={Layout} title="Fixing CLS" subtitle="Visual stability" theme="violet">
-				<p className="mb-4 text-violet-100/80">
-					<strong className="text-violet-300">The problem:</strong> CLS happens when asynchronous visual elements suddenly arrive over the network
+				<p className="mb-4 text-violet-700 dark:text-violet-100/80">
+					<strong className="text-violet-700 dark:text-violet-400">The problem:</strong> CLS happens when asynchronous visual elements suddenly arrive over the network
 					and forcefully push existing DOM nodes downward, causing text jumps and frustrating mis-clicks.
 				</p>
-				<p className="font-semibold mb-2 text-violet-300">Architectural Solutions:</p>
-				<ul className="text-violet-100/75 list-disc pl-5 space-y-2">
+				<p className="font-semibold mb-2 text-violet-700 dark:text-violet-400">Architectural Solutions:</p>
+				<ul className="text-violet-700 dark:text-violet-100/75 list-disc pl-5 space-y-2">
 					<li>
 						<strong>Explicit Dimensions:</strong> Always declare strict <code>width</code> and <code>height</code>{" "}
 						attributes (or <code>aspect-ratio</code> in CSS) precisely on all images or iframes so the browser naturally

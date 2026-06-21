@@ -33,12 +33,12 @@ export const passkeysWebauthnTopic: Topic = {
     </Step>,
     <Grid key="7" cols={2} gap={6} className="my-8">
       <FeatureCard icon={ShieldCheck} title="Immune to Data Breaches" subtitle="Leaked public keys are useless" theme="emerald">
-        <p className="text-sm text-emerald-100/75">
+        <p className="text-sm text-emerald-700 dark:text-emerald-100/75">
           If a hacker steals your entire SQL database, they only get Public Keys. Unlike stolen password hashes (which can be brute-forced), a Public Key is mathematically useless for logging in.
         </p>
       </FeatureCard>
       <FeatureCard icon={KeyRound} title="Immune to Phishing" subtitle="Bound to the real domain" theme="cyan">
-        <p className="text-sm text-cyan-100/75">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75">
           WebAuthn inherently ties the cryptographic signature to the exact URL domain (`google.com`). If a user is tricked into visiting a fake clone `g00gle.com` and scans their face, the signature generated will strictly be for `g00gle.com`, and the real Google backend will instantly reject it.
         </p>
       </FeatureCard>

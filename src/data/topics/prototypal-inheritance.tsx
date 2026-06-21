@@ -24,12 +24,12 @@ export const prototypalInheritanceTopic: Topic = {
     </p>,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <FeatureCard icon={FunctionSquare} title="prototype" subtitle="The blueprint object on functions" theme="amber">
-        <p className="text-sm text-amber-100/75 mb-2">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75 mb-2">
           <strong>The Blueprint:</strong> Only exists on functions. It's the object that will become the <code>__proto__</code> of any instance created with <code>new</code>.
         </p>
       </FeatureCard>
       <FeatureCard icon={Link2} title="__proto__" subtitle="The runtime link on objects" theme="cyan">
-        <p className="text-sm text-cyan-100/75 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-2">
           <strong>The Link:</strong> Exists on every object. It points to the object's parent in the chain. Modern JS recommends using <code>Object.getPrototypeOf()</code> instead.
         </p>
       </FeatureCard>

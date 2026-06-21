@@ -91,15 +91,15 @@ export const ciCdTopic: Topic = {
 		</p>,
 		<Grid key="12" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={GitBranch} title="Why YAML?" subtitle="Pipeline as versioned code" theme="emerald">
-				<p className="text-sm text-emerald-200/80">
+				<p className="text-sm text-emerald-700 dark:text-emerald-300/80">
 					YAML pipelines (<code>.github/workflows/</code>, <code>.gitlab-ci.yml</code>, <code>Jenkinsfile</code>) are
 					declarative, human-readable, and diffable in pull requests. Infrastructure teams can review pipeline changes
 					with the same rigor as application code.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={ShieldCheck} title="Artifact Immutability" subtitle="Build once, deploy everywhere" theme="teal">
-				<p className="text-sm text-teal-200/80">
-					A core principle: <strong className="text-teal-300">build once, deploy everywhere</strong>. The Docker image promoted to production is
+				<p className="text-sm text-teal-700 dark:text-teal-300/80">
+					A core principle: <strong className="text-teal-700 dark:text-teal-400">build once, deploy everywhere</strong>. The Docker image promoted to production is
 					byte-for-byte identical to what ran in staging. Environment differences are injected via environment
 					variables, never baked into the image.
 				</p>

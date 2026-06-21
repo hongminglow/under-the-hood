@@ -28,7 +28,7 @@ export const onlineMultiplayerArchitectureTopic: Topic = {
 
 		<Grid key="3" cols={2} gap={6}>
 			<FeatureCard icon={Globe} title="Web / HTTP Server" subtitle="Stateless, Request/Response" theme="cyan">
-				<ul className="list-disc pl-5 mt-2 text-sm text-cyan-100/75 space-y-1">
+				<ul className="list-disc pl-5 mt-2 text-sm text-cyan-700 dark:text-cyan-100/75 space-y-1">
 					<li>
 						<strong>Protocol:</strong> TCP / HTTP (Reliable, ordered, slow connection handshakes)
 					</li>
@@ -44,7 +44,7 @@ export const onlineMultiplayerArchitectureTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Joystick} title="Dedicated Game Server" subtitle="Stateful, Continuous Simulation" theme="violet">
-				<ul className="list-disc pl-5 mt-2 text-sm text-violet-100/75 space-y-1">
+				<ul className="list-disc pl-5 mt-2 text-sm text-violet-700 dark:text-violet-100/75 space-y-1">
 					<li>
 						<strong>Protocol:</strong> Custom UDP (Unreliable, unordered, but blazingly fast)
 					</li>
@@ -179,14 +179,14 @@ export const onlineMultiplayerArchitectureTopic: Topic = {
 
 		<Grid key="16" cols={2} gap={6}>
 			<FeatureCard icon={Clock3} title="The 'Hot Path' (In-Memory)" subtitle="Zero IO allowed" theme="emerald">
-				<p className="mt-2 text-sm text-emerald-100/75 leading-relaxed">
+				<p className="mt-2 text-sm text-emerald-700 dark:text-emerald-100/75 leading-relaxed">
 					Player movement, HP pooling, ammo count, and spells are never written to disk during a match. They live
 					entirely in C++/C#/Rust memory structs on the Dedicated Server instance. This ensures single-digit nanosecond
 					access times.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Database} title="The 'Cold Path' (Asynchronous)" subtitle="Account Persistence" theme="amber">
-				<p className="mt-2 text-sm text-amber-100/75 leading-relaxed">
+				<p className="mt-2 text-sm text-amber-700 dark:text-amber-100/75 leading-relaxed">
 					At the very end of a match, the server serializes the final state (e.g., 'Player A got 10 kills, gained 20
 					XP'). It drops this message into an asynchronous queue (like Kafka or RabbitMQ). A separate backend worker
 					slowly writes this to a persistent database (PostgreSQL / DynamoDB).
@@ -209,7 +209,7 @@ export const onlineMultiplayerArchitectureTopic: Topic = {
 			struggle with this because their hardware is optimized for multi-tenant, multi-core virtualization.
 		</p>,
 
-		<ul key="20" className="list-disc pl-5 space-y-2 mb-8 text-sm text-slate-400">
+		<ul key="20" className="list-disc pl-5 space-y-2 mb-8 text-sm text-slate-700 dark:text-slate-400">
 			<li>
 				<strong className="text-muted-foreground">High Clock Speeds (GHz):</strong> A single game match physics
 				simulation cannot easily be parallelized across multiple cores. It runs on one main thread. A 4.0GHz core

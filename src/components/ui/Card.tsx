@@ -12,7 +12,7 @@ export function Card({ title, description, children, className }: CardProps) {
 	return (
 		<div
 			className={cn(
-				"rounded-2xl border border-border/60 bg-[#02120a]/40 backdrop-blur-md p-6 shadow-2xl transition-all hover:bg-[#02120a]/60 hover:border-primary/30 group mb-2",
+				"rounded-2xl border border-border/60 bg-card/70 backdrop-blur-md p-6 shadow-xl shadow-black/5 dark:shadow-black/20 transition-all hover:bg-card hover:border-primary/30 group mb-2",
 				className,
 			)}
 		>
@@ -24,13 +24,13 @@ export function Card({ title, description, children, className }: CardProps) {
 						</h3>
 					)}
 					{description && (
-						<p className="text-xs text-muted-foreground font-medium uppercase tracking-wider opacity-60">
+						<p className="text-xs text-muted-foreground font-medium uppercase tracking-wider opacity-70">
 							{description}
 						</p>
 					)}
 				</div>
 			)}
-			<div className="text-slate-300 leading-relaxed text-sm">{children}</div>
+			<div className="text-foreground/75 leading-relaxed text-sm">{children}</div>
 		</div>
 	);
 }

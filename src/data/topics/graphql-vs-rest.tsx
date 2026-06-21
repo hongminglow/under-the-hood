@@ -38,12 +38,12 @@ export const graphqlVsRestTopic: Topic = {
     />,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Database} title="The Frontend Utopia" subtitle="Why app teams love GraphQL" theme="violet">
-        <p className="text-sm text-violet-100/75">
+        <p className="text-sm text-violet-700 dark:text-violet-100/75">
           Frontend engineers dictate the entire data shape using declarative queries. They no longer have to beg backend teams to "please build a custom endpoint for my specific mobile screen."
         </p>
       </FeatureCard>
       <FeatureCard icon={Network} title="The Backend Nightmare" subtitle="Why infra teams stay cautious" theme="amber">
-        <p className="text-sm text-amber-100/75">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75">
           Caching completely dies. REST caches perfectly on standard CDNs because `GET /users/5` is an immutable URL string. GraphQL sends everything wildly as unique POST bodies, destroying edge caches and forcing backend devs to build insanely complex 'DataLoader' systems to prevent their SQL database from catching fire.
         </p>
       </FeatureCard>

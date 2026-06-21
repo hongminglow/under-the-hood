@@ -107,19 +107,19 @@ export const acidPropertiesTopic: Topic = {
 		</p>,
 		<Grid key="12" cols={2} gap={6} className="my-8 items-stretch">
 			<FeatureCard title="Why WAL is Fast" icon={Zap} theme="amber">
-				<p className="text-sm text-amber-200/80 mb-2">Sequential writes vs. random writes.</p>
-				<p className="text-xs italic text-amber-200/60">
-					Writing to the end of a log file is <strong className="text-amber-400">100x faster</strong> than seeking to
+				<p className="text-sm text-amber-700 dark:text-amber-300/80 mb-2">Sequential writes vs. random writes.</p>
+				<p className="text-xs italic text-amber-700 dark:text-amber-300/60">
+					Writing to the end of a log file is <strong className="text-amber-700 dark:text-amber-400">100x faster</strong> than seeking to
 					random disk locations to update data pages. SSDs and HDDs both optimize for sequential I/O. PostgreSQL's WAL
 					can sustain 10,000+ writes/sec on commodity hardware.
 				</p>
 			</FeatureCard>
 			<FeatureCard title="Crash Recovery" icon={ShieldCheck} theme="emerald">
-				<p className="text-sm text-emerald-200/80 mb-2">Replaying the log after power loss.</p>
-				<p className="text-xs italic text-emerald-200/60">
+				<p className="text-sm text-emerald-700 dark:text-emerald-300/80 mb-2">Replaying the log after power loss.</p>
+				<p className="text-xs italic text-emerald-700 dark:text-emerald-300/60">
 					On restart, the database reads the WAL from the last checkpoint and replays every committed transaction.
 					Uncommitted transactions are discarded. This is how PostgreSQL guarantees{" "}
-					<strong className="text-emerald-400">zero data loss</strong> even during kernel panics.
+					<strong className="text-emerald-700 dark:text-emerald-400">zero data loss</strong> even during kernel panics.
 				</p>
 			</FeatureCard>
 		</Grid>,
@@ -312,22 +312,22 @@ WHERE user_id = 123 AND version = 5;  -- Fails if version changed`}
 		</p>,
 		<Grid key="34" cols={2} gap={6} className="my-8 items-stretch">
 			<FeatureCard title="What Went Wrong" icon={ShieldAlert} theme="rose">
-				<ul className="text-sm text-rose-200/80 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-rose-700 dark:text-rose-300/80 space-y-2 list-disc pl-4">
 					<li>Custom database bypassed PostgreSQL's constraint checking</li>
 					<li>Two threads read balance = $1000 simultaneously</li>
 					<li>Both approved $800 withdrawals</li>
 					<li>
-						Final balance: <strong className="text-rose-400">-$600</strong> (impossible in ACID system)
+						Final balance: <strong className="text-rose-700 dark:text-rose-400">-$600</strong> (impossible in ACID system)
 					</li>
 				</ul>
 			</FeatureCard>
 			<FeatureCard title="The Fix" icon={ShieldCheck} theme="emerald">
-				<ul className="text-sm text-emerald-200/80 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-emerald-700 dark:text-emerald-300/80 space-y-2 list-disc pl-4">
 					<li>Migrated to PostgreSQL with CHECK constraints</li>
 					<li>Used SELECT FOR UPDATE to lock rows during reads</li>
 					<li>Added SERIALIZABLE isolation for critical paths</li>
 					<li>
-						Result: <strong className="text-emerald-400">Zero balance violations</strong> in 10+ years
+						Result: <strong className="text-emerald-700 dark:text-emerald-400">Zero balance violations</strong> in 10+ years
 					</li>
 				</ul>
 			</FeatureCard>

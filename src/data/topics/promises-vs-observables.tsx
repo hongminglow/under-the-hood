@@ -22,13 +22,13 @@ export const promisesVsObservablesTopic: Topic = {
     </h3>,
     <Grid key="2a" cols={2} gap={6} className="mb-8">
       <FeatureCard icon={TimerReset} title="Promise" subtitle="One future result" theme="cyan">
-        <p className="text-sm text-cyan-100/75">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75">
           Promises represent exactly one eventual success or failure. They are perfect for one-off async work like fetching
           a single HTTP response.
         </p>
       </FeatureCard>
       <FeatureCard icon={Radio} title="Observable" subtitle="A stream of values over time" theme="violet">
-        <p className="text-sm text-violet-100/75">
+        <p className="text-sm text-violet-700 dark:text-violet-100/75">
           Observables model streams that may emit many values, complete later, or be torn down entirely. They shine for
           events, sockets, and reactive UI flows.
         </p>

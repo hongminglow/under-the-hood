@@ -67,7 +67,7 @@ export const databaseShardingTopic: Topic = {
 		</h3>,
 		<Grid key="g-when" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={CheckCircle2} title="Right Time to Shard" subtitle="Real scaling pressure exists" theme="emerald">
-				<ul className="text-sm text-emerald-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-emerald-700 dark:text-emerald-100/75 space-y-2 list-disc pl-4">
 					<li>Write throughput exceeds what one primary can handle (typically over 10K writes/sec sustained)</li>
 					<li>Dataset size exceeds a single server's disk (multi-TB tables, billions of rows)</li>
 					<li>You need geographic distribution — data sovereignty laws require EU user data to stay in EU</li>
@@ -75,7 +75,7 @@ export const databaseShardingTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={AlertTriangle} title="Wrong Time to Shard" subtitle="The pain is self-inflicted" theme="rose">
-				<ul className="text-sm text-rose-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-rose-700 dark:text-rose-100/75 space-y-2 list-disc pl-4">
 					<li>Your DB is slow because of missing indexes (fix the query first)</li>
 					<li>You have fewer than ~1M active users</li>
 					<li>Your team doesn't have operational expertise to manage N database clusters</li>
@@ -151,39 +151,39 @@ export const databaseShardingTopic: Topic = {
 		</h3>,
 		<Grid key="g-chaos" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={Split} title="No Cross-Shard JOINs" subtitle="The database boundary becomes real" theme="amber">
-				<p className="text-sm text-amber-200/80 mb-2">
+				<p className="text-sm text-amber-700 dark:text-amber-300/80 mb-2">
 					SQL <code>JOIN</code> only works within one database. If a User lives on Shard 1 and their Orders are on Shard
 					3, you must fetch both separately and join in application memory.
 				</p>
-				<p className="text-xs italic text-amber-100/70">
+				<p className="text-xs italic text-amber-700 dark:text-amber-100/70">
 					This forces you to denormalise your data (duplicate fields across tables) or accept the network overhead.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={AlertTriangle} title="No Global Transactions" subtitle="Cross-shard ACID gets ugly fast" theme="rose">
-				<p className="text-sm text-rose-200/80 mb-2">
+				<p className="text-sm text-rose-700 dark:text-rose-300/80 mb-2">
 					Traditional ACID transactions are scoped to a single database. A transaction touching two shards requires a{" "}
 					<strong>Two-Phase Commit (2PC)</strong> -- complex, slow, and a consistency risk.
 				</p>
-				<p className="text-xs italic text-rose-100/70">
+				<p className="text-xs italic text-rose-700 dark:text-rose-100/70">
 					Most architectures avoid cross-shard transactions entirely by designing shard keys so related data is always
 					co-located.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={HardDrive} title="Resharding Pain" subtitle="Adding shards means moving live data" theme="violet">
-				<p className="text-sm text-violet-200/80 mb-2">
+				<p className="text-sm text-violet-700 dark:text-violet-300/80 mb-2">
 					Adding a 5th shard to a 4-shard setup means migrating ~20% of your data live, without downtime. This is an
 					operational nightmare.
 				</p>
-				<p className="text-xs italic text-violet-100/70">
+				<p className="text-xs italic text-violet-700 dark:text-violet-100/70">
 					Solutions: Consistent hashing (minimises data movement), virtual shards (over-provision shards upfront), or
 					managed services (PlanetScale, Vitess).
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={AlertTriangle} title="Operational Complexity" subtitle="You now run N databases, not one" theme="slate">
-				<p className="text-sm text-slate-200 mb-2">
+				<p className="text-sm text-slate-700 dark:text-slate-300 mb-2">
 					You now manage N database instances, N backup schedules, N monitoring dashboards, N upgrade cycles.
 				</p>
-				<p className="text-xs italic text-slate-300">
+				<p className="text-xs italic text-slate-700 dark:text-slate-400">
 					Teams that shard without operational maturity spend more time on database maintenance than on product
 					features.
 				</p>

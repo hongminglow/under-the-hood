@@ -15,20 +15,20 @@ export const oopVsFpTopic: Topic = {
   icon: "Binary",
   content: [
     <p key="1">
-      For decades, <span className="px-1.5 py-0.5 rounded-md border text-[13px] font-bold tracking-tight bg-amber-500/10 text-amber-300 border-amber-500/20">Object-Oriented Programming (OOP)</span> dominated the enterprise. You built a `Car` class with internal fuel state, and called `car.drive()`. But as apps got massive, tracking which object mutated the shared state became a nightmare. <span className="px-1.5 py-0.5 rounded-md border text-[13px] font-bold tracking-tight bg-emerald-500/10 text-emerald-300 border-emerald-500/20">Functional Programming (FP)</span> emerged to ban internal state completely.
+      For decades, <span className="px-1.5 py-0.5 rounded-md border text-[13px] font-bold tracking-tight bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20">Object-Oriented Programming (OOP)</span> dominated the enterprise. You built a `Car` class with internal fuel state, and called `car.drive()`. But as apps got massive, tracking which object mutated the shared state became a nightmare. <span className="px-1.5 py-0.5 rounded-md border text-[13px] font-bold tracking-tight bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20">Functional Programming (FP)</span> emerged to ban internal state completely.
     </p>,
     <h3 key="2" className="text-xl font-bold mt-8 mb-4">
       The Core Philosophies
     </h3>,
     <Grid key="2a" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Boxes} title="Object-Oriented Programming" subtitle="Mutable state inside long-lived objects" theme="amber">
-        <p className="text-sm text-amber-100/75">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75">
           OOP organizes behavior around entities that carry their own state. That feels intuitive for domains like cars,
           users, or services, but once mutation spreads across a large system, debugging who changed what becomes painful.
         </p>
       </FeatureCard>
       <FeatureCard icon={FunctionSquare} title="Functional Programming" subtitle="Pure functions over immutable data" theme="emerald">
-        <p className="text-sm text-emerald-100/75">
+        <p className="text-sm text-emerald-700 dark:text-emerald-100/75">
           FP treats data as immutable values and pushes change through isolated functions. That makes flows more predictable,
           but can introduce its own tradeoffs in verbosity, cloning, and conceptual overhead.
         </p>

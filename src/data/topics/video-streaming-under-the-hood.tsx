@@ -63,7 +63,7 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
     <h3 key="h-pipeline" className="text-xl font-bold mt-8 mb-4">
       The End-to-End Streaming Pipeline
     </h3>,
-    <p key="p-pipeline" className="text-sm text-slate-300 mb-4 leading-relaxed">
+    <p key="p-pipeline" className="text-sm text-slate-700 dark:text-slate-400 mb-4 leading-relaxed">
       Every frame you see on screen has passed through this chain. A failure at
       any stage causes buffering, quality drops, or playback failure.
     </p>,
@@ -117,11 +117,11 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
     <h3 key="h-encoding" className="text-xl font-bold mt-8 mb-4">
       Encoding & the Bitrate Ladder
     </h3>,
-    <p key="p-encoding" className="text-sm text-slate-300 mb-4 leading-relaxed">
+    <p key="p-encoding" className="text-sm text-slate-700 dark:text-slate-400 mb-4 leading-relaxed">
       A single movie on Netflix exists as{" "}
-      <strong className="text-slate-200">dozens of encoded variants</strong>.
+      <strong className="text-slate-700 dark:text-slate-300">dozens of encoded variants</strong>.
       The encoding farm produces a{" "}
-      <strong className="text-slate-200">bitrate ladder</strong> — a set of
+      <strong className="text-slate-700 dark:text-slate-300">bitrate ladder</strong> — a set of
       resolution × bitrate pairs that the ABR algorithm can switch between.
     </p>,
     <Table
@@ -163,11 +163,11 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         subtitle="Netflix's signature optimization"
         theme="emerald"
       >
-        <p className="mt-2 text-sm leading-relaxed text-emerald-200/80">
-          <strong className="text-emerald-300">Netflix</strong>
+        <p className="mt-2 text-sm leading-relaxed text-emerald-700 dark:text-emerald-300/80">
+          <strong className="text-emerald-700 dark:text-emerald-400">Netflix</strong>
           &nbsp;analyzes each title's visual complexity (action scenes need more
           bits than static dialogue) and builds a{" "}
-          <strong className="text-emerald-300">
+          <strong className="text-emerald-700 dark:text-emerald-400">
             custom bitrate ladder per movie
           </strong>
           .&nbsp;
@@ -183,9 +183,9 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         subtitle="The next evolution"
         theme="amber"
       >
-        <p className="mt-2 text-sm leading-relaxed text-amber-200/80">
+        <p className="mt-2 text-sm leading-relaxed text-amber-700 dark:text-amber-300/80">
           Netflix extended per-title to{" "}
-          <strong className="text-amber-300">per-shot</strong>: each scene cut
+          <strong className="text-amber-700 dark:text-amber-400">per-shot</strong>: each scene cut
           gets its own optimal bitrate.&nbsp;
           <SourceMarker vendor="Netflix Tech Blog" year={2018} /> A dark
           dialogue scene encodes at 1.5 Mbps while the explosion that follows
@@ -201,7 +201,7 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
     <h3 key="h-codecs" className="text-xl font-bold mt-8 mb-4">
       Video Codecs: The Compression Battle
     </h3>,
-    <p key="p-codecs" className="text-sm text-slate-300 mb-4 leading-relaxed">
+    <p key="p-codecs" className="text-sm text-slate-700 dark:text-slate-400 mb-4 leading-relaxed">
       The codec determines how efficiently bits represent visual information. A
       better codec means the same quality at fewer bits — or higher quality at
       the same bandwidth.
@@ -262,7 +262,7 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
     </h3>,
     <p
       key="p-protocols"
-      className="text-sm text-slate-300 mb-4 leading-relaxed"
+      className="text-sm text-slate-700 dark:text-slate-400 mb-4 leading-relaxed"
     >
       Two protocols dominate adaptive streaming. Both work similarly — manifest
       + segments over HTTP — but differ in ecosystem, DRM, and flexibility.
@@ -274,33 +274,33 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         subtitle="Apple's protocol — the industry default"
         theme="cyan"
       >
-        <ul className="mt-2 text-sm text-cyan-200/80 space-y-2 list-disc pl-4">
+        <ul className="mt-2 text-sm text-cyan-700 dark:text-cyan-300/80 space-y-2 list-disc pl-4">
           <li>
-            <strong className="text-cyan-300">Origin:</strong> Created by Apple
+            <strong className="text-cyan-700 dark:text-cyan-400">Origin:</strong> Created by Apple
             for iOS in 2009.&nbsp;
             <SourceMarker vendor="Apple" spec="RFC 8216" />
           </li>
           <li>
-            <strong className="text-cyan-300">Manifest:</strong>{" "}
-            <code className="text-cyan-300">.m3u8</code> playlist files
+            <strong className="text-cyan-700 dark:text-cyan-400">Manifest:</strong>{" "}
+            <code className="text-cyan-700 dark:text-cyan-400">.m3u8</code> playlist files
             (plain-text, line-based)
           </li>
           <li>
-            <strong className="text-cyan-300">Segments:</strong> Typically{" "}
-            <code className="text-cyan-300">.ts</code> (MPEG-TS) or{" "}
-            <code className="text-cyan-300">.fmp4</code> (fragmented MP4)
+            <strong className="text-cyan-700 dark:text-cyan-400">Segments:</strong> Typically{" "}
+            <code className="text-cyan-700 dark:text-cyan-400">.ts</code> (MPEG-TS) or{" "}
+            <code className="text-cyan-700 dark:text-cyan-400">.fmp4</code> (fragmented MP4)
           </li>
           <li>
-            <strong className="text-cyan-300">Default segment:</strong> 6
+            <strong className="text-cyan-700 dark:text-cyan-400">Default segment:</strong> 6
             seconds (Apple recommendation), often tuned to 2–4s for lower
             latency
           </li>
           <li>
-            <strong className="text-cyan-300">DRM:</strong> FairPlay (Apple
+            <strong className="text-cyan-700 dark:text-cyan-400">DRM:</strong> FairPlay (Apple
             ecosystem), Widevine via fMP4
           </li>
           <li>
-            <strong className="text-cyan-300">Support:</strong> Native on
+            <strong className="text-cyan-700 dark:text-cyan-400">Support:</strong> Native on
             Safari, iOS, macOS; via hls.js on Chrome, Firefox, Edge
           </li>
         </ul>
@@ -311,32 +311,32 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         subtitle="The open standard"
         theme="violet"
       >
-        <ul className="mt-2 text-sm text-violet-200/80 space-y-2 list-disc pl-4">
+        <ul className="mt-2 text-sm text-violet-700 dark:text-violet-300/80 space-y-2 list-disc pl-4">
           <li>
-            <strong className="text-violet-300">Origin:</strong> ISO/IEC
+            <strong className="text-violet-700 dark:text-violet-400">Origin:</strong> ISO/IEC
             standard, MPEG-DASH.&nbsp;
             <SourceMarker spec="ISO 23009-1" />
           </li>
           <li>
-            <strong className="text-violet-300">Manifest:</strong>{" "}
-            <code className="text-violet-300">.mpd</code> (XML-based Media
+            <strong className="text-violet-700 dark:text-violet-400">Manifest:</strong>{" "}
+            <code className="text-violet-700 dark:text-violet-400">.mpd</code> (XML-based Media
             Presentation Description)
           </li>
           <li>
-            <strong className="text-violet-300">Segments:</strong> Fragmented
-            MP4 (<code className="text-violet-300">.m4s</code>) with
+            <strong className="text-violet-700 dark:text-violet-400">Segments:</strong> Fragmented
+            MP4 (<code className="text-violet-700 dark:text-violet-400">.m4s</code>) with
             initialization segments
           </li>
           <li>
-            <strong className="text-violet-300">Default segment:</strong> 2–6
+            <strong className="text-violet-700 dark:text-violet-400">Default segment:</strong> 2–6
             seconds, fully configurable
           </li>
           <li>
-            <strong className="text-violet-300">DRM:</strong> Widevine (Google),
+            <strong className="text-violet-700 dark:text-violet-400">DRM:</strong> Widevine (Google),
             PlayReady (Microsoft) via CENC
           </li>
           <li>
-            <strong className="text-violet-300">Support:</strong> Chrome,
+            <strong className="text-violet-700 dark:text-violet-400">Support:</strong> Chrome,
             Firefox, Edge, smart TVs, Android — not Safari
           </li>
         </ul>
@@ -401,7 +401,7 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
     <h3 key="h-abr" className="text-xl font-bold mt-8 mb-4">
       Adaptive Bitrate (ABR): The Brain of the Player
     </h3>,
-    <p key="p-abr" className="text-sm text-slate-300 mb-4 leading-relaxed">
+    <p key="p-abr" className="text-sm text-slate-700 dark:text-slate-400 mb-4 leading-relaxed">
       ABR is why your video starts blurry and sharpens after a few seconds. The
       player continuously estimates what quality it can sustain without
       rebuffering, and switches quality between segments.
@@ -413,14 +413,14 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         subtitle="Classic approach"
         theme="sky"
       >
-        <p className="mt-2 text-sm leading-relaxed text-sky-200/80">
+        <p className="mt-2 text-sm leading-relaxed text-sky-700 dark:text-sky-300/80">
           Measures download speed of recent segments. If the last three 1080p
           segments downloaded at 8 Mbps and the next 1080p segment needs 5 Mbps,
           the algorithm stays at 1080p. If throughput drops to 3 Mbps, it drops
           to 720p immediately.
         </p>
-        <p className="mt-2 text-sm text-sky-300/70">
-          <strong className="text-sky-300">Weakness:</strong> Reacts after
+        <p className="mt-2 text-sm text-sky-700 dark:text-sky-400/70">
+          <strong className="text-sky-700 dark:text-sky-400">Weakness:</strong> Reacts after
           congestion is already happening — oscillates between qualities on
           unstable networks.
         </p>
@@ -431,22 +431,22 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         subtitle="Netflix's BBA approach"
         theme="indigo"
       >
-        <p className="mt-2 text-sm leading-relaxed text-indigo-200/80">
+        <p className="mt-2 text-sm leading-relaxed text-indigo-700 dark:text-indigo-300/80">
           Instead of measuring speed, it watches the{" "}
-          <strong className="text-indigo-300">buffer level</strong>. When the
+          <strong className="text-indigo-700 dark:text-indigo-400">buffer level</strong>. When the
           buffer is deep (30+ seconds ahead), it picks higher quality. When the
           buffer drains toward empty, it aggressively drops quality.&nbsp;
           <SourceMarker vendor="Netflix" year={2014} />
         </p>
-        <p className="mt-2 text-sm text-indigo-300/70">
-          <strong className="text-indigo-300">Advantage:</strong> More stable
+        <p className="mt-2 text-sm text-indigo-700 dark:text-indigo-400/70">
+          <strong className="text-indigo-700 dark:text-indigo-400">Advantage:</strong> More stable
           quality decisions — avoids the throughput estimation noise that causes
           oscillation.
         </p>
       </FeatureCard>
     </Grid>,
     <Card key="card-abr-hybrid" title="Modern Hybrid ABR" description="What platforms actually ship today">
-      <p className="text-sm text-slate-300 leading-relaxed mb-3">
+      <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed mb-3">
         Production ABR algorithms combine both signals plus additional heuristics:
         device capability, content complexity metadata from encoding, viewer
         history (Netflix knows your typical bandwidth), and even time-of-day
@@ -456,7 +456,7 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         </strong>{" "}
         — there is no point streaming 4K to a 360p phone widget.
       </p>
-      <p className="text-sm text-slate-400 leading-relaxed">
+      <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
         <strong className="text-muted-foreground">Why it matters:</strong> A
         poorly tuned ABR algorithm causes the "quality yo-yo" where video
         flickers between sharp and blurry every few seconds — more annoying to
@@ -470,7 +470,7 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
     <h3 key="h-cdn" className="text-xl font-bold mt-8 mb-4">
       CDN & Delivery Architecture
     </h3>,
-    <p key="p-cdn" className="text-sm text-slate-300 mb-4 leading-relaxed">
+    <p key="p-cdn" className="text-sm text-slate-700 dark:text-slate-400 mb-4 leading-relaxed">
       Video segments are the heaviest assets on the internet. Netflix alone
       accounts for ~15% of global downstream internet traffic.&nbsp;
       <SourceMarker vendor="Sandvine" year={2023} /> The CDN layer is what makes
@@ -483,9 +483,9 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         subtitle="Netflix's private CDN"
         theme="emerald"
       >
-        <ul className="mt-2 text-sm text-emerald-200/80 space-y-2 list-disc pl-4">
+        <ul className="mt-2 text-sm text-emerald-700 dark:text-emerald-300/80 space-y-2 list-disc pl-4">
           <li>
-            <strong className="text-emerald-300">
+            <strong className="text-emerald-700 dark:text-emerald-400">
               Custom hardware appliances
             </strong>
             &nbsp;deployed inside ISP data centers worldwide
@@ -503,7 +503,7 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
             — traffic never crosses the public internet
           </li>
           <li>
-            <strong className="text-emerald-300">Result:</strong> ~100 Gbps+
+            <strong className="text-emerald-700 dark:text-emerald-400">Result:</strong> ~100 Gbps+
             served from a single appliance&nbsp;
             <SourceMarker vendor="Netflix Open Connect" />
           </li>
@@ -515,9 +515,9 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         subtitle="Google's global edge network"
         theme="amber"
       >
-        <ul className="mt-2 text-sm text-amber-200/80 space-y-2 list-disc pl-4">
+        <ul className="mt-2 text-sm text-amber-700 dark:text-amber-300/80 space-y-2 list-disc pl-4">
           <li>
-            <strong className="text-amber-300">
+            <strong className="text-amber-700 dark:text-amber-400">
               Google Global Cache (GGC)
             </strong>
             &nbsp;nodes inside ISPs, plus Google's own massive edge network
@@ -531,7 +531,7 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
             at scale
           </li>
           <li>
-            <strong className="text-amber-300">QUIC protocol:</strong>{" "}
+            <strong className="text-amber-700 dark:text-amber-400">QUIC protocol:</strong>{" "}
             YouTube pioneered HTTP/3 (QUIC) for faster connection setup and
             multiplexed segment delivery&nbsp;
             <SourceMarker spec="RFC 9114" />
@@ -546,9 +546,9 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
     <h3 key="h-buffer" className="text-xl font-bold mt-8 mb-4">
       Why the Spinner Appears: Buffering Root Causes
     </h3>,
-    <p key="p-buffer" className="text-sm text-slate-300 mb-4 leading-relaxed">
+    <p key="p-buffer" className="text-sm text-slate-700 dark:text-slate-400 mb-4 leading-relaxed">
       The "spinning circle" means the player's buffer has{" "}
-      <strong className="text-slate-200">drained to zero</strong> — it cannot
+      <strong className="text-slate-700 dark:text-slate-300">drained to zero</strong> — it cannot
       play the next frame because the next segment has not arrived and been
       decoded yet. Here is every layer that can cause it:
     </p>,
@@ -675,10 +675,10 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
     <h3 key="h-live" className="text-xl font-bold mt-8 mb-4">
       Live Streaming: A Harder Problem
     </h3>,
-    <p key="p-live" className="text-sm text-slate-300 mb-4 leading-relaxed">
+    <p key="p-live" className="text-sm text-slate-700 dark:text-slate-400 mb-4 leading-relaxed">
       VOD (Video on Demand) lets you pre-encode everything. Live streaming
       removes that luxury — encoding, segmenting, and distribution must happen{" "}
-      <strong className="text-slate-200">in real time</strong>.
+      <strong className="text-slate-700 dark:text-slate-300">in real time</strong>.
     </p>,
     <Table
       key="tbl-live-vod"
@@ -718,9 +718,9 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         subtitle="Apple's live latency solution"
         theme="cyan"
       >
-        <p className="mt-2 text-sm leading-relaxed text-cyan-200/80">
+        <p className="mt-2 text-sm leading-relaxed text-cyan-700 dark:text-cyan-300/80">
           Instead of waiting for complete 6s segments, LL-HLS uses{" "}
-          <strong className="text-cyan-300">partial segments</strong> (~200ms
+          <strong className="text-cyan-700 dark:text-cyan-400">partial segments</strong> (~200ms
           parts) delivered via HTTP/2 push or blocking playlist
           reload.&nbsp;
           <SourceMarker vendor="Apple" version="HLS v12" /> Target latency:
@@ -733,9 +733,9 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         subtitle="DASH's answer with CMAF"
         theme="violet"
       >
-        <p className="mt-2 text-sm leading-relaxed text-violet-200/80">
+        <p className="mt-2 text-sm leading-relaxed text-violet-700 dark:text-violet-300/80">
           Uses{" "}
-          <strong className="text-violet-300">
+          <strong className="text-violet-700 dark:text-violet-400">
             CMAF chunked transfer encoding
           </strong>
           : the CDN starts forwarding a segment before the encoder finishes
@@ -752,9 +752,9 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
     <h3 key="h-drm" className="text-xl font-bold mt-8 mb-4">
       DRM: Why Quality Depends on Your Browser
     </h3>,
-    <p key="p-drm" className="text-sm text-slate-300 mb-4 leading-relaxed">
+    <p key="p-drm" className="text-sm text-slate-700 dark:text-slate-400 mb-4 leading-relaxed">
       You may have noticed Netflix caps quality at 720p on some browsers.
-      This is <strong className="text-slate-200">DRM-enforced</strong>. The
+      This is <strong className="text-slate-700 dark:text-slate-300">DRM-enforced</strong>. The
       studio demands different protection levels depending on the device's
       trusted execution environment.
     </p>,
@@ -853,11 +853,11 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
       subtitle="When CDN capacity meets unpredictable demand"
       theme="rose"
     >
-      <p className="mt-2 text-sm leading-relaxed text-rose-200/80">
+      <p className="mt-2 text-sm leading-relaxed text-rose-700 dark:text-rose-300/80">
         Fox streamed Super Bowl LIII to millions of concurrent viewers. During
         halftime, viewers who had paused their streams all resumed
         simultaneously, creating a{" "}
-        <strong className="text-rose-300">
+        <strong className="text-rose-700 dark:text-rose-400">
           thundering herd of segment requests
         </strong>
         &nbsp;that exceeded CDN edge capacity in multiple regions. The result:
@@ -865,8 +865,8 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
         failures lasting 30–60+ seconds during the most-watched event of the
         year.
       </p>
-      <p className="mt-3 text-sm text-rose-300/70">
-        <strong className="text-rose-300">Lesson:</strong> Live streaming at
+      <p className="mt-3 text-sm text-rose-700 dark:text-rose-400/70">
+        <strong className="text-rose-700 dark:text-rose-400">Lesson:</strong> Live streaming at
         massive scale requires pre-warmed CDN capacity, predictive auto-scaling,
         and fallback origin paths. The encoding pipeline was fine — the delivery
         layer buckled under coordinated demand spikes.
@@ -985,7 +985,7 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
 #EXT-X-STREAM-INF:BANDWIDTH=15000000,RESOLUTION=3840x2160
 4k/playlist.m3u8`}
         />
-        <p className="mt-2 text-xs text-cyan-300/60">
+        <p className="mt-2 text-xs text-cyan-700 dark:text-cyan-400/60">
           The player reads BANDWIDTH values and picks the highest one sustainable
           on the current connection.
         </p>
@@ -1017,7 +1017,7 @@ export const videoStreamingUnderTheHoodTopic: Topic = {
   </Period>
 </MPD>`}
         />
-        <p className="mt-2 text-xs text-violet-300/60">
+        <p className="mt-2 text-xs text-violet-700 dark:text-violet-400/60">
           XML-based, more verbose but more flexible than HLS for advanced
           features like multi-period content and ad insertion.
         </p>

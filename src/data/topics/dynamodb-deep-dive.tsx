@@ -75,7 +75,7 @@ export const dynamoDbDeepDiveTopic: Topic = {
 		</p>,
 		<Grid key="11" cols={2} gap={6} className="my-6">
 			<FeatureCard icon={Zap} title="How LSM Tree Writes Work" subtitle="Sequential append pipeline" theme="emerald">
-				<ol className="text-sm text-emerald-100/75 space-y-1 list-decimal list-inside">
+				<ol className="text-sm text-emerald-700 dark:text-emerald-100/75 space-y-1 list-decimal list-inside">
 					<li>
 						Write lands in an in-memory buffer (<strong>MemTable</strong>)
 					</li>
@@ -87,7 +87,7 @@ export const dynamoDbDeepDiveTopic: Topic = {
 				</ol>
 			</FeatureCard>
 			<FeatureCard icon={TriangleAlert} title="Why This Beats B-Trees at Scale" subtitle="Write-first trade-off profile" theme="cyan">
-				<ul className="text-sm text-cyan-100/75 space-y-1 list-disc list-inside">
+				<ul className="text-sm text-cyan-700 dark:text-cyan-100/75 space-y-1 list-disc list-inside">
 					<li>Every write is a sequential append — disk I/O is maximally efficient</li>
 					<li>No lock contention on a shared B-Tree root structure</li>
 					<li>Writes are acknowledged after MemTable + WAL — microseconds, not disk seeks</li>
@@ -276,7 +276,7 @@ const recent = await dynamo.query({
 		</h3>,
 		<Grid key="31" cols={2} gap={6} className="my-6">
 			<FeatureCard icon={TriangleAlert} title="Avoid DynamoDB When..." subtitle="Relational or exploratory workloads" theme="rose">
-				<ul className="text-sm text-rose-100/75 space-y-1 list-disc list-inside">
+				<ul className="text-sm text-rose-700 dark:text-rose-100/75 space-y-1 list-disc list-inside">
 					<li>You need complex multi-table JOINs or ad-hoc analytics queries</li>
 					<li>Your access patterns are not known at design time (exploratory data)</li>
 					<li>You have relational integrity requirements (foreign keys, cascades)</li>
@@ -286,7 +286,7 @@ const recent = await dynamo.query({
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={Zap} title="DynamoDB Shines When..." subtitle="Predictable access patterns at huge scale" theme="emerald">
-				<ul className="text-sm text-emerald-100/75 space-y-1 list-disc list-inside">
+				<ul className="text-sm text-emerald-700 dark:text-emerald-100/75 space-y-1 list-disc list-inside">
 					<li>You need guaranteed single-digit ms SLA at unpredictable scale</li>
 					<li>You want zero operational overhead (no patches, backups, replication setup)</li>
 					<li>Traffic is spiky and unpredictable — Black Friday, viral moments</li>

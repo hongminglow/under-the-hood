@@ -22,12 +22,12 @@ export const eventDrivenArchitectureTopic: Topic = {
     </h3>,
     <Grid key="3" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Link2Off} title="The Synchronous Web" subtitle="Tight coupling across services" theme="rose">
-        <p className="text-sm text-rose-100/75 mb-2">
+        <p className="text-sm text-rose-700 dark:text-rose-100/75 mb-2">
           Services are strictly coupled. They specifically demand things from each other: `EmailServer.send(userId)`. When one server struggles, the latency propagates mathematically across all tight functions until the entire app freezes.
         </p>
       </FeatureCard>
       <FeatureCard icon={Radio} title="Event-Driven (PubSub)" subtitle="Publish once, let consumers react" theme="cyan">
-        <p className="text-sm text-cyan-100/75">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75">
           The `Order Service` never talks to the `Email Service`. Instead, when an order is placed, it just screams a message into the void (Kafka/RabbitMQ): "EVENT OCCURRED: USER 5 ORDERED A MACBOOK." 
         </p>
       </FeatureCard>
@@ -57,12 +57,12 @@ export const eventDrivenArchitectureTopic: Topic = {
     </p>,
     <Grid key="7b" cols={2} gap={6} className="my-8">
       <FeatureCard icon={KeyRound} title="Idempotency Key" subtitle="Reject duplicates before side effects" theme="emerald">
-        <p className="text-sm text-emerald-100/75">
+        <p className="text-sm text-emerald-700 dark:text-emerald-100/75">
           Every event carries a unique <code>event_id</code>. Before processing, the consumer checks a <strong>deduplication table</strong> (Redis SET or DB unique constraint). If the ID exists, skip processing silently.
         </p>
       </FeatureCard>
       <FeatureCard icon={ReceiptText} title="Transactional Outbox" subtitle="Publish only if the write commits" theme="amber">
-        <p className="text-sm text-amber-100/75">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75">
           Instead of publishing events directly to Kafka, the producer writes the event to an <strong>outbox table</strong> inside the same database transaction as the business write. A separate poller reads the outbox and publishes to the broker. This guarantees the event is published if and only if the business write succeeds.
         </p>
       </FeatureCard>

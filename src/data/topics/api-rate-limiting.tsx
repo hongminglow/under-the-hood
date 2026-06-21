@@ -42,15 +42,15 @@ export const apiRateLimitingTopic: Topic = {
     />,
     <Grid key="4" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Database} title="Architectural Placement" subtitle="Centralized state, not local memory" theme="emerald">
-        <p className="text-sm text-emerald-200/80">
-          Never write an API Rate Limiter locally in Node.js memory. If you have 5 load-balanced servers, a hacker will just hit all 5 servers independently. Rate limits must be stored rapidly into a centralized lightning-fast cache like <strong className="text-emerald-300">Redis</strong> or pushed up entirely into an API Gateway like AWS API Gateway, keeping the malicious traffic far away from your codebase.
+        <p className="text-sm text-emerald-700 dark:text-emerald-300/80">
+          Never write an API Rate Limiter locally in Node.js memory. If you have 5 load-balanced servers, a hacker will just hit all 5 servers independently. Rate limits must be stored rapidly into a centralized lightning-fast cache like <strong className="text-emerald-700 dark:text-emerald-400">Redis</strong> or pushed up entirely into an API Gateway like AWS API Gateway, keeping the malicious traffic far away from your codebase.
         </p>
       </FeatureCard>
       <FeatureCard icon={Timer} title="The Client Headers" subtitle="Expose remaining budget" theme="teal">
-        <p className="text-sm text-teal-200/80">
+        <p className="text-sm text-teal-700 dark:text-teal-300/80">
           Good APIs strictly tell the frontend exactly how many tokens they have left so they do not blindly guess.
         </p>
-        <ul className="text-xs mt-3 border-l border-teal-700/50 pl-3 text-teal-200/70 font-mono space-y-1">
+        <ul className="text-xs mt-3 border-l border-teal-700/50 pl-3 text-teal-700 dark:text-teal-300/70 font-mono space-y-1">
           <li>X-RateLimit-Limit: 100</li>
           <li>X-RateLimit-Remaining: 32</li>
           <li>X-RateLimit-Reset: 1726058400</li>

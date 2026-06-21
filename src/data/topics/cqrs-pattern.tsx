@@ -27,22 +27,22 @@ export const cqrsPatternTopic: Topic = {
 		</h3>,
 		<Grid key="3" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={PencilLine} title="Command Side" subtitle="Write model" theme="amber">
-				<p className="text-sm text-amber-200/80 mb-2">
+				<p className="text-sm text-amber-700 dark:text-amber-300/80 mb-2">
 					Handles <strong>Commands</strong>: <code>PlaceOrder</code>, <code>CancelOrder</code>,{" "}
 					<code>UpdateAddress</code>. Each command validates business rules, mutates state, and writes to the{" "}
 					<strong>write database</strong> (optimized for transactional integrity — normalized, ACID-compliant).
 				</p>
-				<p className="text-xs italic text-amber-200/65">
+				<p className="text-xs italic text-amber-700 dark:text-amber-300/65">
 					Think: PostgreSQL with strict foreign keys, constraints, and normalized tables.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Search} title="Query Side" subtitle="Read model" theme="sky">
-				<p className="text-sm text-sky-200/80 mb-2">
+				<p className="text-sm text-sky-700 dark:text-sky-300/80 mb-2">
 					Handles <strong>Queries</strong>: <code>GetOrderSummary</code>, <code>GetDashboardStats</code>,{" "}
 					<code>SearchProducts</code>. Reads from a <strong>read database</strong> that is pre-computed, denormalized,
 					and optimized purely for query speed.
 				</p>
-				<p className="text-xs italic text-sky-200/65">
+				<p className="text-xs italic text-sky-700 dark:text-sky-300/65">
 					Think: Elasticsearch for search, Redis for dashboards, materialized views for reports.
 				</p>
 			</FeatureCard>
@@ -87,20 +87,20 @@ export const cqrsPatternTopic: Topic = {
 		</p>,
 		<Grid key="7" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={PencilLine} title="Synchronous Projection" subtitle="Immediate read-model update" theme="amber">
-				<p className="text-sm text-amber-200/80 mb-2">
+				<p className="text-sm text-amber-700 dark:text-amber-300/80 mb-2">
 					After a write succeeds, the application <strong>immediately</strong> updates the read model in the same
 					request cycle. Simple, consistent, but couples the two sides together and adds latency to every write.
 				</p>
-				<p className="text-xs italic text-amber-200/65">
+				<p className="text-xs italic text-amber-700 dark:text-amber-300/65">
 					Good for: Low-traffic systems where consistency matters more than write speed.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Search} title="Asynchronous Projection" subtitle="Event-driven read model" theme="sky">
-				<p className="text-sm text-sky-200/80 mb-2">
+				<p className="text-sm text-sky-700 dark:text-sky-300/80 mb-2">
 					The write side publishes a <strong>Domain Event</strong> (e.g., <code>OrderPlaced</code>) to a message broker
 					(Kafka, RabbitMQ). A separate projector service consumes events and updates the read model asynchronously.
 				</p>
-				<p className="text-xs italic text-sky-200/65">
+				<p className="text-xs italic text-sky-700 dark:text-sky-300/65">
 					Good for: High-traffic systems. The read model is <strong>eventually consistent</strong> — there's a brief
 					delay (milliseconds to seconds) before reads reflect the latest write.
 				</p>

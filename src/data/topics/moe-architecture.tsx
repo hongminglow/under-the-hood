@@ -42,7 +42,7 @@ export const moeArchitectureTopic: Topic = {
 		</h3>,
 		<Grid key="grid" cols={2} gap={6}>
 			<FeatureCard icon={SquareStack} title="Dense Model (e.g., Llama 3)" subtitle="Every parameter fires every token" theme="amber">
-				<ul className="text-sm text-amber-100/75 space-y-2 list-disc pl-4 mb-4">
+				<ul className="text-sm text-amber-700 dark:text-amber-100/75 space-y-2 list-disc pl-4 mb-4">
 					<li>Every parameter is active for every token.</li>
 					<li>Linear compute scaling with parameter count.</li>
 					<li>
@@ -54,7 +54,7 @@ export const moeArchitectureTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={GitMerge} title="MoE Model (e.g., Mixtral 8x7B)" subtitle="Sparse experts per token" theme="emerald">
-				<ul className="text-sm text-emerald-100/75 space-y-2 list-disc pl-4 mb-4">
+				<ul className="text-sm text-emerald-700 dark:text-emerald-100/75 space-y-2 list-disc pl-4 mb-4">
 					<li>Sparse activation (e.g., only 2 experts per token).</li>
 					<li>Only 13B active parameters out of 47B total per token.</li>
 					<li>
@@ -129,7 +129,7 @@ export const moeArchitectureTopic: Topic = {
 		</h3>,
 		<Grid key="pros-cons-grid" cols={2} gap={6} className="my-8">
 			<FeatureCard icon={GitMerge} title="Pros" subtitle="Why providers love MoE" theme="emerald">
-				<ul className="text-sm text-emerald-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-emerald-700 dark:text-emerald-100/75 space-y-2 list-disc pl-4">
 					<li>
 						<strong>Blistering Inference Speed:</strong> Active parameter count remains low, meaning less compute time
 						per token.
@@ -149,7 +149,7 @@ export const moeArchitectureTopic: Topic = {
 				</ul>
 			</FeatureCard>
 			<FeatureCard icon={SquareStack} title="Cons" subtitle="What MoE still pays for" theme="amber">
-				<ul className="text-sm text-amber-100/75 space-y-2 list-disc pl-4">
+				<ul className="text-sm text-amber-700 dark:text-amber-100/75 space-y-2 list-disc pl-4">
 					<li>
 						<strong>VRAM Hungry:</strong> Every single parameter must be kept in memory. You cannot page experts in and
 						out of GPU memory fast enough during generation.

@@ -272,7 +272,7 @@ function a(_0x3f4e) {
 
     <Grid key="13" cols={2} gap={6} className="mb-8 mt-6">
       <FeatureCard icon={ShieldCheck} title="Obfuscation Protects Against" subtitle="Raises attacker cost" theme="emerald">
-        <ul className="text-sm text-emerald-200/80 list-disc pl-4 space-y-2">
+        <ul className="text-sm text-emerald-700 dark:text-emerald-300/80 list-disc pl-4 space-y-2">
           <li>Casual competitor bundle inspection</li>
           <li>Automated scraping of proprietary algorithms</li>
           <li>Script-kiddie tampering</li>
@@ -281,7 +281,7 @@ function a(_0x3f4e) {
         </ul>
       </FeatureCard>
       <FeatureCard icon={Lock} title="Obfuscation Does Not Protect Against" subtitle="Still not a boundary" theme="rose">
-        <ul className="text-sm text-rose-200/80 list-disc pl-4 space-y-2">
+        <ul className="text-sm text-rose-700 dark:text-rose-300/80 list-disc pl-4 space-y-2">
           <li>A determined security researcher with a deobfuscator tool</li>
           <li>Runtime inspection via breakpoints on a live execution</li>
           <li>Network-level traffic analysis (use TLS for that)</li>

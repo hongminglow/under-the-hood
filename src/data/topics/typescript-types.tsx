@@ -35,8 +35,8 @@ export const typescriptTypesTopic: Topic = {
       key="3"
       headers={[
         "Concept",
-        "<span class='text-amber-300'>JavaScript (Dynamic)</span>",
-        "<span class='text-cyan-300'>TypeScript (Static)</span>",
+        "<span class='text-amber-700 dark:text-amber-400'>JavaScript (Dynamic)</span>",
+        "<span class='text-cyan-700 dark:text-cyan-400'>TypeScript (Static)</span>",
       ]}
       rows={[
         [
@@ -67,12 +67,12 @@ export const typescriptTypesTopic: Topic = {
     </h3>,
 
     <p key="4a" className="mb-6">
-      <strong className="text-red-400">The Problem:</strong> Browsers completely
+      <strong className="text-red-700 dark:text-red-400">The Problem:</strong> Browsers completely
       do not understand TypeScript natively. They only speak pure Vanilla
       JavaScript.
       <br />
       <br />
-      <strong className="text-green-400">The Solution:</strong> TypeScript is
+      <strong className="text-green-700 dark:text-green-400">The Solution:</strong> TypeScript is
       physically just a "glorified linter" that runs in your terminal. After
       verifying your code is mathematically type-safe, the build tool surgically
       deletes every single type definition, leaving behind raw JavaScript.{" "}
@@ -116,7 +116,7 @@ export const typescriptTypesTopic: Topic = {
         subtitle="Self-documenting code"
         theme="cyan"
       >
-        <p className="mb-4 text-cyan-100/80">
+        <p className="mb-4 text-cyan-700 dark:text-cyan-100/80">
           In large teams, passing a mysterious <code>user</code> object into a
           JavaScript function requires tracking down 5 different files to guess
           what properties exist inside it. In TypeScript, pressing{" "}
@@ -155,12 +155,12 @@ function checkout(cart: Cart) {
         subtitle="Compiler-guided change safety"
         theme="emerald"
       >
-        <p className="mb-4 text-red-100/80">
-          <strong className="text-red-300">The Scenario:</strong> Your backend
+        <p className="mb-4 text-emerald-700 dark:text-emerald-100/80">
+          <strong className="text-emerald-700 dark:text-emerald-400">The Scenario:</strong> Your backend
           team decides to rename the API property <code>user_id</code> to{" "}
           <code>userId</code>.
         </p>
-        <p className="text-red-100/75">
+        <p className="text-emerald-700 dark:text-emerald-100/75">
           In <strong>JavaScript</strong>, this is an absolute nightmare. You run
           a global "Find and Replace", pray you didn't accidentally overwrite a
           completely unrelated variable, push to production, and inevitably

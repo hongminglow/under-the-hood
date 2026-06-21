@@ -33,25 +33,25 @@ export const ssrVsCsrTopic: Topic = {
       headers={["Acronym", "Name", "How it renders HTML", "Best For"]}
       rows={[
         [
-          "<span class='text-amber-300'>CSR</span>",
+          "<span class='text-amber-700 dark:text-amber-400'>CSR</span>",
           "Client-Side Rendering",
           "Traditional React. Sends empty HTML. The user's browser burns CPU building the entire UI from scratch via JavaScript.",
           "Internal SaaS dashboards hidden behind auth. SEO explicitly does not matter here.",
         ],
         [
-          "<span class='text-cyan-300'>SSR</span>",
+          "<span class='text-cyan-700 dark:text-cyan-400'>SSR</span>",
           "Server-Side Rendering",
           "A real Node server builds the full HTML string on every single request on-the-fly, then sends it. Great for SEO, but every request costs compute.",
           "Dynamic content that changes every second — Twitter feed, live stock prices, user-specific dashboards.",
         ],
         [
-          "<span class='text-emerald-300'>SSG</span>",
+          "<span class='text-emerald-700 dark:text-emerald-400'>SSG</span>",
           "Static-Site Generation",
           "During the CI/CD build phase, every page is pre-rendered into physical HTML files. Insanely fast (CDN-served), but requires a full re-deploy to update any content.",
           "Marketing sites, blogs, documentation pages where content changes infrequently.",
         ],
         [
-          "<span class='text-teal-300'>ISR</span>",
+          "<span class='text-teal-700 dark:text-teal-400'>ISR</span>",
           "Incremental Static Regeneration",
           "SSG with a background refresh timer. 'Regenerate this specific page at most once every 60 seconds.' Old cache is served instantly while the new one is built silently.",
           "E-commerce product pages where prices update periodically but don't need millisecond accuracy.",
@@ -79,9 +79,9 @@ export const ssrVsCsrTopic: Topic = {
       key="perf-table"
       headers={[
         "Metric",
-        "<span class='text-amber-300'>CSR</span>",
-        "<span class='text-cyan-300'>SSR</span>",
-        "<span class='text-emerald-300'>SSG</span> / <span class='text-teal-300'>ISR</span>",
+        "<span class='text-amber-700 dark:text-amber-400'>CSR</span>",
+        "<span class='text-cyan-700 dark:text-cyan-400'>SSR</span>",
+        "<span class='text-emerald-700 dark:text-emerald-400'>SSG</span> / <span class='text-teal-700 dark:text-teal-400'>ISR</span>",
         "What it measures",
       ]}
       rows={[
@@ -138,7 +138,7 @@ export const ssrVsCsrTopic: Topic = {
         title="Server Component (default in App Router)"
         description="Renders on server. Never ships to client."
       >
-        <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
+        <ul className="text-sm text-slate-700 dark:text-slate-400 space-y-2 list-disc pl-4">
           <li>
             Can <code>async/await</code> directly inside the component — no{" "}
             <code>useEffect</code> needed.
@@ -172,7 +172,7 @@ export default async function ProductsPage() {
         title="Client Component ('use client')"
         description="Hydrated on client. Ships JS to browser."
       >
-        <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
+        <ul className="text-sm text-slate-700 dark:text-slate-400 space-y-2 list-disc pl-4">
           <li>
             Requires <code>'use client'</code> at the top of the file.
           </li>

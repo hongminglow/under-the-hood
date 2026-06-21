@@ -37,18 +37,18 @@ export const bTreeVsBPlusTreeTopic: Topic = {
     </p>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <FeatureCard icon={GitBranch} title="The Linked Leaf Chain" subtitle="Range scans become horizontal" theme="emerald">
-        <p className="text-sm text-emerald-200/80 mb-2">
-          B+ Trees connect all leaf nodes via a <strong className="text-emerald-300">Doubly Linked List</strong>.
+        <p className="text-sm text-emerald-700 dark:text-emerald-300/80 mb-2">
+          B+ Trees connect all leaf nodes via a <strong className="text-emerald-700 dark:text-emerald-400">Doubly Linked List</strong>.
         </p>
-        <p className="text-xs italic text-emerald-200/60">
+        <p className="text-xs italic text-emerald-700 dark:text-emerald-300/60">
           This allows the database engine to perform "Range Scans" (<code>WHERE id &gt; 100 AND id &lt; 500</code>) by finding the first leaf and simply walking horizontally.
         </p>
       </FeatureCard>
       <FeatureCard icon={TreePine} title="LSM Trees" subtitle="The write-heavy alternative" theme="teal">
-        <p className="text-sm text-teal-200/80 mb-2">
-          Used in NoSQL (Cassandra, RocksDB) for <strong className="text-teal-300">Write-Heavy</strong> workloads.
+        <p className="text-sm text-teal-700 dark:text-teal-300/80 mb-2">
+          Used in NoSQL (Cassandra, RocksDB) for <strong className="text-teal-700 dark:text-teal-400">Write-Heavy</strong> workloads.
         </p>
-        <p className="text-xs italic text-teal-200/60">
+        <p className="text-xs italic text-teal-700 dark:text-teal-300/60">
           Unlike B+ Trees which update in-place (slow random writes), LSM Trees append to an immutable log and "Merge" later. High write throughput, slower reads.
         </p>
       </FeatureCard>

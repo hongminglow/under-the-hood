@@ -40,18 +40,18 @@ export const proxyVsReverseProxyTopic: Topic = {
     </h3>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <FeatureCard icon={ServerCog} title="SSL Termination" subtitle="Offload TLS work to the edge" theme="emerald">
-        <p className="text-sm text-emerald-100/75 mb-2">
+        <p className="text-sm text-emerald-700 dark:text-emerald-100/75 mb-2">
           Decrypting HTTPS is <strong>computationally expensive</strong>.
         </p>
-        <p className="text-xs italic text-emerald-200/70">
+        <p className="text-xs italic text-emerald-700 dark:text-emerald-300/70">
           The Reverse Proxy (Nginx) handles the heavy math. It sends plain HTTP to your internal microservices, saving significant CPU cycles on your app servers.
         </p>
       </FeatureCard>
       <FeatureCard icon={UserRound} title="Header Manipulation" subtitle="Forward the real client identity" theme="cyan">
-        <p className="text-sm text-cyan-100/75 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-2">
           Passing the "Original" User IP.
         </p>
-        <p className="text-xs italic text-cyan-200/70">
+        <p className="text-xs italic text-cyan-700 dark:text-cyan-300/70">
           Because the backend only sees the Proxy's IP, the proxy injects an <code>X-Forwarded-For</code> header so your app knows exactly who the real user is.
         </p>
       </FeatureCard>

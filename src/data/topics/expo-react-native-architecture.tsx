@@ -28,7 +28,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
   tags: ["mobile", "react-native", "expo", "architecture", "cross-platform"],
   icon: "Smartphone",
   content: [
-    <p key="1" className="text-slate-300 mb-6">
+    <p key="1" className="text-slate-700 dark:text-slate-400 mb-6">
       Expo is not just a convenience wrapper around React Native — it is a{" "}
       <strong>complete platform</strong> that includes an SDK of pre-built
       native modules, a cloud build service, an over-the-air update system, and
@@ -47,10 +47,10 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="React components + Expo SDK"
         theme="violet"
       >
-        <p className="text-sm text-violet-100/75 mb-2">
+        <p className="text-sm text-violet-700 dark:text-violet-100/75 mb-2">
           The layer you write every day.
         </p>
-        <p className="text-xs text-violet-200/70">
+        <p className="text-xs text-violet-700 dark:text-violet-300/70">
           Standard React components, hooks, and navigation — plus the{" "}
           <strong>Expo SDK</strong> (Camera, Notifications, FileSystem, etc.)
           that exposes native device APIs as JavaScript imports.
@@ -62,10 +62,10 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="JS → Native bridge"
         theme="cyan"
       >
-        <p className="text-sm text-cyan-100/75 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-2">
           The engine under the hood.
         </p>
-        <p className="text-xs text-cyan-200/70">
+        <p className="text-xs text-cyan-700 dark:text-cyan-300/70">
           Hermes (JS engine) executes your bundle. The{" "}
           <strong>New Architecture</strong> (JSI + Fabric + TurboModules)
           provides synchronous, zero-copy communication between JavaScript and
@@ -78,10 +78,10 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="iOS (UIKit) / Android (Views)"
         theme="amber"
       >
-        <p className="text-sm text-amber-100/75 mb-2">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75 mb-2">
           Real native UI — not a WebView.
         </p>
-        <p className="text-xs text-amber-200/70">
+        <p className="text-xs text-amber-700 dark:text-amber-300/70">
           React Native renders actual native views (UILabel, TextView,
           ScrollView). Your JS code describes <strong>what</strong> to render;
           the native layer handles <strong>how</strong> to render it on each
@@ -93,8 +93,8 @@ export const expoReactNativeArchitectureTopic: Topic = {
     <h3 key="4" className="text-xl font-bold mt-8 mb-4">
       How the QR Code Magic Works
     </h3>,
-    <p key="5" className="text-slate-300 mb-6">
-      When you run <code className="text-cyan-300 bg-slate-800 px-1 rounded">npx expo start</code>,
+    <p key="5" className="text-slate-700 dark:text-slate-400 mb-6">
+      When you run <code className="text-cyan-700 dark:text-cyan-400 bg-slate-500/10 dark:bg-slate-800 px-1 rounded">npx expo start</code>,
       the CLI boots <strong>Metro Bundler</strong> (a JavaScript bundler
       purpose-built for React Native) on your development machine. The QR code
       encodes a URL pointing to that bundler over your local network. Here is
@@ -176,7 +176,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
     <h3 key="10" className="text-xl font-bold mt-8 mb-4">
       React Native's Bridge: Old vs New Architecture
     </h3>,
-    <p key="11" className="text-slate-300 mb-6">
+    <p key="11" className="text-slate-700 dark:text-slate-400 mb-6">
       The bridge is how JavaScript communicates with native platform code. This
       is the single most important architectural concept in React Native — and
       the old design was its biggest bottleneck.
@@ -186,14 +186,14 @@ export const expoReactNativeArchitectureTopic: Topic = {
         icon={ArrowLeftRight}
         title="Old Architecture (Bridge)"
         subtitle="Async JSON serialization"
-        theme="emerald"
+        theme="rose"
       >
-        <p className="text-sm text-red-100/75 mb-2">
+        <p className="text-sm text-rose-700 dark:text-rose-100/75 mb-2">
           Every call between JS and native was serialized as{" "}
           <strong>JSON</strong>, passed across an async bridge, and deserialized
           on the other side.
         </p>
-        <ul className="text-xs text-red-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-rose-700 dark:text-rose-300/70 list-disc pl-4 space-y-1">
           <li>All communication was asynchronous and batched.</li>
           <li>JSON serialization added measurable overhead per message.</li>
           <li>
@@ -212,12 +212,12 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="Synchronous, zero-copy C++ interface"
         theme="cyan"
       >
-        <p className="text-sm text-cyan-100/75 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-2">
           JavaScript talks to native code through{" "}
           <strong>JSI (JavaScript Interface)</strong> — a C++ layer that
           exposes native objects directly to the JS runtime.
         </p>
-        <ul className="text-xs text-cyan-200/70 list-disc pl-4 space-y-1">
+        <ul className="text-xs text-cyan-700 dark:text-cyan-300/70 list-disc pl-4 space-y-1">
           <li>
             <strong>JSI:</strong> JS can call C++ functions synchronously — no
             JSON, no bridge, no async overhead.
@@ -241,7 +241,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
     <h3 key="13" className="text-xl font-bold mt-8 mb-4">
       EAS: Expo Application Services
     </h3>,
-    <p key="14" className="text-slate-300 mb-6">
+    <p key="14" className="text-slate-700 dark:text-slate-400 mb-6">
       EAS is Expo's cloud infrastructure for building, deploying, and updating
       apps. It solves the hardest operational problems in mobile development:
       native compilation and app store distribution.
@@ -253,10 +253,10 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="Cloud-native compilation"
         theme="sky"
       >
-        <p className="text-sm text-sky-100/75 mb-2">
+        <p className="text-sm text-sky-700 dark:text-sky-100/75 mb-2">
           Compiles your native iOS/Android binaries in the cloud.
         </p>
-        <p className="text-xs text-sky-200/70">
+        <p className="text-xs text-sky-700 dark:text-sky-300/70">
           You don't need a Mac for iOS builds. EAS runs Xcode and Gradle on
           cloud machines, producing signed <strong>.ipa</strong> and{" "}
           <strong>.aab</strong> artifacts. Manages certificates and provisioning
@@ -269,10 +269,10 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="Bypass the App Store for JS changes"
         theme="violet"
       >
-        <p className="text-sm text-violet-100/75 mb-2">
+        <p className="text-sm text-violet-700 dark:text-violet-100/75 mb-2">
           Push JavaScript updates directly to users' devices.
         </p>
-        <p className="text-xs text-violet-200/70">
+        <p className="text-xs text-violet-700 dark:text-violet-300/70">
           Since the native shell doesn't change, you can update the JS bundle
           over-the-air without an App Store review cycle. The app checks for
           updates on launch and downloads the new bundle in the background.
@@ -285,10 +285,10 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="Automated store distribution"
         theme="amber"
       >
-        <p className="text-sm text-amber-100/75 mb-2">
+        <p className="text-sm text-amber-700 dark:text-amber-100/75 mb-2">
           Submits builds to Apple App Store and Google Play.
         </p>
-        <p className="text-xs text-amber-200/70">
+        <p className="text-xs text-amber-700 dark:text-amber-300/70">
           Handles the metadata, screenshots, and binary upload. Integrates with
           Apple's App Store Connect and Google Play Console APIs directly from
           your CI/CD pipeline.
@@ -382,14 +382,14 @@ export const expoReactNativeArchitectureTopic: Topic = {
     <h3 key="21" className="text-xl font-bold mt-8 mb-4">
       The Prebuild System: Continuous Native Generation
     </h3>,
-    <p key="22" className="text-slate-300 mb-6">
+    <p key="22" className="text-slate-700 dark:text-slate-400 mb-6">
       Modern Expo uses a paradigm called{" "}
       <strong>Continuous Native Generation (CNG)</strong>. Instead of
       maintaining native iOS/Android project files by hand, you define your
       native configuration declaratively in{" "}
-      <code className="text-cyan-300 bg-slate-800 px-1 rounded">app.json</code>{" "}
+      <code className="text-cyan-700 dark:text-cyan-400 bg-slate-500/10 dark:bg-slate-800 px-1 rounded">app.json</code>{" "}
       and Expo config plugins. Running{" "}
-      <code className="text-cyan-300 bg-slate-800 px-1 rounded">npx expo prebuild</code>{" "}
+      <code className="text-cyan-700 dark:text-cyan-400 bg-slate-500/10 dark:bg-slate-800 px-1 rounded">npx expo prebuild</code>{" "}
       generates the native projects from scratch.
     </p>,
     <Grid key="23" cols={1} gap={6} className="my-8">
@@ -460,7 +460,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
     <h3 key="27" className="text-xl font-bold mt-8 mb-4">
       Hermes: The JavaScript Engine Built for Mobile
     </h3>,
-    <p key="28" className="text-slate-300 mb-6">
+    <p key="28" className="text-slate-700 dark:text-slate-400 mb-6">
       React Native doesn't use V8 (Chrome's engine) or JavaScriptCore (Safari's
       engine) by default anymore. It uses <strong>Hermes</strong> — an engine
       Meta built specifically to solve mobile JavaScript performance problems.
@@ -472,7 +472,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="Bytecode Compilation"
         theme="indigo"
       >
-        <p className="text-xs text-indigo-200/70">
+        <p className="text-xs text-indigo-700 dark:text-indigo-300/70">
           Unlike V8 which parses and JIT-compiles JavaScript at runtime, Hermes compiles
           your JS to bytecode (<code>.hbc</code>) at <em>build time</em>. The
           phone never parses raw JavaScript, which dramatically reduces cold-start time.
@@ -484,7 +484,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="Memory Over Throughput"
         theme="amber"
       >
-        <p className="text-xs text-amber-200/70">
+        <p className="text-xs text-amber-700 dark:text-amber-300/70">
           Hermes intentionally omits Just-In-Time compilation. JIT compilers consume 
           significant memory and CPU during warmup. On mobile, the memory savings from 
           skipping JIT outweigh the peak throughput gains it would provide.
@@ -496,7 +496,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="Tuned for Mobile Memory"
         theme="cyan"
       >
-        <p className="text-xs text-cyan-200/70">
+        <p className="text-xs text-cyan-700 dark:text-cyan-300/70">
           Hermes uses a generational, moving Garbage Collector tuned for mobile memory 
           patterns. Short-lived UI allocations are collected cheaply, and GC pauses are 
           minimized to avoid frame drops during animations.
@@ -508,7 +508,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="30-50% Reduction"
         theme="fuchsia"
       >
-        <p className="text-xs text-fuchsia-200/70">
+        <p className="text-xs text-fuchsia-700 dark:text-fuchsia-300/70">
           Pre-compiled bytecode is typically 30–50% smaller than equivalent minified 
           JavaScript. This significantly reduces download times over cellular networks 
           and lowers storage usage on the device.
@@ -519,7 +519,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
     <h3 key="30" className="text-xl font-bold mt-8 mb-4">
       Metro Bundler: Why Not Vite or Webpack?
     </h3>,
-    <p key="31" className="text-slate-300 mb-6">
+    <p key="31" className="text-slate-700 dark:text-slate-400 mb-6">
       Metro is React Native's dedicated JavaScript bundler. It exists because
       web bundlers like Vite and Webpack were designed for browsers, and mobile
       has fundamentally different requirements:
@@ -531,7 +531,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="One codebase, two platforms"
         theme="sky"
       >
-        <p className="text-xs text-sky-200/70">
+        <p className="text-xs text-sky-700 dark:text-sky-300/70">
           When you import <code>./Button</code>, Metro automatically resolves to{" "}
           <code>Button.ios.tsx</code> or <code>Button.android.tsx</code> based on
           the target platform. Web bundlers have no concept of this. Metro also
@@ -544,7 +544,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
         subtitle="Sub-second refresh cycles"
         theme="violet"
       >
-        <p className="text-xs text-violet-200/70">
+        <p className="text-xs text-violet-700 dark:text-violet-300/70">
           Metro keeps the entire dependency graph in memory. When you save a file,
           it only retransforms the changed module and sends a delta update over
           WebSocket — no full rebundle. Combined with React Fast Refresh
@@ -557,7 +557,7 @@ export const expoReactNativeArchitectureTopic: Topic = {
     <h3 key="33" className="text-xl font-bold mt-8 mb-4">
       Cross-Platform Landscape: Where Does Expo Fit?
     </h3>,
-    <p key="34" className="text-slate-300 mb-6">
+    <p key="34" className="text-slate-700 dark:text-slate-400 mb-6">
       Expo/React Native is one of several cross-platform approaches. Each makes
       fundamentally different architectural tradeoffs:
     </p>,

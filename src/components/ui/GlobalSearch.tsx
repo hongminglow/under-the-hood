@@ -24,8 +24,14 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
   const fuse = useMemo(
     () =>
       new Fuse(allTopics, {
-        keys: ["title", "tags", "description"],
+        // Tags and title outweigh description so the topic's own identity wins.
+        keys: [
+          { name: "tags", weight: 2 },
+          { name: "title", weight: 1.5 },
+          { name: "description", weight: 0.5 },
+        ],
         threshold: 0.4,
+        ignoreLocation: true, // match anywhere, not just near the start
         includeScore: true,
       }),
     [allTopics],
@@ -43,8 +49,31 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
   }, [isOpen]);
 
   const results = useMemo(() => {
-    if (query.trim() === "") return [];
-    return fuse.search(query).map((result) => result.item as Topic);
+    const q = query.trim().toLowerCase();
+    if (q === "") return [];
+
+    // Fuse: lower score = better match. Layer deterministic boosts on top so an
+    // exact tag or the topic's own title always ranks first, never 2nd/3rd.
+    return fuse
+      .search(query)
+      .map((result) => {
+        const topic = result.item as Topic;
+        const title = topic.title.toLowerCase();
+        const tags = topic.tags.map((t) => t.toLowerCase());
+        let score = result.score ?? 1;
+
+        if (tags.includes(q)) score -= 0.6; // exact tag (e.g. "dns", "grpc", "rest")
+        if (title === q || title.startsWith(`${q} `) || title.startsWith(`${q}:`)) {
+          score -= 0.6; // title is, or leads with, the query
+        } else if (title.includes(q)) {
+          score -= 0.2; // query appears somewhere in the title
+        }
+        if (topic.id.toLowerCase() === q) score -= 0.4; // exact id
+
+        return { topic, score };
+      })
+      .sort((a, b) => a.score - b.score)
+      .map((r) => r.topic);
   }, [query, fuse]);
 
   // Auto-scroll selected item into view in the results container
@@ -116,7 +145,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center px-6 py-5 border-b border-border/60 gap-4 bg-secondary/20">
-          <Search className="w-6 h-6 text-primary shadow-[0_0_10px_rgba(16,185,129,0.3)]" />
+          <Search className="w-6 h-6 text-primary shadow-[0_0_10px_rgba(98,181,140,0.3)]" />
           <input
             ref={inputRef}
             type="text"
@@ -186,7 +215,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                           {topic.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="text-[9px] font-extrabold uppercase tracking-widest bg-emerald-500/10 text-emerald-400/90 px-1.5 py-0.5 rounded-md border border-emerald-500/10"
+                              className="text-[9px] font-extrabold uppercase tracking-widest bg-primary/10 text-primary px-1.5 py-0.5 rounded-md border border-primary/20"
                             >
                               {tag}
                             </span>

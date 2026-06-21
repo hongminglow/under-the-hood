@@ -176,14 +176,14 @@ monorepo/
     </h3>,
     <Grid key="23" cols={2} gap={6}>
       <FeatureCard icon={Shield} title="Edge Certificate" subtitle="Browser -> Cloudflare" theme="sky">
-        <p className="mt-2 text-sm leading-relaxed text-sky-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-sky-700 dark:text-sky-100/75">
           This certificate is presented to the user's browser. It proves the
           browser is securely talking to the hostname it requested, such as{" "}
           <code>app.example.com</code>.
         </p>
       </FeatureCard>
       <FeatureCard icon={Server} title="Origin Certificate" subtitle="Cloudflare -> Your server" theme="emerald">
-        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-700 dark:text-emerald-100/75">
           If Cloudflare connects to your backend over HTTPS, the origin may also
           need a certificate. In <strong>Full (Strict)</strong>, Cloudflare
           validates that origin certificate instead of blindly trusting it.

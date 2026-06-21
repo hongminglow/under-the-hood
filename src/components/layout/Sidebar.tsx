@@ -132,7 +132,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       <button
         onClick={onToggle}
         className={cn(
-          "absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.4)] cursor-pointer z-200 transition-all border border-primary-400 hover:scale-110 active:scale-95 group/toggle",
+          "absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_20px_rgba(98,181,140,0.4)] cursor-pointer z-200 transition-all border border-primary-400 hover:scale-110 active:scale-95 group/toggle",
           isCollapsed ? "opacity-100" : "opacity-100",
         )}
         aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
@@ -152,7 +152,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           isCollapsed ? "justify-center px-0" : "px-6 gap-3",
         )}
       >
-        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 shadow-[0_0_25px_rgba(16,185,129,0.1)] transition-all hover:border-primary/40">
+        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 shadow-[0_0_25px_rgba(98,181,140,0.1)] transition-all hover:border-primary/40">
           <img src="/logo.svg" className="text-primary w-5 h-5" />
         </div>
         {!isCollapsed && (
@@ -192,7 +192,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                         cn(
                           "p-3 rounded-2xl transition-all border border-transparent cursor-pointer flex items-center justify-center",
                           isActive
-                            ? "active-topic text-primary bg-primary/10 border-primary/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+                            ? "active-topic text-primary bg-primary/10 border-primary/20 shadow-[0_0_15px_rgba(98,181,140,0.15)]"
                             : "text-muted-foreground/40 hover:bg-primary/10 hover:border-primary/30 hover:text-primary",
                         )
                       }
@@ -218,7 +218,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                     className={cn(
                       "w-full flex items-center justify-between px-3 py-3 text-[10px] font-black uppercase tracking-[0.25em] transition-all group rounded-xl cursor-pointer hover:bg-primary/5",
                       hasActiveDescendant
-                        ? "text-primary drop-shadow-[0_0_8px_rgba(16,185,129,0.3)]"
+                        ? "text-primary drop-shadow-[0_0_8px_rgba(98,181,140,0.3)]"
                         : "text-muted-foreground/70 hover:text-primary",
                     )}
                   >
@@ -248,7 +248,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                             cn(
                               "relative group/item flex items-center gap-3 px-3 py-3 rounded-xl text-[13px] transition-all duration-300 cursor-pointer font-bold my-px",
                               isActive
-                                ? "active-topic bg-primary/15 text-primary border border-primary/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+                                ? "active-topic bg-primary/15 text-primary border border-primary/20 shadow-[0_0_15px_rgba(98,181,140,0.1)]"
                                 : "text-muted-foreground/70 hover:bg-primary/5 hover:text-primary-400 border border-transparent",
                             )
                           }
@@ -267,7 +267,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                               </div>
                               <span className="truncate">{topic.title}</span>
                               {isActive && (
-                                <span className="absolute -left-[18px] top-1/2 -translate-y-1/2 w-[3px] h-1/2 bg-primary rounded-full shadow-[0_0_15px_rgba(16,185,129,0.8)]" />
+                                <span className="absolute -left-[18px] top-1/2 -translate-y-1/2 w-[3px] h-1/2 bg-primary rounded-full shadow-[0_0_15px_rgba(98,181,140,0.8)]" />
                               )}
                             </>
                           )}
@@ -289,13 +289,13 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       >
         {isCollapsed ? (
           <div className="relative group/engine flex justify-center">
-            <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-primary/10 to-transparent border border-primary/20 flex items-center justify-center backdrop-blur-md transition-all hover:bg-primary/10 hover:border-primary/40 cursor-help shadow-[0_0_20px_rgba(16,185,129,0.05)] group-hover/engine:scale-110">
+            <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-primary/10 to-transparent border border-primary/20 flex items-center justify-center backdrop-blur-md transition-all hover:bg-primary/10 hover:border-primary/40 cursor-help shadow-[0_0_20px_rgba(98,181,140,0.05)] group-hover/engine:scale-110">
               <LucideIcons.Cpu
                 size={18}
                 className="text-primary/70 group-hover/engine:text-primary transition-colors"
               />
               <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-background flex items-center justify-center border border-border/50">
-                <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(16,185,129,0.9)] animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(98,181,140,0.9)] animate-pulse" />
               </div>
             </div>
             {/* Floating Tooltip (will be visible because aside has overflow-visible) */}
@@ -317,7 +317,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
               </span>
               <div className="flex items-center gap-2">
                 <div className="relative flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_5px_rgba(16,185,129,0.5)]" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_5px_rgba(98,181,140,0.5)]" />
                   <div className="absolute inset-0 w-1.5 h-1.5 rounded-full bg-primary/40 animate-ping" />
                 </div>
                 <span className="text-[9px] font-bold text-muted-foreground/50 uppercase tracking-tighter">
@@ -347,7 +347,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                 }
           }
         >
-          <div className="px-4 py-2 bg-card/95 backdrop-blur-2xl border border-primary/30 shadow-[0_0_30px_rgba(16,185,129,0.2)] rounded-2xl text-[9px] font-black uppercase tracking-widest text-primary ring-2 ring-primary/5 whitespace-nowrap">
+          <div className="px-4 py-2 bg-card/95 backdrop-blur-2xl border border-primary/30 shadow-[0_0_30px_rgba(98,181,140,0.2)] rounded-2xl text-[9px] font-black uppercase tracking-widest text-primary ring-2 ring-primary/5 whitespace-nowrap">
             {hoveredTopic.title}
           </div>
         </div>

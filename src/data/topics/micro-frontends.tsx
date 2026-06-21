@@ -76,12 +76,12 @@ export const microFrontendsTopic: Topic = {
 
 		<Grid key="6" cols={1} gap={6} className="mb-8">
 			<FeatureCard icon={Package2} title="The Power of Shared Dependencies" subtitle="Why shared singletons matter" theme="cyan">
-				<p className="text-sm text-cyan-100/75 mb-4">
+				<p className="text-sm text-cyan-700 dark:text-cyan-100/75 mb-4">
 					<strong>The Problem:</strong> Previously, if Team A's Cart App and Team B's Product App both used React, the
 					final user physically downloaded React twice.
 				</p>
-				<p className="text-sm font-semibold mb-2 text-cyan-300">Architectural Solution:</p>
-				<ul className="text-sm text-cyan-100/75 list-disc pl-5 space-y-2">
+				<p className="text-sm font-semibold mb-2 text-cyan-700 dark:text-cyan-400">Architectural Solution:</p>
+				<ul className="text-sm text-cyan-700 dark:text-cyan-100/75 list-disc pl-5 space-y-2">
 					<li>
 						Module Federation solves this natively via <code>shared</code> singletons.
 					</li>
@@ -102,12 +102,12 @@ export const microFrontendsTopic: Topic = {
 				subtitle="How teams divide ownership"
 				theme="violet"
 			>
-				<p className="text-sm text-violet-100/75 mb-4">
+				<p className="text-sm text-violet-700 dark:text-violet-100/75 mb-4">
 					<strong>The Problem:</strong> How do you structurally divide the screen real estate between different
 					enterprise teams?
 				</p>
-				<p className="text-sm font-semibold mb-2 text-violet-300">Architectural Solutions:</p>
-				<ul className="text-sm text-violet-100/75 list-disc pl-5 space-y-2">
+				<p className="text-sm font-semibold mb-2 text-violet-700 dark:text-violet-400">Architectural Solutions:</p>
+				<ul className="text-sm text-violet-700 dark:text-violet-100/75 list-disc pl-5 space-y-2">
 					<li>
 						<strong>Vertical Split (Recommended):</strong> Team A owns <code>/checkout</code> entirely. When navigated
 						there, the Shell mounts Team A's comprehensive app. Cleanest separation of concerns.

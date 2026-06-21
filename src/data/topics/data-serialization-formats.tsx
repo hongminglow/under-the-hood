@@ -40,18 +40,18 @@ export const dataSerializationFormatsTopic: Topic = {
     </p>,
     <Grid key="5" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Binary} title="Protocol Buffers" subtitle="Google's tag-based binary format" theme="cyan">
-        <p className="text-sm text-cyan-200/80 mb-2">
+        <p className="text-sm text-cyan-700 dark:text-cyan-300/80 mb-2">
           Define schemas in <code>.proto</code> files. Code generators produce type-safe classes in any language. Fields are identified by numeric tags, not names. Adding new fields is backward-compatible as long as you never reuse tag numbers.
         </p>
-        <p className="text-xs italic text-cyan-100/70">
+        <p className="text-xs italic text-cyan-700 dark:text-cyan-100/70">
           Used by: gRPC, Google internal services, Envoy, Kubernetes API extensions.
         </p>
       </FeatureCard>
       <FeatureCard icon={Waypoints} title="Apache Avro" subtitle="Registry-backed event schemas" theme="violet">
-        <p className="text-sm text-violet-200/80 mb-2">
+        <p className="text-sm text-violet-700 dark:text-violet-300/80 mb-2">
           Schema is defined in JSON but stored in a <strong>Schema Registry</strong>, not embedded in the payload. The producer and consumer negotiate schemas at connection time. Supports full schema evolution (add, remove, rename fields).
         </p>
-        <p className="text-xs italic text-violet-100/70">
+        <p className="text-xs italic text-violet-700 dark:text-violet-100/70">
           Used by: Kafka (with Confluent Schema Registry), Apache Spark, Hadoop ecosystem.
         </p>
       </FeatureCard>
@@ -79,7 +79,7 @@ export const dataSerializationFormatsTopic: Topic = {
     </h3>,
     <Grid key="9" cols={2} gap={6} className="my-8">
       <FeatureCard icon={FileJson2} title="Use JSON" subtitle="Human-readable and low-overhead teams" theme="emerald">
-        <ul className="text-sm text-emerald-100/75 list-disc pl-4 space-y-1">
+        <ul className="text-sm text-emerald-700 dark:text-emerald-100/75 list-disc pl-4 space-y-1">
           <li>Building public APIs consumed by external developers</li>
           <li>Low traffic volume where bandwidth isn't a concern</li>
           <li>Debugging and quick prototyping (human readable)</li>
@@ -87,7 +87,7 @@ export const dataSerializationFormatsTopic: Topic = {
         </ul>
       </FeatureCard>
       <FeatureCard icon={ScrollText} title="Use Binary" subtitle="Throughput and schema discipline matter" theme="cyan">
-        <ul className="text-sm text-cyan-100/75 list-disc pl-4 space-y-1">
+        <ul className="text-sm text-cyan-700 dark:text-cyan-100/75 list-disc pl-4 space-y-1">
           <li>Internal service-to-service communication (gRPC + Protobuf)</li>
           <li>High-throughput event streaming (Kafka + Avro)</li>
           <li>Mobile apps where bandwidth is limited and expensive</li>

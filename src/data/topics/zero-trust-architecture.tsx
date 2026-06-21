@@ -29,33 +29,33 @@ export const zeroTrustTopic: Topic = {
 		</h4>,
 		<Grid key="4" cols={2} gap={6} className="mb-8">
 			<FeatureCard icon={ShieldCheck} title="Never Trust, Always Verify" subtitle="Per-request identity proof" theme="emerald">
-				<p className="text-red-100/80">
+				<p className="text-emerald-700 dark:text-emerald-100/80">
 					Every request is treated as if it originates from an open, untrusted network. Identity verification happens on{" "}
-					<strong className="text-red-300">every single request</strong>, not just at login.
+					<strong className="text-emerald-700 dark:text-emerald-400">every single request</strong>, not just at login.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={KeyRound} title="Least Privilege Access" subtitle="Smallest useful permission set" theme="cyan">
-				<p className="text-cyan-100/80">
-					Users and services get the <strong className="text-cyan-300">minimum permissions</strong> needed to do their job. An engineer accessing
+				<p className="text-cyan-700 dark:text-cyan-100/80">
+					Users and services get the <strong className="text-cyan-700 dark:text-cyan-400">minimum permissions</strong> needed to do their job. An engineer accessing
 					production logs doesn't need write access to the database.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={ScanEye} title="Micro-Segmentation" subtitle="One breach should not unlock the network" theme="sky">
-				<p className="text-sky-100/80">
-					The network is divided into <strong className="text-sky-300">tiny security zones</strong>. Each workload, database, and API has its own
+				<p className="text-sky-700 dark:text-sky-100/80">
+					The network is divided into <strong className="text-sky-700 dark:text-sky-400">tiny security zones</strong>. Each workload, database, and API has its own
 					access policy. Breaching one zone doesn't grant access to others.
 				</p>
 			</FeatureCard>
 			<FeatureCard icon={Activity} title="Assume Breach" subtitle="Detection and response are part of the design" theme="amber">
-				<p className="text-amber-100/80">
-					The system is designed with the assumption that attackers are <strong className="text-amber-300">already inside</strong>. Continuous
+				<p className="text-amber-700 dark:text-amber-100/80">
+					The system is designed with the assumption that attackers are <strong className="text-amber-700 dark:text-amber-400">already inside</strong>. Continuous
 					monitoring, anomaly detection, and automated response are built in.
 				</p>
 			</FeatureCard>
 		</Grid>,
 		<Table
 			key="5"
-			headers={["Aspect", "<span class='text-amber-300'>Traditional (Perimeter)</span>", "<span class='text-red-300'>Zero Trust</span>"]}
+			headers={["Aspect", "<span class='text-amber-700 dark:text-amber-400'>Traditional (Perimeter)</span>", "<span class='text-red-700 dark:text-red-400'>Zero Trust</span>"]}
 			rows={[
 				["Trust Model", "Trust internal, block external", "Trust nothing, verify everything"],
 				["Access Control", "VPN + firewall", "Identity-based, per-request"],

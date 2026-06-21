@@ -102,7 +102,7 @@ export const harnessEngineeringTopic: Topic = {
         subtitle="High intelligence, low grounding"
         theme="amber"
       >
-        <p className="mt-2 text-sm leading-relaxed text-amber-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-amber-700 dark:text-amber-100/75">
           The agent may sound smart, but it guesses APIs, misses repo
           conventions, over-edits files, or repeats the same broken command
           because nothing in the environment teaches it faster than trial and
@@ -115,7 +115,7 @@ export const harnessEngineeringTopic: Topic = {
         subtitle="Moderate intelligence, high leverage"
         theme="emerald"
       >
-        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-700 dark:text-emerald-100/75">
           Even a less impressive model can perform surprisingly well when the
           repository is legible, the tasks are structured, and fast feedback
           tells it exactly what failed and how to recover.
@@ -167,7 +167,7 @@ export const harnessEngineeringTopic: Topic = {
         subtitle="Behavior shaping without changing model weights"
         theme="cyan"
       >
-        <p className="mt-2 text-sm leading-relaxed text-cyan-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-cyan-700 dark:text-cyan-100/75">
           Most harness engineering does <strong>not</strong> retrain the base
           model. It improves outcomes by changing the agent’s operating
           conditions: what it sees, what it can do, how it is checked, and how
@@ -180,7 +180,7 @@ export const harnessEngineeringTopic: Topic = {
         subtitle="Great harnesses can produce great training data"
         theme="violet"
       >
-        <p className="mt-2 text-sm leading-relaxed text-violet-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-violet-700 dark:text-violet-100/75">
           Accepted patches, tool traces, review loops, and high-quality failure
           corrections can later become synthetic data for SFT, preference
           tuning, or distillation. The harness is often what makes those traces
@@ -258,14 +258,14 @@ export const harnessEngineeringTopic: Topic = {
     </p>,
     <Grid key="18" cols={2} gap={6}>
       <FeatureCard icon={ShieldCheck} title="Harness Inputs" subtitle="What the agent receives" theme="cyan">
-        <p className="mt-2 text-sm leading-relaxed text-cyan-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-cyan-700 dark:text-cyan-100/75">
           Topic conventions, section taxonomy, component recipes, README counter
           rules, and examples from existing topic files all act as
           feedforward controls.
         </p>
       </FeatureCard>
       <FeatureCard icon={TriangleAlert} title="Harness Feedback" subtitle="What keeps quality stable" theme="emerald">
-        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-700 dark:text-emerald-100/75">
           TypeScript, the build step, import validation, and visible rendering
           errors act as sensors. When a mistake appears, the repo instructions
           can be tightened so the same failure becomes less likely next time.

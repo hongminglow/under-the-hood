@@ -39,7 +39,7 @@ export const llmTrainingPipelineTopic: Topic = {
   ],
   icon: "BrainCircuit",
   content: [
-    <p key="intro-1" className="text-slate-300 mb-4 leading-relaxed">
+    <p key="intro-1" className="text-slate-700 dark:text-slate-400 mb-4 leading-relaxed">
       When GPT-4 was released in 2023, OpenAI revealed very little about how it
       was trained. When GPT-5 arrived, they revealed even less. Yet the core
       pipeline — pre-training on raw text, supervised fine-tuning, and
@@ -60,7 +60,7 @@ export const llmTrainingPipelineTopic: Topic = {
     <h3 key="h-overview" className="text-xl font-bold mt-10 mb-4">
       The Three-Stage Training Pipeline
     </h3>,
-    <p key="p-overview" className="text-slate-300 mb-6 leading-relaxed">
+    <p key="p-overview" className="text-slate-700 dark:text-slate-400 mb-6 leading-relaxed">
       Every modern frontier LLM (GPT-4, Gemini, Claude, Llama) is produced
       through the same fundamental three-stage pipeline. The stages build on
       each other: each one starts from the checkpoint left by the previous.
@@ -103,7 +103,7 @@ export const llmTrainingPipelineTopic: Topic = {
     <h3 key="h-pretrain" className="text-xl font-bold mt-12 mb-4">
       Stage 1 Deep Dive: Pre-training on the Internet
     </h3>,
-    <p key="p-pretrain" className="text-slate-300 mb-6 leading-relaxed">
+    <p key="p-pretrain" className="text-slate-700 dark:text-slate-400 mb-6 leading-relaxed">
       Pre-training is where the model acquires its core intelligence. It is also
       the most expensive phase — often consuming 90%+ of total compute budget.
     </p>,
@@ -114,29 +114,29 @@ export const llmTrainingPipelineTopic: Topic = {
         subtitle="What goes in"
         theme="emerald"
       >
-        <ul className="mt-2 text-sm text-emerald-200/80 space-y-2 list-disc pl-4">
+        <ul className="mt-2 text-sm text-emerald-700 dark:text-emerald-300/80 space-y-2 list-disc pl-4">
           <li>
-            <strong className="text-emerald-300">Common Crawl</strong> — a
+            <strong className="text-emerald-700 dark:text-emerald-400">Common Crawl</strong> — a
             snapshot of the public web (petabytes of HTML).
           </li>
           <li>
-            <strong className="text-emerald-300">Books / BookCorpus</strong> —
+            <strong className="text-emerald-700 dark:text-emerald-400">Books / BookCorpus</strong> —
             long-form narrative and coherent reasoning.
           </li>
           <li>
-            <strong className="text-emerald-300">GitHub</strong> — code across
+            <strong className="text-emerald-700 dark:text-emerald-400">GitHub</strong> — code across
             hundreds of languages teaches logical structure.
           </li>
           <li>
-            <strong className="text-emerald-300">Wikipedia / arXiv</strong> —
+            <strong className="text-emerald-700 dark:text-emerald-400">Wikipedia / arXiv</strong> —
             factual, structured, high-quality text.
           </li>
           <li>
-            <strong className="text-emerald-300">Filtered web text</strong> —
+            <strong className="text-emerald-700 dark:text-emerald-400">Filtered web text</strong> —
             Reddit, Stack Overflow, news, filtered for quality.
           </li>
         </ul>
-        <p className="mt-3 text-xs text-emerald-300/60">
+        <p className="mt-3 text-xs text-emerald-700 dark:text-emerald-400/60">
           GPT-3 used ~570GB of cleaned text (~300B tokens). GPT-4 likely used
           10–100× more.&nbsp;<SourceMarker vendor="OpenAI" year={2020} />
         </p>
@@ -147,14 +147,14 @@ export const llmTrainingPipelineTopic: Topic = {
         subtitle="What it takes"
         theme="violet"
       >
-        <ul className="mt-2 text-sm text-violet-200/80 space-y-2 list-disc pl-4">
+        <ul className="mt-2 text-sm text-violet-700 dark:text-violet-300/80 space-y-2 list-disc pl-4">
           <li>
             GPT-3 (2020): ~3,600 petaflop/s-days on A100 GPUs.&nbsp;
             <SourceMarker vendor="OpenAI" year={2020} />
           </li>
           <li>
             GPT-4 training cost: estimated{" "}
-            <strong className="text-violet-300">$50–100 million</strong> in
+            <strong className="text-violet-700 dark:text-violet-400">$50–100 million</strong> in
             compute alone.&nbsp;
             <SourceMarker vendor="Sam Altman estimate" year={2023} />
           </li>
@@ -173,22 +173,22 @@ export const llmTrainingPipelineTopic: Topic = {
       title="The Self-Supervised Trick: Next-Token Prediction"
       description="Why you don't need labelled data to train the world's most powerful AI"
     >
-      <p className="text-sm text-slate-300 leading-relaxed mb-3">
+      <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed mb-3">
         The key insight that makes LLMs possible:{" "}
         <strong>you don't need human labels</strong>. Every sentence on the
         internet is its own training example. Given{" "}
-        <code className="text-muted-foreground bg-slate-800 px-1 rounded">
+        <code className="text-muted-foreground bg-slate-500/10 dark:bg-slate-800 px-1 rounded">
           "The capital of France is"
         </code>
         , the label is simply{" "}
-        <code className="text-muted-foreground bg-slate-800 px-1 rounded">
+        <code className="text-muted-foreground bg-slate-500/10 dark:bg-slate-800 px-1 rounded">
           "Paris"
         </code>
         . The model trains by predicting the next token across trillions of
         such examples, and gradient descent adjusts billions of weights to
         make each prediction more accurate.
       </p>
-      <p className="text-sm text-slate-400 leading-relaxed">
+      <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
         This is called <strong>self-supervised learning</strong>: the labels
         come from the data itself. It is why pre-training can scale
         indefinitely without human annotation cost — the entire internet
@@ -202,7 +202,7 @@ export const llmTrainingPipelineTopic: Topic = {
     <h3 key="h-sft" className="text-xl font-bold mt-12 mb-4">
       Stage 2 Deep Dive: Supervised Fine-Tuning (SFT)
     </h3>,
-    <p key="p-sft" className="text-slate-300 mb-6 leading-relaxed">
+    <p key="p-sft" className="text-slate-700 dark:text-slate-400 mb-6 leading-relaxed">
       After pre-training, the model is a brilliant but socially inept predictor
       — it will continue internet text patterns, which include toxic, biased,
       and incoherent content. SFT is the first alignment step.
@@ -224,13 +224,13 @@ export const llmTrainingPipelineTopic: Topic = {
     recursion!"
 }`}
         />
-        <p className="mt-2 text-xs text-slate-400">
+        <p className="mt-2 text-xs text-slate-700 dark:text-slate-400">
           OpenAI used contractors (via Scale AI and similar vendors) to write
           tens of thousands of such pairs for InstructGPT and GPT-4.
         </p>
       </Card>
       <Card title="What SFT Actually Teaches">
-        <ul className="text-sm text-slate-300 space-y-2 list-disc pl-4">
+        <ul className="text-sm text-slate-700 dark:text-slate-400 space-y-2 list-disc pl-4">
           <li>
             <strong className="text-muted-foreground">Follow instructions</strong> —
             stop completing text, start answering questions.
@@ -270,7 +270,7 @@ export const llmTrainingPipelineTopic: Topic = {
     <h3 key="h-rlhf" className="text-xl font-bold mt-12 mb-4">
       Stage 3 Deep Dive: RLHF — Aligning with Human Preference
     </h3>,
-    <p key="p-rlhf" className="text-slate-300 mb-6 leading-relaxed">
+    <p key="p-rlhf" className="text-slate-700 dark:text-slate-400 mb-6 leading-relaxed">
       SFT teaches format; RLHF teaches quality. The key insight:{" "}
       <strong>
         it is easier for humans to compare two outputs than to write the
@@ -310,12 +310,12 @@ export const llmTrainingPipelineTopic: Topic = {
         subtitle="OpenAI's approach — InstructGPT / GPT-4"
         theme="indigo"
       >
-        <p className="mt-2 text-sm leading-relaxed text-indigo-200/80">
+        <p className="mt-2 text-sm leading-relaxed text-indigo-700 dark:text-indigo-300/80">
           Proximal Policy Optimization treats the LLM as a reinforcement
           learning agent. The reward signal comes from the reward model trained
           on human preferences. A KL-divergence constraint keeps the model from
           straying too far from the SFT base.{" "}
-          <strong className="text-indigo-300">Expensive but effective.</strong>
+          <strong className="text-indigo-700 dark:text-indigo-400">Expensive but effective.</strong>
         </p>
       </FeatureCard>
       <FeatureCard
@@ -324,12 +324,12 @@ export const llmTrainingPipelineTopic: Topic = {
         subtitle="DeepSeek, Llama 3, newer models"
         theme="amber"
       >
-        <p className="mt-2 text-sm leading-relaxed text-amber-200/80">
+        <p className="mt-2 text-sm leading-relaxed text-amber-700 dark:text-amber-300/80">
           Direct Preference Optimization (DPO) eliminates the separate reward
           model — the LLM is trained directly on preference pairs. Group Relative
           Policy Optimization (GRPO, used by DeepSeek-R1) further simplifies
           this.{" "}
-          <strong className="text-amber-300">
+          <strong className="text-amber-700 dark:text-amber-400">
             Cheaper and increasingly competitive with PPO.
           </strong>
         </p>
@@ -342,7 +342,7 @@ export const llmTrainingPipelineTopic: Topic = {
     <h3 key="h-versions" className="text-xl font-bold mt-12 mb-4">
       Version by Version: GPT-1 to GPT-5
     </h3>,
-    <p key="p-versions" className="text-slate-300 mb-6 leading-relaxed">
+    <p key="p-versions" className="text-slate-700 dark:text-slate-400 mb-6 leading-relaxed">
       Each GPT version is not just a bigger model — each generation introduced
       architectural or training innovations that changed what was possible.
     </p>,
@@ -429,7 +429,7 @@ export const llmTrainingPipelineTopic: Topic = {
     <h3 key="h-cutoff" className="text-xl font-bold mt-12 mb-4">
       Knowledge Cutoffs — Why the Model Doesn't Know About Yesterday
     </h3>,
-    <p key="p-cutoff" className="text-slate-300 mb-6 leading-relaxed">
+    <p key="p-cutoff" className="text-slate-700 dark:text-slate-400 mb-6 leading-relaxed">
       Every LLM has a <strong>training cutoff date</strong>: the date after
       which no new information was included in the pre-training corpus. This is
       not a deliberate design flaw — it is a fundamental consequence of how
@@ -440,7 +440,7 @@ export const llmTrainingPipelineTopic: Topic = {
         title="Why Cutoffs Exist"
         description="A fundamental architecture constraint"
       >
-        <ul className="text-sm text-slate-300 space-y-2 list-disc pl-4">
+        <ul className="text-sm text-slate-700 dark:text-slate-400 space-y-2 list-disc pl-4">
           <li>
             Pre-training data must be <strong>collected, cleaned, and deduplicated</strong> before training begins. This takes months.
           </li>
@@ -491,9 +491,9 @@ export const llmTrainingPipelineTopic: Topic = {
     <h3 key="h-chatgpt-web" className="text-xl font-bold mt-12 mb-4">
       How ChatGPT on the Web Actually Works
     </h3>,
-    <p key="p-chatgpt-web" className="text-slate-300 mb-6 leading-relaxed">
+    <p key="p-chatgpt-web" className="text-slate-700 dark:text-slate-400 mb-6 leading-relaxed">
       ChatGPT at{" "}
-      <code className="text-muted-foreground bg-slate-800 px-1 rounded">
+      <code className="text-muted-foreground bg-slate-500/10 dark:bg-slate-800 px-1 rounded">
         chat.openai.com
       </code>{" "}
       is a product built on top of the GPT API. Understanding what happens when
@@ -532,7 +532,7 @@ export const llmTrainingPipelineTopic: Topic = {
     <h3 key="h-rag-vs-train" className="text-xl font-bold mt-12 mb-4">
       RAG vs Training: What Actually Happens When ChatGPT Searches the Web
     </h3>,
-    <p key="p-rag-vs-train" className="text-slate-300 mb-6 leading-relaxed">
+    <p key="p-rag-vs-train" className="text-slate-700 dark:text-slate-400 mb-6 leading-relaxed">
       This is one of the most commonly misunderstood aspects of modern LLMs.
       When ChatGPT (or any AI with web search) browses the web, it is{" "}
       <strong>
@@ -587,14 +587,14 @@ export const llmTrainingPipelineTopic: Topic = {
         subtitle="What's actually happening"
         theme="cyan"
       >
-        <ol className="mt-2 text-sm text-cyan-200/80 space-y-2 list-decimal pl-4">
+        <ol className="mt-2 text-sm text-cyan-700 dark:text-cyan-300/80 space-y-2 list-decimal pl-4">
           <li>
             Model detects query needs fresh or factual data (or you explicitly
             ask it to search).
           </li>
           <li>
             Model emits a tool call:{" "}
-            <code className="text-cyan-300">{"search(\"query here\")"}</code>
+            <code className="text-cyan-700 dark:text-cyan-400">{"search(\"query here\")"}</code>
           </li>
           <li>
             Bing/custom search engine returns top results.
@@ -606,7 +606,7 @@ export const llmTrainingPipelineTopic: Topic = {
             Model generates its response citing the retrieved content.
           </li>
           <li>
-            <strong className="text-cyan-300">
+            <strong className="text-cyan-700 dark:text-cyan-400">
               Model weights unchanged. Everything is in the context.
             </strong>
           </li>
@@ -618,7 +618,7 @@ export const llmTrainingPipelineTopic: Topic = {
         subtitle="What updates the weights"
         theme="rose"
       >
-        <ol className="mt-2 text-sm text-rose-200/80 space-y-2 list-decimal pl-4">
+        <ol className="mt-2 text-sm text-rose-700 dark:text-rose-300/80 space-y-2 list-decimal pl-4">
           <li>
             Months of data collection, cleaning, and deduplication.
           </li>
@@ -635,7 +635,7 @@ export const llmTrainingPipelineTopic: Topic = {
             Human feedback cycles for RLHF alignment.
           </li>
           <li>
-            <strong className="text-rose-300">
+            <strong className="text-rose-700 dark:text-rose-400">
               New model checkpoint deployed. Old model retired.
             </strong>
           </li>
@@ -659,7 +659,7 @@ export const llmTrainingPipelineTopic: Topic = {
     <h3 key="h-memory" className="text-xl font-bold mt-12 mb-4">
       Two Kinds of "Memory": Context vs Weights
     </h3>,
-    <p key="p-memory" className="text-slate-300 mb-6 leading-relaxed">
+    <p key="p-memory" className="text-slate-700 dark:text-slate-400 mb-6 leading-relaxed">
       Understanding the difference between these two memory types is essential
       to understanding what any LLM-based product can and cannot do.
     </p>,
@@ -682,7 +682,7 @@ export const llmTrainingPipelineTopic: Topic = {
     <h3 key="h-reasoning" className="text-xl font-bold mt-12 mb-4">
       The Reasoning Model Era: o1, o3, DeepSeek-R1
     </h3>,
-    <p key="p-reasoning" className="text-slate-300 mb-6 leading-relaxed">
+    <p key="p-reasoning" className="text-slate-700 dark:text-slate-400 mb-6 leading-relaxed">
       In 2024–2025, a new training paradigm emerged for the best models: instead
       of just predicting text, models are trained to{" "}
       <strong>think before they answer</strong>. This is the core of OpenAI's
@@ -690,14 +690,14 @@ export const llmTrainingPipelineTopic: Topic = {
     </p>,
     <Grid key="grid-reasoning" cols={2} gap={6} className="mb-8">
       <Card title="Chain-of-Thought as a Training Signal">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+        <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed mb-3">
           Reasoning models are trained to produce a{" "}
           <strong>scratchpad of thinking tokens</strong> before the final
           answer. These thinking tokens are part of the model's generation but
           are hidden from the user. They allow the model to decompose complex
           problems step by step.
         </p>
-        <p className="text-sm text-slate-400 leading-relaxed">
+        <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
           The key training innovation: these thinking traces are optimized via
           RL. The model is rewarded for thinking patterns that lead to correct
           final answers — regardless of what the intermediate thoughts look like.
@@ -705,12 +705,12 @@ export const llmTrainingPipelineTopic: Topic = {
         </p>
       </Card>
       <Card title="Test-Time Compute Scaling">
-        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+        <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed mb-3">
           Traditional scaling laws say: bigger model + more training data =
           better model. Reasoning models introduced a new axis:{" "}
           <strong>more thinking at inference time</strong> = better answers.
         </p>
-        <p className="text-sm text-slate-400 leading-relaxed">
+        <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
           On hard math or coding problems, an o3-class model spending 10,000
           thinking tokens (about 30 seconds of "thinking") dramatically
           outperforms the same model limited to 100 tokens. The answer quality
@@ -797,10 +797,10 @@ export const llmTrainingPipelineTopic: Topic = {
       subtitle="The alignment scaling trick"
       theme="emerald"
     >
-      <p className="mt-2 text-sm leading-relaxed text-emerald-200/80">
+      <p className="mt-2 text-sm leading-relaxed text-emerald-700 dark:text-emerald-300/80">
         Human feedback is the bottleneck in RLHF. For each new model version,
         you need thousands of human comparisons — expensive and slow.{" "}
-        <strong className="text-emerald-300">
+        <strong className="text-emerald-700 dark:text-emerald-400">
           RLAIF (Reinforcement Learning from AI Feedback)
         </strong>{" "}
         uses a separate LLM (often an already-aligned model) as the ranker.
@@ -819,7 +819,7 @@ export const llmTrainingPipelineTopic: Topic = {
     <h3 key="h-safety" className="text-xl font-bold mt-12 mb-4">
       What Keeps the Model Safe: Layers of Alignment
     </h3>,
-    <p key="p-safety" className="text-slate-300 mb-6 leading-relaxed">
+    <p key="p-safety" className="text-slate-700 dark:text-slate-400 mb-6 leading-relaxed">
       Modern production LLMs are not safe because of a single filter. Safety is
       a layered stack built into the training process itself.
     </p>,
@@ -830,7 +830,7 @@ export const llmTrainingPipelineTopic: Topic = {
         subtitle="Layer 1 — remove at the source"
         theme="sky"
       >
-        <p className="mt-2 text-sm leading-relaxed text-sky-200/80">
+        <p className="mt-2 text-sm leading-relaxed text-sky-700 dark:text-sky-300/80">
           Before training starts, the corpus is filtered to remove CSAM,
           known-toxic content, and datasets that repeatedly showed up as
           harmful in prior models. This reduces the base rate of harmful
@@ -843,7 +843,7 @@ export const llmTrainingPipelineTopic: Topic = {
         subtitle="Layer 2 — teach refusal patterns"
         theme="violet"
       >
-        <p className="mt-2 text-sm leading-relaxed text-violet-200/80">
+        <p className="mt-2 text-sm leading-relaxed text-violet-700 dark:text-violet-300/80">
           The SFT dataset includes many examples of harmful prompts paired with
           ideal refusal responses. The model learns the pattern: "when asked for
           X, respond with Y" — where X is a harmful category and Y is a safe,
@@ -856,7 +856,7 @@ export const llmTrainingPipelineTopic: Topic = {
         subtitle="Layer 3 — reinforce safe behavior"
         theme="amber"
       >
-        <p className="mt-2 text-sm leading-relaxed text-amber-200/80">
+        <p className="mt-2 text-sm leading-relaxed text-amber-700 dark:text-amber-300/80">
           Human raters explicitly downrank harmful, toxic, or manipulative
           outputs. The reward model learns to score safety as a dimension of
           quality. The final RLHF-trained model has been systematically pushed
@@ -869,7 +869,7 @@ export const llmTrainingPipelineTopic: Topic = {
         subtitle="Layer 4 — runtime guardrails"
         theme="rose"
       >
-        <p className="mt-2 text-sm leading-relaxed text-rose-200/80">
+        <p className="mt-2 text-sm leading-relaxed text-rose-700 dark:text-rose-300/80">
           ChatGPT has a hidden system prompt that instructs the model to follow
           OpenAI's usage policies. Additionally, both input and output may be
           passed through a separate moderation classifier (the Moderation API)

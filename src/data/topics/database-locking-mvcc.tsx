@@ -29,7 +29,7 @@ export const databaseLockingMvccTopic: Topic = {
         subtitle="The scope depends on the operation"
         theme="amber"
       >
-        <p className="mt-2 text-sm leading-relaxed text-amber-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-amber-700 dark:text-amber-100/75">
           A plain <code>UPDATE users SET ... WHERE id = 42</code> typically
           takes a <strong>row-level lock</strong>. A dangerous schema change
           like <code>ALTER TABLE</code> may take a <strong>table</strong> or
@@ -43,7 +43,7 @@ export const databaseLockingMvccTopic: Topic = {
         subtitle="MVCC is the secret weapon"
         theme="cyan"
       >
-        <p className="mt-2 text-sm leading-relaxed text-cyan-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-cyan-700 dark:text-cyan-100/75">
           PostgreSQL, InnoDB, and other modern engines use{" "}
           <strong>MVCC</strong> (Multi-Version Concurrency Control). Instead of
           forcing readers to wait on every writer, the database lets readers see
@@ -172,28 +172,28 @@ WHERE cardinality(pg_blocking_pids(pid)) > 0;
     </h3>,
     <Grid key="16" cols={2} gap={6}>
       <FeatureCard icon={Gauge} title="Keep Transactions Short" subtitle="The golden rule" theme="emerald">
-        <p className="mt-2 text-sm leading-relaxed text-emerald-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-emerald-700 dark:text-emerald-100/75">
           Open transaction, do the minimum work, commit fast. Never hold a DB
           transaction open while calling an external API, waiting on a queue, or
           doing slow business logic.
         </p>
       </FeatureCard>
       <FeatureCard icon={ShieldCheck} title="Index Your Predicates" subtitle="Avoid accidental lock explosions" theme="teal">
-        <p className="mt-2 text-sm leading-relaxed text-teal-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-teal-700 dark:text-teal-100/75">
           If your `UPDATE ... WHERE status = 'pending'` scans 2 million rows,
           the database may touch and lock far more data than you expected.
           Proper indexes shrink both scan cost and contention windows.
         </p>
       </FeatureCard>
       <FeatureCard icon={Lock} title="Use Explicit Locking Carefully" subtitle="Only when business rules demand it" theme="amber">
-        <p className="mt-2 text-sm leading-relaxed text-amber-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-amber-700 dark:text-amber-100/75">
           For inventory, payments, or job queues, teams may use{" "}
           <code>SELECT ... FOR UPDATE</code>, <code>NOWAIT</code>, or{" "}
           <code>SKIP LOCKED</code> to coordinate competing workers safely.
         </p>
       </FeatureCard>
       <FeatureCard icon={Lock} title="Retry Deadlocks" subtitle="Deadlocks are normal, not mythical" theme="rose">
-        <p className="mt-2 text-sm leading-relaxed text-rose-100/75">
+        <p className="mt-2 text-sm leading-relaxed text-rose-700 dark:text-rose-100/75">
           If Transaction A locks row 1 then row 2, while Transaction B locks row
           2 then row 1, the database detects a <strong>deadlock</strong> and
           kills one transaction. The application should catch that error and

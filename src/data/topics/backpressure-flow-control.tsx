@@ -44,22 +44,22 @@ export const backpressureFlowControlTopic: Topic = {
     </h3>,
     <Grid key="6" cols={2} gap={6} className="my-8">
       <FeatureCard icon={Gauge} title="TCP" subtitle="Sliding window" theme="emerald">
-        <p className="text-sm text-emerald-200/80">
-          TCP has backpressure built in. The receiver advertises a <strong className="text-emerald-300">window size</strong> — the amount of data it can buffer. If the receiver's buffer fills up, the window shrinks to zero, and the sender physically stops transmitting until the receiver drains its buffer.
+        <p className="text-sm text-emerald-700 dark:text-emerald-300/80">
+          TCP has backpressure built in. The receiver advertises a <strong className="text-emerald-700 dark:text-emerald-400">window size</strong> — the amount of data it can buffer. If the receiver's buffer fills up, the window shrinks to zero, and the sender physically stops transmitting until the receiver drains its buffer.
         </p>
       </FeatureCard>
       <FeatureCard icon={ServerCog} title="Kafka" subtitle="Consumer lag" theme="teal">
-        <p className="text-sm text-teal-200/80">
-          Kafka consumers pull messages at their own pace. If a consumer falls behind, <strong className="text-teal-300">Consumer Lag</strong> grows (the offset gap between the latest produced message and the latest consumed message). Monitoring lag is the primary Kafka health signal.
+        <p className="text-sm text-teal-700 dark:text-teal-300/80">
+          Kafka consumers pull messages at their own pace. If a consumer falls behind, <strong className="text-teal-700 dark:text-teal-400">Consumer Lag</strong> grows (the offset gap between the latest produced message and the latest consumed message). Monitoring lag is the primary Kafka health signal.
         </p>
       </FeatureCard>
       <FeatureCard icon={Workflow} title="Node.js Streams" subtitle="highWaterMark" theme="cyan">
-        <p className="text-sm text-cyan-200/80">
+        <p className="text-sm text-cyan-700 dark:text-cyan-300/80">
           Node.js Readable streams have a <code>highWaterMark</code> (default 16KB). When the internal buffer exceeds this, <code>.read()</code> returns null and the stream pauses until the consumer drains data. If you pipe a fast file read into a slow HTTP upload without respecting this, you'll OOM.
         </p>
       </FeatureCard>
       <FeatureCard icon={Radio} title="RxJS / Reactive Streams" subtitle="Explicit demand signals" theme="sky">
-        <p className="text-sm text-sky-200/80">
+        <p className="text-sm text-sky-700 dark:text-sky-300/80">
           Reactive frameworks provide explicit backpressure operators: <code>buffer()</code>, <code>throttle()</code>, <code>debounce()</code>, <code>sample()</code>. The Reactive Streams specification (used by Java's Project Reactor and Akka) mandates that a <code>Subscriber</code> signals demand via <code>request(n)</code>.
         </p>
       </FeatureCard>
