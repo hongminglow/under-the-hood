@@ -391,89 +391,10 @@ class UserService {
 			]}
 		/>,
 
-		<h3 key="30" className="text-xl font-bold mt-8 mb-4">
-			Industry Sector Breakdown
-		</h3>,
-		<Table
-			key="31"
-			headers={["Sector", "Typical Choice", "Reasoning"]}
-			rows={[
-				[
-					"Fintech / Banking",
-					"SQL (PostgreSQL, Oracle)",
-					"ACID transactions mandatory. Regulatory compliance (SOC2, PCI-DSS). Complex fraud detection queries.",
-				],
-				[
-					"Social Media",
-					"NoSQL (Cassandra, MongoDB)",
-					"Billions of users, massive write throughput. Eventual consistency acceptable for feeds/likes.",
-				],
-				[
-					"E-commerce",
-					"SQL (PostgreSQL, MySQL)",
-					"Inventory management requires ACID. Complex queries (search, recommendations, analytics).",
-				],
-				[
-					"IoT / Sensors",
-					"NoSQL (Cassandra, InfluxDB)",
-					"Millions of writes/sec from devices. Time-series data. Horizontal scaling essential.",
-				],
-				[
-					"Healthcare",
-					"SQL (PostgreSQL, SQL Server)",
-					"HIPAA compliance requires audit trails. Relational data (patients, prescriptions, appointments).",
-				],
-				[
-					"Gaming",
-					"NoSQL (Redis, DynamoDB)",
-					"Real-time leaderboards, session state. High read/write throughput. Low latency critical.",
-				],
-				[
-					"SaaS / B2B",
-					"SQL (PostgreSQL)",
-					"Multi-tenant data isolation. Complex reporting. ACID for billing/subscriptions.",
-				],
-				[
-					"Content / Media",
-					"NoSQL (MongoDB, S3)",
-					"Flexible schemas (articles, videos, metadata). Document-centric. CDN integration.",
-				],
-			]}
-		/>,
-
 		<Callout key="32" type="tip" title="Pro Tip: Start SQL, Add NoSQL Later">
 			The best strategy: start with PostgreSQL for everything. As you scale, identify bottlenecks and add specialized
 			databases (Redis for caching, Elasticsearch for search, Cassandra for logs). This is called{" "}
 			<strong>polyglot persistence</strong>&nbsp;and is how companies like Uber and Netflix operate at scale.
 		</Callout>,
-
-		<h3 key="33" className="text-xl font-bold mt-8 mb-4">
-			The Future: NewSQL Databases
-		</h3>,
-		<p key="34" className="mb-4">
-			<strong>NewSQL</strong>&nbsp;databases (CockroachDB, Google Spanner, YugabyteDB) promise the impossible: SQL's
-			ACID guarantees with NoSQL's horizontal scalability. They use distributed consensus algorithms (Raft, Paxos) to
-			maintain consistency across 1000+ nodes.
-		</p>,
-		<Grid key="35" cols={2} gap={6} className="my-8">
-			<Card title="NewSQL Advantages">
-				<ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
-					<li>ACID transactions across distributed nodes</li>
-					<li>Horizontal scaling like NoSQL (add nodes = more capacity)</li>
-					<li>SQL query language (no learning curve)</li>
-					<li>Automatic sharding and replication</li>
-					<li>Global distribution (multi-region)</li>
-				</ul>
-			</Card>
-			<Card title="NewSQL Tradeoffs">
-				<ul className="text-xs text-muted-foreground space-y-1 list-disc pl-4">
-					<li>Higher latency than single-node SQL (consensus overhead)</li>
-					<li>More expensive (distributed systems are complex)</li>
-					<li>Less mature ecosystem (fewer tools, extensions)</li>
-					<li>Overkill for most applications (&lt; 10M users)</li>
-					<li>Operational complexity (need distributed systems expertise)</li>
-				</ul>
-			</Card>
-		</Grid>,
 	],
 };
